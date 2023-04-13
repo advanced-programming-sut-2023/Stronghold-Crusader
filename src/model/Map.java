@@ -22,11 +22,11 @@ public class Map {
     public void removeMapObject() {
     }
 
-    public Collection<mapAsset> getObjectsAt(Vector2D coordinate) {
+    public Collection<MapAsset> getObjectsAt(Vector2D coordinate) {
         return null;
     }
 
-    public Collection<mapAsset> getObjectsAt(Vector2D coordinate, Player player) {
+    public Collection<MapAsset> getObjectsAt(Vector2D coordinate, Player player) {
         return null;
     }
 

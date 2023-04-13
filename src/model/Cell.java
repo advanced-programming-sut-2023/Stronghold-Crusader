@@ -6,18 +6,18 @@ import java.util.HashMap;
 public class Cell {
     private Vector2D coordinate;
     private CellType type;
-    private HashMap<Integer, mapAsset> objects;
+    private HashMap<Integer, MapAsset> objects;
 
     public Cell(Vector2D coordinate, CellType type) {
         this.coordinate = coordinate;
         this.type = type;
     }
 
-    public Collection<mapAsset> getAllObjects() {
+    public Collection<MapAsset> getAllObjects() {
         return null;
     }
 
-    public Collection<mapAsset> getPlayersObjects(Player player){
+    public Collection<MapAsset> getPlayersObjects(Player player){
         return null;
     }
 
