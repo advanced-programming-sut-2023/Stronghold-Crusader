@@ -10,11 +10,7 @@ public class Vector2D {
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
+    public double getDistance(Vector2D v2) {
+        return 0;
     }
 }

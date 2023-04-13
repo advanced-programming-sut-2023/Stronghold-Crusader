@@ -1,18 +1,48 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Map {
     private Cell[][] map;
-    private int[] size;
+    private Vector2D size;
+    private int playerCount;
 
-    public Map(String fileName){
-        //TODO initialize map & load file
+    public Map(String fileName) {
+        // initialize map
+        // load file
     }
 
-    public double getDistance(Vector2D v1, Vector2D v2){
+    private void loadMap(String fileName){
+    }
+
+    public void addMapObject() {
+    }
+
+    public void removeMapObject() {
+    }
+
+    public Collection<mapAsset> getObjectsAt(Vector2D coordinate) {
+        return null;
+    }
+
+    public Collection<mapAsset> getObjectsAt(Vector2D coordinate, Player player) {
+        return null;
+    }
+
+    public Collection<Person> getPeopleAt(Vector2D coordinate) {
+        return null;
+    }
+
+    public Collection<Person> getPeopleAt(Vector2D coordinate, Player player) {
+        return null;
+    }
+
+    public int getTraverseDistance(Person person, Vector2D dest) {
         return 0;
     }
 
-    public boolean isTraversable(Vector2D v1, Vector2D v2, PersonType personType){
-        return false;
+    public ArrayList<Cell> getTraversePath(Person person, Vector2D dest) {
+        return null;
     }
 }
