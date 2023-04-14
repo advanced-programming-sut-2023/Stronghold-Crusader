@@ -1,5 +1,7 @@
 package model;
 
+import utils.Vector2D;
+
 public class AttackingUnitBuilder {
     public static AttackingUnit makeArcher(Vector2D coordinate) {
         return null;

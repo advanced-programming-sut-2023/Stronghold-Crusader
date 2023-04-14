@@ -1,5 +1,7 @@
 package model;
 
+import utils.Vector2D;
+
 public class MobileUnitBuilder {
     public static MobileUnit makeEngineer(Vector2D coordinate) {
         return null;

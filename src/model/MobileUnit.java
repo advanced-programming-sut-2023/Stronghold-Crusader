@@ -1,5 +1,7 @@
 package model;
 
+import utils.Vector2D;
+
 import java.util.ArrayList;
 
 public class MobileUnit extends MapAsset {

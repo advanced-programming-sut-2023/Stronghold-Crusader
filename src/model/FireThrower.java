@@ -1,6 +1,6 @@
 package model;
 
-import java.util.HashMap;
+import utils.Vector2D;
 
 public class FireThrower extends AttackingUnit {
     public FireThrower(Vector2D coordinate, Player owner) {

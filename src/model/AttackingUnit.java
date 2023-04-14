@@ -1,5 +1,7 @@
 package model;
 
+import utils.Vector2D;
+
 import java.util.HashMap;
 
 public class AttackingUnit extends MobileUnit {

@@ -1,6 +1,6 @@
 package model;
 
-import java.util.HashMap;
+import utils.Vector2D;
 
 public class StableCatapult extends AttackingUnit {
     public StableCatapult(Vector2D coordinate, Player owner) {

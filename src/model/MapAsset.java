@@ -1,5 +1,7 @@
 package model;
 
+import utils.Vector2D;
+
 public abstract class MapAsset {
     private final Vector2D coordinate;
     private final Player owner;
