@@ -16,7 +16,7 @@ public class Game {
         //make players from the users
     }
 
-    public void assignColor(Player player, Color color){
+    public void assignColor(Player player, Color color) {
         // assign players color field
         // assign owner for governments base
     }
@@ -31,7 +31,7 @@ public class Game {
         return currentPlayer;
     }
 
-    public Player getPlayerByUsername(String username){
+    public Player getPlayerByUsername(String username) {
         return null;
     }
 
@@ -47,7 +47,7 @@ public class Game {
         return map;
     }
 
-    public Enum getGameState(){
+    public Enum getGameState() {
         return null;
     }
 }

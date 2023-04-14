@@ -11,20 +11,46 @@ public class AttackingUnit extends MobileUnit {
     private Armour armour;
     private ArmourPenetration armourPenetration;
 
-    public AttackingUnit(Vector2D coordinate, Player owner, int maxHitPoint, String type, int moveSpeed, int defenceMultiplier, int engineersCount, int attackDamage, int attackRange, boolean canClimbLadder, boolean canModifyMoat, HashMap<AttackTarget, Boolean> targets, Armour armour, ArmourPenetration armourPenetration) {
-        super(coordinate, owner, maxHitPoint, type, moveSpeed, defenceMultiplier, engineersCount);
+    public AttackingUnit(Vector2D coordinate, Player owner) {
+        super(coordinate, owner);
+    }
+
+    @Override
+    public void getDamageFrom(MapAsset attacker) {
+        super.getDamageFrom(attacker);
+    }
+
+    public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
+    }
+
+    public void setAttackRange(int attackRange) {
         this.attackRange = attackRange;
+    }
+
+    public void setCanClimbLadder(boolean canClimbLadder) {
         this.canClimbLadder = canClimbLadder;
+    }
+
+    public void setCanModifyMoat(boolean canModifyMoat) {
         this.canModifyMoat = canModifyMoat;
+    }
+
+    public void setTargets(HashMap<AttackTarget, Boolean> targets) {
         this.targets = targets;
+    }
+
+    public void setArmour(Armour armour) {
         this.armour = armour;
+    }
+
+    public void setArmourPenetration(ArmourPenetration armourPenetration) {
         this.armourPenetration = armourPenetration;
     }
 
-    public void attack(){
+    public void attack() {
     }
 
-    public void stopAttack(){
+    public void stopAttack() {
     }
 }

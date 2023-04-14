@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Governance {
-    private final ArrayList<Building> buildings ;
+    private final ArrayList<Building> buildings;
     //private final units
     private int population;
     private int popularity;
@@ -16,7 +16,7 @@ public class Governance {
     private Storage storage;
 
     Governance() {
-        buildings = new ArrayList<>() ;
+        buildings = new ArrayList<>();
     }
 
     public int getPopulation() {

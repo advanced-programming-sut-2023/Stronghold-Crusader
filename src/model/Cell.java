@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Cell {
-    private Vector2D coordinate;
+    private final Vector2D coordinate;
     private CellType type;
     private HashMap<Integer, MapAsset> objects;
 
@@ -17,7 +17,7 @@ public class Cell {
         return null;
     }
 
-    public Collection<MapAsset> getPlayersObjects(Player player){
+    public Collection<MapAsset> getPlayersObjects(Player player) {
         return null;
     }
 
@@ -33,7 +33,7 @@ public class Cell {
         return coordinate;
     }
 
-    public boolean isTraversable(Person person){
+    public boolean isTraversable(MobileUnit unit) {
         return false;
     }
 }

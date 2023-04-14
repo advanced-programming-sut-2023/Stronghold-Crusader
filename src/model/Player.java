@@ -1,10 +1,10 @@
 package model;
 
 public class Player {
+    public Governance governace;
     private String username;
     private String nickname;
     private String slogan;
-    public Governance governace;
 
     Player(String username, String nickname, String slogan) {
 

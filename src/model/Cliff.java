@@ -1,7 +1,7 @@
 package model;
 
-public class Building extends MapAsset {
-    public Building(Vector2D coordinate, Player owner) {
+public class Cliff extends MapAsset {
+    public Cliff(Vector2D coordinate, Player owner) {
         super(coordinate, owner);
     }
 

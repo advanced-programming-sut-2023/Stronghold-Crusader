@@ -1,6 +1,7 @@
 package model;
 
 import utils.*;
+
 public class User {
     private String username;
     private String password;
@@ -9,6 +10,7 @@ public class User {
     private String Email;
     private Pair passwordRecovery;
     private int highscore;
+
     User(String username, String password, String Email) {
 
     }
@@ -25,17 +27,27 @@ public class User {
         return slogan;
     }
 
+    public void setSlogan(String slogan) {
+        this.slogan = slogan;
+    }
+
     public int getHighscore() {
         return highscore;
+    }
+
+    public void setHighscore(int highscore) {
+        this.highscore = highscore;
     }
 
     public String getPasswordRecoveryQuestion() {
         return passwordRecovery.x;
     }
-    public boolean isPasswordCorrect(String password){
+
+    public boolean isPasswordCorrect(String password) {
         return true;
     }
-    public boolean isRecoveryPasswordCorrect(String recoveryAnswer){
+
+    public boolean isRecoveryPasswordCorrect(String recoveryAnswer) {
         return true;
     }
 
@@ -47,19 +59,11 @@ public class User {
         this.nickname = nickname;
     }
 
-    public void setSlogan(String slogan) {
-        this.slogan = slogan;
-    }
-
     public void changeEmail(String email) {
         Email = email;
     }
 
     public void setPasswordRecovery(Pair passwordRecovery) {
         this.passwordRecovery = passwordRecovery;
-    }
-
-    public void setHighscore(int highscore) {
-        this.highscore = highscore;
     }
 }

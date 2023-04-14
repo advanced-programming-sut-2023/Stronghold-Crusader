@@ -13,7 +13,7 @@ public class Map {
         // load file
     }
 
-    private void loadMap(String fileName){
+    private void loadMap(String fileName) {
     }
 
     public void addMapObject() {
@@ -30,19 +30,11 @@ public class Map {
         return null;
     }
 
-    public Collection<Person> getPeopleAt(Vector2D coordinate) {
-        return null;
-    }
-
-    public Collection<Person> getPeopleAt(Vector2D coordinate, Player player) {
-        return null;
-    }
-
-    public int getTraverseDistance(Person person, Vector2D dest) {
+    public int getTraverseDistance(MobileUnit unit, Vector2D dest) {
         return 0;
     }
 
-    public ArrayList<Cell> getTraversePath(Person person, Vector2D dest) {
+    public ArrayList<Cell> getTraversePath(MobileUnit unit, Vector2D dest) {
         return null;
     }
 }
