@@ -3,6 +3,7 @@ package view;
 import controller.SignupAndLoginController;
 import utils.SignupAndLoginUtils;
 import view.enums.commands.SignupAndLoginCommands;
+import view.enums.messages.SignupAndLoginMessages;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -23,7 +24,10 @@ public class SignupAndLoginMenu {
     private void createUserCall(Matcher matcher) {
         HashMap<String,String> inputs =
                 SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATEUSER.getRegex());
-        controller.signup(inputs);
+        SignupAndLoginMessages message = controller.signup(inputs);
+        switch (message) {
+         //   case EMPTYFIELD:
+        }
     }
 }
 

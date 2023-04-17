@@ -1,5 +1,6 @@
 package controller;
 
+import utils.SignupAndLoginUtils;
 import view.enums.messages.SignupAndLoginMessages;
 
 import java.util.HashMap;
@@ -7,9 +8,10 @@ import java.util.HashMap;
 public class SignupAndLoginController {
 
     public SignupAndLoginMessages signup(HashMap<String, String> inputs) {
-        for (String name : inputs.keySet()) {
-            System.out.println(inputs.get(name));
-        }
+        if (inputs.get("password") == null || inputs.get("email") == null || inputs.get("email") == null)
+            return SignupAndLoginMessages.EMPTYFIELD;
+        //if (!SignupAndLoginUtils.isUsernameForamtCorrect(inputs.get("username")))
+         //   return SignupAndLoginMessages.
         return null;
     }
 }

@@ -15,5 +15,8 @@ public class SignupAndLoginUtils {
         }
         return inputs;
     }
-
+    public static boolean isUsernameForamtCorrect(String username) {
+        return username.matches("[\\w\\d\\_]+");
+    }
+    //public static boolean isPasswordLENGHTCORRECT(String password)
 }
