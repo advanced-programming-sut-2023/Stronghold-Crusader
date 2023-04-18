@@ -12,10 +12,6 @@ public class Map {
 
     public Map(String fileName) {
         // initialize map
-        // load file
-    }
-
-    private void loadMap(String fileName) {
     }
 
     public void addMapObject() {

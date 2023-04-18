@@ -9,10 +9,10 @@ public class Game {
     private boolean isEditableMode;
     private int turnCounter;
     private int time;
-    private Map map;
+    private final Map map;
 
-    public Game(String mapFileName, ArrayList<Player> players, boolean isEditableMode) {
-        map = new Map(mapFileName);
+    public Game(String mapId, ArrayList<Player> players, boolean isEditableMode) {
+        map = MapLoader.load(mapId);
         //make players from the users
     }
 

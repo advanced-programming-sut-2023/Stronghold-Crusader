@@ -37,7 +37,7 @@ public class SignupAndLoginUtils {
     }
     public static String generateRandomUsername(String username) {
         String newName = username;
-        while (Stronghold.userExists(newName)) {
+        while (Stronghold.getInstance().userExists(newName)) {
             newName += Integer.valueOf((int)(Math.random() * 9 )).toString();
         }
         return newName;
