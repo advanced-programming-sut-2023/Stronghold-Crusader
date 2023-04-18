@@ -2,12 +2,14 @@ package utils;
 
 public enum FormatValidation {
     USERNAME("[\\w\\d\\_]+"),
-    PASSWORDLENGTH(".{6,}"),
-    PASSWORDLETTERS("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\\w\\d])$"),
-    EMAIL("[\\w\\d\\.\\_]+\\@[\\w\\d\\_]+\\.[\\w\\d]");
+    PASSWORD_LENGTH(".{6,}"),
+    PASSWORD_LETTERS("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\\w\\d]).+$"),
+    EMAIL("[\\w\\d\\.\\_]+\\@[\\w\\d\\_]+\\.[\\w\\d]+"),
+    YES("Y|y.+"),
+    NO("N|n.+");
 
 
-    private String regex;
+    private final String regex;
     FormatValidation(String regex) {
         this.regex = regex;
     }

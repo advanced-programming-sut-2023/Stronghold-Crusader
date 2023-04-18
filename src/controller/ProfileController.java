@@ -23,7 +23,7 @@ public class ProfileController {
     }
 
     public String changeUsername(String newUsername){
-        if(!SignupAndLoginUtils.isUsernameFormatCorrect(newUsername)) return ProfileMessages.INVALID_USERNAME_FORMAT.getMessage();
+   //     if(!SignupAndLoginUtils.isUsernameFormatCorrect(newUsername)) return ProfileMessages.INVALID_USERNAME_FORMAT.getMessage();
         if(Stronghold.doesUserExist(newUsername)) return ProfileMessages.USERNAME_TAKEN.getMessage();
         currentUser.changeUsername(newUsername);
         return ProfileMessages.USERNAME_CHANGE_SUCCESS.getMessage();
