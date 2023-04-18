@@ -42,7 +42,7 @@ public class User {
         return passwordRecovery.x;
     }
     public boolean isPasswordCorrect(String password){
-        return true;
+        return this.password.matches(password);
     }
     public boolean isRecoveryPasswordCorrect(String recoveryAnswer){
         return true;
@@ -70,5 +70,12 @@ public class User {
 
     public void setHighscore(int highscore) {
         this.highscore = highscore;
+    }
+    public void setPassword(String newPass, String oldPass) {
+        if (isPasswordCorrect(oldPass))
+            this.password = newPass;
+    }
+    public void removeSlogan() {
+        this.slogan = "";
     }
 }
