@@ -11,6 +11,9 @@ public enum SignupAndLoginMessages {
     EXISTED_EMAIL,
     CONFIRM,
     SUCCESS,
-    FAIL;
+    FAIL,
+    USER_DOES_NOT_EXIST,
+    INCORRECT_PASSWORD,
+    TOO_MANY_ATTEMPTS
 
 }

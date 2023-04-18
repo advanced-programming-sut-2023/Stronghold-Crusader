@@ -8,9 +8,25 @@ import utils.Pair;
 import utils.SignupAndLoginUtils;
 import view.enums.messages.SignupAndLoginMessages;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
 public class SignupAndLoginController {
+    private int failedAttempts = 0;
+    private LocalDateTime loginTime = null;
+    private void increaseFailedAttempts() {
+        failedAttempts++;
+        loginTime = LocalDateTime.now().plus(5 * (long) Math.pow(2, failedAttempts - 1), ChronoUnit.SECONDS);
+    }
+
+    private void failedAttemptsReset() {
+        failedAttempts = 0;
+        loginTime = null;
+    }
+    public long getTimeUntilLogin() {
+        return LocalDateTime.now().until(this.loginTime, ChronoUnit.SECONDS);
+    }
 
     public SignupAndLoginMessages signup(HashMap<String, String> inputs) {
         if (inputs.get("slogan").equals("random"))
@@ -68,4 +84,21 @@ public class SignupAndLoginController {
         user.setPasswordRecovery(pair);
         return SignupAndLoginMessages.SUCCESS;
     }
+
+    public SignupAndLoginMessages login(HashMap<String, String> inputs) {
+        if (inputs.get("username") == null || inputs.get("password") == null)
+            return SignupAndLoginMessages.EMPTY_FIELD;
+        if (Stronghold.getUserByUsername(inputs.get("username")) == null)
+            return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
+        if (this.loginTime != null && LocalDateTime.now().isBefore(loginTime))
+            return SignupAndLoginMessages.TOO_MANY_ATTEMPTS;
+        if (!Stronghold.getUserByUsername(inputs.get("username")).isPasswordCorrect(inputs.get("password"))) {
+            increaseFailedAttempts();
+            return SignupAndLoginMessages.INCORRECT_PASSWORD;
+        }
+        failedAttemptsReset();
+        return SignupAndLoginMessages.SUCCESS;
+        //TODO enter to the main menu *>Diba
+    }
+
 }

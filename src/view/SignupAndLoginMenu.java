@@ -17,8 +17,10 @@ public class SignupAndLoginMenu {
         Matcher matcher;
         while (true) {
             nextCommand = Menu.getScanner().nextLine();
-            if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATE_USER)) != null) {
+            if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATE_USER)) != null)
                 createUserCall(matcher);
+            else if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.LOGIN)) != null) {
+                loginCall(matcher);
             }
         }
     }
@@ -73,23 +75,47 @@ public class SignupAndLoginMenu {
             case SUCCESS:
                 if (randomSlogan)
                     System.out.println("your random slogan is: " + inputs.get("slogan"));
-//                while (true) {
-//                    System.out.println("Pick your security question: 1. What is my father’s name?" +
-//                            " 2. What was my first pet’s name? 3. What is my mother’s last name?");
-//                    String nextCommand = Menu.getScanner().nextLine();
-//                    Matcher matcher2 = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.QUESTION_PICK);
-//                    if (matcher2 == null)
-//                        System.out.println("some error founds");
-//                    else {
-//                        HashMap<String, String> pickQuestionInputs =
-//                                SignupAndLoginUtils.getInputs(matcher2, SignupAndLoginCommands.QUESTION_PICK.getRegex());
-//                        pickQuestionInputs.put("username", inputs.get("username"));
-//                        message = controller.pickQuestion(pickQuestionInputs);
-//                        if (!message.equals(SignupAndLoginMessages.FAIL)) break;
-//                        System.out.println("some error founds");
-//                    }
-//                }
+                while (true) {
+                    System.out.println("Pick your security question: 1. What is my father’s name?" +
+                            " 2. What was my first pet’s name? 3. What is my mother’s last name?");
+                    String nextCommand = Menu.getScanner().nextLine();
+                    Matcher matcher2 = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.QUESTION_PICK);
+                    if (matcher2 == null)
+                        System.out.println("some error founds");
+                    else {
+                        HashMap<String, String> pickQuestionInputs =
+                                SignupAndLoginUtils.getInputs(matcher2, SignupAndLoginCommands.QUESTION_PICK.getRegex());
+                        pickQuestionInputs.put("username", inputs.get("username"));
+                        message = controller.pickQuestion(pickQuestionInputs);
+                        if (!message.equals(SignupAndLoginMessages.FAIL)) break;
+                        System.out.println("some error founds");
+                    }
+                }
                 System.out.println("user created successfully");
+                break;
+        }
+    }
+
+    private void loginCall(Matcher matcher) {
+        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.LOGIN.getRegex());
+        SignupAndLoginMessages messages = controller.login(inputs);
+        switch (messages) {
+            case EMPTY_FIELD:
+                System.out.println("There are empty fields among the entered entries");
+                break;
+            case USER_DOES_NOT_EXIST:
+                System.out.println("There is no user with this username");
+                break;
+            case INCORRECT_PASSWORD:
+                System.out.println("The password entered is incorrect");
+                break;
+            case TOO_MANY_ATTEMPTS:
+                int minutes = (int) (controller.getTimeUntilLogin() / 60);
+                int seconds = (int) (controller.getTimeUntilLogin() % 60);
+                System.out.println("Too many failed attempts. Please wait " + minutes + " minutes and " +
+                        seconds + " seconds before trying again");
+            case SUCCESS:
+                //TODO go to the main menu >*Diba
                 break;
         }
     }
