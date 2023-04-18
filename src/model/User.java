@@ -12,6 +12,7 @@ public class User {
     public User(String username, String password, String Email, String nickname, String slogan) {
         this.username = username;
         this.password = password;
+        this.Email = Email;
         this.nickname = nickname;
         this.slogan = slogan;
         this.highscore = 0 ;
