@@ -11,22 +11,22 @@ public class SignupAndLoginController {
 
     public SignupAndLoginMessages signup(HashMap<String, String> inputs) {
         if (inputs.get("password") == null || inputs.get("email") == null
-                || inputs.get("email") == null || inputs.get("slogan") == "")
-            return SignupAndLoginMessages.EMPTYFIELD;
+                || inputs.get("email") == null || inputs.get("slogan").equals(""))
+            return SignupAndLoginMessages.EMPTY_FIELD;
         if (!FormatValidation.isFormatValid(inputs.get("username"), FormatValidation.USERNAME))
-            return SignupAndLoginMessages.INVALIDUSERNAMEFORAMT;
-        if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORDLENGTH))
-            return SignupAndLoginMessages.PASSWORDWEEK_LENGTH;
-        if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORDLETTERS))
-            return SignupAndLoginMessages.PASSWORDWEEK_LETTERSPROBLEM;
+            return SignupAndLoginMessages.INVALID_USERNAME_FORMAT;
+        if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LENGTH))
+            return SignupAndLoginMessages.PASSWORD_WEEK_LENGTH;
+        if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LETTERS))
+            return SignupAndLoginMessages.PASSWORD_WEEK_LETTERS_PROBLEM;
         if (!FormatValidation.isFormatValid(inputs.get("email"), FormatValidation.EMAIL))
-            return SignupAndLoginMessages.INVALIDEMAILFORMAT;
+            return SignupAndLoginMessages.INVALID_EMAIL_FORMAT;
         if (!inputs.get("password").equals("random") && !inputs.get("password").equals(inputs.get("passwordConfirmation")))
-            return SignupAndLoginMessages.CONFIRMATIONPASSWORDERROR;
+            return SignupAndLoginMessages.CONFIRMATION_PASSWORD_ERROR;
         if (Stronghold.isEmailExist(inputs.get("email")))
-            return SignupAndLoginMessages.EXISTEDEMAIL;
+            return SignupAndLoginMessages.EXISTED_EMAIL;
         if (Stronghold.getUserByUsername(inputs.get("username")) == null)
-            return SignupAndLoginMessages.EXISTEDUSERNAME;
+            return SignupAndLoginMessages.EXISTED_USERNAME;
         return null;
     }
 }

@@ -4,12 +4,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SignupAndLoginCommands {
-    CREATEUSER("\\s*user\\s+create((\\s+-u\\s+(?<username>\\S+))|" +
+    CREATE_USER("\\s*user\\s+create((\\s+-u\\s+(?<username>\\S+))|" +
             "(\\s+-p\\s+(?<password>\\S+)(\\s+(?<passwordConfirmation>\\S+))?)|" +
             "(\\s+-email\\s+(?<email>\\S+))|" +
             "(\\s+-n\\s+(?<nickname>\\S+))|(\\s+-s\\s+(?<slogan>\\S*)))*\\s*");
 
-    private String regex;
+    private final String regex;
     SignupAndLoginCommands(String regex) {
         this.regex = regex;
     }

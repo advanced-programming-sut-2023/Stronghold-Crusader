@@ -16,14 +16,14 @@ public class SignupAndLoginMenu {
         Matcher matcher;
         while (true) {
             nextCommand = Menu.getScanner().nextLine();
-            if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATEUSER)) != null){
+            if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATE_USER)) != null){
                 createUserCall(matcher);
             }
         }
     }
     private void createUserCall(Matcher matcher) {
         HashMap<String,String> inputs =
-                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATEUSER.getRegex());
+                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
         SignupAndLoginMessages message = controller.signup(inputs);
         switch (message) {
          //   case EMPTYFIELD:
