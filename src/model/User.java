@@ -29,6 +29,10 @@ public class User {
         return highscore;
     }
 
+    public String getEmail() {
+        return Email;
+    }
+
     public String getPasswordRecoveryQuestion() {
         return passwordRecovery.x;
     }

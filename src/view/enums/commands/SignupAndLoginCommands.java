@@ -7,7 +7,7 @@ public enum SignupAndLoginCommands {
     CREATEUSER("\\s*user\\s+create((\\s+-u\\s+(?<username>\\S+))|" +
             "(\\s+-p\\s+(?<password>\\S+)(\\s+(?<passwordConfirmation>\\S+))?)|" +
             "(\\s+-email\\s+(?<email>\\S+))|" +
-            "(\\s+-n\\s+(?<nickname>\\S+))|(\\s+-s\\s+(?<slogan>\\S+)))*\\s*");
+            "(\\s+-n\\s+(?<nickname>\\S+))|(\\s+-s\\s+(?<slogan>\\S*)))*\\s*");
 
     private String regex;
     SignupAndLoginCommands(String regex) {

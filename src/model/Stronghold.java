@@ -14,5 +14,11 @@ public class Stronghold {
     public static void addUser(User user) {
         users.put(user.getUsername(), user);
     }
+    public static boolean isEmailExist(String email) {
+        for (User user : users.values()) {
+            if (user.getEmail().toLowerCase().matches(email.toLowerCase())) return true;
+        }
+        return false;
+    }
 
 }
