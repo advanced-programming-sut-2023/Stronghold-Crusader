@@ -25,8 +25,13 @@ public class SignupAndLoginController {
             return SignupAndLoginMessages.CONFIRMATION_PASSWORD_ERROR;
         if (Stronghold.isEmailExist(inputs.get("email")))
             return SignupAndLoginMessages.EXISTED_EMAIL;
-        if (Stronghold.getUserByUsername(inputs.get("username")) == null)
+        if (Stronghold.doesUserExist(inputs.get("username")))
             return SignupAndLoginMessages.EXISTED_USERNAME;
+        if (inputs.get("password").equals("random")){
+            inputs.replace("password",inputs.get("password"),SignupAndLoginUtils.generateRandomPassword());
+            return SignupAndLoginMessages.CONFIRM;
+        }
+
         return null;
     }
 }

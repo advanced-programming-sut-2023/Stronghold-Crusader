@@ -4,7 +4,9 @@ public enum FormatValidation {
     USERNAME("[\\w\\d\\_]+"),
     PASSWORD_LENGTH(".{6,}"),
     PASSWORD_LETTERS("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\\w\\d])$"),
-    EMAIL("[\\w\\d\\.\\_]+\\@[\\w\\d\\_]+\\.[\\w\\d]");
+    EMAIL("[\\w\\d\\.\\_]+\\@[\\w\\d\\_]+\\.[\\w\\d]"),
+    YES("Y|y.+"),
+    NO("N|n.+");
 
 
     private final String regex;
