@@ -45,7 +45,7 @@ public class User {
         return this.password.matches(password);
     }
     public boolean isRecoveryPasswordCorrect(String recoveryAnswer){
-        return true;
+        return this.passwordRecovery.y.matches(recoveryAnswer);
     }
 
     public void changeUsername(String username) {
@@ -62,6 +62,10 @@ public class User {
 
     public void changeEmail(String email) {
         Email = email;
+    }
+    public void changePassword(String passwordRecoveryQuestion, String newPass){
+        if (!passwordRecoveryQuestion.matches(passwordRecovery.y)) return;
+        this.password = newPass;
     }
 
     public void setPasswordRecovery(Pair passwordRecovery) {

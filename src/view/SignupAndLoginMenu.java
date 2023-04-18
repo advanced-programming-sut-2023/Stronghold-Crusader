@@ -6,6 +6,8 @@ import utils.SignupAndLoginUtils;
 import view.enums.commands.SignupAndLoginCommands;
 import view.enums.messages.SignupAndLoginMessages;
 
+import java.lang.invoke.VarHandle;
+import java.lang.management.MemoryUsage;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
@@ -19,9 +21,11 @@ public class SignupAndLoginMenu {
             nextCommand = Menu.getScanner().nextLine();
             if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATE_USER)) != null)
                 createUserCall(matcher);
-            else if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.LOGIN)) != null) {
+            else if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.LOGIN)) != null)
                 loginCall(matcher);
-            }
+            else if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CHANGE_PASSWORD)) != null)
+                changePasswordCall(matcher);
+            else System.out.println("Invalid command");
         }
     }
 
@@ -117,6 +121,33 @@ public class SignupAndLoginMenu {
             case SUCCESS:
                 //TODO go to the main menu >*Diba
                 break;
+        }
+    }
+
+    private void changePasswordCall(Matcher matcher) {
+        SignupAndLoginMessages messages = controller.getCurrentUser(matcher.group("username"));
+        if (messages.equals(SignupAndLoginMessages.USER_DOES_NOT_EXIST))
+            System.out.println("There is no user with this username");
+        else {
+            String nextCommand = Menu.getScanner().nextLine();
+            System.out.println(controller.currentUser.getPasswordRecoveryQuestion());
+            String recoveryAnswer = nextCommand;
+            if (controller.currentUser.isRecoveryPasswordCorrect(recoveryAnswer)) {
+                while (true) {
+                    System.out.println("Enter new Password:");
+                    nextCommand = Menu.getScanner().nextLine();
+                    if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LENGTH)) {
+                        System.out.println("Password is week(password must has at least 6 characters)");
+                    } else if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LETTERS))
+                        System.out.println("Pick your security question: 1. What is my father’s name?" +
+                                " 2. What was my first pet’s name? 3. What is my mother’s last name?");
+                    else {
+                        controller.currentUser.changePassword(recoveryAnswer, nextCommand);
+                        System.out.println("Password changed successfully");
+                        break;
+                    }
+                }
+            } else System.out.println("Incorrect answer!");
         }
     }
 }

@@ -13,6 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
 public class SignupAndLoginController {
+    public User currentUser = null;
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
     private void increaseFailedAttempts() {
@@ -99,6 +100,13 @@ public class SignupAndLoginController {
         failedAttemptsReset();
         return SignupAndLoginMessages.SUCCESS;
         //TODO enter to the main menu *>Diba
+    }
+
+    public SignupAndLoginMessages getCurrentUser(String username) {
+        currentUser = Stronghold.getUserByUsername(username);
+        if (currentUser == null)
+            return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
+        return SignupAndLoginMessages.SUCCESS;
     }
 
 }
