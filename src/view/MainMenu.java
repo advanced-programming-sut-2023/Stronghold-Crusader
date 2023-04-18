@@ -1,6 +1,7 @@
 package view;
 
 import controller.MainController;
+import controller.ProfileController;
 import view.enums.commands.MainMenuCommands;
 import view.enums.messages.MainMenuMessages;
 
@@ -22,6 +23,10 @@ public class MainMenu {
             if(cmd == null){
                 System.out.println();
                 continue;
+            }
+            switch (cmd){
+                case PROFILE_MENU:
+                    return "profileMenu";
             }
         }
     }

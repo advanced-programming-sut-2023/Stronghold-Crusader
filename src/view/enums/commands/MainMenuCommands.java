@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MainMenuCommands {
-    ;
+    PROFILE_MENU("\\s*profile\\s+menu\\s*");
     private String regex;
     MainMenuCommands(String regex) {
         this.regex = regex;

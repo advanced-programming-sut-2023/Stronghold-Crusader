@@ -5,6 +5,7 @@ import view.enums.commands.ProfileCommands;
 import view.enums.messages.ProfileMessages;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
 
 public class ProfileMenu {
     private ProfileController profileController;
@@ -22,6 +23,56 @@ public class ProfileMenu {
             if(cmd == null){
                 ProfileMessages.printMessage(ProfileMessages.INVALID_COMMAND);
             }
+            Matcher matcher = ProfileCommands.getMatcher(input, cmd);
+            switch (cmd){
+                case CHANGE_USERNAME :
+                    runChangeUsername(matcher);
+                    break;
+                case CHANGE_NICKNAME:
+                    runChangeNickname(matcher);
+                    break;
+                case CHANGE_PASSWORD:
+                    runChangePassword(matcher);
+                    break;
+                case CHANGE_EMAIL:
+                    runChangeEmail(matcher);
+                    break;
+                case CHANGE_SLOGAN:
+                    runChangeSlogan(matcher);
+                    break;
+            }
         }
+    }
+
+    private void runChangeUsername(Matcher matcher){
+        String newUsername = matcher.group("newUsername");
+        System.out.println(profileController.changeUsername(newUsername));
+    }
+
+    private void runChangeNickname(Matcher matcher){
+        String newNickname = matcher.group("newNickname");
+        System.out.println(profileController.changeNickname(newNickname));
+    }
+
+    private void runChangePassword(Matcher matcher){
+        String oldPass = matcher.group("oldPass");
+        String newPass = matcher.group("newPass");
+        String canChangePass = profileController.canChangePassword(oldPass);
+        if(canChangePass.equals("true")) {
+            System.out.println(ProfileMessages.ENTER_NEWPASS_AGAIN);
+            String confirmation = scanner.nextLine();
+            System.out.println(profileController.changePassword(newPass, confirmation));
+        }
+        else System.out.println(canChangePass);
+    }
+
+    private void runChangeEmail(Matcher matcher){
+        String newEmail = matcher.group("email");
+        System.out.println(profileController.changeEmail(newEmail));
+    }
+
+    private void runChangeSlogan(Matcher matcher){
+        String newSlogan = matcher.group("slogan");
+        System.out.println(profileController.changeSlogan(newSlogan));
     }
 }
