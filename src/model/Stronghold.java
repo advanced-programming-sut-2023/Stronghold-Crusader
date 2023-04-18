@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Stronghold {
     public static HashMap<String, User> users;
-    public static ArrayList<Integer> rankings;
+    public static ArrayList<User> rankings;
 
     public static User getUserByUsername(String username) {
         return  users.get(username);
@@ -15,4 +15,7 @@ public class Stronghold {
         users.put(user.getUsername(), user);
     }
 
+    public static int getUserRank(User user){
+        return rankings.indexOf(user) + 1;
+    }
 }

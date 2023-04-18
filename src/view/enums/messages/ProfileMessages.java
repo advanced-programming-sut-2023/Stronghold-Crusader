@@ -9,6 +9,7 @@ public enum ProfileMessages {
     PASSWORD_CHANGE_SUCCESS("Password changed successfully"),
     EMAIL_CHANGE_SUCCESS("Email changed successfully"),
     SLOGAN_CHANGE_SUCCESS("Slogan changed successfully"),
+    SLOGAN_REMOVAL_SUCCESS("Slogan changed successfully"),
     PASSWORD_INCORRECT("Current password is incorrect!"),
     PASSWORD_NOT_NEW("Please enter a new password!"),
     ENTER_NEWPASS_AGAIN("Please enter your new password again");

@@ -50,4 +50,23 @@ public class ProfileController {
     public String changeSlogan(String newSlogan){
         return ProfileMessages.SLOGAN_CHANGE_SUCCESS.getMessage();
     }
+
+    public String removeSlogan(){
+        return ProfileMessages.SLOGAN_REMOVAL_SUCCESS.getMessage();
+    }
+
+    public int displayHighscore(){
+        return currentUser.getHighscore();
+    }
+    public int displayRank(){
+        return Stronghold.getUserRank(currentUser);
+    }
+
+    public String displaySlogan(){
+        return currentUser.getSlogan();
+    }
+
+    public String displayUserInfo(){
+        return null;
+    }
 }
