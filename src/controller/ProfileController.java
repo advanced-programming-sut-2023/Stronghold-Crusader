@@ -3,7 +3,6 @@ package controller;
 import model.Stronghold;
 import model.User;
 import utils.FormatValidation;
-import utils.SignupAndLoginUtils;
 import view.ProfileMenu;
 import view.enums.messages.ProfileMessages;
 
@@ -25,7 +24,7 @@ public class ProfileController {
 
     public String changeUsername(String newUsername){
         if(!FormatValidation.isFormatValid(newUsername, FormatValidation.USERNAME)) return ProfileMessages.INVALID_USERNAME_FORMAT.getMessage();
-        if(Stronghold.doesUserExist(newUsername)) return ProfileMessages.USERNAME_TAKEN.getMessage();
+        if(Stronghold.userExists(newUsername)) return ProfileMessages.USERNAME_TAKEN.getMessage();
         currentUser.changeUsername(newUsername);
         return ProfileMessages.USERNAME_CHANGE_SUCCESS.getMessage();
     }
@@ -45,12 +44,12 @@ public class ProfileController {
 
     public String changePassword(String newPass, String passConfirm, String oldPass){
         if(!passConfirm.equals(newPass)) return ProfileMessages.CONFIRMATION_INCORRECT.getMessage();
-        currentUser.setPassword(newPass, oldPass);
+        currentUser.setPassword(newPass);
         return ProfileMessages.PASSWORD_CHANGE_SUCCESS.getMessage();
     }
 
     public String changeEmail(String newEmail){
-        if(Stronghold.isEmailExist(newEmail)) return ProfileMessages.EMAIL_EXISTS.getMessage();
+        if(Stronghold.emailExists(newEmail)) return ProfileMessages.EMAIL_EXISTS.getMessage();
         if(!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL)) return ProfileMessages.INVALID_EMAIL_FORMAT.getMessage();
         return ProfileMessages.EMAIL_CHANGE_SUCCESS.getMessage();
     }
@@ -66,7 +65,7 @@ public class ProfileController {
     }
 
     public int displayHighscore(){
-        return currentUser.getHighscore();
+        return currentUser.getHighScore();
     }
     public int displayRank(){
         return Stronghold.getUserRank(currentUser);
