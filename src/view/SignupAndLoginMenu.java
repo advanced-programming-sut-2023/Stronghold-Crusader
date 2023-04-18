@@ -12,9 +12,12 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class SignupAndLoginMenu {
-    private final SignupAndLoginController controller = new SignupAndLoginController();
+    private SignupAndLoginController controller;
+    public SignupAndLoginMenu(SignupAndLoginController controller){
+        this.controller = controller;
+    }
 
-    public void run() {
+    public String run() {
         String nextCommand;
         Matcher matcher;
         while (true) {

@@ -7,7 +7,8 @@ import view.ProfileMenu;
 import view.enums.messages.ProfileMessages;
 
 public class ProfileController {
-    User currentUser;
+    private User currentUser;
+    private Stronghold stronghold = Stronghold.getInstance();
     public ProfileController(User currentUser){
         this.currentUser = currentUser;
     }
@@ -24,7 +25,7 @@ public class ProfileController {
 
     public String changeUsername(String newUsername){
         if(!FormatValidation.isFormatValid(newUsername, FormatValidation.USERNAME)) return ProfileMessages.INVALID_USERNAME_FORMAT.getMessage();
-        if(Stronghold.getInstance().userExists(newUsername)) return ProfileMessages.USERNAME_TAKEN.getMessage();
+        if(stronghold.userExists(newUsername)) return ProfileMessages.USERNAME_TAKEN.getMessage();
         currentUser.changeUsername(newUsername);
         return ProfileMessages.USERNAME_CHANGE_SUCCESS.getMessage();
     }
@@ -49,7 +50,7 @@ public class ProfileController {
     }
 
     public String changeEmail(String newEmail){
-        if(Stronghold.getInstance().emailExists(newEmail)) return ProfileMessages.EMAIL_EXISTS.getMessage();
+        if(stronghold.emailExists(newEmail)) return ProfileMessages.EMAIL_EXISTS.getMessage();
         if(!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL)) return ProfileMessages.INVALID_EMAIL_FORMAT.getMessage();
         return ProfileMessages.EMAIL_CHANGE_SUCCESS.getMessage();
     }
@@ -68,7 +69,7 @@ public class ProfileController {
         return currentUser.getHighScore();
     }
     public int displayRank(){
-        return Stronghold.getInstance().getUserRank(currentUser);
+        return stronghold.getUserRank(currentUser);
     }
 
     public String displaySlogan(){

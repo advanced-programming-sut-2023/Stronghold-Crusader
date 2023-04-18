@@ -6,6 +6,7 @@ import model.User;
 import utils.FormatValidation;
 import utils.Pair;
 import utils.SignupAndLoginUtils;
+import view.SignupAndLoginMenu;
 import view.enums.messages.SignupAndLoginMessages;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ public class SignupAndLoginController {
     public User currentUser = null;
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
+    private Stronghold stronghold = Stronghold.getInstance();
     private void increaseFailedAttempts() {
         failedAttempts++;
         loginTime = LocalDateTime.now().plus(5 * (long) Math.pow(2, failedAttempts - 1), ChronoUnit.SECONDS);
@@ -27,6 +29,14 @@ public class SignupAndLoginController {
     }
     public long getTimeUntilLogin() {
         return LocalDateTime.now().until(this.loginTime, ChronoUnit.SECONDS);
+    }
+    public void run(){
+        SignupAndLoginMenu signupAndLoginMenu = new SignupAndLoginMenu(this);
+        while(true){
+            switch (signupAndLoginMenu.run()){
+
+            }
+        }
     }
 
     public SignupAndLoginMessages signup(HashMap<String, String> inputs) {
@@ -47,9 +57,9 @@ public class SignupAndLoginController {
             return SignupAndLoginMessages.INVALID_EMAIL_FORMAT;
         if (!inputs.get("password").equals("random") && !inputs.get("password").equals(inputs.get("passwordConfirmation")))
             return SignupAndLoginMessages.CONFIRMATION_ERROR;
-        if (Stronghold.getInstance().emailExists(inputs.get("email")))
+        if (stronghold.emailExists(inputs.get("email")))
             return SignupAndLoginMessages.EXISTED_EMAIL;
-        if (Stronghold.getInstance().userExists(inputs.get("username")))
+        if (stronghold.userExists(inputs.get("username")))
             return SignupAndLoginMessages.EXISTING_USERNAME;
         if (inputs.get("password").equals("random")) {
             inputs.replace("password", inputs.get("password"), SignupAndLoginUtils.generateRandomPassword());
@@ -57,7 +67,7 @@ public class SignupAndLoginController {
         }
         User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
-        Stronghold.getInstance().addUser(newUser);
+        stronghold.addUser(newUser);
         return SignupAndLoginMessages.SUCCESS;
     }
 
@@ -67,7 +77,7 @@ public class SignupAndLoginController {
         if (!inputs.get("answer").equals(inputs.get("answerConfirm")) || (number < 1 || number > 3))
             return SignupAndLoginMessages.FAIL;
         Pair pair;
-        User user = Stronghold.getInstance().getUser(inputs.get("username"));
+        User user = stronghold.getUser(inputs.get("username"));
         switch (number) {
             case 1:
                 pair = new Pair("What is my father’s name?", inputs.get("answer"));
@@ -103,7 +113,7 @@ public class SignupAndLoginController {
     }
 
     public SignupAndLoginMessages getCurrentUser(String username) {
-        currentUser = Stronghold.getUser(username);
+        currentUser = stronghold.getUser(username);
         if (currentUser == null)
             return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
         return SignupAndLoginMessages.SUCCESS;

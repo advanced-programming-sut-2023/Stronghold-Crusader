@@ -19,9 +19,9 @@ public enum ProfileCommands {
         this.regex = regex;
     }
 
-    public static ProfileCommands getCommand(String regex){
+    public static ProfileCommands getCommand(String input){
         for(ProfileCommands cmd : ProfileCommands.values()){
-            if(regex.matches(cmd.regex)) return cmd;
+            if(input.matches(cmd.regex)) return cmd;
         }
         return null;
     }
