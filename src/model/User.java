@@ -1,21 +1,23 @@
-    package model;
+package model;
 
 import utils.*;
+
 public class User {
     private String username;
     private String password;
     private String nickname;
     private String slogan;
-    private String Email;
+    private String email;
     private Pair passwordRecovery;
-    private int highscore;
-    public User(String username, String password, String Email, String nickname, String slogan) {
+    private int highScore;
+
+    public User(String username, String password, String email, String nickname, String slogan) {
         this.username = username;
         this.password = password;
-        this.Email = Email;
+        this.email = email;
         this.nickname = nickname;
         this.slogan = slogan;
-        this.highscore = 0 ;
+        this.highScore = 0;
     }
 
     public String getUsername() {
@@ -30,22 +32,28 @@ public class User {
         return slogan;
     }
 
-    public int getHighscore() {
-        return highscore;
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public String getPasswordRecoveryQuestion() {
         return passwordRecovery.x;
     }
-    public boolean isPasswordCorrect(String password){
+
+    public boolean isPasswordCorrect(String password) {
         return this.password.matches(password);
     }
-    public boolean isRecoveryPasswordCorrect(String recoveryAnswer){
-        return true;
+
+    public boolean isRecoveryPasswordCorrect(String recoveryAnswer) {
+        return passwordRecovery.y.equals(recoveryAnswer);
     }
 
     public void changeUsername(String username) {
@@ -61,20 +69,17 @@ public class User {
     }
 
     public void changeEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public void setPasswordRecovery(Pair passwordRecovery) {
         this.passwordRecovery = passwordRecovery;
     }
 
-    public void setHighscore(int highscore) {
-        this.highscore = highscore;
+    public void setPassword(String newPass) {
+        this.password = newPass;
     }
-    public void setPassword(String newPass, String oldPass) {
-        if (isPasswordCorrect(oldPass))
-            this.password = newPass;
-    }
+
     public void removeSlogan() {
         this.slogan = "";
     }

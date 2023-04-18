@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 public class SignupAndLoginUtils {
     public static HashMap<String, String> getInputs(Matcher matcher, String regex) {
-        Matcher listOfGroups = Pattern.compile("\\?\\<(?<groupName>[^\\>]+)\\>").matcher(regex);
+        Matcher listOfGroups = Pattern.compile("\\?<(?<groupName>[^>]+)>").matcher(regex);
         String groupName;
-        HashMap<String, String> inputs = new HashMap<String, String>();
+        HashMap<String, String> inputs = new HashMap<>();
         while (listOfGroups.find()) {
             groupName = listOfGroups.group("groupName");
             inputs.put(groupName, matcher.group(groupName));
@@ -37,7 +37,7 @@ public class SignupAndLoginUtils {
     }
     public static String generateRandomUsername(String username) {
         String newName = username;
-        while (Stronghold.doesUserExist(newName)) {
+        while (Stronghold.userExists(newName)) {
             newName += Integer.valueOf((int)(Math.random() * 9 )).toString();
         }
         return newName;

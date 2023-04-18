@@ -46,10 +46,10 @@ public class SignupAndLoginController {
             return SignupAndLoginMessages.INVALID_EMAIL_FORMAT;
         if (!inputs.get("password").equals("random") && !inputs.get("password").equals(inputs.get("passwordConfirmation")))
             return SignupAndLoginMessages.CONFIRMATION_ERROR;
-        if (Stronghold.isEmailExist(inputs.get("email")))
+        if (Stronghold.emailExists(inputs.get("email")))
             return SignupAndLoginMessages.EXISTED_EMAIL;
-        if (Stronghold.doesUserExist(inputs.get("username")))
-            return SignupAndLoginMessages.EXISTED_USERNAME;
+        if (Stronghold.userExists(inputs.get("username")))
+            return SignupAndLoginMessages.EXISTING_USERNAME;
         if (inputs.get("password").equals("random")) {
             inputs.replace("password", inputs.get("password"), SignupAndLoginUtils.generateRandomPassword());
             return SignupAndLoginMessages.CONFIRM;
@@ -66,7 +66,7 @@ public class SignupAndLoginController {
         if (!inputs.get("answer").equals(inputs.get("answerConfirm")) || (number < 1 || number > 3))
             return SignupAndLoginMessages.FAIL;
         Pair pair;
-        User user = Stronghold.getUserByUsername(inputs.get("username"));
+        User user = Stronghold.getUser(inputs.get("username"));
         switch (number) {
             case 1:
                 pair = new Pair("What is my father’s name?", inputs.get("answer"));
@@ -88,11 +88,11 @@ public class SignupAndLoginController {
     public SignupAndLoginMessages login(HashMap<String, String> inputs) {
         if (inputs.get("username") == null || inputs.get("password") == null)
             return SignupAndLoginMessages.EMPTY_FIELD;
-        if (Stronghold.getUserByUsername(inputs.get("username")) == null)
+        if (Stronghold.getUser(inputs.get("username")) == null)
             return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
         if (this.loginTime != null && LocalDateTime.now().isBefore(loginTime))
             return SignupAndLoginMessages.TOO_MANY_ATTEMPTS;
-        if (!Stronghold.getUserByUsername(inputs.get("username")).isPasswordCorrect(inputs.get("password"))) {
+        if (!Stronghold.getUser(inputs.get("username")).isPasswordCorrect(inputs.get("password"))) {
             increaseFailedAttempts();
             return SignupAndLoginMessages.INCORRECT_PASSWORD;
         }

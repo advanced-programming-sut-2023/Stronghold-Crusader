@@ -41,7 +41,7 @@ public class SignupAndLoginMenu {
                 inputs.replace("passwordConfirmation", inputs.get("passwordConfirmation"), Menu.getScanner().nextLine());
                 message = controller.signup(inputs);
                 break;
-            case EXISTED_USERNAME:
+            case EXISTING_USERNAME:
                 System.out.println("The username already taken");
                 String username = inputs.get("username");
                 inputs.replace("username", username, SignupAndLoginUtils.generateRandomUsername(username));
