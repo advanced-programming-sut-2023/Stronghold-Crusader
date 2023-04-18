@@ -103,7 +103,7 @@ public class SignupAndLoginController {
     }
 
     public SignupAndLoginMessages getCurrentUser(String username) {
-        currentUser = Stronghold.getUserByUsername(username);
+        currentUser = Stronghold.getUser(username);
         if (currentUser == null)
             return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
         return SignupAndLoginMessages.SUCCESS;

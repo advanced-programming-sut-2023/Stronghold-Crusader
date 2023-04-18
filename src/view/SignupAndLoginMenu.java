@@ -131,8 +131,7 @@ public class SignupAndLoginMenu {
         else {
             String nextCommand = Menu.getScanner().nextLine();
             System.out.println(controller.currentUser.getPasswordRecoveryQuestion());
-            String recoveryAnswer = nextCommand;
-            if (controller.currentUser.isRecoveryPasswordCorrect(recoveryAnswer)) {
+            if (controller.currentUser.isRecoveryPasswordCorrect(nextCommand)) {
                 while (true) {
                     System.out.println("Enter new Password:");
                     nextCommand = Menu.getScanner().nextLine();
@@ -142,7 +141,7 @@ public class SignupAndLoginMenu {
                         System.out.println("Pick your security question: 1. What is my father’s name?" +
                                 " 2. What was my first pet’s name? 3. What is my mother’s last name?");
                     else {
-                        controller.currentUser.changePassword(recoveryAnswer, nextCommand);
+                        controller.currentUser.setPassword(nextCommand);
                         System.out.println("Password changed successfully");
                         break;
                     }
