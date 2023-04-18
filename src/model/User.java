@@ -1,8 +1,6 @@
-package model;
+    package model;
 
 import utils.*;
-
-
 public class User {
     private String username;
     private String password;
@@ -11,15 +9,13 @@ public class User {
     private String Email;
     private Pair passwordRecovery;
     private int highscore;
-
-
     public User(String username, String password, String Email, String nickname, String slogan) {
         this.username = username;
         this.password = password;
         this.Email = Email;
         this.nickname = nickname;
         this.slogan = slogan;
-        this.highscore = 0;
+        this.highscore = 0 ;
     }
 
     public String getUsername() {
@@ -42,16 +38,13 @@ public class User {
         return Email;
     }
 
-
     public String getPasswordRecoveryQuestion() {
         return passwordRecovery.x;
     }
-
-    public boolean isPasswordCorrect(String password) {
-        return this.password.matches(password);
+    public boolean isPasswordCorrect(String password){
+        return true;
     }
-
-    public boolean isRecoveryPasswordCorrect(String recoveryAnswer) {
+    public boolean isRecoveryPasswordCorrect(String recoveryAnswer){
         return true;
     }
 
@@ -78,6 +71,4 @@ public class User {
     public void setHighscore(int highscore) {
         this.highscore = highscore;
     }
-
-
 }

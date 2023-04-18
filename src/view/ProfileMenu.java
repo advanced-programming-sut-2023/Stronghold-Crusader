@@ -22,6 +22,7 @@ public class ProfileMenu {
             ProfileCommands cmd = ProfileCommands.getCommand(input);
             if(cmd == null){
                 ProfileMessages.printMessage(ProfileMessages.INVALID_COMMAND);
+                continue;
             }
             Matcher matcher = ProfileCommands.getMatcher(input, cmd);
             switch (cmd){
@@ -40,6 +41,24 @@ public class ProfileMenu {
                 case CHANGE_SLOGAN:
                     runChangeSlogan(matcher);
                     break;
+                case DISPLAY_HIGHSCORE:
+                    System.out.println(profileController.displayHighscore());
+                    break;
+                case DISPLAY_RANK:
+                    System.out.println(profileController.displayRank());
+                    break;
+                case DISPLAY_SLOGAN:
+                    System.out.println(profileController.displaySlogan());
+                    break;
+                case PROFILE_INFO:
+                    System.out.println(profileController.displayUserInfo());
+                    break;
+                case REMOVE_SLOGAN:
+                    System.out.println(profileController.removeSlogan());
+                    break;
+                default:
+                    ProfileMessages.printMessage(ProfileMessages.INVALID_COMMAND);
+                    break;
             }
         }
     }
@@ -57,11 +76,11 @@ public class ProfileMenu {
     private void runChangePassword(Matcher matcher){
         String oldPass = matcher.group("oldPass");
         String newPass = matcher.group("newPass");
-        String canChangePass = profileController.canChangePassword(oldPass);
+        String canChangePass = profileController.canChangePassword(oldPass, newPass);
         if(canChangePass.equals("true")) {
             System.out.println(ProfileMessages.ENTER_NEWPASS_AGAIN);
             String confirmation = scanner.nextLine();
-            System.out.println(profileController.changePassword(newPass, confirmation));
+            System.out.println(profileController.changePassword(newPass, confirmation, oldPass));
         }
         else System.out.println(canChangePass);
     }
