@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Stronghold {
-    public static HashMap<String, User> users;
-    public static ArrayList<Integer> rankings;
+    public  static HashMap<String, User> users = new HashMap<>();
+    public static ArrayList<Integer> rankings = new ArrayList<>();
 
     public static User getUserByUsername(String username) {
         return  users.get(username);

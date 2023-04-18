@@ -9,8 +9,12 @@ public class User {
     private String Email;
     private Pair passwordRecovery;
     private int highscore;
-    User(String username, String password, String Email) {
-
+    public User(String username, String password, String Email, String nickname, String slogan) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.slogan = slogan;
+        this.highscore = 0 ;
     }
 
     public String getUsername() {
@@ -51,7 +55,7 @@ public class User {
         this.nickname = nickname;
     }
 
-    public void setSlogan(String slogan) {
+    public void changeSlogan(String slogan) {
         this.slogan = slogan;
     }
 

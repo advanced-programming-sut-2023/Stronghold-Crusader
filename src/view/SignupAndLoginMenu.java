@@ -17,28 +17,34 @@ public class SignupAndLoginMenu {
         Matcher matcher;
         while (true) {
             nextCommand = Menu.getScanner().nextLine();
-            if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATE_USER)) != null){
+            if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATE_USER)) != null) {
                 createUserCall(matcher);
             }
         }
     }
+
     private void createUserCall(Matcher matcher) {
-        HashMap<String,String> inputs =
+        HashMap<String, String> inputs =
                 SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
+        boolean randomSlogan = inputs.get("slogan").equals("random");
         SignupAndLoginMessages message = controller.signup(inputs);
-        switch (message){
+        switch (message) {
             case CONFIRM:
-            System.out.println("Your random password is: "+ inputs.get("password"));
-            System.out.print("Please re-enter your password here:\t");
-            inputs.replace("passwordConfirmation", inputs.get("passwordConfirmation"), Menu.getScanner().nextLine());
-            message = controller.signup(inputs);
-            break;
+                if (randomSlogan) {
+                    System.out.println("your random slogan is: " + inputs.get("slogan"));
+                    randomSlogan = false;
+                }
+                System.out.println("Your random password is: " + inputs.get("password"));
+                System.out.print("Please re-enter your password here:\t");
+                inputs.replace("passwordConfirmation", inputs.get("passwordConfirmation"), Menu.getScanner().nextLine());
+                message = controller.signup(inputs);
+                break;
             case EXISTED_USERNAME:
                 System.out.println("The username already taken");
                 String username = inputs.get("username");
                 inputs.replace("username", username, SignupAndLoginUtils.generateRandomUsername(username));
-                System.out.println("Do you want to continue  registration process with "+ username +"?" );
-                if (FormatValidation.isFormatValid(Menu.getScanner().nextLine(), FormatValidation.YES ))
+                System.out.println("Do you want to continue  registration process with " + username + "?");
+                if (FormatValidation.isFormatValid(Menu.getScanner().nextLine(), FormatValidation.YES))
                     message = controller.signup(inputs);
         }
         switch (message) {
@@ -58,11 +64,32 @@ public class SignupAndLoginMenu {
             case INVALID_EMAIL_FORMAT:
                 System.out.println("Email format is not valid");
                 break;
-            case CONFIRMATION_PASSWORD_ERROR:
+            case CONFIRMATION_ERROR:
                 System.out.println("Passwords do not match");
                 break;
             case EXISTED_EMAIL:
                 System.out.println("The email already taken");
+                break;
+            case SUCCESS:
+                if (randomSlogan)
+                    System.out.println("your random slogan is: " + inputs.get("slogan"));
+                while (true) {
+                    System.out.println("Pick your security question: 1. What is my father’s name?" +
+                            " 2. What was my first pet’s name? 3. What is my mother’s last name?");
+                    String nextCommand = Menu.getScanner().nextLine();
+                    Matcher matcher2 = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.QUESTION_PICK);
+                    if (matcher2 == null)
+                        System.out.println("some error founds");
+                    else {
+                        HashMap<String, String> pickQuestionInputs =
+                                SignupAndLoginUtils.getInputs(matcher2, SignupAndLoginCommands.QUESTION_PICK.getRegex());
+                        pickQuestionInputs.put("username", inputs.get("username"));
+                        message = controller.pickQuestion(pickQuestionInputs);
+                        if (!message.equals(SignupAndLoginMessages.FAIL)) break;
+                        System.out.println("some error founds");
+                    }
+                }
+                System.out.println("user created successfully");
                 break;
         }
     }
