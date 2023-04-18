@@ -76,11 +76,11 @@ public class ProfileMenu {
     private void runChangePassword(Matcher matcher){
         String oldPass = matcher.group("oldPass");
         String newPass = matcher.group("newPass");
-        String canChangePass = profileController.canChangePassword(oldPass);
+        String canChangePass = profileController.canChangePassword(oldPass, newPass);
         if(canChangePass.equals("true")) {
             System.out.println(ProfileMessages.ENTER_NEWPASS_AGAIN);
             String confirmation = scanner.nextLine();
-            System.out.println(profileController.changePassword(newPass, confirmation));
+            System.out.println(profileController.changePassword(newPass, confirmation, oldPass));
         }
         else System.out.println(canChangePass);
     }

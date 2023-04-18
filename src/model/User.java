@@ -71,4 +71,12 @@ public class User {
     public void setHighscore(int highscore) {
         this.highscore = highscore;
     }
+
+    public void setPassword(String newPass, String oldPass) {
+        if(isPasswordCorrect(oldPass)) this.password = newPass;
+    }
+
+    public void removeSlogan(){
+        this.slogan = "";
+    }
 }
