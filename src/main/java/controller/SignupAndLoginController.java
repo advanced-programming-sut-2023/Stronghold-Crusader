@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.tools.javac.Main;
 import model.Slogan;
 import model.Stronghold;
 import model.User;
@@ -18,6 +19,7 @@ public class SignupAndLoginController {
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
     private final Stronghold stronghold = Stronghold.getInstance();
+    private MainController mainController;
 
     private void increaseFailedAttempts() {
         failedAttempts++;
@@ -37,7 +39,11 @@ public class SignupAndLoginController {
         SignupAndLoginMenu signupAndLoginMenu = new SignupAndLoginMenu(this);
         while (true) {
             switch (signupAndLoginMenu.run()) {
-
+                case "logout":
+                    return;
+                case "login":
+                    mainController.run();
+                    break;
             }
         }
     }
@@ -67,6 +73,7 @@ public class SignupAndLoginController {
         User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
         stronghold.addUser(newUser);
+        mainController = new MainController(newUser);
         return SignupAndLoginMessages.SUCCESS_PROCESS;
     }
 

@@ -27,12 +27,12 @@ public class SignupAndLoginMenu {
                 SignupAndLoginMessages.INVALID_COMMAND.printMessage();
                 continue;
             }
-            if (typeOfCommand.equals(SignupAndLoginCommands.LOGOUT)) break;
+            if (typeOfCommand.equals(SignupAndLoginCommands.LOGOUT)) return "logout";
 
             matcher = SignupAndLoginCommands.getMatcher(nextCommand, typeOfCommand);
             switch (typeOfCommand) {
                 case LOGIN:
-                    loginCall(matcher);
+                    if(loginCall(matcher)) return "login";
                     break;
                 case CHANGE_PASSWORD:
                     changePasswordCall(matcher);
@@ -42,7 +42,6 @@ public class SignupAndLoginMenu {
                     break;
             }
         }
-        return null;
     }
 
     private void createUserCall(Matcher matcher) {
@@ -66,14 +65,19 @@ public class SignupAndLoginMenu {
         }
     }
 
-    private void loginCall(Matcher matcher) {
+    private boolean loginCall(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.LOGIN.getRegex());
         SignupAndLoginMessages messages = controller.login(inputs);
             messages.printMessage();
-            if (messages.equals(SignupAndLoginMessages.TOO_MANY_ATTEMPTS))
+            if (messages.equals(SignupAndLoginMessages.TOO_MANY_ATTEMPTS)){
                 tooManyAttemptsError();
-           if (messages.equals(SignupAndLoginMessages.SUCCESS_PROCESS))
-               System.out.println("success");//TODO DIBA ->
+                return false;
+            }
+           if (messages.equals(SignupAndLoginMessages.SUCCESS_PROCESS)){
+               System.out.println("success");
+               return true;
+           }
+           return false;
     }
 
     private void changePasswordCall(Matcher matcher) {
