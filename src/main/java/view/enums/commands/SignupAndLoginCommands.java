@@ -18,9 +18,9 @@ public enum SignupAndLoginCommands {
     SignupAndLoginCommands(String regex) {
         this.regex = regex;
     }
-    public static SignupAndLoginCommands getCommand(String command) {
+    public static SignupAndLoginCommands getCommand(String input) {
         for (SignupAndLoginCommands cmd : SignupAndLoginCommands.values()){
-            if (cmd.regex.matches(command)) return cmd;
+            if (input.matches(cmd.regex)) return cmd;
         }
         return null;
     }

@@ -13,7 +13,7 @@ public class Stronghold {
 
     public static void load() {
         if (instance == null)
-            instance = UserManager.load();
+            instance = new Stronghold();
     }
 
     public static Stronghold getInstance() {

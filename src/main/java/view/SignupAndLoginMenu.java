@@ -8,29 +8,32 @@ import view.enums.messages.SignupAndLoginMessages;
 
 
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class SignupAndLoginMenu {
     private final SignupAndLoginController controller;
+    private Scanner scanner;
 
     public SignupAndLoginMenu(SignupAndLoginController controller) {
         this.controller = controller;
+        this.scanner = Menu.getScanner();
     }
 
     public String run() {
         String nextCommand;
         Matcher matcher;
         while (true) {
-            nextCommand = Menu.getScanner().nextLine();
+            nextCommand = scanner.nextLine();
             SignupAndLoginCommands typeOfCommand = SignupAndLoginCommands.getCommand(nextCommand);
             if (typeOfCommand == null) {
                 SignupAndLoginMessages.INVALID_COMMAND.printMessage();
                 continue;
             }
-            if (typeOfCommand.equals(SignupAndLoginCommands.LOGOUT)) return "logout";
-
             matcher = SignupAndLoginCommands.getMatcher(nextCommand, typeOfCommand);
             switch (typeOfCommand) {
+                case LOGOUT:
+                    return "logout";
                 case LOGIN:
                     if(loginCall(matcher)) return "login";
                     break;
