@@ -17,7 +17,8 @@ public class SignupAndLoginController {
     public User currentUser = null;
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
-    private Stronghold stronghold = Stronghold.getInstance();
+    private final Stronghold stronghold = Stronghold.getInstance();
+
     private void increaseFailedAttempts() {
         failedAttempts++;
         loginTime = LocalDateTime.now().plus(5 * (long) Math.pow(2, failedAttempts - 1), ChronoUnit.SECONDS);
@@ -27,13 +28,15 @@ public class SignupAndLoginController {
         failedAttempts = 0;
         loginTime = null;
     }
+
     public long getTimeUntilLogin() {
         return LocalDateTime.now().until(this.loginTime, ChronoUnit.SECONDS);
     }
-    public void run(){
+
+    public void run() {
         SignupAndLoginMenu signupAndLoginMenu = new SignupAndLoginMenu(this);
-        while(true){
-            switch (signupAndLoginMenu.run()){
+        while (true) {
+            switch (signupAndLoginMenu.run()) {
 
             }
         }
@@ -41,41 +44,37 @@ public class SignupAndLoginController {
 
     public SignupAndLoginMessages signup(HashMap<String, String> inputs) {
         if (inputs.get("slogan").equals("random"))
-            inputs.replace("slogan", inputs.get("slogan"), Slogan.values()[(int) (Math.random() * 5)].getSlogan());
-        if (inputs.get("password") == null || inputs.get("email") == null
-                || inputs.get("email") == null || inputs.get("slogan").equals(""))
+            inputs.replace("slogan", inputs.get("slogan"), generateRandomSlogan());
+        if (hasEmptyField(inputs))
             return SignupAndLoginMessages.EMPTY_FIELD;
-        if (!FormatValidation.isFormatValid(inputs.get("username"), FormatValidation.USERNAME))
-            return SignupAndLoginMessages.INVALID_USERNAME_FORMAT;
-        if (!inputs.get("password").equals("random")) {
-            if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LENGTH))
-                return SignupAndLoginMessages.PASSWORD_WEEK_LENGTH;
-            if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LETTERS))
-                return SignupAndLoginMessages.PASSWORD_WEEK_LETTERS_PROBLEM;
-        }
-        if (!FormatValidation.isFormatValid(inputs.get("email"), FormatValidation.EMAIL))
-            return SignupAndLoginMessages.INVALID_EMAIL_FORMAT;
+
+        if (checkFormatOfInputs(inputs) != null)
+            return checkFormatOfInputs(inputs);
+
         if (!inputs.get("password").equals("random") && !inputs.get("password").equals(inputs.get("passwordConfirmation")))
             return SignupAndLoginMessages.CONFIRMATION_ERROR;
+
         if (stronghold.emailExists(inputs.get("email")))
             return SignupAndLoginMessages.EXISTED_EMAIL;
+
         if (stronghold.userExists(inputs.get("username")))
             return SignupAndLoginMessages.EXISTING_USERNAME;
+
         if (inputs.get("password").equals("random")) {
             inputs.replace("password", inputs.get("password"), SignupAndLoginUtils.generateRandomPassword());
-            return SignupAndLoginMessages.CONFIRM;
+            return SignupAndLoginMessages.RANDOM_PASSWORD;
         }
         User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
         stronghold.addUser(newUser);
-        return SignupAndLoginMessages.SUCCESS;
+        return SignupAndLoginMessages.SUCCESS_PROCESS;
     }
 
 
     public SignupAndLoginMessages pickQuestion(HashMap<String, String> inputs) {
         int number = Integer.parseInt(inputs.get("questionNumber"));
         if (!inputs.get("answer").equals(inputs.get("answerConfirm")) || (number < 1 || number > 3))
-            return SignupAndLoginMessages.FAIL;
+            return SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION;
         Pair pair;
         User user = stronghold.getUser(inputs.get("username"));
         switch (number) {
@@ -93,7 +92,7 @@ public class SignupAndLoginController {
                 break;
         }
         user.setPasswordRecovery(pair);
-        return SignupAndLoginMessages.SUCCESS;
+        return SignupAndLoginMessages.SUCCESS_PROCESS;
     }
 
     public SignupAndLoginMessages login(HashMap<String, String> inputs) {
@@ -108,7 +107,7 @@ public class SignupAndLoginController {
             return SignupAndLoginMessages.INCORRECT_PASSWORD;
         }
         failedAttemptsReset();
-        return SignupAndLoginMessages.SUCCESS;
+        return SignupAndLoginMessages.SUCCESS_PROCESS;
         //TODO enter to the main menu *>Diba
     }
 
@@ -116,7 +115,32 @@ public class SignupAndLoginController {
         currentUser = stronghold.getUser(username);
         if (currentUser == null)
             return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
-        return SignupAndLoginMessages.SUCCESS;
+        return SignupAndLoginMessages.SUCCESS_PROCESS;
+    }
+
+    private boolean hasEmptyField(HashMap<String, String> inputs) {
+        return inputs.get("password") == null || inputs.get("email") == null
+                || inputs.get("email") == null || inputs.get("slogan").equals("");
+    }
+
+    private SignupAndLoginMessages checkFormatOfInputs(HashMap<String, String> inputs) {
+        if (!FormatValidation.isFormatValid(inputs.get("username"), FormatValidation.USERNAME))
+            return SignupAndLoginMessages.INVALID_USERNAME_FORMAT;
+
+        if (!inputs.get("password").equals("random")) {
+            if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LENGTH))
+                return SignupAndLoginMessages.PASSWORD_WEEK_LENGTH;
+            if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LETTERS))
+                return SignupAndLoginMessages.PASSWORD_WEEK_LETTERS_PROBLEM;
+        }
+
+        if (!FormatValidation.isFormatValid(inputs.get("email"), FormatValidation.EMAIL))
+            return SignupAndLoginMessages.INVALID_EMAIL_FORMAT;
+        return null;
+    }
+
+    private String generateRandomSlogan() {
+        return Slogan.values()[(int) (Math.random() * 5)].getSlogan();
     }
 
 }

@@ -11,11 +11,18 @@ public enum SignupAndLoginCommands {
     QUESTION_PICK("\\s*question\\s+pick\\s+-q\\s+(?<questionNumber>\\d+)\\s+-a\\s+(?<answer>.+)" +
             "\\s+-c\\s+(?<answerConfirm>.+)\\s*"),
     LOGIN("\\s*user\\s+login((\\s+-u\\s+(?<username>\\S+))|(\\s+-p\\s+(?<password>\\S+)))*\\s*"),
-    CHANGE_PASSWORD("\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\\S+)\\s*");
+    CHANGE_PASSWORD("\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\\S+)\\s*"),
+    LOGOUT("\\s*logout\\s*");
 
     private final String regex;
     SignupAndLoginCommands(String regex) {
         this.regex = regex;
+    }
+    public static SignupAndLoginCommands getCommand(String command) {
+        for (SignupAndLoginCommands cmd : SignupAndLoginCommands.values()){
+            if (cmd.regex.matches(command)) return cmd;
+        }
+        return null;
     }
 
     public static Matcher getMatcher(String command, SignupAndLoginCommands sampleCommand) {

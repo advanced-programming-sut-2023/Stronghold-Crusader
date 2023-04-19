@@ -6,14 +6,14 @@ import utils.SignupAndLoginUtils;
 import view.enums.commands.SignupAndLoginCommands;
 import view.enums.messages.SignupAndLoginMessages;
 
-import java.lang.invoke.VarHandle;
-import java.lang.management.MemoryUsage;
+
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class SignupAndLoginMenu {
-    private SignupAndLoginController controller;
-    public SignupAndLoginMenu(SignupAndLoginController controller){
+    private final SignupAndLoginController controller;
+
+    public SignupAndLoginMenu(SignupAndLoginController controller) {
         this.controller = controller;
     }
 
@@ -22,135 +22,128 @@ public class SignupAndLoginMenu {
         Matcher matcher;
         while (true) {
             nextCommand = Menu.getScanner().nextLine();
-            if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CREATE_USER)) != null)
-                createUserCall(matcher);
-            else if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.LOGIN)) != null)
-                loginCall(matcher);
-            else if ((matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.CHANGE_PASSWORD)) != null)
-                changePasswordCall(matcher);
-            else System.out.println("Invalid command");
+            SignupAndLoginCommands typeOfCommand = SignupAndLoginCommands.getCommand(nextCommand);
+            if (typeOfCommand == null) {
+                SignupAndLoginMessages.INVALID_COMMAND.printMessage();
+                continue;
+            }
+            if (typeOfCommand.equals(SignupAndLoginCommands.LOGOUT)) break;
+
+            matcher = SignupAndLoginCommands.getMatcher(nextCommand, typeOfCommand);
+            switch (typeOfCommand) {
+                case LOGIN:
+                    loginCall(matcher);
+                    break;
+                case CHANGE_PASSWORD:
+                    changePasswordCall(matcher);
+                    break;
+                case CREATE_USER:
+                    createUserCall(matcher);
+                    break;
+            }
         }
+        return null;
     }
 
     private void createUserCall(Matcher matcher) {
-        HashMap<String, String> inputs =
-                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
+        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
         boolean randomSlogan = inputs.get("slogan").equals("random");
         SignupAndLoginMessages message = controller.signup(inputs);
-        switch (message) {
-            case CONFIRM:
-                if (randomSlogan) {
-                    System.out.println("your random slogan is: " + inputs.get("slogan"));
-                    randomSlogan = false;
-                }
-                System.out.println("Your random password is: " + inputs.get("password"));
-                System.out.print("Please re-enter your password here:\t");
-                inputs.replace("passwordConfirmation", inputs.get("passwordConfirmation"), Menu.getScanner().nextLine());
-                message = controller.signup(inputs);
-                break;
-            case EXISTING_USERNAME:
-                System.out.println("The username already taken");
-                String username = inputs.get("username");
-                inputs.replace("username", username, SignupAndLoginUtils.generateRandomUsername(username));
-                System.out.println("Do you want to continue  registration process with " + inputs.get("username") + "?");
-                if (FormatValidation.isFormatValid(Menu.getScanner().nextLine(), FormatValidation.YES))
-                    message = controller.signup(inputs);
+
+        if (message.equals(SignupAndLoginMessages.RANDOM_PASSWORD)) {
+            randomPasswordSuggestion(inputs, randomSlogan);
+            message = controller.signup(inputs);
         }
-        switch (message) {
-            case EMPTY_FIELD:
-                System.out.println("There are empty fields among the entered entries");
-                break;
-            case INVALID_USERNAME_FORMAT:
-                System.out.println("Username format is not valid");
-                break;
-            case PASSWORD_WEEK_LENGTH:
-                System.out.println("Password is week(password must has at least 6 characters)");
-                break;
-            case PASSWORD_WEEK_LETTERS_PROBLEM:
-                System.out.println("Password is week(password must include at least 1 lowercase character" +
-                        ", 1 uppercase character, 1 number, and 1 special character)");
-                break;
-            case INVALID_EMAIL_FORMAT:
-                System.out.println("Email format is not valid");
-                break;
-            case CONFIRMATION_ERROR:
-                System.out.println("Passwords do not match");
-                break;
-            case EXISTED_EMAIL:
-                System.out.println("The email already taken");
-                break;
-            case SUCCESS:
-                if (randomSlogan)
-                    System.out.println("your random slogan is: " + inputs.get("slogan"));
-                while (true) {
-                    System.out.println("Pick your security question: 1. What is my father’s name?" +
-                            " 2. What was my first pet’s name? 3. What is my mother’s last name?");
-                    String nextCommand = Menu.getScanner().nextLine();
-                    Matcher matcher2 = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.QUESTION_PICK);
-                    if (matcher2 == null)
-                        System.out.println("some error founds");
-                    else {
-                        HashMap<String, String> pickQuestionInputs =
-                                SignupAndLoginUtils.getInputs(matcher2, SignupAndLoginCommands.QUESTION_PICK.getRegex());
-                        pickQuestionInputs.put("username", inputs.get("username"));
-                        message = controller.pickQuestion(pickQuestionInputs);
-                        if (!message.equals(SignupAndLoginMessages.FAIL)) break;
-                        System.out.println("some error founds");
-                    }
-                }
-                System.out.println("user created successfully");
-                break;
+
+        if (message.equals(SignupAndLoginMessages.EXISTING_USERNAME))
+            if (isUsernameSuggestionAccept(inputs))
+                message = controller.signup(inputs);
+
+        message.printMessage();
+        if (message.equals(SignupAndLoginMessages.SUCCESS_PROCESS)) {
+            if (randomSlogan) printRandomSlogan(inputs);
+            pickUpQuestion(inputs);
         }
     }
 
     private void loginCall(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.LOGIN.getRegex());
         SignupAndLoginMessages messages = controller.login(inputs);
-        switch (messages) {
-            case EMPTY_FIELD:
-                System.out.println("There are empty fields among the entered entries");
-                break;
-            case USER_DOES_NOT_EXIST:
-                System.out.println("There is no user with this username");
-                break;
-            case INCORRECT_PASSWORD:
-                System.out.println("The password entered is incorrect");
-                break;
-            case TOO_MANY_ATTEMPTS:
-                int minutes = (int) (controller.getTimeUntilLogin() / 60);
-                int seconds = (int) (controller.getTimeUntilLogin() % 60);
-                System.out.println("Too many failed attempts. Please wait " + minutes + " minutes and " +
-                        seconds + " seconds before trying again");
-            case SUCCESS:
-                //TODO go to the main menu >*Diba
-                break;
-        }
+            messages.printMessage();
+            if (messages.equals(SignupAndLoginMessages.TOO_MANY_ATTEMPTS))
+                tooManyAttemptsError();
+           if (messages.equals(SignupAndLoginMessages.SUCCESS_PROCESS))
+               System.out.println("success");//TODO DIBA ->
     }
 
     private void changePasswordCall(Matcher matcher) {
         SignupAndLoginMessages messages = controller.getCurrentUser(matcher.group("username"));
-        if (messages.equals(SignupAndLoginMessages.USER_DOES_NOT_EXIST))
-            System.out.println("There is no user with this username");
-        else {
+        messages.printMessage();
             String nextCommand = Menu.getScanner().nextLine();
             System.out.println(controller.currentUser.getPasswordRecoveryQuestion());
             if (controller.currentUser.isRecoveryPasswordCorrect(nextCommand)) {
-                while (true) {
-                    System.out.println("Enter new Password:");
-                    nextCommand = Menu.getScanner().nextLine();
-                    if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LENGTH)) {
-                        System.out.println("Password is week(password must has at least 6 characters)");
-                    } else if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LETTERS))
-                        System.out.println("Pick your security question: 1. What is my father’s name?" +
-                                " 2. What was my first pet’s name? 3. What is my mother’s last name?");
-                    else {
-                        controller.currentUser.setPassword(nextCommand);
-                        System.out.println("Password changed successfully");
-                        break;
-                    }
-                }
+                recoveryPassword();
             } else System.out.println("Incorrect answer!");
+    }
+
+    private boolean isUsernameSuggestionAccept(HashMap<String, String> inputs) {
+        String username = inputs.get("username");
+        inputs.replace("username", username, SignupAndLoginUtils.generateRandomUsername(username));
+        System.out.println("Do you want to continue  registration process with " + inputs.get("username") + "?");
+        return (FormatValidation.isFormatValid(Menu.getScanner().nextLine(), FormatValidation.YES));
+    }
+
+    private void randomPasswordSuggestion(HashMap<String, String> inputs, boolean randomSlogan) {
+        if (randomSlogan) {
+            printRandomSlogan(inputs);
+            randomSlogan = false;
+        }
+        System.out.println("Your random password is: " + inputs.get("password"));
+        System.out.print("Please re-enter your password here:\t");
+        inputs.replace("passwordConfirmation", inputs.get("passwordConfirmation"), Menu.getScanner().nextLine());
+    }
+
+    private void printRandomSlogan(HashMap<String, String> inputs) {
+        System.out.println("your random slogan is: " + inputs.get("slogan"));
+    }
+    private void  pickUpQuestion(HashMap<String, String> inputs) {
+        SignupAndLoginMessages message = SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION;
+        do {
+            SignupAndLoginMessages.PICKING_QUESTION.printMessage();
+            String nextCommand = Menu.getScanner().nextLine();
+            Matcher matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.QUESTION_PICK);
+            if (matcher == null)
+                System.out.println("some error founds");
+            else {
+                HashMap<String, String> pickQuestionInputs =
+                        SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.QUESTION_PICK.getRegex());
+                pickQuestionInputs.put("username", inputs.get("username"));
+                 message = controller.pickQuestion(pickQuestionInputs);
+                message.printMessage();
+            }
+        } while (!message.equals(SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION));
+    }
+    private void  tooManyAttemptsError() {
+        int minutes = (int) (controller.getTimeUntilLogin() / 60);
+        int seconds = (int) (controller.getTimeUntilLogin() % 60);
+        System.out.println("Too many failed attempts. Please wait " + minutes + " minutes and " +
+                seconds + " seconds before trying again");
+    }
+    private void recoveryPassword() {
+        String nextCommand;
+        while (true) {
+            System.out.println("Enter new Password:");
+            nextCommand = Menu.getScanner().nextLine();
+            if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LENGTH)) {
+                SignupAndLoginMessages.PASSWORD_WEEK_LENGTH.printMessage();
+            } else if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LETTERS))
+                SignupAndLoginMessages.PASSWORD_WEEK_LETTERS_PROBLEM.printMessage();
+            else {
+                controller.currentUser.setPassword(nextCommand);
+                break;
+            }
         }
     }
 }
+
 
