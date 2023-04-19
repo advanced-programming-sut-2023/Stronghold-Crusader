@@ -20,7 +20,7 @@ public enum SignupAndLoginCommands {
     }
     public static SignupAndLoginCommands getCommand(String command) {
         for (SignupAndLoginCommands cmd : SignupAndLoginCommands.values()){
-            if (cmd.regex.matches(command)) return cmd;
+            if (command.matches(cmd.regex)) return cmd;
         }
         return null;
     }
