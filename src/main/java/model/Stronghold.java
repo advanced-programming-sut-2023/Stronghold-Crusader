@@ -5,23 +5,25 @@ import java.util.HashMap;
 
 public class Stronghold {
     private static Stronghold instance = null;
-    public HashMap<String, User> users = new HashMap<>();
-    public ArrayList<User> userRankings = new ArrayList<>();
+    private final HashMap<String, User> users = new HashMap<>();
+    private final ArrayList<User> userRankings = new ArrayList<>();
 
     private Stronghold() {
     }
 
     public static void load() {
-        if (instance == null)
+        if (instance == null) {
             instance = new Stronghold();
+            UserManager.load(instance);
+        }
     }
 
     public static Stronghold getInstance() {
         return instance;
     }
 
-    private static Integer compareForRanks(User u1, User u2) {
-        return Integer.compare(u2.getHighScore(), u1.getHighScore());
+    public void updateData() {
+        UserManager.updateJson(users.values());
     }
 
     public User getUser(String username) {
@@ -30,10 +32,13 @@ public class Stronghold {
 
     public void addUser(User user) {
         users.put(user.getUsername(), user);
+        userRankings.add(user);
+        // do we need to call updateRankings() here?
+        updateData();
     }
 
     public void updateRankings() {
-        userRankings.sort(Stronghold::compareForRanks);
+        userRankings.sort(User::compareForRanks);
     }
 
     public int getUserRank(User user) {

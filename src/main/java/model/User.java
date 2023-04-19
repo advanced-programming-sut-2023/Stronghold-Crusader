@@ -13,11 +13,15 @@ public class User {
 
     public User(String username, String password, String email, String nickname, String slogan) {
         this.username = username;
-        this.password = password;
+        this.password = PasswordConverter.encodePassword(password);
         this.email = email;
         this.nickname = nickname;
         this.slogan = slogan;
         this.highScore = 0;
+    }
+
+    static Integer compareForRanks(User u1, User u2) {
+        return Integer.compare(u2.getHighScore(), u1.getHighScore());
     }
 
     public String getUsername() {
@@ -38,6 +42,8 @@ public class User {
 
     public void setHighScore(int highScore) {
         this.highScore = highScore;
+        Stronghold.getInstance().updateRankings();
+        Stronghold.getInstance().updateData();
     }
 
     public String getEmail() {
@@ -49,7 +55,8 @@ public class User {
     }
 
     public boolean isPasswordCorrect(String password) {
-        return this.password.matches(password);
+        //noinspection DataFlowIssue
+        return this.password.matches(PasswordConverter.encodePassword(password));
     }
 
     public boolean isRecoveryPasswordCorrect(String recoveryAnswer) {
@@ -58,29 +65,36 @@ public class User {
 
     public void changeUsername(String username) {
         this.username = username;
+        Stronghold.getInstance().updateData();
     }
 
     public void changeNickname(String nickname) {
         this.nickname = nickname;
+        Stronghold.getInstance().updateData();
     }
 
     public void changeSlogan(String slogan) {
         this.slogan = slogan;
+        Stronghold.getInstance().updateData();
     }
 
     public void changeEmail(String email) {
         this.email = email;
+        Stronghold.getInstance().updateData();
     }
 
     public void setPasswordRecovery(Pair passwordRecovery) {
         this.passwordRecovery = passwordRecovery;
+        Stronghold.getInstance().updateData();
     }
 
     public void setPassword(String newPass) {
-        this.password = newPass;
+        this.password = PasswordConverter.encodePassword(newPass);
+        Stronghold.getInstance().updateData();
     }
 
     public void removeSlogan() {
         this.slogan = "";
+        Stronghold.getInstance().updateData();
     }
 }
