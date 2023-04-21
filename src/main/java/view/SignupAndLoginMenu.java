@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 
 public class SignupAndLoginMenu {
     private final SignupAndLoginController controller;
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public SignupAndLoginMenu(SignupAndLoginController controller) {
         this.controller = controller;

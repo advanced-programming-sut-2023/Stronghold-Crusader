@@ -13,8 +13,9 @@ public class SignupAndLoginUtils {
         HashMap<String, String> inputs = new HashMap<>();
         while (listOfGroups.find()) {
             groupName = listOfGroups.group("groupName");
-            removeDoubleQuotation(matcher.group(groupName));
-            inputs.put(groupName, matcher.group(groupName));
+            String value = matcher.group(groupName);
+            value = removeDoubleQuotation(value);
+            inputs.put(groupName, value);
         }
         return inputs;
     }
@@ -43,10 +44,11 @@ public class SignupAndLoginUtils {
         }
         return newName;
     }
-    public static void removeDoubleQuotation(String word){
-        if (word == null) return;
+    public static String removeDoubleQuotation(String word){
+        if (word == null) return null;
         if (word.matches("(?=.*[\\s]).+")){
-            word = word.substring(1, word.length()-1);
+             return word.substring(1, word.length()-1);
         }
+        return word;
     }
 }
