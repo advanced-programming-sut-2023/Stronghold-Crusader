@@ -1,6 +1,6 @@
 package model;
 
-import Building;
+import model.MapAsset.Buidling.Building;
 
 import java.util.ArrayList;
 
