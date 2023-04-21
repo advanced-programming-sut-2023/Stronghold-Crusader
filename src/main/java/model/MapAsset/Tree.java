@@ -1,5 +1,7 @@
-package model;
+package model.MapAsset;
 
+import model.Player;
+import model.enums.TreeType;
 import utils.Vector2D;
 
 public class Tree extends MapAsset {

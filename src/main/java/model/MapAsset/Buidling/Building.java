@@ -1,5 +1,7 @@
-package model;
+package model.MapAsset.Buidling;
 
+import model.MapAsset.MapAsset;
+import model.Player;
 import utils.Vector2D;
 
 public class Building extends MapAsset {
