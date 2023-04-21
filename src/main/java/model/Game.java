@@ -1,9 +1,5 @@
 package model;
 
-import model.Map.Map;
-import model.Map.MapLoader;
-import model.enums.Color;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 

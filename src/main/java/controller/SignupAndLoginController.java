@@ -1,6 +1,7 @@
 package controller;
 
-import model.enums.Slogan;
+import com.sun.tools.javac.Main;
+import model.Slogan;
 import model.Stronghold;
 import model.User;
 import utils.FormatValidation;

@@ -1,8 +1,5 @@
-package model.Map;
+package model;
 
-import model.MapAsset.MapAsset;
-import model.MapAsset.MobileUnit.MobileUnit;
-import model.Player;
 import utils.Vector2D;
 
 import java.util.ArrayList;

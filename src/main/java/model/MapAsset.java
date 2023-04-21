@@ -1,6 +1,5 @@
-package model.MapAsset;
+package model;
 
-import model.Player;
 import utils.Vector2D;
 
 public abstract class MapAsset {

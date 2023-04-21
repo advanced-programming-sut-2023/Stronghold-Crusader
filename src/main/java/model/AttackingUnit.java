@@ -1,10 +1,5 @@
-package model.MapAsset.MobileUnit;
+package model;
 
-import model.*;
-import model.MapAsset.MapAsset;
-import model.enums.Armour;
-import model.enums.ArmourPenetration;
-import model.enums.AttackTarget;
 import utils.Vector2D;
 
 import java.util.HashMap;

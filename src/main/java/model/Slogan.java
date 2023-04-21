@@ -1,4 +1,4 @@
-package model.enums;
+package model;
 
 public enum Slogan {
     VALUE_0("I shall have my revenge, in this life or the next"),
