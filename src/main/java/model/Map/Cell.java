@@ -1,5 +1,9 @@
-package model;
+package model.Map;
 
+import model.MapAsset.MapAsset;
+import model.MapAsset.MapAsset.MobileUnit.MobileUnit;
+import model.Player;
+import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.Collection;

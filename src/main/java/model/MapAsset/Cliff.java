@@ -1,5 +1,6 @@
-package model;
+package model.MapAsset;
 
+import model.Player;
 import utils.Vector2D;
 
 public class Cliff extends MapAsset {

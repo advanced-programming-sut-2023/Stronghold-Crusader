@@ -1,4 +1,4 @@
-package model;
+package model.MapAsset.MobileUnit;
 
 import utils.Vector2D;
 

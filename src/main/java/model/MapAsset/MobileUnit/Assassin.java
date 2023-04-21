@@ -1,8 +1,7 @@
-package model;
+package model.MapAsset.MobileUnit;
 
+import model.Player;
 import utils.Vector2D;
-
-import java.util.HashMap;
 
 public class Assassin extends AttackingUnit {
     private boolean invisibility;
