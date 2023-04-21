@@ -52,15 +52,19 @@ public class SignupAndLoginMenu {
         boolean randomSlogan = inputs.get("slogan").equals("random");
         SignupAndLoginMessages message = controller.signup(inputs);
 
-        if (message.equals(SignupAndLoginMessages.RANDOM_PASSWORD)) {
-            randomPasswordSuggestion(inputs, randomSlogan);
-            message = controller.signup(inputs);
-        }
-
-        if (message.equals(SignupAndLoginMessages.EXISTING_USERNAME))
+        if (message.equals(SignupAndLoginMessages.EXISTING_USERNAME)) {
+           message.printMessage();
             if (isUsernameSuggestionAccept(inputs))
                 message = controller.signup(inputs);
-
+        }
+        if (message.equals(SignupAndLoginMessages.RANDOM_PASSWORD)) {
+            if (randomSlogan) {
+                printRandomSlogan(inputs);
+                randomSlogan = false;
+            }
+            randomPasswordSuggestion(inputs);
+            message = controller.signup(inputs);
+        }
         message.printMessage();
         if (message.equals(SignupAndLoginMessages.SUCCESS_PROCESS)) {
             if (randomSlogan) printRandomSlogan(inputs);
@@ -97,14 +101,10 @@ public class SignupAndLoginMenu {
         String username = inputs.get("username");
         inputs.replace("username", username, SignupAndLoginUtils.generateRandomUsername(username));
         System.out.println("Do you want to continue  registration process with " + inputs.get("username") + "?");
-        return (FormatValidation.isFormatValid(Menu.getScanner().nextLine(), FormatValidation.YES));
+        return  (FormatValidation.isFormatValid(Menu.getScanner().nextLine(), FormatValidation.YES));
     }
 
-    private void randomPasswordSuggestion(HashMap<String, String> inputs, boolean randomSlogan) {
-        if (randomSlogan) {
-            printRandomSlogan(inputs);
-            randomSlogan = false;
-        }
+    private void randomPasswordSuggestion(HashMap<String, String> inputs) {
         System.out.println("Your random password is: " + inputs.get("password"));
         System.out.print("Please re-enter your password here:\t");
         inputs.replace("passwordConfirmation", inputs.get("passwordConfirmation"), Menu.getScanner().nextLine());
@@ -128,7 +128,7 @@ public class SignupAndLoginMenu {
                  message = controller.pickQuestion(pickQuestionInputs);
                 message.printMessage();
             }
-        } while (!message.equals(SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION));
+        } while (message.equals(SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION));
     }
     private void  tooManyAttemptsError() {
         int minutes = (int) (controller.getTimeUntilLogin() / 60);

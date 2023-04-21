@@ -53,26 +53,21 @@ public class SignupAndLoginController {
             inputs.replace("slogan", inputs.get("slogan"), generateRandomSlogan());
         if (hasEmptyField(inputs))
             return SignupAndLoginMessages.EMPTY_FIELD;
-
         if (checkFormatOfInputs(inputs) != null)
             return checkFormatOfInputs(inputs);
-
         if (!inputs.get("password").equals("random") && !inputs.get("password").equals(inputs.get("passwordConfirmation")))
             return SignupAndLoginMessages.CONFIRMATION_ERROR;
-
         if (stronghold.emailExists(inputs.get("email")))
             return SignupAndLoginMessages.EXISTED_EMAIL;
-
         if (stronghold.userExists(inputs.get("username")))
             return SignupAndLoginMessages.EXISTING_USERNAME;
-
         if (inputs.get("password").equals("random")) {
             inputs.replace("password", inputs.get("password"), SignupAndLoginUtils.generateRandomPassword());
             return SignupAndLoginMessages.RANDOM_PASSWORD;
         }
         User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
-        stronghold.addUser(newUser);
+         stronghold.addUser(newUser);
         mainController = new MainController(newUser);
         return SignupAndLoginMessages.SUCCESS_PROCESS;
     }
@@ -99,7 +94,7 @@ public class SignupAndLoginController {
                 break;
         }
         user.setPasswordRecovery(pair);
-        return SignupAndLoginMessages.SUCCESS_PROCESS;
+        return SignupAndLoginMessages.SUCCESS_CREATING_USER;
     }
 
     public SignupAndLoginMessages login(HashMap<String, String> inputs) {
