@@ -1,7 +1,8 @@
 package model;
 
+import model.MapAsset.Building.Building;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Governance {
     private final ArrayList<Building> buildings;

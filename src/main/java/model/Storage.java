@@ -1,5 +1,6 @@
 package model;
 
+import model.enums.Material;
 import utils.Pair;
 
 import java.util.HashMap;

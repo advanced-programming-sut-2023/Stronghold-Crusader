@@ -1,7 +1,6 @@
 package controller;
 
-import com.sun.tools.javac.Main;
-import model.Slogan;
+import model.enums.Slogan;
 import model.Stronghold;
 import model.User;
 import utils.FormatValidation;
@@ -110,7 +109,6 @@ public class SignupAndLoginController {
         }
         failedAttemptsReset();
         return SignupAndLoginMessages.SUCCESS_PROCESS;
-        //TODO enter to the main menu *>Diba
     }
 
     public SignupAndLoginMessages getCurrentUser(String username) {

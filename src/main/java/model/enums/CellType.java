@@ -1,0 +1,5 @@
+package model.enums;
+
+public enum CellType {
+    FIELD, GRAVEL, STONE, SLATE, IRON, GRASS, MEADOW, DENSE_MEADOW, OIL, PlAIN, SHALLOW_WATER, RIVER, SMALL_POOL, BIG_POOL, BEACH, SEA
+}
