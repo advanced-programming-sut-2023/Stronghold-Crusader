@@ -4,15 +4,16 @@ import model.Player;
 import utils.Vector2D;
 
 public abstract class MapAsset {
-    private final Vector2D coordinate;
-    private final Player owner;
-    private double hitPoint;
-    private double maxHitPoint;
-    private String type;
+    protected final Vector2D coordinate;
+    protected final Player owner;
+    protected double hitPoint;
+    protected double maxHitPoint;
+    protected MapAsset type;
 
-    public MapAsset(Vector2D coordinate, Player owner) {
+    public MapAsset(Vector2D coordinate, Player owner, MapAsset type) {
         this.coordinate = coordinate;
         this.owner = owner;
+        this.type = type;
     }
 
     public abstract void getDamageFrom(MapAsset attacker);
@@ -22,7 +23,7 @@ public abstract class MapAsset {
         this.hitPoint = maxHitPoint;
     }
 
-    public void setType(String type) {
+    public void setType(MapAsset type) {
         this.type = type;
     }
 }
