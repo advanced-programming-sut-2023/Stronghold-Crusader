@@ -3,7 +3,7 @@ package model.MapAsset.MobileUnit;
 import model.Map.Cell;
 import model.MapAsset.MapAsset;
 import model.Player;
-import model.enums.AssestType;
+import model.enums.MapAssetType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class MobileUnit extends MapAsset {
     private int engineersCount;
 
     public MobileUnit(Vector2D coordinate, Player owner) {
-        super(coordinate, owner, AssestType.Unit);
+        super(coordinate, owner, MapAssetType.UNIT);
     }
 
     public void setMoveSpeed(int moveSpeed) {

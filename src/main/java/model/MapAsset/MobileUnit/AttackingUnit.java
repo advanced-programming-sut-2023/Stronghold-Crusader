@@ -2,8 +2,6 @@ package model.MapAsset.MobileUnit;
 
 import model.MapAsset.MapAsset;
 import model.Player;
-import model.enums.Armour;
-import model.enums.ArmourPenetration;
 import model.enums.AttackTarget;
 import utils.Vector2D;
 
@@ -15,8 +13,6 @@ public class AttackingUnit extends MobileUnit {
     private boolean canClimbLadder;
     private boolean canModifyMoat;
     private HashMap<AttackTarget, Boolean> targets;
-    private Armour armour;
-    private ArmourPenetration armourPenetration;
 
     public AttackingUnit(Vector2D coordinate, Player owner) {
         super(coordinate, owner);
@@ -47,13 +43,8 @@ public class AttackingUnit extends MobileUnit {
         this.targets = targets;
     }
 
-    public void setArmour(Armour armour) {
-        this.armour = armour;
-    }
 
-    public void setArmourPenetration(ArmourPenetration armourPenetration) {
-        this.armourPenetration = armourPenetration;
-    }
+
 
     public void attack() {
     }
