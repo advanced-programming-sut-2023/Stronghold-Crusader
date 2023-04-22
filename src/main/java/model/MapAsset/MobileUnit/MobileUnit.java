@@ -13,7 +13,7 @@ public class MobileUnit extends MapAsset {
     private int engineersCount;
 
     public MobileUnit(Vector2D coordinate, Player owner) {
-        super(coordinate, owner);
+        super(coordinate, owner, null);
     }
 
     public void setMoveSpeed(int moveSpeed) {

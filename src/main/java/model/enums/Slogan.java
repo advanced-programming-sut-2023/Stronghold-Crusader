@@ -9,7 +9,7 @@ public enum Slogan {
     VALUE_5("I will take back what belongs to me");
 
 
-    String slogan;
+    private String slogan;
     Slogan(String slogan) {
         this.slogan = slogan;
     }
