@@ -27,4 +27,37 @@ public class ProductionBuilding extends Building{
     public void move(){
 
     }
+
+    @Override
+    public void setMaxHitPoint(double maxHitPoint) {
+        super.setMaxHitPoint(maxHitPoint);
+    }
+
+    public void setInventory(int inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setProducingMaterial(ArrayList<Material> producingMaterial) {
+        this.producingMaterial = producingMaterial;
+    }
+
+    public void setProductionCapacity(int productionCapacity) {
+        this.productionCapacity = productionCapacity;
+    }
+
+    public void setRateOfProcess(int rateOfProcess) {
+        this.rateOfProcess = rateOfProcess;
+    }
+
+    public void setRateOfProduction(ArrayList<Integer> rateOfProduction) {
+        this.rateOfProduction = rateOfProduction;
+    }
+
+    public void setRateOfUsage(ArrayList<Integer> rateOfUsage) {
+        this.rateOfUsage = rateOfUsage;
+    }
+
+    public void setUsingMaterial(ArrayList<Material> usingMaterial) {
+        this.usingMaterial = usingMaterial;
+    }
 }

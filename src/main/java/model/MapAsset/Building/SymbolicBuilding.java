@@ -11,4 +11,12 @@ public class SymbolicBuilding extends Building{
     public SymbolicBuilding(Vector2D coordinate, Player owner, MapAsset type) {
         super(coordinate, owner, type);
     }
+
+    public void setCapacityChangeRate(int capacityChangeRate) {
+        this.capacityChangeRate = capacityChangeRate;
+    }
+
+    public void setChangeType(String changeType) {
+        this.changeType = changeType;
+    }
 }
