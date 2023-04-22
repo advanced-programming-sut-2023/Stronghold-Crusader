@@ -3,6 +3,7 @@ package model.MapAsset.MobileUnit;
 import model.Map.Cell;
 import model.MapAsset.MapAsset;
 import model.Player;
+import model.enums.AssestType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class MobileUnit extends MapAsset {
     private int engineersCount;
 
     public MobileUnit(Vector2D coordinate, Player owner) {
-        super(coordinate, owner, null);
+        super(coordinate, owner, AssestType.Unit);
     }
 
     public void setMoveSpeed(int moveSpeed) {
@@ -36,6 +37,5 @@ public class MobileUnit extends MapAsset {
 
     @Override
     public void getDamageFrom(MapAsset attacker) {
-
     }
 }

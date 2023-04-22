@@ -1,6 +1,7 @@
 package model.MapAsset;
 
 import model.Player;
+import model.enums.AssestType;
 import utils.Vector2D;
 
 public abstract class MapAsset {
@@ -8,9 +9,9 @@ public abstract class MapAsset {
     protected final Player owner;
     protected double hitPoint;
     protected double maxHitPoint;
-    protected MapAsset type;
+    protected AssestType type;
 
-    public MapAsset(Vector2D coordinate, Player owner, MapAsset type) {
+    public MapAsset(Vector2D coordinate, Player owner, AssestType type) {
         this.coordinate = coordinate;
         this.owner = owner;
         this.type = type;
@@ -23,7 +24,4 @@ public abstract class MapAsset {
         this.hitPoint = maxHitPoint;
     }
 
-    public void setType(MapAsset type) {
-        this.type = type;
-    }
 }
