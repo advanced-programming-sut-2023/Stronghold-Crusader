@@ -37,7 +37,4 @@ public enum DefenseAndAttackConstants {
         return fireRange;
     }
 
-    public int getTroopCapacity() {
-        return troopCapacity;
-    }
 }
