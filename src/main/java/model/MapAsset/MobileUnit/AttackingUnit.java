@@ -3,6 +3,7 @@ package model.MapAsset.MobileUnit;
 import model.MapAsset.MapAsset;
 import model.Player;
 import model.enums.AttackTarget;
+import model.enums.MapAssetType;
 import utils.Vector2D;
 
 import java.util.HashMap;
@@ -14,8 +15,8 @@ public class AttackingUnit extends MobileUnit {
     private boolean canModifyMoat;
     private HashMap<AttackTarget, Boolean> targets;
 
-    public AttackingUnit(Vector2D coordinate, Player owner) {
-        super(coordinate, owner);
+    public AttackingUnit(Vector2D coordinate, Player owner, MapAssetType type) {
+        super(coordinate, owner, type);
     }
 
     @Override

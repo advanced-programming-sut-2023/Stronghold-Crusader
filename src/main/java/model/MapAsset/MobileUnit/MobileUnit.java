@@ -13,8 +13,8 @@ public class MobileUnit extends MapAsset {
     private double defenceMultiplier;
     private int engineersCount;
 
-    public MobileUnit(Vector2D coordinate, Player owner) {
-        super(coordinate, owner, MapAssetType.UNIT);
+    public MobileUnit(Vector2D coordinate, Player owner, MapAssetType type) {
+        super(coordinate, owner, type );
     }
 
     public void setMoveSpeed(int moveSpeed) {
