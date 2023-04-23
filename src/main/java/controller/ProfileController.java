@@ -23,46 +23,46 @@ public class ProfileController {
         }
     }
 
-    public String changeUsername(String newUsername){
-        if(!FormatValidation.isFormatValid(newUsername, FormatValidation.USERNAME)) return ProfileMessages.INVALID_USERNAME_FORMAT.getMessage();
-        if(stronghold.userExists(newUsername)) return ProfileMessages.USERNAME_TAKEN.getMessage();
+    public ProfileMessages changeUsername(String newUsername){
+        if(!FormatValidation.isFormatValid(newUsername, FormatValidation.USERNAME)) return ProfileMessages.INVALID_USERNAME_FORMAT;
+        if(stronghold.userExists(newUsername)) return ProfileMessages.USERNAME_TAKEN;
         currentUser.changeUsername(newUsername);
-        return ProfileMessages.USERNAME_CHANGE_SUCCESS.getMessage();
+        return ProfileMessages.USERNAME_CHANGE_SUCCESS;
     }
 
-    public String changeNickname(String newNickname){
+    public ProfileMessages changeNickname(String newNickname){
         currentUser.changeNickname(newNickname);
-        return ProfileMessages.NICKNAME_CHANGE_SUCCESS.getMessage();
+        return ProfileMessages.NICKNAME_CHANGE_SUCCESS;
     }
 
-    public String canChangePassword(String oldPass, String newPass){
-        if(!currentUser.isPasswordCorrect(oldPass)) return ProfileMessages.PASSWORD_INCORRECT.getMessage();
-        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LETTERS)) return ProfileMessages.INVALID_PASSWORD_FORMAT.getMessage();
-        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LENGTH)) return ProfileMessages.INVALID_PASSWORD_LENGTH.getMessage();
-        if(oldPass.equals(newPass)) return ProfileMessages.PASSWORD_NOT_NEW.getMessage();
-        return "true";
+    public ProfileMessages canChangePassword(String oldPass, String newPass){
+        if(!currentUser.isPasswordCorrect(oldPass)) return ProfileMessages.PASSWORD_INCORRECT;
+        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LETTERS)) return ProfileMessages.INVALID_PASSWORD_FORMAT;
+        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LENGTH)) return ProfileMessages.INVALID_PASSWORD_LENGTH;
+        if(oldPass.equals(newPass)) return ProfileMessages.PASSWORD_NOT_NEW;
+        return ProfileMessages.CAN_CHANGE_PASSWORD;
     }
 
-    public String changePassword(String newPass, String passConfirm, String oldPass){
-        if(!passConfirm.equals(newPass)) return ProfileMessages.CONFIRMATION_INCORRECT.getMessage();
+    public ProfileMessages changePassword(String newPass, String passConfirm, String oldPass){
+        if(!passConfirm.equals(newPass)) return ProfileMessages.CONFIRMATION_INCORRECT;
         currentUser.setPassword(newPass);
-        return ProfileMessages.PASSWORD_CHANGE_SUCCESS.getMessage();
+        return ProfileMessages.PASSWORD_CHANGE_SUCCESS;
     }
 
-    public String changeEmail(String newEmail){
-        if(stronghold.emailExists(newEmail)) return ProfileMessages.EMAIL_EXISTS.getMessage();
-        if(!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL)) return ProfileMessages.INVALID_EMAIL_FORMAT.getMessage();
-        return ProfileMessages.EMAIL_CHANGE_SUCCESS.getMessage();
+    public ProfileMessages changeEmail(String newEmail){
+        if(stronghold.emailExists(newEmail)) return ProfileMessages.EMAIL_EXISTS;
+        if(!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL)) return ProfileMessages.INVALID_EMAIL_FORMAT;
+        return ProfileMessages.EMAIL_CHANGE_SUCCESS;
     }
 
-    public String changeSlogan(String newSlogan){
+    public ProfileMessages changeSlogan(String newSlogan){
         currentUser.changeSlogan(newSlogan);
-        return ProfileMessages.SLOGAN_CHANGE_SUCCESS.getMessage();
+        return ProfileMessages.SLOGAN_CHANGE_SUCCESS;
     }
 
-    public String removeSlogan(){
+    public ProfileMessages removeSlogan(){
         currentUser.removeSlogan();
-        return ProfileMessages.SLOGAN_REMOVAL_SUCCESS.getMessage();
+        return ProfileMessages.SLOGAN_REMOVAL_SUCCESS;
     }
 
     public int displayHighscore(){

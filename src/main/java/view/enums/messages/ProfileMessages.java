@@ -17,7 +17,8 @@ public enum ProfileMessages {
     CONFIRMATION_INCORRECT("Password confirmation is incorrect"),
     PASSWORD_NOT_NEW("Please enter a new password!"),
     ENTER_NEWPASS_AGAIN("Please enter your new password again"),
-    EMAIL_EXISTS("Email already exists");
+    EMAIL_EXISTS("Email already exists"),
+    CAN_CHANGE_PASSWORD("true");
     private String message;
     private ProfileMessages(String message){
         this.message = message;

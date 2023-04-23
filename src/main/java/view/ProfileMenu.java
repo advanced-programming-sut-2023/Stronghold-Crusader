@@ -65,18 +65,18 @@ public class ProfileMenu {
 
     private void runChangeUsername(Matcher matcher){
         String newUsername = matcher.group("newUsername");
-        System.out.println(profileController.changeUsername(newUsername));
+        System.out.println(profileController.changeUsername(newUsername).getMessage());
     }
 
     private void runChangeNickname(Matcher matcher){
         String newNickname = matcher.group("newNickname");
-        System.out.println(profileController.changeNickname(newNickname));
+        System.out.println(profileController.changeNickname(newNickname).getMessage());
     }
 
     private void runChangePassword(Matcher matcher){
         String oldPass = matcher.group("oldPass");
         String newPass = matcher.group("newPass");
-        String canChangePass = profileController.canChangePassword(oldPass, newPass);
+        String canChangePass = profileController.canChangePassword(oldPass, newPass).getMessage();
         if(canChangePass.equals("true")) {
             System.out.println(ProfileMessages.ENTER_NEWPASS_AGAIN.getMessage());
             String confirmation = scanner.nextLine();
@@ -87,11 +87,11 @@ public class ProfileMenu {
 
     private void runChangeEmail(Matcher matcher){
         String newEmail = matcher.group("email");
-        System.out.println(profileController.changeEmail(newEmail));
+        System.out.println(profileController.changeEmail(newEmail).getMessage());
     }
 
     private void runChangeSlogan(Matcher matcher){
         String newSlogan = matcher.group("slogan");
-        System.out.println(profileController.changeSlogan(newSlogan));
+        System.out.println(profileController.changeSlogan(newSlogan).getMessage());
     }
 }
