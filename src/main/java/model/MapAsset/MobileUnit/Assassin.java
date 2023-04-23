@@ -11,6 +11,7 @@ public class Assassin extends AttackingUnit {
         super(coordinate, owner, type);
     }
 
+
     public void setInvisibility(boolean invisibility) {
         this.invisibility = invisibility;
     }
