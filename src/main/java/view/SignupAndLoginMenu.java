@@ -128,7 +128,7 @@ public class SignupAndLoginMenu {
                  message = controller.pickQuestion(pickQuestionInputs);
                 message.printMessage();
             }
-        } while (message.equals(SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION));
+        } while (!message.equals(SignupAndLoginMessages.SUCCESS_CREATING_USER));
     }
     private void  tooManyAttemptsError() {
         int minutes = (int) (controller.getTimeUntilLogin() / 60);

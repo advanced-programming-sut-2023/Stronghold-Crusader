@@ -1,13 +1,12 @@
 package model.MapAsset.Building;
 
-import Settings.BuildingConstants.DefenseAndAttackConstants;
 import Settings.BuildingConstants.ProductionConstants;
-import model.MapAsset.MapAsset;
 import model.Player;
+import model.enums.MapAssetType;
 import utils.Vector2D;
 
 public class ProductionBuilder {
-    public static ProductionBuilding createBuilding(Vector2D coordinate, Player owner, MapAsset type, ProductionConstants buildingType) {
+    public static ProductionBuilding createBuilding(Vector2D coordinate, Player owner, MapAssetType type, ProductionConstants buildingType) {
         ProductionBuilding building = new ProductionBuilding(coordinate, owner, type);
         setAttrs(building, buildingType);
         return building;

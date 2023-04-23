@@ -20,6 +20,7 @@ public enum SignupAndLoginMessages {
     INCORRECT_PASSWORD("The password entered is incorrect"),
     TOO_MANY_ATTEMPTS,
     SUCCESS_PROCESS,
+    INVALID_CAPTCHA("Invalid CAPTCHA"),
     INVALID_COMMAND("Invalid command!");
     private final String output;
 

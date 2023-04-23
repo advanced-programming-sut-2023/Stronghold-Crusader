@@ -1,12 +1,12 @@
 package model.MapAsset.Building;
 
 import Settings.BuildingConstants.TrainingAndEmploymentConstants;
-import model.MapAsset.MapAsset;
 import model.Player;
+import model.enums.MapAssetType;
 import utils.Vector2D;
 
 public class TrainingAndEmploymentBuilder {
-    public static TrainingAndEmploymentBuilding createBuilding(Vector2D coordinate, Player owner, MapAsset type, TrainingAndEmploymentConstants buildingType) {
+    public static TrainingAndEmploymentBuilding createBuilding(Vector2D coordinate, Player owner, MapAssetType type, TrainingAndEmploymentConstants buildingType) {
         TrainingAndEmploymentBuilding building = new TrainingAndEmploymentBuilding(coordinate, owner, type);
         setAttrs(building, buildingType);
         return building;

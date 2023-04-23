@@ -1,13 +1,13 @@
 package model.MapAsset.Building;
 
 import Settings.BuildingConstants.DefenseAndAttackConstants;
-import model.MapAsset.MapAsset;
 import model.Player;
+import model.enums.MapAssetType;
 import utils.Vector2D;
 
 public class DefenseAndAttackBuilder {
 
-    public static DefenseAndAttackBuilding createBuilding(Vector2D coordinate, Player owner, MapAsset type, DefenseAndAttackConstants buildingType) {
+    public static DefenseAndAttackBuilding createBuilding(Vector2D coordinate, Player owner, MapAssetType type, DefenseAndAttackConstants buildingType) {
         DefenseAndAttackBuilding building = new DefenseAndAttackBuilding(coordinate, owner, type);
         setAttrs(building, buildingType);
         return building;

@@ -1,7 +1,7 @@
 package model.MapAsset.Building;
 
-import model.MapAsset.MapAsset;
 import model.Player;
+import model.enums.MapAssetType;
 import model.enums.Material;
 import utils.Vector2D;
 
@@ -16,7 +16,7 @@ public class ProductionBuilding extends Building{
     private int rateOfProcess;
     private int inventory;
 
-    public ProductionBuilding(Vector2D coordinate, Player owner, MapAsset type) {
+    public ProductionBuilding(Vector2D coordinate, Player owner, MapAssetType type) {
         super(coordinate, owner, type);
     }
 

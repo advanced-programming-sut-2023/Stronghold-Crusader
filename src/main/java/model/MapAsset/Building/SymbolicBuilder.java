@@ -1,13 +1,12 @@
 package model.MapAsset.Building;
 
-import Settings.BuildingConstants.ProductionConstants;
 import Settings.BuildingConstants.SymbolicConstants;
-import model.MapAsset.MapAsset;
 import model.Player;
+import model.enums.MapAssetType;
 import utils.Vector2D;
 
 public class SymbolicBuilder {
-    public static SymbolicBuilding createBuilding(Vector2D coordinate, Player owner, MapAsset type, SymbolicConstants buildingType) {
+    public static SymbolicBuilding createBuilding(Vector2D coordinate, Player owner, MapAssetType type, SymbolicConstants buildingType) {
         SymbolicBuilding building = new SymbolicBuilding(coordinate, owner, type);
         setAttrs(building, buildingType);
         return building;

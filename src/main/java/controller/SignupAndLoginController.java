@@ -1,11 +1,13 @@
 package controller;
 
-import model.enums.Slogan;
 import model.Stronghold;
 import model.User;
+import model.enums.Slogan;
+import utils.Captcha;
 import utils.FormatValidation;
 import utils.Pair;
 import utils.SignupAndLoginUtils;
+import view.Menu;
 import view.SignupAndLoginMenu;
 import view.enums.messages.SignupAndLoginMessages;
 
@@ -66,7 +68,7 @@ public class SignupAndLoginController {
         }
         User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
-         stronghold.addUser(newUser);
+        stronghold.addUser(newUser);
         mainController = new MainController(newUser);
         return SignupAndLoginMessages.SUCCESS_PROCESS;
     }
@@ -76,6 +78,13 @@ public class SignupAndLoginController {
         int number = Integer.parseInt(inputs.get("questionNumber"));
         if (!inputs.get("answer").equals(inputs.get("answerConfirm")) || (number < 1 || number > 3))
             return SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION;
+        while (true) {
+            System.out.println("Enter the code shown below :");
+            Captcha.generateCaptcha();
+            if (!Captcha.isFilledCaptchaValid(Menu.getScanner().nextLine()))
+                return SignupAndLoginMessages.INVALID_CAPTCHA;
+            else break;
+        }
         Pair pair;
         User user = stronghold.getUser(inputs.get("username"));
         switch (number) {
