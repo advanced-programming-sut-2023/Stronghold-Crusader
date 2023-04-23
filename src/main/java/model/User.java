@@ -56,7 +56,7 @@ public class User {
 
     public boolean isPasswordCorrect(String password) {
         //noinspection DataFlowIssue
-        return this.password.matches(PasswordConverter.encodePassword(password));
+        return this.password.equals(PasswordConverter.encodePassword(password));
     }
 
     public boolean isRecoveryPasswordCorrect(String recoveryAnswer) {

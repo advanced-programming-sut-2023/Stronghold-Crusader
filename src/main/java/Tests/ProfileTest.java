@@ -10,8 +10,7 @@ import view.enums.messages.ProfileMessages;
 import java.io.File;
 
 public class ProfileTest {
-    @Test
-    public void testChangeUsername(){
+    private User loadForTest(){
         File users = new File("Resources/users.user");
         users.delete();
         User user = new User("dibaHadiEsfangereh", "Hadie83@",
@@ -21,6 +20,11 @@ public class ProfileTest {
         Stronghold.load();
         Stronghold.getInstance().addUser(user);
         Stronghold.getInstance().addUser(user2);
+        return user;
+    }
+    @Test
+    public void testChangeUsername(){
+        User user = loadForTest();
         ProfileController controller = new ProfileController(user);
 
         ProfileMessages msg = controller.changeUsername("diba@hadi");
@@ -46,19 +50,49 @@ public class ProfileTest {
 
     @Test
     public void testChangeNickName(){
-        File users = new File("Resources/users.user");
-        users.delete();
-        User user = new User("dibaHadiEsfangereh", "Hadie83@",
-                "dibahadie@gmail.com", "dibaH", "someSlogan");
-        User user2 = new User("dibaHadiEsfangereh2", "Hadie83@",
-                "dibahadie2@gmail.com", "dibaH2", "someSlogan");
-        Stronghold.load();
-        Stronghold.getInstance().addUser(user);
-        Stronghold.getInstance().addUser(user2);
+        User user = loadForTest();
         ProfileController controller = new ProfileController(user);
 
         ProfileMessages msg = controller.changeNickname("newNickName");
         Assertions.assertEquals(msg, ProfileMessages.NICKNAME_CHANGE_SUCCESS);
         Assertions.assertEquals(user.getNickname(), "newNickName");
+    }
+
+    @Test
+    public void testChangePassword(){
+        User user = loadForTest();
+        ProfileController controller = new ProfileController(user);
+        controller.setCurrentUser(user);
+
+        ProfileMessages msg = controller.changePassword("newPass", "newPass1", "Hadie83@");
+        Assertions.assertEquals(msg, ProfileMessages.CONFIRMATION_INCORRECT);
+        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+
+        msg = controller.canChangePassword("Hadie8", "newPass");
+        Assertions.assertEquals(msg, ProfileMessages.PASSWORD_INCORRECT);
+        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+
+        msg = controller.canChangePassword("Hadie83@", "newPass");
+        Assertions.assertEquals(msg, ProfileMessages.INVALID_PASSWORD_FORMAT);
+        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+
+        msg = controller.canChangePassword("Hadie83@", "N@w2");
+        Assertions.assertEquals(msg, ProfileMessages.INVALID_PASSWORD_LENGTH);
+        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+
+        msg = controller.canChangePassword("Hadie83@", "Hadie83@");
+        Assertions.assertEquals(msg, ProfileMessages.PASSWORD_NOT_NEW);
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie83@"));
+
+        msg = controller.canChangePassword("Hadie83@", "Hadie833@");
+        Assertions.assertEquals(msg, ProfileMessages.CAN_CHANGE_PASSWORD);
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie83@"));
+
+        user.setPassword("Hadie834@");
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie834@"));
+
+        msg = controller.changePassword( "Hadie833@", "Hadie833@", "Hadie83@");
+        Assertions.assertEquals(msg, ProfileMessages.PASSWORD_CHANGE_SUCCESS);
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie833@"));
     }
 }

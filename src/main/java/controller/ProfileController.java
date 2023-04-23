@@ -79,4 +79,8 @@ public class ProfileController {
     public String displayUserInfo(){
         return null;
     }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
 }
