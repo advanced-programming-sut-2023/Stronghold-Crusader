@@ -9,6 +9,7 @@ public class Captcha {
         captcha = generateRandomCaptchaText();
         BufferedImage img = textToImage(captcha);
         showCaptcha(img);
+        System.out.println(captcha);
     }
     public static boolean isFilledCaptchaValid(String input){
         return input.matches(captcha);
