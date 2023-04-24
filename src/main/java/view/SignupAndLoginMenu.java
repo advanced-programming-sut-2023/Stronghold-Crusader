@@ -74,6 +74,7 @@ public class SignupAndLoginMenu {
     }
 
     private boolean loginCall(Matcher matcher) {
+        //TODO stay-logged-in flag
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.LOGIN.getRegex());
         SignupAndLoginMessages messages = controller.login(inputs);
         messages.printMessage();
