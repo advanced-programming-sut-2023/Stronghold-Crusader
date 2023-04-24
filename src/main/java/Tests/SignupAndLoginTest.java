@@ -1,6 +1,6 @@
 package Tests;
 
-import controller.SignupAndLoginController;
+import controller.SignupController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import utils.FormatValidation;
@@ -75,7 +75,7 @@ public class SignupAndLoginTest {
         String command;
         Matcher matcher;
         HashMap<String, String> inputs;
-        SignupAndLoginController controller = new SignupAndLoginController();
+        SignupController controller = new SignupController();
         //Empty Field:
         command = "user create -u username -email email -p password -s   -n nickname";
         matcher = SignupAndLoginCommands.getMatcher(command, SignupAndLoginCommands.CREATE_USER);

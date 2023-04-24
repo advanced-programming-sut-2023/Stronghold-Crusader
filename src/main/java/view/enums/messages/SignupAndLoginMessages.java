@@ -21,7 +21,9 @@ public enum SignupAndLoginMessages {
     TOO_MANY_ATTEMPTS,
     SUCCESS_PROCESS,
     INVALID_CAPTCHA("Invalid CAPTCHA"),
-    INVALID_COMMAND("Invalid command!");
+    INVALID_COMMAND("Invalid command!"),
+    SIGNUP_MENU("Entered to the signup menu"),
+    LOGIN_MENU("Entered to the login menu");
     private final String output;
 
     SignupAndLoginMessages() {

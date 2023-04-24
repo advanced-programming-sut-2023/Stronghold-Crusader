@@ -1,22 +1,21 @@
 package view;
 
-import controller.SignupAndLoginController;
+import controller.SignupController;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
 import view.enums.commands.SignupAndLoginCommands;
 import view.enums.messages.SignupAndLoginMessages;
 
-
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class SignupAndLoginMenu {
-    private final SignupAndLoginController controller;
+public class SignupMenu {
+    private final SignupController signupController;
     private final Scanner scanner;
 
-    public SignupAndLoginMenu(SignupAndLoginController controller) {
-        this.controller = controller;
+    public SignupMenu(SignupController signupController) {
+        this.signupController = signupController;
         this.scanner = Menu.getScanner();
     }
 
@@ -34,29 +33,26 @@ public class SignupAndLoginMenu {
             switch (typeOfCommand) {
                 case LOGOUT:
                     return "logout";
-                case LOGIN:
-                    if (loginCall(matcher)) return "login";
-                    break;
-                case CHANGE_PASSWORD:
-                    changePasswordCall(matcher);
-                    break;
                 case CREATE_USER:
                     createUserCall(matcher);
                     break;
+                case LOGIN_MENU:
+                    SignupAndLoginMessages.LOGIN_MENU.printMessage();
+                    return "login menu";
             }
         }
     }
 
     private void createUserCall(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
-        controller.changeNullSloganToEmpty(inputs);
+        signupController.changeNullSloganToEmpty(inputs);
         boolean randomSlogan = inputs.get("slogan") != null && inputs.get("slogan").equals("random");
-        SignupAndLoginMessages message = controller.signup(inputs);
+        SignupAndLoginMessages message = signupController.signup(inputs);
 
         if (message.equals(SignupAndLoginMessages.EXISTING_USERNAME)) {
             message.printMessage();
             if (isUsernameSuggestionAccept(inputs))
-                message = controller.signup(inputs);
+                message = signupController.signup(inputs);
         }
         if (message.equals(SignupAndLoginMessages.RANDOM_PASSWORD)) {
             if (randomSlogan) {
@@ -64,39 +60,13 @@ public class SignupAndLoginMenu {
                 randomSlogan = false;
             }
             randomPasswordSuggestion(inputs);
-            message = controller.signup(inputs);
+            message = signupController.signup(inputs);
         }
         message.printMessage();
         if (message.equals(SignupAndLoginMessages.SUCCESS_PROCESS)) {
             if (randomSlogan) printRandomSlogan(inputs);
             pickUpQuestion(inputs);
         }
-    }
-
-    private boolean loginCall(Matcher matcher) {
-        //TODO stay-logged-in flag
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.LOGIN.getRegex());
-        SignupAndLoginMessages messages = controller.login(inputs);
-        messages.printMessage();
-        if (messages.equals(SignupAndLoginMessages.TOO_MANY_ATTEMPTS)) {
-            tooManyAttemptsError();
-            return false;
-        }
-        if (messages.equals(SignupAndLoginMessages.SUCCESS_PROCESS)) {
-            System.out.println("success");
-            return true;
-        }
-        return false;
-    }
-
-    private void changePasswordCall(Matcher matcher) {
-        SignupAndLoginMessages messages = controller.getCurrentUser(matcher.group("username"));
-        messages.printMessage();
-        String nextCommand = Menu.getScanner().nextLine();
-        System.out.println(controller.currentUser.getPasswordRecoveryQuestion());
-        if (controller.currentUser.isRecoveryPasswordCorrect(nextCommand)) {
-            recoveryPassword();
-        } else System.out.println("Incorrect answer!");
     }
 
     private boolean isUsernameSuggestionAccept(HashMap<String, String> inputs) {
@@ -128,35 +98,10 @@ public class SignupAndLoginMenu {
                 HashMap<String, String> pickQuestionInputs =
                         SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.QUESTION_PICK.getRegex());
                 pickQuestionInputs.put("username", inputs.get("username"));
-                message = controller.pickQuestion(pickQuestionInputs);
+                message = signupController.pickQuestion(pickQuestionInputs);
                 message.printMessage();
             }
         } while (!message.equals(SignupAndLoginMessages.SUCCESS_CREATING_USER));
     }
 
-    private void tooManyAttemptsError() {
-        int minutes = (int) (controller.getTimeUntilLogin() / 60);
-        int seconds = (int) (controller.getTimeUntilLogin() % 60);
-        System.out.println("Too many failed attempts. Please wait " + minutes + " minutes and " +
-                seconds + " seconds before trying again");
-    }
-
-    private void recoveryPassword() {
-        String nextCommand;
-        while (true) {
-            System.out.println("Enter new Password:");
-            nextCommand = Menu.getScanner().nextLine();
-            if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LENGTH)) {
-                SignupAndLoginMessages.PASSWORD_WEEK_LENGTH.printMessage();
-            } else if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LETTERS))
-                SignupAndLoginMessages.PASSWORD_WEEK_LETTERS_PROBLEM.printMessage();
-            else {
-                controller.currentUser.setPassword(nextCommand);
-                break;
-            }
-        }
-    }
-
 }
-
-

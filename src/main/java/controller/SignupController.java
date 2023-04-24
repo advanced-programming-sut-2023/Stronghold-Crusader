@@ -8,42 +8,25 @@ import utils.FormatValidation;
 import utils.Pair;
 import utils.SignupAndLoginUtils;
 import view.Menu;
-import view.SignupAndLoginMenu;
+import view.SignupMenu;
 import view.enums.messages.SignupAndLoginMessages;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
-public class SignupAndLoginController {
+public class SignupController {
     public User currentUser = null;
-    private int failedAttempts = 0;
-    private LocalDateTime loginTime = null;
     private final Stronghold stronghold = Stronghold.getInstance();
-    private MainController mainController;
-
-    private void increaseFailedAttempts() {
-        failedAttempts++;
-        loginTime = LocalDateTime.now().plus(5 * (long) Math.pow(2, failedAttempts - 1), ChronoUnit.SECONDS);
-    }
-
-    private void failedAttemptsReset() {
-        failedAttempts = 0;
-        loginTime = null;
-    }
-
-    public long getTimeUntilLogin() {
-        return LocalDateTime.now().until(this.loginTime, ChronoUnit.SECONDS);
-    }
+    private LoginController loginController;
 
     public void run() {
-        SignupAndLoginMenu signupAndLoginMenu = new SignupAndLoginMenu(this);
+        SignupMenu signupMenu = new SignupMenu(this);
         while (true) {
-            switch (signupAndLoginMenu.run()) {
+            switch (signupMenu.run()) {
                 case "logout":
                     return;
-                case "login":
-                    mainController.run();
+                case "login menu":
+                    loginController = new LoginController();
+                    loginController.run();
                     break;
             }
         }
@@ -70,10 +53,8 @@ public class SignupAndLoginController {
         User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
         stronghold.addUser(newUser);
-        mainController = new MainController(newUser);
         return SignupAndLoginMessages.SUCCESS_PROCESS;
     }
-
 
     public SignupAndLoginMessages pickQuestion(HashMap<String, String> inputs) {
         int number = Integer.parseInt(inputs.get("questionNumber"));
@@ -106,28 +87,6 @@ public class SignupAndLoginController {
         return SignupAndLoginMessages.SUCCESS_CREATING_USER;
     }
 
-    public SignupAndLoginMessages login(HashMap<String, String> inputs) {
-        if (inputs.get("username") == null || inputs.get("password") == null)
-            return SignupAndLoginMessages.EMPTY_FIELD;
-        if (Stronghold.getInstance().getUser(inputs.get("username")) == null)
-            return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
-        if (this.loginTime != null && LocalDateTime.now().isBefore(loginTime))
-            return SignupAndLoginMessages.TOO_MANY_ATTEMPTS;
-        if (!Stronghold.getInstance().getUser(inputs.get("username")).isPasswordCorrect(inputs.get("password"))) {
-            increaseFailedAttempts();
-            return SignupAndLoginMessages.INCORRECT_PASSWORD;
-        }
-        failedAttemptsReset();
-        return SignupAndLoginMessages.SUCCESS_PROCESS;
-    }
-
-    public SignupAndLoginMessages getCurrentUser(String username) {
-        currentUser = stronghold.getUser(username);
-        if (currentUser == null)
-            return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
-        return SignupAndLoginMessages.SUCCESS_PROCESS;
-    }
-
     private boolean hasEmptyField(HashMap<String, String> inputs) {
         return inputs.get("password") == null || inputs.get("email") == null
                 || inputs.get("email") == null || inputs.get("slogan") == null;
@@ -152,7 +111,8 @@ public class SignupAndLoginController {
     private String generateRandomSlogan() {
         return Slogan.values()[(int) (Math.random() * 5)].getSlogan();
     }
-    public void changeNullSloganToEmpty(HashMap<String, String> inputs){
+
+    public void changeNullSloganToEmpty(HashMap<String, String> inputs) {
         if (inputs.get("sloganTest") == null) inputs.replace("slogan", null, "");
     }
 

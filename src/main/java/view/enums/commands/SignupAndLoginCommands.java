@@ -11,9 +11,11 @@ public enum SignupAndLoginCommands {
     QUESTION_PICK("\\s*question\\s+pick\\s+-q\\s+(?<questionNumber>\\d+)\\s+-a\\s+(?<answer>.+)" +
             "\\s+-c\\s+(?<answerConfirm>.+)\\s*"),
     LOGIN("\\s*user\\s+login((\\s+-u\\s+(?<username>\\S+|(\"[^\"]+\")))|" +
-            "(\\s+-p\\s+(?<password>\\S+|(\"[^\"]+\"))))*\\s*"),
+            "(\\s+-p\\s+(?<password>\\S+|(\"[^\"]+\"))))*\\s*(?<stayLoggedIn>--stay-logged-in)?\\s*"),
     CHANGE_PASSWORD("\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\\S+|(\"[^\"]+\"))\\s*"),
-    LOGOUT("\\s*logout\\s*");
+    LOGOUT("\\s*logout\\s*"),
+    LOGIN_MENU("\\s*login menu\\s*"),
+    SIGNUP_MENU("\\s*signup menu\\s*");
 
     private final String regex;
     SignupAndLoginCommands(String regex) {
