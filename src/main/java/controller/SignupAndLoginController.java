@@ -50,10 +50,11 @@ public class SignupAndLoginController {
     }
 
     public SignupAndLoginMessages signup(HashMap<String, String> inputs) {
-        if (inputs.get("slogan").equals("random"))
-            inputs.replace("slogan", inputs.get("slogan"), generateRandomSlogan());
         if (hasEmptyField(inputs))
             return SignupAndLoginMessages.EMPTY_FIELD;
+        if (inputs.get("slogan").equals("random"))
+            inputs.replace("slogan", inputs.get("slogan"), generateRandomSlogan());
+
         if (checkFormatOfInputs(inputs) != null)
             return checkFormatOfInputs(inputs);
         if (!inputs.get("password").equals("random") && !inputs.get("password").equals(inputs.get("passwordConfirmation")))
@@ -129,7 +130,7 @@ public class SignupAndLoginController {
 
     private boolean hasEmptyField(HashMap<String, String> inputs) {
         return inputs.get("password") == null || inputs.get("email") == null
-                || inputs.get("email") == null || inputs.get("slogan").equals("");
+                || inputs.get("email") == null || inputs.get("slogan") == null;
     }
 
     private SignupAndLoginMessages checkFormatOfInputs(HashMap<String, String> inputs) {
@@ -150,6 +151,9 @@ public class SignupAndLoginController {
 
     private String generateRandomSlogan() {
         return Slogan.values()[(int) (Math.random() * 5)].getSlogan();
+    }
+    public void changeNullSloganToEmpty(HashMap<String, String> inputs){
+        if (inputs.get("sloganTest") == null) inputs.replace("slogan", null, "");
     }
 
 }
