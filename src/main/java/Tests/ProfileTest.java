@@ -1,5 +1,6 @@
 package Tests;
 
+import Settings.Settings;
 import controller.ProfileController;
 import model.Stronghold;
 import model.User;
@@ -11,8 +12,8 @@ import java.io.File;
 
 public class ProfileTest {
     @Test
-    public void testChangeUsername(){
-        File users = new File("Resources/users.user");
+    public void testChangeUsername() {
+        File users = new File(Settings.USERS_PATH);
         users.delete();
         User user = new User("dibaHadiEsfangereh", "Hadie83@",
                 "dibahadie@gmail.com", "dibaH", "someSlogan");
@@ -45,8 +46,8 @@ public class ProfileTest {
     }
 
     @Test
-    public void testChangeNickName(){
-        File users = new File("Resources/users.user");
+    public void testChangeNickName() {
+        File users = new File(Settings.USERS_PATH);
         users.delete();
         User user = new User("dibaHadiEsfangereh", "Hadie83@",
                 "dibahadie@gmail.com", "dibaH", "someSlogan");
