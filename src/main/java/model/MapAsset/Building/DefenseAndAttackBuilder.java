@@ -13,6 +13,7 @@ public class DefenseAndAttackBuilder {
         return building;
     }
 
+    //TODO change name
     private static void setAttrs(DefenseAndAttackBuilding building, DefenseAndAttackConstants buildingType) {
         building.setDefendRange(buildingType.getDefendRange());
         building.setMaxHitPoint(buildingType.getHitpoint());

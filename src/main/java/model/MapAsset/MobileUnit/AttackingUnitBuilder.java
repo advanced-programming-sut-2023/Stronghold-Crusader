@@ -37,6 +37,7 @@ public class AttackingUnitBuilder {
         return attackingUnitObject;
     }
 
+    //TODO change name
     private static void setAttrs(AttackingUnit attackingUnitObject, AttackingUnitConstants attackingUnitType) {
         attackingUnitObject.setDefenceMultiplier(attackingUnitType.getDefenseMultiplier());
         attackingUnitObject.setEngineersCount(attackingUnitType.getEngineerCount());
