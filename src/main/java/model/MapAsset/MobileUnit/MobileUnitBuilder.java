@@ -13,6 +13,8 @@ public class MobileUnitBuilder {
         return mobileObject;
     }
 
+
+    //TODO change name
     private static void setAttrs(MobileUnit mobileObject, MobileUnitConstants mobileUnitType) {
         mobileObject.setDefenceMultiplier(mobileUnitType.getDefenseMultiplier());
         mobileObject.setEngineersCount(mobileUnitType.getEngineerCount());

@@ -12,6 +12,7 @@ public class ProductionBuilder {
         return building;
     }
 
+    //TODO change name
     private static void setAttrs(ProductionBuilding building, ProductionConstants buildingType) {
         building.setProductionCapacity(buildingType.getProductionMaxCapacity());
         building.setMaxHitPoint(buildingType.getHitpoint());

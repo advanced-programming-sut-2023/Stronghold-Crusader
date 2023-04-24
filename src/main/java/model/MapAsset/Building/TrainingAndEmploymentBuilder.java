@@ -12,6 +12,8 @@ public class TrainingAndEmploymentBuilder {
         return building;
     }
 
+
+    //TODO change name
     private static void setAttrs(TrainingAndEmploymentBuilding building, TrainingAndEmploymentConstants buildingType) {
         building.setPeopleType(buildingType.getPeopleType());
         building.setPopularityChangeRate(buildingType.getPopularityChangeRate());
