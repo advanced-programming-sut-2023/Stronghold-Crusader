@@ -66,19 +66,19 @@ public class ProfileTest {
 
         ProfileMessages msg = controller.changePassword("newPass", "newPass1", "Hadie83@");
         Assertions.assertEquals(msg, ProfileMessages.CONFIRMATION_INCORRECT);
-        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie83@"));
 
         msg = controller.canChangePassword("Hadie8", "newPass");
         Assertions.assertEquals(msg, ProfileMessages.PASSWORD_INCORRECT);
-        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie83@"));
 
         msg = controller.canChangePassword("Hadie83@", "newPass");
         Assertions.assertEquals(msg, ProfileMessages.INVALID_PASSWORD_FORMAT);
-        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie83@"));
 
         msg = controller.canChangePassword("Hadie83@", "N@w2");
         Assertions.assertEquals(msg, ProfileMessages.INVALID_PASSWORD_LENGTH);
-        Assertions.assertEquals(user.isPasswordCorrect("Hadie83@"), true);
+        Assertions.assertTrue(user.isPasswordCorrect("Hadie83@"));
 
         msg = controller.canChangePassword("Hadie83@", "Hadie83@");
         Assertions.assertEquals(msg, ProfileMessages.PASSWORD_NOT_NEW);
@@ -94,5 +94,24 @@ public class ProfileTest {
         msg = controller.changePassword( "Hadie833@", "Hadie833@", "Hadie83@");
         Assertions.assertEquals(msg, ProfileMessages.PASSWORD_CHANGE_SUCCESS);
         Assertions.assertTrue(user.isPasswordCorrect("Hadie833@"));
+    }
+
+    @Test
+    public void testChangeEmail(){
+        User user = loadForTest();
+        ProfileController controller = new ProfileController(user);
+        controller.setCurrentUser(user);
+
+        ProfileMessages msg = controller.changeEmail("dibahadie2@gmail.com");
+        Assertions.assertEquals(msg, ProfileMessages.EMAIL_EXISTS);
+        Assertions.assertEquals(user.getEmail(), "dibahadie@gmail.com");
+
+        msg = controller.changeEmail("email");
+        Assertions.assertEquals(msg, ProfileMessages.INVALID_EMAIL_FORMAT);
+        Assertions.assertEquals(user.getEmail(), "dibahadie@gmail.com");
+
+        msg = controller.changeEmail("dibahadi@gmail.com");
+        Assertions.assertEquals(msg, ProfileMessages.EMAIL_CHANGE_SUCCESS);
+        Assertions.assertEquals(user.getEmail(), "dibahadi@gmail.com");
     }
 }

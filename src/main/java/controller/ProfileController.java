@@ -52,6 +52,7 @@ public class ProfileController {
     public ProfileMessages changeEmail(String newEmail){
         if(stronghold.emailExists(newEmail)) return ProfileMessages.EMAIL_EXISTS;
         if(!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL)) return ProfileMessages.INVALID_EMAIL_FORMAT;
+        currentUser.changeEmail(newEmail);
         return ProfileMessages.EMAIL_CHANGE_SUCCESS;
     }
 
@@ -77,6 +78,7 @@ public class ProfileController {
     }
 
     public String displayUserInfo(){
+//      TODO fixOutput : Diba
         return null;
     }
 
