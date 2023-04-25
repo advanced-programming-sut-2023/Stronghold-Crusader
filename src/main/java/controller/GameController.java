@@ -2,7 +2,6 @@ package controller;
 
 import model.Game;
 import model.User;
-import view.GameMakerMenu;
 import view.GameMenu;
 
 public class GameController {

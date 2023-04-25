@@ -23,7 +23,7 @@ public class Stronghold {
     }
 
     public void updateData() {
-        UserManager.updateJson(users.values());
+        UserManager.updateAllUsers(users.values());
     }
 
     public User getUser(String username) {
