@@ -10,6 +10,7 @@ public class GameMakerController {
         this.currentUser = currentUser;
     }
 
+    // choosing the map - choosing the players - assigning colors
     public void run(){
         GameMakerMenu gameMakerMenu = new GameMakerMenu(this);
         while(true){

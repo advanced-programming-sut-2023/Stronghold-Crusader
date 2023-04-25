@@ -27,6 +27,8 @@ public class MainMenu {
             switch (cmd){
                 case PROFILE_MENU:
                     return "profileMenu";
+                case GAME_MAKER_MENU:
+                    return "newGame";
             }
         }
     }

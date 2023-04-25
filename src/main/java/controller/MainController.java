@@ -22,11 +22,6 @@ public class MainController {
                     ProfileController profileController = new ProfileController(currentUser);
                     profileController.run();
                     break;
-                case "mapMakerMenu":
-                    MapMakerController mapMakerController = new MapMakerController(currentUser);
-                    mapMakerController.run();
-                    break;
-
             }
         }
     }

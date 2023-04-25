@@ -1,6 +1,11 @@
 package model.Map;
 
+import java.util.ArrayList;
+
 public class MapLoader {
+    public static ArrayList<String> getMapList(){
+        return null;
+    }
     public static Map load(String mapId){
         return null;
     }

@@ -15,19 +15,19 @@ import view.enums.messages.MapMakerMessage;
 
 public class MapMakerController {
     private User currentUser;
-    private Map newMap;
+    private Map map;
     private MapMakerMenu mapMakerMenu;
-    public MapMakerController(User currentUser){
+    public MapMakerController(User currentUser, Map map){
         this.currentUser = currentUser;
+        this.map = map;
         mapMakerMenu = new MapMakerMenu(this);
     }
 
     public void run(){
-        initiateMap();
         while (true){
             switch (mapMakerMenu.run()){
                 case "back":
-                    MapLoader.addMap(newMap);
+                    MapLoader.addMap(map);
                     return;
                 case "environment":
                     runChangeEnvironment();
@@ -38,20 +38,6 @@ public class MapMakerController {
                 }
             }
 
-    }
-
-    public void initiateMap(){
-        String mapName;
-        while (true){
-            mapName = mapMakerMenu.getMapName();
-            if(!MapLoader.isMapNameTaken(mapName)){
-                String fileName = MapLoader.generateMapAddress(mapName);
-                // TODO : handle possible errors
-                Vector2D mapSize = mapMakerMenu.getMapSize();
-                newMap = new Map(fileName, mapSize);
-                return;
-            }
-        }
     }
 
     private void runAssetPlacement(){
