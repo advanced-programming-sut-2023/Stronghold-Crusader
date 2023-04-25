@@ -3,21 +3,22 @@ package view.enums.commands;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum GameMenuCommands {
-    MODIFY_MAP("");
+public enum MainMenuCommand {
+    PROFILE_MENU("\\s*profile\\s+menu\\s*"),
+    GAME_MAKER_MENU("");
     private String regex;
-    GameMenuCommands(String regex) {
+    MainMenuCommand(String regex) {
         this.regex = regex;
     }
 
-    public static GameMenuCommands getCommand(String input){
-        for(GameMenuCommands cmd : GameMenuCommands.values()){
+    public static MainMenuCommand getCommand(String input){
+        for(MainMenuCommand cmd : MainMenuCommand.values()){
             if(input.matches(cmd.regex)) return cmd;
         }
         return null;
     }
 
-    public static Matcher getMatcher(String input, GameMenuCommands cmd){
+    public static Matcher getMatcher(String input, MainMenuCommand cmd){
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
         return matcher;

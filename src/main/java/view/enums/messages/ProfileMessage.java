@@ -1,6 +1,6 @@
 package view.enums.messages;
 
-public enum ProfileMessages {
+public enum ProfileMessage {
     INVALID_COMMAND("invalid command"),
     INVALID_USERNAME_FORMAT("Invalid username"),
     INVALID_PASSWORD_FORMAT("Invalid password"),
@@ -20,13 +20,13 @@ public enum ProfileMessages {
     EMAIL_EXISTS("Email already exists"),
     CAN_CHANGE_PASSWORD("true");
     private String message;
-    private ProfileMessages(String message){
+    private ProfileMessage(String message){
         this.message = message;
     }
     public String getMessage(){
         return message;
     }
-    public static void printMessage(ProfileMessages msg){
+    public static void printMessage(ProfileMessage msg){
         System.out.println(msg.message);
     }
 }

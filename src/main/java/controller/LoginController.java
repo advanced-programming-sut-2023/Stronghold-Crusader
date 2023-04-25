@@ -3,7 +3,7 @@ package controller;
 import model.Stronghold;
 import model.User;
 import view.LoginMenu;
-import view.enums.messages.SignupAndLoginMessages;
+import view.enums.messages.SignupAndLoginMessage;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -45,27 +45,27 @@ public class LoginController {
             }
         }
     }
-    public SignupAndLoginMessages login(HashMap<String, String> inputs) {
+    public SignupAndLoginMessage login(HashMap<String, String> inputs) {
         currentUser = Stronghold.getInstance().getUser(inputs.get("username"));
         if (inputs.get("username") == null || inputs.get("password") == null)
-            return SignupAndLoginMessages.EMPTY_FIELD;
+            return SignupAndLoginMessage.EMPTY_FIELD;
         if (currentUser == null)
-            return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
+            return SignupAndLoginMessage.USER_DOES_NOT_EXIST;
         if (this.loginTime != null && LocalDateTime.now().isBefore(loginTime))
-            return SignupAndLoginMessages.TOO_MANY_ATTEMPTS;
+            return SignupAndLoginMessage.TOO_MANY_ATTEMPTS;
         if (!Stronghold.getInstance().getUser(inputs.get("username")).isPasswordCorrect(inputs.get("password"))) {
             increaseFailedAttempts();
-            return SignupAndLoginMessages.INCORRECT_PASSWORD;
+            return SignupAndLoginMessage.INCORRECT_PASSWORD;
         }
         failedAttemptsReset();
         mainController = new MainController(currentUser);
-        return SignupAndLoginMessages.SUCCESS_PROCESS;
+        return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
-    public SignupAndLoginMessages getCurrentUser(String username) {
+    public SignupAndLoginMessage getCurrentUser(String username) {
         currentUser = stronghold.getUser(username);
         if (currentUser == null)
-            return SignupAndLoginMessages.USER_DOES_NOT_EXIST;
-        return SignupAndLoginMessages.SUCCESS_PROCESS;
+            return SignupAndLoginMessage.USER_DOES_NOT_EXIST;
+        return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
 
 }

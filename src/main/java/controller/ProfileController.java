@@ -4,7 +4,7 @@ import model.Stronghold;
 import model.User;
 import utils.FormatValidation;
 import view.ProfileMenu;
-import view.enums.messages.ProfileMessages;
+import view.enums.messages.ProfileMessage;
 
 public class ProfileController {
     private User currentUser;
@@ -23,47 +23,47 @@ public class ProfileController {
         }
     }
 
-    public ProfileMessages changeUsername(String newUsername){
-        if(!FormatValidation.isFormatValid(newUsername, FormatValidation.USERNAME)) return ProfileMessages.INVALID_USERNAME_FORMAT;
-        if(stronghold.userExists(newUsername)) return ProfileMessages.USERNAME_TAKEN;
+    public ProfileMessage changeUsername(String newUsername){
+        if(!FormatValidation.isFormatValid(newUsername, FormatValidation.USERNAME)) return ProfileMessage.INVALID_USERNAME_FORMAT;
+        if(stronghold.userExists(newUsername)) return ProfileMessage.USERNAME_TAKEN;
         currentUser.changeUsername(newUsername);
-        return ProfileMessages.USERNAME_CHANGE_SUCCESS;
+        return ProfileMessage.USERNAME_CHANGE_SUCCESS;
     }
 
-    public ProfileMessages changeNickname(String newNickname){
+    public ProfileMessage changeNickname(String newNickname){
         currentUser.changeNickname(newNickname);
-        return ProfileMessages.NICKNAME_CHANGE_SUCCESS;
+        return ProfileMessage.NICKNAME_CHANGE_SUCCESS;
     }
 
-    public ProfileMessages canChangePassword(String oldPass, String newPass){
-        if(!currentUser.isPasswordCorrect(oldPass)) return ProfileMessages.PASSWORD_INCORRECT;
-        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LETTERS)) return ProfileMessages.INVALID_PASSWORD_FORMAT;
-        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LENGTH)) return ProfileMessages.INVALID_PASSWORD_LENGTH;
-        if(oldPass.equals(newPass)) return ProfileMessages.PASSWORD_NOT_NEW;
-        return ProfileMessages.CAN_CHANGE_PASSWORD;
+    public ProfileMessage canChangePassword(String oldPass, String newPass){
+        if(!currentUser.isPasswordCorrect(oldPass)) return ProfileMessage.PASSWORD_INCORRECT;
+        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LETTERS)) return ProfileMessage.INVALID_PASSWORD_FORMAT;
+        if(!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LENGTH)) return ProfileMessage.INVALID_PASSWORD_LENGTH;
+        if(oldPass.equals(newPass)) return ProfileMessage.PASSWORD_NOT_NEW;
+        return ProfileMessage.CAN_CHANGE_PASSWORD;
     }
 
-    public ProfileMessages changePassword(String newPass, String passConfirm, String oldPass){
-        if(!passConfirm.equals(newPass)) return ProfileMessages.CONFIRMATION_INCORRECT;
+    public ProfileMessage changePassword(String newPass, String passConfirm, String oldPass){
+        if(!passConfirm.equals(newPass)) return ProfileMessage.CONFIRMATION_INCORRECT;
         currentUser.setPassword(newPass);
-        return ProfileMessages.PASSWORD_CHANGE_SUCCESS;
+        return ProfileMessage.PASSWORD_CHANGE_SUCCESS;
     }
 
-    public ProfileMessages changeEmail(String newEmail){
-        if(stronghold.emailExists(newEmail)) return ProfileMessages.EMAIL_EXISTS;
-        if(!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL)) return ProfileMessages.INVALID_EMAIL_FORMAT;
+    public ProfileMessage changeEmail(String newEmail){
+        if(stronghold.emailExists(newEmail)) return ProfileMessage.EMAIL_EXISTS;
+        if(!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL)) return ProfileMessage.INVALID_EMAIL_FORMAT;
         currentUser.changeEmail(newEmail);
-        return ProfileMessages.EMAIL_CHANGE_SUCCESS;
+        return ProfileMessage.EMAIL_CHANGE_SUCCESS;
     }
 
-    public ProfileMessages changeSlogan(String newSlogan){
+    public ProfileMessage changeSlogan(String newSlogan){
         currentUser.changeSlogan(newSlogan);
-        return ProfileMessages.SLOGAN_CHANGE_SUCCESS;
+        return ProfileMessage.SLOGAN_CHANGE_SUCCESS;
     }
 
-    public ProfileMessages removeSlogan(){
+    public ProfileMessage removeSlogan(){
         currentUser.removeSlogan();
-        return ProfileMessages.SLOGAN_REMOVAL_SUCCESS;
+        return ProfileMessage.SLOGAN_REMOVAL_SUCCESS;
     }
 
     public int displayHighscore(){

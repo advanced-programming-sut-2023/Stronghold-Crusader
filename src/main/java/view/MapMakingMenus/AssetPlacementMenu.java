@@ -2,7 +2,7 @@ package view.MapMakingMenus;
 
 import controller.MapMakerController;
 import view.Menu;
-import view.enums.commands.MapMakerCommands;
+import view.enums.commands.MapMakerCommand;
 import view.enums.messages.MapMakerMessage;
 
 import java.util.Scanner;
@@ -20,12 +20,12 @@ public class AssetPlacementMenu {
         String input;
         while (true){
             input = scanner.nextLine();
-            MapMakerCommands cmd = MapMakerCommands.getCommand(input);
+            MapMakerCommand cmd = MapMakerCommand.getCommand(input);
             if(input == null){
                 MapMakerMessage.printMessage(MapMakerMessage.INVALID_COMMAND);
                 continue;
             }
-            Matcher matcher = MapMakerCommands.getMatcher(input, cmd);
+            Matcher matcher = MapMakerCommand.getMatcher(input, cmd);
             switch (cmd){
                 case DROP_BUILDING:
                     runDropBuilding(matcher);

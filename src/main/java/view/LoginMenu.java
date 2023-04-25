@@ -3,8 +3,8 @@ package view;
 import controller.LoginController;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
-import view.enums.commands.SignupAndLoginCommands;
-import view.enums.messages.SignupAndLoginMessages;
+import view.enums.commands.SignupAndLoginCommand;
+import view.enums.messages.SignupAndLoginMessage;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -24,12 +24,12 @@ public class LoginMenu {
         Matcher matcher;
         while (true) {
             nextCommand = scanner.nextLine();
-            SignupAndLoginCommands typeOfCommand = SignupAndLoginCommands.getCommand(nextCommand);
+            SignupAndLoginCommand typeOfCommand = SignupAndLoginCommand.getCommand(nextCommand);
             if (typeOfCommand == null) {
-                SignupAndLoginMessages.INVALID_COMMAND.printMessage();
+                SignupAndLoginMessage.INVALID_COMMAND.printMessage();
                 continue;
             }
-            matcher = SignupAndLoginCommands.getMatcher(nextCommand, typeOfCommand);
+            matcher = SignupAndLoginCommand.getMatcher(nextCommand, typeOfCommand);
             switch (typeOfCommand) {
                 case LOGOUT:
                     return "logout";
@@ -40,21 +40,21 @@ public class LoginMenu {
                     changePasswordCall(matcher);
                     break;
                 case SIGNUP_MENU:
-                    SignupAndLoginMessages.SIGNUP_MENU.printMessage();
+                    SignupAndLoginMessage.SIGNUP_MENU.printMessage();
                     return "signup menu";
             }
         }
     }
 
     private boolean loginCall(Matcher matcher) {
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.LOGIN.getRegex());
-        SignupAndLoginMessages messages = loginController.login(inputs);
-        messages.printMessage();
-        if (messages.equals(SignupAndLoginMessages.TOO_MANY_ATTEMPTS)) {
+        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.LOGIN.getRegex());
+        SignupAndLoginMessage message = loginController.login(inputs);
+        message.printMessage();
+        if (message.equals(SignupAndLoginMessage.TOO_MANY_ATTEMPTS)) {
             tooManyAttemptsError();
             return false;
         }
-        if (messages.equals(SignupAndLoginMessages.SUCCESS_PROCESS)) {
+        if (message.equals(SignupAndLoginMessage.SUCCESS_PROCESS)) {
             System.out.println("success");
             return true;
         }
@@ -62,8 +62,8 @@ public class LoginMenu {
     }
 
     private void changePasswordCall(Matcher matcher) {
-        SignupAndLoginMessages messages = loginController.getCurrentUser(matcher.group("username"));
-        messages.printMessage();
+        SignupAndLoginMessage message = loginController.getCurrentUser(matcher.group("username"));
+        message.printMessage();
         String nextCommand = Menu.getScanner().nextLine();
         System.out.println(loginController.currentUser.getPasswordRecoveryQuestion());
         if (loginController.currentUser.isRecoveryPasswordCorrect(nextCommand)) {
@@ -84,9 +84,9 @@ public class LoginMenu {
             System.out.println("Enter new Password:");
             nextCommand = Menu.getScanner().nextLine();
             if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LENGTH)) {
-                SignupAndLoginMessages.PASSWORD_WEEK_LENGTH.printMessage();
+                SignupAndLoginMessage.PASSWORD_WEEK_LENGTH.printMessage();
             } else if (!FormatValidation.isFormatValid(nextCommand, FormatValidation.PASSWORD_LETTERS))
-                SignupAndLoginMessages.PASSWORD_WEEK_LETTERS_PROBLEM.printMessage();
+                SignupAndLoginMessage.PASSWORD_WEEK_LETTERS_PROBLEM.printMessage();
             else {
                 loginController.currentUser.setPassword(nextCommand);
                 break;

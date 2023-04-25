@@ -1,6 +1,6 @@
 package view.enums.messages;
 
-public enum SignupAndLoginMessages {
+public enum SignupAndLoginMessage {
     EMPTY_FIELD("There are empty fields among the entered entries"),
     INVALID_USERNAME_FORMAT("Username format is not valid"),
     INVALID_EMAIL_FORMAT("Email format is not valid"),
@@ -26,11 +26,11 @@ public enum SignupAndLoginMessages {
     LOGIN_MENU("Entered to the login menu");
     private final String output;
 
-    SignupAndLoginMessages() {
+    SignupAndLoginMessage() {
         this.output = "";
     }
 
-    SignupAndLoginMessages(String output) {
+    SignupAndLoginMessage(String output) {
         this.output = output;
     }
 

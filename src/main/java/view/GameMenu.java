@@ -1,7 +1,7 @@
 package view;
 
 import controller.GameController;
-import view.enums.commands.GameMenuCommands;
+import view.enums.commands.GameMenuCommand;
 
 import java.util.Scanner;
 
@@ -17,7 +17,7 @@ public class GameMenu {
         String input;
         while(true){
             input = scanner.nextLine();
-            GameMenuCommands cmd = GameMenuCommands.getCommand(input);
+            GameMenuCommand cmd = GameMenuCommand.getCommand(input);
             if(cmd == null){
                 System.out.println();
                 continue;

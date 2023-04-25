@@ -3,7 +3,7 @@ package view.enums.commands;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum ProfileCommands {
+public enum ProfileCommand {
     CHANGE_USERNAME("^\\s*profile\\s+change\\s+-u\\s+(?<newUsername>.+)\\s*$"),
     CHANGE_NICKNAME("^\\s*profile\\s+change\\s+-n\\s+(?<newNickname>.+)\\s*$"),
     CHANGE_PASSWORD("^\\s*profile\\s+change\\s+password\\s+(-o (?<oldPass>\\S+)\\s*|-n (?<newPass>.+)\\s*)*$"),
@@ -15,18 +15,18 @@ public enum ProfileCommands {
     REMOVE_SLOGAN("\\s*profile\\s+remove\\s+slogan\\s*"),
     PROFILE_INFO("^\\s*profile\\s+display\\s*$");
     private String regex;
-    ProfileCommands(String regex) {
+    ProfileCommand(String regex) {
         this.regex = regex;
     }
 
-    public static ProfileCommands getCommand(String input){
-        for(ProfileCommands cmd : ProfileCommands.values()){
+    public static ProfileCommand getCommand(String input){
+        for(ProfileCommand cmd : ProfileCommand.values()){
             if(input.matches(cmd.regex)) return cmd;
         }
         return null;
     }
 
-    public static Matcher getMatcher(String input, ProfileCommands cmd){
+    public static Matcher getMatcher(String input, ProfileCommand cmd){
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
         matcher.find();

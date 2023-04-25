@@ -3,7 +3,7 @@ package view.enums.commands;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum SignupAndLoginCommands {
+public enum SignupAndLoginCommand {
     CREATE_USER("\\s*user\\s+create((\\s+-u\\s+(?<username>\\S+|(\"[^\"]+\")))|" +
             "(\\s+-p\\s+(?<password>(\"[^\"]+\")|\\S+)(\\s+(?<passwordConfirmation>\\S+|(\"[^\"]+\")))?)|" +
             "(\\s+-email\\s+(?<email>\\S+|(\"[^\"]+\")))|" +
@@ -18,17 +18,17 @@ public enum SignupAndLoginCommands {
     SIGNUP_MENU("\\s*signup menu\\s*");
 
     private final String regex;
-    SignupAndLoginCommands(String regex) {
+    SignupAndLoginCommand(String regex) {
         this.regex = regex;
     }
-    public static SignupAndLoginCommands getCommand(String input) {
-        for (SignupAndLoginCommands cmd : SignupAndLoginCommands.values()){
+    public static SignupAndLoginCommand getCommand(String input) {
+        for (SignupAndLoginCommand cmd : SignupAndLoginCommand.values()){
             if (input.matches(cmd.regex)) return cmd;
         }
         return null;
     }
 
-    public static Matcher getMatcher(String command, SignupAndLoginCommands sampleCommand) {
+    public static Matcher getMatcher(String command, SignupAndLoginCommand sampleCommand) {
         Matcher matcher = Pattern.compile(sampleCommand.regex).matcher(command);
         return matcher.matches() ? matcher : null;
     }

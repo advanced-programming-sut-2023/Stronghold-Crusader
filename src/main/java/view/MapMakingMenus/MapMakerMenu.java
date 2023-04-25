@@ -3,7 +3,7 @@ package view.MapMakingMenus;
 import controller.MapMakerController;
 import utils.Vector2D;
 import view.Menu;
-import view.enums.commands.MapMakerCommands;
+import view.enums.commands.MapMakerCommand;
 import view.enums.messages.MapMakerMessage;
 
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class MapMakerMenu {
         String input;
         while(true){
             input = scanner.nextLine();
-            MapMakerCommands cmd = MapMakerCommands.getCommand(input);
+            MapMakerCommand cmd = MapMakerCommand.getCommand(input);
             if(input == null){
                 MapMakerMessage.printMessage(MapMakerMessage.INVALID_COMMAND);
                 continue;

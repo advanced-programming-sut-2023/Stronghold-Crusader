@@ -1,8 +1,8 @@
 package view;
 
 import controller.ProfileController;
-import view.enums.commands.ProfileCommands;
-import view.enums.messages.ProfileMessages;
+import view.enums.commands.ProfileCommand;
+import view.enums.messages.ProfileMessage;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -19,12 +19,12 @@ public class ProfileMenu {
         String input;
         while(true){
             input = scanner.nextLine();
-            ProfileCommands cmd = ProfileCommands.getCommand(input);
+            ProfileCommand cmd = ProfileCommand.getCommand(input);
             if(cmd == null){
-                ProfileMessages.printMessage(ProfileMessages.INVALID_COMMAND);
+                ProfileMessage.printMessage(ProfileMessage.INVALID_COMMAND);
                 continue;
             }
-            Matcher matcher = ProfileCommands.getMatcher(input, cmd);
+            Matcher matcher = ProfileCommand.getMatcher(input, cmd);
             switch (cmd){
                 case CHANGE_USERNAME :
                     runChangeUsername(matcher);
@@ -57,7 +57,7 @@ public class ProfileMenu {
                     System.out.println(profileController.removeSlogan());
                     break;
                 default:
-                    ProfileMessages.printMessage(ProfileMessages.INVALID_COMMAND);
+                    ProfileMessage.printMessage(ProfileMessage.INVALID_COMMAND);
                     break;
             }
         }
@@ -78,7 +78,7 @@ public class ProfileMenu {
         String newPass = matcher.group("newPass");
         String canChangePass = profileController.canChangePassword(oldPass, newPass).getMessage();
         if(canChangePass.equals("true")) {
-            System.out.println(ProfileMessages.ENTER_NEWPASS_AGAIN.getMessage());
+            System.out.println(ProfileMessage.ENTER_NEWPASS_AGAIN.getMessage());
             String confirmation = scanner.nextLine();
             System.out.println(profileController.changePassword(newPass, confirmation, oldPass));
         }

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
-import view.enums.commands.SignupAndLoginCommands;
-import view.enums.messages.SignupAndLoginMessages;
+import view.enums.commands.SignupAndLoginCommand;
+import view.enums.messages.SignupAndLoginMessage;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -24,22 +24,22 @@ public class SignupAndLoginTest {
         inputs.put("nickname", "nickname");
         //movement between inputs
         String command = "user create -u username -email email -p password -s \"a slogan\" -n nickname";
-        matcher = SignupAndLoginCommands.getMatcher(command, SignupAndLoginCommands.CREATE_USER);
+        matcher = SignupAndLoginCommand.getMatcher(command, SignupAndLoginCommand.CREATE_USER);
         HashMap<String, String> test =
-                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
+                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
         test.remove("sloganTest");
         Assertions.assertEquals(inputs, test);
 
         command = "user create -p password   -s \"a slogan\" -n nickname -u username -email email ";
-        matcher = SignupAndLoginCommands.getMatcher(command, SignupAndLoginCommands.CREATE_USER);
-        test = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
+        matcher = SignupAndLoginCommand.getMatcher(command, SignupAndLoginCommand.CREATE_USER);
+        test = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
         test.remove("sloganTest");
         Assertions.assertEquals(inputs, test);
 
         //get inputs in double quotation
         command = "user create -u \"kian username\"  -email \"I am an Email\" -p \"pass 123\" -s \"a slogan\" -n \"kian G\"";
-        matcher = SignupAndLoginCommands.getMatcher(command, SignupAndLoginCommands.CREATE_USER);
-        test = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
+        matcher = SignupAndLoginCommand.getMatcher(command, SignupAndLoginCommand.CREATE_USER);
+        test = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
         inputs.replace("username", "username", "kian username");
         inputs.replace("password", "password", "pass 123");
         inputs.replace("email", "email", "I am an Email");
@@ -78,22 +78,22 @@ public class SignupAndLoginTest {
         SignupController controller = new SignupController();
         //Empty Field:
         command = "user create -u username -email email -p password -s   -n nickname";
-        matcher = SignupAndLoginCommands.getMatcher(command, SignupAndLoginCommands.CREATE_USER);
+        matcher = SignupAndLoginCommand.getMatcher(command, SignupAndLoginCommand.CREATE_USER);
         inputs =
-                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
-        Assertions.assertEquals(controller.signup(inputs), SignupAndLoginMessages.EMPTY_FIELD);
+                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
+        Assertions.assertEquals(controller.signup(inputs), SignupAndLoginMessage.EMPTY_FIELD);
         //Empty Field:
         command = "user create -u username  -p password   -n nickname";
-        matcher = SignupAndLoginCommands.getMatcher(command, SignupAndLoginCommands.CREATE_USER);
+        matcher = SignupAndLoginCommand.getMatcher(command, SignupAndLoginCommand.CREATE_USER);
         inputs =
-                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
-        Assertions.assertEquals(controller.signup(inputs), SignupAndLoginMessages.EMPTY_FIELD);
+                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
+        Assertions.assertEquals(controller.signup(inputs), SignupAndLoginMessage.EMPTY_FIELD);
         command = "user create -u username -email email -p password    -n nickname";
-        matcher = SignupAndLoginCommands.getMatcher(command, SignupAndLoginCommands.CREATE_USER);
+        matcher = SignupAndLoginCommand.getMatcher(command, SignupAndLoginCommand.CREATE_USER);
         inputs =
-                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
+                SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
         controller.changeNullSloganToEmpty(inputs);
-        Assertions.assertNotEquals(controller.signup(inputs), SignupAndLoginMessages.EMPTY_FIELD);
+        Assertions.assertNotEquals(controller.signup(inputs), SignupAndLoginMessage.EMPTY_FIELD);
     }
 }
 

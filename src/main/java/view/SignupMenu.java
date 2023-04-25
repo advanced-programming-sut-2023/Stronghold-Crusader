@@ -3,8 +3,8 @@ package view;
 import controller.SignupController;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
-import view.enums.commands.SignupAndLoginCommands;
-import view.enums.messages.SignupAndLoginMessages;
+import view.enums.commands.SignupAndLoginCommand;
+import view.enums.messages.SignupAndLoginMessage;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -24,12 +24,12 @@ public class SignupMenu {
         Matcher matcher;
         while (true) {
             nextCommand = scanner.nextLine();
-            SignupAndLoginCommands typeOfCommand = SignupAndLoginCommands.getCommand(nextCommand);
+            SignupAndLoginCommand typeOfCommand = SignupAndLoginCommand.getCommand(nextCommand);
             if (typeOfCommand == null) {
-                SignupAndLoginMessages.INVALID_COMMAND.printMessage();
+                SignupAndLoginMessage.INVALID_COMMAND.printMessage();
                 continue;
             }
-            matcher = SignupAndLoginCommands.getMatcher(nextCommand, typeOfCommand);
+            matcher = SignupAndLoginCommand.getMatcher(nextCommand, typeOfCommand);
             switch (typeOfCommand) {
                 case LOGOUT:
                     return "logout";
@@ -37,24 +37,24 @@ public class SignupMenu {
                     createUserCall(matcher);
                     break;
                 case LOGIN_MENU:
-                    SignupAndLoginMessages.LOGIN_MENU.printMessage();
+                    SignupAndLoginMessage.LOGIN_MENU.printMessage();
                     return "login menu";
             }
         }
     }
 
     private void createUserCall(Matcher matcher) {
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.CREATE_USER.getRegex());
+        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
         signupController.changeNullSloganToEmpty(inputs);
         boolean randomSlogan = inputs.get("slogan") != null && inputs.get("slogan").equals("random");
-        SignupAndLoginMessages message = signupController.signup(inputs);
+        SignupAndLoginMessage message = signupController.signup(inputs);
 
-        if (message.equals(SignupAndLoginMessages.EXISTING_USERNAME)) {
+        if (message.equals(SignupAndLoginMessage.EXISTING_USERNAME)) {
             message.printMessage();
             if (isUsernameSuggestionAccept(inputs))
                 message = signupController.signup(inputs);
         }
-        if (message.equals(SignupAndLoginMessages.RANDOM_PASSWORD)) {
+        if (message.equals(SignupAndLoginMessage.RANDOM_PASSWORD)) {
             if (randomSlogan) {
                 printRandomSlogan(inputs);
                 randomSlogan = false;
@@ -63,7 +63,7 @@ public class SignupMenu {
             message = signupController.signup(inputs);
         }
         message.printMessage();
-        if (message.equals(SignupAndLoginMessages.SUCCESS_PROCESS)) {
+        if (message.equals(SignupAndLoginMessage.SUCCESS_PROCESS)) {
             if (randomSlogan) printRandomSlogan(inputs);
             pickUpQuestion(inputs);
         }
@@ -87,21 +87,21 @@ public class SignupMenu {
     }
 
     private void pickUpQuestion(HashMap<String, String> inputs) {
-        SignupAndLoginMessages message = SignupAndLoginMessages.FAIL_PICKING_UP_QUESTION;
+        SignupAndLoginMessage message = SignupAndLoginMessage.FAIL_PICKING_UP_QUESTION;
         do {
-            SignupAndLoginMessages.PICKING_QUESTION.printMessage();
+            SignupAndLoginMessage.PICKING_QUESTION.printMessage();
             String nextCommand = Menu.getScanner().nextLine();
-            Matcher matcher = SignupAndLoginCommands.getMatcher(nextCommand, SignupAndLoginCommands.QUESTION_PICK);
+            Matcher matcher = SignupAndLoginCommand.getMatcher(nextCommand, SignupAndLoginCommand.QUESTION_PICK);
             if (matcher == null)
                 System.out.println("some error founds");
             else {
                 HashMap<String, String> pickQuestionInputs =
-                        SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommands.QUESTION_PICK.getRegex());
+                        SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.QUESTION_PICK.getRegex());
                 pickQuestionInputs.put("username", inputs.get("username"));
                 message = signupController.pickQuestion(pickQuestionInputs);
                 message.printMessage();
             }
-        } while (!message.equals(SignupAndLoginMessages.SUCCESS_CREATING_USER));
+        } while (!message.equals(SignupAndLoginMessage.SUCCESS_CREATING_USER));
     }
 
 }

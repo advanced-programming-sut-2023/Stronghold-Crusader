@@ -1,9 +1,7 @@
 package view;
 
 import controller.MainController;
-import controller.ProfileController;
-import view.enums.commands.MainMenuCommands;
-import view.enums.messages.MainMenuMessages;
+import view.enums.commands.MainMenuCommand;
 
 import java.util.Scanner;
 
@@ -19,7 +17,7 @@ public class MainMenu {
         String input;
         while(true){
             input = scanner.nextLine();
-            MainMenuCommands cmd = MainMenuCommands.getCommand(input);
+            MainMenuCommand cmd = MainMenuCommand.getCommand(input);
             if(cmd == null){
                 System.out.println();
                 continue;
