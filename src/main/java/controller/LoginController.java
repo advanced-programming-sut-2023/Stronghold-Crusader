@@ -32,6 +32,7 @@ public class LoginController {
         LoginMenu loginMenu = new LoginMenu(this);
         while (true) {
             switch (loginMenu.run()) {
+                //TODO @kian we should type exit to quit, not logout
                 case "logout":
                     return;
                 case "signup menu":

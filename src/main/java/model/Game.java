@@ -1,7 +1,7 @@
 package model;
 
 import model.Map.Map;
-import model.Map.MapLoader;
+import model.Map.MapManager;
 import model.enums.Color;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class Game {
     private final Map map;
 
     public Game(String mapId, ArrayList<Player> players, boolean isEditableMode) {
-        map = MapLoader.load(mapId);
+        map = MapManager.load(mapId);
         //make players from the users
     }
 

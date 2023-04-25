@@ -8,11 +8,12 @@ import java.util.Collection;
 
 public class UserManager {
     public static void load(Stronghold stronghold) {
+        initializeResources();
         Reader reader;
         try {
             reader = new FileReader(Settings.USERS_PATH);
         } catch (FileNotFoundException e) {
-            initializeResources();
+            e.printStackTrace();
             return;
         }
         Gson gson = new Gson();
@@ -29,6 +30,9 @@ public class UserManager {
         File resourceDir = new File(Settings.RESOURCE_PATH);
         if (!resourceDir.exists())
             resourceDir.mkdir();
+        File mapsDir = new File(Settings.MAPS_PATH);
+        if (!mapsDir.exists())
+            mapsDir.mkdir();
         try {
             new File(Settings.USERS_PATH).createNewFile();
         } catch (IOException ex) {

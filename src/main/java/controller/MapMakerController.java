@@ -1,7 +1,7 @@
 package controller;
 
 import model.Map.Map;
-import model.Map.MapLoader;
+import model.Map.MapManager;
 import model.MapAsset.MapAsset;
 import model.MapAsset.Tree;
 import model.User;
@@ -27,7 +27,7 @@ public class MapMakerController {
         while (true){
             switch (mapMakerMenu.run()){
                 case "back":
-                    MapLoader.addMap(newMap);
+//                    MapManager.addMap(newMap);
                     return;
                 case "environment":
                     runChangeEnvironment();
@@ -44,11 +44,11 @@ public class MapMakerController {
         String mapName;
         while (true){
             mapName = mapMakerMenu.getMapName();
-            if(!MapLoader.isMapNameTaken(mapName)){
-                String fileName = MapLoader.generateMapAddress(mapName);
+            if(!MapManager.isMapNameTaken(mapName)){
+//                String fileName = MapManager.generateMapAddress(mapName);
                 // TODO : handle possible errors
                 Vector2D mapSize = mapMakerMenu.getMapSize();
-                newMap = new Map(fileName, mapSize);
+//                newMap = new Map(mapSize);
                 return;
             }
         }
