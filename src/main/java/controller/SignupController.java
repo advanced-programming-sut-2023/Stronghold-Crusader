@@ -16,16 +16,15 @@ import java.util.HashMap;
 public class SignupController {
     public User currentUser = null;
     private final Stronghold stronghold = Stronghold.getInstance();
-    private LoginController loginController;
 
     public void run() {
         SignupMenu signupMenu = new SignupMenu(this);
         while (true) {
             switch (signupMenu.run()) {
-                case "logout":
+                case "exit":
                     return;
                 case "login menu":
-                    loginController = new LoginController();
+                    LoginController loginController = new LoginController();
                     loginController.run();
                     break;
             }

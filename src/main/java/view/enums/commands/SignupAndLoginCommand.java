@@ -14,6 +14,7 @@ public enum SignupAndLoginCommand {
             "(\\s+-p\\s+(?<password>\\S+|(\"[^\"]+\"))))*\\s*(?<stayLoggedIn>--stay-logged-in)?\\s*"),
     CHANGE_PASSWORD("\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\\S+|(\"[^\"]+\"))\\s*"),
     LOGOUT("\\s*logout\\s*"),
+    EXIT("\\s*exit\\s*"),
     LOGIN_MENU("\\s*login menu\\s*"),
     SIGNUP_MENU("\\s*signup menu\\s*");
 

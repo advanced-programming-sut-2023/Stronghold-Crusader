@@ -31,8 +31,8 @@ public class SignupMenu {
             }
             matcher = SignupAndLoginCommand.getMatcher(nextCommand, typeOfCommand);
             switch (typeOfCommand) {
-                case LOGOUT:
-                    return "logout";
+                case EXIT:
+                    return "exit";
                 case CREATE_USER:
                     createUserCall(matcher);
                     break;
