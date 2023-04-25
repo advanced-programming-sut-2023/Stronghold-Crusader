@@ -1,12 +1,14 @@
 package model;
 
 import model.MapAsset.Building.Building;
+import model.MapAsset.MobileUnit.MobileUnit;
 
 import java.util.ArrayList;
 
 public class Governance {
     private final ArrayList<Building> buildings;
-    //private final units
+    private final ArrayList<MobileUnit> people;
+    private final ArrayList<Trade> trades;
     private int population;
     private int popularity;
     private int foodRate;
@@ -18,6 +20,16 @@ public class Governance {
 
     Governance() {
         buildings = new ArrayList<>();
+        people = new ArrayList<>();
+        trades = new ArrayList<>();
+        population = 50;
+        popularity = -8;
+        foodRate = -8;
+        taxRate = 0;
+        religionRate = 0;
+        fearRate = 0;
+        Gold = 1000;
+        storage = new Storage();
     }
 
     public int getPopulation() {
@@ -46,6 +58,42 @@ public class Governance {
 
     public int getGold() {
         return Gold;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
+    }
+
+    public void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
+    public void setFoodRate(int foodRate) {
+        this.foodRate = foodRate;
+    }
+
+    public void setTaxRate(int taxRate) {
+        this.taxRate = taxRate;
+    }
+
+    public void setReligionRate(int religionRate) {
+        this.religionRate = religionRate;
+    }
+
+    public void setFearRate(int fearRate) {
+        this.fearRate = fearRate;
+    }
+
+    public void setGold(int gold) {
+        Gold = gold;
+    }
+
+    public void addPeople(MobileUnit mobileUnit) {
+        people.add(mobileUnit);
+    }
+
+    public void addBuilding(Building building) {
+        buildings.add(building);
     }
 
 }

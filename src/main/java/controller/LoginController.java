@@ -33,7 +33,7 @@ public class LoginController {
 
     public void run() {
         currentUser = UserManager.getLoggedInUser();
-        if (currentUser != null){
+        if (currentUser != null) {
             mainController = new MainController(currentUser);
             mainController.run();
         }
