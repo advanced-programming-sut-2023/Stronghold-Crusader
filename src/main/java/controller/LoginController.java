@@ -10,12 +10,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 
 public class LoginController {
+    private final Stronghold stronghold = Stronghold.getInstance();
     public User currentUser = null;
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
-    private final Stronghold stronghold = Stronghold.getInstance();
     private MainController mainController;
     private SignupController signupController;
+
     private void increaseFailedAttempts() {
         failedAttempts++;
         loginTime = LocalDateTime.now().plus(5 * (long) Math.pow(2, failedAttempts - 1), ChronoUnit.SECONDS);
@@ -25,9 +26,11 @@ public class LoginController {
         failedAttempts = 0;
         loginTime = null;
     }
+
     public long getTimeUntilLogin() {
         return LocalDateTime.now().until(this.loginTime, ChronoUnit.SECONDS);
     }
+
     public void run() {
         LoginMenu loginMenu = new LoginMenu(this);
         while (true) {
@@ -45,6 +48,7 @@ public class LoginController {
             }
         }
     }
+
     public SignupAndLoginMessage login(HashMap<String, String> inputs) {
         currentUser = Stronghold.getInstance().getUser(inputs.get("username"));
         if (inputs.get("username") == null || inputs.get("password") == null)
@@ -58,9 +62,11 @@ public class LoginController {
             return SignupAndLoginMessage.INCORRECT_PASSWORD;
         }
         failedAttemptsReset();
+        //TODO I think this is the wrong place to <new MainController>
         mainController = new MainController(currentUser);
         return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
+
     public SignupAndLoginMessage getCurrentUser(String username) {
         currentUser = stronghold.getUser(username);
         if (currentUser == null)

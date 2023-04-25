@@ -35,7 +35,7 @@ public class UserManager {
             mapsDir.mkdir();
         try {
             new File(Settings.USERS_PATH).createNewFile();
-            new File(Settings.LOGGEDIN_USER_PATH).createNewFile();
+            new File(Settings.LOGGED_IN_USER_PATH).createNewFile();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
@@ -60,7 +60,7 @@ public class UserManager {
     public static User getLoggedInUser() {
         Reader reader;
         try {
-            reader = new FileReader(Settings.LOGGEDIN_USER_PATH);
+            reader = new FileReader(Settings.LOGGED_IN_USER_PATH);
             User user = new Gson().fromJson(reader, User.class);
             reader.close();
             return user;
@@ -72,7 +72,7 @@ public class UserManager {
 
     public static void setLoggedInUser(User user) {
         try {
-            FileWriter fileWriter = new FileWriter(Settings.LOGGEDIN_USER_PATH);
+            FileWriter fileWriter = new FileWriter(Settings.LOGGED_IN_USER_PATH);
             fileWriter.write(new Gson().toJson(user));
             fileWriter.close();
         } catch (IOException e) {
