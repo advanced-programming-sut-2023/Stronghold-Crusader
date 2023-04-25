@@ -73,7 +73,7 @@ public class MapMakerController {
     }
 
     public MapMakerMessage setTexture(int x1, int y1, int x2, int y2, CellType texture){
-
+        return null;
     }
 
     //errors for this section : invalid coordinates

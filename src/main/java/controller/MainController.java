@@ -15,8 +15,8 @@ public class MainController {
                 case "logout":
                     return;
                 case "newGame":
-                    GameMakerController gameMakerController = new GameMakerController(currentUser);
-                    gameMakerController.run();
+                    MapSelectController mapSelectController = new MapSelectController(currentUser);
+                    mapSelectController.run();
                     break;
                 case "profileMenu":
                     ProfileController profileController = new ProfileController(currentUser);

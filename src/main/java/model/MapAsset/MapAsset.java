@@ -6,7 +6,7 @@ import utils.Vector2D;
 
 public abstract class MapAsset {
     protected final Vector2D coordinate;
-    protected final Player owner;
+    protected Player owner;
     protected double hitPoint;
     protected double maxHitPoint;
     protected MapAssetType type;
@@ -24,4 +24,15 @@ public abstract class MapAsset {
         this.hitPoint = maxHitPoint;
     }
 
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    public Player getOwner() {
+        return owner;
+    }
+
+    public MapAssetType getType() {
+        return type;
+    }
 }

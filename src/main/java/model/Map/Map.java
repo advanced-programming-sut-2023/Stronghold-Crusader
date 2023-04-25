@@ -10,19 +10,48 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Map {
-    private Cell[][] map;
-    private Vector2D size;
+    private final String name;
+    private final Vector2D size;
     private int playerCount;
+    private Cell[][] map;
 
-    public Map(String fileName, Vector2D size) {
+    public Map(Vector2D size, String name) {
+        this.name = name;
         this.size = size;
-        // initialize map
+        initializeMap();
+    }
+
+    private void initializeMap() {
+        map = new Cell[size.y][size.x];
+        for (int y = 0; y < size.y; y++) {
+            map[y] = new Cell[size.x];
+            for (int x = 0; x < size.x; x++) {
+                map[y][x] = new Cell(new Vector2D(x, y), CellType.FIELD);
+            }
+        }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPlayerCount() {
+        return playerCount;
     }
 
     public void addMapObject(Vector2D coordinate) {
     }
 
     public void removeMapObject() {
+    }
+
+    //only gets called at the end of the game to prepare Map for saving.
+    public void removeNonSavableAssets() {
+        for (Cell[] cells : map) {
+            for (Cell cell : cells) {
+                cell.removeNonSavableAssets();
+            }
+        }
     }
 
     public Collection<MapAsset> getObjectsAt(Vector2D coordinate) {
