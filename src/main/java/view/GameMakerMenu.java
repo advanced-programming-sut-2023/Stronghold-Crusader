@@ -1,7 +1,6 @@
 package view;
 
 import controller.GameMakerController;
-import controller.MainController;
 
 import java.util.Scanner;
 
@@ -11,5 +10,9 @@ public class GameMakerMenu {
     public GameMakerMenu(GameMakerController gameMakerController){
         this.gameMakerController = gameMakerController;
         this.scanner = Menu.getScanner();
+    }
+
+    public String run(){
+        return null;
     }
 }

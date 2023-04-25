@@ -3,6 +3,7 @@ package model.Map;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.MapAsset.MapAsset;
 import model.Player;
+import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -13,11 +14,12 @@ public class Map {
     private Vector2D size;
     private int playerCount;
 
-    public Map(String fileName) {
+    public Map(String fileName, Vector2D size) {
+        this.size = size;
         // initialize map
     }
 
-    public void addMapObject() {
+    public void addMapObject(Vector2D coordinate) {
     }
 
     public void removeMapObject() {
@@ -37,5 +39,8 @@ public class Map {
 
     public ArrayList<Cell> getTraversePath(MobileUnit unit, Vector2D dest) {
         return null;
+    }
+    public void changeCellTypeTo(int x, int y, CellType type){
+        map[y][x].setType(type);
     }
 }
