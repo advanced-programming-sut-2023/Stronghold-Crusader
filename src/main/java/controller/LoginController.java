@@ -2,6 +2,7 @@ package controller;
 
 import model.Stronghold;
 import model.User;
+import model.UserManager;
 import view.LoginMenu;
 import view.enums.messages.SignupAndLoginMessage;
 
@@ -15,7 +16,6 @@ public class LoginController {
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
     private MainController mainController;
-    private SignupController signupController;
 
     private void increaseFailedAttempts() {
         failedAttempts++;
@@ -32,14 +32,18 @@ public class LoginController {
     }
 
     public void run() {
+        currentUser = UserManager.getLoggedInUser();
+        if (currentUser != null) {
+            mainController = new MainController(currentUser);
+            mainController.run();
+        }
         LoginMenu loginMenu = new LoginMenu(this);
         while (true) {
             switch (loginMenu.run()) {
-                //TODO @kian we should type exit to quit, not logout
-                case "logout":
+                case "exit":
                     return;
                 case "signup menu":
-                    signupController = new SignupController();
+                    SignupController signupController = new SignupController();
                     signupController.run();
                     return;
                 case "login":
@@ -62,12 +66,12 @@ public class LoginController {
             return SignupAndLoginMessage.INCORRECT_PASSWORD;
         }
         failedAttemptsReset();
-        //TODO I think this is the wrong place to <new MainController>
+        if (inputs.get("stayLoggedIn") != null) UserManager.setLoggedInUser(currentUser);
         mainController = new MainController(currentUser);
         return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
 
-    public SignupAndLoginMessage getCurrentUser(String username) {
+    public SignupAndLoginMessage checkUserExist(String username) {
         currentUser = stronghold.getUser(username);
         if (currentUser == null)
             return SignupAndLoginMessage.USER_DOES_NOT_EXIST;

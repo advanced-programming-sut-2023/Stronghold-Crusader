@@ -31,8 +31,8 @@ public class LoginMenu {
             }
             matcher = SignupAndLoginCommand.getMatcher(nextCommand, typeOfCommand);
             switch (typeOfCommand) {
-                case LOGOUT:
-                    return "logout";
+                case EXIT:
+                    return "exit";
                 case LOGIN:
                     if (loginCall(matcher)) return "login";
                     break;
@@ -62,7 +62,7 @@ public class LoginMenu {
     }
 
     private void changePasswordCall(Matcher matcher) {
-        SignupAndLoginMessage message = loginController.getCurrentUser(matcher.group("username"));
+        SignupAndLoginMessage message = loginController.checkUserExist(matcher.group("username"));
         message.printMessage();
         String nextCommand = Menu.getScanner().nextLine();
         System.out.println(loginController.currentUser.getPasswordRecoveryQuestion());

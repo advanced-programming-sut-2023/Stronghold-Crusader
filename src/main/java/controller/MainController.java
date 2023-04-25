@@ -1,6 +1,7 @@
 package controller;
 
 import model.User;
+import model.UserManager;
 import view.MainMenu;
 
 public class MainController {
@@ -13,6 +14,7 @@ public class MainController {
         while(true){
             switch (mainMenu.run()){
                 case "logout":
+                    UserManager.setLoggedInUser(null);
                     return;
                 case "newGame":
                     MapSelectController mapSelectController = new MapSelectController(currentUser);
