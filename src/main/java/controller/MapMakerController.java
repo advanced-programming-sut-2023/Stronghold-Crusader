@@ -25,19 +25,19 @@ public class MapMakerController {
     public void run(){
         initiateMap();
         while (true){
-            while (true){
-                switch (mapMakerMenu.run()){
-                    case "back":
-                        return;
-                    case "environment":
-                        runChangeEnvironment();
-                        break;
-                    case "asset":
-                        runAssetPlacement();
-                        break;
+            switch (mapMakerMenu.run()){
+                case "back":
+                    MapLoader.addMap(newMap);
+                    return;
+                case "environment":
+                    runChangeEnvironment();
+                    break;
+                case "asset":
+                    runAssetPlacement();
+                    break;
                 }
             }
-        }
+
     }
 
     public void initiateMap(){

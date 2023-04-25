@@ -5,7 +5,7 @@ public class MapLoader {
         return null;
     }
 
-    public static void addMap(){
+    public static void addMap(Map map){
 
     }
     public static String generateMapAddress(String mapName){
