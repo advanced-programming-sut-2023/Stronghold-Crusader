@@ -7,11 +7,14 @@ import model.MapAsset.Tree;
 import model.User;
 import model.enums.CellType;
 import model.enums.Color;
+import utils.FormatValidation;
 import utils.Vector2D;
 import view.MapMakingMenus.AssetPlacementMenu;
 import view.MapMakingMenus.ChangeEnvironmentMenu;
 import view.MapMakingMenus.MapMakerMenu;
 import view.enums.messages.MapMakerMessage;
+
+import javax.xml.validation.Validator;
 
 public class MapMakerController {
     private User currentUser;
@@ -58,12 +61,19 @@ public class MapMakerController {
     // TODO : complete the functions
 
     //errors for this section : invalid coordinates/existing building beforehand
-    public MapMakerMessage setTexture(int x, int y, CellType texture){
-        return null;
+    public MapMakerMessage setTexture(int x, int y, String textureName){
+        CellType texture = CellType.getType(textureName);
+        Vector2D coordinate = new Vector2D(x, y);
+
+        if(texture == null) return MapMakerMessage.INVALID_TEXTURE_TYPE;
+        if(!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+
+        map.changeCellTypeTo(coordinate, texture);
+        return MapMakerMessage.SET_TEXTURE_SUCCESS;
     }
 
     public MapMakerMessage setTexture(int x1, int y1, int x2, int y2, CellType texture){
-        return null;
+
     }
 
     //errors for this section : invalid coordinates

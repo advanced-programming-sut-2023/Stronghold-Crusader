@@ -40,7 +40,10 @@ public class Map {
     public ArrayList<Cell> getTraversePath(MobileUnit unit, Vector2D dest) {
         return null;
     }
-    public void changeCellTypeTo(int x, int y, CellType type){
-        map[y][x].setType(type);
+    public void changeCellTypeTo(Vector2D coordinate, CellType type){
+        map[coordinate.y][coordinate.x].setType(type);
+    }
+    public boolean isCoordinateValid(Vector2D coordinate){
+        return false;
     }
 }
