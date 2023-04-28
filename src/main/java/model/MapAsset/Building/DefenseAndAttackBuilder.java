@@ -7,13 +7,12 @@ import utils.Vector2D;
 
 public class DefenseAndAttackBuilder {
 
-    public static DefenseAndAttackBuilding createBuilding(Vector2D coordinate, Player owner, MapAssetType type, DefenseAndAttackConstants buildingType) {
-        DefenseAndAttackBuilding building = new DefenseAndAttackBuilding(coordinate, owner, type);
+    public static DefenseAndAttackBuilding createBuilding(Vector2D coordinate, Player owner, DefenseAndAttackConstants buildingType) {
+        DefenseAndAttackBuilding building = new DefenseAndAttackBuilding(coordinate, owner, buildingType.getType());
         setAttrs(building, buildingType);
         return building;
     }
 
-    //TODO change name
     private static void setAttrs(DefenseAndAttackBuilding building, DefenseAndAttackConstants buildingType) {
         building.setDefendRange(buildingType.getDefendRange());
         building.setMaxHitPoint(buildingType.getHitpoint());

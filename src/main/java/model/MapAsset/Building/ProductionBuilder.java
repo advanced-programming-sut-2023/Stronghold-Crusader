@@ -6,13 +6,12 @@ import model.enums.MapAssetType;
 import utils.Vector2D;
 
 public class ProductionBuilder {
-    public static ProductionBuilding createBuilding(Vector2D coordinate, Player owner, MapAssetType type, ProductionConstants buildingType) {
-        ProductionBuilding building = new ProductionBuilding(coordinate, owner, type);
+    public static ProductionBuilding createBuilding(Vector2D coordinate, Player owner, ProductionConstants buildingType) {
+        ProductionBuilding building = new ProductionBuilding(coordinate, owner, buildingType.getType());
         setAttrs(building, buildingType);
         return building;
     }
 
-    //TODO change name
     private static void setAttrs(ProductionBuilding building, ProductionConstants buildingType) {
         building.setProductionCapacity(buildingType.getProductionMaxCapacity());
         building.setMaxHitPoint(buildingType.getHitpoint());

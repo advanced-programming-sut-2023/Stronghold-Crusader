@@ -6,14 +6,13 @@ import utils.Vector2D;
 
 public class MobileUnitBuilder {
 
-    private static MobileUnit creatingMobileUnit(Vector2D coordinate, Player owner, MobileUnitConstants mobileUnitType) {
+    public static MobileUnit creatingMobileUnit(Vector2D coordinate, Player owner, MobileUnitConstants mobileUnitType) {
         MobileUnit mobileObject = new MobileUnit(coordinate, owner, mobileUnitType.getType());
         setAttrs(mobileObject, mobileUnitType);
         return mobileObject;
     }
 
 
-    //TODO change name
     private static void setAttrs(MobileUnit mobileObject, MobileUnitConstants mobileUnitType) {
         mobileObject.setDefenceMultiplier(mobileUnitType.getDefenseMultiplier());
         mobileObject.setEngineersCount(mobileUnitType.getEngineerCount());
