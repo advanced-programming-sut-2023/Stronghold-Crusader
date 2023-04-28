@@ -5,7 +5,7 @@ import model.Player;
 import utils.Vector2D;
 
 public class AttackingUnitBuilder {
-    private static AttackingUnit creatingAttackingUnit(Vector2D coordinate, Player owner, AttackingUnitConstants attackingUnitType) {
+    public static AttackingUnit creatingAttackingUnit(Vector2D coordinate, Player owner, AttackingUnitConstants attackingUnitType) {
         AttackingUnit attackingUnitObject;
         if (attackingUnitType == AttackingUnitConstants.ASSASSIN)
             attackingUnitObject = new Assassin(coordinate, owner, attackingUnitType.getType());
@@ -15,7 +15,6 @@ public class AttackingUnitBuilder {
         return attackingUnitObject;
     }
 
-    //TODO change name
     private static void setAttrs(AttackingUnit attackingUnitObject, AttackingUnitConstants attackingUnitType) {
         attackingUnitObject.setDefenceMultiplier(attackingUnitType.getDefenseMultiplier());
         attackingUnitObject.setEngineersCount(attackingUnitType.getEngineerCount());
