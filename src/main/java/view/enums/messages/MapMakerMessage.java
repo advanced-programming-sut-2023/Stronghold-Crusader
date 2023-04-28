@@ -6,7 +6,12 @@ public enum MapMakerMessage {
     INVALID_COMMAND("invalid command"),
     INVALID_TEXTURE_TYPE("Invalid cell texture type"),
     INVALID_COORDINATE("Coordinate invalid"),
-    SET_TEXTURE_SUCCESS("cell texture changed successfully");
+    INVALID_DIRECTION("Invalid direction"),
+    INVALID_TREE_TYPE("Invalid tree type"),
+    SET_TEXTURE_SUCCESS("cell texture changed successfully"),
+    CLEAR_CELL_SUCCESS("Cell cleared successfully"),
+    DROP_TREE_SUCCESS("Tree dropped successfully"),
+    DROP_ROCK_SUCCESS("");
     private String message;
     private MapMakerMessage(String message){
         this.message = message;

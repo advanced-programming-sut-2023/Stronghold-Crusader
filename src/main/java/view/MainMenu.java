@@ -27,6 +27,8 @@ public class MainMenu {
                     return "profileMenu";
                 case GAME_MAKER_MENU:
                     return "newGame";
+                case BACK:
+                    return "logout";
             }
         }
     }

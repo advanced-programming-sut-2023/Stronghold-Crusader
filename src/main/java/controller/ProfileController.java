@@ -16,7 +16,9 @@ public class ProfileController {
 
     public void run() {
         ProfileMenu profileMenu = new ProfileMenu(this);
-        profileMenu.run();
+        while (true){
+            if(profileMenu.run().equals("mainMenu")) return;
+        }
     }
 
     public ProfileMessage changeUsername(String newUsername) {

@@ -2,19 +2,19 @@ package controller;
 
 import model.Map.Map;
 import model.Map.MapLoader;
+import model.MapAsset.Cliff;
 import model.MapAsset.MapAsset;
 import model.MapAsset.Tree;
 import model.User;
 import model.enums.CellType;
 import model.enums.Color;
-import utils.FormatValidation;
+import model.enums.Direction;
+import model.enums.TreeType;
 import utils.Vector2D;
 import view.MapMakingMenus.AssetPlacementMenu;
 import view.MapMakingMenus.ChangeEnvironmentMenu;
 import view.MapMakingMenus.MapMakerMenu;
 import view.enums.messages.MapMakerMessage;
-
-import javax.xml.validation.Validator;
 
 public class MapMakerController {
     private User currentUser;
@@ -58,7 +58,8 @@ public class MapMakerController {
     }
 
 
-    // TODO : complete the functions
+    // TODO : complete the functions : diba
+    // TODO : test for this section : diba
 
     //errors for this section : invalid coordinates/existing building beforehand
     public MapMakerMessage setTexture(int x, int y, String textureName){
@@ -72,23 +73,53 @@ public class MapMakerController {
         return MapMakerMessage.SET_TEXTURE_SUCCESS;
     }
 
-    public MapMakerMessage setTexture(int x1, int y1, int x2, int y2, CellType texture){
-        return null;
+
+    public MapMakerMessage setTexture(int x1, int y1, int x2, int y2, String textureName){
+        CellType texture = CellType.getType(textureName);
+        if(texture == null) return MapMakerMessage.INVALID_TEXTURE_TYPE;
+        if(!map.isCoordinateValid(new Vector2D(x1, y1))) return MapMakerMessage.INVALID_COORDINATE;
+        if(!map.isCoordinateValid(new Vector2D(x2, y2))) return MapMakerMessage.INVALID_COORDINATE;
+
+        for(int i = x1; i<= x2; i++){
+            for(int j = y1; j<=y2; j++){
+                map.changeCellTypeTo(new Vector2D(i, j), texture);
+            }
+        }
+        return MapMakerMessage.SET_TEXTURE_SUCCESS;
     }
+
 
     //errors for this section : invalid coordinates
     public MapMakerMessage clearCell(int x, int y){
-        return null;
+        Vector2D coordinate = new Vector2D(x, y);
+        if(!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+        map.clearCell(coordinate);
+        return MapMakerMessage.CLEAR_CELL_SUCCESS;
     }
 
-    //errors for this section : invalid coordinates/invalid direction
-    public MapMakerMessage dropRock(int x, int y, String direction){
-        return null;
+
+    //errors for this section : invalid coordinates/invalid direction/Sth already there
+    public MapMakerMessage dropRock(int x, int y, String directionName){
+        Vector2D coordinate = new Vector2D(x, y);
+        Direction direction = Direction.getDirection(directionName);
+
+        if(!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+        if(direction == null) return MapMakerMessage.INVALID_DIRECTION;
+        Cliff cliff = new Cliff(coordinate, null);
+        map.addMapObject(coordinate, cliff);
+        return MapMakerMessage.DROP_ROCK_SUCCESS;
     }
 
-    //errors for this section : invalid coordinates/invalid type/inappropriate TargetCellType
-    public MapMakerMessage dropTree(int x, int y, Tree type){
-        return null;
+    //errors for this section : invalid coordinates/invalid type/inappropriate TargetCellType/
+    public MapMakerMessage dropTree(int x, int y, String typeName){
+        Vector2D coordinate = new Vector2D(x, y);
+        TreeType type = TreeType.getType(typeName);
+        if(type == null) return MapMakerMessage.INVALID_TREE_TYPE;
+        if(!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+
+        Tree tree = new Tree(coordinate, null, type);
+        map.addMapObject(coordinate, tree);
+        return MapMakerMessage.DROP_TREE_SUCCESS;
     }
 
     public MapMakerMessage dropHeadquarters(int x, int y, Color color){

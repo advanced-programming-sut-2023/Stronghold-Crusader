@@ -58,4 +58,12 @@ public class Cell {
     public boolean isTraversable(MobileUnit unit) {
         return false;
     }
+
+    public void clear(){
+
+    }
+
+    public void addMapAsset(MapAsset obj){
+        objects.add(obj);
+    }
 }

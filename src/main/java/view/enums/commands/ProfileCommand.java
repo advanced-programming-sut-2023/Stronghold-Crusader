@@ -13,7 +13,8 @@ public enum ProfileCommand {
     DISPLAY_RANK("\\s*profile\\s+display\\s+rank\\s*"),
     DISPLAY_SLOGAN("\\s*profile\\s+display\\s+slogan\\s*"),
     REMOVE_SLOGAN("\\s*profile\\s+remove\\s+slogan\\s*"),
-    PROFILE_INFO("^\\s*profile\\s+display\\s*$");
+    PROFILE_INFO("^\\s*profile\\s+display\\s*$"),
+    BACK("\\s*back\\s*");
     private String regex;
     ProfileCommand(String regex) {
         this.regex = regex;
