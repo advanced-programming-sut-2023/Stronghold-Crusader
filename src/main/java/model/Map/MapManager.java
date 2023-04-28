@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 @SuppressWarnings("DataFlowIssue")
 public class MapManager {
     public static Map load(String mapId) {
+        // TODO : change mapID to mapName here or give the mapID to user in getMapList : Ayeen
         Reader reader;
         try {
             String fileName = getFilenameFromMapId(mapId);
@@ -63,8 +64,9 @@ public class MapManager {
         return null;
     }
 
-    public static boolean isMapNameTaken(String mapName) {
-        //TODO fix map name repetition checking
+
+    public static boolean isMapIDValid(String MapId){
+        // TODO
         return false;
     }
 }

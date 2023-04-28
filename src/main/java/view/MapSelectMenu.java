@@ -13,9 +13,6 @@ import java.util.regex.Matcher;
 public class MapSelectMenu {
     private MapSelectController mapSelectController;
     private Scanner scanner;
-    private Map selectedMap;
-    private ArrayList<Player> players;
-    private boolean isMapModifiable;
     public MapSelectMenu(MapSelectController mapSelectController){
         this.mapSelectController = mapSelectController;
         this.scanner = Menu.getScanner();
@@ -35,7 +32,18 @@ public class MapSelectMenu {
                 case GET_MAP_LIST:
                     System.out.print(mapSelectController.getMapsList());
                     break;
+                case SELECT_MAP:
+                    runSelectMap(matcher);
+                    break;
+                case PLAYERS_COUNT:
+                    System.out.println(mapSelectController.numberOfPlayers());
+                    break;
             }
         }
+    }
+
+    private void runSelectMap(Matcher matcher){
+        String mapId = matcher.group("mapId");
+        System.out.println(mapSelectController.selectMap(mapId));
     }
 }

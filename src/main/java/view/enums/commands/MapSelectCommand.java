@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MapSelectCommand {
-    GET_MAP_LIST("\\s*show\\s+maps\\s*");
+    GET_MAP_LIST("\\s*show\\s+maps\\s*"),
+    SELECT_MAP("\\s*select\\s+map\\s+-n\\s+(?<mapId>\\S+)\\s*"),
+    PLAYERS_COUNT("\\s*players\\s+count\\s*");
     private String regex;
     MapSelectCommand(String regex){
         this.regex = regex;
