@@ -1,5 +1,3 @@
-package Tests;
-
 import controller.ProfileController;
 import model.Stronghold;
 import model.User;
