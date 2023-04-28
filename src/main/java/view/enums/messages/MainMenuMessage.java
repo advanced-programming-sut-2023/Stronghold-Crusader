@@ -7,7 +7,7 @@ public enum MainMenuMessage {
         this.message = message;
     }
 
-    public void printMessage(MainMenuMessage msg){
+    public static void printMessage(MainMenuMessage msg){
         System.out.println(msg.message);
     }
 }

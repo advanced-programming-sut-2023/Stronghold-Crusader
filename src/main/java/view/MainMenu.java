@@ -2,6 +2,10 @@ package view;
 
 import controller.MainController;
 import view.enums.commands.MainMenuCommand;
+import view.enums.commands.MapSelectCommand;
+import view.enums.messages.MainMenuMessage;
+import view.enums.messages.MapSelectMessage;
+import view.enums.messages.SignupAndLoginMessage;
 
 import java.util.Scanner;
 
@@ -19,7 +23,7 @@ public class MainMenu {
             input = scanner.nextLine();
             MainMenuCommand cmd = MainMenuCommand.getCommand(input);
             if(cmd == null){
-                System.out.println();
+                MainMenuMessage.printMessage(MainMenuMessage.INVALID_COMMAND);
                 continue;
             }
             switch (cmd){
