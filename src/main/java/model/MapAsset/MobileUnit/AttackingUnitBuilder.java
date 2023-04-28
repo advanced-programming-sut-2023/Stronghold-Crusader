@@ -7,32 +7,10 @@ import utils.Vector2D;
 public class AttackingUnitBuilder {
     private static AttackingUnit creatingAttackingUnit(Vector2D coordinate, Player owner, AttackingUnitConstants attackingUnitType) {
         AttackingUnit attackingUnitObject;
-        switch (attackingUnitType) {
-            case ASSASSIN:
-                attackingUnitObject = new Assassin(coordinate, owner, attackingUnitType.getType());
-                break;
-            case FIRE_THROWER:
-                attackingUnitObject = new FireThrower(coordinate, owner, attackingUnitType.getType());
-                break;
-            case CATAPULT:
-                attackingUnitObject = new Catapult(coordinate, owner, attackingUnitType.getType());
-                break;
-            case FIRE_CATAPULT:
-                attackingUnitObject = new FireCatapult(coordinate, owner, attackingUnitType.getType());
-                break;
-            case STABLE_CATAPULT:
-                attackingUnitObject = new StableCatapult(coordinate, owner, attackingUnitType.getType());
-                break;
-            case KNIGHT:
-                attackingUnitObject = new Knight(coordinate, owner, attackingUnitType.getType());
-                break;
-            case HORSE_ARCHER:
-                attackingUnitObject = new HorseArcher(coordinate, owner, attackingUnitType.getType());
-                break;
-            default:
-                attackingUnitObject = new AttackingUnit(coordinate, owner, attackingUnitType.getType());
-                break;
-        }
+        if (attackingUnitType == AttackingUnitConstants.ASSASSIN)
+            attackingUnitObject = new Assassin(coordinate, owner, attackingUnitType.getType());
+        else
+            attackingUnitObject = new AttackingUnit(coordinate, owner, attackingUnitType.getType());
         setAttrs(attackingUnitObject, attackingUnitType);
         return attackingUnitObject;
     }

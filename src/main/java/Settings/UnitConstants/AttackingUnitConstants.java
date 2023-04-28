@@ -10,8 +10,10 @@ public enum AttackingUnitConstants {
     SPEARMAN(1, 5, 0, 600, 100, 1, true, true, MapAssetType.SPEARMAN),
     PIKEMAN(0.6, 3, 0, 1700, 250, 1, false, true, MapAssetType.PIKEMAN),
     MACEMAN(0.8, 6, 0, 1500, 175, 1, true, true, MapAssetType.MACEMAN),
-    KNIGHT(0.5, 10, 0, 2000, 300, 1, false, false, MapAssetType.KNIGHT),
     SWORDSMAN(0.5, 1, 0, 2000, 350, 1, false, false, MapAssetType.SWORDSMAN),
+    KNIGHT(0.5, 10, 0, 2000, 300, 1, false, false, MapAssetType.KNIGHT),
+    //TODO fill this
+    TUNNELER(0, 0, 0, 0, 0, 0, false, false, MapAssetType.TUNNELER),
     BLACK_MONK(1, 3, 0, 500, 50, 1, false, false, MapAssetType.BLACK_MONK),
     //Arabian Units:
     ARCHER_BOW(1, 8, 0, 500, 20, 3, false, true, MapAssetType.ARCHER_BOW),
