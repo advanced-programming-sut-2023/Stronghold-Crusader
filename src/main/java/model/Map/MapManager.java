@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 @SuppressWarnings("DataFlowIssue")
 public class MapManager {
     public static Map load(String mapId) {
-        // TODO : change mapID to mapName here or give the mapID to user in getMapList : Ayeen
         Reader reader;
         try {
             String fileName = getFilenameFromMapId(mapId);
@@ -38,14 +37,18 @@ public class MapManager {
         }
     }
 
-    public static ArrayList<Pair> getMapList() {
-        ArrayList<Pair> list = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> getMapList() {
+        ArrayList<ArrayList<String>> list = new ArrayList<>();
         File mapsDir = new File(Settings.MAPS_PATH);
-        Pattern pattern = Pattern.compile("\\d+_(?<mapName>[\\S ]+)_(?<players>\\d+)\\.map");
+        Pattern pattern = Pattern.compile("(?<mapId>\\d+)_(?<mapName>[\\S ]+)_(?<players>\\d+)\\.map");
         for (String fileName : mapsDir.list()) {
             Matcher matcher = pattern.matcher(fileName);
+            ArrayList<String> mapInfo = new ArrayList<>();
+            mapInfo.add(matcher.group("mapId"));
+            mapInfo.add(matcher.group("mapName"));
+            mapInfo.add(matcher.group("players"));
             if (matcher.matches())
-                list.add(new Pair(matcher.group("mapName"), matcher.group("players")));
+                list.add(mapInfo);
         }
         return list;
     }
@@ -64,9 +67,4 @@ public class MapManager {
         return null;
     }
 
-
-    public static boolean isMapIDValid(String MapId){
-        // TODO
-        return false;
-    }
 }
