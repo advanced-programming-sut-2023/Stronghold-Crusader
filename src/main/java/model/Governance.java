@@ -60,6 +60,10 @@ public class Governance {
         return Gold;
     }
 
+    public Storage getStorage() {
+        return storage;
+    }
+
     public void setPopulation(int population) {
         this.population = population;
     }

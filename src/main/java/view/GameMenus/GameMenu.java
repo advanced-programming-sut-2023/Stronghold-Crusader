@@ -1,6 +1,7 @@
-package view;
+package view.GameMenus;
 
 import controller.GameController;
+import view.Menu;
 import view.enums.commands.GameMenuCommand;
 
 import java.util.Scanner;

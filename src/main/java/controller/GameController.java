@@ -2,7 +2,7 @@ package controller;
 
 import model.Game;
 import model.User;
-import view.GameMenu;
+import view.GameMenus.GameMenu;
 
 public class GameController {
     private User currentUser;

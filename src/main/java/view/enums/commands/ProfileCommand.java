@@ -15,7 +15,7 @@ public enum ProfileCommand {
     REMOVE_SLOGAN("\\s*profile\\s+remove\\s+slogan\\s*"),
     PROFILE_INFO("^\\s*profile\\s+display\\s*$"),
     BACK("\\s*back\\s*");
-    private String regex;
+    private final String regex;
     ProfileCommand(String regex) {
         this.regex = regex;
     }

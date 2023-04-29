@@ -9,6 +9,7 @@ public enum Material {
     CHEESE,
     APPLE,
     WOOD,
+    STONE,
     SPEAL,
     PICK,
     BOW,

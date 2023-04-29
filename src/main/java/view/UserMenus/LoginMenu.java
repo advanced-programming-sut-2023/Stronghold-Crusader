@@ -1,8 +1,9 @@
-package view;
+package view.UserMenus;
 
 import controller.LoginController;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
+import view.Menu;
 import view.enums.commands.SignupAndLoginCommand;
 import view.enums.messages.SignupAndLoginMessage;
 

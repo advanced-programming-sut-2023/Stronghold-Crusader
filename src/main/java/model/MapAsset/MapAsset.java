@@ -35,4 +35,12 @@ public abstract class MapAsset {
     public MapAssetType getType() {
         return type;
     }
+
+    public double getHitPoint() {
+        return hitPoint;
+    }
+
+    public double getMaxHitPoint() {
+        return maxHitPoint;
+    }
 }

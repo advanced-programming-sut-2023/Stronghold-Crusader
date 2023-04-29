@@ -3,7 +3,7 @@ package controller;
 import model.Stronghold;
 import model.User;
 import utils.FormatValidation;
-import view.ProfileMenu;
+import view.UserMenus.ProfileMenu;
 import view.enums.messages.ProfileMessage;
 
 public class ProfileController {

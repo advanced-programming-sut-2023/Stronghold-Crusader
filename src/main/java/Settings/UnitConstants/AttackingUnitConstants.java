@@ -87,4 +87,5 @@ public enum AttackingUnitConstants {
     public MapAssetType getType() {
         return type;
     }
+
 }

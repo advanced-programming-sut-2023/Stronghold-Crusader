@@ -2,7 +2,7 @@ package controller;
 
 import model.User;
 import model.UserManager;
-import view.MainMenu;
+import view.UserMenus.MainMenu;
 
 public class MainController {
     User currentUser;
@@ -24,6 +24,8 @@ public class MainController {
                     ProfileController profileController = new ProfileController(currentUser);
                     profileController.run();
                     break;
+                case "exit":
+                    return;
             }
         }
     }

@@ -1,11 +1,9 @@
-package view;
+package view.UserMenus;
 
 import controller.MainController;
+import view.Menu;
 import view.enums.commands.MainMenuCommand;
-import view.enums.commands.MapSelectCommand;
 import view.enums.messages.MainMenuMessage;
-import view.enums.messages.MapSelectMessage;
-import view.enums.messages.SignupAndLoginMessage;
 
 import java.util.Scanner;
 

@@ -8,7 +8,7 @@ import utils.FormatValidation;
 import utils.Pair;
 import utils.SignupAndLoginUtils;
 import view.Menu;
-import view.SignupMenu;
+import view.UserMenus.SignupMenu;
 import view.enums.messages.SignupAndLoginMessage;
 
 import java.util.HashMap;

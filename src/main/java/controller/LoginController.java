@@ -3,7 +3,7 @@ package controller;
 import model.Stronghold;
 import model.User;
 import model.UserManager;
-import view.LoginMenu;
+import view.UserMenus.LoginMenu;
 import view.enums.messages.SignupAndLoginMessage;
 
 import java.time.LocalDateTime;
