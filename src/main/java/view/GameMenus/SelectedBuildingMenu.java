@@ -3,6 +3,7 @@ package view.GameMenus;
 import controller.SelectedBuildingController;
 import view.Menu;
 import view.enums.commands.SelectedBuildingCommand;
+import view.enums.messages.SelectedBuildingMessage;
 
 import java.util.regex.Matcher;
 
@@ -19,7 +20,7 @@ public class SelectedBuildingMenu {
             nextCommand = Menu.getScanner().nextLine();
             SelectedBuildingCommand typeOfCommand = SelectedBuildingCommand.getCommand(nextCommand);
             if (typeOfCommand == null) {
-             //   SelectedBuildingMessage.INVALID_COMMAND.printMessage();
+                SelectedBuildingMessage.INVALID_COMMAND.printMessage();
                 continue;
             }
             matcher = SelectedBuildingCommand.getMatcher(nextCommand, typeOfCommand);

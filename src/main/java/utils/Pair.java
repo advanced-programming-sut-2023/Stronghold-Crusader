@@ -1,5 +1,7 @@
 package utils;
 
+import model.enums.Material;
+
 public class Pair {
     public String x, y;
 
@@ -10,6 +12,10 @@ public class Pair {
 
     public Pair(String x, int y) {
         this.x = x;
+        this.y = String.valueOf(y);
+    }
+    public Pair(Material material, int y){
+        this.x = material.name();
         this.y = String.valueOf(y);
     }
 

@@ -1,10 +1,9 @@
 package model.Map;
 
-import model.MapAsset.MobileUnit.MobileUnit;
 import model.MapAsset.MapAsset;
+import model.MapAsset.MobileUnit.MobileUnit;
 import model.Player;
 import model.enums.CellType;
-import model.enums.TreeType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -80,5 +79,10 @@ public class Map {
 
     public void clearCell(Vector2D coordinate){
         map[coordinate.y][coordinate.x].clear();
+    }
+
+    //TODO Handle with coordinate
+    public Cell getCell(int x, int y) {
+        return map[x][y];
     }
 }

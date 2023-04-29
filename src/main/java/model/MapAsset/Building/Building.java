@@ -3,9 +3,12 @@ package model.MapAsset.Building;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.Player;
+import utils.Pair;
 import utils.Vector2D;
 
 public class Building extends MapAsset {
+    private Pair neededMaterial;
+
     public Building(Building reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
     }
@@ -14,4 +17,13 @@ public class Building extends MapAsset {
     public void getDamageFrom(AttackingUnit attacker) {
 
     }
+
+    public int getNumberOfMaterialNeeded(){
+        return Integer.parseInt(neededMaterial.y);
+    }
+
+    public void setNeededMaterial(Pair neededMaterial) {
+        this.neededMaterial = neededMaterial;
+    }
+
 }

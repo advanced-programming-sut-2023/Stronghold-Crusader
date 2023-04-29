@@ -6,6 +6,7 @@ import model.MapAsset.MobileUnit.MobileUnit;
 import java.util.ArrayList;
 
 public class Governance {
+    private final Player player;
     private final ArrayList<Building> buildings;
     private final ArrayList<MobileUnit> people;
     private final ArrayList<Trade> trades;
@@ -18,7 +19,8 @@ public class Governance {
     private int Gold;
     private Storage storage;
 
-    Governance() {
+    //TODO Plater ? Governance
+    Governance(Player player) {
         buildings = new ArrayList<>();
         people = new ArrayList<>();
         trades = new ArrayList<>();
@@ -30,6 +32,7 @@ public class Governance {
         fearRate = 0;
         Gold = 1000;
         storage = new Storage();
+        this.player = player;
     }
 
     public int getPopulation() {
@@ -58,6 +61,10 @@ public class Governance {
 
     public int getGold() {
         return Gold;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     public Storage getStorage() {
