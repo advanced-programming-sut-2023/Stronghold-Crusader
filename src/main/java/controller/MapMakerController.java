@@ -8,7 +8,7 @@ import model.MapAsset.Tree;
 import model.User;
 import model.enums.CellType;
 import model.enums.Color;
-import model.enums.Direction;
+import model.enums.CliffDirection;
 import model.enums.TreeType;
 import utils.Vector2D;
 import view.MapMakingMenus.AssetPlacementMenu;
@@ -101,11 +101,11 @@ public class MapMakerController {
     //errors for this section : invalid coordinates/invalid direction/Sth already there
     public MapMakerMessage dropRock(int x, int y, String directionName){
         Vector2D coordinate = new Vector2D(x, y);
-        Direction direction = Direction.getDirection(directionName);
+        CliffDirection cliffDirection = CliffDirection.getDirection(directionName);
 
         if(!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
-        if(direction == null) return MapMakerMessage.INVALID_DIRECTION;
-        Cliff cliff = new Cliff(coordinate, null);
+        if(cliffDirection == null) return MapMakerMessage.INVALID_DIRECTION;
+        Cliff cliff = new Cliff(coordinate, null, cliffDirection);
         map.addMapObject(coordinate, cliff);
         return MapMakerMessage.DROP_ROCK_SUCCESS;
     }

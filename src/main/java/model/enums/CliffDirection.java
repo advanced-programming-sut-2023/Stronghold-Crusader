@@ -1,17 +1,17 @@
 package model.enums;
 
-public enum Direction {
+public enum CliffDirection {
     SOUTH("s"),
     NORTH("n"),
     EAST("e"),
     WEST("w"),
     RANDOM("r");
-    private String name;
-    Direction(String name){
+    private final String name;
+    CliffDirection(String name){
         this.name = name;
     }
-    public static Direction getDirection(String direction){
-        for(Direction d : Direction.values()){
+    public static CliffDirection getDirection(String direction){
+        for(CliffDirection d : CliffDirection.values()){
             if (d.name.equals(direction)) return d;
         }
         return null;

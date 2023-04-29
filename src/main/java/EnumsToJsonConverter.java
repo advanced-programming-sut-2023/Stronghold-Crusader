@@ -4,8 +4,10 @@ import Settings.BuildingConstants.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import model.MapAsset.Cliff;
 import model.MapAsset.MobileUnit.*;
 import model.MapAsset.Building.*;
+import model.MapAsset.Tree;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,6 +23,7 @@ public class EnumsToJsonConverter {
         addProductionBuilding(objectsData);
         addSymbolicBuilding(objectsData);
         addTrainingAndEmploymentBuilding(objectsData);
+        addRemainingAssets(objectsData);
         try {
             FileWriter fileWriter = new FileWriter(Settings.GAME_CONSTANTS_PATH);
             fileWriter.write(new Gson().toJson(objectsData));
@@ -82,5 +85,24 @@ public class EnumsToJsonConverter {
             units.add(gson.toJsonTree(toBeAdded));
         }
         data.add(TrainingAndEmploymentBuilding.class.getName(), gson.toJsonTree(units));
+    }
+
+    private static void addRemainingAssets(JsonObject data){
+        //no source for the constants!
+        Store store = new Store(null, null);
+        store.setMaxHitPoint(0);
+        data.add(Store.class.getName(), gson.toJsonTree(store));
+        OxTether oxTether = new OxTether(null, null);
+        oxTether.setMaxHitPoint(0);
+        data.add(OxTether.class.getName(), gson.toJsonTree(oxTether));
+        Headquarters headquarters = new Headquarters(null, null);
+        headquarters.setMaxHitPoint(0);
+        data.add(Headquarters.class.getName(), gson.toJsonTree(headquarters));
+        Tree tree = new Tree(null, null, null);
+        tree.setMaxHitPoint(0);
+        data.add(Tree.class.getName(), gson.toJsonTree(tree));
+        Cliff cliff = new Cliff(null,null, null);
+        cliff.setMaxHitPoint(0);
+        data.add(Cliff.class.getName(), gson.toJsonTree(cliff));
     }
 }

@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import model.MapAsset.Building.*;
 import model.MapAsset.MobileUnit.*;
+import model.MapAsset.*;
 import model.enums.MapAssetType;
 
 import java.io.FileReader;
@@ -23,10 +24,17 @@ public class ConstantManager {
     private HashMap<MapAssetType, TrainingAndEmploymentBuilding> trainingAndEmploymentBuildings;
     private Store store;
     private OxTether oxTether;
+    private Headquarters headquarters;
+    private Tree tree;
+    private Cliff cliff;
 
     //Mobile units
     private HashMap<MapAssetType, MobileUnit> mobileUnits;
     private HashMap<MapAssetType, AttackingUnit> attackingUnits;
+
+    public static ConstantManager getInstance() {
+        return instance;
+    }
 
     public static void load() {
         if (instance == null)
@@ -34,8 +42,23 @@ public class ConstantManager {
         instance.loadConstants();
     }
 
-    public static ConstantManager getInstance() {
-        return instance;
+    private void loadConstants() {
+        JsonObject data;
+        try {
+            Gson gson = new Gson();
+            Reader reader = new FileReader(Settings.GAME_CONSTANTS_PATH);
+            data = gson.fromJson(reader, JsonObject.class);
+            reader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        fillMobileUnits(data);
+        fillProductionBuildings(data);
+        fillAttackingUnits(data);
+        fillSymbolicBuildings(data);
+        fillTrainingAndEmploymentBuildings(data);
+        fillDefenceAndAttackBuildings(data);
+        fillRemainingAssets(data);
     }
 
     public DefenseAndAttackBuilding getDefenseAndAttackBuilding(MapAssetType type) {
@@ -62,23 +85,26 @@ public class ConstantManager {
         return attackingUnits.get(type);
     }
 
-    private void loadConstants() {
-        JsonObject data;
-        try {
-            Gson gson = new Gson();
-            Reader reader = new FileReader(Settings.GAME_CONSTANTS_PATH);
-            data = gson.fromJson(reader, JsonObject.class);
-            reader.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        fillMobileUnits(data);
-        fillProductionBuildings(data);
-        fillAttackingUnits(data);
-        fillSymbolicBuildings(data);
-        fillTrainingAndEmploymentBuildings(data);
-        fillDefenceAndAttackBuildings(data);
+    public Tree getTree() {
+        return tree;
     }
+
+    public OxTether getOxTether() {
+        return oxTether;
+    }
+
+    public Store getStore() {
+        return store;
+    }
+
+    public Cliff getCliff() {
+        return cliff;
+    }
+
+    public Headquarters getHeadquarters() {
+        return headquarters;
+    }
+
 
     private void fillMobileUnits(JsonObject data) {
         mobileUnits = new HashMap<>();
@@ -132,5 +158,14 @@ public class ConstantManager {
             TrainingAndEmploymentBuilding unit = new Gson().fromJson(unitJson, TrainingAndEmploymentBuilding.class);
             trainingAndEmploymentBuildings.put(unit.getType(), unit);
         }
+    }
+
+    private void fillRemainingAssets(JsonObject data) {
+        Gson gson = new Gson();
+        store = gson.fromJson(data.get(Store.class.getName()), Store.class);
+        oxTether = gson.fromJson(data.get(OxTether.class.getName()), OxTether.class);
+        headquarters = gson.fromJson(data.get(Headquarters.class.getName()), Headquarters.class);
+        tree = gson.fromJson(data.get(Tree.class.getName()), Tree.class);
+        cliff = gson.fromJson(data.get(Cliff.class.getName()), Cliff.class);
     }
 }
