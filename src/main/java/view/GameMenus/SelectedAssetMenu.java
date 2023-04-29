@@ -1,16 +1,16 @@
 package view.GameMenus;
 
-import controller.SelectedBuildingController;
+import controller.GameControllers.SelectedBuildingController;
 import view.Menu;
 import view.enums.commands.SelectedBuildingCommand;
 import view.enums.messages.SelectedBuildingMessage;
 
 import java.util.regex.Matcher;
 
-public class SelectedBuildingMenu {
+public class SelectedAssetMenu {
     private final SelectedBuildingController selectedBuildingController;
 
-    public SelectedBuildingMenu(SelectedBuildingController selectedBuildingController){
+    public SelectedAssetMenu(SelectedBuildingController selectedBuildingController){
         this.selectedBuildingController = selectedBuildingController;
     }
     public void run() {

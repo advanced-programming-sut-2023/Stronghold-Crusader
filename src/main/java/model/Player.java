@@ -6,7 +6,7 @@ public class Player {
     private String nickname;
     private String slogan;
 
-    Player(String username, String nickname, String slogan) {
+    public Player(String username, String nickname, String slogan) {
 
     }
 

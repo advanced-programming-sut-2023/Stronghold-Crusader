@@ -1,12 +1,11 @@
-package controller;
+package controller.MapControllers;
 
 
 import model.Map.Map;
 import model.Map.MapManager;
 import model.Player;
 import model.User;
-import utils.Pair;
-import view.MapSelectMenu;
+import view.MapMenus.MapSelectMenu;
 import view.enums.messages.MapSelectMessage;
 
 import java.util.ArrayList;
@@ -51,7 +50,9 @@ public class MapSelectController {
         return String.valueOf(selectedMap.getPlayerCount());
     }
 
-    public MapSelectMessage addPlayer() {
+    public MapSelectMessage addPlayer(User user) {
+        Player newPlayer = new Player(user.getUsername(), user.getNickname(), user.getSlogan());
         return MapSelectMessage.PLAYER_ADD_SUCCESS;
     }
+
 }

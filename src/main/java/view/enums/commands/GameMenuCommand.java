@@ -4,7 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommand {
-    MODIFY_MAP("");
+    PLACE_BUILDING("^\\s*building\\s+placement\\s*$"),
+    CHANGE_ENVIRONMENT("^\\s*change\\s+environment\\s*$"),
+    TRADE_MENU("^\\s*trade\\s+menu\\s*$"),
+    SHOW_MAP("");
     private String regex;
     GameMenuCommand(String regex) {
         this.regex = regex;

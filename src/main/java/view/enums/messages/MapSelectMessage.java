@@ -7,7 +7,7 @@ public enum MapSelectMessage {
     MAP_NOT_SELECTED("Please first select a map"),
     PLAYER_ADD_SUCCESS("Player added successfully");
     private String message;
-    private MapSelectMessage(String message){
+    MapSelectMessage(String message){
         this.message = message;
     }
     public String getMessage(){

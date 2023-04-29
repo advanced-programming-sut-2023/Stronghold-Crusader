@@ -1,5 +1,6 @@
-package controller;
+package controller.UserControllers;
 
+import controller.UserControllers.LoginController;
 import model.Stronghold;
 import model.User;
 import model.enums.Slogan;

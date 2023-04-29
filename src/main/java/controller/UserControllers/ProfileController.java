@@ -1,4 +1,4 @@
-package controller;
+package controller.UserControllers;
 
 import model.Stronghold;
 import model.User;
@@ -8,7 +8,7 @@ import view.enums.messages.ProfileMessage;
 
 public class ProfileController {
     private User currentUser;
-    private Stronghold stronghold = Stronghold.getInstance();
+    private final Stronghold stronghold = Stronghold.getInstance();
 
     public ProfileController(User currentUser) {
         this.currentUser = currentUser;

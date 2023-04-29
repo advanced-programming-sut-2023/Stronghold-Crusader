@@ -1,6 +1,6 @@
-package view.MapMakingMenus;
+package view.MapMenus;
 
-import controller.MapMakerController;
+import controller.MapControllers.ChangeEnvironmentController;
 import view.Menu;
 import view.enums.commands.MapMakerCommand;
 import view.enums.messages.MapMakerMessage;
@@ -9,9 +9,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class ChangeEnvironmentMenu {
-    private MapMakerController controller;
+    private ChangeEnvironmentController controller;
     private Scanner scanner;
-    public ChangeEnvironmentMenu(MapMakerController controller){
+    public ChangeEnvironmentMenu(ChangeEnvironmentController controller){
         this.scanner = Menu.getScanner();
         this.controller = controller;
     }

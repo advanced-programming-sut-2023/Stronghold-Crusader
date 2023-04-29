@@ -1,11 +1,11 @@
-package controller;
+package controller.GameControllers;
 
 import model.Governance;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
 import model.enums.Material;
-import view.GameMenus.SelectedBuildingMenu;
+import view.GameMenus.SelectedAssetMenu;
 import view.enums.messages.SelectedBuildingMessage;
 
 public class SelectedBuildingController {
@@ -22,7 +22,7 @@ public class SelectedBuildingController {
     }
 
     public void run(){
-        SelectedBuildingMenu selectedBuildingMenu = new SelectedBuildingMenu(this);
+        SelectedAssetMenu selectedAssetMenu = new SelectedAssetMenu(this);
     }
     public SelectedBuildingMessage repair(){
         if (governance.getStorage().getMaterials().get(Material.STONE) < materialNeededForRepair())

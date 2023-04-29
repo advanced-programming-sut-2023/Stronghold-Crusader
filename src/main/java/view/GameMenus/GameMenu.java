@@ -1,6 +1,6 @@
 package view.GameMenus;
 
-import controller.GameController;
+import controller.GameControllers.GameController;
 import view.Menu;
 import view.enums.commands.GameMenuCommand;
 
@@ -24,8 +24,14 @@ public class GameMenu {
                 continue;
             }
             switch (cmd){
-                case MODIFY_MAP:
-                    return "modifyMap";
+                case CHANGE_ENVIRONMENT:
+                    return "changeEnvironment";
+                case PLACE_BUILDING:
+                    return "buildingPlacement";
+                case TRADE_MENU:
+                    return "tradeMenu";
+                case SHOW_MAP:
+                    return "showMap";
             }
         }
     }

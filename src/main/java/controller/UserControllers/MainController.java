@@ -1,5 +1,6 @@
-package controller;
+package controller.UserControllers;
 
+import controller.MapControllers.MapSelectController;
 import model.User;
 import model.UserManager;
 import view.UserMenus.MainMenu;

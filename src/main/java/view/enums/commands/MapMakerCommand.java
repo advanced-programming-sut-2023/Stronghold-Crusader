@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 public enum MapMakerCommand {
     // TODO : add commands
-    CHANGE_ENVIRONMENT(""),
     PLACE_ASSETS(""),
     SET_TEXTURE(""),
     CLEAR_CELL(""),

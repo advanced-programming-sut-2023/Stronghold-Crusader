@@ -1,4 +1,4 @@
-import controller.ProfileController;
+import controller.UserControllers.ProfileController;
 import model.Stronghold;
 import model.User;
 import org.junit.jupiter.api.Assertions;

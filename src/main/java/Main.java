@@ -1,4 +1,4 @@
-import controller.LoginController;
+import controller.UserControllers.LoginController;
 import model.ConstantManager;
 import model.Stronghold;
 

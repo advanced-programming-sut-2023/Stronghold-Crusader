@@ -1,6 +1,6 @@
 package view.UserMenus;
 
-import controller.LoginController;
+import controller.UserControllers.LoginController;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
 import view.Menu;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class LoginMenu {
+public class  LoginMenu {
     private final LoginController loginController;
     private final Scanner scanner;
 

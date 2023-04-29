@@ -1,6 +1,6 @@
 package view.UserMenus;
 
-import controller.MainController;
+import controller.UserControllers.MainController;
 import view.Menu;
 import view.enums.commands.MainMenuCommand;
 import view.enums.messages.MainMenuMessage;

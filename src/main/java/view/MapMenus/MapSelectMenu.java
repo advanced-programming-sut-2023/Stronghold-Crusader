@@ -1,12 +1,10 @@
-package view;
+package view.MapMenus;
 
-import controller.MapSelectController;
-import model.Player;
+import controller.MapControllers.MapSelectController;
+import view.Menu;
 import view.enums.commands.MapSelectCommand;
 import view.enums.messages.MapSelectMessage;
 
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 

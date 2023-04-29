@@ -67,4 +67,8 @@ public class MapManager {
         return null;
     }
 
+    public static boolean isMapIDValid(String mapId){
+        // TODO
+        return false;
+    }
 }

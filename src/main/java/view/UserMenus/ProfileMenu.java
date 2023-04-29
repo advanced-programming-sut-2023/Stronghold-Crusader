@@ -1,6 +1,6 @@
 package view.UserMenus;
 
-import controller.ProfileController;
+import controller.UserControllers.ProfileController;
 import view.Menu;
 import view.enums.commands.ProfileCommand;
 import view.enums.messages.ProfileMessage;

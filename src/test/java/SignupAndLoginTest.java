@@ -1,4 +1,4 @@
-import controller.SignupController;
+import controller.UserControllers.SignupController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import utils.FormatValidation;

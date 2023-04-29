@@ -1,6 +1,6 @@
-package view.MapMakingMenus;
+package view.MapMenus;
 
-import controller.MapMakerController;
+import controller.MapControllers.BuildingPlacementController;
 import view.Menu;
 import view.enums.commands.MapMakerCommand;
 import view.enums.messages.MapMakerMessage;
@@ -8,10 +8,10 @@ import view.enums.messages.MapMakerMessage;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
-public class AssetPlacementMenu {
-    private MapMakerController controller;
+public class BuildingPlacementMenu {
     private Scanner scanner;
-    public AssetPlacementMenu(MapMakerController controller){
+    private BuildingPlacementController controller;
+    public BuildingPlacementMenu(BuildingPlacementController controller){
         this.scanner = Menu.getScanner();
         this.controller = controller;
     }

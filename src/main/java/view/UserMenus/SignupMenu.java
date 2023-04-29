@@ -1,6 +1,6 @@
 package view.UserMenus;
 
-import controller.SignupController;
+import controller.UserControllers.SignupController;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
 import view.Menu;
