@@ -7,57 +7,31 @@ import utils.Vector2D;
 
 import java.util.ArrayList;
 
-public class ProductionBuilding extends Building{
-    private int productionCapacity;
-    private ArrayList<Material> usingMaterial;
-    private ArrayList<Material> producingMaterial;
-    private ArrayList<Integer> rateOfUsage;
-    private ArrayList<Integer> rateOfProduction;
-    private int rateOfProcess;
-    private int inventory;
+public class ProductionBuilding extends Building {
+    private final int productionCapacity;
+    private final ArrayList<Material> usingMaterial;
+    private final ArrayList<Material> producingMaterial;
+    private final ArrayList<Integer> rateOfUsage;
+    private final ArrayList<Integer> rateOfProduction;
+    private final int rateOfProcess;
+    private final int inventory;
 
-    public ProductionBuilding(Vector2D coordinate, Player owner, MapAssetType type) {
-        super(coordinate, owner, type);
+    public ProductionBuilding(ProductionBuilding reference, Vector2D coordinate, Player owner) {
+        super(reference, coordinate, owner);
+        this.productionCapacity = reference.productionCapacity;
+        this.usingMaterial = reference.usingMaterial;
+        this.producingMaterial = reference.producingMaterial;
+        this.rateOfUsage = reference.rateOfUsage;
+        this.rateOfProduction = reference.rateOfProduction;
+        this.rateOfProcess = reference.rateOfProcess;
+        this.inventory = reference.inventory;
     }
 
-    public void produce(){
+    public void produce() {
 
     }
 
-    public void move(){
+    public void move() {
 
-    }
-
-    @Override
-    public void setMaxHitPoint(double maxHitPoint) {
-        super.setMaxHitPoint(maxHitPoint);
-    }
-
-    public void setInventory(int inventory) {
-        this.inventory = inventory;
-    }
-
-    public void setProducingMaterial(ArrayList<Material> producingMaterial) {
-        this.producingMaterial = producingMaterial;
-    }
-
-    public void setProductionCapacity(int productionCapacity) {
-        this.productionCapacity = productionCapacity;
-    }
-
-    public void setRateOfProcess(int rateOfProcess) {
-        this.rateOfProcess = rateOfProcess;
-    }
-
-    public void setRateOfProduction(ArrayList<Integer> rateOfProduction) {
-        this.rateOfProduction = rateOfProduction;
-    }
-
-    public void setRateOfUsage(ArrayList<Integer> rateOfUsage) {
-        this.rateOfUsage = rateOfUsage;
-    }
-
-    public void setUsingMaterial(ArrayList<Material> usingMaterial) {
-        this.usingMaterial = usingMaterial;
     }
 }

@@ -7,19 +7,13 @@ import utils.Vector2D;
 
 import java.util.ArrayList;
 
-public class TrainingAndEmploymentBuilding extends Building{
-    private ArrayList<People> peopleType;
-    private int popularityChangeRate;
+public class TrainingAndEmploymentBuilding extends Building {
+    private final ArrayList<People> peopleType;
+    private final int popularityChangeRate;
 
-    public TrainingAndEmploymentBuilding(Vector2D coordinate, Player owner, MapAssetType type) {
-        super(coordinate, owner, type);
-    }
-
-    public void setPeopleType(ArrayList<People> peopleType) {
-        this.peopleType = peopleType;
-    }
-
-    public void setPopularityChangeRate(int popularityChangeRate) {
-        this.popularityChangeRate = popularityChangeRate;
+    public TrainingAndEmploymentBuilding(TrainingAndEmploymentBuilding reference, Vector2D coordinate, Player owner) {
+        super(reference, coordinate, owner);
+        this.peopleType = reference.peopleType;
+        this.popularityChangeRate = reference.popularityChangeRate;
     }
 }

@@ -16,41 +16,42 @@ public class MapSelectController {
     private Map selectedMap;
     private ArrayList<Player> players;
     private boolean isMapModifiable;
-    public MapSelectController(User currentUser){
+
+    public MapSelectController(User currentUser) {
         this.currentUser = currentUser;
     }
 
-    public void run(){
+    public void run() {
         MapSelectMenu mapSelectMenu = new MapSelectMenu(this);
-        while(true){
-            switch (mapSelectMenu.run()){
+        while (true) {
+            switch (mapSelectMenu.run()) {
 
             }
         }
     }
 
-    public String getMapsList(){
-        ArrayList<Pair> maps = MapManager.getMapList();
+    public String getMapsList() {
+        ArrayList<ArrayList<String>> maps = MapManager.getMapList();
         String output = "";
-        for(Pair map : maps){
-            output += "Map name : " + map.x + " Number of players : " + map.y;
+        for (ArrayList<String> map : maps) {
+            output += "Map id: " + map.get(0) + "Map name : " + map.get(1) + " Number of players : " + map.get(2);
             output += "\n";
         }
         return output;
     }
 
-    public MapSelectMessage selectMap(String mapId){
-        if(!MapManager.isMapIDValid(mapId)) return MapSelectMessage.INVALID_MAP_ID;
+    public MapSelectMessage selectMap(String mapId) {
+        if (!MapManager.isMapIDValid(mapId)) return MapSelectMessage.INVALID_MAP_ID;
         selectedMap = MapManager.load(mapId);
         return MapSelectMessage.MAP_SELECT_SUCCESS;
     }
 
-    public String numberOfPlayers(){
-        if(selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED.getMessage();
+    public String numberOfPlayers() {
+        if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED.getMessage();
         return String.valueOf(selectedMap.getPlayerCount());
     }
 
-    public MapSelectMessage addPlayer(){
+    public MapSelectMessage addPlayer() {
         return MapSelectMessage.PLAYER_ADD_SUCCESS;
     }
 }
