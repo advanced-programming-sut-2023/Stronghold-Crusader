@@ -13,11 +13,6 @@ public class Cliff extends MapAsset {
         this.direction = direction;
     }
 
-    public Cliff(Cliff reference, Vector2D coordinate, Player owner, CliffDirection direction){
-        super(reference, coordinate, owner);
-        this.direction = direction;
-    }
-
     @Override
     public void getDamageFrom(MapAsset attacker) {
 

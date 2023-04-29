@@ -6,19 +6,14 @@ import model.enums.TreeType;
 import utils.Vector2D;
 
 public class Tree extends MapAsset {
-    private final TreeType type;
-    public Tree(Vector2D coordinate, Player owner, TreeType type) {
+    private final TreeType treeType;
+    public Tree(Vector2D coordinate, Player owner, TreeType treeType) {
         super(coordinate, owner, MapAssetType.TREE);
-        this.type = type;
-    }
-
-    public Tree(Tree reference, Vector2D coordinate, Player owner, TreeType type){
-        super(reference, coordinate, owner);
-        this.type = type;
+        this.treeType = treeType;
     }
 
     public TreeType getTreeType() {
-        return type;
+        return treeType;
     }
 
     @Override

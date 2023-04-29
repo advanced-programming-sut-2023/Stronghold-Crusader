@@ -17,13 +17,6 @@ public class MobileUnit extends MapAsset {
         super(coordinate, owner, type);
     }
 
-    public MobileUnit(MobileUnit reference, Vector2D coordinate, Player owner) {
-        super(reference, coordinate, owner);
-        this.moveSpeed = reference.moveSpeed;
-        this.defenceMultiplier = reference.defenceMultiplier;
-        this.engineersCount = reference.engineersCount;
-    }
-
     public void setMoveSpeed(int moveSpeed) {
         this.moveSpeed = moveSpeed;
     }

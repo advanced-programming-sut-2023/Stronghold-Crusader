@@ -19,15 +19,6 @@ public class AttackingUnit extends MobileUnit {
         super(coordinate, owner, type);
     }
 
-    public AttackingUnit(AttackingUnit reference, Vector2D coordinate, Player owner) {
-        super(reference, coordinate, owner);
-        this.attackDamage = reference.attackDamage;
-        this.attackRange = reference.attackRange;
-        this.canClimbLadder = reference.canClimbLadder;
-        this.canModifyMoat = reference.canModifyMoat;
-        this.targets = reference.targets;
-    }
-
     public void setAttackDamage(int attackDamage) {
         this.attackDamage = attackDamage;
     }

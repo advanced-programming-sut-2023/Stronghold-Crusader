@@ -87,8 +87,8 @@ public class EnumsToJsonConverter {
         data.add(TrainingAndEmploymentBuilding.class.getName(), gson.toJsonTree(units));
     }
 
-    private static void addRemainingAssets(JsonObject data){
-        //no source for the constants!
+    private static void addRemainingAssets(JsonObject data) {
+        //TODO no source for these constants!
         Store store = new Store(null, null);
         store.setMaxHitPoint(0);
         data.add(Store.class.getName(), gson.toJsonTree(store));
@@ -101,7 +101,7 @@ public class EnumsToJsonConverter {
         Tree tree = new Tree(null, null, null);
         tree.setMaxHitPoint(0);
         data.add(Tree.class.getName(), gson.toJsonTree(tree));
-        Cliff cliff = new Cliff(null,null, null);
+        Cliff cliff = new Cliff(null, null, null);
         cliff.setMaxHitPoint(0);
         data.add(Cliff.class.getName(), gson.toJsonTree(cliff));
     }
