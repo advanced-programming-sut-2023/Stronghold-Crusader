@@ -4,19 +4,13 @@ import model.Player;
 import model.enums.MapAssetType;
 import utils.Vector2D;
 
-public class SymbolicBuilding extends Building{
-    private int capacityChangeRate;
-    private String changeType;
+public class SymbolicBuilding extends Building {
+    private final int capacityChangeRate;
+    private final String changeType;
 
-    public SymbolicBuilding(Vector2D coordinate, Player owner, MapAssetType type) {
-        super(coordinate, owner, type);
-    }
-
-    public void setCapacityChangeRate(int capacityChangeRate) {
-        this.capacityChangeRate = capacityChangeRate;
-    }
-
-    public void setChangeType(String changeType) {
-        this.changeType = changeType;
+    public SymbolicBuilding(SymbolicBuilding reference, Vector2D coordinate, Player owner) {
+        super(reference, coordinate, owner);
+        this.capacityChangeRate = reference.capacityChangeRate;
+        this.changeType = reference.changeType;
     }
 }

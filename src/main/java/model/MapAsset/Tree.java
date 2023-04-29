@@ -1,28 +1,24 @@
 package model.MapAsset;
 
+import model.MapAsset.MobileUnit.AttackingUnit;
 import model.Player;
-import model.enums.MapAssetType;
 import model.enums.TreeType;
 import utils.Vector2D;
 
 public class Tree extends MapAsset {
-    private final TreeType type;
-    public Tree(Vector2D coordinate, Player owner, TreeType type) {
-        super(coordinate, owner, MapAssetType.TREE);
-        this.type = type;
-    }
+    private final TreeType treeType;
 
-    public Tree(Tree reference, Vector2D coordinate, Player owner, TreeType type){
+    public Tree(Tree reference, Vector2D coordinate, Player owner, TreeType treeType) {
         super(reference, coordinate, owner);
-        this.type = type;
+        this.treeType = treeType;
     }
 
     public TreeType getTreeType() {
-        return type;
+        return treeType;
     }
 
     @Override
-    public void getDamageFrom(MapAsset attacker) {
+    public void getDamageFrom(AttackingUnit attacker) {
 
     }
 }

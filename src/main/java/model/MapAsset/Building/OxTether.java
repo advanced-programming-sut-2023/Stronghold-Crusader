@@ -5,7 +5,7 @@ import model.enums.MapAssetType;
 import utils.Vector2D;
 
 public class OxTether extends Building {
-    public OxTether(Vector2D coordinate, Player owner) {
-        super(coordinate, owner, MapAssetType.OX_TETHER);
+    public OxTether(OxTether reference, Vector2D coordinate, Player owner) {
+        super(reference, coordinate, owner);
     }
 }
