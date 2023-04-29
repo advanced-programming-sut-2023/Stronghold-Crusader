@@ -17,6 +17,12 @@ public abstract class MapAsset {
         this.type = type;
     }
 
+    public MapAsset(MapAsset reference, Vector2D coordinate, Player owner) {
+        this.coordinate = coordinate;
+        this.owner = owner;
+        this.type = reference.type;
+    }
+
     public abstract void getDamageFrom(MapAsset attacker);
 
     public void setMaxHitPoint(double maxHitPoint) {
@@ -24,12 +30,12 @@ public abstract class MapAsset {
         this.hitPoint = maxHitPoint;
     }
 
-    public void setOwner(Player owner) {
-        this.owner = owner;
-    }
-
     public Player getOwner() {
         return owner;
+    }
+
+    public void setOwner(Player owner) {
+        this.owner = owner;
     }
 
     public MapAssetType getType() {

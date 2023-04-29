@@ -14,7 +14,14 @@ public class MobileUnit extends MapAsset {
     private int engineersCount;
 
     public MobileUnit(Vector2D coordinate, Player owner, MapAssetType type) {
-        super(coordinate, owner, type );
+        super(coordinate, owner, type);
+    }
+
+    public MobileUnit(MobileUnit reference, Vector2D coordinate, Player owner) {
+        super(reference, coordinate, owner);
+        this.moveSpeed = reference.moveSpeed;
+        this.defenceMultiplier = reference.defenceMultiplier;
+        this.engineersCount = reference.engineersCount;
     }
 
     public void setMoveSpeed(int moveSpeed) {

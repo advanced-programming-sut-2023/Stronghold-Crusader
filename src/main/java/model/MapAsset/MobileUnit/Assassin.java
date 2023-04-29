@@ -11,6 +11,9 @@ public class Assassin extends AttackingUnit {
         super(coordinate, owner, type);
     }
 
+    public Assassin(Assassin reference, Vector2D coordinate, Player owner) {
+        super(reference, coordinate, owner);
+    }
 
     public void setInvisibility(boolean invisibility) {
         this.invisibility = invisibility;

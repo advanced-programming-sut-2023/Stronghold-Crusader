@@ -19,9 +19,13 @@ public class AttackingUnit extends MobileUnit {
         super(coordinate, owner, type);
     }
 
-    @Override
-    public void getDamageFrom(MapAsset attacker) {
-        super.getDamageFrom(attacker);
+    public AttackingUnit(AttackingUnit reference, Vector2D coordinate, Player owner) {
+        super(reference, coordinate, owner);
+        this.attackDamage = reference.attackDamage;
+        this.attackRange = reference.attackRange;
+        this.canClimbLadder = reference.canClimbLadder;
+        this.canModifyMoat = reference.canModifyMoat;
+        this.targets = reference.targets;
     }
 
     public void setAttackDamage(int attackDamage) {
@@ -43,9 +47,6 @@ public class AttackingUnit extends MobileUnit {
     public void setTargets(HashMap<AttackTarget, Boolean> targets) {
         this.targets = targets;
     }
-
-
-
 
     public void attack() {
     }
