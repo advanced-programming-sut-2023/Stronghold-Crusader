@@ -27,12 +27,18 @@ public class SelectedAssetMenu {
             switch (typeOfCommand) {
                 case REPAIR:
                  runRepair();
+                 break;
+                case INFO:
+                    System.out.println(selectedBuildingController.showInfo());
+                    break;
+                case DELETE:
+                    runDelete();
+                    return;
             }
         }
     }
 
-    private void runRepair(){
-        System.out.println(selectedBuildingController.repair().getMessage());
-    }
+    private void runRepair(){System.out.println(selectedBuildingController.repair().getMessage());}
+    private void runDelete(){}
 }
 

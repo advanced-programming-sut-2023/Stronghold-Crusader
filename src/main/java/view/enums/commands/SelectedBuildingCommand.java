@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SelectedBuildingCommand {
-    REPAIR("\\s*repair\\s*");
+    REPAIR("\\s*repair\\s*"),
+    INFO("\\s*info\\s*"),
+    DELETE("\\s*delete\\s*");
 
     private final String regex;
 

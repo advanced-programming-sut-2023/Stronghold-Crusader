@@ -1,9 +1,7 @@
 package model.Map;
 
-import model.MapAsset.Cliff;
-import model.MapAsset.MobileUnit.MobileUnit;
 import model.MapAsset.MapAsset;
-import model.MapAsset.Tree;
+import model.MapAsset.MobileUnit.MobileUnit;
 import model.Player;
 import model.enums.CellType;
 import model.enums.MapAssetType;
@@ -65,6 +63,13 @@ public class Cell {
 
     public void addMapAsset(MapAsset obj){
         objects.add(obj);
+    }
+    public void removeMapAsset(MapAsset obj){objects.remove(obj);}
+    public boolean isThereUnit(){
+        for (MapAsset mapAsset: objects) {
+            if (mapAsset instanceof MobileUnit) return true;
+        }
+        return false;
     }
 
     public boolean isEmpty(){

@@ -1,7 +1,7 @@
 package model;
 
 public class Player {
-    public Governance governace;
+    public Governance governance;
     private String username;
     private String nickname;
     private String slogan;

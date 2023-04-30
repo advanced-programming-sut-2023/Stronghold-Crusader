@@ -26,4 +26,15 @@ public class Building extends MapAsset {
         this.neededMaterial = neededMaterial;
     }
 
+    @Override
+    public String toString() {
+        return "Building{" +
+                "neededMaterial=" + neededMaterial +
+                ", coordinate=" + coordinate +
+                ", maxHitPoint=" + maxHitPoint +
+                ", type=" + type +
+                ", owner=" + owner +
+                ", hitPoint=" + hitPoint +
+                '}';
+    }
 }
