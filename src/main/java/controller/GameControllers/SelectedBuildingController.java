@@ -2,6 +2,7 @@ package controller.GameControllers;
 
 import model.Map.Map;
 import model.MapAsset.Building.Building;
+import model.MapAsset.Building.ProductionBuilding;
 import model.MapAsset.MapAsset;
 import model.Player;
 import utils.Vector2D;
@@ -12,15 +13,12 @@ public class SelectedBuildingController {
     private final Building building;
     private final Player player;
     private final Map map;
-    private final int x, y;
     private final Vector2D coordinate;
 
     public SelectedBuildingController(Building building, Player player, Map map, int x, int y) {
         this.building = building;
         this.player = player;
         this.map = map;
-        this.x = x;
-        this.y = y;
         coordinate = new Vector2D(x, y);
     }
 
@@ -50,6 +48,16 @@ public class SelectedBuildingController {
         map.getCell(coordinate).removeMapAsset(building);
         player.governance.removeBuilding(building);
         return SelectedBuildingMessage.DELETED_BUILDING;
+    }
+
+    public SelectedBuildingMessage stopProduction() {
+        if (!(building instanceof ProductionBuilding))
+            return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
+
+        ((ProductionBuilding) building).changeProductionMode();
+        if (((ProductionBuilding) building).isProduce())
+            return SelectedBuildingMessage.RESUME_PRODUCTION;
+        else return SelectedBuildingMessage.STOP_PRODUCTION;
     }
 
     private int materialNeededForRepair() {

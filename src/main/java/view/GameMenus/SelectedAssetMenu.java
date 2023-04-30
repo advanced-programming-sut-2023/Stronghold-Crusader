@@ -31,6 +31,8 @@ public class SelectedAssetMenu {
                 case INFO:
                     System.out.println(selectedBuildingController.showInfo());
                     break;
+                case STOP_PRODUCTION:
+                    runStopProduction();
                 case DELETE:
                     runDelete();
                     return;
@@ -39,6 +41,7 @@ public class SelectedAssetMenu {
     }
 
     private void runRepair(){System.out.println(selectedBuildingController.repair().getMessage());}
-    private void runDelete(){}
+    private void runDelete(){System.out.println(selectedBuildingController.deleteBuilding().getMessage());}
+    private void runStopProduction(){}
 }
 
