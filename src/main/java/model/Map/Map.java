@@ -82,7 +82,7 @@ public class Map {
     }
 
     //TODO Handle with coordinate
-    public Cell getCell(int x, int y) {
-        return map[x][y];
+    public Cell getCell(Vector2D coordinate) {
+        return map[coordinate.y][coordinate.x];
     }
 }

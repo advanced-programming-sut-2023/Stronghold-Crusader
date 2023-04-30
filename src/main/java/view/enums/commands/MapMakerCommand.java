@@ -6,11 +6,11 @@ import java.util.regex.Pattern;
 public enum MapMakerCommand {
     // TODO : add commands
     PLACE_ASSETS(""),
-    SET_TEXTURE(""),
-    CLEAR_CELL(""),
-    DROP_ROCK(""),
-    DROP_TREE(""),
-    DROP_HEADQUARTERS(""),
+    SET_TEXTURE("^\\s*settexture\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*$"),
+    CLEAR_CELL("^\\s*clear\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)"),
+    DROP_ROCK("^\\s*droprock\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-d\\s+(?<direction>\\S+)\\s*$"),
+    DROP_TREE("^\\s*droptree\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*$"),
+    DROP_HEADQUARTERS("^\\s*dropheadquarter\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<color>\\S+)\\s*$"),
     DROP_BUILDING(""),
     DROP_UNIT(""),
     BACK("");

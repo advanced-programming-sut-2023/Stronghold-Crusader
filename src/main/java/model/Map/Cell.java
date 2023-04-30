@@ -66,4 +66,8 @@ public class Cell {
     public void addMapAsset(MapAsset obj){
         objects.add(obj);
     }
+
+    public boolean isEmpty(){
+        return objects.isEmpty();
+    }
 }

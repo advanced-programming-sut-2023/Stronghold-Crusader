@@ -21,14 +21,14 @@ public class ChangeEnvironmentMenu {
         while (true){
             input = scanner.nextLine();
             MapMakerCommand cmd = MapMakerCommand.getCommand(input);
-            if(input == null){
+            if(cmd == null){
                 MapMakerMessage.printMessage(MapMakerMessage.INVALID_COMMAND);
                 continue;
             }
             Matcher matcher = MapMakerCommand.getMatcher(input, cmd);
             switch (cmd){
                 case SET_TEXTURE:
-                    runSetTeture(matcher);
+                    runSetTexture(matcher);
                     break;
                 case DROP_ROCK:
                     runDropRock(matcher);
@@ -38,6 +38,9 @@ public class ChangeEnvironmentMenu {
                     break;
                 case CLEAR_CELL:
                     runClearCell(matcher);
+                    break;
+                case DROP_HEADQUARTERS:
+                    runDropHeadquarter(matcher);
                     break;
                 case BACK:
                     return "back";
@@ -49,17 +52,34 @@ public class ChangeEnvironmentMenu {
     }
 
     // TODO : handle command and inputs
-    private void runSetTeture(Matcher matcher){
-
+    private void runSetTexture(Matcher matcher){
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String type = matcher.group("type");
+        MapMakerMessage.printMessage(controller.setTexture(x, y, type));
     }
     private void runDropTree(Matcher matcher){
-
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String type = matcher.group("type");
+        MapMakerMessage.printMessage((controller.dropTree(x, y, type)));
     }
     private void runDropRock(Matcher matcher){
-
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String direction = matcher.group("direction");
+        MapMakerMessage.printMessage((controller.dropRock(x, y, direction)));
     }
     private void runClearCell(Matcher matcher){
-
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        MapMakerMessage.printMessage((controller.clearCell(x, y)));
     }
 
+    private void runDropHeadquarter(Matcher matcher){
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String color = matcher.group("color");
+        MapMakerMessage.printMessage(controller.dropHeadquarters(x, y, color));
+    }
 }
