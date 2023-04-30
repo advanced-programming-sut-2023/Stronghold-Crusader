@@ -3,6 +3,7 @@ package model.MapAsset.Building;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.Player;
+import model.enums.Material;
 import utils.Pair;
 import utils.Vector2D;
 
@@ -20,6 +21,12 @@ public class Building extends MapAsset {
 
     public int getNumberOfMaterialNeeded(){
         return Integer.parseInt(neededMaterial.y);
+    }
+    public Material getNeededMaterial(){
+        return Material.valueOf(neededMaterial.x);
+    }
+    public void repair(){
+        hitPoint = maxHitPoint;
     }
 
     public void setNeededMaterial(Pair neededMaterial) {

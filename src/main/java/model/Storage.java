@@ -54,6 +54,9 @@ public class Storage {
             materials.put(material, 0);
         else materials.replace(material, materials.get(material), materials.get(material) + 1);
     }
+    public void reduceMaterial(Material material,int number){
+        materials.replace(material, materials.get(material) - number);
+    }
 
     public void setArmourCapacity(int armourCapacity) {
         ArmourCapacity = armourCapacity;
