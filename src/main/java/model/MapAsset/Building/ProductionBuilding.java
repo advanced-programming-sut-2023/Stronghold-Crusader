@@ -1,7 +1,6 @@
 package model.MapAsset.Building;
 
 import model.Player;
-import model.enums.MapAssetType;
 import model.enums.Material;
 import utils.Vector2D;
 
@@ -15,6 +14,7 @@ public class ProductionBuilding extends Building {
     private final ArrayList<Integer> rateOfProduction;
     private final int rateOfProcess;
     private final int inventory;
+    private boolean productionMode;
 
     public ProductionBuilding(ProductionBuilding reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
@@ -25,6 +25,14 @@ public class ProductionBuilding extends Building {
         this.rateOfProduction = reference.rateOfProduction;
         this.rateOfProcess = reference.rateOfProcess;
         this.inventory = reference.inventory;
+        this.productionMode = true;
+    }
+    public void changeProductionMode(){
+        productionMode = !productionMode;
+    }
+
+    public boolean isProduce() {
+        return productionMode;
     }
 
     public void produce() {
@@ -34,4 +42,5 @@ public class ProductionBuilding extends Building {
     public void move() {
 
     }
+
 }

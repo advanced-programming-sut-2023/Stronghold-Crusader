@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 public enum SelectedBuildingCommand {
     REPAIR("\\s*repair\\s*"),
     INFO("\\s*info\\s*"),
+    STOP_PRODUCTION("\\s*stop\\s+production\\s*"),
+    RESUME_PRODUCTION("\\s*resume\\s+production\\s*"),
     DELETE("\\s*delete\\s*");
 
     private final String regex;

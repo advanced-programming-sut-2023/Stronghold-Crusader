@@ -6,6 +6,9 @@ public enum SelectedBuildingMessage{
     SUCCESS_REPAIR("The building has been repaired"),
     DELETED_BUILDING("The building was successfully deleted"),
     NOT_ALLOWED_TO_DELETE("Clearing the building is not allowed"),
+    STOP_PRODUCTION("Production stopped"),
+    RESUME_PRODUCTION("Production resumes"),
+    INVALID_COMMAND_FOR_BUILDING("this command is not allowed here"),
     INVALID_COMMAND("invalid command");
 
     SelectedBuildingMessage(String message){
