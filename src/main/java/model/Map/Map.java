@@ -39,6 +39,10 @@ public class Map {
         return playerCount;
     }
 
+    public Vector2D getSize() {
+        return size;
+    }
+
     public void addMapObject(Vector2D coordinate, MapAsset obj) {
         map[coordinate.y][coordinate.x].addMapAsset(obj);
     }

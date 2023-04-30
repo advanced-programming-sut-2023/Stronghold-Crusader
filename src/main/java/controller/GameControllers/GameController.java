@@ -5,19 +5,21 @@ import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
 import model.Game;
 import model.User;
+import utils.Vector2D;
 import view.GameMenus.GameMenu;
 
 public class GameController {
     private User currentUser;
     private Game game;
-    public GameController(User currentUser){
+
+    public GameController(User currentUser) {
         this.currentUser = currentUser;
     }
 
-    public void run(){
+    public void run() {
         GameMenu gameMenu = new GameMenu(this);
-        while(true){
-            switch (gameMenu.run()){
+        while (true) {
+            switch (gameMenu.run()) {
                 case "changeEnvironment":
                     ChangeEnvironmentController environmentController = new ChangeEnvironmentController(game.getMap());
                     environmentController.run();
@@ -31,7 +33,11 @@ public class GameController {
                     tradeController.run();
                     break;
                 case "showMap":
-                    ShowMapController showMapController = new ShowMapController(currentUser);
+                    //TODO this command takes a center coordinate variable and should get passed to the constructor
+                    //the center coordinate should be within map range otherwise don't run these
+                    //for validating the map range call ShowMapController.isCenterValid()
+                    ShowMapController showMapController = new ShowMapController(
+                            game.getMap(), new Vector2D(0, 0));
                     showMapController.run();
                     break;
             }

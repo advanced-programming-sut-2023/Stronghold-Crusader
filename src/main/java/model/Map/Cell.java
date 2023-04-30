@@ -13,18 +13,18 @@ import java.util.Collection;
 public class Cell {
     private final Vector2D coordinate;
     private CellType type;
-    private ArrayList<MapAsset> objects;
+    private ArrayList<MapAsset> assets;
 
     public Cell(Vector2D coordinate, CellType type) {
         this.coordinate = coordinate;
         this.type = type;
     }
 
-    public Collection<MapAsset> getAllObjects() {
+    public Collection<MapAsset> getAllAssets() {
         return null;
     }
 
-    public Collection<MapAsset> getPlayersObjects(Player player) {
+    public Collection<MapAsset> getAllAssets(Player player) {
         return null;
     }
 
@@ -43,14 +43,14 @@ public class Cell {
     //only gets called at the end of the game to prepare Map for saving.
     public void removeNonSavableAssets(){
         ArrayList<MapAsset> newObjects = new ArrayList<>();
-        for (MapAsset asset : objects) {
+        for (MapAsset asset : assets) {
             MapAssetType type = asset.getType();
             if(type == MapAssetType.TREE || type == MapAssetType.CLIFF || type == MapAssetType.HEADQUARTER){
                 asset.setOwner(null);
                 newObjects.add(asset);
             }
         }
-        objects = newObjects;
+        assets = newObjects;
     }
 
     public boolean isTraversable(MobileUnit unit) {
@@ -62,17 +62,18 @@ public class Cell {
     }
 
     public void addMapAsset(MapAsset obj){
-        objects.add(obj);
+        assets.add(obj);
     }
-    public void removeMapAsset(MapAsset obj){objects.remove(obj);}
+    public void removeMapAsset(MapAsset obj){
+        assets.remove(obj);}
     public boolean isThereUnit(){
-        for (MapAsset mapAsset: objects) {
+        for (MapAsset mapAsset: assets) {
             if (mapAsset instanceof MobileUnit) return true;
         }
         return false;
     }
 
     public boolean isEmpty(){
-        return objects.isEmpty();
+        return assets.isEmpty();
     }
 }

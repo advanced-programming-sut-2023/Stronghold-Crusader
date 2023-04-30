@@ -1,8 +1,10 @@
 package view.enums.messages;
 
 public enum ShowMapMessage {
-    INVALID_COMMAND("invalid command"),
-    ;
+    MOVE_SUCCESSFUL("moved successfully"),
+    TARGET_OUT_OF_RANGE("target coordinate is out of range"),
+    INVALID_MOVE_COMMAND("invalid map move command"),
+    INVALID_COMMAND("invalid command");
     private final String message;
 
     private ShowMapMessage(String message) {

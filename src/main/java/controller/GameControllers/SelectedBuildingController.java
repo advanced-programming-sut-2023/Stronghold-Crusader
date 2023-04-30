@@ -59,7 +59,7 @@ public class SelectedBuildingController {
 
     //TODO Find nearby Cells
     private boolean isThereEnemy() {
-        for (MapAsset mapAsset : map.getCell(coordinate).getAllObjects()) {
+        for (MapAsset mapAsset : map.getCell(coordinate).getAllAssets()) {
             if (!mapAsset.getOwner().equals(player)) return true;
         }
         return false;
