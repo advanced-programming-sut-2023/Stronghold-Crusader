@@ -81,7 +81,6 @@ public class Map {
         map[coordinate.y][coordinate.x].clear();
     }
 
-    //TODO Handle with coordinate
     public Cell getCell(Vector2D coordinate) {
         return map[coordinate.y][coordinate.x];
     }
