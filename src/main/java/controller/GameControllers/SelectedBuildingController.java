@@ -14,7 +14,7 @@ import model.enums.Weapon;
 import utils.SignupAndLoginUtils;
 import utils.Vector2D;
 import view.GameMenus.SelectedAssetMenu;
-import view.enums.messages.SelectedBuildingMessage;
+import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.HashMap;
 

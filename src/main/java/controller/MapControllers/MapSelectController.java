@@ -11,7 +11,7 @@ import model.User;
 import model.enums.Color;
 import utils.FormatValidation;
 import view.MapMenus.MapSelectMenu;
-import view.enums.messages.MapSelectMessage;
+import view.enums.messages.MapMessage.MapSelectMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ public class MapSelectController {
         while (true) {
             if (mapSelectMenu.run().equals("newGame")) {
                 GameController gameController = new GameController(currentUser, newGame);
-                if(gameController.run().equals("gameEnd")) return;
+                if(gameController.run().equals("endGame")) return;
             }
         }
     }

@@ -4,7 +4,7 @@ import model.Stronghold;
 import model.User;
 import utils.FormatValidation;
 import view.UserMenus.ProfileMenu;
-import view.enums.messages.ProfileMessage;
+import view.enums.messages.UserCommand.ProfileMessage;
 
 public class ProfileController {
     private User currentUser;

@@ -4,8 +4,8 @@ import controller.UserControllers.LoginController;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
 import view.Menu;
-import view.enums.commands.SignupAndLoginCommand;
-import view.enums.messages.SignupAndLoginMessage;
+import view.enums.commands.UserCommand.SignupAndLoginCommand;
+import view.enums.messages.UserCommand.SignupAndLoginMessage;
 
 import java.util.HashMap;
 import java.util.Scanner;

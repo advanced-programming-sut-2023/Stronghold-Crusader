@@ -11,7 +11,7 @@ import model.MapAsset.Tree;
 import model.enums.CellType;
 import utils.Vector2D;
 import view.MapMenus.ShowMapMenu;
-import view.enums.messages.ShowMapMessage;
+import view.enums.messages.MapMessage.ShowMapMessage;
 
 public class ShowMapController {
     private final Map map;

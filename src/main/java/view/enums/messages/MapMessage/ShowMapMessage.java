@@ -1,4 +1,4 @@
-package view.enums.messages;
+package view.enums.messages.MapMessage;
 
 public enum ShowMapMessage {
     COORDINATE_OUT_OF_RANGE("cell coordinate is out of range"),

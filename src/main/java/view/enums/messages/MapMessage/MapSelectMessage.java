@@ -1,4 +1,4 @@
-package view.enums.messages;
+package view.enums.messages.MapMessage;
 
 public enum MapSelectMessage {
     INVALID_COMMAND("invalid command"),

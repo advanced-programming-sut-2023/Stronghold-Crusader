@@ -3,8 +3,8 @@ package view.GameMenus;
 import controller.GameControllers.SelectedBuildingController;
 import utils.SignupAndLoginUtils;
 import view.Menu;
-import view.enums.commands.SelectedBuildingCommand;
-import view.enums.messages.SelectedBuildingMessage;
+import view.enums.commands.GameCommand.SelectedBuildingCommand;
+import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;

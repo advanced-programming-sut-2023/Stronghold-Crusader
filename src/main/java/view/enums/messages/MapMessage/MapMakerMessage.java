@@ -1,4 +1,4 @@
-package view.enums.messages;
+package view.enums.messages.MapMessage;
 
 public enum MapMakerMessage {
     CHOOSE_MAP_NAME("Please choose a name for your map"),
@@ -14,7 +14,8 @@ public enum MapMakerMessage {
     DROP_ROCK_SUCCESS("Cliff dropped successfully"),
     INVALID_COLOR_NAME("Invalid color name"),
     NOT_EMPTY("Target cell is not empty"),
-    DROP_HEADQUARTER_SUCCESS("Headquarter dropped successfully");
+    DROP_HEADQUARTER_SUCCESS("Headquarter dropped successfully"),
+    INVALID_BUILDING_TYPE("Invalid building type");
     private String message;
     private MapMakerMessage(String message){
         this.message = message;

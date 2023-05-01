@@ -1,4 +1,4 @@
-package view.enums.messages;
+package view.enums.messages.UserCommand;
 
 public enum MainMenuMessage {
     INVALID_COMMAND("invalid command");

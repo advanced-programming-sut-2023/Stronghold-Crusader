@@ -3,9 +3,9 @@ package view.MapMenus;
 import controller.MapControllers.ShowMapController;
 import utils.Vector2D;
 import view.Menu;
-import view.enums.commands.ShowMapCommand;
-import view.enums.messages.ProfileMessage;
-import view.enums.messages.ShowMapMessage;
+import view.enums.commands.MapCommand.ShowMapCommand;
+import view.enums.messages.UserCommand.ProfileMessage;
+import view.enums.messages.MapMessage.ShowMapMessage;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

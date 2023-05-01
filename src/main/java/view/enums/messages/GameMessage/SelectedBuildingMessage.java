@@ -1,4 +1,4 @@
-package view.enums.messages;
+package view.enums.messages.GameMessage;
 
 public enum SelectedBuildingMessage {
     MATERIAL_NEEDED("material is needed"),

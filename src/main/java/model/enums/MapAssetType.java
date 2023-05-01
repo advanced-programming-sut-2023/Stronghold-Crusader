@@ -1,5 +1,7 @@
 package model.enums;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("SpellCheckingInspection")
 public enum MapAssetType {
     //Buildings
@@ -14,7 +16,12 @@ public enum MapAssetType {
     BATTERING_RAM, CATAPULT, STABLE_CATAPULT, FIRE_CATAPULT, SIEGE_TOWER, MOBILE_SHIELD,
     DOG, COW,
     //Nature objects
-    TREE, CLIFF
+    TREE, CLIFF;
 
-
+    public static MapAssetType getMapAssetType(String typeName) {
+        for (MapAssetType type : MapAssetType.values()) {
+            if (type.name().toLowerCase().equals(typeName)) return type;
+        }
+        return null;
+    }
 }

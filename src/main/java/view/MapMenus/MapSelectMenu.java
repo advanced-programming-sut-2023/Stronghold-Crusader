@@ -2,8 +2,8 @@ package view.MapMenus;
 
 import controller.MapControllers.MapSelectController;
 import view.Menu;
-import view.enums.commands.MapSelectCommand;
-import view.enums.messages.MapSelectMessage;
+import view.enums.commands.MapCommand.MapSelectCommand;
+import view.enums.messages.MapMessage.MapSelectMessage;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -43,7 +43,9 @@ public class MapSelectMenu {
                     runMapModifiability(matcher);
                     break;
                 case START_GAME:
-                    if(runMapModifiability(matcher)) return "startGame";
+                    MapSelectMessage msg = mapSelectController.startGame();
+                    MapSelectMessage.printMessage(msg);
+                    if(msg.equals(MapSelectMessage.GAME_CREATION_SUCCESS)) return "startGame";
                     break;
             }
         }
@@ -60,10 +62,9 @@ public class MapSelectMenu {
         MapSelectMessage.printMessage(mapSelectController.addPlayer(username, colorName));
     }
 
-    private boolean runMapModifiability(Matcher matcher){
+    private void runMapModifiability(Matcher matcher){
         String bool = matcher.group("modifiability");
-        MapSelectMessage msg = mapSelectController.setMapModifiability(bool);
-        MapSelectMessage.printMessage(msg);
-        return msg == MapSelectMessage.GAME_CREATION_SUCCESS;
+        MapSelectMessage.printMessage(mapSelectController.setMapModifiability(bool));
     }
+
 }

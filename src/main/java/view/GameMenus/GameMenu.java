@@ -2,7 +2,7 @@ package view.GameMenus;
 
 import controller.GameControllers.GameController;
 import view.Menu;
-import view.enums.commands.GameMenuCommand;
+import view.enums.commands.GameCommand.GameMenuCommand;
 
 import java.util.Scanner;
 

@@ -2,8 +2,8 @@ package view.UserMenus;
 
 import controller.UserControllers.MainController;
 import view.Menu;
-import view.enums.commands.MainMenuCommand;
-import view.enums.messages.MainMenuMessage;
+import view.enums.commands.UserCommand.MainMenuCommand;
+import view.enums.messages.UserCommand.MainMenuMessage;
 
 import java.util.Scanner;
 

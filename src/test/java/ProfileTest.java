@@ -3,7 +3,7 @@ import model.Stronghold;
 import model.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import view.enums.messages.ProfileMessage;
+import view.enums.messages.UserCommand.ProfileMessage;
 
 import java.io.File;
 

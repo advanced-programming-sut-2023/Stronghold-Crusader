@@ -8,7 +8,7 @@ import model.MapAsset.Tree;
 import model.enums.*;
 import utils.Vector2D;
 import view.MapMenus.ChangeEnvironmentMenu;
-import view.enums.messages.MapMakerMessage;
+import view.enums.messages.MapMessage.MapMakerMessage;
 
 public class ChangeEnvironmentController {
     private Map map;

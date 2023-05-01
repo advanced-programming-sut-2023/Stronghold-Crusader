@@ -2,8 +2,8 @@ package view.MapMenus;
 
 import controller.MapControllers.ChangeEnvironmentController;
 import view.Menu;
-import view.enums.commands.MapMakerCommand;
-import view.enums.messages.MapMakerMessage;
+import view.enums.commands.MapCommand.MapMakerCommand;
+import view.enums.messages.MapMessage.MapMakerMessage;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -51,7 +51,6 @@ public class ChangeEnvironmentMenu {
         }
     }
 
-    // TODO : handle command and inputs
     private void runSetTexture(Matcher matcher){
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));

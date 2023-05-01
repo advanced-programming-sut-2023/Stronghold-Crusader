@@ -18,6 +18,7 @@ import java.util.HashMap;
 public class ConstantManager {
     private static ConstantManager instance;
     //Buildings
+    // TODO : getMapAssetType @Ayeen
     private HashMap<MapAssetType, DefenseAndAttackBuilding> defenseAndAttackBuildings;
     private HashMap<MapAssetType, ProductionBuilding> productionBuildings;
     private HashMap<MapAssetType, SymbolicBuilding> symbolicBuildings;

@@ -1,6 +1,5 @@
 package controller.UserControllers;
 
-import controller.UserControllers.LoginController;
 import model.Stronghold;
 import model.User;
 import model.enums.Slogan;
@@ -10,7 +9,7 @@ import utils.Pair;
 import utils.SignupAndLoginUtils;
 import view.Menu;
 import view.UserMenus.SignupMenu;
-import view.enums.messages.SignupAndLoginMessage;
+import view.enums.messages.UserCommand.SignupAndLoginMessage;
 
 import java.util.HashMap;
 

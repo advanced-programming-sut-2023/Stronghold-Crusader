@@ -2,8 +2,8 @@ package view.UserMenus;
 
 import controller.UserControllers.ProfileController;
 import view.Menu;
-import view.enums.commands.ProfileCommand;
-import view.enums.messages.ProfileMessage;
+import view.enums.commands.UserCommand.ProfileCommand;
+import view.enums.messages.UserCommand.ProfileMessage;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
