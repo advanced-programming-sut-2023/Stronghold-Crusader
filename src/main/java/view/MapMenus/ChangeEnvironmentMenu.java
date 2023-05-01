@@ -39,9 +39,6 @@ public class ChangeEnvironmentMenu {
                 case CLEAR_CELL:
                     runClearCell(matcher);
                     break;
-                case DROP_HEADQUARTERS:
-                    runDropHeadquarter(matcher);
-                    break;
                 case BACK:
                     return "back";
                 default:
@@ -75,10 +72,4 @@ public class ChangeEnvironmentMenu {
         MapMakerMessage.printMessage((controller.clearCell(x, y)));
     }
 
-    private void runDropHeadquarter(Matcher matcher){
-        int x = Integer.parseInt(matcher.group("x"));
-        int y = Integer.parseInt(matcher.group("y"));
-        String color = matcher.group("color");
-        MapMakerMessage.printMessage(controller.dropHeadquarters(x, y, color));
-    }
 }

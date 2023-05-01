@@ -7,7 +7,9 @@ public enum BuildingPlacementMessage {
     INVALID_COMMAND("invalid command"),
     BUILDING_DROP_SUCCESS("Building dropped successfully"),
     INVALID_CELL_TYPE("You can not drop in this cell type"),
-    NOT_ENOUGH_RESOURCE("Not enough resources");
+    NOT_ENOUGH_RESOURCE("Not enough resources"),
+    INVALID_BUILDING_CATEGORY("Invalid Building category"),
+    BUILDING_CATEGORY_SUCCESS("Building category set successfully");
     BuildingPlacementMessage(String message) {
         this.message = message;
     }
@@ -18,7 +20,7 @@ public enum BuildingPlacementMessage {
         return message;
     }
 
-    public void printMessage() {
-        System.out.println(message);
+    public static void printMessage(BuildingPlacementMessage msg) {
+        System.out.println(msg.message);
     }
 }

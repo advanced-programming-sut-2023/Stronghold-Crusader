@@ -83,14 +83,4 @@ public class ChangeEnvironmentController {
         return MapMakerMessage.DROP_TREE_SUCCESS;
     }
 
-    public MapMakerMessage dropHeadquarters(int x, int y, String colorName) {
-        // TODO : complete errors
-        Vector2D coordinate = new Vector2D(x, y);
-        Color color = Color.getColor(colorName);
-        if(color == null) return MapMakerMessage.INVALID_COLOR_NAME;
-        if (!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
-        Headquarters headquarters = new Headquarters(ConstantManager.getInstance().getHeadquarters(), coordinate, null);
-        map.addMapObject(coordinate, headquarters);
-        return MapMakerMessage.DROP_HEADQUARTER_SUCCESS;
-    }
 }

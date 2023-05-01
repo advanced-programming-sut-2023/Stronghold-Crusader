@@ -7,6 +7,7 @@ import model.Player;
 import model.enums.BuildingType;
 import model.enums.CellType;
 import model.enums.MapAssetType;
+import utils.FormatValidation;
 import utils.Vector2D;
 import view.MapMenus.BuildingPlacementMenu.BuildingPlacementMenu;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
@@ -28,6 +29,13 @@ public class BuildingPlacementController {
         }
     }
 
+    public BuildingPlacementMessage setBuildingCategory(String buildingCategory) {
+        if (!FormatValidation.isFormatValid(buildingCategory, FormatValidation.BUILDING_CATEGORY))
+            return BuildingPlacementMessage.INVALID_BUILDING_CATEGORY;
+        this.buildingCategory = buildingCategory;
+        return BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS;
+    }
+
     public BuildingPlacementMessage dropBuilding(String buildingTypeName, int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         BuildingType buildingType = BuildingType.getType(buildingTypeName);
@@ -42,6 +50,7 @@ public class BuildingPlacementController {
         if (!currentPlayer.getGovernance().getStorage().hasEnoughMaterial(reference))
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
 
+        // TODO : Handel workers
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;

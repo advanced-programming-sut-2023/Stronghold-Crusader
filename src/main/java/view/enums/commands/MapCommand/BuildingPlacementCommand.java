@@ -4,12 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum BuildingPlacementCommand {
-    DANDA("\\s*defense\\s+and\\s+attack\\s*"),
-    TANDA("\\s*training\\s+and\\s+employment\\s*"),
-    PRODUCTION("\\s*production\\s*"),
-    SYMBOLIC("\\s*symbolic\\s*"),
     BACK("\\s*back\\s*"),
-    DROP_BUILDING("");
+    DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y(?<y>\\S+)\\s+-t(?<type<\\S+)\\s*"),
+    CHOOSE_CATEGORY("\\s*category\\s+-c\\s+(?<buildingCategory>\\S+)\\s*");
     private String regex;
 
     BuildingPlacementCommand(String regex) {

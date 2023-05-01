@@ -1,7 +1,9 @@
 package view.enums.messages.GameMessage;
 
 public enum GameMenuMessage {
-    INVALID_COMMAND("invalid command");
+    INVALID_COMMAND("invalid command"),
+    INVALID_COORDINATE("Invalid coordinate"),
+    ENTER_SHOW_MAP("Entered show map menu successfully");
     private final String message;
 
     GameMenuMessage(String message) {
@@ -12,7 +14,7 @@ public enum GameMenuMessage {
         return message;
     }
 
-    public void printMessage() {
-        System.out.println(message);
+    public static void printMessage(GameMenuMessage msg) {
+        System.out.println(msg.message);
     }
 }

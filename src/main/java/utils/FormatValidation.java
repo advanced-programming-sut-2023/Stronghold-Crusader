@@ -7,7 +7,8 @@ public enum FormatValidation {
     EMAIL("[\\w\\d\\.\\_]+\\@[\\w\\d\\_]+\\.[\\w\\d]+"),
     YES("Y|y.+"),
     NO("N|n.+"),
-    BOOLEAN_ANSWER("t|T|f|F");
+    BOOLEAN_ANSWER("t|T|f|F"),
+    BUILDING_CATEGORY("Headquarter|DandA|Production|TAndA|Symbolic|Store|OxTether");
 
 
     private final String regex;

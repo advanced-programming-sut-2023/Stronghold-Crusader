@@ -8,7 +8,6 @@ public enum MapMakerCommand {
     CLEAR_CELL("^\\s*clear\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)"),
     DROP_ROCK("^\\s*droprock\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-d\\s+(?<direction>\\S+)\\s*$"),
     DROP_TREE("^\\s*droptree\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*$"),
-    DROP_HEADQUARTERS("^\\s*dropheadquarter\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<color>\\S+)\\s*$"),
     BACK("\\s*back\\s*");
     private String regex;
     MapMakerCommand(String regex){

@@ -23,7 +23,7 @@ public class ShowMapController {
     }
 
     public void run() {
-        if (!isCenterValid(center))
+        if (!isCenterValid(center, map))
             return;
         ShowMapMenu showMapMenu = new ShowMapMenu(this);
         while (true) {
@@ -40,7 +40,7 @@ public class ShowMapController {
     public ShowMapMessage moveMap(Vector2D moveOffset) {
         if (moveOffset.y == 0 && moveOffset.x == 0)
             return ShowMapMessage.INVALID_MOVE_COMMAND;
-        if (!isCenterValid(new Vector2D(center.x + moveOffset.x, center.y + moveOffset.y)))
+        if (!isCenterValid(new Vector2D(center.x + moveOffset.x, center.y + moveOffset.y), map))
             return ShowMapMessage.TARGET_OUT_OF_RANGE;
         center.x += moveOffset.x;
         center.y += moveOffset.y;
@@ -92,7 +92,7 @@ public class ShowMapController {
         return colorCode + str + AnsiEscapeCodes.RESET;
     }
 
-    private boolean isCenterValid(Vector2D coordinate) {
+    public static boolean isCenterValid(Vector2D coordinate, Map map) {
         Vector2D mapSize = map.getSize();
         int xRange = ShowMapSettings.showMapWidthRange;
         int yRange = ShowMapSettings.showMapHeightRange;

@@ -7,10 +7,12 @@ import model.Game;
 import model.User;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
+import view.enums.messages.GameMessage.GameMenuMessage;
 
 public class GameController {
     private final User currentUser;
     private final Game game;
+    private ShowMapController showMapController;
 
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
@@ -34,15 +36,20 @@ public class GameController {
                     tradeController.run();
                     break;
                 case "showMap":
-                    //TODO this command takes a center coordinate variable and should get passed to the constructor
-                    //the center coordinate should be within map range otherwise don't run these
-                    //for validating the map range call ShowMapController.isCenterValid()
-                    ShowMapController showMapController = new ShowMapController(
-                            game.getMap(), new Vector2D(2, 2));
                     showMapController.run();
+                    break;
+                case "marketMenu":
                     break;
             }
         }
+    }
+
+    public GameMenuMessage showMap(int x, int y){
+        Vector2D coordinate = new Vector2D(x, y);
+        if(!ShowMapController.isCenterValid(coordinate, game.getMap()))
+            return GameMenuMessage.INVALID_COORDINATE;
+        showMapController = new ShowMapController(game.getMap(), coordinate);
+        return GameMenuMessage.ENTER_SHOW_MAP;
     }
 
 }
