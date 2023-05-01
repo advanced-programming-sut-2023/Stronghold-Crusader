@@ -78,25 +78,21 @@ public class SelectedBuildingController {
         if (!isUnitMatchWithBuilding(inputs.get("type")))
             return SelectedBuildingMessage.INVALID_UNIT_FOR_CREATING;
 
-
         int count = Integer.parseInt(inputs.get("count"));
+        MapAssetType type = MapAssetType.valueOf(inputs.get("type").toUpperCase());
         //TODO If MOBILE UNIT ?
-        AttackingUnit sampleAttackingUnit = new AttackingUnit(ConstantManager.getInstance().getAttackingUnit(
-                MapAssetType.valueOf(inputs.get("type").toUpperCase())), new Vector2D(coordinate.x, coordinate.y + 1), player);
+        AttackingUnit sampleAttackingUnit = ConstantManager.getInstance().getAttackingUnit(type);
         if (!isWeaponEnough(sampleAttackingUnit, count))
             return SelectedBuildingMessage.WEAPON_NEEDED;
         if (!isGoldEnough(sampleAttackingUnit.getCost(), count))
             return SelectedBuildingMessage.GOLD_NEEDED;
-
         player.governance.setGold(player.governance.getGold() - sampleAttackingUnit.getCost() * count);
         player.governance.getStorage().reduceWeapon(sampleAttackingUnit.getWeapon(), count);
-
         for (int i = 0; i < count; i++) {
-            sampleAttackingUnit = new AttackingUnit(ConstantManager.getInstance().getAttackingUnit(
-                    MapAssetType.valueOf(inputs.get("type").toUpperCase())), new Vector2D(coordinate.x, coordinate.y + 1), player);
-            map.getCell(sampleAttackingUnit.getCoordinate()).addMapAsset(sampleAttackingUnit);
+            AttackingUnit attackingUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
+            map.getCell(attackingUnit.getCoordinate()).addMapAsset(sampleAttackingUnit);
             //TODO if units in governance gone ...
-            player.governance.addPeople(sampleAttackingUnit);
+            player.governance.addPeople(attackingUnit);
         }
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
     }
@@ -104,10 +100,16 @@ public class SelectedBuildingController {
     private boolean isUnitMatchWithBuilding(String type) {
         if (!People.isContains(type.toUpperCase())) return false;
         People people = People.valueOf(type.toUpperCase());
-        if (building.getType().equals(MapAssetType.CHURCH) && people.checkType("churchMan")) return true;
-        if (building.getType().equals(MapAssetType.BARRACK) && people.checkType("European")) return true;
-        if (building.getType().equals(MapAssetType.MERCENARY_POST) && people.checkType("Arabian")) return true;
-        if (building.getType().equals(MapAssetType.ENGINEER_GUILD) && people.checkType("Engineer")) return true;
+        switch (building.getType()) {
+            case CHURCH:
+                return people.checkType("churchMan");
+            case BARRACK:
+                return people.checkType("European");
+            case MERCENARY_POST:
+                return  people.checkType("Arabian");
+            case ENGINEER_GUILD:
+                return people.checkType("Engineer");
+        }
         return false;
     }
 
