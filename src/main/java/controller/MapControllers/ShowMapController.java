@@ -53,7 +53,7 @@ public class ShowMapController {
         int cellWidth = ShowMapSettings.cellPrintCharWidth;
         int cellHeight = ShowMapSettings.cellPrintCharHeight;
         String output = "";
-        String borderLine = "-".repeat((cellWidth + 1) * (2 * xRange + 1) + 2);
+        String borderLine = "-".repeat((cellWidth + 1) * (2 * xRange + 1) + 1);
         for (int i = center.y - yRange; i <= center.y + yRange; i++) {
             output += borderLine;
             for (int l = 0; l < cellHeight; l++) {
