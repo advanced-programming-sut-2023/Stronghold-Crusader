@@ -9,7 +9,6 @@ public class Captcha {
         captcha = generateRandomCaptchaText();
         BufferedImage img = textToImage(captcha);
         showCaptcha(img);
-        // for diba
         System.out.println(captcha);
     }
     public static boolean isFilledCaptchaValid(String input){
