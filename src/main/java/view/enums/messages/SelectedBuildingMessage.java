@@ -1,6 +1,6 @@
 package view.enums.messages;
 
-public enum SelectedBuildingMessage{
+public enum SelectedBuildingMessage {
     MATERIAL_NEEDED("material is needed"),
     ENEMY_EXIST("There is an enemy near the building"),
     SUCCESS_REPAIR("The building has been repaired"),
@@ -10,19 +10,25 @@ public enum SelectedBuildingMessage{
     RESUME_PRODUCTION("Production resumes"),
     INVALID_COMMAND_FOR_BUILDING("this command is not allowed here"),
     INVALID_UNIT_FOR_CREATING("this building does not train this type of unit"),
-    أGOLD_NEEDED("gold is not enough"),
+    GOLD_NEEDED("gold is not enough"),
+    WEAPON_NEEDED("Weapon is not enough"),
     EMPTY_FIELD("There are empty fields among the entered entries"),
     INVALID_COUNT("The number of production soldiers requested is not valid"),
+    SUCCESS_CREATING_UNIT("units has been successfully created"),
+
     INVALID_COMMAND("invalid command");
 
-    SelectedBuildingMessage(String message){
+    SelectedBuildingMessage(String message) {
         this.message = message;
     }
+
     private final String message;
-    public String getMessage(){
+
+    public String getMessage() {
         return message;
     }
-    public void printMessage(){
+
+    public void printMessage() {
         System.out.println(message);
     }
 }

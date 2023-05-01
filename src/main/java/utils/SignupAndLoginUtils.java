@@ -19,6 +19,15 @@ public class SignupAndLoginUtils {
         }
         return inputs;
     }
+    public static boolean isNumberValid(String count) {
+        try {
+            int number = Integer.parseInt(count);
+            if (number <= 0) return false;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+        return true;
+    }
 
     public static String generateRandomPassword() {
         String randomPass = "";

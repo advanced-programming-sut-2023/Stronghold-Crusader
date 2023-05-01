@@ -12,9 +12,10 @@ import java.util.regex.Matcher;
 public class SelectedAssetMenu {
     private final SelectedBuildingController selectedBuildingController;
 
-    public SelectedAssetMenu(SelectedBuildingController selectedBuildingController){
+    public SelectedAssetMenu(SelectedBuildingController selectedBuildingController) {
         this.selectedBuildingController = selectedBuildingController;
     }
+
     public void run() {
         String nextCommand;
         Matcher matcher;
@@ -28,8 +29,8 @@ public class SelectedAssetMenu {
             matcher = SelectedBuildingCommand.getMatcher(nextCommand, typeOfCommand);
             switch (typeOfCommand) {
                 case REPAIR:
-                 runRepair();
-                 break;
+                    runRepair();
+                    break;
                 case INFO:
                     System.out.println(selectedBuildingController.showInfo());
                     break;
@@ -46,12 +47,21 @@ public class SelectedAssetMenu {
         }
     }
 
-    private void runRepair(){System.out.println(selectedBuildingController.repair().getMessage());}
-    private void runDelete(){System.out.println(selectedBuildingController.deleteBuilding().getMessage());}
-    private void runChangeProductionMode(){System.out.println(selectedBuildingController.changeProductionMode().getMessage());}
-    private  void runCreateUnit(Matcher matcher){
-        HashMap<String,String> inputs =SignupAndLoginUtils.getInputs(matcher,SelectedBuildingCommand.CREATE_UNIT.getRegex());
-        SelectedBuildingMessage selectedBuildingMessage = selectedBuildingController.createUnit(inputs);
+    private void runRepair() {
+        selectedBuildingController.repair().printMessage();
+    }
+
+    private void runDelete() {
+        selectedBuildingController.deleteBuilding().printMessage();
+    }
+
+    private void runChangeProductionMode() {
+        selectedBuildingController.changeProductionMode().printMessage();
+    }
+
+    private void runCreateUnit(Matcher matcher) {
+        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SelectedBuildingCommand.CREATE_UNIT.getRegex());
+        selectedBuildingController.createUnit(inputs).printMessage();
     }
 }
 

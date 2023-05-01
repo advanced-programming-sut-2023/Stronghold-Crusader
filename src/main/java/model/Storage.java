@@ -1,19 +1,21 @@
 package model;
 
 import model.enums.Material;
+import model.enums.Weapon;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Storage {
-    private int ArmourCapacity;
+    private int weaponCapacity;
     private int foodStuckCapacity;
     private int materialCapacity;
-    private HashMap<Material, Integer> Armours;
+    private HashMap<Weapon, Integer> weapons;
     private HashMap<Material, Integer> foodStuck;
     private HashMap<Material, Integer> materials;
 
-    public HashMap<Material, Integer> getArmours() {
-        return Armours;
+    public HashMap<Weapon, Integer> getWeapons() {
+        return weapons;
     }
 
     public HashMap<Material, Integer> getFoodStuck() {
@@ -24,8 +26,8 @@ public class Storage {
         return materials;
     }
 
-    public int getArmourCapacity() {
-        return ArmourCapacity;
+    public int getWeaponCapacity() {
+        return weaponCapacity;
     }
 
     public int getFoodStuckCapacity() {
@@ -36,10 +38,10 @@ public class Storage {
         return materialCapacity;
     }
 
-    public void addArmors(Material material) {
-        if (Armours.get(material) == null)
-            Armours.put(material, 0);
-        else Armours.replace(material, Armours.get(material), Armours.get(material) + 1);
+    public void addArmors(Weapon weapon) {
+        if (weapons.get(weapon) == null)
+            weapons.put(weapon, 0);
+        else weapons.replace(weapon, weapons.get(weapon), weapons.get(weapon) + 1);
 
     }
 
@@ -54,12 +56,19 @@ public class Storage {
             materials.put(material, 0);
         else materials.replace(material, materials.get(material), materials.get(material) + 1);
     }
-    public void reduceMaterial(Material material,int number){
+
+    public void reduceMaterial(Material material, int number) {
         materials.replace(material, materials.get(material) - number);
     }
 
-    public void setArmourCapacity(int armourCapacity) {
-        ArmourCapacity = armourCapacity;
+    public void reduceWeapon(ArrayList<Weapon> weapons, int number) {
+        for (Weapon weapon : weapons) {
+            this.weapons.replace(weapon, this.weapons.get(weapon) - number);
+        }
+    }
+
+    public void setWeaponCapacity(int weaponCapacity) {
+        this.weaponCapacity = weaponCapacity;
     }
 
     public void setFoodStuckCapacity(int foodStuckCapacity) {

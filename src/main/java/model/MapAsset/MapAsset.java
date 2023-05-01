@@ -41,4 +41,8 @@ public abstract class MapAsset {
     public double getMaxHitPoint() {
         return maxHitPoint;
     }
+
+    public Vector2D getCoordinate() {
+        return coordinate;
+    }
 }
