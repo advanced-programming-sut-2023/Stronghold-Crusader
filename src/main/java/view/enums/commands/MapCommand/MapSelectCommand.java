@@ -22,7 +22,7 @@ public enum MapSelectCommand {
         return null;
     }
 
-    public static Matcher getMatcher(String input, MapSelectCommand cmd){
+    public static Matcher getMatcher(String input, MapSelectCommand cmd) {
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
         matcher.find();

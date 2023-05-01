@@ -59,13 +59,13 @@ public class SignupController {
         int number = Integer.parseInt(inputs.get("questionNumber"));
         if (!inputs.get("answer").equals(inputs.get("answerConfirm")) || (number < 1 || number > 3))
             return SignupAndLoginMessage.FAIL_PICKING_UP_QUESTION;
-//        while (true) {
-//            System.out.println("Enter the code shown below :");
-//            Captcha.generateCaptcha();
-//            if (!Captcha.isFilledCaptchaValid(Menu.getScanner().nextLine()))
-//                return SignupAndLoginMessage.INVALID_CAPTCHA;
-//            else break;
-//        }
+        while (true) {
+            System.out.println("Enter the code shown below :");
+            Captcha.generateCaptcha();
+            if (!Captcha.isFilledCaptchaValid(Menu.getScanner().nextLine()))
+                return SignupAndLoginMessage.INVALID_CAPTCHA;
+            else break;
+        }
         Pair pair;
         User user = stronghold.getUser(inputs.get("username"));
         switch (number) {
