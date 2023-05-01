@@ -11,14 +11,12 @@ public enum MapSelectCommand {
     MAP_MODIFIABILITY("\\s*set\\s+map\\s+modifiability\\s+-m\\s+(?<modifiability>\\S+)\\s*"),
     START_GAME("\\s*start\\s+game\\s*");
     private String regex;
-
-    MapSelectCommand(String regex) {
+    MapSelectCommand(String regex){
         this.regex = regex;
     }
-
-    public static MapSelectCommand getCommand(String input) {
-        for (MapSelectCommand cmd : MapSelectCommand.values()) {
-            if (input.matches(cmd.regex)) return cmd;
+    public static MapSelectCommand getCommand(String input){
+        for(MapSelectCommand cmd : MapSelectCommand.values()){
+            if(input.matches(cmd.regex)) return cmd;
         }
         return null;
     }

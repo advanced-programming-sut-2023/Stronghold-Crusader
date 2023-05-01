@@ -77,8 +77,8 @@ public class MapSelectController {
     public MapSelectMessage setMapModifiability(String access) {
         if (!FormatValidation.isFormatValid(access, FormatValidation.BOOLEAN_ANSWER))
             return MapSelectMessage.INVALID_MODIFIABILITY;
-        if (access.equalsIgnoreCase("t")) isMapModifiable = true;
-        if (access.equalsIgnoreCase("f")) isMapModifiable = false;
+        if (access.toLowerCase().equals("t")) isMapModifiable = true;
+        if (access.toLowerCase().equals("f")) isMapModifiable = false;
         return MapSelectMessage.MODIFIABILITY_SUCCESS;
     }
 

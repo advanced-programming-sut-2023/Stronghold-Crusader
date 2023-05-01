@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MapSelectMenu {
-    private final MapSelectController mapSelectController;
-    private final Scanner scanner;
+    private MapSelectController mapSelectController;
+    private Scanner scanner;
     public MapSelectMenu(MapSelectController mapSelectController){
         this.mapSelectController = mapSelectController;
         this.scanner = Menu.getScanner();

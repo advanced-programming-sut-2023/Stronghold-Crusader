@@ -48,7 +48,8 @@ public class MapManager {
             mapInfo.add(matcher.group("mapId"));
             mapInfo.add(matcher.group("mapName"));
             mapInfo.add(matcher.group("players"));
-            list.add(mapInfo);
+            if (matcher.matches())
+                list.add(mapInfo);
         }
         return list;
     }
@@ -68,7 +69,10 @@ public class MapManager {
     }
 
     public static boolean isMapIDValid(String mapId){
-        // TODO
+        ArrayList<ArrayList<String>> maps = getMapList();
+        for (ArrayList<String> map : maps){
+            if(map.get(0).equals(mapId)) return true;
+        }
         return false;
     }
 }

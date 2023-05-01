@@ -25,6 +25,8 @@ public class MainController {
                     ProfileController profileController = new ProfileController(currentUser);
                     profileController.run();
                     break;
+                case "exit":
+                    return;
             }
         }
     }
