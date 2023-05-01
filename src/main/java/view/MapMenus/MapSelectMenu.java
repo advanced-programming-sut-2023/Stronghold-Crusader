@@ -45,7 +45,7 @@ public class MapSelectMenu {
                 case START_GAME:
                     MapSelectMessage msg = mapSelectController.startGame();
                     MapSelectMessage.printMessage(msg);
-                    if(msg.equals(MapSelectMessage.GAME_CREATION_SUCCESS)) return "startGame";
+                    if(msg.equals(MapSelectMessage.GAME_CREATION_SUCCESS)) return "newGame";
                     break;
             }
         }
@@ -53,7 +53,7 @@ public class MapSelectMenu {
 
     private void runSelectMap(Matcher matcher){
         String mapId = matcher.group("mapId");
-        System.out.println(mapSelectController.selectMap(mapId));
+        MapSelectMessage.printMessage(mapSelectController.selectMap(mapId));
     }
 
     private void runAddPlayer(Matcher matcher){

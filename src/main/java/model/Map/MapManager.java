@@ -43,6 +43,7 @@ public class MapManager {
         Pattern pattern = Pattern.compile("(?<mapId>\\d+)_(?<mapName>[\\S ]+)_(?<players>\\d+)\\.map");
         for (String fileName : mapsDir.list()) {
             Matcher matcher = pattern.matcher(fileName);
+            matcher.find();
             ArrayList<String> mapInfo = new ArrayList<>();
             mapInfo.add(matcher.group("mapId"));
             mapInfo.add(matcher.group("mapName"));
@@ -68,7 +69,10 @@ public class MapManager {
     }
 
     public static boolean isMapIDValid(String mapId){
-        // TODO
+        ArrayList<ArrayList<String>> maps = getMapList();
+        for (ArrayList<String> map : maps){
+            if(map.get(0).equals(mapId)) return true;
+        }
         return false;
     }
 }

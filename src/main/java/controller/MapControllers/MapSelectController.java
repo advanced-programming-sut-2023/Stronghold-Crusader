@@ -26,6 +26,7 @@ public class MapSelectController {
 
     public MapSelectController(User currentUser) {
         this.currentUser = currentUser;
+        this.players = new HashMap<>();
     }
 
     public void run() {
@@ -42,7 +43,7 @@ public class MapSelectController {
         ArrayList<ArrayList<String>> maps = MapManager.getMapList();
         String output = "";
         for (ArrayList<String> map : maps) {
-            output += "Map id: " + map.get(0) + "Map name : " + map.get(1) + " Number of players : " + map.get(2);
+            output += "Map id: " + map.get(0) + " Map name : " + map.get(1) + " Number of players : " + map.get(2);
             output += "\n";
         }
         return output;
