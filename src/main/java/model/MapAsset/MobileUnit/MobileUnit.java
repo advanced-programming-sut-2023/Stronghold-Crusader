@@ -12,6 +12,8 @@ public class MobileUnit extends MapAsset {
     private int moveSpeed;
     private double defenceMultiplier;
     private int engineersCount;
+    private int cost;
+
 
     public MobileUnit(Vector2D coordinate, Player owner, MapAssetType type) {
         super(coordinate, owner, type);
@@ -27,6 +29,10 @@ public class MobileUnit extends MapAsset {
 
     public void setEngineersCount(int engineersCount) {
         this.engineersCount = engineersCount;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     public void move(ArrayList<Cell> path) {

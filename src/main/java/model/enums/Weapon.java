@@ -8,5 +8,6 @@ public enum Weapon {
     BOW,
     CROSS_BOW,
     SPEAR,
-    PIKE
+    PIKE,
+    HORSE
 }

@@ -18,6 +18,7 @@ public class MobileUnitBuilder {
         mobileObject.setEngineersCount(mobileUnitType.getEngineerCount());
         mobileObject.setMoveSpeed(mobileUnitType.getMoveSpeed());
         mobileObject.setMaxHitPoint(mobileUnitType.getMaxHitPoint());
+        mobileObject.setCost(mobileUnitType.getCost());
     }
 
 

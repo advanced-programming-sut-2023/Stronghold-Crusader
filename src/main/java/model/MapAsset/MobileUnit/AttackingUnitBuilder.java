@@ -24,6 +24,8 @@ public class AttackingUnitBuilder {
         attackingUnitObject.setAttackRange(attackingUnitType.getAttackRange());
         attackingUnitObject.setCanClimbLadder(attackingUnitType.isCanClimbLadder());
         attackingUnitObject.setCanModifyMoat(attackingUnitType.isCanModifyMoat());
+        attackingUnitObject.setCost(attackingUnitType.getCost());
+        attackingUnitObject.setWeapon(attackingUnitType.getWeapon());
     }
 
 
