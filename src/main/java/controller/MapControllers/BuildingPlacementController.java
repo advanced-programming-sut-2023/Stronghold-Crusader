@@ -26,15 +26,10 @@ public class BuildingPlacementController {
     public MapMakerMessage dropBuilding(int x, int y, MapAsset type) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+        if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
         // if map asset type is invalid return invalid
 
         return null;
     }
-
-    //errors for this section : invalid coordinates/invalid type/inappropriate TargetCellType
-    public MapMakerMessage dropUnit(int x, int y, MapAsset type) {
-        return null;
-    }
-
 }
 

@@ -10,9 +10,11 @@ import utils.Vector2D;
 //TODO complete this class
 public class Building extends MapAsset {
     private Pair neededMaterial;
+    private final int cost;
 
     public Building(Building reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
+        this.cost = reference.cost;
     }
 
     @Override
