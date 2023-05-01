@@ -42,7 +42,7 @@ public class MapSelectController {
         ArrayList<ArrayList<String>> maps = MapManager.getMapList();
         String output = "";
         for (ArrayList<String> map : maps) {
-            output += "Map id: " + map.get(0) + "Map name : " + map.get(1) + " Number of players : " + map.get(2);
+            output += "Map id:" + map.get(0) + ", Map name:" + map.get(1) + ", Number of players:" + map.get(2);
             output += "\n";
         }
         return output;
@@ -76,8 +76,8 @@ public class MapSelectController {
     public MapSelectMessage setMapModifiability(String access) {
         if (!FormatValidation.isFormatValid(access, FormatValidation.BOOLEAN_ANSWER))
             return MapSelectMessage.INVALID_MODIFIABILITY;
-        if (access.toLowerCase().equals("t")) isMapModifiable = true;
-        if (access.toLowerCase().equals("f")) isMapModifiable = false;
+        if (access.equalsIgnoreCase("t")) isMapModifiable = true;
+        if (access.equalsIgnoreCase("f")) isMapModifiable = false;
         return MapSelectMessage.MODIFIABILITY_SUCCESS;
     }
 

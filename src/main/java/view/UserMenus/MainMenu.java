@@ -31,8 +31,11 @@ public class MainMenu {
                 case GAME_MAKER_MENU:
                     MainMenuMessage.printMessage(MainMenuMessage.ENTER_NEW_GAME);
                     return "newGame";
-                case BACK:
+                case SIGN_OUT:
+                    MainMenuMessage.printMessage(MainMenuMessage.ENTER_LOGIN_MENU);
                     return "logout";
+                case EXIT:
+                    System.exit(0);
             }
         }
     }

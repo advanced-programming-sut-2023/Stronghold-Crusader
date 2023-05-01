@@ -44,11 +44,12 @@ public class MapManager {
         for (String fileName : mapsDir.list()) {
             Matcher matcher = pattern.matcher(fileName);
             ArrayList<String> mapInfo = new ArrayList<>();
+            if (!matcher.matches())
+                continue;
             mapInfo.add(matcher.group("mapId"));
             mapInfo.add(matcher.group("mapName"));
             mapInfo.add(matcher.group("players"));
-            if (matcher.matches())
-                list.add(mapInfo);
+            list.add(mapInfo);
         }
         return list;
     }
@@ -67,8 +68,12 @@ public class MapManager {
         return null;
     }
 
-    public static boolean isMapIDValid(String mapId){
-        // TODO
+    public static boolean isMapIDValid(String mapId) {
+        File mapsDir = new File(Settings.MAPS_PATH);
+        for (String fileName : mapsDir.list()) {
+            if (fileName.startsWith(mapId))
+                return true;
+        }
         return false;
     }
 }
