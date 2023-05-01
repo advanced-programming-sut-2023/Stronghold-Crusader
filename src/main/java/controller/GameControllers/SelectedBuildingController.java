@@ -3,11 +3,14 @@ package controller.GameControllers;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.ProductionBuilding;
+import model.MapAsset.Building.TrainingAndEmploymentBuilding;
 import model.MapAsset.MapAsset;
 import model.Player;
 import utils.Vector2D;
 import view.GameMenus.SelectedAssetMenu;
 import view.enums.messages.SelectedBuildingMessage;
+
+import java.util.HashMap;
 
 public class SelectedBuildingController {
     private final Building building;
@@ -50,7 +53,7 @@ public class SelectedBuildingController {
         return SelectedBuildingMessage.DELETED_BUILDING;
     }
 
-    public SelectedBuildingMessage stopProduction() {
+    public SelectedBuildingMessage changeProductionMode() {
         if (!(building instanceof ProductionBuilding))
             return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
 
@@ -58,6 +61,26 @@ public class SelectedBuildingController {
         if (((ProductionBuilding) building).isProduce())
             return SelectedBuildingMessage.RESUME_PRODUCTION;
         else return SelectedBuildingMessage.STOP_PRODUCTION;
+    }
+
+    public SelectedBuildingMessage createUnit(HashMap<String, String> inputs) {
+        if (inputs.get("type") == null || inputs.get("count") == null) return SelectedBuildingMessage.EMPTY_FIELD;
+        if (!isNumberValid(inputs.get("count")))
+            return SelectedBuildingMessage.INVALID_COUNT;
+        if (!(building instanceof TrainingAndEmploymentBuilding))
+            return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
+
+        return null;
+    }
+
+    private boolean isNumberValid(String count) {
+        try {
+            int number = Integer.parseInt(count);
+            if (number <= 0) return false;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+        return true;
     }
 
     private int materialNeededForRepair() {

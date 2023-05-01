@@ -1,9 +1,8 @@
 package model.MapAsset.MobileUnit;
 
-import model.MapAsset.MapAsset;
 import model.Player;
 import model.enums.AttackTarget;
-import model.enums.MapAssetType;
+import model.enums.Weapon;
 import utils.Vector2D;
 
 import java.util.HashMap;
@@ -13,6 +12,8 @@ public class AttackingUnit extends MobileUnit {
     private final int attackRange;
     private final boolean canClimbLadder;
     private final boolean canModifyMoat;
+    public final Weapon weapon;
+    public final int cost;
     private final HashMap<AttackTarget, Boolean> targets;
 
     public AttackingUnit(AttackingUnit reference, Vector2D coordinate, Player owner) {
@@ -22,6 +23,8 @@ public class AttackingUnit extends MobileUnit {
         this.canClimbLadder = reference.canClimbLadder;
         this.canModifyMoat = reference.canModifyMoat;
         this.targets = reference.targets;
+        this.weapon = reference.weapon;
+        this.cost = reference.cost;
     }
 
     public void attack() {

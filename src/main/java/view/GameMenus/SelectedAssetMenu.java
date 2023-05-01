@@ -1,10 +1,12 @@
 package view.GameMenus;
 
 import controller.GameControllers.SelectedBuildingController;
+import utils.SignupAndLoginUtils;
 import view.Menu;
 import view.enums.commands.SelectedBuildingCommand;
 import view.enums.messages.SelectedBuildingMessage;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class SelectedAssetMenu {
@@ -32,7 +34,11 @@ public class SelectedAssetMenu {
                     System.out.println(selectedBuildingController.showInfo());
                     break;
                 case STOP_PRODUCTION:
-                    runStopProduction();
+                    runChangeProductionMode();
+                case RESUME_PRODUCTION:
+                    runChangeProductionMode();
+                case CREATE_UNIT:
+                    runCreateUnit(matcher);
                 case DELETE:
                     runDelete();
                     return;
@@ -42,6 +48,10 @@ public class SelectedAssetMenu {
 
     private void runRepair(){System.out.println(selectedBuildingController.repair().getMessage());}
     private void runDelete(){System.out.println(selectedBuildingController.deleteBuilding().getMessage());}
-    private void runStopProduction(){}
+    private void runChangeProductionMode(){System.out.println(selectedBuildingController.changeProductionMode().getMessage());}
+    private  void runCreateUnit(Matcher matcher){
+        HashMap<String,String> inputs =SignupAndLoginUtils.getInputs(matcher,SelectedBuildingCommand.CREATE_UNIT.getRegex());
+        SelectedBuildingMessage selectedBuildingMessage = selectedBuildingController.createUnit(inputs);
+    }
 }
 

@@ -9,6 +9,10 @@ public enum SelectedBuildingMessage{
     STOP_PRODUCTION("Production stopped"),
     RESUME_PRODUCTION("Production resumes"),
     INVALID_COMMAND_FOR_BUILDING("this command is not allowed here"),
+    INVALID_UNIT_FOR_CREATING("this building does not train this type of unit"),
+    أGOLD_NEEDED("gold is not enough"),
+    EMPTY_FIELD("There are empty fields among the entered entries"),
+    INVALID_COUNT("The number of production soldiers requested is not valid"),
     INVALID_COMMAND("invalid command");
 
     SelectedBuildingMessage(String message){
