@@ -4,7 +4,7 @@ import controller.MapControllers.ShowMapController;
 import utils.Vector2D;
 import view.Menu;
 import view.enums.commands.MapCommand.ShowMapCommand;
-import view.enums.messages.UserCommand.ProfileMessage;
+import view.enums.messages.UserMessage.ProfileMessage;
 import view.enums.messages.MapMessage.ShowMapMessage;
 
 import java.util.Scanner;

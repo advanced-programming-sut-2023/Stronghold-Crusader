@@ -1,4 +1,4 @@
-package view.enums.messages.UserCommand;
+package view.enums.messages.UserMessage;
 
 public enum SignupAndLoginMessage {
     EMPTY_FIELD("There are empty fields among the entered entries"),

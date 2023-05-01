@@ -3,7 +3,7 @@ package view.UserMenus;
 import controller.UserControllers.ProfileController;
 import view.Menu;
 import view.enums.commands.UserCommand.ProfileCommand;
-import view.enums.messages.UserCommand.ProfileMessage;
+import view.enums.messages.UserMessage.ProfileMessage;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

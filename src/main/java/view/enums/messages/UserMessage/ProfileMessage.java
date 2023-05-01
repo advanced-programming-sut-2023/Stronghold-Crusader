@@ -1,4 +1,4 @@
-package view.enums.messages.UserCommand;
+package view.enums.messages.UserMessage;
 
 public enum ProfileMessage {
     INVALID_COMMAND("invalid command"),

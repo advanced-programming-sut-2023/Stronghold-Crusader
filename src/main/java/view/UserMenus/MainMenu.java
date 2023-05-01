@@ -3,7 +3,7 @@ package view.UserMenus;
 import controller.UserControllers.MainController;
 import view.Menu;
 import view.enums.commands.UserCommand.MainMenuCommand;
-import view.enums.messages.UserCommand.MainMenuMessage;
+import view.enums.messages.UserMessage.MainMenuMessage;
 
 import java.util.Scanner;
 
@@ -26,8 +26,10 @@ public class MainMenu {
             }
             switch (cmd){
                 case PROFILE_MENU:
+                    MainMenuMessage.printMessage(MainMenuMessage.ENTER_PROFILE);
                     return "profileMenu";
                 case GAME_MAKER_MENU:
+                    MainMenuMessage.printMessage(MainMenuMessage.ENTER_NEW_GAME);
                     return "newGame";
                 case BACK:
                     return "logout";

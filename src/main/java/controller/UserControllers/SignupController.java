@@ -9,7 +9,7 @@ import utils.Pair;
 import utils.SignupAndLoginUtils;
 import view.Menu;
 import view.UserMenus.SignupMenu;
-import view.enums.messages.UserCommand.SignupAndLoginMessage;
+import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.util.HashMap;
 

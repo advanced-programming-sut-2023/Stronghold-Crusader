@@ -4,7 +4,7 @@ import model.Stronghold;
 import model.User;
 import model.UserManager;
 import view.UserMenus.LoginMenu;
-import view.enums.messages.UserCommand.SignupAndLoginMessage;
+import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
