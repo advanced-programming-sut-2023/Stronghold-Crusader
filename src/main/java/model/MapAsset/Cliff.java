@@ -17,4 +17,10 @@ public class Cliff extends MapAsset {
     public void getDamageFrom(AttackingUnit attacker) {
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", direction=" + direction.getName();
+    }
 }

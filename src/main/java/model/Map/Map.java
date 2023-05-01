@@ -74,18 +74,24 @@ public class Map {
     public ArrayList<Cell> getTraversePath(MobileUnit unit, Vector2D dest) {
         return null;
     }
-    public void changeCellTypeTo(Vector2D coordinate, CellType type){
+
+    public void changeCellTypeTo(Vector2D coordinate, CellType type) {
         map[coordinate.y][coordinate.x].setType(type);
     }
-    public boolean isCoordinateValid(Vector2D coordinate){
+
+    public boolean isCoordinateValid(Vector2D coordinate) {
         return false;
     }
 
-    public void clearCell(Vector2D coordinate){
+    public void clearCell(Vector2D coordinate) {
         map[coordinate.y][coordinate.x].clear();
     }
 
     public Cell getCell(Vector2D coordinate) {
         return map[coordinate.y][coordinate.x];
+    }
+
+    public boolean isInMap(Vector2D coordinate) {
+        return coordinate.x >= 0 && coordinate.y >= 0 && coordinate.y < size.y && coordinate.x < size.x;
     }
 }

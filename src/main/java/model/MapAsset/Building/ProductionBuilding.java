@@ -27,7 +27,8 @@ public class ProductionBuilding extends Building {
         this.inventory = reference.inventory;
         this.productionMode = true;
     }
-    public void changeProductionMode(){
+
+    public void changeProductionMode() {
         productionMode = !productionMode;
     }
 
@@ -43,4 +44,16 @@ public class ProductionBuilding extends Building {
 
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", productionCapacity=" + productionCapacity +
+                ", usingMaterial=" + usingMaterial +
+                ", producingMaterial=" + producingMaterial +
+                ", rateOfUsage=" + rateOfUsage +
+                ", rateOfProduction=" + rateOfProduction +
+                ", rateOfProcess=" + rateOfProcess +
+                ", inventory=" + inventory +
+                ", productionMode=" + productionMode;
+    }
 }

@@ -18,4 +18,10 @@ public class Assassin extends AttackingUnit {
     public boolean isInvisible() {
         return invisibility;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", invisibility=" + invisibility;
+    }
 }

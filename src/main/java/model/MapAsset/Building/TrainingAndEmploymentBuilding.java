@@ -16,4 +16,11 @@ public class TrainingAndEmploymentBuilding extends Building {
         this.peopleType = reference.peopleType;
         this.popularityChangeRate = reference.popularityChangeRate;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", peopleType=" + peopleType +
+                ", popularityChangeRate=" + popularityChangeRate;
+    }
 }

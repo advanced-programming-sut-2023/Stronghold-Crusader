@@ -13,4 +13,11 @@ public class SymbolicBuilding extends Building {
         this.capacityChangeRate = reference.capacityChangeRate;
         this.changeType = reference.changeType;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", capacityChangeRate=" + capacityChangeRate +
+                ", changeType=" + changeType;
+    }
 }

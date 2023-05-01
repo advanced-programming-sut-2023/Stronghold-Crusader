@@ -12,4 +12,9 @@ public class Vector2D {
     public double getDistance(Vector2D v2) {
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")";
+    }
 }

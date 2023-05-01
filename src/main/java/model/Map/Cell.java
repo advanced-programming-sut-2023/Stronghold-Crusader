@@ -41,11 +41,11 @@ public class Cell {
     }
 
     //only gets called at the end of the game to prepare Map for saving.
-    public void removeNonSavableAssets(){
+    public void removeNonSavableAssets() {
         ArrayList<MapAsset> newObjects = new ArrayList<>();
         for (MapAsset asset : assets) {
             MapAssetType type = asset.getType();
-            if(type == MapAssetType.TREE || type == MapAssetType.CLIFF || type == MapAssetType.HEADQUARTER){
+            if (type == MapAssetType.TREE || type == MapAssetType.CLIFF || type == MapAssetType.HEADQUARTER) {
                 asset.setOwner(null);
                 newObjects.add(asset);
             }
@@ -57,23 +57,35 @@ public class Cell {
         return false;
     }
 
-    public void clear(){
+    public void clear() {
 
     }
 
-    public void addMapAsset(MapAsset obj){
+    public void addMapAsset(MapAsset obj) {
         assets.add(obj);
     }
-    public void removeMapAsset(MapAsset obj){
-        assets.remove(obj);}
-    public boolean isThereUnit(){
-        for (MapAsset mapAsset: assets) {
+
+    public void removeMapAsset(MapAsset obj) {
+        assets.remove(obj);
+    }
+
+    public boolean isThereUnit() {
+        for (MapAsset mapAsset : assets) {
             if (mapAsset instanceof MobileUnit) return true;
         }
         return false;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return assets.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder("Cell type: " + type.getName());
+        for (MapAsset asset : assets) {
+            output.append('\n').append(asset.toString());
+        }
+        return output.toString();
     }
 }

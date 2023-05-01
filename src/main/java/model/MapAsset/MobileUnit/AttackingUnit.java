@@ -35,4 +35,15 @@ public class AttackingUnit extends MobileUnit {
 
     public void stopAttack() {
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", attack damage=" + attackDamage +
+                ", attack range=" + attackRange +
+                ", climbs ladder=" + canClimbLadder +
+                ", modifies moat=" + canModifyMoat +
+                ", weapon=" + weapon +
+                ", targets=" + targets;
+    }
 }
