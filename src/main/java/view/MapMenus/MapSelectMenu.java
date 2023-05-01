@@ -11,22 +11,23 @@ import java.util.regex.Matcher;
 public class MapSelectMenu {
     private final MapSelectController mapSelectController;
     private final Scanner scanner;
-    public MapSelectMenu(MapSelectController mapSelectController){
+
+    public MapSelectMenu(MapSelectController mapSelectController) {
         this.mapSelectController = mapSelectController;
         this.scanner = Menu.getScanner();
     }
 
-    public String run(){
+    public String run() {
         String input;
-        while (true){
+        while (true) {
             input = scanner.nextLine();
             MapSelectCommand cmd = MapSelectCommand.getCommand(input);
-            if(cmd == null){
-                MapSelectMessage.printMessage(MapSelectMessage.INVALID_COMMAND);
+            if (cmd == null) {
+                System.out.println(MapSelectMessage.INVALID_COMMAND.getMessage());
                 continue;
             }
             Matcher matcher = MapSelectCommand.getMatcher(input, cmd);
-            switch (cmd){
+            switch (cmd) {
                 case GET_MAP_LIST:
                     System.out.print(mapSelectController.getMapsList());
                     break;
@@ -39,32 +40,24 @@ public class MapSelectMenu {
                 case ADD_PLAYER:
                     runAddPlayer(matcher);
                     break;
-                case MAP_MODIFIABILITY:
-                    runMapModifiability(matcher);
-                    break;
                 case START_GAME:
                     MapSelectMessage msg = mapSelectController.startGame();
-                    MapSelectMessage.printMessage(msg);
-                    if(msg.equals(MapSelectMessage.GAME_CREATION_SUCCESS)) return "newGame";
+                    System.out.println(msg.getMessage());
+                    if (msg.equals(MapSelectMessage.GAME_CREATION_SUCCESS)) return "startGame";
                     break;
             }
         }
     }
 
-    private void runSelectMap(Matcher matcher){
+    private void runSelectMap(Matcher matcher) {
         String mapId = matcher.group("mapId");
-        MapSelectMessage.printMessage(mapSelectController.selectMap(mapId));
+        boolean flag = matcher.group("modifiable") != null;
+        System.out.println(mapSelectController.selectMap(mapId, flag).getMessage());
     }
 
-    private void runAddPlayer(Matcher matcher){
+    private void runAddPlayer(Matcher matcher) {
         String username = matcher.group("username");
-        String colorName = matcher.group("colorName");
-        MapSelectMessage.printMessage(mapSelectController.addPlayer(username, colorName));
+        String colorName = matcher.group("color");
+        System.out.println(mapSelectController.addPlayer(username, colorName).getMessage());
     }
-
-    private void runMapModifiability(Matcher matcher){
-        String bool = matcher.group("modifiability");
-        MapSelectMessage.printMessage(mapSelectController.setMapModifiability(bool));
-    }
-
 }

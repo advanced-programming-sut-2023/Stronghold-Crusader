@@ -19,8 +19,7 @@ import java.util.HashMap;
 public class MapSelectController {
     private User currentUser;
     private Map selectedMap;
-    private String selectedMapId;
-    private HashMap<Color,Player> players;
+    private HashMap<Color, Player> players;
     private boolean isMapModifiable;
     private Game newGame;
 
@@ -32,9 +31,9 @@ public class MapSelectController {
     public void run() {
         MapSelectMenu mapSelectMenu = new MapSelectMenu(this);
         while (true) {
-            if (mapSelectMenu.run().equals("newGame")) {
+            if (mapSelectMenu.run().equals("startGame")) {
                 GameController gameController = new GameController(currentUser, newGame);
-                if(gameController.run().equals("endGame")) return;
+                if (gameController.run().equals("endGame")) return;
             }
         }
     }
@@ -49,16 +48,17 @@ public class MapSelectController {
         return output;
     }
 
-    public MapSelectMessage selectMap(String mapId) {
+    public MapSelectMessage selectMap(String mapId, boolean isMapModifiable) {
         if (!MapManager.isMapIDValid(mapId)) return MapSelectMessage.INVALID_MAP_ID;
+        this.isMapModifiable = isMapModifiable;
         selectedMap = MapManager.load(mapId);
-        selectedMapId = mapId;
+        players = new HashMap<>();
         return MapSelectMessage.MAP_SELECT_SUCCESS;
     }
 
     public String numberOfPlayers() {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED.getMessage();
-        return String.valueOf(selectedMap.getPlayerCount());
+        return String.valueOf(players.size()) + '/' + selectedMap.getPlayerCount();
     }
 
     public MapSelectMessage addPlayer(String username, String colorName) {
@@ -68,24 +68,21 @@ public class MapSelectController {
         if (players.size() == selectedMap.getPlayerCount()) return MapSelectMessage.PLAYER_COUNT_EXCEEDED;
         if (user == null) return MapSelectMessage.USERNAME_INVALID;
         if (color == null) return MapSelectMessage.INVALID_COLOR;
-        Player newPlayer = new Player(user.getUsername(), user.getNickname(), user.getSlogan());
-        players.put(color,newPlayer);
+        if (players.get(color) != null)
+            return MapSelectMessage.PICKED_COLOR;
+        for (Player player : players.values()) {
+            if (user.getUsername().equals(player.getUsername()))
+                return MapSelectMessage.PLAYER_EXISTS;
+        }
+        Player newPlayer = new Player(user);
+        players.put(color, newPlayer);
         return MapSelectMessage.PLAYER_ADD_SUCCESS;
-    }
-
-
-    public MapSelectMessage setMapModifiability(String access) {
-        if (!FormatValidation.isFormatValid(access, FormatValidation.BOOLEAN_ANSWER))
-            return MapSelectMessage.INVALID_MODIFIABILITY;
-        if (access.equalsIgnoreCase("t")) isMapModifiable = true;
-        if (access.equalsIgnoreCase("f")) isMapModifiable = false;
-        return MapSelectMessage.MODIFIABILITY_SUCCESS;
     }
 
     public MapSelectMessage startGame() {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED;
         if (players.size() < selectedMap.getPlayerCount()) return MapSelectMessage.NOT_ENOUGH_PLAYERS;
-        newGame = new Game(selectedMapId, players, isMapModifiable);
+        newGame = new Game(selectedMap, players, isMapModifiable);
         return MapSelectMessage.GAME_CREATION_SUCCESS;
     }
 }

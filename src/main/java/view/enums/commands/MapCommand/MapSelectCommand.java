@@ -5,12 +5,11 @@ import java.util.regex.Pattern;
 
 public enum MapSelectCommand {
     GET_MAP_LIST("\\s*show\\s+maps\\s*"),
-    SELECT_MAP("\\s*select\\s+map\\s+-i\\s+(?<mapId>\\S+)\\s*"),
+    SELECT_MAP("\\s*select\\s+map\\s+-n\\s+(?<mapId>\\S+)(?<modifiable>\\s+--modifiable)?\\s*"),
     PLAYERS_COUNT("\\s*players\\s+count\\s*"),
     ADD_PLAYER("\\s*add\\s+player\\s+-u\\s+(?<username>\\S+)\\s+-c\\s+(?<color>\\S+)\\s*"),
-    MAP_MODIFIABILITY("\\s*set\\s+map\\s+modifiability\\s+-m\\s+(?<modifiability>\\S+)\\s*"),
     START_GAME("\\s*start\\s+game\\s*");
-    private String regex;
+    private final String regex;
 
     MapSelectCommand(String regex) {
         this.regex = regex;

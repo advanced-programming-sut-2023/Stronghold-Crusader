@@ -2,12 +2,15 @@ package model;
 
 public class Player {
     private Governance governance;
-    private String username;
-    private String nickname;
-    private String slogan;
+    private final String username;
+    private final String nickname;
+    private final String slogan;
 
-    public Player(String username, String nickname, String slogan) {
-
+    public Player(User user) {
+        this.username = user.getUsername();
+        this.nickname = user.getNickname();
+        this.slogan = user.getSlogan();
+        governance = new Governance(this);
     }
 
     public String getUsername() {

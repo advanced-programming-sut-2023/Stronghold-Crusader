@@ -20,7 +20,7 @@ public enum MapAssetType {
 
     public static MapAssetType getMapAssetType(String typeName) {
         for (MapAssetType type : MapAssetType.values()) {
-            if (type.name().toLowerCase().equals(typeName)) return type;
+            if (type.name().equalsIgnoreCase(typeName)) return type;
         }
         return null;
     }

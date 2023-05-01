@@ -18,10 +18,11 @@ public class Cell {
     public Cell(Vector2D coordinate, CellType type) {
         this.coordinate = coordinate;
         this.type = type;
+        assets = new ArrayList<>();
     }
 
     public Collection<MapAsset> getAllAssets() {
-        return null;
+        return assets;
     }
 
     public Collection<MapAsset> getAllAssets(Player player) {

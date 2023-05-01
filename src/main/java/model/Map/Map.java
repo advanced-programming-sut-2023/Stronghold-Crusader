@@ -39,6 +39,10 @@ public class Map {
         return playerCount;
     }
 
+    public void setPlayerCount(int playerCount) {
+        this.playerCount = playerCount;
+    }
+
     public Vector2D getSize() {
         return size;
     }

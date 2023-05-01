@@ -29,7 +29,7 @@ public class MapManager {
     public static void save(Map map, String mapId) {
         try {
             FileWriter fileWriter = new FileWriter(generateMapAddress(mapId, map.getName(), map.getPlayerCount()));
-            Gson gson = new GsonBuilder().serializeNulls().create();
+            Gson gson = new Gson();
             fileWriter.write(gson.toJson(map));
             fileWriter.close();
         } catch (IOException e) {
