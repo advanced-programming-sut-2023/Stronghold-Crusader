@@ -3,6 +3,7 @@ package view.GameMenus;
 import controller.GameControllers.GameController;
 import view.Menu;
 import view.enums.commands.GameCommand.GameMenuCommand;
+import view.enums.messages.GameMessage.GameMenuMessage;
 
 import java.util.Scanner;
 
@@ -20,7 +21,7 @@ public class GameMenu {
             input = scanner.nextLine();
             GameMenuCommand cmd = GameMenuCommand.getCommand(input);
             if(cmd == null){
-                System.out.println();
+                GameMenuMessage.INVALID_COMMAND.printMessage();
                 continue;
             }
             switch (cmd){

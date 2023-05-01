@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Game {
     private final HashMap<String, Player> players;
     private Player currentPlayer;
-    private boolean isEditableMode;
+    private final boolean isEditableMode;
     private int turnCounter;
     private final Map map;
 

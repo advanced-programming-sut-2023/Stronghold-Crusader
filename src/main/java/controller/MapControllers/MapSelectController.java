@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MapSelectController {
-    private User currentUser;
+    private final User currentUser;
     private Map selectedMap;
     private HashMap<Color, Player> players;
     private boolean isMapModifiable;
@@ -42,7 +42,7 @@ public class MapSelectController {
         ArrayList<ArrayList<String>> maps = MapManager.getMapList();
         String output = "";
         for (ArrayList<String> map : maps) {
-            output += "Map id: " + map.get(0) + " Map name : " + map.get(1) + " Number of players : " + map.get(2);
+            output += "Map id:" + map.get(0) + ", Map name:" + map.get(1) + ", Number of players:" + map.get(2);
             output += "\n";
         }
         return output;

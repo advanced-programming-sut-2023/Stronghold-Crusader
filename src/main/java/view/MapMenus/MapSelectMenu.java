@@ -23,7 +23,7 @@ public class MapSelectMenu {
             input = scanner.nextLine();
             MapSelectCommand cmd = MapSelectCommand.getCommand(input);
             if (cmd == null) {
-                System.out.println(MapSelectMessage.INVALID_COMMAND.getMessage());
+                MapSelectMessage.INVALID_COMMAND.printMessage();
                 continue;
             }
             Matcher matcher = MapSelectCommand.getMatcher(input, cmd);
@@ -42,7 +42,7 @@ public class MapSelectMenu {
                     break;
                 case START_GAME:
                     MapSelectMessage msg = mapSelectController.startGame();
-                    System.out.println(msg.getMessage());
+                    msg.printMessage();
                     if (msg.equals(MapSelectMessage.GAME_CREATION_SUCCESS)) return "startGame";
                     break;
             }
@@ -52,12 +52,12 @@ public class MapSelectMenu {
     private void runSelectMap(Matcher matcher) {
         String mapId = matcher.group("mapId");
         boolean flag = matcher.group("modifiable") != null;
-        System.out.println(mapSelectController.selectMap(mapId, flag).getMessage());
+        mapSelectController.selectMap(mapId, flag).printMessage();
     }
 
     private void runAddPlayer(Matcher matcher) {
         String username = matcher.group("username");
         String colorName = matcher.group("color");
-        System.out.println(mapSelectController.addPlayer(username, colorName).getMessage());
+        mapSelectController.addPlayer(username, colorName).printMessage();
     }
 }

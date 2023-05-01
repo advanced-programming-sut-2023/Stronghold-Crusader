@@ -9,11 +9,12 @@ import utils.Vector2D;
 import view.GameMenus.GameMenu;
 
 public class GameController {
-    private User currentUser;
-    private Game game;
+    private final User currentUser;
+    private final Game game;
 
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
+        this.game = game;
     }
 
     public String run() {
@@ -37,7 +38,7 @@ public class GameController {
                     //the center coordinate should be within map range otherwise don't run these
                     //for validating the map range call ShowMapController.isCenterValid()
                     ShowMapController showMapController = new ShowMapController(
-                            game.getMap(), new Vector2D(0, 0));
+                            game.getMap(), new Vector2D(2, 2));
                     showMapController.run();
                     break;
             }
