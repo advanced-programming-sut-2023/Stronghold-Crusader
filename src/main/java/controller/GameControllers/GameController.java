@@ -25,7 +25,7 @@ public class GameController {
                     environmentController.run();
                     break;
                 case "buildingPlacement":
-                    BuildingPlacementController controller = new BuildingPlacementController(currentUser, game.getMap());
+                    BuildingPlacementController controller = new BuildingPlacementController(game.getCurrentPlayer(), game.getMap());
                     controller.run();
                     break;
                 case "tradeMenu":

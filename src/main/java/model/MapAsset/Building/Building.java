@@ -10,11 +10,12 @@ import utils.Pair;
 import utils.Vector2D;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //TODO complete this class
 public class Building extends MapAsset {
-    // TODO
-    private Pair neededMaterial;
+    private Material neededMaterial;
+    private int neededMaterialAmount;
     private final int cost;
     private int workerNumber;
     private ArrayList<CellType> buildingGroundType;
@@ -31,21 +32,21 @@ public class Building extends MapAsset {
     }
 
     public int getNumberOfMaterialNeeded() {
-        return Integer.parseInt(neededMaterial.y);
+        return neededMaterialAmount;
     }
 
     public Material getNeededMaterial() {
-        return Material.valueOf(neededMaterial.x);
+        return neededMaterial;
     }
 
-    public void setNeededMaterial(Pair neededMaterial) {
+    public void setNeededMaterial(Material neededMaterial) {
         this.neededMaterial = neededMaterial;
     }
 
     public void repair() {
         hitPoint = maxHitPoint;
     }
-    public boolean isTypeValid(CellType celltype){
+    public boolean isCellTypeValid(CellType celltype){
         return buildingGroundType.contains(celltype);
     }
 }

@@ -37,11 +37,11 @@ public class SelectedBuildingController {
     }
 
     public SelectedBuildingMessage repair() {
-        if (player.governance.getStorage().getMaterials().get(building.getNeededMaterial()) < materialNeededForRepair())
+        if (player.getGovernance().getStorage().getMaterials().get(building.getNeededMaterial()) < materialNeededForRepair())
             return SelectedBuildingMessage.MATERIAL_NEEDED;
         if (isThereEnemy())
             return SelectedBuildingMessage.ENEMY_EXIST;
-        player.governance.getStorage().reduceMaterial(building.getNeededMaterial(), materialNeededForRepair());
+        player.getGovernance().getStorage().reduceMaterial(building.getNeededMaterial(), materialNeededForRepair());
         building.repair();
         return SelectedBuildingMessage.SUCCESS_REPAIR;
     }
@@ -55,7 +55,7 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.NOT_ALLOWED_TO_DELETE;
         //TODO if Storage ...
         map.getCell(coordinate).removeMapAsset(building);
-        player.governance.removeBuilding(building);
+        player.getGovernance().removeBuilding(building);
         return SelectedBuildingMessage.DELETED_BUILDING;
     }
 
@@ -86,13 +86,13 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.WEAPON_NEEDED;
         if (!isGoldEnough(sampleAttackingUnit.getCost(), count))
             return SelectedBuildingMessage.GOLD_NEEDED;
-        player.governance.setGold(player.governance.getGold() - sampleAttackingUnit.getCost() * count);
-        player.governance.getStorage().reduceWeapon(sampleAttackingUnit.getWeapon(), count);
+        player.getGovernance().setGold(player.getGovernance().getGold() - sampleAttackingUnit.getCost() * count);
+        player.getGovernance().getStorage().reduceWeapon(sampleAttackingUnit.getWeapon(), count);
         for (int i = 0; i < count; i++) {
             AttackingUnit attackingUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
             map.getCell(attackingUnit.getCoordinate()).addMapAsset(sampleAttackingUnit);
             //TODO if units in governance gone ...
-            player.governance.addPeople(attackingUnit);
+            player.getGovernance().addPeople(attackingUnit);
         }
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
     }
@@ -116,13 +116,13 @@ public class SelectedBuildingController {
     private boolean isWeaponEnough(AttackingUnit attackingUnit, int count) {
         //TODO if enums change ...
         for (Weapon weapon : attackingUnit.getWeapon()) {
-            if (player.governance.getStorage().getWeapons().get(weapon) < count) return false;
+            if (player.getGovernance().getStorage().getWeapons().get(weapon) < count) return false;
         }
         return true;
     }
 
     private boolean isGoldEnough(int gold, int count) {
-        return (player.governance.getGold() >= gold * count);
+        return (player.getGovernance().getGold() >= gold * count);
     }
 
     private int materialNeededForRepair() {

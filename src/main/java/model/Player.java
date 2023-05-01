@@ -1,7 +1,7 @@
 package model;
 
 public class Player {
-    public Governance governance;
+    private Governance governance;
     private String username;
     private String nickname;
     private String slogan;
@@ -20,5 +20,9 @@ public class Player {
 
     public String getSlogan() {
         return slogan;
+    }
+
+    public Governance getGovernance() {
+        return governance;
     }
 }

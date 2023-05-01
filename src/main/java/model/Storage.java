@@ -1,7 +1,9 @@
 package model;
 
+import model.MapAsset.Building.Building;
 import model.enums.Material;
 import model.enums.Weapon;
+import utils.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,5 +79,12 @@ public class Storage {
 
     public void setMaterialCapacity(int materialCapacity) {
         this.materialCapacity = materialCapacity;
+    }
+
+    public boolean hasEnoughMaterial(Building building){
+        Material material = building.getNeededMaterial();
+        int amount = building.getNumberOfMaterialNeeded();
+        int inStock = materials.get(material);
+        return amount <= inStock;
     }
 }
