@@ -12,11 +12,11 @@ public class GameController {
     private User currentUser;
     private Game game;
 
-    public GameController(User currentUser) {
+    public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
     }
 
-    public void run() {
+    public String run() {
         GameMenu gameMenu = new GameMenu(this);
         while (true) {
             switch (gameMenu.run()) {

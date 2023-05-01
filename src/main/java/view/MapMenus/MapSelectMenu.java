@@ -36,6 +36,15 @@ public class MapSelectMenu {
                 case PLAYERS_COUNT:
                     System.out.println(mapSelectController.numberOfPlayers());
                     break;
+                case ADD_PLAYER:
+                    runAddPlayer(matcher);
+                    break;
+                case MAP_MODIFIABILITY:
+                    runMapModifiability(matcher);
+                    break;
+                case START_GAME:
+                    if(runMapModifiability(matcher)) return "startGame";
+                    break;
             }
         }
     }
@@ -43,5 +52,18 @@ public class MapSelectMenu {
     private void runSelectMap(Matcher matcher){
         String mapId = matcher.group("mapId");
         System.out.println(mapSelectController.selectMap(mapId));
+    }
+
+    private void runAddPlayer(Matcher matcher){
+        String username = matcher.group("username");
+        String colorName = matcher.group("colorName");
+        MapSelectMessage.printMessage(mapSelectController.addPlayer(username, colorName));
+    }
+
+    private boolean runMapModifiability(Matcher matcher){
+        String bool = matcher.group("modifiability");
+        MapSelectMessage msg = mapSelectController.setMapModifiability(bool);
+        MapSelectMessage.printMessage(msg);
+        return msg == MapSelectMessage.GAME_CREATION_SUCCESS;
     }
 }

@@ -6,7 +6,8 @@ public enum FormatValidation {
     PASSWORD_LETTERS("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\\w\\d]).+$"),
     EMAIL("[\\w\\d\\.\\_]+\\@[\\w\\d\\_]+\\.[\\w\\d]+"),
     YES("Y|y.+"),
-    NO("N|n.+");
+    NO("N|n.+"),
+    BOOLEAN_ANSWER("t|T|f|F");
 
 
     private final String regex;

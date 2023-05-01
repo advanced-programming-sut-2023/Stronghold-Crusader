@@ -12,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ShowMapMenu {
-
     private final ShowMapController showMapController;
     private final Scanner scanner;
 
@@ -33,6 +32,9 @@ public class ShowMapMenu {
             }
             Matcher matcher = ShowMapCommand.getMatcher(input, cmd);
             switch (cmd) {
+                case SHOW_DETAILS:
+                    runShowDetails(matcher);
+                    break;
                 case MOVE_MAP:
                     runMoveMap(matcher);
                     break;
@@ -45,17 +47,23 @@ public class ShowMapMenu {
         }
     }
 
+    private void runShowDetails(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        System.out.println(showMapController.showCellDetails(new Vector2D(x, y)));
+    }
+
     private void runMoveMap(Matcher matcher) {
         String details = matcher.group("details");
         Vector2D moveOffset = getMoveOffset(details);
         ShowMapMessage message = showMapController.moveMap(moveOffset);
-        if(message == ShowMapMessage.MOVE_SUCCESSFUL)
+        if (message == ShowMapMessage.MOVE_SUCCESSFUL)
             System.out.println(showMapController.printMap());
         else
             System.out.println(message.getMessage());
     }
 
-    private static Vector2D getMoveOffset(String details) {
+    private Vector2D getMoveOffset(String details) {
         String directionRegex = "(\\s+(?<num>\\d+))?";
         Vector2D moveVector = new Vector2D(0, 0);
         Matcher directionMatcher = Pattern.compile("up" + directionRegex).matcher(details);

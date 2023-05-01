@@ -37,4 +37,8 @@ public enum CellType {
     public String getAsniColor() {
         return asniColor;
     }
+
+    public String getName() {
+        return name;
+    }
 }

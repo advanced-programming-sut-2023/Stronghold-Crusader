@@ -45,4 +45,12 @@ public abstract class MapAsset {
     public Vector2D getCoordinate() {
         return coordinate;
     }
+
+    @Override
+    public String toString() {
+        return type.name().toLowerCase() +
+                ": coordinate=" + coordinate.toString() +
+                ", owner=" + owner.getNickname() +
+                ", hp=" + hitPoint + '/' + maxHitPoint;
+    }
 }

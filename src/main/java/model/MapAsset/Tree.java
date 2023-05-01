@@ -21,4 +21,10 @@ public class Tree extends MapAsset {
     public void getDamageFrom(AttackingUnit attacker) {
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString()
+                + ", type=" + treeType.name().toLowerCase();
+    }
 }

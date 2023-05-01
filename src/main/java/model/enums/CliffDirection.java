@@ -7,13 +7,19 @@ public enum CliffDirection {
     WEST("w"),
     RANDOM("r");
     private final String name;
-    CliffDirection(String name){
+
+    CliffDirection(String name) {
         this.name = name;
     }
-    public static CliffDirection getDirection(String direction){
-        for(CliffDirection d : CliffDirection.values()){
+
+    public static CliffDirection getDirection(String direction) {
+        for (CliffDirection d : CliffDirection.values()) {
             if (d.name.equals(direction)) return d;
         }
         return null;
+    }
+
+    public String getName() {
+        return name;
     }
 }

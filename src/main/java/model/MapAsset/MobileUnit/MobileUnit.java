@@ -47,4 +47,11 @@ public class MobileUnit extends MapAsset {
     public void getDamageFrom(AttackingUnit attacker) {
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", moveSpeed=" + moveSpeed +
+                ", engineersCount=" + engineersCount;
+    }
 }

@@ -8,15 +8,12 @@ import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.MapAsset.Tree;
-import model.Stronghold;
-import model.User;
 import model.enums.CellType;
 import utils.Vector2D;
 import view.MapMenus.ShowMapMenu;
 import view.enums.messages.ShowMapMessage;
 
 public class ShowMapController {
-    private final Stronghold stronghold = Stronghold.getInstance();
     private final Map map;
     private final Vector2D center;
 
@@ -26,12 +23,18 @@ public class ShowMapController {
     }
 
     public void run() {
-        if(!isCenterValid(center))
+        if (!isCenterValid(center))
             return;
         ShowMapMenu showMapMenu = new ShowMapMenu(this);
         while (true) {
             if (showMapMenu.run().equals("exit")) return;
         }
+    }
+
+    public String showCellDetails(Vector2D cellCoordinate) {
+        if (!map.isInMap(cellCoordinate))
+            return ShowMapMessage.COORDINATE_OUT_OF_RANGE.getMessage();
+        return map.getCell(cellCoordinate).toString();
     }
 
     public ShowMapMessage moveMap(Vector2D moveOffset) {
@@ -50,8 +53,9 @@ public class ShowMapController {
         int cellWidth = ShowMapSettings.cellPrintCharWidth;
         int cellHeight = ShowMapSettings.cellPrintCharHeight;
         String output = "";
+        String borderLine = "-".repeat((cellWidth + 1) * (2 * xRange + 1) + 2);
         for (int i = center.y - yRange; i <= center.y + yRange; i++) {
-            output += "-".repeat((cellWidth + 1) * (2 * xRange + 1) + 2);
+            output += borderLine;
             for (int l = 0; l < cellHeight; l++) {
                 output += "\n|";
                 for (int j = center.x - xRange; j <= center.x + xRange; j++) {
@@ -59,9 +63,9 @@ public class ShowMapController {
                     output += '|';
                 }
             }
-            if (i != center.y + yRange)
-                output += '\n';
+            output += '\n';
         }
+        output += borderLine;
         return output;
     }
 
