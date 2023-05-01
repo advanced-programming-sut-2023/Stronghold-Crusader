@@ -77,19 +77,22 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
         if (!isUnitMatchWithBuilding(inputs.get("type")))
             return SelectedBuildingMessage.INVALID_UNIT_FOR_CREATING;
+
+
         int count = Integer.parseInt(inputs.get("count"));
-        ConstantManager constantManager = new ConstantManager();
         //TODO If MOBILE UNIT ?
-        AttackingUnit sampleAttackingUnit = new AttackingUnit(constantManager.getAttackingUnit(
+        AttackingUnit sampleAttackingUnit = new AttackingUnit(ConstantManager.getInstance().getAttackingUnit(
                 MapAssetType.valueOf(inputs.get("type").toUpperCase())), new Vector2D(coordinate.x, coordinate.y + 1), player);
         if (!isWeaponEnough(sampleAttackingUnit, count))
             return SelectedBuildingMessage.WEAPON_NEEDED;
         if (!isGoldEnough(sampleAttackingUnit.getCost(), count))
             return SelectedBuildingMessage.GOLD_NEEDED;
+
         player.governance.setGold(player.governance.getGold() - sampleAttackingUnit.getCost() * count);
         player.governance.getStorage().reduceWeapon(sampleAttackingUnit.getWeapon(), count);
+
         for (int i = 0; i < count; i++) {
-            sampleAttackingUnit = new AttackingUnit(constantManager.getAttackingUnit(
+            sampleAttackingUnit = new AttackingUnit(ConstantManager.getInstance().getAttackingUnit(
                     MapAssetType.valueOf(inputs.get("type").toUpperCase())), new Vector2D(coordinate.x, coordinate.y + 1), player);
             map.getCell(sampleAttackingUnit.getCoordinate()).addMapAsset(sampleAttackingUnit);
             //TODO if units in governance gone ...

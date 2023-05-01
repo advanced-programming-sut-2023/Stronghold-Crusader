@@ -12,17 +12,14 @@ public class Game {
     private Player currentPlayer;
     private boolean isEditableMode;
     private int turnCounter;
-    private int time;
     private final Map map;
 
-    public Game(String mapId, ArrayList<Player> players, boolean isEditableMode) {
+    public Game(String mapId, HashMap<Color,Player> players, boolean isEditableMode) {
         map = MapManager.load(mapId);
-        //make players from the users
-    }
-
-    public void assignColor(Player player, Color color) {
-        // assign players color field
-        // assign owner for governments base
+        this.players = new HashMap<>();
+        for(Player p : players.values()){
+            this.players.put(p.getUsername(), p);
+        }
     }
 
     public void nextPlayer() {
@@ -37,10 +34,6 @@ public class Game {
 
     public Player getPlayerByUsername(String username) {
         return null;
-    }
-
-    public int getTime() {
-        return time;
     }
 
     public int getTurnCounter() {
