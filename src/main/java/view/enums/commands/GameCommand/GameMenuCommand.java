@@ -7,7 +7,7 @@ public enum GameMenuCommand {
     PLACE_BUILDING("^\\s*building\\s+placement\\s*$"),
     CHANGE_ENVIRONMENT("^\\s*change\\s+environment\\s*$"),
     TRADE_MENU("^\\s*trade\\s+menu\\s*$"),
-    SHOW_MAP("^\\s*show\\s+map\\s*-x\\s+(?<x>\\S+)\\s+-y(?<y>\\S+)$"),
+    SHOW_MAP("^\\s*show\\s+map\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)$"),
     MARKET_MENU("^\\s*market\\s+menu\\s*$");
     private final String regex;
 
