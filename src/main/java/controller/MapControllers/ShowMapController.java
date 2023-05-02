@@ -52,21 +52,21 @@ public class ShowMapController {
         int xRange = ShowMapSettings.showMapWidthRange;
         int cellWidth = ShowMapSettings.cellPrintCharWidth;
         int cellHeight = ShowMapSettings.cellPrintCharHeight;
-        String output = "";
+        StringBuilder output = new StringBuilder();
         String borderLine = "-".repeat((cellWidth + 1) * (2 * xRange + 1) + 1);
         for (int i = center.y - yRange; i <= center.y + yRange; i++) {
-            output += borderLine;
+            output.append(borderLine);
             for (int l = 0; l < cellHeight; l++) {
-                output += "\n|";
+                output.append("\n|");
                 for (int j = center.x - xRange; j <= center.x + xRange; j++) {
-                    output += cellRowString(map.getCell(new Vector2D(j, i)), l);
-                    output += '|';
+                    output.append(cellRowString(map.getCell(new Vector2D(j, i)), l));
+                    output.append('|');
                 }
             }
-            output += '\n';
+            output.append('\n');
         }
-        output += borderLine;
-        return output;
+        output.append(borderLine);
+        return output.toString();
     }
 
     private String cellRowString(Cell cell, int rowNum) {

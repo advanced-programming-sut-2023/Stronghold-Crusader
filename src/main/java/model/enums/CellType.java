@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public enum CellType {
     @SerializedName("1")
-    FIELD("field", AnsiEscapeCodes.CYAN_BACKGROUND),
+    FIELD("field", AnsiEscapeCodes.YELLOW_BACKGROUND),
     @SerializedName("2")
     GRAVEL("gravel", AnsiEscapeCodes.YELLOW_BACKGROUND_BRIGHT),
     @SerializedName("3")
