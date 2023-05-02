@@ -1,4 +1,4 @@
-package model.enums;
+package model.enums.AssetType;
 
 public enum Material {
     GRAIN,

@@ -1,4 +1,4 @@
-package model.enums;
+package model.enums.AssetType;
 
 public enum BuildingType {
     HEADQUARTER("Headquarter"), LOOKOUT_TOWER("DandA"), PERIMETER_TOWER("DandA"),

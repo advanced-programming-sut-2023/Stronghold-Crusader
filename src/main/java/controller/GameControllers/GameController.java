@@ -3,8 +3,8 @@ package controller.GameControllers;
 import controller.MapControllers.BuildingPlacementController;
 import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
-import model.Game;
-import model.User;
+import model.Game.Game;
+import model.User.User;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
@@ -39,6 +39,8 @@ public class GameController {
                     showMapController.run();
                     break;
                 case "marketMenu":
+                    MarketController marketController = new MarketController(game.getCurrentPlayer(), game);
+                    marketController.run();
                     break;
             }
         }

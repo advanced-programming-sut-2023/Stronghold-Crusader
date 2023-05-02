@@ -1,8 +1,8 @@
 package controller.UserControllers;
 
 import model.Stronghold;
-import model.User;
-import model.enums.Slogan;
+import model.User.User;
+import model.enums.User.Slogan;
 import utils.Captcha;
 import utils.FormatValidation;
 import utils.Pair;

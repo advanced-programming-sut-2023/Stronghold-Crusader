@@ -1,6 +1,6 @@
 package utils;
 
-import model.enums.Material;
+import model.enums.AssetType.Material;
 
 public class Pair {
     public String x, y;

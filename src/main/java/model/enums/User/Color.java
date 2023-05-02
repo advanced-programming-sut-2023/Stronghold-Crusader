@@ -1,4 +1,4 @@
-package model.enums;
+package model.enums.User;
 
 public enum Color {
     RED, ORANGE, BLUE_LIGHT, BLUE, YELLOW, GRAY, PURPLE, GREEN;

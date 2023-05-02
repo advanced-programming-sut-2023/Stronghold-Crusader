@@ -1,9 +1,8 @@
-package model;
+package model.Game;
 
 import model.MapAsset.Building.Building;
-import model.enums.Material;
-import model.enums.Weapon;
-import utils.Pair;
+import model.enums.AssetType.Material;
+import model.enums.AssetType.Weapon;
 
 import java.util.ArrayList;
 import java.util.HashMap;

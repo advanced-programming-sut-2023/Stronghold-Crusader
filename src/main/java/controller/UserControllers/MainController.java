@@ -1,8 +1,8 @@
 package controller.UserControllers;
 
 import controller.MapControllers.MapSelectController;
-import model.User;
-import model.UserManager;
+import model.User.User;
+import model.User.UserManager;
 import view.UserMenus.MainMenu;
 
 public class MainController {

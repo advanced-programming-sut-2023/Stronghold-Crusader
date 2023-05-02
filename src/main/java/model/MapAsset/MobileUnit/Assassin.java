@@ -1,7 +1,6 @@
 package model.MapAsset.MobileUnit;
 
-import model.Player;
-import model.enums.MapAssetType;
+import model.User.Player;
 import utils.Vector2D;
 
 public class Assassin extends AttackingUnit {

@@ -2,15 +2,12 @@ package model.MapAsset.Building;
 
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
-import model.Player;
+import model.User.Player;
 import model.enums.CellType;
-import model.enums.MapAssetType;
-import model.enums.Material;
-import utils.Pair;
+import model.enums.AssetType.Material;
 import utils.Vector2D;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 //TODO complete this class
 public class Building extends MapAsset {

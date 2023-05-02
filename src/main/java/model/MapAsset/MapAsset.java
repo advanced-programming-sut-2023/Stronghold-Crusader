@@ -1,8 +1,8 @@
 package model.MapAsset;
 
 import model.MapAsset.MobileUnit.AttackingUnit;
-import model.Player;
-import model.enums.MapAssetType;
+import model.User.Player;
+import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
 public abstract class MapAsset {

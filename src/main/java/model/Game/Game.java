@@ -1,10 +1,9 @@
-package model;
+package model.Game;
 
 import model.Map.Map;
-import model.Map.MapManager;
-import model.enums.Color;
+import model.User.Player;
+import model.enums.User.Color;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game {

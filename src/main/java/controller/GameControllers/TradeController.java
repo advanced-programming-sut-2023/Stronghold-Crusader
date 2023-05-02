@@ -1,6 +1,6 @@
 package controller.GameControllers;
 
-import model.User;
+import model.User.User;
 import view.GameMenus.TradeMenu;
 
 public class TradeController {

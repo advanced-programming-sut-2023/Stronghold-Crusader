@@ -1,6 +1,4 @@
-package model.enums;
-
-import java.util.ArrayList;
+package model.enums.AssetType;
 
 @SuppressWarnings("SpellCheckingInspection")
 public enum MapAssetType {

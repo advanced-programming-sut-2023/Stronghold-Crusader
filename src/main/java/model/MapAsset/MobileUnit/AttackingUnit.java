@@ -1,8 +1,8 @@
 package model.MapAsset.MobileUnit;
 
-import model.Player;
+import model.User.Player;
 import model.enums.AttackTarget;
-import model.enums.Weapon;
+import model.enums.AssetType.Weapon;
 import utils.Vector2D;
 
 import java.util.ArrayList;

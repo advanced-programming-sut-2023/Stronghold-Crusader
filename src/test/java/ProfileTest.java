@@ -1,6 +1,6 @@
 import controller.UserControllers.ProfileController;
 import model.Stronghold;
-import model.User;
+import model.User.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import view.enums.messages.UserMessage.ProfileMessage;

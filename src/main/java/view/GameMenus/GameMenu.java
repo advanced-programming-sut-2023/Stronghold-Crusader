@@ -35,10 +35,9 @@ public class GameMenu {
                 case TRADE_MENU:
                     return "tradeMenu";
                 case SHOW_MAP:
-                    return "showMap";
+                    if (runShowMap(matcher)) return "showMap";
                 case MARKET_MENU:
-                    if (runShowMap(matcher)) return "marketMenu";
-                    break;
+                    return "marketMenu";
             }
         }
     }

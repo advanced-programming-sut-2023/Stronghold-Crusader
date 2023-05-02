@@ -2,9 +2,9 @@ package model.Map;
 
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
-import model.Player;
+import model.User.Player;
 import model.enums.CellType;
-import model.enums.MapAssetType;
+import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
 import java.util.ArrayList;

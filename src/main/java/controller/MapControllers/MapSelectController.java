@@ -2,14 +2,13 @@ package controller.MapControllers;
 
 
 import controller.GameControllers.GameController;
-import model.Game;
+import model.Game.Game;
 import model.Map.Map;
 import model.Map.MapManager;
-import model.Player;
+import model.User.Player;
 import model.Stronghold;
-import model.User;
-import model.enums.Color;
-import utils.FormatValidation;
+import model.User.User;
+import model.enums.User.Color;
 import view.MapMenus.MapSelectMenu;
 import view.enums.messages.MapMessage.MapSelectMessage;
 

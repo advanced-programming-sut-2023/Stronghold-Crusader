@@ -5,14 +5,18 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import model.Game.Store.StoreMaterial;
 import model.MapAsset.Building.*;
 import model.MapAsset.MobileUnit.*;
 import model.MapAsset.*;
-import model.enums.MapAssetType;
+import model.enums.AssetType.MapAssetType;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class ConstantManager {
@@ -60,6 +64,7 @@ public class ConstantManager {
         fillTrainingAndEmploymentBuildings(data);
         fillDefenceAndAttackBuildings(data);
         fillRemainingAssets(data);
+        fillMarketConstants();
     }
 
     public DefenseAndAttackBuilding getDefenseAndAttackBuilding(MapAssetType type) {
@@ -169,4 +174,21 @@ public class ConstantManager {
         tree = gson.fromJson(data.get(Tree.class.getName()), Tree.class);
         cliff = gson.fromJson(data.get(Cliff.class.getName()), Cliff.class);
     }
+
+    private void fillMarketConstants() {
+        try {
+            Gson gson = new Gson();
+            Reader reader = new FileReader(Settings.MARKET_CONSTANTS_PATH);
+            JsonObject json = gson.fromJson(reader, JsonObject.class);
+            reader.close();
+
+            JsonArray materialArray = json.getAsJsonArray("materials");
+            StoreMaterial[] materials = gson.fromJson(materialArray, StoreMaterial[].class);
+            ArrayList<StoreMaterial> materialList = new ArrayList<>(Arrays.asList(materials));
+            StoreMaterial.setMaterialList(materialList);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

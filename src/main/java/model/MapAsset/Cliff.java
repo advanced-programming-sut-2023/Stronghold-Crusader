@@ -1,7 +1,7 @@
 package model.MapAsset;
 
 import model.MapAsset.MobileUnit.AttackingUnit;
-import model.Player;
+import model.User.Player;
 import model.enums.CliffDirection;
 import utils.Vector2D;
 

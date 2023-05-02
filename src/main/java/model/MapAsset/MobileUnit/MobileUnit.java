@@ -2,7 +2,7 @@ package model.MapAsset.MobileUnit;
 
 import model.Map.Cell;
 import model.MapAsset.MapAsset;
-import model.Player;
+import model.User.Player;
 import utils.Vector2D;
 
 import java.util.ArrayList;

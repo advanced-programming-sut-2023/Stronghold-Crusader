@@ -1,7 +1,10 @@
-package model;
+package model.Game;
 
+import model.Game.Storage;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MobileUnit.MobileUnit;
+import model.Trade;
+import model.User.Player;
 
 import java.util.ArrayList;
 
@@ -18,7 +21,7 @@ public class Governance {
     private int Gold;
     private Storage storage;
 
-    Governance(Player player) {
+    public Governance(Player player) {
         buildings = new ArrayList<>();
         people = new ArrayList<>();
         trades = new ArrayList<>();

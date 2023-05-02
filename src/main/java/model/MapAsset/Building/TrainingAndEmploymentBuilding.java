@@ -1,8 +1,7 @@
 package model.MapAsset.Building;
 
-import model.Player;
-import model.enums.MapAssetType;
-import model.enums.People;
+import model.User.Player;
+import model.enums.AssetType.People;
 import utils.Vector2D;
 
 import java.util.ArrayList;

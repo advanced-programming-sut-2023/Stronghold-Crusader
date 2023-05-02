@@ -1,5 +1,6 @@
 package model;
 
+import model.User.Player;
 import utils.Pair;
 
 public class Trade {

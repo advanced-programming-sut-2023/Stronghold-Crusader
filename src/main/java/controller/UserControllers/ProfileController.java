@@ -1,7 +1,7 @@
 package controller.UserControllers;
 
 import model.Stronghold;
-import model.User;
+import model.User.User;
 import utils.FormatValidation;
 import view.UserMenus.ProfileMenu;
 import view.enums.messages.UserMessage.ProfileMessage;

@@ -1,5 +1,6 @@
-package model;
+package model.User;
 
+import model.Stronghold;
 import utils.*;
 
 public class User {

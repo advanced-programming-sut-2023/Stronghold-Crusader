@@ -1,5 +1,8 @@
 package model;
 
+import model.User.User;
+import model.User.UserManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,7 +42,8 @@ public class Stronghold {
     }
 
     public void updateRankings() {
-        userRankings.sort(User::compareForRanks);
+        // TODO : fix this
+//        userRankings.sort(User::compareForRanks);
     }
 
     public int getUserRank(User user) {
