@@ -67,48 +67,31 @@ public class ConstantManager {
         fillMarketConstants();
     }
 
-    public DefenseAndAttackBuilding getDefenseAndAttackBuilding(MapAssetType type) {
-        return defenseAndAttackBuildings.get(type);
-    }
-
-    public ProductionBuilding getProductionBuilding(MapAssetType type) {
-        return productionBuildings.get(type);
-    }
-
-    public SymbolicBuilding getSymbolicBuilding(MapAssetType type) {
-        return symbolicBuildings.get(type);
-    }
-
-    public TrainingAndEmploymentBuilding getTrainingAndEmploymentBuilding(MapAssetType type) {
-        return trainingAndEmploymentBuildings.get(type);
-    }
-
-    public MobileUnit getMobileUnit(MapAssetType type) {
-        return mobileUnits.get(type);
-    }
-
-    public AttackingUnit getAttackingUnit(MapAssetType type) {
-        return attackingUnits.get(type);
-    }
-
-    public Tree getTree() {
-        return tree;
-    }
-
-    public OxTether getOxTether() {
-        return oxTether;
-    }
-
-    public Store getStore() {
-        return store;
-    }
-
-    public Cliff getCliff() {
-        return cliff;
-    }
-
-    public Headquarters getHeadquarters() {
-        return headquarters;
+    public MapAsset getAsset(MapAssetType type) {
+        MapAsset asset;
+        if (type == MapAssetType.CLIFF)
+            return cliff;
+        if (type == MapAssetType.HEADQUARTER)
+            return headquarters;
+        if (type == MapAssetType.STORE)
+            return store;
+        if (type == MapAssetType.OX_TETHER)
+            return oxTether;
+        if (type == MapAssetType.TREE)
+            return tree;
+        if ((asset = attackingUnits.get(type)) != null)
+            return asset;
+        if ((asset = defenseAndAttackBuildings.get(type)) != null)
+            return asset;
+        if ((asset = productionBuildings.get(type)) != null)
+            return asset;
+        if ((asset = trainingAndEmploymentBuildings.get(type)) != null)
+            return asset;
+        if ((asset = mobileUnits.get(type)) != null)
+            return asset;
+        if ((asset = symbolicBuildings.get(type)) != null)
+            return asset;
+        return null;
     }
 
 

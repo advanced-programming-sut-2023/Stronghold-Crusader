@@ -7,6 +7,7 @@ import model.MapAsset.Building.ProductionBuilding;
 import model.MapAsset.Building.TrainingAndEmploymentBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
+import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.People;
@@ -81,7 +82,9 @@ public class SelectedBuildingController {
         int count = Integer.parseInt(inputs.get("count"));
         MapAssetType type = MapAssetType.valueOf(inputs.get("type").toUpperCase());
         //TODO If MOBILE UNIT ?
-        AttackingUnit sampleAttackingUnit = ConstantManager.getInstance().getAttackingUnit(type);
+        MobileUnit sampleMobileUnit = (MobileUnit) ConstantManager.getInstance().getAsset(type);
+        //TODO check attacking unit with instance of
+        AttackingUnit sampleAttackingUnit = null;
         if (!isWeaponEnough(sampleAttackingUnit, count))
             return SelectedBuildingMessage.WEAPON_NEEDED;
         if (!isGoldEnough(sampleAttackingUnit.getCost(), count))

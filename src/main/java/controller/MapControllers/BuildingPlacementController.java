@@ -44,7 +44,7 @@ public class BuildingPlacementController {
 
         CellType targetCellType = map.getCell(coordinate).getType();
         MapAssetType assetType = MapAssetType.getMapAssetType(buildingTypeName);
-        Building reference = getReference(assetType);
+        Building reference = (Building) ConstantManager.getInstance().getAsset(assetType);
 
         if (!reference.isCellTypeValid(targetCellType)) return BuildingPlacementMessage.INVALID_CELL_TYPE;
         if (!currentPlayer.getGovernance().getStorage().hasEnoughMaterial(reference))
@@ -54,34 +54,6 @@ public class BuildingPlacementController {
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
-    }
-
-    private Building getReference(MapAssetType assetType) {
-        Building reference = null;
-        switch (buildingCategory) {
-            case "DandA":
-                reference = ConstantManager.getInstance().getDefenseAndAttackBuilding(assetType);
-                break;
-            case "Production":
-                reference = ConstantManager.getInstance().getProductionBuilding(assetType);
-                break;
-            case "TAndA":
-                reference = ConstantManager.getInstance().getTrainingAndEmploymentBuilding(assetType);
-                break;
-            case "Symbolic":
-                reference = ConstantManager.getInstance().getSymbolicBuilding(assetType);
-                break;
-            case "Headquarter":
-                reference = ConstantManager.getInstance().getHeadquarters();
-                break;
-            case "Store":
-                reference = ConstantManager.getInstance().getStore();
-                break;
-            case "OxTether":
-                reference = ConstantManager.getInstance().getOxTether();
-                break;
-        }
-        return reference;
     }
 
     private Building createBuilding(Player owner, Vector2D coordinate, Building reference){

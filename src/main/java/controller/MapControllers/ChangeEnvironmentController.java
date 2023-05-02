@@ -6,20 +6,22 @@ import model.MapAsset.Building.Headquarters;
 import model.MapAsset.Cliff;
 import model.MapAsset.Tree;
 import model.enums.*;
+import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 import view.MapMenus.ChangeEnvironmentMenu;
 import view.enums.messages.MapMessage.MapMakerMessage;
 
 public class ChangeEnvironmentController {
     private Map map;
-    public ChangeEnvironmentController(Map map){
+
+    public ChangeEnvironmentController(Map map) {
         this.map = map;
     }
 
-    public void run(){
+    public void run() {
         ChangeEnvironmentMenu menu = new ChangeEnvironmentMenu(this);
-        while (true){
-            if(menu.run().equals("back")) return;
+        while (true) {
+            if (menu.run().equals("back")) return;
         }
     }
 
@@ -66,7 +68,7 @@ public class ChangeEnvironmentController {
         if (cliffDirection == null) return MapMakerMessage.INVALID_DIRECTION;
         if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
 
-        Cliff cliff = new Cliff(ConstantManager.getInstance().getCliff(), coordinate, null, cliffDirection);
+        Cliff cliff = new Cliff((Cliff) ConstantManager.getInstance().getAsset(MapAssetType.CLIFF), coordinate, null, cliffDirection);
         map.addMapObject(coordinate, cliff);
         return MapMakerMessage.DROP_ROCK_SUCCESS;
     }
@@ -78,7 +80,7 @@ public class ChangeEnvironmentController {
         if (!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         // TODO : invalid TargetCellType error
 //        if (map.getCell(coordinate).getType() )
-        Tree tree = new Tree(ConstantManager.getInstance().getTree(), coordinate, null, type);
+        Tree tree = new Tree((Tree) ConstantManager.getInstance().getAsset(MapAssetType.TREE), coordinate, null, type);
         map.addMapObject(coordinate, tree);
         return MapMakerMessage.DROP_TREE_SUCCESS;
     }
