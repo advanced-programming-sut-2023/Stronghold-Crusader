@@ -33,10 +33,31 @@ public class MarketMenu {
                     System.out.println(marketController.showPriceList());
                     break;
                 case BUY:
+                    runBuy(matcher);
                     break;
                 case SELL:
+                    runSell(matcher);
                     break;
             }
         }
+    }
+
+    public boolean confirm(String output){
+        System.out.println(output);
+        String input = scanner.nextLine();
+        if (input.matches("[yY]")) return true;
+        return false;
+    }
+
+    private void runBuy(Matcher matcher){
+        String materialName = matcher.group("item");
+        int amount = Integer.parseInt(matcher.group("amount"));
+        System.out.println(marketController.buy(materialName, amount));
+    }
+
+    private void runSell(Matcher matcher){
+        String materialName = matcher.group("item");
+        int amount = Integer.parseInt(matcher.group("amount"));
+        System.out.println(marketController.sell(materialName, amount));
     }
 }

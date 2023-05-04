@@ -31,7 +31,7 @@ public enum Material {
     PIKE,
     HORSE;
 
-    public static boolean isContains(String input) {
+    public static boolean Contains(String input) {
 
         for (Material m : Material.values()) {
             if (m.name().equals(input)) {
@@ -39,5 +39,14 @@ public enum Material {
             }
         }
         return false;
+    }
+
+    public static Material getMaterial(String materialName){
+        for (Material m : Material.values()) {
+            if (m.name().equals(materialName)) {
+                return m;
+            }
+        }
+        return null;
     }
 }

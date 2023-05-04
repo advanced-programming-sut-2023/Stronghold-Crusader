@@ -29,7 +29,7 @@ public class TradeController {
     public TradeMenuMessage request(HashMap<String, String> inputs) {
         if (hasEmptyFieldInRequest(inputs))
             return TradeMenuMessage.EMPTY_FIELD;
-        if (!Material.isContains(inputs.get("resourceType").toUpperCase()))
+        if (!Material.Contains(inputs.get("resourceType").toUpperCase()))
             return TradeMenuMessage.INVALID_MATERIAL;
         if (!SignupAndLoginUtils.isNumberValid(inputs.get("resourceAmount")) ||
                 !SignupAndLoginUtils.isNumberValid(inputs.get("price")))

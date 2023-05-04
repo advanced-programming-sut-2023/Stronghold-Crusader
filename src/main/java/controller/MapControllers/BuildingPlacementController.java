@@ -47,9 +47,9 @@ public class BuildingPlacementController {
         Building reference = (Building) ConstantManager.getInstance().getAsset(assetType);
 
         if (!reference.isCellTypeValid(targetCellType)) return BuildingPlacementMessage.INVALID_CELL_TYPE;
-        if (!currentPlayer.getGovernance().getStorage().hasEnoughMaterial(reference))
+        if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(), reference.getNumberOfMaterialNeeded()))
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
-        // TODO : Handle material change
+
         // TODO : Handel workers
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
