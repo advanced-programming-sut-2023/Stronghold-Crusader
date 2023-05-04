@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public enum TradeMenuCommand {
     REQUEST("\\s*trade((\\s+-t\\s+(?<resourceType>\\S+))|(\\s+-a\\s+(?<resourceType>\\S+))" +
             "|(\\s+-p\\s+(?<price>\\S+))|(\\s+-m\\s+(?<message>\\S+|(\"[^\"]+\"))))*\\s*"),
+    TRADE_LIST("\\s*trade\\s+list\\s*"),
 
     BACK("\\s*back\\s*");
 

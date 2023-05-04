@@ -30,6 +30,8 @@ public class TradeMenu {
             switch (typeOfCommand){
                 case REQUEST:
                     requestRun(matcher);
+                case TRADE_LIST:
+                    tradeListRun();
                 case BACK:
                     return "back";
             }
@@ -39,5 +41,8 @@ public class TradeMenu {
     private void requestRun(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher,TradeMenuCommand.REQUEST.getRegex());
         tradeController.request(inputs).printMessage();
+    }
+    private void tradeListRun() {
+        System.out.println(tradeController.showTrades());
     }
 }

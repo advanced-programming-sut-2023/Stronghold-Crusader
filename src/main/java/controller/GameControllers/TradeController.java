@@ -38,10 +38,19 @@ public class TradeController {
         int resourceAmount = Integer.parseInt(inputs.get("resourceAmount"));
         Material resourceType = Material.valueOf(inputs.get("resourceType").toUpperCase());
 
-        if (game.getCurrentPlayer().getGovernance().getStorage().getMaterialCapacity(resourceType) < resourceAmount)
-            return TradeMenuMessage.MATERIAL_NEEDED;
+        if (game.getCurrentPlayer().getGovernance().getGold() < Integer.parseInt(inputs.get("price")))
+            return TradeMenuMessage.GOLD_NEEDED;
         addTrade(resourceType, resourceAmount, Integer.parseInt(inputs.get("price")), inputs.get("message"));
         return TradeMenuMessage.REQUEST_SUCCESS;
+    }
+
+    public String showTrades() {
+        StringBuilder result = new StringBuilder();
+        if (trades.size() == 0) return "There are not trades!";
+        for (Trade trade : trades) {
+            result.append(trade.toString()).append("\n");
+        }
+        return result.toString();
     }
 
     private boolean hasEmptyFieldInRequest(HashMap<String, String> inputs) {

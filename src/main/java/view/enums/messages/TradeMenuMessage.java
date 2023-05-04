@@ -5,6 +5,7 @@ public enum TradeMenuMessage {
     INVALID_MATERIAL("Invalid material"),
     INVALID_AMOUNT("The number of requested gold or amount of resource is not valid "),
     MATERIAL_NEEDED("There is not enough of this material in the storage"),
+    GOLD_NEEDED("Gold is not enough"),
     REQUEST_SUCCESS("Request added successfully"),
 
     INVALID_COMMAND("invalid command!");

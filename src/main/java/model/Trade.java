@@ -63,4 +63,19 @@ public class Trade {
     public void accept() {
         acceptanceMode = true;
     }
+
+    @Override
+    public String toString() {
+        String trade = (price == 0) ? "Donation" : "Request";
+        return trade + "{" +
+                "id=" + id +
+                ", acceptanceMode=" + acceptanceMode +
+                ", owner=" + owner +
+                ", acceptor=" + acceptor +
+                ", price=" + price +
+                ", info=" + info +
+                ", message='" + message + '\'' +
+                ", acceptorMessage='" + acceptorMessage + '\'' +
+                '}';
+    }
 }
