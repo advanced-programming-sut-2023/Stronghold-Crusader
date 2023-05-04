@@ -29,7 +29,6 @@ public class ConstantManager {
     private HashMap<MapAssetType, TrainingAndEmploymentBuilding> trainingAndEmploymentBuildings;
     private Store store;
     private OxTether oxTether;
-    private Headquarters headquarters;
     private Tree tree;
     private Cliff cliff;
     private Building wall;
@@ -72,8 +71,6 @@ public class ConstantManager {
         MapAsset asset;
         if (type == MapAssetType.CLIFF)
             return cliff;
-        if (type == MapAssetType.HEADQUARTER)
-            return headquarters;
         if (type == MapAssetType.STORE)
             return store;
         if (type == MapAssetType.OX_TETHER)
@@ -154,7 +151,6 @@ public class ConstantManager {
         Gson gson = new Gson();
         store = gson.fromJson(data.get(Store.class.getName()), Store.class);
         oxTether = gson.fromJson(data.get(OxTether.class.getName()), OxTether.class);
-        headquarters = gson.fromJson(data.get(Headquarters.class.getName()), Headquarters.class);
         tree = gson.fromJson(data.get(Tree.class.getName()), Tree.class);
         cliff = gson.fromJson(data.get(Cliff.class.getName()), Cliff.class);
         wall = gson.fromJson(data.get(Building.class.getName()), Building.class);

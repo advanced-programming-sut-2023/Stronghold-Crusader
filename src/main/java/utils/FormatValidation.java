@@ -8,7 +8,7 @@ public enum FormatValidation {
     YES("Y|y.+"),
     NO("N|n.+"),
     BOOLEAN_ANSWER("t|T|f|F"),
-    BUILDING_CATEGORY("Headquarter|DandA|Production|TAndA|Symbolic|Store|OxTether");
+    BUILDING_CATEGORY("DandA|Production|TAndA|Symbolic|Store|OxTether");
 
 
     private final String regex;

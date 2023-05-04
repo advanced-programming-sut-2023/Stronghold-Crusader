@@ -49,7 +49,7 @@ public class BuildingPlacementController {
         if (!reference.isCellTypeValid(targetCellType)) return BuildingPlacementMessage.INVALID_CELL_TYPE;
         if (!currentPlayer.getGovernance().getStorage().hasEnoughMaterial(reference))
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
-
+        // TODO : Handle material change
         // TODO : Handel workers
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
@@ -70,9 +70,6 @@ public class BuildingPlacementController {
                 break;
             case "Symbolic":
                 building = new SymbolicBuilding((SymbolicBuilding) reference, coordinate, owner);
-                break;
-            case "Headquarter":
-                building = new Headquarters((Headquarters) reference, coordinate, owner);
                 break;
             case "Store":
                 building = new Store((Store) reference, coordinate, owner);

@@ -2,7 +2,6 @@ package controller.MapControllers;
 
 import model.ConstantManager;
 import model.Map.Map;
-import model.MapAsset.Building.Headquarters;
 import model.MapAsset.Cliff;
 import model.MapAsset.Tree;
 import model.enums.*;

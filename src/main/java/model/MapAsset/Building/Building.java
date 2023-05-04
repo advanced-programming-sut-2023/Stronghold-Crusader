@@ -15,7 +15,7 @@ public class Building extends MapAsset {
     private int neededMaterialAmount;
     private final int cost;
     private int workerNumber;
-    private ArrayList<CellType> buildingGroundType;
+    private final ArrayList<CellType> buildingGroundType;
 
     public Building(Building reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);

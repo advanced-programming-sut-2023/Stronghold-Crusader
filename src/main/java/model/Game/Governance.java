@@ -15,6 +15,7 @@ public class Governance {
     private final ArrayList<Building> buildings;
     private final ArrayList<MobileUnit> people;
     private int population;
+    private int populationCapacity;
     private int popularity;
     private int foodRate;
     private int taxRate;
@@ -38,16 +39,8 @@ public class Governance {
         return population;
     }
 
-    public void setPopulation(int population) {
-        this.population = population;
-    }
-
     public int getPopularity() {
         return popularity;
-    }
-
-    public void setPopularity(int popularity) {
-        this.popularity = popularity;
     }
 
     public int getFoodRate() {
@@ -97,10 +90,14 @@ public class Governance {
 
     public void addBuilding(Building building) {
         buildings.add(building);
+        if (building instanceof SymbolicBuilding)
+            populationCapacity += ((SymbolicBuilding) building).getPopulationAmount();
     }
 
     public void removeBuilding(Building building) {
         buildings.remove(building);
+        if (building instanceof SymbolicBuilding)
+            populationCapacity -= ((SymbolicBuilding) building).getPopulationAmount();
     }
 
     public int getStorageStock(Material material) {
