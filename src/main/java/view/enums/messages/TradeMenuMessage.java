@@ -7,6 +7,9 @@ public enum TradeMenuMessage {
     MATERIAL_NEEDED("There is not enough of this material in the storage"),
     GOLD_NEEDED("Gold is not enough"),
     REQUEST_SUCCESS("Request added successfully"),
+    INVALID_ID("there is not any trade with this id"),
+    ACCEPTED("trade accepted successfully"),
+    ALREADY_ACCEPTED("this trade already accepted"),
 
     INVALID_COMMAND("invalid command!");
 

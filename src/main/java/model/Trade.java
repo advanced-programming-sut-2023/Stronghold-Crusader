@@ -52,9 +52,6 @@ public class Trade {
         return message;
     }
 
-    public boolean isAcceptanceMode() {
-        return acceptanceMode;
-    }
 
     public String getAcceptorMessage() {
         return acceptorMessage;
@@ -62,6 +59,7 @@ public class Trade {
 
     public void accept() {
         acceptanceMode = true;
+        owner.getNewTrades().add(this);
     }
 
     @Override
@@ -77,5 +75,9 @@ public class Trade {
                 ", message='" + message + '\'' +
                 ", acceptorMessage='" + acceptorMessage + '\'' +
                 '}';
+    }
+    public String showAcceptedTrade() {
+        assert acceptor != null;
+        return "the trade with id:[" + id + "]" + "accepted by " + acceptor.getUsername() + "\nmessage:" + acceptorMessage;
     }
 }

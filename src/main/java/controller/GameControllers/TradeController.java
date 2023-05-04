@@ -44,13 +44,47 @@ public class TradeController {
         return TradeMenuMessage.REQUEST_SUCCESS;
     }
 
-    public String showTrades() {
-        StringBuilder result = new StringBuilder();
+    public String showAllTrades() {
         if (trades.size() == 0) return "There are not trades!";
+        StringBuilder result = new StringBuilder();
+        result.append("all trades:").append("\n");
         for (Trade trade : trades) {
             result.append(trade.toString()).append("\n");
         }
         return result.toString();
+    }
+
+    public String tradeHistory() {
+        StringBuilder result = new StringBuilder();
+        for (Trade trade : trades) {
+            if (trade.getOwner() == game.getCurrentPlayer() || trade.getAcceptor() == game.getCurrentPlayer())
+                result.append(trade).append("\n");
+        }
+        if (result.length() == 0) return "you don't have any trades yet!";
+        return result.toString();
+    }
+
+    public String showNewTradesForPlayer() {
+        if (game.getCurrentPlayer().getNewTrades().size() == 0) return "You don't have any new trades";
+        StringBuilder result = new StringBuilder();
+        for (Trade trade : game.getCurrentPlayer().getNewTrades()) {
+            if (trade.getOwner().equals(game.getCurrentPlayer()))
+                result.append(trade.showAcceptedTrade()).append("\n");
+        }
+        result.append("new Trades :").append("\n");
+        for (Trade trade : game.getCurrentPlayer().getNewTrades()) {
+            result.append(trade.toString()).append("\n");
+        }
+        game.getCurrentPlayer().getNewTrades().clear();
+        return result.toString();
+    }
+
+    public TradeMenuMessage accept_trade(HashMap<String, String> inputs) {
+        Trade trade = getTradeById(Integer.parseInt(inputs.get("id")));
+        if (trade == null)
+            return TradeMenuMessage.INVALID_ID;
+      //  if (game.getCurrentPlayer().getGovernance().getStorage().)
+        return null;
     }
 
     private boolean hasEmptyFieldInRequest(HashMap<String, String> inputs) {
@@ -64,5 +98,13 @@ public class TradeController {
         for (Player player : game.getPlayers()) {
             if (!player.equals(game.getCurrentPlayer())) player.getNewTrades().add(newTrade);
         }
+    }
+
+    private Trade getTradeById(int id) {
+        for (Trade trade : trades) {
+            if (id == trade.getId())
+                return trade;
+        }
+        return null;
     }
 }

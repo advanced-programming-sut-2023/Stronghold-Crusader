@@ -17,6 +17,7 @@ public class TradeMenu {
     }
 
     public String run() {
+        System.out.println(tradeController.showNewTradesForPlayer());
         String nextCommand;
         Matcher matcher;
         while (true) {
@@ -27,11 +28,15 @@ public class TradeMenu {
                 continue;
             }
             matcher = TradeMenuCommand.getMatcher(nextCommand, typeOfCommand);
-            switch (typeOfCommand){
+            switch (typeOfCommand) {
                 case REQUEST:
                     requestRun(matcher);
+                case ACCEPT_TRADE:
+                    acceptTradeRun(matcher);
                 case TRADE_LIST:
                     tradeListRun();
+                case TRADE_HISTORY:
+                    tradeHistoryRun();
                 case BACK:
                     return "back";
             }
@@ -39,10 +44,20 @@ public class TradeMenu {
     }
 
     private void requestRun(Matcher matcher) {
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher,TradeMenuCommand.REQUEST.getRegex());
+        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
         tradeController.request(inputs).printMessage();
     }
+
     private void tradeListRun() {
-        System.out.println(tradeController.showTrades());
+        System.out.println(tradeController.showAllTrades());
+    }
+
+    private void tradeHistoryRun() {
+        System.out.println(tradeController.tradeHistory());
+    }
+
+    private void acceptTradeRun(Matcher matcher) {
+        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.ACCEPT_TRADE.getRegex());
+        tradeController.accept_trade(inputs).printMessage();
     }
 }

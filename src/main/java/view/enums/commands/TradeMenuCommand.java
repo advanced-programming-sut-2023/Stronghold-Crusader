@@ -7,6 +7,8 @@ public enum TradeMenuCommand {
     REQUEST("\\s*trade((\\s+-t\\s+(?<resourceType>\\S+))|(\\s+-a\\s+(?<resourceType>\\S+))" +
             "|(\\s+-p\\s+(?<price>\\S+))|(\\s+-m\\s+(?<message>\\S+|(\"[^\"]+\"))))*\\s*"),
     TRADE_LIST("\\s*trade\\s+list\\s*"),
+    TRADE_HISTORY("\\s*trade\\s+history\\s*"),
+    ACCEPT_TRADE("\\s*trade\\s+accept\\s+-i\\s+(?<id>\\d+)\\s+-m\\s+(?<message>\\S+|(\"[^\"]+\"))"),
 
     BACK("\\s*back\\s*");
 
