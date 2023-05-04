@@ -27,15 +27,7 @@ public class Storage {
         return materials;
     }
 
-    public int getWeaponCapacity() {
-        return weaponCapacity;
-    }
-
-    public int getFoodStuckCapacity() {
-        return foodStuckCapacity;
-    }
-
-    public int getMaterialCapacity() {
+    public int getMaterialCapacity(Material material) {
         return materialCapacity;
     }
 

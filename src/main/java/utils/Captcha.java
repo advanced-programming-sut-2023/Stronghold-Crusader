@@ -44,7 +44,7 @@ public class Captcha {
     private static BufferedImage textToImage(String displayCode) {
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
-        Font font = new Font("Arial", Font.PLAIN, 18);
+        Font font = new Font("Arial", Font.PLAIN, 30);
         g2d.setFont(font);
         FontMetrics fm = g2d.getFontMetrics();
         int width = fm.stringWidth(displayCode);

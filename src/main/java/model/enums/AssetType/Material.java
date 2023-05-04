@@ -20,5 +20,15 @@ public enum Material {
     ROCKBLOCK,
     PITCH,
     WINE,
-    MEAT
+    MEAT;
+
+    public static boolean isContains(String input) {
+
+        for (Material m : Material.values()) {
+            if (m.name().equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

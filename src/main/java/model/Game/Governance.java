@@ -1,9 +1,7 @@
 package model.Game;
 
-import model.Game.Storage;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MobileUnit.MobileUnit;
-import model.Trade;
 import model.User.Player;
 
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import java.util.ArrayList;
 public class Governance {
     private final ArrayList<Building> buildings;
     private final ArrayList<MobileUnit> people;
-    private final ArrayList<Trade> trades;
     private int population;
     private int popularity;
     private int foodRate;
@@ -19,12 +16,11 @@ public class Governance {
     private int religionRate;
     private int fearRate;
     private int Gold;
-    private Storage storage;
+    private final Storage storage;
 
     public Governance(Player player) {
         buildings = new ArrayList<>();
         people = new ArrayList<>();
-        trades = new ArrayList<>();
         population = 50;
         popularity = -8;
         foodRate = -8;

@@ -4,6 +4,7 @@ import model.Map.Map;
 import model.User.Player;
 import model.enums.User.Color;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Game {
@@ -46,5 +47,9 @@ public class Game {
 
     public Enum getGameState() {
         return null;
+    }
+
+    public Collection<Player> getPlayers() {
+        return players.values();
     }
 }
