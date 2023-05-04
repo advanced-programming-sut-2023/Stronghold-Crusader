@@ -83,8 +83,19 @@ public class TradeController {
         Trade trade = getTradeById(Integer.parseInt(inputs.get("id")));
         if (trade == null)
             return TradeMenuMessage.INVALID_ID;
-      //  if (game.getCurrentPlayer().getGovernance().getStorage().)
-        return null;
+
+        int amount = Integer.parseInt(trade.getInfo().y);
+        Material material = Material.valueOf(trade.getInfo().x.toUpperCase());
+        if (game.getCurrentPlayer().getGovernance().getStorageCapacity(material)
+                < amount)
+            return TradeMenuMessage.MATERIAL_NEEDED;
+        if (trade.isAccepted())
+            return TradeMenuMessage.ALREADY_ACCEPTED;
+        game.getCurrentPlayer().getGovernance().changeStorageStock(material, -1 * amount);
+        game.getCurrentPlayer().getGovernance().changeGold(trade.getPrice());
+        trade.setAcceptorMessage(inputs.get("message"));
+        trade.accept();
+        return TradeMenuMessage.ACCEPTED;
     }
 
     private boolean hasEmptyFieldInRequest(HashMap<String, String> inputs) {

@@ -32,7 +32,7 @@ public class Trade {
         return id;
     }
 
-    public boolean getAcceptanceMode() {
+    public boolean isAccepted() {
         return acceptanceMode;
     }
 
@@ -52,14 +52,18 @@ public class Trade {
         return message;
     }
 
-
-    public String getAcceptorMessage() {
-        return acceptorMessage;
+    public int getPrice() {
+        return price;
     }
+
 
     public void accept() {
         acceptanceMode = true;
         owner.getNewTrades().add(this);
+    }
+
+    public void setAcceptorMessage(String acceptorMessage) {
+        this.acceptorMessage = acceptorMessage;
     }
 
     @Override
@@ -76,6 +80,7 @@ public class Trade {
                 ", acceptorMessage='" + acceptorMessage + '\'' +
                 '}';
     }
+
     public String showAcceptedTrade() {
         assert acceptor != null;
         return "the trade with id:[" + id + "]" + "accepted by " + acceptor.getUsername() + "\nmessage:" + acceptorMessage;

@@ -81,21 +81,25 @@ public class SelectedBuildingController {
 
         int count = Integer.parseInt(inputs.get("count"));
         MapAssetType type = MapAssetType.valueOf(inputs.get("type").toUpperCase());
-        //TODO If MOBILE UNIT ?
+
         MobileUnit sampleMobileUnit = (MobileUnit) ConstantManager.getInstance().getAsset(type);
-        //TODO check attacking unit with instance of
-        AttackingUnit sampleAttackingUnit = null;
-        if (!isWeaponEnough(sampleAttackingUnit, count))
+
+        AttackingUnit sampleAttackingUnit = (sampleMobileUnit instanceof AttackingUnit) ?
+                (AttackingUnit) sampleMobileUnit : null;
+        if (sampleAttackingUnit != null && !isWeaponEnough(sampleAttackingUnit, count))
             return SelectedBuildingMessage.WEAPON_NEEDED;
-        if (!isGoldEnough(sampleAttackingUnit.getCost(), count))
+        if (!isGoldEnough(sampleMobileUnit.getCost(), count))
             return SelectedBuildingMessage.GOLD_NEEDED;
-        player.getGovernance().setGold(player.getGovernance().getGold() - sampleAttackingUnit.getCost() * count);
-        player.getGovernance().getStorage().changeStorageStock(sampleAttackingUnit.getWeapons(), count);
+
+        player.getGovernance().changeGold(-1 * sampleMobileUnit.getCost() * count);
+        if (sampleAttackingUnit != null) {
+            for (Material weapon : sampleAttackingUnit.getWeapons())
+                player.getGovernance().changeStorageStock(weapon, -1 * count);
+        }
         for (int i = 0; i < count; i++) {
-            AttackingUnit attackingUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
-            map.getCell(attackingUnit.getCoordinate()).addMapAsset(sampleAttackingUnit);
-            //TODO if units in governance gone ...
-            player.getGovernance().addPeople(attackingUnit);
+            MobileUnit mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
+            map.getCell(mobileUnit.getCoordinate()).addMapAsset(sampleMobileUnit);
+            player.getGovernance().addPeople(mobileUnit);
         }
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
     }
@@ -109,7 +113,7 @@ public class SelectedBuildingController {
             case BARRACK:
                 return people.checkType("European");
             case MERCENARY_POST:
-                return  people.checkType("Arabian");
+                return people.checkType("Arabian");
             case ENGINEER_GUILD:
                 return people.checkType("Engineer");
         }
@@ -117,9 +121,8 @@ public class SelectedBuildingController {
     }
 
     private boolean isWeaponEnough(AttackingUnit attackingUnit, int count) {
-        //TODO if enums change ...
         for (Material weapon : attackingUnit.getWeapons()) {
-            if (player.getGovernance().getStorage().getStorageCurrentStock(weapon) < count) return false;
+            if (player.getGovernance().getStorageStock(weapon) < count) return false;
         }
         return true;
     }

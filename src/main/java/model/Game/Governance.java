@@ -86,8 +86,9 @@ public class Governance {
         return Gold;
     }
 
-    public void setGold(int gold) {
-        Gold = gold;
+    //TODO HANDLE SET GOLD PROBLEM...
+    public void changeGold(int gold) {
+        Gold += gold;
     }
 
     public void addPeople(MobileUnit mobileUnit) {
