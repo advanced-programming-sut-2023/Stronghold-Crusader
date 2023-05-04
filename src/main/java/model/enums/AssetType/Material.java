@@ -29,5 +29,15 @@ public enum Material {
     CROSS_BOW,
     SPEAR,
     PIKE,
-    HORSE
+    HORSE;
+
+    public static boolean isContains(String input) {
+
+        for (Material m : Material.values()) {
+            if (m.name().equals(input)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

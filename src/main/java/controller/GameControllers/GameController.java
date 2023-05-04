@@ -32,7 +32,7 @@ public class GameController {
                     controller.run();
                     break;
                 case "tradeMenu":
-                    TradeController tradeController = new TradeController(currentUser);
+                    TradeController tradeController = new TradeController(game);
                     tradeController.run();
                     break;
                 case "showMap":

@@ -22,7 +22,7 @@ public class SignupAndLoginUtils {
     public static boolean isNumberValid(String count) {
         try {
             int number = Integer.parseInt(count);
-            if (number <= 0) return false;
+            if (number < 0) return false;
         } catch (NumberFormatException ex) {
             return false;
         }

@@ -10,8 +10,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class GameMenu {
-    private GameController gameController;
-    private Scanner scanner;
+    private final GameController gameController;
+    private final Scanner scanner;
 
     public GameMenu(GameController gameController) {
         this.gameController = gameController;

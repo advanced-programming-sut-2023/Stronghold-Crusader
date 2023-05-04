@@ -1,18 +1,23 @@
 package model.User;
 
 import model.Game.Governance;
+import model.Trade;
+
+import java.util.ArrayList;
 
 public class Player {
-    private Governance governance;
+    private final Governance governance;
     private final String username;
     private final String nickname;
     private final String slogan;
+    private final ArrayList<Trade> newTrades;
 
     public Player(User user) {
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         this.slogan = user.getSlogan();
         governance = new Governance(this);
+        newTrades = new ArrayList<>();
     }
 
     public String getUsername() {
@@ -29,5 +34,9 @@ public class Player {
 
     public Governance getGovernance() {
         return governance;
+    }
+
+    public ArrayList<Trade> getNewTrades() {
+        return newTrades;
     }
 }
