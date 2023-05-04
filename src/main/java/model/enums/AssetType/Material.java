@@ -1,24 +1,33 @@
 package model.enums.AssetType;
 
 public enum Material {
+    //Main foods
+    MEAT,
+    APPLE,
+    BREAD,
+    CHEESE,
+
+    //Other
     GRAIN,
     BEAR,
     FLOUR,
-    BREAD,
     WHEAT,
-    CHEESE,
-    APPLE,
     WOOD,
     STONE,
     SPEAL,
     PICK,
-    BOW,
-    IRON,
-    ARMOUR,
-    MACE,
-    SWORD,
     ROCKBLOCK,
     PITCH,
     WINE,
-    MEAT
+    IRON,
+
+    //Weapons
+    ARMOUR,
+    MACE,
+    SWORD,
+    BOW,
+    CROSS_BOW,
+    SPEAR,
+    PIKE,
+    HORSE
 }
