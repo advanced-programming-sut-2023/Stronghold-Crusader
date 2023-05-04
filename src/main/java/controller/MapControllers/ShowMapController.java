@@ -5,9 +5,11 @@ import Settings.ShowMapSettings;
 import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
+import model.MapAsset.Cliff;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.MapAsset.Tree;
+import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import utils.Vector2D;
 import view.MapMenus.ShowMapMenu;
@@ -20,6 +22,14 @@ public class ShowMapController {
     public ShowMapController(Map map, Vector2D center) {
         this.map = map;
         this.center = center;
+    }
+
+    public static boolean isCenterValid(Vector2D coordinate, Map map) {
+        Vector2D mapSize = map.getSize();
+        int xRange = ShowMapSettings.showMapWidthRange;
+        int yRange = ShowMapSettings.showMapHeightRange;
+        return coordinate.x >= xRange && coordinate.y >= yRange &&
+                coordinate.y + yRange < mapSize.y && coordinate.x + xRange < mapSize.x;
     }
 
     public void run() {
@@ -73,14 +83,17 @@ public class ShowMapController {
         StringBuilder str = new StringBuilder();
         int cellWidth = ShowMapSettings.cellPrintCharWidth;
         int cellHeight = ShowMapSettings.cellPrintCharHeight;
-        //TODO add walls (W) support
         for (MapAsset asset : cell.getAllAssets()) {
-            if (asset instanceof Building)
+            if (asset.getType() == MapAssetType.WALL)
+                str.append('W');
+            else if (asset instanceof Building)
                 str.append('B');
-            if (asset instanceof MobileUnit)
+            else if (asset instanceof MobileUnit)
                 str.append('S');
-            if (asset instanceof Tree)
+            else if (asset instanceof Tree)
                 str.append('T');
+            else if (asset instanceof Cliff)
+                str.append('C');
         }
         str.append("#".repeat(Math.max(0, cellWidth * cellHeight - str.length())));
         String substring = str.substring(rowNum * cellWidth, (rowNum + 1) * cellWidth);
@@ -90,13 +103,5 @@ public class ShowMapController {
     private String colorizeBasedOnCellType(String str, CellType cellType) {
         String colorCode = cellType.getAsniColor();
         return colorCode + str + AnsiEscapeCodes.RESET;
-    }
-
-    public static boolean isCenterValid(Vector2D coordinate, Map map) {
-        Vector2D mapSize = map.getSize();
-        int xRange = ShowMapSettings.showMapWidthRange;
-        int yRange = ShowMapSettings.showMapHeightRange;
-        return coordinate.x >= xRange && coordinate.y >= yRange &&
-                coordinate.y + yRange < mapSize.y && coordinate.x + xRange < mapSize.x;
     }
 }
