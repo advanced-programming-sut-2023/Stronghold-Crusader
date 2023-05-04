@@ -1,10 +1,15 @@
 package model.Game;
 
 import model.MapAsset.Building.Building;
+import model.MapAsset.Building.SymbolicBuilding;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
+import model.enums.AssetType.Material;
 
 import java.util.ArrayList;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class Governance {
     private final ArrayList<Building> buildings;
@@ -16,7 +21,6 @@ public class Governance {
     private int religionRate;
     private int fearRate;
     private int Gold;
-    private final Storage storage;
 
     public Governance(Player player) {
         buildings = new ArrayList<>();
@@ -28,64 +32,58 @@ public class Governance {
         religionRate = 0;
         fearRate = 0;
         Gold = 1000;
-        storage = new Storage();
     }
 
     public int getPopulation() {
         return population;
     }
 
-    public int getPopularity() {
-        return popularity;
-    }
-
-    public int getFoodRate() {
-        return foodRate;
-    }
-
-    public int getTaxRate() {
-        return taxRate;
-    }
-
-    public int getReligionRate() {
-        return religionRate;
-    }
-
-    public int getFearRate() {
-        return fearRate;
-    }
-
-    public int getGold() {
-        return Gold;
-    }
-
-
-    public Storage getStorage() {
-        return storage;
-    }
-
     public void setPopulation(int population) {
         this.population = population;
+    }
+
+    public int getPopularity() {
+        return popularity;
     }
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
     }
 
+    public int getFoodRate() {
+        return foodRate;
+    }
+
     public void setFoodRate(int foodRate) {
         this.foodRate = foodRate;
+    }
+
+    public int getTaxRate() {
+        return taxRate;
     }
 
     public void setTaxRate(int taxRate) {
         this.taxRate = taxRate;
     }
 
+    public int getReligionRate() {
+        return religionRate;
+    }
+
     public void setReligionRate(int religionRate) {
         this.religionRate = religionRate;
     }
 
+    public int getFearRate() {
+        return fearRate;
+    }
+
     public void setFearRate(int fearRate) {
         this.fearRate = fearRate;
+    }
+
+    public int getGold() {
+        return Gold;
     }
 
     public void setGold(int gold) {
@@ -99,6 +97,64 @@ public class Governance {
     public void addBuilding(Building building) {
         buildings.add(building);
     }
-    public void removeBuilding(Building building){ buildings.remove(building);}
+
+    public void removeBuilding(Building building) {
+        buildings.remove(building);
+    }
+
+    public int getStorageStock(Material material) {
+        int stock = 0;
+        for (Building building : buildings) {
+            if (!(building instanceof SymbolicBuilding))
+                continue;
+            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
+            if (symbolicBuilding.hasMaterial(material))
+                stock += symbolicBuilding.getStock(material);
+        }
+        return stock;
+    }
+
+    public int getStorageCapacity(Material material) {
+        int capacitySum = 0;
+        for (Building building : buildings) {
+            if (!(building instanceof SymbolicBuilding))
+                continue;
+            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
+            if (symbolicBuilding.hasMaterial(material))
+                capacitySum += symbolicBuilding.getTotalCapacity();
+        }
+        return capacitySum;
+    }
+
+    public int getStorageRemainingCapacity(Material material) {
+        int capacitySum = 0;
+        for (Building building : buildings) {
+            if (!(building instanceof SymbolicBuilding))
+                continue;
+            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
+            if (symbolicBuilding.hasMaterial(material))
+                capacitySum += (symbolicBuilding.getRemainingCapacity());
+        }
+        return capacitySum;
+    }
+
+    public void changeStorageStock(Material material, int offset) {
+        for (Building building : buildings) {
+            if (offset == 0)
+                return;
+            if (!(building instanceof SymbolicBuilding))
+                continue;
+            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
+            if (!symbolicBuilding.hasMaterial(material))
+                continue;
+            int changeAmount;
+            if (offset > 0)
+                changeAmount = min(symbolicBuilding.getRemainingCapacity(), offset);
+            else
+                changeAmount = max(-1 * symbolicBuilding.getStock(material), offset);
+            offset -= changeAmount;
+            symbolicBuilding.changeStock(material, changeAmount);
+        }
+    }
 
 }

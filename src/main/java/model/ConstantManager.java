@@ -32,6 +32,7 @@ public class ConstantManager {
     private Headquarters headquarters;
     private Tree tree;
     private Cliff cliff;
+    private Building wall;
 
     //Mobile units
     private HashMap<MapAssetType, MobileUnit> mobileUnits;
@@ -156,6 +157,7 @@ public class ConstantManager {
         headquarters = gson.fromJson(data.get(Headquarters.class.getName()), Headquarters.class);
         tree = gson.fromJson(data.get(Tree.class.getName()), Tree.class);
         cliff = gson.fromJson(data.get(Cliff.class.getName()), Cliff.class);
+        wall = gson.fromJson(data.get(Building.class.getName()), Building.class);
     }
 
     private void fillMarketConstants() {

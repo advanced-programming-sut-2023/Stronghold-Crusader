@@ -10,8 +10,8 @@ import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
+import model.enums.AssetType.Material;
 import model.enums.AssetType.People;
-import model.enums.AssetType.Weapon;
 import utils.SignupAndLoginUtils;
 import utils.Vector2D;
 import view.GameMenus.SelectedAssetMenu;
@@ -38,11 +38,11 @@ public class SelectedBuildingController {
     }
 
     public SelectedBuildingMessage repair() {
-        if (player.getGovernance().getStorage().getMaterials().get(building.getNeededMaterial()) < materialNeededForRepair())
+        if (player.getGovernance().getStorageStock(building.getNeededMaterial()) < materialNeededForRepair())
             return SelectedBuildingMessage.MATERIAL_NEEDED;
         if (isThereEnemy())
             return SelectedBuildingMessage.ENEMY_EXIST;
-        player.getGovernance().getStorage().reduceMaterial(building.getNeededMaterial(), materialNeededForRepair());
+        player.getGovernance().changeStorageStock(building.getNeededMaterial(), -1 * materialNeededForRepair());
         building.repair();
         return SelectedBuildingMessage.SUCCESS_REPAIR;
     }
@@ -90,7 +90,7 @@ public class SelectedBuildingController {
         if (!isGoldEnough(sampleAttackingUnit.getCost(), count))
             return SelectedBuildingMessage.GOLD_NEEDED;
         player.getGovernance().setGold(player.getGovernance().getGold() - sampleAttackingUnit.getCost() * count);
-        player.getGovernance().getStorage().reduceWeapon(sampleAttackingUnit.getWeapon(), count);
+        player.getGovernance().getStorage().changeStorageStock(sampleAttackingUnit.getWeapons(), count);
         for (int i = 0; i < count; i++) {
             AttackingUnit attackingUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
             map.getCell(attackingUnit.getCoordinate()).addMapAsset(sampleAttackingUnit);
@@ -118,8 +118,8 @@ public class SelectedBuildingController {
 
     private boolean isWeaponEnough(AttackingUnit attackingUnit, int count) {
         //TODO if enums change ...
-        for (Weapon weapon : attackingUnit.getWeapon()) {
-            if (player.getGovernance().getStorage().getWeapons().get(weapon) < count) return false;
+        for (Material weapon : attackingUnit.getWeapons()) {
+            if (player.getGovernance().getStorage().getStorageCurrentStock(weapon) < count) return false;
         }
         return true;
     }
