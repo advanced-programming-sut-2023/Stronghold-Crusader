@@ -1,21 +1,47 @@
 package model.enums.AssetType;
 
 public enum BuildingType {
-    HEADQUARTER("Headquarter"), LOOKOUT_TOWER("DandA"), PERIMETER_TOWER("DandA"),
-    DEFENSE_TOWER("DandA"), SQUARE_TOWER("DandA"), CIRCULAR_TOWER("DandA"),
-    BEAR_FACTORY("Production"), BAKERY("Production"), WHEAT_FIELD("Production"),
-    GRAIN_FIELD("Production"), DIARY_FACTORY("Production"), APPLE_GARDEN("Production"),
-    POLTURNER("Production"), FLETCHER("Production"), BLACKSMITH("Production"),
-    ARMOURER("Production"), WOOD_CUTTER("Production"), QUARRY("Production"),
-    PITCH_RIG("Production"), IRON_MINE("Production"), MILL("Production"),
-    INN("Production"), HAUNTING_GROUND("Production"), SIEGE_TENT("Production"),
-    STABLE("TAndA"), BARRACK("TAndA"), MERCENARY_POST("TAndA"), ENGINEER_GUILD("TAndA"),
-    CHURCH("TAndA"), CATHEDRAL("TAndA"), TUNNELER_POST("TAndA"),
-    HOUSE("Symbolic"), SMALL_GATEHOUSE("Symbolic"), BIG_GATEHOUSE("Symbolic"),
-    ARMOURY("Symbolic"), FOOD_STORAGE("Symbolic"), STORE_HOUSE("Symbolic"),
-    STORE("Store"), OX_TETHER("OxTether");
-    private String category;
-    BuildingType(String category){
+    HEADQUARTER(BuildingCategory.SYMBOLIC),
+    LOOKOUT_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
+    PERIMETER_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
+    DEFENSE_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
+    SQUARE_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
+    CIRCULAR_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
+    BEAR_FACTORY(BuildingCategory.PRODUCTION),
+    BAKERY(BuildingCategory.PRODUCTION),
+    WHEAT_FIELD(BuildingCategory.PRODUCTION),
+    GRAIN_FIELD(BuildingCategory.PRODUCTION),
+    DIARY_FACTORY(BuildingCategory.PRODUCTION),
+    APPLE_GARDEN(BuildingCategory.PRODUCTION),
+    POLTURNER(BuildingCategory.PRODUCTION),
+    FLETCHER(BuildingCategory.PRODUCTION),
+    BLACKSMITH(BuildingCategory.PRODUCTION),
+    ARMOURER(BuildingCategory.PRODUCTION),
+    WOOD_CUTTER(BuildingCategory.PRODUCTION),
+    QUARRY(BuildingCategory.PRODUCTION),
+    PITCH_RIG(BuildingCategory.PRODUCTION),
+    IRON_MINE(BuildingCategory.PRODUCTION),
+    MILL(BuildingCategory.PRODUCTION),
+    INN(BuildingCategory.PRODUCTION),
+    HAUNTING_GROUND(BuildingCategory.PRODUCTION),
+    SIEGE_TENT(BuildingCategory.PRODUCTION),
+    STABLE(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    BARRACK(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    MERCENARY_POST(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    ENGINEER_GUILD(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    CHURCH(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    CATHEDRAL(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    TUNNELER_POST(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    HOUSE(BuildingCategory.SYMBOLIC),
+    SMALL_GATEHOUSE(BuildingCategory.SYMBOLIC),
+    BIG_GATEHOUSE(BuildingCategory.SYMBOLIC),
+    ARMOURY(BuildingCategory.SYMBOLIC),
+    FOOD_STORAGE(BuildingCategory.SYMBOLIC),
+    STORE_HOUSE(BuildingCategory.SYMBOLIC),
+    STORE(BuildingCategory.STORE),
+    OX_TETHER(BuildingCategory.OX_TETHER);
+    private BuildingCategory category;
+    BuildingType(BuildingCategory category){
         this.category = category;
     }
 

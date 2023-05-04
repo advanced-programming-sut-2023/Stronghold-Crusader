@@ -4,6 +4,7 @@ import model.ConstantManager;
 import model.Map.Map;
 import model.MapAsset.Building.*;
 import model.User.Player;
+import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
 import model.enums.CellType;
 import model.enums.AssetType.MapAssetType;
@@ -15,7 +16,7 @@ import view.enums.messages.MapMessage.BuildingPlacementMessage;
 public class BuildingPlacementController {
     private Player currentPlayer;
     private Map map;
-    private String buildingCategory;
+    private BuildingCategory buildingCategory;
 
     public BuildingPlacementController(Player currentPlayer, Map map) {
         this.currentPlayer = currentPlayer;
@@ -29,10 +30,10 @@ public class BuildingPlacementController {
         }
     }
 
-    public BuildingPlacementMessage setBuildingCategory(String buildingCategory) {
-        if (!FormatValidation.isFormatValid(buildingCategory, FormatValidation.BUILDING_CATEGORY))
+    public BuildingPlacementMessage setBuildingCategory(String categoryName) {
+        if (!FormatValidation.isFormatValid(categoryName, FormatValidation.BUILDING_CATEGORY))
             return BuildingPlacementMessage.INVALID_BUILDING_CATEGORY;
-        this.buildingCategory = buildingCategory;
+        this.buildingCategory = BuildingCategory.getCategory(categoryName);
         return BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS;
     }
 
@@ -59,22 +60,22 @@ public class BuildingPlacementController {
     private Building createBuilding(Player owner, Vector2D coordinate, Building reference){
         Building building = null;
         switch (buildingCategory) {
-            case "DandA":
+            case DEFENSE_AND_ATTACK:
                 building = new DefenseAndAttackBuilding((DefenseAndAttackBuilding) reference, coordinate, owner);
                 break;
-            case "Production":
+            case PRODUCTION:
                 building = new ProductionBuilding((ProductionBuilding) reference, coordinate, owner);
                 break;
-            case "TAndA":
+            case TRAINING_AND_EMPLOYMENT:
                 building = new TrainingAndEmploymentBuilding((TrainingAndEmploymentBuilding) reference, coordinate, owner);
                 break;
-            case "Symbolic":
+            case SYMBOLIC:
                 building = new SymbolicBuilding((SymbolicBuilding) reference, coordinate, owner);
                 break;
-            case "Store":
+            case STORE:
                 building = new Store((Store) reference, coordinate, owner);
                 break;
-            case "OxTether":
+            case OX_TETHER:
                 building = new OxTether((OxTether) reference, coordinate, owner);
                 break;
         }
