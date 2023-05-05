@@ -30,20 +30,28 @@ public class GameMenu {
             switch (cmd) {
                 case SHOW_POPULARITY:
                     System.out.println(gameController.showPopularity());
+                    break;
                 case SHOW_POPULARITY_FACTORS:
                     System.out.println(gameController.showPopularityFactors());
+                    break;
                 case SET_FOOD_RATE:
                     runSetFoodRate(matcher);
+                    break;
                 case SHOW_FOOD_LIST:
                     System.out.println(gameController.showFoodList());
+                    break;
                 case SHOW_FOOD_RATE:
                     System.out.println(gameController.showFoodRate());
+                    break;
                 case SET_TAX_RATE:
                     runSetTaxRate(matcher);
+                    break;
                 case SHOW_TAX_RATE:
                     System.out.println(gameController.showTaxRate());
+                    break;
                 case SET_FEAR_RATE:
-
+                    runSetFearRate(matcher);
+                    break;
                 case CHANGE_ENVIRONMENT:
                     return "changeEnvironment";
                 case PLACE_BUILDING:
@@ -67,14 +75,19 @@ public class GameMenu {
         return msg.equals(GameMenuMessage.ENTER_SHOW_MAP);
     }
 
-    private void runSetFoodRate(Matcher matcher){
+    private void runSetFoodRate(Matcher matcher) {
         int rate = Integer.parseInt(matcher.group("rate"));
         GameMenuMessage.printMessage(gameController.setFoodRate(rate));
     }
 
-    private void runSetTaxRate(Matcher matcher){
+    private void runSetTaxRate(Matcher matcher) {
         int rate = Integer.parseInt(matcher.group("rate"));
         GameMenuMessage.printMessage(gameController.setTaxRate(rate));
+    }
+
+    private void runSetFearRate(Matcher matcher) {
+        int rate = Integer.parseInt(matcher.group("rate"));
+        GameMenuMessage.printMessage(gameController.setFearRate(rate));
     }
 
 }

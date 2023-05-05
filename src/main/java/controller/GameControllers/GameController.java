@@ -106,8 +106,8 @@ public class GameController {
 
     public GameMenuMessage setFearRate(int fearRate) {
         if (fearRate > 5 || fearRate < -5)
-            return GameMenuMessage.INVALID_TAX_RATE;
+            return GameMenuMessage.INVALID_FEAR_RATE;
         game.getCurrentPlayer().getGovernance().setFearRate(fearRate);
-        return GameMenuMessage.TAX_RATE_CHANGE_SUCCESS;
+        return GameMenuMessage.FEAR_RATE_CHANGE_SUCCESS;
     }
 }
