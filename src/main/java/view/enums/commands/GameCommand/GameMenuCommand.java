@@ -4,11 +4,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommand {
-    PLACE_BUILDING("^\\s*building\\s+placement\\s*$"),
-    CHANGE_ENVIRONMENT("^\\s*change\\s+environment\\s*$"),
-    TRADE_MENU("^\\s*trade\\s+menu\\s*$"),
-    SHOW_MAP("^\\s*show\\s+map\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)$"),
-    MARKET_MENU("^\\s*market\\s+menu\\s*$");
+    SHOW_POPULARITY_FACTORS("^\\s*show\\s+popularity\\s+factors\\s*$"),
+    SHOW_POPULARITY("\\s*show\\s+popularity\\s*"),
+    SHOW_FOOD_RATE("\\s*food\\s+rate\\s+show\\s*"),
+    SHOW_FOOD_LIST("\\s*show\\s+food\\s+list\\s*"),
+    SET_FOOD_RATE("\\s*food\\s+rate\\s+-r\\s+(?<rate>-?\\d+)\\s*"),
+    SHOW_TAX_RATE("\\s*tax\\s+rate\\s+show\\s*"),
+    SET_TAX_RATE("\\s*tax\\s+rate\\s+-r\\s+(?<rate>-?\\d+)\\s*"),
+    SHOW_FEAR_RATE("\\s*fear\\s+rate\\s+show\\s*"),
+    SET_FEAR_RATE("\\s*fear\\s+rate\\s+-r\\s+(?<rate>-?\\d+)\\s*"),
+    PLACE_BUILDING("\\s*building\\s+placement\\s*"),
+    CHANGE_ENVIRONMENT("\\s*change\\s+environment\\s*"),
+    TRADE_MENU("\\s*trade\\s+menu\\s*"),
+    SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)"),
+    MARKET_MENU("\\s*market\\s+menu\\s*");
     private final String regex;
 
     GameMenuCommand(String regex) {

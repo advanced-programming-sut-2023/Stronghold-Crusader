@@ -16,7 +16,7 @@ public enum SelectedBuildingMessage {
     INVALID_COUNT("The number of production soldiers requested is not valid"),
     SUCCESS_CREATING_UNIT("units has been successfully created"),
 
-    INVALID_COMMAND("invalid command");
+    INVALID_COMMAND("Invalid command");
 
     SelectedBuildingMessage(String message) {
         this.message = message;

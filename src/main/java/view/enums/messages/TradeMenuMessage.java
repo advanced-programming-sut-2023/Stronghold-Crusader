@@ -11,7 +11,7 @@ public enum TradeMenuMessage {
     ACCEPTED("trade accepted successfully"),
     ALREADY_ACCEPTED("this trade already accepted"),
 
-    INVALID_COMMAND("invalid command!");
+    INVALID_COMMAND("Invalid command!");
 
 
 

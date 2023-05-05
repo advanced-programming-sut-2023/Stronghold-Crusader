@@ -1,7 +1,7 @@
 package view.enums.messages.MapMessage;
 
 public enum MapSelectMessage {
-    INVALID_COMMAND("invalid command"),
+    INVALID_COMMAND("Invalid command"),
     MAP_SELECT_SUCCESS("Map selected successfully"),
     INVALID_MAP_ID("Map Id invalid"),
     MAP_NOT_SELECTED("Please first select a map"),

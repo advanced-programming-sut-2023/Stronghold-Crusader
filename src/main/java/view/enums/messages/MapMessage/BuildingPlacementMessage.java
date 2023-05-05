@@ -4,7 +4,7 @@ public enum BuildingPlacementMessage {
     INVALID_COORDINATE("Invalid coordinate"),
     INVALID_BUILDING_TYPE("Invalid building type"),
 
-    INVALID_COMMAND("invalid command"),
+    INVALID_COMMAND("Invalid command"),
     BUILDING_DROP_SUCCESS("Building dropped successfully"),
     INVALID_CELL_TYPE("You can not drop in this cell type"),
     NOT_ENOUGH_RESOURCE("Not enough resources"),

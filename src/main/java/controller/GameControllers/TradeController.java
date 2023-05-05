@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TradeController {
-    private final Game game;
     private static final ArrayList<Trade> trades = new ArrayList<>();
+    private final Game game;
 
     public TradeController(Game game) {
         this.game = game;

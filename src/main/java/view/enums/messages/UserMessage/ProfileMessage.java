@@ -1,7 +1,7 @@
 package view.enums.messages.UserMessage;
 
 public enum ProfileMessage {
-    INVALID_COMMAND("invalid command"),
+    INVALID_COMMAND("Invalid command"),
     INVALID_USERNAME_FORMAT("Invalid username"),
     INVALID_PASSWORD_FORMAT("Invalid password"),
     INVALID_EMAIL_FORMAT("Invalid email"),
