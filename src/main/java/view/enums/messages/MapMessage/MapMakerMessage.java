@@ -2,7 +2,7 @@ package view.enums.messages.MapMessage;
 
 public enum MapMakerMessage {
 
-    INVALID_COMMAND("invalid command"),
+    INVALID_COMMAND("Invalid command"),
     INVALID_TEXTURE_TYPE("Invalid cell texture type"),
     INVALID_COORDINATE("Coordinate invalid"),
     INVALID_DIRECTION("Invalid direction"),
