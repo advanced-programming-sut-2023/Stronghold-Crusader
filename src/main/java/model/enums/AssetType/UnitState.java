@@ -8,4 +8,8 @@ public enum UnitState {
     UnitState(int triggerRange){
         this.triggerRange = triggerRange;
     }
+
+    public int getTriggerRange() {
+        return triggerRange;
+    }
 }

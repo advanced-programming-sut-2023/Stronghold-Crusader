@@ -72,9 +72,6 @@ public class BuildingPlacementController {
             case SYMBOLIC:
                 building = new SymbolicBuilding((SymbolicBuilding) reference, coordinate, owner);
                 break;
-            case STORE:
-                building = new Store((Store) reference, coordinate, owner);
-                break;
             case OX_TETHER:
                 building = new OxTether((OxTether) reference, coordinate, owner);
                 break;
