@@ -38,8 +38,7 @@ public enum BuildingType {
     ARMOURY(BuildingCategory.SYMBOLIC),
     FOOD_STORAGE(BuildingCategory.SYMBOLIC),
     STORE_HOUSE(BuildingCategory.SYMBOLIC),
-    STORE(BuildingCategory.STORE),
-    OX_TETHER(BuildingCategory.OX_TETHER);
+    STORE(BuildingCategory.STORE);
     private BuildingCategory category;
     BuildingType(BuildingCategory category){
         this.category = category;

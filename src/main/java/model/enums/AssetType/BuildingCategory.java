@@ -5,7 +5,6 @@ public enum BuildingCategory {
     PRODUCTION,
     TRAINING_AND_EMPLOYMENT,
     SYMBOLIC,
-    OX_TETHER,
     STORE;
 
     public static BuildingCategory getCategory(String categoryName){

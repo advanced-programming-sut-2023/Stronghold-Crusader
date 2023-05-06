@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public enum BuildingPlacementCommand {
     BACK("\\s*back\\s*"),
-    DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y(?<y>\\S+)\\s+-t(?<type<\\S+)\\s*"),
+    DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y(?<y>\\S+)\\s+-t(?<type>\\S+)\\s*"),
     CHOOSE_CATEGORY("\\s*category\\s+-c\\s+(?<buildingCategory>\\S+)\\s*");
     private String regex;
 
@@ -23,6 +23,7 @@ public enum BuildingPlacementCommand {
     public static Matcher getMatcher(String input, BuildingPlacementCommand cmd) {
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
+        matcher.find();
         return matcher;
     }
 }
