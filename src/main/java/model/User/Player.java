@@ -1,7 +1,7 @@
 package model.User;
 
 import model.Game.Governance;
-import model.Trade;
+import model.Game.Trade;
 
 import java.util.ArrayList;
 

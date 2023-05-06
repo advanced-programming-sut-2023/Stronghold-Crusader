@@ -1,7 +1,7 @@
 package controller.GameControllers;
 
 import model.Game.Game;
-import model.Trade;
+import model.Game.Trade;
 import model.User.Player;
 import model.enums.AssetType.Material;
 import utils.SignupAndLoginUtils;

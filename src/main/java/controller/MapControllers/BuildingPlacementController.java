@@ -40,7 +40,7 @@ public class BuildingPlacementController {
     public BuildingPlacementMessage dropBuilding(String buildingTypeName, int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         BuildingType buildingType = BuildingType.getType(buildingTypeName);
-        if (!map.isCoordinateValid(coordinate)) return BuildingPlacementMessage.INVALID_COORDINATE;
+        if (!map.isInMap(coordinate)) return BuildingPlacementMessage.INVALID_COORDINATE;
         if (buildingType == null) return BuildingPlacementMessage.INVALID_BUILDING_TYPE;
 
         CellType targetCellType = map.getCell(coordinate).getType();

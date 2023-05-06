@@ -83,10 +83,6 @@ public class Map {
         map[coordinate.y][coordinate.x].setType(type);
     }
 
-    public boolean isCoordinateValid(Vector2D coordinate) {
-        return false;
-    }
-
     public void clearCell(Vector2D coordinate) {
         map[coordinate.y][coordinate.x].clear();
     }

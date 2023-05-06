@@ -1,4 +1,4 @@
-package model;
+package model.Game;
 
 import model.enums.AssetType.Material;
 import model.User.Player;

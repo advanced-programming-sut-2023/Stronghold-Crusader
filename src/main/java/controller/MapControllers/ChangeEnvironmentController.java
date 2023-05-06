@@ -29,7 +29,7 @@ public class ChangeEnvironmentController {
         Vector2D coordinate = new Vector2D(x, y);
 
         if (texture == null) return MapMakerMessage.INVALID_TEXTURE_TYPE;
-        if (!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+        if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
 
         map.changeCellTypeTo(coordinate, texture);
         return MapMakerMessage.SET_TEXTURE_SUCCESS;
@@ -39,8 +39,8 @@ public class ChangeEnvironmentController {
     public MapMakerMessage setTexture(int x1, int y1, int x2, int y2, String textureName) {
         CellType texture = CellType.getType(textureName);
         if (texture == null) return MapMakerMessage.INVALID_TEXTURE_TYPE;
-        if (!map.isCoordinateValid(new Vector2D(x1, y1))) return MapMakerMessage.INVALID_COORDINATE;
-        if (!map.isCoordinateValid(new Vector2D(x2, y2))) return MapMakerMessage.INVALID_COORDINATE;
+        if (!map.isInMap(new Vector2D(x1, y1))) return MapMakerMessage.INVALID_COORDINATE;
+        if (!map.isInMap(new Vector2D(x2, y2))) return MapMakerMessage.INVALID_COORDINATE;
 
         for (int i = x1; i <= x2; i++) {
             for (int j = y1; j <= y2; j++) {
@@ -53,7 +53,7 @@ public class ChangeEnvironmentController {
 
     public MapMakerMessage clearCell(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
-        if (!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+        if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         map.clearCell(coordinate);
         return MapMakerMessage.CLEAR_CELL_SUCCESS;
     }
@@ -63,7 +63,7 @@ public class ChangeEnvironmentController {
         Vector2D coordinate = new Vector2D(x, y);
         CliffDirection cliffDirection = CliffDirection.getDirection(directionName);
 
-        if (!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+        if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         if (cliffDirection == null) return MapMakerMessage.INVALID_DIRECTION;
         if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
 
@@ -76,7 +76,7 @@ public class ChangeEnvironmentController {
         Vector2D coordinate = new Vector2D(x, y);
         TreeType type = TreeType.getType(typeName);
         if (type == null) return MapMakerMessage.INVALID_TREE_TYPE;
-        if (!map.isCoordinateValid(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
+        if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         // TODO : invalid TargetCellType error
 //        if (map.getCell(coordinate).getType() )
         Tree tree = new Tree((Tree) ConstantManager.getInstance().getAsset(MapAssetType.TREE), coordinate, null, type);

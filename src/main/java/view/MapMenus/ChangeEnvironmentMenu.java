@@ -30,6 +30,9 @@ public class ChangeEnvironmentMenu {
                 case SET_TEXTURE:
                     runSetTexture(matcher);
                     break;
+                case SET_TEXTURE_BLOCK:
+                    runSetTextureBlock(matcher);
+                    break;
                 case DROP_ROCK:
                     runDropRock(matcher);
                     break;
@@ -53,6 +56,14 @@ public class ChangeEnvironmentMenu {
         int y = Integer.parseInt(matcher.group("y"));
         String type = matcher.group("type");
         MapMakerMessage.printMessage(controller.setTexture(x, y, type));
+    }
+    private void runSetTextureBlock(Matcher matcher){
+        int x1 = Integer.parseInt(matcher.group("x1"));
+        int y1 = Integer.parseInt(matcher.group("y1"));
+        int x2 = Integer.parseInt(matcher.group("x2"));
+        int y2 = Integer.parseInt(matcher.group("y2"));
+        String type = matcher.group("type");
+        MapMakerMessage.printMessage(controller.setTexture(x1, y1, x2, y2, type));
     }
     private void runDropTree(Matcher matcher){
         int x = Integer.parseInt(matcher.group("x"));
