@@ -10,7 +10,7 @@ public class Vector2D {
     }
 
     public double getDistance(Vector2D v2) {
-        return 0;
+        return Math.abs(v2.x - x) + Math.abs(v2.y - y);
     }
 
     @Override

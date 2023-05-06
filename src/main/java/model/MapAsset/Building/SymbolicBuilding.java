@@ -53,6 +53,7 @@ public class SymbolicBuilding extends Building {
     @Override
     public String toString() {
         return super.toString() +
+                ", populationAmount=" + populationAmount +
                 ", totalCapacity=" + totalCapacity +
                 ", storage=" + storage;
     }

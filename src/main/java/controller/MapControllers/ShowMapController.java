@@ -84,7 +84,7 @@ public class ShowMapController {
         int cellWidth = ShowMapSettings.cellPrintCharWidth;
         int cellHeight = ShowMapSettings.cellPrintCharHeight;
         for (MapAsset asset : cell.getAllAssets()) {
-            if (asset.getType() == MapAssetType.WALL)
+            if (asset.getType() == MapAssetType.WALL || asset.getType() == MapAssetType.SHORT_WALL)
                 str.append('W');
             else if (asset instanceof Building)
                 str.append('B');
