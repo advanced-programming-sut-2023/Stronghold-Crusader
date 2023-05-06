@@ -40,6 +40,7 @@ public class MarketController {
         Material material = Material.getMaterial(materialName);
         if (storeMaterial == null) return MarketMessage.INVALID_MATERIAL;
         int gold = (int) currentPlayer.getGovernance().getGold();
+
         if (gold < storeMaterial.getPrice()*amount) return MarketMessage.NOT_ENOUGH_GOLD;
         if (menu.confirm(confirmBuyMessage(materialName, amount,
                 storeMaterial.getPrice()*amount))){
