@@ -25,6 +25,7 @@ public class MapSelectController {
     public MapSelectController(User currentUser) {
         this.currentUser = currentUser;
         this.players = new HashMap<>();
+        this.isMapModifiable = false;
     }
 
     public void run() {

@@ -61,4 +61,8 @@ public class Stronghold {
     public boolean userExists(String username) {
         return users.containsKey(username);
     }
+
+    public HashMap<String, User> getUsers() {
+        return users;
+    }
 }
