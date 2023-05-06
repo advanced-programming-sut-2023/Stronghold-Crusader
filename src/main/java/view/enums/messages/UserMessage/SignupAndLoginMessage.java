@@ -22,8 +22,9 @@ public enum SignupAndLoginMessage {
     SUCCESS_PROCESS,
     INVALID_CAPTCHA("Invalid CAPTCHA"),
     INVALID_COMMAND("Invalid command!"),
-    SIGNUP_MENU("Entered to the signup menu"),
-    LOGIN_MENU("Entered to the login menu");
+    SIGNUP_MENU("Entered signup menu"),
+    LOGIN_MENU("Entered login menu"),
+    MAIN_MENU("Entered main menu");
     private final String output;
 
     SignupAndLoginMessage() {

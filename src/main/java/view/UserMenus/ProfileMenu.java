@@ -58,6 +58,7 @@ public class ProfileMenu {
                     System.out.println(profileController.removeSlogan());
                     break;
                 case BACK:
+                    System.out.println(ProfileMessage.MAIN_MENU);
                     return "mainMenu";
                 default:
                     ProfileMessage.printMessage(ProfileMessage.INVALID_COMMAND);

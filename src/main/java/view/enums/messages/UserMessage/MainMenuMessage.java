@@ -3,7 +3,10 @@ package view.enums.messages.UserMessage;
 public enum MainMenuMessage {
     INVALID_COMMAND("Invalid command"),
     ENTER_NEW_GAME("Entered new game menu"),
-    ENTER_PROFILE("Entered profile menu");
+    ENTER_PROFILE("Entered profile menu"),
+    LOGOUT("Logged out"),
+    MAP_SELECT("Entered map selection menu"),
+    PROFILE_MENU("Entered profile menu");
     private String message;
     private MainMenuMessage(String message){
         this.message = message;

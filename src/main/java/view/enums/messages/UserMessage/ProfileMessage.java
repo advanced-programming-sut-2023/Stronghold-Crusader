@@ -18,7 +18,8 @@ public enum ProfileMessage {
     PASSWORD_NOT_NEW("Please enter a new password!"),
     ENTER_NEWPASS_AGAIN("Please enter your new password again"),
     EMAIL_EXISTS("Email already exists"),
-    CAN_CHANGE_PASSWORD("true");
+    CAN_CHANGE_PASSWORD("true"),
+    MAIN_MENU("Entered main menu");
     private String message;
     private ProfileMessage(String message){
         this.message = message;
