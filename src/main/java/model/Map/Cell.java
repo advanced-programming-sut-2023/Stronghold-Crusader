@@ -70,6 +70,13 @@ public class Cell {
         return true;
     }
 
+    public int getTravelWorth(MobileUnit unit) {
+        if (!isTraversable(unit)) return Integer.MAX_VALUE;
+        if (type.equals(CellType.SHALLOW_WATER)) return 3;
+        if (isThereUnit(unit.getOwner())) return 2;
+        return 1;
+    }
+
     public void clear() {
         //TODO
     }
