@@ -50,6 +50,10 @@ public enum CellType {
         }
         return null;
     }
+    public static boolean isTraversableByType(CellType type) {
+        return  type.equals(FIELD) || type.equals(GRAVEL) || type.equals(STONE) || type.equals(IRON) || type.equals(GRASS)
+                || type.equals(MEADOW) || type.equals(DENSE_MEADOW) || type.equals(PlAIN) || type.equals(SHALLOW_WATER);
+    }
 
     public String getAsniColor() {
         return asniColor;

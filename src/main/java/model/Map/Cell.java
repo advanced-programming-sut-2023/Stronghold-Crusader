@@ -1,5 +1,6 @@
 package model.Map;
 
+import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
@@ -54,8 +55,27 @@ public class Cell {
         assets = newObjects;
     }
 
-    public boolean isTraversable(MobileUnit unit) {
-        return false;
+    private boolean isTraversable(MobileUnit unit) {
+        if (!CellType.isTraversableByType(type)) return false;
+        for (MapAsset mapAsset : assets){
+            if (mapAsset instanceof Building){
+              if(mapAsset.getOwner().equals(unit.getOwner()) && (mapAsset.getType().equals(MapAssetType.BIG_GATEHOUSE)
+                               || mapAsset.getType().equals(MapAssetType.SMALL_GATEHOUSE))){
+                  //TODO is Gate open or not ?
+                  return true;
+              }
+                  return false;
+            }
+        }
+        return true;
+    }
+
+    public int getTravelWorth(MobileUnit unit) {
+        if (!isTraversable(unit)) return Integer.MAX_VALUE;
+        if (type.equals(CellType.SHALLOW_WATER)) return 3;
+        if (isThereUnit(unit.getOwner())) return 2;
+        return 1;
+
     }
 
     public void clear() {
@@ -77,6 +97,14 @@ public class Cell {
         return false;
     }
 
+    public boolean isThereUnit(Player player) {
+        for (MapAsset mapAsset : assets) {
+            if (mapAsset instanceof MobileUnit && !mapAsset.getOwner().equals(player)) return true;
+        }
+        return false;
+    }
+
+
     public boolean isEmpty() {
         return assets.isEmpty();
     }
@@ -90,8 +118,8 @@ public class Cell {
         return output.toString();
     }
 
-    public boolean containsType(MapAssetType type){
-        for (MapAsset asset : assets){
+    public boolean containsType(MapAssetType type) {
+        for (MapAsset asset : assets) {
             if (asset.getType().equals(type)) return true;
         }
         return false;
