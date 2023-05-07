@@ -5,6 +5,10 @@ import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
 import model.Game.Game;
 import model.Game.Governance;
+import model.Map.Map;
+import model.MapAsset.MapAsset;
+import model.MapAsset.MobileUnit.AttackingUnit;
+import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.User;
 import model.enums.AssetType.Material;
 import utils.Vector2D;
@@ -12,7 +16,6 @@ import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class GameController {
     private final User currentUser;
@@ -51,6 +54,55 @@ public class GameController {
         }
     }
 
+    public void nextRound() {
+        Map map = game.getMap();
+        processUnitDecisions(map);
+        applyUnitDecisions(map);
+    }
+
+    private void applyUnitDecisions(Map map) {
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                for (MapAsset asset : map.getCell(new Vector2D(x, y)).getAllAssets()) {
+                    if (asset instanceof MobileUnit) {
+                        MobileUnit mobileAsset = (MobileUnit) asset;
+                        Vector2D pastCoordinate = asset.getCoordinate();
+                        if (mobileAsset.hasNextMoveDestination()) {
+                            if (mobileAsset.move()) {
+                                //TODO cow and patrol
+                            }
+                        }
+                        Vector2D newCoordinate = asset.getCoordinate();
+                        map.moveMapObject(pastCoordinate, newCoordinate, asset);
+                    }
+                    if (asset instanceof AttackingUnit) {
+                        MapAsset targetUnit = ((AttackingUnit) asset).getNextRoundAttackTarget();
+                        if (targetUnit != null) {
+                            targetUnit.takeDamageFrom((AttackingUnit) asset);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void processUnitDecisions(Map map) {
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                for (MapAsset asset : map.getCell(new Vector2D(x, y)).getAllAssets()) {
+                    if (!(asset instanceof AttackingUnit))
+                        continue;
+                    ((AttackingUnit) asset).processNextRoundMove(map);
+                    ((MobileUnit) asset).findNextMoveDest(map);
+                }
+            }
+        }
+    }
+
+    public void nextTurn() {
+
+    }
+
     public GameMenuMessage showMap(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!ShowMapController.isCenterValid(coordinate, game.getMap()))
@@ -80,7 +132,7 @@ public class GameController {
     public String showFoodList() {
         StringBuilder output = new StringBuilder();
         HashMap<Material, Integer> list = game.getCurrentPlayer().getGovernance().getFoodList();
-        for (Map.Entry<Material, Integer> entry : list.entrySet())
+        for (java.util.Map.Entry<Material, Integer> entry : list.entrySet())
             output.append(entry.getKey().name().toLowerCase()).append(": ").append(entry.getValue()).append('\n');
         output.deleteCharAt(output.length() - 1);
         return output.toString();

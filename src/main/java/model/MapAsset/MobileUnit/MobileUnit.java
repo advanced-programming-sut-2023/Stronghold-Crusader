@@ -1,6 +1,6 @@
 package model.MapAsset.MobileUnit;
 
-import model.Map.Cell;
+import model.Map.Map;
 import model.MapAsset.MapAsset;
 import model.User.Player;
 import utils.Vector2D;
@@ -12,6 +12,8 @@ public class MobileUnit extends MapAsset {
     private final double defenceMultiplier;
     private final int engineersCount;
     private final int cost;
+    protected Vector2D finalMoveDestination;
+    private Vector2D nextMoveDestination;
 
     public MobileUnit(MobileUnit reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
@@ -21,18 +23,36 @@ public class MobileUnit extends MapAsset {
         this.cost = reference.cost;
     }
 
-    public void move(ArrayList<Cell> path) {
+    //returns true if reached the round move destination
+    public boolean move() {
+        coordinate.x = nextMoveDestination.x;
+        coordinate.y = nextMoveDestination.y;
+        if (coordinate.equals(finalMoveDestination)) {
+            finalMoveDestination = null;
+            return true;
+        }
+        return false;
     }
 
-    public void stopMovement() {
+    public void findNextMoveDest(Map map) {
+        if (finalMoveDestination == null) {
+            nextMoveDestination = null;
+            return;
+        }
+        ArrayList<Vector2D> traversePath = map.getTraversePath(this, finalMoveDestination);
+        if (traversePath.isEmpty()) {
+            nextMoveDestination = null;
+            return;
+        }
+        nextMoveDestination = traversePath.get(Math.min(traversePath.size() - 1, moveSpeed));
     }
 
-    public int getMoveSpeed() {
-        return moveSpeed;
+    public boolean hasNextMoveDestination() {
+        return nextMoveDestination != null;
     }
 
-    public double getDefenceMultiplier() {
-        return defenceMultiplier;
+    public void selectMoveDestination(Vector2D dest) {
+        finalMoveDestination = dest;
     }
 
     public int getEngineersCount() {
@@ -44,8 +64,8 @@ public class MobileUnit extends MapAsset {
     }
 
     @Override
-    public void getDamageFrom(AttackingUnit attacker) {
-
+    public void takeDamageFrom(AttackingUnit attacker) {
+        hitPoint -= attacker.getAttackDamage() * defenceMultiplier;
     }
 
     @Override

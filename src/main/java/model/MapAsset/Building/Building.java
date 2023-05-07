@@ -23,11 +23,6 @@ public class Building extends MapAsset {
         this.buildingGroundType = reference.buildingGroundType;
     }
 
-    @Override
-    public void getDamageFrom(AttackingUnit attacker) {
-
-    }
-
     public int getNumberOfMaterialNeeded() {
         return neededMaterialAmount;
     }
