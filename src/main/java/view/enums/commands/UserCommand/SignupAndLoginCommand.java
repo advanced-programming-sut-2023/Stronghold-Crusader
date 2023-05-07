@@ -8,8 +8,8 @@ public enum SignupAndLoginCommand {
             "(\\s+-p\\s+(?<password>(\"[^\"]+\")|\\S+)(\\s+(?<passwordConfirmation>\\S+|(\"[^\"]+\")))?)|" +
             "(\\s+-email\\s+(?<email>\\S+|(\"[^\"]+\")))|" +
             "(\\s+-n\\s+(?<nickname>\\S+|(\"[^\"]+\")))|(?<sloganTest>\\s+-s\\s+(?<slogan>\\S*|(\"[^\"]+\"))))*\\s*"),
-    QUESTION_PICK("\\s*question\\s+pick\\s+-q\\s+(?<questionNumber>\\d+)\\s+-a\\s+(?<answer>.+)" +
-            "\\s+-c\\s+(?<answerConfirm>.+)\\s*"),
+    QUESTION_PICK("\\s*question\\s+pick\\s+-q\\s+(?<questionNumber>\\d+)\\s+-a\\s+(?<answer>\\S+|(\"[^\"]+\"))" +
+            "\\s+-c\\s+(?<answerConfirm>\\S+|(\"[^\"]+\"))\\s*"),
     LOGIN("\\s*user\\s+login((\\s+-u\\s+(?<username>\\S+|(\"[^\"]+\")))|" +
             "(\\s+-p\\s+(?<password>\\S+|(\"[^\"]+\"))))*\\s*(?<stayLoggedIn>--stay-logged-in)?\\s*"),
     CHANGE_PASSWORD("\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\\S+|(\"[^\"]+\"))\\s*"),
