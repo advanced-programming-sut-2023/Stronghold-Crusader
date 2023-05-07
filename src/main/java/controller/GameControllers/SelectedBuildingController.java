@@ -107,16 +107,7 @@ public class SelectedBuildingController {
     private boolean isUnitMatchWithBuilding(String type) {
         if (!People.isContains(type.toUpperCase())) return false;
         People people = People.valueOf(type.toUpperCase());
-        switch (building.getType()) {
-            case CHURCH:
-                return people.checkType("churchMan");
-            case BARRACK:
-                return people.checkType("European");
-            case MERCENARY_POST:
-                return people.checkType("Arabian");
-            case ENGINEER_GUILD:
-                return people.checkType("Engineer");
-        }
+
         return false;
     }
 

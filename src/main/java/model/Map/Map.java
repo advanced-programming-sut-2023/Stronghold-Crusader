@@ -2,12 +2,10 @@ package model.Map;
 
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
-import model.User.Player;
 import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Map {
     private final String name;
@@ -49,6 +47,10 @@ public class Map {
 
     public void addMapObject(Vector2D coordinate, MapAsset obj) {
         map[coordinate.y][coordinate.x].addMapAsset(obj);
+    }
+
+    public Cell[][] getMap() {
+        return map;
     }
 
     public void removeMapObject() {
