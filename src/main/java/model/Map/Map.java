@@ -53,6 +53,7 @@ public class Map {
         return map;
     }
 
+
     public void removeMapObject() {
     }
 
