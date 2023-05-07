@@ -10,7 +10,10 @@ public enum GameMenuMessage {
     TAX_RATE_CHANGE_SUCCESS("Successfully changed tax rate"),
     INVALID_FEAR_RATE("Invalid fear rate"),
     FEAR_RATE_CHANGE_SUCCESS("Successfully changed fear rate"),
-    ;
+    CHANGE_ENVIRONMENT("Entered change environment menu successfully"),
+    BUILDING_PLACEMENT("Entered building placement menu successfully"),
+    TRADE("Entered trade menu successfully"),
+    ENTER_MARKET("Entered market menu successfully");
     private final String message;
 
     GameMenuMessage(String message) {

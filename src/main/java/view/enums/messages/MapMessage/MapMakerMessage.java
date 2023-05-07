@@ -13,7 +13,8 @@ public enum MapMakerMessage {
     DROP_ROCK_SUCCESS("Cliff dropped successfully"),
     INVALID_COLOR_NAME("Invalid color name"),
     NOT_EMPTY("Target cell is not empty"),
-    DROP_HEADQUARTER_SUCCESS("Headquarter dropped successfully");
+    DROP_HEADQUARTER_SUCCESS("Headquarter dropped successfully"),
+    ENTER_MAIN("Entered main menu successfully");
     private String message;
     private MapMakerMessage(String message){
         this.message = message;

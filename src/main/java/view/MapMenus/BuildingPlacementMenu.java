@@ -1,4 +1,4 @@
-package view.MapMenus.BuildingPlacementMenu;
+package view.MapMenus;
 
 import controller.MapControllers.BuildingPlacementController;
 import view.Menu;
@@ -36,6 +36,7 @@ public class BuildingPlacementMenu {
                     runChooseCategory(matcher);
                     break;
                 case BACK:
+                    BuildingPlacementMessage.printMessage(BuildingPlacementMessage.ENTER_MAIN);
                     return "back";
             }
         }

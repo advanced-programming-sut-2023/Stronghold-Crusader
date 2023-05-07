@@ -8,7 +8,8 @@ import java.util.regex.Pattern;
 public enum MarketCommand {
     PRICE_LIST("^\\s*show\\s+price\\s+list\\s*$"),
     BUY("^\\s*buy\\s+-i\\(?<item>\\S+)\\s+-a\\s+(?<amount>\\S+)\\s*$"),
-    SELL("^\\s*sell\\s+-i\\(?<item>\\S+)\\s+-a\\s+(?<amount>\\S+)\\s*$");
+    SELL("^\\s*sell\\s+-i\\(?<item>\\S+)\\s+-a\\s+(?<amount>\\S+)\\s*$"),
+    BACK("\\s*back\\s*");
     private final String regex;
 
     MarketCommand(String regex) {

@@ -5,7 +5,8 @@ public enum ShowMapMessage {
     MOVE_SUCCESSFUL("moved successfully"),
     TARGET_OUT_OF_RANGE("target coordinate is out of range"),
     INVALID_MOVE_COMMAND("Invalid map move command"),
-    INVALID_COMMAND("Invalid command");
+    INVALID_COMMAND("Invalid command"),
+    ENTER_MAIN("Entered main menu successfully");
     private final String message;
 
     private ShowMapMessage(String message) {

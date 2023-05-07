@@ -21,7 +21,7 @@ public class MarketController {
     public void run(){
         menu = new MarketMenu(this);
         while (true){
-            menu.run();
+            if (menu.run().equals("back")) return;
         }
     }
 

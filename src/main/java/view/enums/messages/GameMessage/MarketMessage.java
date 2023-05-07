@@ -7,7 +7,8 @@ public enum MarketMessage {
     BUY_SUCCESS("Material bought successfully"),
     NOT_ENOUGH_STOCK("You don't have enough material in stock"),
     NOT_ENOUGH_GOLD("You don't have enough gold"),
-    BUY_FAIL("Purchase terminated");
+    BUY_FAIL("Purchase terminated"),
+    ENTERED_MAIN("Entered main menu successfully");
     private final String message;
 
     MarketMessage(String message) {

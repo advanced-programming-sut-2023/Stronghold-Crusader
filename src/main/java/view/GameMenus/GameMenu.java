@@ -53,15 +53,20 @@ public class GameMenu {
                     runSetFearRate(matcher);
                     break;
                 case CHANGE_ENVIRONMENT:
+                    GameMenuMessage.printMessage(GameMenuMessage.CHANGE_ENVIRONMENT);
                     return "changeEnvironment";
                 case PLACE_BUILDING:
+                    GameMenuMessage.printMessage(GameMenuMessage.BUILDING_PLACEMENT);
                     return "buildingPlacement";
                 case TRADE_MENU:
+                    GameMenuMessage.printMessage(GameMenuMessage.TRADE);
                     return "tradeMenu";
                 case SHOW_MAP:
+                    GameMenuMessage.printMessage(GameMenuMessage.ENTER_SHOW_MAP);
                     if (runShowMap(matcher))
                         return "showMap";
                 case MARKET_MENU:
+                    GameMenuMessage.printMessage(GameMenuMessage.ENTER_MARKET);
                     return "marketMenu";
             }
         }

@@ -38,8 +38,9 @@ public class ShowMapMenu {
                 case MOVE_MAP:
                     runMoveMap(matcher);
                     break;
-                case EXIT:
-                    return "exit";
+                case BACK:
+                    ShowMapMessage.printMessage(ShowMapMessage.ENTER_MAIN);
+                    return "back";
                 default:
                     ProfileMessage.printMessage(ProfileMessage.INVALID_COMMAND);
                     break;

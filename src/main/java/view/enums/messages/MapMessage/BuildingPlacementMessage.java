@@ -13,7 +13,8 @@ public enum BuildingPlacementMessage {
     PLACEMENT_SIGHT_VALID("valid"),
     NOT_EMPTY("A building has already been dropped in this cell"),
     NO_STOREHOUSE_NEARBY("StoreHouses have to be built next to each other"),
-    NO_GATEHOUSE_NEARBY("You can only build a bridge next to a gatehouse");
+    NO_GATEHOUSE_NEARBY("You can only build a bridge next to a gatehouse"),
+    ENTER_MAIN("Entered main menu successfully");
     BuildingPlacementMessage(String message) {
         this.message = message;
     }

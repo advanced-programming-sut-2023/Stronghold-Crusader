@@ -38,6 +38,9 @@ public class MarketMenu {
                 case SELL:
                     runSell(matcher);
                     break;
+                case BACK:
+                    MarketMessage.printMessage(MarketMessage.ENTERED_MAIN);
+                    return "back";
             }
         }
     }
@@ -45,8 +48,7 @@ public class MarketMenu {
     public boolean confirm(String output){
         System.out.println(output);
         String input = scanner.nextLine();
-        if (input.matches("[yY]")) return true;
-        return false;
+        return input.matches("[yY]");
     }
 
     private void runBuy(Matcher matcher){

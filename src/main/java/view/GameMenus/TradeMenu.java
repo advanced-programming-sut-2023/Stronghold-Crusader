@@ -38,6 +38,7 @@ public class TradeMenu {
                 case TRADE_HISTORY:
                     tradeHistoryRun();
                 case BACK:
+                    System.out.println(TradeMenuMessage.ENTER_MAIN);
                     return "back";
             }
         }

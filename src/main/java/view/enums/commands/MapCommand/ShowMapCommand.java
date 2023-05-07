@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum ShowMapCommand {
     SHOW_DETAILS("\\s*show\\s+details\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*"),
     MOVE_MAP("\\s*map\\s+(?<details>.+)"),
-    EXIT("\\s*exit\\s*");
+    BACK("\\s*back\\s*");
     private final String regex;
 
     ShowMapCommand(String regex) {

@@ -43,6 +43,7 @@ public class ChangeEnvironmentMenu {
                     runClearCell(matcher);
                     break;
                 case BACK:
+                    MapMakerMessage.printMessage(MapMakerMessage.ENTER_MAIN);
                     return "back";
                 default:
                     MapMakerMessage.printMessage(MapMakerMessage.INVALID_COMMAND);

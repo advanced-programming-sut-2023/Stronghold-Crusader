@@ -11,7 +11,7 @@ import model.enums.CellType;
 import model.enums.AssetType.MapAssetType;
 import utils.FormatValidation;
 import utils.Vector2D;
-import view.MapMenus.BuildingPlacementMenu.BuildingPlacementMenu;
+import view.MapMenus.BuildingPlacementMenu;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
 
 public class BuildingPlacementController {
