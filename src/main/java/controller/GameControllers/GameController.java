@@ -9,12 +9,15 @@ import model.Map.Map;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
+import model.User.Player;
 import model.User.User;
 import model.enums.AssetType.Material;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class GameController {
@@ -61,24 +64,35 @@ public class GameController {
     }
 
     private void applyUnitDecisions(Map map) {
+        Vector2D currentCoord = new Vector2D(0, 0);
         for (int y = 0; y < map.getSize().y; y++) {
             for (int x = 0; x < map.getSize().x; x++) {
-                for (MapAsset asset : map.getCell(new Vector2D(x, y)).getAllAssets()) {
+                currentCoord.x = x;
+                currentCoord.y = y;
+                ArrayList<MapAsset> cellAssets = map.getCell(currentCoord).getAllAssets();
+                for (int i = cellAssets.size() - 1; i >= 0; i--) {
+                    MapAsset asset = cellAssets.get(i);
                     if (asset instanceof MobileUnit) {
                         MobileUnit mobileAsset = (MobileUnit) asset;
                         Vector2D pastCoordinate = asset.getCoordinate();
-                        if (mobileAsset.hasNextMoveDestination()) {
-                            if (mobileAsset.move()) {
-                                //TODO cow and patrol
-                            }
-                        }
+                        if (mobileAsset.hasNextMoveDestination())
+                            mobileAsset.move();
                         Vector2D newCoordinate = asset.getCoordinate();
                         map.moveMapObject(pastCoordinate, newCoordinate, asset);
                     }
                     if (asset instanceof AttackingUnit) {
-                        MapAsset targetUnit = ((AttackingUnit) asset).getNextRoundAttackTarget();
+                        AttackingUnit attackingAsset = (AttackingUnit) asset;
+                        MapAsset targetUnit = attackingAsset.getNextRoundAttackTarget();
                         if (targetUnit != null) {
-                            targetUnit.takeDamageFrom((AttackingUnit) asset);
+                            targetUnit.takeDamageFrom(attackingAsset);
+                            if(targetUnit.getHitPoint() < 0){
+                                map.removeMapObject(targetUnit.getCoordinate(), targetUnit);
+                                attackingAsset.selectAttackTarget(null);
+                                Player owner = targetUnit.getOwner();
+                                if(owner != null){
+                                    owner.getGovernance().
+                                }
+                            }
                         }
                     }
                 }

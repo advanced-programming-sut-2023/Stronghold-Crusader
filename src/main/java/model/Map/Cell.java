@@ -22,12 +22,8 @@ public class Cell {
         assets = new ArrayList<>();
     }
 
-    public Collection<MapAsset> getAllAssets() {
+    public ArrayList<MapAsset> getAllAssets() {
         return assets;
-    }
-
-    public Collection<MapAsset> getAllAssets(Player player) {
-        return null;
     }
 
     public CellType getType() {

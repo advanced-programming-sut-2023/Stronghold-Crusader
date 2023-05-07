@@ -56,7 +56,7 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.NOT_ALLOWED_TO_DELETE;
         //TODO if Storage ...
         map.getCell(coordinate).removeMapAsset(building);
-        player.getGovernance().removeBuilding(building);
+        player.getGovernance().removeAsset(building);
         return SelectedBuildingMessage.DELETED_BUILDING;
     }
 

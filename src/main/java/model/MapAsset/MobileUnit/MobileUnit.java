@@ -14,6 +14,7 @@ public class MobileUnit extends MapAsset {
     private final int cost;
     protected Vector2D finalMoveDestination;
     private Vector2D nextMoveDestination;
+    private Vector2D[] petrolPath;
 
     public MobileUnit(MobileUnit reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
@@ -23,15 +24,19 @@ public class MobileUnit extends MapAsset {
         this.cost = reference.cost;
     }
 
-    //returns true if reached the round move destination
-    public boolean move() {
+    public void move() {
         coordinate.x = nextMoveDestination.x;
         coordinate.y = nextMoveDestination.y;
         if (coordinate.equals(finalMoveDestination)) {
-            finalMoveDestination = null;
-            return true;
+            if (petrolPath == null)
+                finalMoveDestination = null;
+            else {
+                if (petrolPath[0].equals(coordinate))
+                    finalMoveDestination = petrolPath[1];
+                else
+                    finalMoveDestination = petrolPath[0];
+            }
         }
-        return false;
     }
 
     public void findNextMoveDest(Map map) {
@@ -53,6 +58,14 @@ public class MobileUnit extends MapAsset {
 
     public void selectMoveDestination(Vector2D dest) {
         finalMoveDestination = dest;
+        petrolPath = null;
+    }
+
+    public void selectPetrolPath(Vector2D v1, Vector2D v2) {
+        petrolPath = new Vector2D[2];
+        petrolPath[0] = new Vector2D(v1.x, v1.y);
+        petrolPath[1] = new Vector2D(v2.x, v2.y);
+        finalMoveDestination = petrolPath[0];
     }
 
     public int getEngineersCount() {
