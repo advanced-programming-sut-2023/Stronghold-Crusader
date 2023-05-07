@@ -89,4 +89,11 @@ public class Cell {
         }
         return output.toString();
     }
+
+    public boolean containsType(MapAssetType type){
+        for (MapAsset asset : assets){
+            if (asset.getType().equals(type)) return true;
+        }
+        return false;
+    }
 }
