@@ -52,4 +52,8 @@ public class Game {
     public Collection<Player> getPlayers() {
         return players.values();
     }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 }

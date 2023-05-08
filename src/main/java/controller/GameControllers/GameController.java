@@ -5,14 +5,20 @@ import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
 import model.Game.Game;
 import model.Game.Governance;
+import model.Map.Map;
+import model.MapAsset.MapAsset;
+import model.MapAsset.MobileUnit.AttackingUnit;
+import model.MapAsset.MobileUnit.MobileUnit;
+import model.User.Player;
 import model.User.User;
 import model.enums.AssetType.Material;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 public class GameController {
     private final User currentUser;
@@ -51,6 +57,65 @@ public class GameController {
         }
     }
 
+    public void nextRound() {
+        processUnitDecisions();
+        applyUnitDecisions();
+    }
+
+    private void applyUnitDecisions() {
+        Map map = game.getMap();
+        Vector2D currentCoord = new Vector2D(0, 0);
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                currentCoord.x = x;
+                currentCoord.y = y;
+                ArrayList<MapAsset> cellAssets = map.getCell(currentCoord).getAllAssets();
+                for (int i = cellAssets.size() - 1; i >= 0; i--) {
+                    MapAsset asset = cellAssets.get(i);
+                    if (asset instanceof MobileUnit)
+                        processMovement(map, (MobileUnit) asset);
+                    if (asset instanceof AttackingUnit)
+                        processAttack((AttackingUnit) asset);
+                }
+            }
+        }
+    }
+
+    private void processMovement(Map map, MobileUnit mobileUnit) {
+        Vector2D pastCoordinate = mobileUnit.getCoordinate();
+        if (mobileUnit.hasNextMoveDestination())
+            mobileUnit.move();
+        Vector2D newCoordinate = mobileUnit.getCoordinate();
+        map.moveMapObject(pastCoordinate, newCoordinate, mobileUnit);
+    }
+
+    private void processAttack(AttackingUnit attackingAsset) {
+        MapAsset targetUnit = attackingAsset.getNextRoundAttackTarget();
+        if (targetUnit != null) {
+            targetUnit.takeDamageFrom(attackingAsset);
+            if (targetUnit.getHitPoint() < 0)
+                eraseAsset(attackingAsset);
+        }
+    }
+
+    private void processUnitDecisions() {
+        Map map = game.getMap();
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                for (MapAsset asset : map.getCell(new Vector2D(x, y)).getAllAssets()) {
+                    if (!(asset instanceof AttackingUnit))
+                        continue;
+                    ((AttackingUnit) asset).processNextRoundMove(map);
+                    ((MobileUnit) asset).findNextMoveDest(map);
+                }
+            }
+        }
+    }
+
+    public void nextTurn() {
+
+    }
+
     public GameMenuMessage showMap(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!ShowMapController.isCenterValid(coordinate, game.getMap()))
@@ -80,7 +145,7 @@ public class GameController {
     public String showFoodList() {
         StringBuilder output = new StringBuilder();
         HashMap<Material, Integer> list = game.getCurrentPlayer().getGovernance().getFoodList();
-        for (Map.Entry<Material, Integer> entry : list.entrySet())
+        for (java.util.Map.Entry<Material, Integer> entry : list.entrySet())
             output.append(entry.getKey().name().toLowerCase()).append(": ").append(entry.getValue()).append('\n');
         output.deleteCharAt(output.length() - 1);
         return output.toString();
@@ -109,5 +174,12 @@ public class GameController {
             return GameMenuMessage.INVALID_FEAR_RATE;
         game.getCurrentPlayer().getGovernance().setFearRate(fearRate);
         return GameMenuMessage.FEAR_RATE_CHANGE_SUCCESS;
+    }
+
+    private void eraseAsset(MapAsset asset) {
+        game.getMap().removeMapObject(asset.getCoordinate(), asset);
+        Player owner = asset.getOwner();
+        if (owner != null)
+            owner.getGovernance().removeAsset(asset);
     }
 }

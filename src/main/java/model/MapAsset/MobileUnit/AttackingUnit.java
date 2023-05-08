@@ -22,9 +22,7 @@ public class AttackingUnit extends MobileUnit {
     private final ArrayList<AttackTarget> targets;
     private UnitState state;
     private MapAsset selectedAttackTarget;
-    private MapAsset roundAttackTarget;
-    private Vector2D selectedMoveDestination;
-    private Vector2D roundMoveDestination;
+    private MapAsset nextRoundAttackTarget;
 
     public AttackingUnit(AttackingUnit reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
@@ -39,35 +37,40 @@ public class AttackingUnit extends MobileUnit {
     }
 
     public void processNextRoundMove(Map map) {
-        if (selectedMoveDestination != null) {
-            roundMoveDestination = selectedMoveDestination;
-            roundAttackTarget = null;
+        checkForTargetDeath();
+        if (finalMoveDestination != null) {
+            nextRoundAttackTarget = null;
             return;
         }
         if (selectedAttackTarget != null) {
             if (coordinate.getDistance(selectedAttackTarget.getCoordinate()) <= attackRange) {
-                roundMoveDestination = null;
-                roundAttackTarget = selectedAttackTarget;
+                finalMoveDestination = null;
+                nextRoundAttackTarget = selectedAttackTarget;
             } else {
-                roundMoveDestination = roundAttackTarget.getCoordinate();
-                roundAttackTarget = null;
+                finalMoveDestination = nextRoundAttackTarget.getCoordinate();
+                nextRoundAttackTarget = null;
             }
             return;
         }
         MapAsset attackTarget = findTarget(map, attackRange);
         if (attackTarget != null) {
-            roundAttackTarget = attackTarget;
-            roundMoveDestination = null;
+            nextRoundAttackTarget = attackTarget;
+            finalMoveDestination = null;
             return;
         }
         MapAsset triggeredAttackTarget = findTarget(map, state.getTriggerRange());
         if (triggeredAttackTarget != null) {
-            roundAttackTarget = null;
-            roundMoveDestination = triggeredAttackTarget.getCoordinate();
+            nextRoundAttackTarget = null;
+            finalMoveDestination = triggeredAttackTarget.getCoordinate();
             return;
         }
-        roundMoveDestination = null;
-        roundAttackTarget = null;
+        nextRoundAttackTarget = null;
+        finalMoveDestination = null;
+    }
+
+    private void checkForTargetDeath(){
+        if(selectedAttackTarget.getHitPoint() < 0)
+            selectedAttackTarget = null;
     }
 
     private MapAsset findTarget(Map map, int range) {
@@ -92,8 +95,15 @@ public class AttackingUnit extends MobileUnit {
         return weapon;
     }
 
-    public UnitState getState() {
-        return state;
+    @Override
+    public void takeDamageFrom(AttackingUnit attacker) {
+        if (selectedAttackTarget == null)
+            selectedAttackTarget = attacker;
+        super.takeDamageFrom(attacker);
+    }
+
+    public int getAttackDamage() {
+        return attackDamage;
     }
 
     public void setState(UnitState state) {
@@ -102,21 +112,18 @@ public class AttackingUnit extends MobileUnit {
 
     public void selectAttackTarget(MapAsset target) {
         selectedAttackTarget = target;
-        selectedMoveDestination = null;
+        finalMoveDestination = null;
     }
 
     public void selectMoveDestination(Vector2D dest) {
-        selectedMoveDestination = dest;
+        finalMoveDestination = dest;
         selectedAttackTarget = null;
     }
 
-    public MapAsset getRoundAttackTarget() {
-        return roundAttackTarget;
+    public MapAsset getNextRoundAttackTarget() {
+        return nextRoundAttackTarget;
     }
 
-    public Vector2D getRoundMoveDestination() {
-        return roundMoveDestination;
-    }
 
     @Override
     public String toString() {

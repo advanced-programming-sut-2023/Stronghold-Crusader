@@ -22,12 +22,8 @@ public class Cell {
         assets = new ArrayList<>();
     }
 
-    public Collection<MapAsset> getAllAssets() {
+    public ArrayList<MapAsset> getAllAssets() {
         return assets;
-    }
-
-    public Collection<MapAsset> getAllAssets(Player player) {
-        return null;
     }
 
     public CellType getType() {
@@ -57,14 +53,14 @@ public class Cell {
 
     private boolean isTraversable(MobileUnit unit) {
         if (!CellType.isTraversableByType(type)) return false;
-        for (MapAsset mapAsset : assets){
-            if (mapAsset instanceof Building){
-              if(mapAsset.getOwner().equals(unit.getOwner()) && (mapAsset.getType().equals(MapAssetType.BIG_GATEHOUSE)
-                               || mapAsset.getType().equals(MapAssetType.SMALL_GATEHOUSE))){
-                  //TODO is Gate open or not ?
-                  return true;
-              }
-                  return false;
+        for (MapAsset mapAsset : assets) {
+            if (mapAsset instanceof Building) {
+                if (mapAsset.getOwner().equals(unit.getOwner()) && (mapAsset.getType().equals(MapAssetType.BIG_GATEHOUSE)
+                        || mapAsset.getType().equals(MapAssetType.SMALL_GATEHOUSE))) {
+                    //TODO is Gate open or not ?
+                    return true;
+                }
+                return false;
             }
         }
         return true;
@@ -75,11 +71,10 @@ public class Cell {
         if (type.equals(CellType.SHALLOW_WATER)) return 3;
         if (isThereUnit(unit.getOwner())) return 2;
         return 1;
-
     }
 
     public void clear() {
-
+        //TODO
     }
 
     public void addMapAsset(MapAsset obj) {
@@ -104,9 +99,15 @@ public class Cell {
         return false;
     }
 
-
     public boolean isEmpty() {
         return assets.isEmpty();
+    }
+
+    public boolean containsType(MapAssetType type) {
+        for (MapAsset asset : assets) {
+            if (asset.getType().equals(type)) return true;
+        }
+        return false;
     }
 
     @Override
@@ -116,12 +117,5 @@ public class Cell {
             output.append('\n').append(asset.toString());
         }
         return output.toString();
-    }
-
-    public boolean containsType(MapAssetType type) {
-        for (MapAsset asset : assets) {
-            if (asset.getType().equals(type)) return true;
-        }
-        return false;
     }
 }

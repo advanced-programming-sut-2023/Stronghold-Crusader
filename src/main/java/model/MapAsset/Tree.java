@@ -18,11 +18,6 @@ public class Tree extends MapAsset {
     }
 
     @Override
-    public void getDamageFrom(AttackingUnit attacker) {
-
-    }
-
-    @Override
     public String toString() {
         return super.toString()
                 + ", type=" + treeType.name().toLowerCase();

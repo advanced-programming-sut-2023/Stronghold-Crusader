@@ -69,16 +69,16 @@ public class Trade {
     @Override
     public String toString() {
         String trade = (price == 0) ? "Donation" : "Request";
-        return trade + "{" +
-                "id=" + id +
-                ", acceptanceMode=" + acceptanceMode +
-                ", owner=" + owner +
-                ", acceptor=" + acceptor +
-                ", price=" + price +
-                ", info=" + info +
-                ", message='" + message + '\'' +
-                ", acceptorMessage='" + acceptorMessage + '\'' +
-                '}';
+        return trade + "{" + "\n" +
+                "id = " + id + "\n" +
+                "acceptanceMode = " + acceptanceMode + "\n" +
+                "owner = " + owner.getUsername() + "\n" +
+                "acceptor = " + acceptor + "\n" +
+                "price = " + price + "\n" +
+                "info = " + info + "\n" +
+                "message = " + message + '\'' + "\n" +
+                "acceptorMessage = " + acceptorMessage + '\'' + "\n" +
+                '}' +  "\n" ;
     }
 
     public String showAcceptedTrade() {

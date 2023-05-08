@@ -6,6 +6,7 @@ import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Map {
     private final String name;
@@ -46,14 +47,16 @@ public class Map {
     }
 
     public void addMapObject(Vector2D coordinate, MapAsset obj) {
-        map[coordinate.y][coordinate.x].addMapAsset(obj);
+        getCell(coordinate).addMapAsset(obj);
     }
 
-    public Cell[][] getMap() {
-        return map;
+    public void removeMapObject(Vector2D coordinate, MapAsset obj) {
+        getCell(coordinate).removeMapAsset(obj);
     }
 
-    public void removeMapObject() {
+    public void moveMapObject(Vector2D source, Vector2D dest, MapAsset obj) {
+        addMapObject(dest, obj);
+        removeMapObject(source, obj);
     }
 
     //only gets called at the end of the game to prepare Map for saving.
@@ -65,33 +68,74 @@ public class Map {
         }
     }
 
-    public ArrayList<Cell> getNearbyCells(Vector2D center, int radius){
+    public ArrayList<Cell> getNearbyCells(Vector2D center, int radius) {
         ArrayList<Cell> nearbyCells = new ArrayList<>();
         nearbyCells.add(getCell(center));
         for (int r = 1; r < radius; r++) {
             for (int j = -r; j <= r; j++) {
                 Vector2D cellCoord = new Vector2D(center.x + j, center.y + r);
-                if(isInMap(cellCoord))
+                if (isInMap(cellCoord))
                     nearbyCells.add(getCell(cellCoord));
                 cellCoord = new Vector2D(center.x + j, center.y - r);
-                if(isInMap(cellCoord))
+                if (isInMap(cellCoord))
                     nearbyCells.add(getCell(cellCoord));
             }
             for (int j = -r + 1; j <= r - 1; j++) {
                 Vector2D cellCoord = new Vector2D(center.x + r, center.y + j);
-                if(isInMap(cellCoord))
+                if (isInMap(cellCoord))
                     nearbyCells.add(getCell(cellCoord));
                 cellCoord = new Vector2D(center.x - r, center.y + j);
-                if(isInMap(cellCoord))
+                if (isInMap(cellCoord))
                     nearbyCells.add(getCell(cellCoord));
             }
         }
         return nearbyCells;
     }
 
-    public ArrayList<Cell> getTraversePath(MobileUnit unit, Vector2D dest) {
-        return null;
+    public ArrayList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
+        int numberOfVertices = map.length;
+        int[] dist = new int[numberOfVertices];
+        int[] prev = new int[numberOfVertices];
+        boolean[] visited = new boolean[numberOfVertices];
+        for (int i = 0; i < numberOfVertices; i++) {
+            dist[i] = Integer.MAX_VALUE;
+            prev[i] = -1;
+            visited[i] = false;
+        }
+        dist[Vector2D.translateVector2DToInt(currentUnit.getCoordinate(), size.x)] = 0;
+        for (int i = 0; i < numberOfVertices - 1; i++) {
+            int minDist = Integer.MAX_VALUE;
+            int minIndex = -1;
+            for (int j = 0; j < numberOfVertices; j++) {
+                if (!visited[j] && dist[j] < minDist) {
+                    minDist = dist[j];
+                    minIndex = j;
+                }
+            }
+            visited[minIndex] = true;
+            if (minIndex == Vector2D.translateVector2DToInt(destination, size.x)) {
+                break;
+            }
+            for (int j = 0; j < numberOfVertices; j++) {
+                Vector2D v2 = Vector2D.translateIntToVector2D(j, size.x);
+                Cell cell = getCell(v2);
+                if (!visited[j] && dist[minIndex] != Integer.MAX_VALUE && dist[minIndex] + cell.getTravelWorth(currentUnit) < dist[j]) {
+                    dist[j] = dist[minIndex] + cell.getTravelWorth(currentUnit);
+                    prev[j] = minIndex;
+                }
+            }
+        }
+        ArrayList<Vector2D> path = new ArrayList<>();
+        int curr = Vector2D.translateVector2DToInt(destination, size.x);
+        while (curr != -1) {
+            path.add(Vector2D.translateIntToVector2D(curr, size.x));
+            curr = prev[curr];
+        }
+        Collections.reverse(path);
+        System.out.println("Shortest path from " + currentUnit.getCoordinate() + " to " + destination + ": " + path);
+        return path;
     }
+
 
     public void changeCellTypeTo(Vector2D coordinate, CellType type) {
         map[coordinate.y][coordinate.x].setType(type);

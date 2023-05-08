@@ -3,6 +3,7 @@ package model.Game;
 import Settings.GovernanceSettings;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.SymbolicBuilding;
+import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
@@ -16,7 +17,7 @@ import static java.lang.Math.min;
 
 public class Governance {
     private final ArrayList<Building> buildings;
-    private final ArrayList<MobileUnit> people;
+    private final ArrayList<MobileUnit> units;
     private int totalPopulation;
     private int peasantPopulation;
     private int populationCapacity;
@@ -24,18 +25,16 @@ public class Governance {
     private int foodPopularity;
     private int taxPopularity;
     private int taxRate;
-    private int religionRate;
     private int fearRate;
     private double gold;
 
     public Governance(Player player) {
         buildings = new ArrayList<>();
-        people = new ArrayList<>();
+        units = new ArrayList<>();
         totalPopulation = 50;
         peasantPopulation = 50;
         foodRate = -8;
         taxRate = 0;
-        religionRate = 0;
         fearRate = 0;
         gold = 1000;
         foodPopularity = 0;
@@ -138,6 +137,7 @@ public class Governance {
     }
 
     public int getInnPopularity() {
+        //TODO
         return 0;
     }
 
@@ -157,10 +157,6 @@ public class Governance {
         this.taxRate = taxRate;
     }
 
-    public int getFearRate() {
-        return fearRate;
-    }
-
     public void setFearRate(int fearRate) {
         this.fearRate = fearRate;
     }
@@ -175,7 +171,7 @@ public class Governance {
     }
 
     public void addPeople(MobileUnit mobileUnit) {
-        people.add(mobileUnit);
+        units.add(mobileUnit);
     }
 
     public void addBuilding(Building building) {
@@ -184,10 +180,24 @@ public class Governance {
             populationCapacity += ((SymbolicBuilding) building).getPopulationAmount();
     }
 
-    public void removeBuilding(Building building) {
+    public void removeAsset(MapAsset asset) {
+        if (asset instanceof Building)
+            removeBuilding((Building) asset);
+        else if (asset instanceof MobileUnit)
+            removeMobileUnit((MobileUnit) asset);
+    }
+
+    private void removeBuilding(Building building) {
         buildings.remove(building);
         if (building instanceof SymbolicBuilding)
             populationCapacity -= ((SymbolicBuilding) building).getPopulationAmount();
+    }
+
+    private void removeMobileUnit(MobileUnit mobileUnit) {
+        units.remove(mobileUnit);
+        totalPopulation -= mobileUnit.getEngineersCount();
+        if (MapAssetType.getPeople().contains(mobileUnit.getType()))
+            totalPopulation -= 1;
     }
 
     public int getStorageStock(Material material) {
@@ -245,7 +255,7 @@ public class Governance {
         }
     }
 
-    public boolean hasEnoughInStock(Material material, int amount){
+    public boolean hasEnoughInStock(Material material, int amount) {
         return amount <= getStorageStock(material);
     }
 

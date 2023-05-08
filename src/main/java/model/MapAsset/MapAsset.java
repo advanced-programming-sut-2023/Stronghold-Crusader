@@ -6,7 +6,7 @@ import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
 public abstract class MapAsset {
-    protected final Vector2D coordinate;
+    protected Vector2D coordinate;
     protected final double maxHitPoint;
     protected final MapAssetType type;
     protected Player owner;
@@ -20,7 +20,9 @@ public abstract class MapAsset {
         this.hitPoint = this.maxHitPoint;
     }
 
-    public abstract void getDamageFrom(AttackingUnit attacker);
+    public void takeDamageFrom(AttackingUnit attacker){
+        hitPoint -= attacker.getAttackDamage();
+    }
 
     public Player getOwner() {
         return owner;

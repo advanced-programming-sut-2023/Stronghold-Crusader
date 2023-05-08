@@ -14,8 +14,7 @@ public class Cliff extends MapAsset {
     }
 
     @Override
-    public void getDamageFrom(AttackingUnit attacker) {
-
+    public void takeDamageFrom(AttackingUnit attacker) {
     }
 
     @Override

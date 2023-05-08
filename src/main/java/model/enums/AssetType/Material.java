@@ -1,39 +1,19 @@
 package model.enums.AssetType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public enum Material {
     //Main foods
-    MEAT,
-    APPLE,
-    BREAD,
-    CHEESE,
+    MEAT, APPLE, BREAD, CHEESE,
 
     //Other
-    GRAIN,
-    BEAR,
-    FLOUR,
-    WHEAT,
-    WOOD,
-    STONE,
-    SPEAL,
-    PICK,
-    ROCKBLOCK,
-    PITCH,
-    WINE,
-    IRON,
+    GRAIN, BEAR, FLOUR, WHEAT, WOOD, STONE, SPEAL, PICK, ROCKBLOCK, PITCH, WINE, IRON,
 
     //Weapons
-    ARMOUR,
-    MACE,
-    SWORD,
-    BOW,
-    CROSS_BOW,
-    SPEAR,
-    PIKE,
-    HORSE;
+    ARMOUR, MACE, SWORD, BOW, CROSS_BOW, SPEAR, PIKE, HORSE;
 
-    public static boolean Contains(String input) {
+    public static boolean contains(String input) {
 
         for (Material m : Material.values()) {
             if (m.name().equals(input)) {
@@ -43,20 +23,14 @@ public enum Material {
         return false;
     }
 
-    public static Material[] getMainFoods(){
-        Material[] foods = new Material[4];
-        foods[0] = MEAT;
-        foods[1] = CHEESE;
-        foods[2] = APPLE;
-        foods[3] = BREAD;
-        return foods;
+    public static ArrayList<Material> getMainFoods() {
+        return new ArrayList<>(List.of(MEAT, CHEESE, APPLE, BREAD));
     }
 
-    public static Material getMaterial(String materialName){
+    public static Material getMaterial(String materialName) {
         for (Material m : Material.values()) {
-            if (m.name().equals(materialName)) {
+            if (m.name().equals(materialName))
                 return m;
-            }
         }
         return null;
     }
