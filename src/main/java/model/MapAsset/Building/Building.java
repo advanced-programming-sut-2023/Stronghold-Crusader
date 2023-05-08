@@ -31,6 +31,10 @@ public class Building extends MapAsset {
         return neededMaterial;
     }
 
+    public int getWorkerNumber() {
+        return workerNumber;
+    }
+
     public void setNeededMaterial(Material neededMaterial) {
         this.neededMaterial = neededMaterial;
     }

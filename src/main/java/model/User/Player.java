@@ -16,7 +16,7 @@ public class Player {
         this.username = user.getUsername();
         this.nickname = user.getNickname();
         this.slogan = user.getSlogan();
-        governance = new Governance(this);
+        governance = new Governance();
         newTrades = new ArrayList<>();
     }
 

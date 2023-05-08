@@ -17,7 +17,6 @@ import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class GameController {
@@ -55,6 +54,15 @@ public class GameController {
                     break;
             }
         }
+    }
+
+    public void nextTurn() {
+        Governance governance = game.getCurrentPlayer().getGovernance();
+        governance.processPopulation();
+        governance.payTax();
+        governance.distributeFoods();
+        //produce
+        governance.calculatePopularity();
     }
 
     public void nextRound() {
@@ -98,6 +106,13 @@ public class GameController {
         }
     }
 
+    private void eraseAsset(MapAsset asset) {
+        game.getMap().removeMapObject(asset.getCoordinate(), asset);
+        Player owner = asset.getOwner();
+        if (owner != null)
+            owner.getGovernance().removeAsset(asset);
+    }
+
     private void processUnitDecisions() {
         Map map = game.getMap();
         for (int y = 0; y < map.getSize().y; y++) {
@@ -110,10 +125,6 @@ public class GameController {
                 }
             }
         }
-    }
-
-    public void nextTurn() {
-
     }
 
     public GameMenuMessage showMap(int x, int y) {
@@ -135,7 +146,7 @@ public class GameController {
     }
 
     public String showPopularity() {
-        return "Popularity: " + game.getCurrentPlayer().getGovernance().getPopularity();
+        return "Popularity: " + game.getCurrentPlayer().getGovernance().getTotalPopularity();
     }
 
     public String showFoodRate() {
@@ -174,12 +185,5 @@ public class GameController {
             return GameMenuMessage.INVALID_FEAR_RATE;
         game.getCurrentPlayer().getGovernance().setFearRate(fearRate);
         return GameMenuMessage.FEAR_RATE_CHANGE_SUCCESS;
-    }
-
-    private void eraseAsset(MapAsset asset) {
-        game.getMap().removeMapObject(asset.getCoordinate(), asset);
-        Player owner = asset.getOwner();
-        if (owner != null)
-            owner.getGovernance().removeAsset(asset);
     }
 }

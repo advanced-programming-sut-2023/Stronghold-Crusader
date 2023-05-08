@@ -68,8 +68,8 @@ public class AttackingUnit extends MobileUnit {
         finalMoveDestination = null;
     }
 
-    private void checkForTargetDeath(){
-        if(selectedAttackTarget.getHitPoint() < 0)
+    private void checkForTargetDeath() {
+        if (selectedAttackTarget.getHitPoint() < 0)
             selectedAttackTarget = null;
     }
 
@@ -112,18 +112,25 @@ public class AttackingUnit extends MobileUnit {
 
     public void selectAttackTarget(MapAsset target) {
         selectedAttackTarget = target;
-        finalMoveDestination = null;
+        super.selectMoveDestination(null);
     }
 
     public void selectMoveDestination(Vector2D dest) {
-        finalMoveDestination = dest;
         selectedAttackTarget = null;
+        super.selectMoveDestination(dest);
+    }
+
+    @Override
+    public void selectPetrolPath(Vector2D v1, Vector2D v2) {
+        selectedAttackTarget = null;
+        super.selectPetrolPath(v1, v2);
     }
 
     public MapAsset getNextRoundAttackTarget() {
+        if (nextRoundAttackTarget.getHitPoint() < 0)
+            return null;
         return nextRoundAttackTarget;
     }
-
 
     @Override
     public String toString() {

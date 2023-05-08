@@ -54,6 +54,7 @@ public class BuildingPlacementController {
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
 
         // TODO : Handel workers
+        // TODO : add buildings to governance buildings using governance::addAsset()
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
