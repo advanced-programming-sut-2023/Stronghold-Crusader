@@ -11,7 +11,6 @@ import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
-import model.enums.AssetType.People;
 import utils.SignupAndLoginUtils;
 import utils.Vector2D;
 import view.GameMenus.SelectedAssetMenu;
@@ -105,9 +104,10 @@ public class SelectedBuildingController {
     }
 
     private boolean isUnitMatchWithBuilding(String type) {
-        if (!People.isContains(type.toUpperCase())) return false;
-        People people = People.valueOf(type.toUpperCase());
-
+        MapAssetType person = MapAssetType.getPerson(type);
+        if (person == null)
+            return false;
+        // TODO kian
         return false;
     }
 

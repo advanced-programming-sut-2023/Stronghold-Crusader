@@ -180,23 +180,24 @@ public class Governance {
             populationCapacity += ((SymbolicBuilding) building).getPopulationAmount();
     }
 
+    public void removeAsset(MapAsset asset) {
+        if (asset instanceof Building)
+            removeBuilding((Building) asset);
+        else if (asset instanceof MobileUnit)
+            removeMobileUnit((MobileUnit) asset);
+    }
+
     private void removeBuilding(Building building) {
         buildings.remove(building);
         if (building instanceof SymbolicBuilding)
             populationCapacity -= ((SymbolicBuilding) building).getPopulationAmount();
     }
 
-    private void removeMobileUnit(MobileUnit mobileUnit){
+    private void removeMobileUnit(MobileUnit mobileUnit) {
         units.remove(mobileUnit);
         totalPopulation -= mobileUnit.getEngineersCount();
-        //TODO finish this using people array
-    }
-
-    public void removeAsset(MapAsset asset){
-        if(asset instanceof Building)
-            removeBuilding((Building) asset);
-        else if(asset instanceof MobileUnit)
-            removeMobileUnit((MobileUnit) asset);
+        if (MapAssetType.getPeople().contains(mobileUnit.getType()))
+            totalPopulation -= 1;
     }
 
     public int getStorageStock(Material material) {
@@ -254,7 +255,7 @@ public class Governance {
         }
     }
 
-    public boolean hasEnoughInStock(Material material, int amount){
+    public boolean hasEnoughInStock(Material material, int amount) {
         return amount <= getStorageStock(material);
     }
 

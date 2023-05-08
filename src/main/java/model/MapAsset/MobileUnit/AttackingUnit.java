@@ -37,6 +37,7 @@ public class AttackingUnit extends MobileUnit {
     }
 
     public void processNextRoundMove(Map map) {
+        checkForTargetDeath();
         if (finalMoveDestination != null) {
             nextRoundAttackTarget = null;
             return;
@@ -65,6 +66,11 @@ public class AttackingUnit extends MobileUnit {
         }
         nextRoundAttackTarget = null;
         finalMoveDestination = null;
+    }
+
+    private void checkForTargetDeath(){
+        if(selectedAttackTarget.getHitPoint() < 0)
+            selectedAttackTarget = null;
     }
 
     private MapAsset findTarget(Map map, int range) {

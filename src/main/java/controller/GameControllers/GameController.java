@@ -58,12 +58,12 @@ public class GameController {
     }
 
     public void nextRound() {
-        Map map = game.getMap();
-        processUnitDecisions(map);
-        applyUnitDecisions(map);
+        processUnitDecisions();
+        applyUnitDecisions();
     }
 
-    private void applyUnitDecisions(Map map) {
+    private void applyUnitDecisions() {
+        Map map = game.getMap();
         Vector2D currentCoord = new Vector2D(0, 0);
         for (int y = 0; y < map.getSize().y; y++) {
             for (int x = 0; x < map.getSize().x; x++) {
@@ -72,35 +72,34 @@ public class GameController {
                 ArrayList<MapAsset> cellAssets = map.getCell(currentCoord).getAllAssets();
                 for (int i = cellAssets.size() - 1; i >= 0; i--) {
                     MapAsset asset = cellAssets.get(i);
-                    if (asset instanceof MobileUnit) {
-                        MobileUnit mobileAsset = (MobileUnit) asset;
-                        Vector2D pastCoordinate = asset.getCoordinate();
-                        if (mobileAsset.hasNextMoveDestination())
-                            mobileAsset.move();
-                        Vector2D newCoordinate = asset.getCoordinate();
-                        map.moveMapObject(pastCoordinate, newCoordinate, asset);
-                    }
-                    if (asset instanceof AttackingUnit) {
-                        AttackingUnit attackingAsset = (AttackingUnit) asset;
-                        MapAsset targetUnit = attackingAsset.getNextRoundAttackTarget();
-                        if (targetUnit != null) {
-                            targetUnit.takeDamageFrom(attackingAsset);
-                            if(targetUnit.getHitPoint() < 0){
-                                map.removeMapObject(targetUnit.getCoordinate(), targetUnit);
-                                attackingAsset.selectAttackTarget(null);
-                                Player owner = targetUnit.getOwner();
-                                if(owner != null){
-                                    owner.getGovernance().
-                                }
-                            }
-                        }
-                    }
+                    if (asset instanceof MobileUnit)
+                        processMovement(map, (MobileUnit) asset);
+                    if (asset instanceof AttackingUnit)
+                        processAttack((AttackingUnit) asset);
                 }
             }
         }
     }
 
-    private void processUnitDecisions(Map map) {
+    private void processMovement(Map map, MobileUnit mobileUnit) {
+        Vector2D pastCoordinate = mobileUnit.getCoordinate();
+        if (mobileUnit.hasNextMoveDestination())
+            mobileUnit.move();
+        Vector2D newCoordinate = mobileUnit.getCoordinate();
+        map.moveMapObject(pastCoordinate, newCoordinate, mobileUnit);
+    }
+
+    private void processAttack(AttackingUnit attackingAsset) {
+        MapAsset targetUnit = attackingAsset.getNextRoundAttackTarget();
+        if (targetUnit != null) {
+            targetUnit.takeDamageFrom(attackingAsset);
+            if (targetUnit.getHitPoint() < 0)
+                eraseAsset(attackingAsset);
+        }
+    }
+
+    private void processUnitDecisions() {
+        Map map = game.getMap();
         for (int y = 0; y < map.getSize().y; y++) {
             for (int x = 0; x < map.getSize().x; x++) {
                 for (MapAsset asset : map.getCell(new Vector2D(x, y)).getAllAssets()) {
@@ -175,5 +174,12 @@ public class GameController {
             return GameMenuMessage.INVALID_FEAR_RATE;
         game.getCurrentPlayer().getGovernance().setFearRate(fearRate);
         return GameMenuMessage.FEAR_RATE_CHANGE_SUCCESS;
+    }
+
+    private void eraseAsset(MapAsset asset) {
+        game.getMap().removeMapObject(asset.getCoordinate(), asset);
+        Player owner = asset.getOwner();
+        if (owner != null)
+            owner.getGovernance().removeAsset(asset);
     }
 }

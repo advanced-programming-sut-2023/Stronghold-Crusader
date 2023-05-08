@@ -1,5 +1,8 @@
 package model.enums.AssetType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Material {
     //Main foods
     MEAT, APPLE, BREAD, CHEESE,
@@ -20,20 +23,14 @@ public enum Material {
         return false;
     }
 
-    public static Material[] getMainFoods() {
-        Material[] foods = new Material[4];
-        foods[0] = MEAT;
-        foods[1] = CHEESE;
-        foods[2] = APPLE;
-        foods[3] = BREAD;
-        return foods;
+    public static ArrayList<Material> getMainFoods() {
+        return new ArrayList<>(List.of(MEAT, CHEESE, APPLE, BREAD));
     }
 
     public static Material getMaterial(String materialName) {
         for (Material m : Material.values()) {
-            if (m.name().equals(materialName)) {
+            if (m.name().equals(materialName))
                 return m;
-            }
         }
         return null;
     }
