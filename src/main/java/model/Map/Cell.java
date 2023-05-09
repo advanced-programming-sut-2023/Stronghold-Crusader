@@ -1,7 +1,9 @@
 package model.Map;
 
+import model.Game.Game;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
+import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.CellType;
@@ -74,7 +76,7 @@ public class Cell {
     }
 
     public void clear() {
-        //TODO
+        assets.clear();
     }
 
     public void addMapAsset(MapAsset obj) {

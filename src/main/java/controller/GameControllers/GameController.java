@@ -34,7 +34,8 @@ public class GameController {
         while (true) {
             switch (gameMenu.run()) {
                 case "changeEnvironment":
-                    ChangeEnvironmentController environmentController = new ChangeEnvironmentController(game.getMap());
+                    ChangeEnvironmentController environmentController = new
+                            ChangeEnvironmentController(game.getMap(), game);
                     environmentController.run();
                     break;
                 case "buildingPlacement":

@@ -66,15 +66,15 @@ public class TradeTest {
         Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.EMPTY_FIELD);
 
         matcher = TradeMenuCommand.getMatcher(requestCommand_invalidMaterial, TradeMenuCommand.REQUEST);
-        inputs = SignupAndLoginUtils.getInputs(matcher,TradeMenuCommand.REQUEST.getRegex());
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
         Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.INVALID_MATERIAL);
 
         matcher = TradeMenuCommand.getMatcher(requestCommand_invalidAmount, TradeMenuCommand.REQUEST);
-        inputs = SignupAndLoginUtils.getInputs(matcher,TradeMenuCommand.REQUEST.getRegex());
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
         Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.INVALID_AMOUNT);
 
         matcher = TradeMenuCommand.getMatcher(requestCommand_correct, TradeMenuCommand.REQUEST);
-        inputs = SignupAndLoginUtils.getInputs(matcher,TradeMenuCommand.REQUEST.getRegex());
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
         Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.GOLD_NEEDED);
         player1.getGovernance().changeGold(1005);
         Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.REQUEST_SUCCESS);

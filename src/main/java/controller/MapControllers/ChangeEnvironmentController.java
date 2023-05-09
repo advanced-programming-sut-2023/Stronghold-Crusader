@@ -1,9 +1,12 @@
 package controller.MapControllers;
 
 import model.ConstantManager;
+import model.Game.Game;
 import model.Map.Map;
 import model.MapAsset.Cliff;
+import model.MapAsset.MapAsset;
 import model.MapAsset.Tree;
+import model.User.Player;
 import model.enums.*;
 import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
@@ -12,8 +15,9 @@ import view.enums.messages.MapMessage.MapMakerMessage;
 
 public class ChangeEnvironmentController {
     private Map map;
+    private Game game;
 
-    public ChangeEnvironmentController(Map map) {
+    public ChangeEnvironmentController(Map map, Game game) {
         this.map = map;
     }
 
@@ -54,7 +58,12 @@ public class ChangeEnvironmentController {
     public MapMakerMessage clearCell(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
-        map.clearCell(coordinate);
+        for (MapAsset asset : map.getCell(coordinate).getAllAssets()){
+            for (Player player : game.getPlayers()){
+                player.getGovernance().removeAsset(asset);
+            }
+        }
+        map.getCell(coordinate).setType(CellType.PlAIN);
         return MapMakerMessage.CLEAR_CELL_SUCCESS;
     }
 
@@ -66,7 +75,6 @@ public class ChangeEnvironmentController {
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         if (cliffDirection == null) return MapMakerMessage.INVALID_DIRECTION;
         if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
-
         Cliff cliff = new Cliff((Cliff) ConstantManager.getInstance().getAsset(MapAssetType.CLIFF), coordinate, null, cliffDirection);
         map.addMapObject(coordinate, cliff);
         return MapMakerMessage.DROP_ROCK_SUCCESS;

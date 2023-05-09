@@ -1,5 +1,7 @@
 package model.enums;
 
+import java.util.Random;
+
 public enum Direction {
     SOUTH("s"),
     NORTH("n"),
@@ -13,6 +15,11 @@ public enum Direction {
     }
 
     public static Direction getDirection(String direction) {
+        if (direction.equals("r")){
+            Direction[] directions = {SOUTH, NORTH, EAST, WEST};
+            int randomInt = new Random().nextInt(4);
+            return directions[randomInt];
+        }
         for (Direction d : Direction.values()) {
             if (d.name.equals(direction)) return d;
         }

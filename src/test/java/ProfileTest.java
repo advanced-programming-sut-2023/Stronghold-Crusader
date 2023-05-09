@@ -8,7 +8,7 @@ import view.enums.messages.UserMessage.ProfileMessage;
 import java.io.File;
 
 public class ProfileTest {
-    private User loadForTest(){
+    private User loadForTest() {
         File users = new File("Resources/users.user");
         users.delete();
         User user = new User("dibaHadiEsfangereh", "Hadie83@",
@@ -20,8 +20,9 @@ public class ProfileTest {
         Stronghold.getInstance().addUser(user2);
         return user;
     }
+
     @Test
-    public void testChangeUsername(){
+    public void testChangeUsername() {
         User user = loadForTest();
         ProfileController controller = new ProfileController(user);
 
@@ -47,7 +48,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testChangeNickName(){
+    public void testChangeNickName() {
         User user = loadForTest();
         ProfileController controller = new ProfileController(user);
 
@@ -57,7 +58,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testChangePassword(){
+    public void testChangePassword() {
         User user = loadForTest();
         ProfileController controller = new ProfileController(user);
         controller.setCurrentUser(user);
@@ -89,13 +90,13 @@ public class ProfileTest {
         user.setPassword("Hadie834@");
         Assertions.assertTrue(user.isPasswordCorrect("Hadie834@"));
 
-        msg = controller.changePassword( "Hadie833@", "Hadie833@", "Hadie83@");
+        msg = controller.changePassword("Hadie833@", "Hadie833@", "Hadie83@");
         Assertions.assertEquals(msg, ProfileMessage.PASSWORD_CHANGE_SUCCESS);
         Assertions.assertTrue(user.isPasswordCorrect("Hadie833@"));
     }
 
     @Test
-    public void testChangeEmail(){
+    public void testChangeEmail() {
         User user = loadForTest();
         ProfileController controller = new ProfileController(user);
         controller.setCurrentUser(user);

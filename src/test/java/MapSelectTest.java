@@ -20,7 +20,7 @@ public class MapSelectTest {
     private static User user2;
     private static User user3;
     private static MapSelectController controller;
-    
+
     @BeforeAll
     public static void beforeAll() throws NoSuchFieldException {
         File users = new File("Resources/users.user");
@@ -37,6 +37,7 @@ public class MapSelectTest {
         Stronghold.getInstance().addUser(user3);
         Stronghold.getInstance().updateData();
     }
+
     @Test
     public void selectMap() throws NoSuchFieldException, IllegalAccessException {
         controller = new MapSelectController(user1);

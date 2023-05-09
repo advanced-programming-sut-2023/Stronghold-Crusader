@@ -42,9 +42,10 @@ public class MarketController {
         int gold = (int) currentPlayer.getGovernance().getGold();
 
         if (gold < storeMaterial.getPrice()*amount) return MarketMessage.NOT_ENOUGH_GOLD;
+        if (currentPlayer.getGovernance().getStorageRemainingCapacity(material) < amount)
+            return MarketMessage.NOT_ENOUGH_SPACE;
         if (menu.confirm(confirmBuyMessage(materialName, amount,
                 storeMaterial.getPrice()*amount))){
-            // TODO diba check currentPlayer.getGovernance().getStorageRemainingCapacity(material)
             currentPlayer.getGovernance().changeStorageStock(material, amount);
             currentPlayer.getGovernance().changeGold((-1)*storeMaterial.getPrice()*amount);
             return MarketMessage.BUY_SUCCESS;

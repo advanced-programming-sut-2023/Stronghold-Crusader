@@ -68,4 +68,6 @@ public class BuildingPlacementTest {
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
         Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.STORE);
     }
+
+
 }
