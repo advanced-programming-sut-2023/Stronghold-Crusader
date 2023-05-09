@@ -17,8 +17,6 @@ public class AttackingUnit extends MobileUnit {
     private final int attackDamage;
     private final int attackRange;
     private final boolean isAreaSplash;
-    private final boolean canClimbLadder;
-    private final boolean canModifyMoat;
     private final ArrayList<AttackTarget> targets;
     private UnitState state;
     private MapAsset selectedAttackTarget;
@@ -28,8 +26,6 @@ public class AttackingUnit extends MobileUnit {
         super(reference, coordinate, owner);
         this.attackDamage = reference.attackDamage;
         this.attackRange = reference.attackRange;
-        this.canClimbLadder = reference.canClimbLadder;
-        this.canModifyMoat = reference.canModifyMoat;
         this.targets = reference.targets;
         this.weapon = reference.weapon;
         this.isAreaSplash = reference.isAreaSplash;
@@ -68,8 +64,8 @@ public class AttackingUnit extends MobileUnit {
         finalMoveDestination = null;
     }
 
-    private void checkForTargetDeath(){
-        if(selectedAttackTarget.getHitPoint() < 0)
+    private void checkForTargetDeath() {
+        if (selectedAttackTarget.getHitPoint() < 0)
             selectedAttackTarget = null;
     }
 
@@ -112,18 +108,25 @@ public class AttackingUnit extends MobileUnit {
 
     public void selectAttackTarget(MapAsset target) {
         selectedAttackTarget = target;
-        finalMoveDestination = null;
+        super.selectMoveDestination(null);
     }
 
     public void selectMoveDestination(Vector2D dest) {
-        finalMoveDestination = dest;
         selectedAttackTarget = null;
+        super.selectMoveDestination(dest);
+    }
+
+    @Override
+    public void selectPetrolPath(Vector2D v1, Vector2D v2) {
+        selectedAttackTarget = null;
+        super.selectPetrolPath(v1, v2);
     }
 
     public MapAsset getNextRoundAttackTarget() {
+        if (nextRoundAttackTarget.getHitPoint() < 0)
+            return null;
         return nextRoundAttackTarget;
     }
-
 
     @Override
     public String toString() {
@@ -131,8 +134,6 @@ public class AttackingUnit extends MobileUnit {
                 ", attack damage=" + attackDamage +
                 ", attack range=" + attackRange +
                 ", unit state=" + state.name().toLowerCase() +
-                ", climbs ladder=" + canClimbLadder +
-                ", modifies moat=" + canModifyMoat +
                 ", weapon=" + weapon +
                 ", targets=" + targets;
     }

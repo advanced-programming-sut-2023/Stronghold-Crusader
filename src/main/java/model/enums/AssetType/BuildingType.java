@@ -1,7 +1,7 @@
 package model.enums.AssetType;
 
 public enum BuildingType {
-    HEADQUARTER(BuildingCategory.SYMBOLIC),
+    HEADQUARTER(BuildingCategory.STORAGE),
     LOOKOUT_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
     PERIMETER_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
     DEFENSE_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
@@ -32,12 +32,12 @@ public enum BuildingType {
     CHURCH(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     CATHEDRAL(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     TUNNELER_POST(BuildingCategory.TRAINING_AND_EMPLOYMENT),
-    HOUSE(BuildingCategory.SYMBOLIC),
-    SMALL_GATEHOUSE(BuildingCategory.SYMBOLIC),
-    BIG_GATEHOUSE(BuildingCategory.SYMBOLIC),
-    ARMOURY(BuildingCategory.SYMBOLIC),
-    FOOD_STORAGE(BuildingCategory.SYMBOLIC),
-    STORE_HOUSE(BuildingCategory.SYMBOLIC),
+    HOUSE(BuildingCategory.STORAGE),
+    SMALL_GATEHOUSE(BuildingCategory.STORAGE),
+    BIG_GATEHOUSE(BuildingCategory.STORAGE),
+    ARMOURY(BuildingCategory.STORAGE),
+    FOOD_STORAGE(BuildingCategory.STORAGE),
+    STORE_HOUSE(BuildingCategory.STORAGE),
     STORE(BuildingCategory.STORE);
     private BuildingCategory category;
     BuildingType(BuildingCategory category){

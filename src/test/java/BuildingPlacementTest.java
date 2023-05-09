@@ -1,5 +1,4 @@
 import controller.MapControllers.BuildingPlacementController;
-import controller.MapControllers.ChangeEnvironmentController;
 import model.Map.Map;
 import model.Map.MapManager;
 import model.Stronghold;
@@ -61,9 +60,9 @@ public class BuildingPlacementTest {
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
         Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.TRAINING_AND_EMPLOYMENT);
 
-        Assertions.assertEquals(controller.setBuildingCategory("symbolic"),
+        Assertions.assertEquals(controller.setBuildingCategory("storage"),
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
-        Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.SYMBOLIC);
+        Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.STORAGE);
 
         Assertions.assertEquals(controller.setBuildingCategory("store"),
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);

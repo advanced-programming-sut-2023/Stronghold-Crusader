@@ -54,6 +54,7 @@ public class BuildingPlacementController {
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
 
         // TODO : Handel workers
+        // TODO : add buildings to governance buildings using governance::addAsset()
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
@@ -71,8 +72,8 @@ public class BuildingPlacementController {
             case TRAINING_AND_EMPLOYMENT:
                 building = new TrainingAndEmploymentBuilding((TrainingAndEmploymentBuilding) reference, coordinate, owner);
                 break;
-            case SYMBOLIC:
-                building = new SymbolicBuilding((SymbolicBuilding) reference, coordinate, owner);
+            case STORAGE:
+                building = new StorageBuilding((StorageBuilding) reference, coordinate, owner);
                 break;
         }
         return building;

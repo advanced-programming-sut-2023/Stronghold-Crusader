@@ -98,7 +98,7 @@ public class SelectedBuildingController {
         for (int i = 0; i < count; i++) {
             MobileUnit mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
             map.getCell(mobileUnit.getCoordinate()).addMapAsset(sampleMobileUnit);
-            player.getGovernance().addPeople(mobileUnit);
+            player.getGovernance().addAsset(mobileUnit);
         }
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
     }

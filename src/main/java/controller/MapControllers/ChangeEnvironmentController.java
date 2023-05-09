@@ -61,7 +61,7 @@ public class ChangeEnvironmentController {
 
     public MapMakerMessage dropRock(int x, int y, String directionName) {
         Vector2D coordinate = new Vector2D(x, y);
-        CliffDirection cliffDirection = CliffDirection.getDirection(directionName);
+        Direction cliffDirection = Direction.getDirection(directionName);
 
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         if (cliffDirection == null) return MapMakerMessage.INVALID_DIRECTION;
