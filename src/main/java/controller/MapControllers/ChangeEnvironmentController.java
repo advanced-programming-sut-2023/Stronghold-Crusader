@@ -58,8 +58,8 @@ public class ChangeEnvironmentController {
     public MapMakerMessage clearCell(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
-        for (MapAsset asset : map.getCell(coordinate).getAllAssets()){
-            for (Player player : game.getPlayers()){
+        for (MapAsset asset : map.getCell(coordinate).getAllAssets()) {
+            for (Player player : game.getPlayers()) {
                 player.getGovernance().removeAsset(asset);
             }
         }
@@ -75,7 +75,8 @@ public class ChangeEnvironmentController {
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         if (cliffDirection == null) return MapMakerMessage.INVALID_DIRECTION;
         if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
-        Cliff cliff = new Cliff((Cliff) ConstantManager.getInstance().getAsset(MapAssetType.CLIFF), coordinate, null, cliffDirection);
+        Cliff cliff = new Cliff((Cliff) ConstantManager.getInstance().getAsset(MapAssetType.CLIFF),
+                coordinate, null, cliffDirection);
         map.addMapObject(coordinate, cliff);
         return MapMakerMessage.DROP_ROCK_SUCCESS;
     }
@@ -85,9 +86,11 @@ public class ChangeEnvironmentController {
         TreeType type = TreeType.getType(typeName);
         if (type == null) return MapMakerMessage.INVALID_TREE_TYPE;
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
-        // TODO : invalid TargetCellType error
-//        if (map.getCell(coordinate).getType() )
-        Tree tree = new Tree((Tree) ConstantManager.getInstance().getAsset(MapAssetType.TREE), coordinate, null, type);
+        if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
+        if (!(map.getCell(coordinate).getType().equals(CellType.GRASS) ||
+                map.getCell(coordinate).getType().equals(CellType.PlAIN))) return MapMakerMessage.INVALID_CELL_TYPE;
+        Tree tree = new Tree((Tree) ConstantManager.getInstance().getAsset(MapAssetType.TREE),
+                coordinate, null, type);
         map.addMapObject(coordinate, tree);
         return MapMakerMessage.DROP_TREE_SUCCESS;
     }

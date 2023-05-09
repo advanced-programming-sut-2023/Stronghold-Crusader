@@ -14,7 +14,8 @@ public enum MapMakerMessage {
     INVALID_COLOR_NAME("Invalid color name"),
     NOT_EMPTY("Target cell is not empty"),
     DROP_HEADQUARTER_SUCCESS("Headquarter dropped successfully"),
-    ENTER_MAIN("Entered main menu successfully");
+    ENTER_MAIN("Entered main menu successfully"),
+    INVALID_CELL_TYPE("You can't drop this asset on this cell type");
     private String message;
     private MapMakerMessage(String message){
         this.message = message;

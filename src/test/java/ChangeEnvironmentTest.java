@@ -104,14 +104,47 @@ public class ChangeEnvironmentTest {
                 MapMakerMessage.INVALID_DIRECTION);
 
         Assertions.assertEquals(controller.dropRock(10, 10, "r"),
+                MapMakerMessage.DROP_ROCK_SUCCESS);
+        Vector2D coordinate1 = new Vector2D(10, 10);
+        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate1).containsType(MapAssetType.CLIFF));
+
+        Assertions.assertEquals(controller.dropRock(10, 10, "e"),
                 MapMakerMessage.NOT_EMPTY);
-//        Vector2D coordinate1 = new Vector2D(10, 10);
-//        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate1).containsType(MapAssetType.CLIFF));
-//
-//        Assertions.assertEquals(controller.dropRock(10, 10, "e"),
-//                MapMakerMessage.DROP_ROCK_SUCCESS);
-//        Vector2D coordinate2 = new Vector2D(20, 20);
-//        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate2).containsType(MapAssetType.CLIFF));
+        Vector2D coordinate2 = new Vector2D(10, 10);
+        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate2).containsType(MapAssetType.CLIFF));
+
+        Assertions.assertEquals(controller.dropRock(20, 20, "e"),
+                MapMakerMessage.DROP_ROCK_SUCCESS);
+        Vector2D coordinate3 = new Vector2D(20, 20);
+        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate3).containsType(MapAssetType.CLIFF));
+
+    }
+
+    @Test
+    public void dropTreeTest() throws IllegalAccessException {
+        // TODO : add not empty tests after drop building
+        Assertions.assertEquals(controller.dropTree(10, 10, "invalid"),
+                MapMakerMessage.INVALID_TREE_TYPE);
+
+        Assertions.assertEquals(controller.dropTree(15, 15, "olive"),
+                MapMakerMessage.INVALID_CELL_TYPE);
+
+        controller.setTexture(10, 10, CellType.PlAIN.getName());
+        controller.setTexture(20, 20, CellType.PlAIN.getName());
+        Assertions.assertEquals(controller.dropTree(10, 10, "olive"),
+                MapMakerMessage.DROP_TREE_SUCCESS);
+        Vector2D coordinate1 = new Vector2D(10, 10);
+        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate1).containsType(MapAssetType.TREE));
+
+        Assertions.assertEquals(controller.dropTree(10, 10, "olive"),
+                MapMakerMessage.NOT_EMPTY);
+        Vector2D coordinate2 = new Vector2D(10, 10);
+        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate2).containsType(MapAssetType.TREE));
+
+        Assertions.assertEquals(controller.dropTree(20, 20, "olive"),
+                MapMakerMessage.DROP_TREE_SUCCESS);
+        Vector2D coordinate3 = new Vector2D(20, 20);
+        Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate3).containsType(MapAssetType.TREE));
 
     }
 }
