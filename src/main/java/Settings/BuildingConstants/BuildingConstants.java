@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public enum BuildingConstants {
     //Normal buildings
     HEADQUARTER(500, MapAssetType.HEADQUARTER, 0, 50, null, 0, 0, null),
+    STORE(200, MapAssetType.STORE, 0, 0, Material.WOOD, 5, 0, null),
     KILLING_PIT(Integer.MAX_VALUE, MapAssetType.KILLING_PIT, 0, 0, Material.WOOD, 6, 0, null),
     HOUSE(200, MapAssetType.HOUSE, 0, 8, Material.WOOD, 6, 0, null),
     CAGED_WARDOG(20, MapAssetType.CAGED_WARDOG, 100, 0, Material.WOOD, 10, 0, null),
