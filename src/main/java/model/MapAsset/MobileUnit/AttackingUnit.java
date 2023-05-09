@@ -32,6 +32,15 @@ public class AttackingUnit extends MobileUnit {
         state = UnitState.STANDING;
     }
 
+    public AttackingUnit(double maxHitPoint, MapAssetType type, int cost, int moveSpeed, double defenceMultiplier, int engineersCount, boolean canClimbLadder, ArrayList<Material> weapon, int attackDamage, int attackRange, boolean isAreaSplash, ArrayList<AttackTarget> targets) {
+        super(maxHitPoint, type, cost, moveSpeed, defenceMultiplier, engineersCount, canClimbLadder);
+        this.weapon = weapon;
+        this.attackDamage = attackDamage;
+        this.attackRange = attackRange;
+        this.isAreaSplash = isAreaSplash;
+        this.targets = targets;
+    }
+
     public void processNextRoundMove(Map map) {
         checkForTargetDeath();
         if (finalMoveDestination != null) {

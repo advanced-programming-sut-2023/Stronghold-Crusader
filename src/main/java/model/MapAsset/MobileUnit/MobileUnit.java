@@ -3,6 +3,7 @@ package model.MapAsset.MobileUnit;
 import model.Map.Map;
 import model.MapAsset.MapAsset;
 import model.User.Player;
+import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -22,6 +23,14 @@ public class MobileUnit extends MapAsset {
         this.defenceMultiplier = reference.defenceMultiplier;
         this.engineersCount = reference.engineersCount;
         this.canClimbLadder = reference.canClimbLadder;
+    }
+
+    public MobileUnit(double maxHitPoint, MapAssetType type, int cost, int moveSpeed, double defenceMultiplier, int engineersCount, boolean canClimbLadder) {
+        super(maxHitPoint, type, cost);
+        this.moveSpeed = moveSpeed;
+        this.defenceMultiplier = defenceMultiplier;
+        this.engineersCount = engineersCount;
+        this.canClimbLadder = canClimbLadder;
     }
 
     public void move() {

@@ -22,6 +22,12 @@ public abstract class MapAsset {
         this.cost = reference.cost;
     }
 
+    public MapAsset(double maxHitPoint, MapAssetType type, int cost) {
+        this.maxHitPoint = maxHitPoint;
+        this.type = type;
+        this.cost = cost;
+    }
+
     public void takeDamageFrom(AttackingUnit attacker) {
         hitPoint -= attacker.getAttackDamage();
     }

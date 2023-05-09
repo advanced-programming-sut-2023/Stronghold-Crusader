@@ -1,7 +1,9 @@
 package model.MapAsset.Building;
 
 import model.User.Player;
+import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
+import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -13,7 +15,6 @@ public class ProductionBuilding extends Building {
     private final ArrayList<Integer> rateOfUsage;
     private final ArrayList<Integer> rateOfProduction;
     private final int rateOfProcess;
-    private final int inventory;
     private boolean productionMode;
 
     public ProductionBuilding(ProductionBuilding reference, Vector2D coordinate, Player owner) {
@@ -24,8 +25,17 @@ public class ProductionBuilding extends Building {
         this.rateOfUsage = reference.rateOfUsage;
         this.rateOfProduction = reference.rateOfProduction;
         this.rateOfProcess = reference.rateOfProcess;
-        this.inventory = reference.inventory;
         this.productionMode = true;
+    }
+
+    public ProductionBuilding(double maxHitPoint, MapAssetType type, int cost, int populationCapacity, Material neededMaterial, int workerCount, ArrayList<CellType> buildingGroundType, int neededMaterialAmount, int productionCapacity, ArrayList<Material> usingMaterial, ArrayList<Material> producingMaterial, ArrayList<Integer> rateOfUsage, ArrayList<Integer> rateOfProduction, int rateOfProcess) {
+        super(maxHitPoint, type, cost, populationCapacity, neededMaterial, workerCount, buildingGroundType, neededMaterialAmount);
+        this.productionCapacity = productionCapacity;
+        this.usingMaterial = usingMaterial;
+        this.producingMaterial = producingMaterial;
+        this.rateOfUsage = rateOfUsage;
+        this.rateOfProduction = rateOfProduction;
+        this.rateOfProcess = rateOfProcess;
     }
 
     public void changeProductionMode() {
@@ -53,7 +63,6 @@ public class ProductionBuilding extends Building {
                 ", rateOfUsage=" + rateOfUsage +
                 ", rateOfProduction=" + rateOfProduction +
                 ", rateOfProcess=" + rateOfProcess +
-                ", inventory=" + inventory +
                 ", productionMode=" + productionMode;
     }
 }

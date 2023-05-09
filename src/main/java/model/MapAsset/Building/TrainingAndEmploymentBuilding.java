@@ -2,6 +2,8 @@ package model.MapAsset.Building;
 
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
+import model.enums.AssetType.Material;
+import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -14,6 +16,12 @@ public class TrainingAndEmploymentBuilding extends Building {
         super(reference, coordinate, owner);
         this.peopleType = reference.peopleType;
         this.popularityChangeRate = reference.popularityChangeRate;
+    }
+
+    public TrainingAndEmploymentBuilding(double maxHitPoint, MapAssetType type, int cost, int populationCapacity, Material neededMaterial, int workerCount, ArrayList<CellType> buildingGroundType, int neededMaterialAmount, ArrayList<MapAssetType> peopleType, int popularityChangeRate) {
+        super(maxHitPoint, type, cost, populationCapacity, neededMaterial, workerCount, buildingGroundType, neededMaterialAmount);
+        this.peopleType = peopleType;
+        this.popularityChangeRate = popularityChangeRate;
     }
 
     @Override

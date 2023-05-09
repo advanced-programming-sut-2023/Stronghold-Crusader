@@ -2,6 +2,7 @@ package model.MapAsset.Building;
 
 import model.MapAsset.MapAsset;
 import model.User.Player;
+import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import model.enums.AssetType.Material;
 import utils.Vector2D;
@@ -23,7 +24,15 @@ public class Building extends MapAsset {
         this.workerCount = reference.workerCount;
         this.populationCapacity = reference.populationCapacity;
         this.neededMaterialAmount = reference.neededMaterialAmount;
+    }
 
+    public Building(double maxHitPoint, MapAssetType type, int cost, int populationCapacity, Material neededMaterial, int workerCount, ArrayList<CellType> buildingGroundType, int neededMaterialAmount) {
+        super(maxHitPoint, type, cost);
+        this.populationCapacity = populationCapacity;
+        this.neededMaterial = neededMaterial;
+        this.workerCount = workerCount;
+        this.buildingGroundType = buildingGroundType;
+        this.neededMaterialAmount = neededMaterialAmount;
     }
 
     public int getNumberOfMaterialNeeded() {

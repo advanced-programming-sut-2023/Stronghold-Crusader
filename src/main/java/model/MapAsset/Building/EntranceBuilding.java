@@ -1,7 +1,12 @@
 package model.MapAsset.Building;
 
 import model.User.Player;
+import model.enums.AssetType.MapAssetType;
+import model.enums.AssetType.Material;
+import model.enums.CellType;
 import utils.Vector2D;
+
+import java.util.ArrayList;
 
 public class EntranceBuilding extends Building {
     private boolean isOpen;
@@ -11,6 +16,10 @@ public class EntranceBuilding extends Building {
         super(reference, coordinate, owner);
         isOpen = true;
         hasFlag = false;
+    }
+
+    public EntranceBuilding(double maxHitPoint, MapAssetType type, int cost, int populationCapacity, Material neededMaterial, int workerCount, ArrayList<CellType> buildingGroundType, int neededMaterialAmount) {
+        super(maxHitPoint, type, cost, populationCapacity, neededMaterial, workerCount, buildingGroundType, neededMaterialAmount);
     }
 
     public boolean isOpen() {

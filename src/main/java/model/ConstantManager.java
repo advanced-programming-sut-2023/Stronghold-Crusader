@@ -26,9 +26,10 @@ public class ConstantManager {
     private HashMap<MapAssetType, ProductionBuilding> productionBuildings;
     private HashMap<MapAssetType, StorageBuilding> storageBuildings;
     private HashMap<MapAssetType, TrainingAndEmploymentBuilding> trainingAndEmploymentBuildings;
+    private HashMap<MapAssetType, Wall> walls;
+    private HashMap<MapAssetType, Building> normalBuildings;
     private Tree tree;
     private Cliff cliff;
-    private Building wall;
 
     //Mobile units
     private HashMap<MapAssetType, MobileUnit> mobileUnits;
@@ -54,14 +55,15 @@ public class ConstantManager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        fillMobileUnits(data);
-        fillProductionBuildings(data);
-        fillAttackingUnits(data);
-        fillStorageBuildings(data);
-        fillTrainingAndEmploymentBuildings(data);
-        fillDefenceAndAttackBuildings(data);
-        fillRemainingAssets(data);
-        fillMarketConstants();
+        fillWalls(data);
+//        fillMobileUnits(data);
+//        fillProductionBuildings(data);
+//        fillAttackingUnits(data);
+//        fillStorageBuildings(data);
+//        fillTrainingAndEmploymentBuildings(data);
+//        fillDefenceAndAttackBuildings(data);
+//        fillRemainingAssets(data);
+//        fillMarketConstants();
     }
 
     public MapAsset getAsset(MapAssetType type) {
@@ -70,6 +72,8 @@ public class ConstantManager {
             return cliff;
         if (type == MapAssetType.TREE)
             return tree;
+        if ((asset = walls.get(type)) != null)
+            return asset;
         if ((asset = attackingUnits.get(type)) != null)
             return asset;
         if ((asset = defenseAndAttackBuildings.get(type)) != null)
@@ -85,6 +89,18 @@ public class ConstantManager {
         return null;
     }
 
+    private void fillWalls(JsonObject data) {
+        walls = new HashMap<>();
+        JsonArray unitsArray = data.getAsJsonArray(Wall.class.getName());
+        for (JsonElement unitJson : unitsArray) {
+            Wall unit = new Gson().fromJson(unitJson, Wall.class);
+            walls.put(unit.getType(), unit);
+        }
+    }
+
+    private void fillNormalBuildings(JsonObject data) {
+        normalBuildings = new HashMap<>();
+    }
 
     private void fillMobileUnits(JsonObject data) {
         mobileUnits = new HashMap<>();
@@ -144,7 +160,6 @@ public class ConstantManager {
         Gson gson = new Gson();
         tree = gson.fromJson(data.get(Tree.class.getName()), Tree.class);
         cliff = gson.fromJson(data.get(Cliff.class.getName()), Cliff.class);
-        wall = gson.fromJson(data.get(Building.class.getName()), Building.class);
     }
 
     private void fillMarketConstants() {
