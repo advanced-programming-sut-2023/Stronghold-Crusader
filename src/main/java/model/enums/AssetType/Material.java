@@ -11,7 +11,10 @@ public enum Material {
     GRAIN, BEAR, FLOUR, WHEAT, WOOD, STONE, SPEAL, PICK, ROCKBLOCK, PITCH, WINE, IRON,
 
     //Weapons
-    ARMOUR, MACE, SWORD, BOW, CROSS_BOW, SPEAR, PIKE, HORSE;
+    ARMOUR, MACE, SWORD, BOW, CROSS_BOW, SPEAR, PIKE,
+
+    //Stable
+    HORSE;
 
     public static boolean contains(String input) {
 

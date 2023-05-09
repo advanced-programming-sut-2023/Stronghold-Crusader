@@ -1,7 +1,7 @@
 package model.enums.AssetType;
 
 public enum BuildingType {
-    HEADQUARTER(BuildingCategory.STORAGE),
+    HEADQUARTER(BuildingCategory.NORMAL),
     LOOKOUT_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
     PERIMETER_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
     DEFENSE_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
@@ -23,23 +23,24 @@ public enum BuildingType {
     IRON_MINE(BuildingCategory.PRODUCTION),
     MILL(BuildingCategory.PRODUCTION),
     INN(BuildingCategory.PRODUCTION),
-    HAUNTING_GROUND(BuildingCategory.PRODUCTION),
-    SIEGE_TENT(BuildingCategory.PRODUCTION),
-    STABLE(BuildingCategory.TRAINING_AND_EMPLOYMENT),
+    KILLING_PIT(BuildingCategory.NORMAL),
+    SIEGE_TENT(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     BARRACK(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     MERCENARY_POST(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     ENGINEER_GUILD(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     CHURCH(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     CATHEDRAL(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     TUNNELER_POST(BuildingCategory.TRAINING_AND_EMPLOYMENT),
-    HOUSE(BuildingCategory.STORAGE),
-    SMALL_GATEHOUSE(BuildingCategory.STORAGE),
-    BIG_GATEHOUSE(BuildingCategory.STORAGE),
+    HOUSE(BuildingCategory.NORMAL),
+    SMALL_GATEHOUSE(BuildingCategory.NORMAL),
+    BIG_GATEHOUSE(BuildingCategory.NORMAL),
+    STORE(BuildingCategory.NORMAL),
     ARMOURY(BuildingCategory.STORAGE),
     FOOD_STORAGE(BuildingCategory.STORAGE),
     STORE_HOUSE(BuildingCategory.STORAGE),
-    STORE(BuildingCategory.STORE);
-    private BuildingCategory category;
+    STABLE(BuildingCategory.STORAGE);
+
+    private final BuildingCategory category;
     BuildingType(BuildingCategory category){
         this.category = category;
     }

@@ -5,7 +5,8 @@ public enum BuildingCategory {
     PRODUCTION,
     TRAINING_AND_EMPLOYMENT,
     STORAGE,
-    STORE;
+    NORMAL,
+    ENTRANCE;
 
     public static BuildingCategory getCategory(String categoryName){
         for (BuildingCategory category: BuildingCategory.values()){

@@ -64,8 +64,9 @@ public class BuildingPlacementTest {
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
         Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.STORAGE);
 
+        // TODO change
         Assertions.assertEquals(controller.setBuildingCategory("store"),
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
-        Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.STORE);
+        Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.NORMAL);
     }
 }
