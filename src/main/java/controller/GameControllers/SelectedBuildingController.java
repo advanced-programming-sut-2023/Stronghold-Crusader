@@ -64,7 +64,7 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
 
         ((ProductionBuilding) building).changeProductionMode();
-        if (((ProductionBuilding) building).isProduce())
+        if (((ProductionBuilding) building).getProductionMode())
             return SelectedBuildingMessage.RESUME_PRODUCTION;
         else return SelectedBuildingMessage.STOP_PRODUCTION;
     }

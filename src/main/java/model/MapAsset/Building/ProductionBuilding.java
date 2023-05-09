@@ -13,7 +13,6 @@ public class ProductionBuilding extends Building {
     private final ArrayList<Integer> rateOfUsage;
     private final ArrayList<Integer> rateOfProduction;
     private final int rateOfProcess;
-    private final int inventory;
     private boolean productionMode;
 
     public ProductionBuilding(ProductionBuilding reference, Vector2D coordinate, Player owner) {
@@ -24,7 +23,6 @@ public class ProductionBuilding extends Building {
         this.rateOfUsage = reference.rateOfUsage;
         this.rateOfProduction = reference.rateOfProduction;
         this.rateOfProcess = reference.rateOfProcess;
-        this.inventory = reference.inventory;
         this.productionMode = true;
     }
 
@@ -32,16 +30,8 @@ public class ProductionBuilding extends Building {
         productionMode = !productionMode;
     }
 
-    public boolean isProduce() {
+    public boolean getProductionMode() {
         return productionMode;
-    }
-
-    public void produce() {
-
-    }
-
-    public void move() {
-
     }
 
     @Override
@@ -53,7 +43,6 @@ public class ProductionBuilding extends Building {
                 ", rateOfUsage=" + rateOfUsage +
                 ", rateOfProduction=" + rateOfProduction +
                 ", rateOfProcess=" + rateOfProcess +
-                ", inventory=" + inventory +
                 ", productionMode=" + productionMode;
     }
 }

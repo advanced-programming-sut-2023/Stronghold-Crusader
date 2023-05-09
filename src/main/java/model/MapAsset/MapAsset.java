@@ -56,9 +56,12 @@ public abstract class MapAsset {
 
     @Override
     public String toString() {
-        return type.name().toLowerCase() +
-                ", owner=" + owner.getNickname() +
-                ": coordinate=" + coordinate.toString() +
-                ", hp=" + hitPoint + '/' + maxHitPoint;
+        String ownerStr = "";
+        if (owner != null)
+            ownerStr = ", owner=" + owner.getNickname();
+        String coordStr = "";
+        if (coordinate != null)
+            coordStr = ": coordinate=" + coordinate;
+        return type.name().toLowerCase() + ownerStr + coordStr + ", hp=" + hitPoint + '/' + maxHitPoint;
     }
 }
