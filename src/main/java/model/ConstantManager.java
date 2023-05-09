@@ -11,7 +11,6 @@ import model.MapAsset.MobileUnit.*;
 import model.MapAsset.*;
 import model.enums.AssetType.MapAssetType;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -25,9 +24,8 @@ public class ConstantManager {
     // TODO : getMapAssetType @Ayeen
     private HashMap<MapAssetType, DefenseAndAttackBuilding> defenseAndAttackBuildings;
     private HashMap<MapAssetType, ProductionBuilding> productionBuildings;
-    private HashMap<MapAssetType, SymbolicBuilding> symbolicBuildings;
+    private HashMap<MapAssetType, StorageBuilding> storageBuildings;
     private HashMap<MapAssetType, TrainingAndEmploymentBuilding> trainingAndEmploymentBuildings;
-    private OxTether oxTether;
     private Tree tree;
     private Cliff cliff;
     private Building wall;
@@ -59,7 +57,7 @@ public class ConstantManager {
         fillMobileUnits(data);
         fillProductionBuildings(data);
         fillAttackingUnits(data);
-        fillSymbolicBuildings(data);
+        fillStorageBuildings(data);
         fillTrainingAndEmploymentBuildings(data);
         fillDefenceAndAttackBuildings(data);
         fillRemainingAssets(data);
@@ -70,8 +68,6 @@ public class ConstantManager {
         MapAsset asset;
         if (type == MapAssetType.CLIFF)
             return cliff;
-        if (type == MapAssetType.OX_TETHER)
-            return oxTether;
         if (type == MapAssetType.TREE)
             return tree;
         if ((asset = attackingUnits.get(type)) != null)
@@ -84,7 +80,7 @@ public class ConstantManager {
             return asset;
         if ((asset = mobileUnits.get(type)) != null)
             return asset;
-        if ((asset = symbolicBuildings.get(type)) != null)
+        if ((asset = storageBuildings.get(type)) != null)
             return asset;
         return null;
     }
@@ -126,12 +122,12 @@ public class ConstantManager {
         }
     }
 
-    private void fillSymbolicBuildings(JsonObject data) {
-        symbolicBuildings = new HashMap<>();
-        JsonArray unitsArray = data.getAsJsonArray(SymbolicBuilding.class.getName());
+    private void fillStorageBuildings(JsonObject data) {
+        storageBuildings = new HashMap<>();
+        JsonArray unitsArray = data.getAsJsonArray(StorageBuilding.class.getName());
         for (JsonElement unitJson : unitsArray) {
-            SymbolicBuilding unit = new Gson().fromJson(unitJson, SymbolicBuilding.class);
-            symbolicBuildings.put(unit.getType(), unit);
+            StorageBuilding unit = new Gson().fromJson(unitJson, StorageBuilding.class);
+            storageBuildings.put(unit.getType(), unit);
         }
     }
 
@@ -146,7 +142,6 @@ public class ConstantManager {
 
     private void fillRemainingAssets(JsonObject data) {
         Gson gson = new Gson();
-        oxTether = gson.fromJson(data.get(OxTether.class.getName()), OxTether.class);
         tree = gson.fromJson(data.get(Tree.class.getName()), Tree.class);
         cliff = gson.fromJson(data.get(Cliff.class.getName()), Cliff.class);
         wall = gson.fromJson(data.get(Building.class.getName()), Building.class);

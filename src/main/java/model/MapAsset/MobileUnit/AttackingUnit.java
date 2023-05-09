@@ -17,8 +17,6 @@ public class AttackingUnit extends MobileUnit {
     private final int attackDamage;
     private final int attackRange;
     private final boolean isAreaSplash;
-    private final boolean canClimbLadder;
-    private final boolean canModifyMoat;
     private final ArrayList<AttackTarget> targets;
     private UnitState state;
     private MapAsset selectedAttackTarget;
@@ -28,8 +26,6 @@ public class AttackingUnit extends MobileUnit {
         super(reference, coordinate, owner);
         this.attackDamage = reference.attackDamage;
         this.attackRange = reference.attackRange;
-        this.canClimbLadder = reference.canClimbLadder;
-        this.canModifyMoat = reference.canModifyMoat;
         this.targets = reference.targets;
         this.weapon = reference.weapon;
         this.isAreaSplash = reference.isAreaSplash;
@@ -138,8 +134,6 @@ public class AttackingUnit extends MobileUnit {
                 ", attack damage=" + attackDamage +
                 ", attack range=" + attackRange +
                 ", unit state=" + state.name().toLowerCase() +
-                ", climbs ladder=" + canClimbLadder +
-                ", modifies moat=" + canModifyMoat +
                 ", weapon=" + weapon +
                 ", targets=" + targets;
     }

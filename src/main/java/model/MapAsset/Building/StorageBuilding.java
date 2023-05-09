@@ -6,16 +6,14 @@ import utils.Vector2D;
 
 import java.util.HashMap;
 
-public class SymbolicBuilding extends Building {
-    private final int populationCapacity;
+public class StorageBuilding extends Building {
     private final int totalCapacity;
     private final HashMap<Material, Integer> storage;
 
-    public SymbolicBuilding(SymbolicBuilding reference, Vector2D coordinate, Player owner) {
+    public StorageBuilding(StorageBuilding reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
         this.totalCapacity = reference.totalCapacity;
         this.storage = reference.storage;
-        this.populationCapacity = reference.populationCapacity;
     }
 
     public void changeStock(Material material, int offset) {
@@ -44,17 +42,5 @@ public class SymbolicBuilding extends Building {
 
     public int getTotalCapacity() {
         return totalCapacity;
-    }
-
-    public int getPopulationCapacity() {
-        return populationCapacity;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                ", populationAmount=" + populationCapacity +
-                ", totalCapacity=" + totalCapacity +
-                ", storage=" + storage;
     }
 }

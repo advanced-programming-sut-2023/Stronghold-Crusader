@@ -1,7 +1,6 @@
 package model.MapAsset.Building;
 
 import model.MapAsset.MapAsset;
-import model.MapAsset.MobileUnit.AttackingUnit;
 import model.User.Player;
 import model.enums.CellType;
 import model.enums.AssetType.Material;
@@ -11,38 +10,43 @@ import java.util.ArrayList;
 
 //TODO complete this class
 public class Building extends MapAsset {
-    private Material neededMaterial;
-    private int neededMaterialAmount;
-    private final int cost;
-    private int workerNumber;
+    private final int populationCapacity;
+    private final Material neededMaterial;
+    private final int workerCount;
     private final ArrayList<CellType> buildingGroundType;
+    private final int neededMaterialAmount;
 
     public Building(Building reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
-        this.cost = reference.cost;
         this.buildingGroundType = reference.buildingGroundType;
+        this.neededMaterial = reference.neededMaterial;
+        this.workerCount = reference.workerCount;
+        this.populationCapacity = reference.populationCapacity;
+        this.neededMaterialAmount = reference.neededMaterialAmount;
+
     }
 
     public int getNumberOfMaterialNeeded() {
         return neededMaterialAmount;
     }
 
+    public int getPopulationCapacity() {
+        return populationCapacity;
+    }
+
     public Material getNeededMaterial() {
         return neededMaterial;
     }
 
-    public int getWorkerNumber() {
-        return workerNumber;
-    }
-
-    public void setNeededMaterial(Material neededMaterial) {
-        this.neededMaterial = neededMaterial;
+    public int getWorkerCount() {
+        return workerCount;
     }
 
     public void repair() {
         hitPoint = maxHitPoint;
     }
-    public boolean isCellTypeValid(CellType celltype){
+
+    public boolean isCellTypeValid(CellType celltype) {
         return buildingGroundType.contains(celltype);
     }
 }

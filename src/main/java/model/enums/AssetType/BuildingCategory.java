@@ -4,7 +4,7 @@ public enum BuildingCategory {
     DEFENSE_AND_ATTACK,
     PRODUCTION,
     TRAINING_AND_EMPLOYMENT,
-    SYMBOLIC,
+    STORAGE,
     STORE;
 
     public static BuildingCategory getCategory(String categoryName){

@@ -72,8 +72,8 @@ public class BuildingPlacementController {
             case TRAINING_AND_EMPLOYMENT:
                 building = new TrainingAndEmploymentBuilding((TrainingAndEmploymentBuilding) reference, coordinate, owner);
                 break;
-            case SYMBOLIC:
-                building = new SymbolicBuilding((SymbolicBuilding) reference, coordinate, owner);
+            case STORAGE:
+                building = new StorageBuilding((StorageBuilding) reference, coordinate, owner);
                 break;
         }
         return building;

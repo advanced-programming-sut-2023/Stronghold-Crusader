@@ -11,7 +11,7 @@ public class MobileUnit extends MapAsset {
     private final int moveSpeed;
     private final double defenceMultiplier;
     private final int engineersCount;
-    private final int cost;
+    private final boolean canClimbLadder;
     protected Vector2D finalMoveDestination;
     private Vector2D nextMoveDestination;
     private Vector2D[] petrolPath;
@@ -21,7 +21,7 @@ public class MobileUnit extends MapAsset {
         this.moveSpeed = reference.moveSpeed;
         this.defenceMultiplier = reference.defenceMultiplier;
         this.engineersCount = reference.engineersCount;
-        this.cost = reference.cost;
+        this.canClimbLadder = reference.canClimbLadder;
     }
 
     public void move() {
@@ -72,8 +72,8 @@ public class MobileUnit extends MapAsset {
         return engineersCount;
     }
 
-    public int getCost() {
-        return cost;
+    public boolean canClimbLadder() {
+        return canClimbLadder;
     }
 
     @Override
@@ -85,6 +85,7 @@ public class MobileUnit extends MapAsset {
     public String toString() {
         return super.toString() +
                 ", moveSpeed=" + moveSpeed +
+                ", climbs ladder=" + canClimbLadder +
                 ", engineersCount=" + engineersCount;
     }
 }

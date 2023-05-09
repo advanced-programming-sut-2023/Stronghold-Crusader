@@ -2,7 +2,7 @@ package model.Game;
 
 import Settings.GovernanceSettings;
 import model.MapAsset.Building.Building;
-import model.MapAsset.Building.SymbolicBuilding;
+import model.MapAsset.Building.StorageBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.enums.AssetType.MapAssetType;
@@ -64,7 +64,7 @@ public class Governance {
     private void calculatePopulation() {
         totalPopulation = peasantPopulation;
         for (Building building : buildings)
-            totalPopulation += building.getWorkerNumber();
+            totalPopulation += building.getWorkerCount();
         for (MobileUnit unit : units) {
             totalPopulation += unit.getEngineersCount();
             if (MapAssetType.getPeople().contains(unit.getType())) //if is person
@@ -75,8 +75,8 @@ public class Governance {
     private void calculatePopulationCapacity() {
         populationCapacity = 0;
         for (Building building : buildings) {
-            if (building instanceof SymbolicBuilding)
-                populationCapacity += ((SymbolicBuilding) building).getPopulationCapacity();
+            if (building instanceof StorageBuilding)
+                populationCapacity += ((StorageBuilding) building).getPopulationCapacity();
         }
     }
 
@@ -255,11 +255,11 @@ public class Governance {
     public int getStorageStock(Material material) {
         int stock = 0;
         for (Building building : buildings) {
-            if (!(building instanceof SymbolicBuilding))
+            if (!(building instanceof StorageBuilding))
                 continue;
-            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
-            if (symbolicBuilding.hasMaterial(material))
-                stock += symbolicBuilding.getStock(material);
+            StorageBuilding storageBuilding = (StorageBuilding) building;
+            if (storageBuilding.hasMaterial(material))
+                stock += storageBuilding.getStock(material);
         }
         return stock;
     }
@@ -267,11 +267,11 @@ public class Governance {
     public int getStorageCapacity(Material material) {
         int capacitySum = 0;
         for (Building building : buildings) {
-            if (!(building instanceof SymbolicBuilding))
+            if (!(building instanceof StorageBuilding))
                 continue;
-            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
-            if (symbolicBuilding.hasMaterial(material))
-                capacitySum += symbolicBuilding.getTotalCapacity();
+            StorageBuilding storageBuilding = (StorageBuilding) building;
+            if (storageBuilding.hasMaterial(material))
+                capacitySum += storageBuilding.getTotalCapacity();
         }
         return capacitySum;
     }
@@ -279,11 +279,11 @@ public class Governance {
     public int getStorageRemainingCapacity(Material material) {
         int capacitySum = 0;
         for (Building building : buildings) {
-            if (!(building instanceof SymbolicBuilding))
+            if (!(building instanceof StorageBuilding))
                 continue;
-            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
-            if (symbolicBuilding.hasMaterial(material))
-                capacitySum += (symbolicBuilding.getRemainingCapacity());
+            StorageBuilding storageBuilding = (StorageBuilding) building;
+            if (storageBuilding.hasMaterial(material))
+                capacitySum += (storageBuilding.getRemainingCapacity());
         }
         return capacitySum;
     }
@@ -292,18 +292,18 @@ public class Governance {
         for (Building building : buildings) {
             if (offset == 0)
                 return;
-            if (!(building instanceof SymbolicBuilding))
+            if (!(building instanceof StorageBuilding))
                 continue;
-            SymbolicBuilding symbolicBuilding = (SymbolicBuilding) building;
-            if (!symbolicBuilding.hasMaterial(material))
+            StorageBuilding storageBuilding = (StorageBuilding) building;
+            if (!storageBuilding.hasMaterial(material))
                 continue;
             int changeAmount;
             if (offset > 0)
-                changeAmount = min(symbolicBuilding.getRemainingCapacity(), offset);
+                changeAmount = min(storageBuilding.getRemainingCapacity(), offset);
             else
-                changeAmount = max(-1 * symbolicBuilding.getStock(material), offset);
+                changeAmount = max(-1 * storageBuilding.getStock(material), offset);
             offset -= changeAmount;
-            symbolicBuilding.changeStock(material, changeAmount);
+            storageBuilding.changeStock(material, changeAmount);
         }
     }
 

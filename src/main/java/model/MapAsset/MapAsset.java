@@ -6,9 +6,10 @@ import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
 public abstract class MapAsset {
-    protected Vector2D coordinate;
     protected final double maxHitPoint;
     protected final MapAssetType type;
+    private final int cost;
+    protected Vector2D coordinate;
     protected Player owner;
     protected double hitPoint;
 
@@ -18,9 +19,10 @@ public abstract class MapAsset {
         this.type = reference.type;
         this.maxHitPoint = reference.maxHitPoint;
         this.hitPoint = this.maxHitPoint;
+        this.cost = reference.cost;
     }
 
-    public void takeDamageFrom(AttackingUnit attacker){
+    public void takeDamageFrom(AttackingUnit attacker) {
         hitPoint -= attacker.getAttackDamage();
     }
 
@@ -44,6 +46,10 @@ public abstract class MapAsset {
         return maxHitPoint;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
     public Vector2D getCoordinate() {
         return coordinate;
     }
@@ -51,8 +57,8 @@ public abstract class MapAsset {
     @Override
     public String toString() {
         return type.name().toLowerCase() +
-                ": coordinate=" + coordinate.toString() +
                 ", owner=" + owner.getNickname() +
+                ": coordinate=" + coordinate.toString() +
                 ", hp=" + hitPoint + '/' + maxHitPoint;
     }
 }
