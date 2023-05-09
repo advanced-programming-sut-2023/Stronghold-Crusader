@@ -1,4 +1,5 @@
 import controller.MapControllers.BuildingPlacementController;
+import model.ConstantManager;
 import model.Map.Map;
 import model.Map.MapManager;
 import model.Stronghold;
@@ -29,6 +30,7 @@ public class BuildingPlacementTest {
         user3 = new User("dibaHadiEsfangereh3", "Hadie83@",
                 "dibahadie3@gmail.com", "dibaH3", "someSlogan");
         Stronghold.load();
+        ConstantManager.load();
         Stronghold.getInstance().addUser(user1);
         Stronghold.getInstance().addUser(user2);
         Stronghold.getInstance().addUser(user3);
@@ -64,10 +66,13 @@ public class BuildingPlacementTest {
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
         Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.STORAGE);
 
-        // TODO change
-        Assertions.assertEquals(controller.setBuildingCategory("store"),
+        Assertions.assertEquals(controller.setBuildingCategory("normal"),
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
         Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.NORMAL);
+
+        Assertions.assertEquals(controller.setBuildingCategory("entrance"),
+                BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
+        Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.ENTRANCE);
     }
 
 

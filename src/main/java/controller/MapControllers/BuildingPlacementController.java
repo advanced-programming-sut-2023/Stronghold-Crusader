@@ -9,7 +9,6 @@ import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
 import model.enums.CellType;
 import model.enums.AssetType.MapAssetType;
-import utils.FormatValidation;
 import utils.Vector2D;
 import view.MapMenus.BuildingPlacementMenu;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
@@ -32,9 +31,9 @@ public class BuildingPlacementController {
     }
 
     public BuildingPlacementMessage setBuildingCategory(String categoryName) {
-        if (!FormatValidation.isFormatValid(categoryName, FormatValidation.BUILDING_CATEGORY))
-            return BuildingPlacementMessage.INVALID_BUILDING_CATEGORY;
-        this.buildingCategory = BuildingCategory.getCategory(categoryName);
+        BuildingCategory category = BuildingCategory.getCategory(categoryName);
+        if (category == null) return BuildingPlacementMessage.INVALID_BUILDING_CATEGORY;
+        this.buildingCategory = category;
         return BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS;
     }
 
@@ -54,9 +53,9 @@ public class BuildingPlacementController {
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
 
         // TODO : Handel workers
-        // TODO : add buildings to governance buildings using governance::addAsset()
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
+        currentPlayer.getGovernance().addAsset(newBuilding);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
 
@@ -74,6 +73,12 @@ public class BuildingPlacementController {
                 break;
             case STORAGE:
                 building = new StorageBuilding((StorageBuilding) reference, coordinate, owner);
+                break;
+            case NORMAL:
+                building = new Building(reference, coordinate, owner);
+                break;
+            case ENTRANCE:
+                building = new EntranceBuilding(reference, coordinate, owner);
                 break;
         }
         return building;

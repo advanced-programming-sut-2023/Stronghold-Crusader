@@ -129,21 +129,21 @@ public class ChangeEnvironmentTest {
         Assertions.assertEquals(controller.dropTree(15, 15, "olive"),
                 MapMakerMessage.INVALID_CELL_TYPE);
 
-        controller.setTexture(10, 10, CellType.PlAIN.getName());
-        controller.setTexture(20, 20, CellType.PlAIN.getName());
-        Assertions.assertEquals(controller.dropTree(10, 10, "olive"),
+        controller.setTexture(30, 30, CellType.PlAIN.getName());
+        controller.setTexture(40, 40, CellType.PlAIN.getName());
+        Assertions.assertEquals(controller.dropTree(30, 30, "olive"),
                 MapMakerMessage.DROP_TREE_SUCCESS);
-        Vector2D coordinate1 = new Vector2D(10, 10);
+        Vector2D coordinate1 = new Vector2D(30, 30);
         Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate1).containsType(MapAssetType.TREE));
 
-        Assertions.assertEquals(controller.dropTree(10, 10, "olive"),
+        Assertions.assertEquals(controller.dropTree(30, 30, "olive"),
                 MapMakerMessage.NOT_EMPTY);
-        Vector2D coordinate2 = new Vector2D(10, 10);
+        Vector2D coordinate2 = new Vector2D(30, 30);
         Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate2).containsType(MapAssetType.TREE));
 
-        Assertions.assertEquals(controller.dropTree(20, 20, "olive"),
+        Assertions.assertEquals(controller.dropTree(40, 40, "olive"),
                 MapMakerMessage.DROP_TREE_SUCCESS);
-        Vector2D coordinate3 = new Vector2D(20, 20);
+        Vector2D coordinate3 = new Vector2D(40, 40);
         Assertions.assertTrue(((Map) mapField.get(controller)).getCell(coordinate3).containsType(MapAssetType.TREE));
 
     }
