@@ -5,6 +5,7 @@ import model.Map.MapManager;
 import model.Stronghold;
 import model.User.Player;
 import model.User.User;
+import model.enums.AssetType.Material;
 import model.enums.User.Color;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -117,5 +118,39 @@ public class TradeTest {
         Assertions.assertEquals(2, player3.getNewTrades().size());
         Assertions.assertEquals(3, player2.getNewTrades().size());
         Assertions.assertEquals(1, player1.getNewTrades().size());
+    }
+
+
+    @Test
+    public void acceptTradeTest() {
+        HashMap<String, String> inputs;
+        Matcher matcher;
+        game.setCurrentPlayer(player1);
+        String requestCommand_correct1 = "trade -t stone -a 10 -p 50 -m \"give me\" ";
+
+        //Add a trade with id=1
+        matcher = TradeMenuCommand.getMatcher(requestCommand_correct1, TradeMenuCommand.REQUEST);
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
+        tradeController.request(inputs);
+
+        game.setCurrentPlayer(player2);
+
+        String acceptTradeCommand_invalidId = "trade accept -i 5      -m thankYou";
+        matcher = TradeMenuCommand.getMatcher(acceptTradeCommand_invalidId, TradeMenuCommand.ACCEPT_TRADE);
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.ACCEPT_TRADE.getRegex());
+        Assertions.assertEquals(TradeMenuMessage.INVALID_ID, tradeController.accept_trade(inputs));
+
+        String acceptTradeCommand_correctCommand = "trade accept -i 1 -m thankYou";
+
+        matcher = TradeMenuCommand.getMatcher(acceptTradeCommand_correctCommand, TradeMenuCommand.ACCEPT_TRADE);
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.ACCEPT_TRADE.getRegex());
+        Assertions.assertEquals(TradeMenuMessage.MATERIAL_NEEDED, tradeController.accept_trade(inputs));
+
+        player2.getGovernance().changeStorageStock(Material.STONE, 15);
+        System.out.println(player2.getGovernance().getStorageCapacity(Material.STONE));
+        //TODO handle storage completely
+
+        //   Assertions.assertEquals(TradeMenuMessage.ACCEPTED, tradeController.accept_trade(inputs));
+        //   Assertions.assertEquals(TradeMenuMessage.ALREADY_ACCEPTED, tradeController.accept_trade(inputs));
     }
 }
