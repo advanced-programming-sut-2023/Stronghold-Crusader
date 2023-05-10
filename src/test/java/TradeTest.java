@@ -22,6 +22,7 @@ public class TradeTest {
     private static Game game;
     private static TradeController tradeController;
 
+
     @BeforeAll
     public static void beforeAll() {
         File users = new File("Resources/users.user");
@@ -76,10 +77,45 @@ public class TradeTest {
         matcher = TradeMenuCommand.getMatcher(requestCommand_correct, TradeMenuCommand.REQUEST);
         inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
         Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.GOLD_NEEDED);
+
+        game.setCurrentPlayer(player1);
         player1.getGovernance().changeGold(1005);
         Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.REQUEST_SUCCESS);
         game.setCurrentPlayer(player2);
         Assertions.assertNotEquals(tradeController.showNewTradesForPlayer(), null);
     }
 
+    @Test
+    public void showTradesTest() {
+        HashMap<String, String> inputs;
+        Matcher matcher;
+
+        String requestCommand_correct1 = "trade -t stone -a 10 -p 50 -m \"give me\" ";
+        String requestCommand_correct2 = "trade -t wood -a 30 -p 720 -m \"give me\" ";
+        String requestCommand_correct3 = "trade -t Iron -a 2 -p 200 -m \"give me\" ";
+
+        Assertions.assertEquals("There are not trades!", tradeController.showAllTrades());
+        Assertions.assertEquals("you don't have any trades yet!", tradeController.tradeHistory());
+
+        matcher = TradeMenuCommand.getMatcher(requestCommand_correct1, TradeMenuCommand.REQUEST);
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
+        tradeController.request(inputs);
+
+        matcher = TradeMenuCommand.getMatcher(requestCommand_correct2, TradeMenuCommand.REQUEST);
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
+        tradeController.request(inputs);
+
+        game.setCurrentPlayer(player3);
+        // tradeMenu.run();
+        matcher = TradeMenuCommand.getMatcher(requestCommand_correct3, TradeMenuCommand.REQUEST);
+        inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
+
+        Assertions.assertEquals(tradeController.request(inputs), TradeMenuMessage.REQUEST_SUCCESS);
+        Assertions.assertNotEquals("you don't have any trades yet!", tradeController.tradeHistory());
+
+        Assertions.assertEquals(3, TradeController.trades.size());
+        Assertions.assertEquals(2, player3.getNewTrades().size());
+        Assertions.assertEquals(3, player2.getNewTrades().size());
+        Assertions.assertEquals(1, player1.getNewTrades().size());
+    }
 }
