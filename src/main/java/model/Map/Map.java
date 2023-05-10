@@ -93,6 +93,7 @@ public class Map {
     }
 
     public ArrayList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
+        //TODO change the logic of searching
         int numberOfVertices = map.length;
         int[] dist = new int[numberOfVertices];
         int[] prev = new int[numberOfVertices];
@@ -119,8 +120,8 @@ public class Map {
             for (int j = 0; j < numberOfVertices; j++) {
                 Vector2D v2 = Vector2D.translateIntToVector2D(j, size.x);
                 Cell cell = getCell(v2);
-                if (!visited[j] && dist[minIndex] != Integer.MAX_VALUE && dist[minIndex] + cell.getTravelWorth(currentUnit) < dist[j]) {
-                    dist[j] = dist[minIndex] + cell.getTravelWorth(currentUnit);
+                if (!visited[j] && dist[minIndex] != Integer.MAX_VALUE && cell.isTraversable(currentUnit)) {
+                    dist[j] = dist[minIndex] + 1;
                     prev[j] = minIndex;
                 }
             }

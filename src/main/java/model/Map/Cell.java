@@ -1,17 +1,14 @@
 package model.Map;
 
-import model.Game.Game;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
-import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
-import model.enums.CellType;
 import model.enums.AssetType.MapAssetType;
+import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Cell {
     private final Vector2D coordinate;
@@ -53,7 +50,7 @@ public class Cell {
         assets = newObjects;
     }
 
-    private boolean isTraversable(MobileUnit unit) {
+    public boolean isTraversable(MobileUnit unit) {
         if (!CellType.isTraversableByType(type)) return false;
         for (MapAsset mapAsset : assets) {
             if (mapAsset instanceof Building) {
@@ -68,12 +65,7 @@ public class Cell {
         return true;
     }
 
-    public int getTravelWorth(MobileUnit unit) {
-        if (!isTraversable(unit)) return Integer.MAX_VALUE;
-        if (type.equals(CellType.SHALLOW_WATER)) return 3;
-        if (isThereUnit(unit.getOwner())) return 2;
-        return 1;
-    }
+
 
     public void clear() {
         assets.clear();
