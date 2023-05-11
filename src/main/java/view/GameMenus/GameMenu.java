@@ -62,9 +62,9 @@ public class GameMenu {
                     GameMenuMessage.printMessage(GameMenuMessage.TRADE);
                     return "tradeMenu";
                 case SHOW_MAP:
-                    GameMenuMessage.printMessage(GameMenuMessage.ENTER_SHOW_MAP);
                     if (runShowMap(matcher))
                         return "showMap";
+                    break;
                 case MARKET_MENU:
                     GameMenuMessage.printMessage(GameMenuMessage.ENTER_MARKET);
                     return "marketMenu";
