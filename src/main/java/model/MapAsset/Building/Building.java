@@ -8,7 +8,6 @@ import utils.Vector2D;
 
 import java.util.ArrayList;
 
-//TODO complete this class
 public class Building extends MapAsset {
     private final int populationCapacity;
     private final Material neededMaterial;

@@ -175,8 +175,13 @@ public class Governance {
     }
 
     public int getInnPopularity() {
-        //TODO
-        return 0;
+        //TODO fix this
+        int innConuter = 0;
+        for (Building building : buildings) {
+            if (building.getType() == MapAssetType.INN)
+                innConuter++;
+        }
+        return innConuter * 5;
     }
 
     public int getFoodRate() {
@@ -315,14 +320,14 @@ public class Governance {
     public ArrayList<MobileUnit> getUnits() {
         return units;
     }
+
     public int getEngineers() {
-        int result = 0 ;
+        int result = 0;
         for (MapAsset mapAsset : units) {
-            if (mapAsset.getType().equals(MapAssetType.ENGINEER)) result ++ ;
+            if (mapAsset.getType().equals(MapAssetType.ENGINEER)) result++;
         }
         return result;
     }
-
 
 
     @Override
