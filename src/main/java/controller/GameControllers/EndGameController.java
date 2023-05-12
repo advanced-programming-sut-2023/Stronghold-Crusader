@@ -1,5 +1,7 @@
 package controller.GameControllers;
 
+import model.Stronghold;
+import model.User.User;
 import utils.Pair;
 import view.GameMenus.EndGameMenu;
 
@@ -15,6 +17,7 @@ public class EndGameController {
     public void run() {
         sortPlayers();
         System.out.println(showPlayers());
+        updateScores();
         EndGameMenu endGameMenu = new EndGameMenu(this);
         endGameMenu.run();
     }
@@ -45,5 +48,12 @@ public class EndGameController {
             index++;
         }
         return result.toString();
+    }
+    private void  updateScores() {
+        User currentUser;
+        for (Pair player : players) {
+            currentUser = Stronghold.getInstance().getUser(player.x);
+            if (currentUser.getHighScore() < Integer.parseInt(player.y)) currentUser.setHighScore(Integer.parseInt(player.y));
+        }
     }
 }
