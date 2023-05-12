@@ -97,4 +97,13 @@ public class User {
         this.slogan = "";
         Stronghold.getInstance().updateData();
     }
+
+    @Override
+    public String toString() {
+        return "username : " + username +
+                "\nnickname : " + nickname +
+                "\nslogan : " + slogan +
+                "\nemail : " + email +
+                "\nhighscore : " + highScore;
+    }
 }

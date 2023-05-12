@@ -81,8 +81,7 @@ public class ProfileController {
     }
 
     public String displayUserInfo() {
-//      TODO fixOutput : Diba
-        return null;
+        return currentUser.toString();
     }
 
     public void setCurrentUser(User currentUser) {
