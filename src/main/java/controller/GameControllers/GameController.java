@@ -36,6 +36,7 @@ public class GameController {
     }
 
     public String run() {
+        nextTurn();
         GameMenu gameMenu = new GameMenu(this);
         while (true) {
             switch (gameMenu.run()) {
@@ -72,14 +73,14 @@ public class GameController {
     }
 
     public void nextTurn() {
+        game.nextTurn();
+        if (game.isNextRound()) nextRound();
         Governance governance = game.getCurrentPlayer().getGovernance();
         governance.processPopulation();
         governance.payTax();
         governance.distributeFoods();
         governance.calculatePopularity();
         produce();
-        game.nextTurn();
-        if (game.isNextRound()) nextRound();
     }
 
     public void produce() {
