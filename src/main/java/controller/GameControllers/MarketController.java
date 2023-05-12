@@ -2,7 +2,6 @@ package controller.GameControllers;
 
 import model.Game.Store.StoreMaterial;
 import model.User.Player;
-import model.Game.Game;
 import model.enums.AssetType.Material;
 import view.GameMenus.MarketMenu;
 import view.enums.messages.GameMessage.MarketMessage;
@@ -11,10 +10,8 @@ import java.util.ArrayList;
 
 public class MarketController {
     private final Player currentPlayer;
-    private final Game game;
     private MarketMenu menu;
-    public MarketController(Player player, Game game){
-        this.game = game;
+    public MarketController(Player player){
         this.currentPlayer = player;
     }
 

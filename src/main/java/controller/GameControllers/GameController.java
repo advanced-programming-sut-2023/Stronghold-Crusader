@@ -50,7 +50,7 @@ public class GameController {
                     showMapController.run();
                     break;
                 case "marketMenu":
-                    MarketController marketController = new MarketController(game.getCurrentPlayer(), game);
+                    MarketController marketController = new MarketController(game.getCurrentPlayer());
                     marketController.run();
                     break;
             }

@@ -34,8 +34,13 @@ public class SelectedBuildingController {
     }
 
     public void run() {
-        SelectedAssetMenu selectedAssetMenu = new SelectedAssetMenu(this);
-        selectedAssetMenu.run();
+        if (building.getType().equals(MapAssetType.STORE)){
+            MarketController marketController = new MarketController(player);
+            marketController.run();
+        } else {
+            SelectedAssetMenu selectedAssetMenu = new SelectedAssetMenu(this);
+            selectedAssetMenu.run();
+        }
     }
 
     public SelectedBuildingMessage repair() {
