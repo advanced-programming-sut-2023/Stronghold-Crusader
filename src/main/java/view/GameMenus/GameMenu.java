@@ -53,6 +53,10 @@ public class GameMenu {
                     runSetFearRate(matcher);
                     break;
                 case CHANGE_ENVIRONMENT:
+                    if (!gameController.isModifiable()) {
+                        GameMenuMessage.printMessage(GameMenuMessage.NOT_MODIFIABLE);
+                        break;
+                    }
                     GameMenuMessage.printMessage(GameMenuMessage.CHANGE_ENVIRONMENT);
                     return "changeEnvironment";
                 case PLACE_BUILDING:

@@ -13,7 +13,8 @@ public enum GameMenuMessage {
     CHANGE_ENVIRONMENT("Entered change environment menu successfully"),
     BUILDING_PLACEMENT("Entered building placement menu successfully"),
     TRADE("Entered trade menu successfully"),
-    ENTER_MARKET("Entered market menu successfully");
+    ENTER_MARKET("Entered market menu successfully"),
+    NOT_MODIFIABLE("Map is not modifiable");
     private final String message;
 
     GameMenuMessage(String message) {

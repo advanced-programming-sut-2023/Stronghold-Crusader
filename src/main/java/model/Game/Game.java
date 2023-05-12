@@ -70,4 +70,8 @@ public class Game {
             colorPlayerEntry.getValue().getGovernance().addAsset(storeHouse);
         }
     }
+
+    public boolean isEditableMode() {
+        return isEditableMode;
+    }
 }

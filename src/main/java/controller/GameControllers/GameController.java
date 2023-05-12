@@ -190,4 +190,8 @@ public class GameController {
         game.getCurrentPlayer().getGovernance().setFearRate(fearRate);
         return GameMenuMessage.FEAR_RATE_CHANGE_SUCCESS;
     }
+
+    public boolean isModifiable(){
+        return game.isEditableMode();
+    }
 }
