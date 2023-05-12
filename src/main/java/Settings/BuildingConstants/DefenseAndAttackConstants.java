@@ -5,14 +5,34 @@ import model.enums.AssetType.Material;
 import model.enums.CellType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public enum DefenseAndAttackConstants {
-    // TODO fill this
-//    LOOKOUT_TOWER(1, MapAssetType.LOOKOUT_TOWER, 0, 0, false, MapAssetType.LOOKOUT_TOWER),
-//    PERIMETER_TOWER(1, 1, 2, 3, false, MapAssetType.PERIMETER_TOWER),
-//    DEFENSE_TOWER(1, 1, 2, 3, false, MapAssetType.DEFENSE_TOWER),
-//    SQUARE_TOWER(1, 1, 2, 3, false, MapAssetType.SQUARE_TOWER),
-//    CIRCULAR_TOWER(1, 1, 2, 3, false, MapAssetType.CIRCULAR_TOWER)
+    LOOKOUT_TOWER(200, MapAssetType.LOOKOUT_TOWER, 0, 0,
+            Material.STONE, 0,
+            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
+                    CellType.PlAIN, CellType.MEADOW, CellType.DENSE_MEADOW)),
+            10, 0, 0, 20, false),
+    PERIMETER_TOWER(200, MapAssetType.PERIMETER_TOWER, 2, 3,
+            Material.STONE, 0,
+            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
+                    CellType.PlAIN, CellType.MEADOW, CellType.DENSE_MEADOW)),
+            10, 0, 0, 20, false),
+    DEFENSE_TOWER(300, MapAssetType.DEFENSE_TOWER, 2, 3,
+            Material.STONE, 0,
+            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
+                    CellType.PlAIN, CellType.MEADOW, CellType.DENSE_MEADOW)),
+            15, 0, 0, 20, false),
+    SQUARE_TOWER(300, MapAssetType.SQUARE_TOWER, 2, 3,
+            Material.STONE, 0,
+            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
+                    CellType.PlAIN, CellType.MEADOW, CellType.DENSE_MEADOW)),
+            35, 0, 0, 20, true),
+    CIRCULAR_TOWER(400, MapAssetType.CIRCULAR_TOWER, 2, 3,
+            Material.STONE, 0,
+            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
+                    CellType.PlAIN, CellType.MEADOW, CellType.DENSE_MEADOW)),
+            40, 0, 0, 20, true)
     ;
     public final double maxHitPoint;
     public final MapAssetType type;
@@ -27,7 +47,11 @@ public enum DefenseAndAttackConstants {
     public final int troopCapacity;
     public final boolean siegeEquipmentAllowance;
 
-    DefenseAndAttackConstants(double maxHitPoint, MapAssetType type, int cost, int populationCapacity, Material neededMaterial, int workerCount, ArrayList<CellType> buildingGroundType, int neededMaterialAmount, int fireRange, int defendRange, int troopCapacity, boolean siegeEquipmentAllowance) {
+    DefenseAndAttackConstants(double maxHitPoint, MapAssetType type, int cost,
+                              int populationCapacity, Material neededMaterial,
+                              int workerCount, ArrayList<CellType> buildingGroundType,
+                              int neededMaterialAmount, int fireRange, int defendRange,
+                              int troopCapacity, boolean siegeEquipmentAllowance) {
         this.maxHitPoint = maxHitPoint;
         this.type = type;
         this.cost = cost;
