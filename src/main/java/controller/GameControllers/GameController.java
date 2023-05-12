@@ -73,13 +73,14 @@ public class GameController {
     }
 
     public void nextTurn() {
-        game.nextTurn();
         Governance governance = game.getCurrentPlayer().getGovernance();
         governance.processPopulation();
         governance.payTax();
         governance.distributeFoods();
         governance.calculatePopularity();
         produce();
+        game.nextTurn();
+        if (game.isNextRound()) nextRound();
     }
 
     public void produce() {

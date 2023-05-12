@@ -40,8 +40,8 @@ public class Game {
         turnCounter++;
     }
 
-    public void nextRound(){
-
+    public boolean isNextRound(){
+        return turnCounter == 0;
     }
 
     public Player getCurrentPlayer() {
