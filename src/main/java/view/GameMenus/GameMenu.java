@@ -29,6 +29,14 @@ public class GameMenu {
             }
             Matcher matcher = GameMenuCommand.getMatcher(input, cmd);
             switch (cmd) {
+                case SELECT_UNIT:
+                    if (runSelectUnit(matcher))
+                        return "selectedUnit";
+                    break;
+                case SELECT_BUILDING:
+                    if (runSelectBuilding(matcher))
+                        return "selectedBuilding";
+                    break;
                 case SHOW_POPULARITY:
                     System.out.println(gameController.showPopularity());
                     break;
@@ -82,6 +90,22 @@ public class GameMenu {
                     return "marketMenu";
             }
         }
+    }
+
+    private boolean runSelectUnit(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        GameMenuMessage msg = gameController.selectUnit(x, y);
+        GameMenuMessage.printMessage(msg);
+        return msg.equals(GameMenuMessage.ENTER_UNIT_MENU);
+    }
+
+    private boolean runSelectBuilding(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        GameMenuMessage msg = gameController.selectBuilding(x, y);
+        GameMenuMessage.printMessage(msg);
+        return msg.equals(GameMenuMessage.ENTER_BUILDING_MENU);
     }
 
     private boolean runShowMap(Matcher matcher) {

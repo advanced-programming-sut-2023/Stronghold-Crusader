@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommand {
+    SELECT_UNIT("\\s*select\\s+unit\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)"),
+    SELECT_BUILDING("\\s*select\\s+building\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)"),
     SHOW_POPULARITY_FACTORS("^\\s*show\\s+popularity\\s+factors\\s*$"),
     SHOW_POPULARITY("\\s*show\\s+popularity\\s*"),
     SHOW_FOOD_RATE("\\s*food\\s+rate\\s+show\\s*"),

@@ -3,6 +3,11 @@ package view.enums.messages.GameMessage;
 public enum GameMenuMessage {
     INVALID_COMMAND("Invalid command"),
     INVALID_COORDINATE("Invalid coordinate"),
+    NO_UNITS_IN_PLACE("No units owned by you is in this place"),
+    ENTER_UNIT_MENU("Entered unit menu successfully"),
+    NO_BUILDING_IN_PLACE("No building is in this place"),
+    ENTER_BUILDING_MENU("Entered selected building menu successfully"),
+    WRONG_OWNER("You don't own the selected building"),
     ENTER_SHOW_MAP("Entered show map menu successfully"),
     INVALID_FOOD_RATE("Invalid food rate"),
     FOOD_RATE_CHANGE_SUCCESS("Successfully changed food rate"),
@@ -21,11 +26,11 @@ public enum GameMenuMessage {
         this.message = message;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
     public static void printMessage(GameMenuMessage msg) {
         System.out.println(msg.message);
+    }
+
+    public String getMessage() {
+        return message;
     }
 }
