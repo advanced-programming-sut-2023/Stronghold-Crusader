@@ -10,23 +10,34 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Game {
+    private static final Color[] colors = Color.values();
     private final HashMap<Color, Player> players;
     private final boolean isEditableMode;
     private final Map map;
     private Player currentPlayer;
     private int turnCounter;
+    private int roundCounter;
 
     public Game(Map map, HashMap<Color, Player> players, boolean isEditableMode) {
         this.map = map;
         this.isEditableMode = isEditableMode;
         this.players = players;
+        this.turnCounter = 0;
+        this.roundCounter = 1;
         initializeColors();
     }
 
-    public void nextPlayer() {
+    public void nextTurn(){
+        if(turnCounter == map.getPlayerCount()){
+            turnCounter = 0;
+            roundCounter++;
+        }
+        currentPlayer = players.get(colors[turnCounter]);
+        turnCounter++;
     }
 
-    public void nextTurn() {
+    public void nextRound(){
+
     }
 
     public Player getCurrentPlayer() {
@@ -37,12 +48,8 @@ public class Game {
         this.currentPlayer = currentPlayer;
     }
 
-    public Player getPlayerByUsername(String username) {
-        return null;
-    }
-
-    public int getTurnCounter() {
-        return turnCounter;
+    public int getRound() {
+        return roundCounter;
     }
 
     public Map getMap() {

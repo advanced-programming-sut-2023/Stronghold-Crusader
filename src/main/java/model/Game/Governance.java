@@ -31,14 +31,14 @@ public class Governance {
     public Governance() {
         buildings = new ArrayList<>();
         units = new ArrayList<>();
-        totalPopulation = 50;
         peasantPopulation = 50;
-        foodRate = -8;
+        foodRate = -2;
         taxRate = 0;
         fearRate = 0;
         gold = 1000;
         foodPopularity = 0;
         taxPopularity = 0;
+        totalPopularity = 0;
     }
 
     public void processPopulation() {
@@ -57,7 +57,7 @@ public class Governance {
         else
             growth += totalPopularity * 2;
         if (growth < 0)
-            return Math.max(growth, -1 * peasantPopulation);
+            return Math.min(Math.max(growth, -1 * peasantPopulation), remainingHousehold);
         return Math.min(growth, remainingHousehold);
     }
 
@@ -74,10 +74,8 @@ public class Governance {
 
     private void calculatePopulationCapacity() {
         populationCapacity = 0;
-        for (Building building : buildings) {
-            if (building instanceof StorageBuilding)
-                populationCapacity += ((StorageBuilding) building).getPopulationCapacity();
-        }
+        for (Building building : buildings)
+            populationCapacity += building.getPopulationCapacity();
     }
 
     public void calculatePopularity() {

@@ -6,11 +6,9 @@ import controller.MapControllers.ShowMapController;
 import model.Game.Game;
 import model.Game.Governance;
 import model.Map.Map;
-import model.MapAsset.Building.StorageBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
-import model.MapAsset.Tree;
 import model.User.Player;
 import model.User.User;
 import model.enums.AssetType.Material;
@@ -25,7 +23,6 @@ public class GameController {
     private final User currentUser;
     private final Game game;
     private ShowMapController showMapController;
-    private int currentPlayerColorSelectionIndex = 0;
 
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
@@ -33,6 +30,7 @@ public class GameController {
     }
 
     public String run() {
+        nextTurn();
         GameMenu gameMenu = new GameMenu(this);
         while (true) {
             switch (gameMenu.run()) {
@@ -61,6 +59,7 @@ public class GameController {
     }
 
     public void nextTurn() {
+        game.nextTurn();
         Governance governance = game.getCurrentPlayer().getGovernance();
         governance.processPopulation();
         governance.payTax();
@@ -72,6 +71,7 @@ public class GameController {
     public void nextRound() {
         processUnitDecisions();
         applyUnitDecisions();
+        //check for game end
     }
 
     private void applyUnitDecisions() {
@@ -129,6 +129,11 @@ public class GameController {
                 }
             }
         }
+    }
+
+    public String showGameInfo(){
+        return "Round " + game.getRound() + ":\n" +
+                game.getCurrentPlayer().getNickname() + "'s Turn";
     }
 
     public GameMenuMessage showMap(int x, int y) {
