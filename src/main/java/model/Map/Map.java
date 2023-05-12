@@ -83,7 +83,7 @@ public class Map {
     public ArrayList<Cell> getNearbyCells(Vector2D center, int radius) {
         ArrayList<Cell> nearbyCells = new ArrayList<>();
         nearbyCells.add(getCell(center));
-        for (int r = 1; r < radius; r++) {
+        for (int r = 1; r <= radius; r++) {
             for (int j = -r; j <= r; j++) {
                 Vector2D cellCoord = new Vector2D(center.x + j, center.y + r);
                 if (isInMap(cellCoord))
@@ -103,19 +103,6 @@ public class Map {
         }
         return nearbyCells;
     }
-    private ArrayList<Cell> getNeighbors(Vector2D point) {
-        ArrayList<Cell> neighbors = new ArrayList<>();
-        if (isInMap(new Vector2D(point.x+1, point.y)))
-            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y)));
-        if (isInMap(new Vector2D(point.x-1, point.y)))
-            neighbors.add(this.getCell(new Vector2D(point.x-1, point.y)));
-        if (isInMap(new Vector2D(point.x, point.y+1)))
-            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y+1)));
-        if (isInMap(new Vector2D(point.x, point.y-1)))
-            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y-1)));
-        return neighbors;
-    }
-
 
     public LinkedList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
         LinkedList<LinkedList<Vector2D>> queue = new LinkedList<>();
@@ -133,7 +120,7 @@ public class Map {
             if (currentPlace.equals(destination)) {
                 return currentPath;
             }
-            ArrayList<Cell> neighbors = getNeighbors(currentPlace);
+            ArrayList<Cell> neighbors = getNearbyCells(currentPlace, 1);
             neighbors.remove(this.getCell(currentPlace));
             for (Cell neighbor : neighbors) {
                 if (isTraversable(this.getCell(currentPlace), neighbor) && !visited.contains(neighbor.getCoordinate()) ) {
