@@ -54,7 +54,7 @@ public class MapAsset {
     }
 
     public Vector2D getCoordinate() {
-        return coordinate;
+        return new Vector2D(coordinate.x, coordinate.y);
     }
 
     @Override

@@ -106,14 +106,14 @@ public class Map {
 
     private ArrayList<Cell> getNeighbors(Vector2D point) {
         ArrayList<Cell> neighbors = new ArrayList<>();
-        if (isInMap(new Vector2D(point.x + 1, point.y)))
-            neighbors.add(this.getCell(new Vector2D(point.x + 1, point.y)));
-        if (isInMap(new Vector2D(point.x - 1, point.y)))
-            neighbors.add(this.getCell(new Vector2D(point.x - 1, point.y)));
-        if (isInMap(new Vector2D(point.x, point.y + 1)))
-            neighbors.add(this.getCell(new Vector2D(point.x + 1, point.y + 1)));
-        if (isInMap(new Vector2D(point.x, point.y - 1)))
-            neighbors.add(this.getCell(new Vector2D(point.x + 1, point.y - 1)));
+        if (isInMap(new Vector2D(point.x+1, point.y)))
+            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y)));
+        if (isInMap(new Vector2D(point.x-1, point.y)))
+            neighbors.add(this.getCell(new Vector2D(point.x-1, point.y)));
+        if (isInMap(new Vector2D(point.x, point.y+1)))
+            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y+1)));
+        if (isInMap(new Vector2D(point.x, point.y-1)))
+            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y-1)));
         return neighbors;
     }
 
@@ -137,7 +137,7 @@ public class Map {
 
             ArrayList<Cell> neighbors = getNeighbors(currentPlace);
             for (Cell neighbor : neighbors) {
-                if (isTraversable(this.getCell(currentPlace), neighbor) && !visited.contains(neighbor.getCoordinate())) {
+                if (isTraversable(this.getCell(currentPlace), neighbor) && !visited.contains(neighbor.getCoordinate()) ) {
                     LinkedList<Vector2D> newPath = new LinkedList<>(currentPath);
                     newPath.add(neighbor.getCoordinate());
                     queue.add(newPath);
