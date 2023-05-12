@@ -115,6 +115,7 @@ public class BuildingPlacementController {
                     return BuildingPlacementMessage.NO_GATEHOUSE_NEARBY;
                 break;
             case STORE_HOUSE:
+                if (!currentPlayer.getGovernance().containsType(MapAssetType.STORE_HOUSE)) break;
                 if (!hasTypeNearby(coordinate, MapAssetType.STORE_HOUSE))
                     return BuildingPlacementMessage.NO_STOREHOUSE_NEARBY;
                 break;

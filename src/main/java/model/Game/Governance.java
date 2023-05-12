@@ -328,4 +328,11 @@ public class Governance {
                 ", total popularity" + getTotalPopularity() + "\n" +
                 '}';
     }
+
+    public boolean containsType(MapAssetType type){
+        for (MapAsset building : buildings){
+            if (building.getType().equals(type)) return true;
+        }
+        return false;
+    }
 }

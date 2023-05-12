@@ -148,7 +148,7 @@ public class TradeTest {
         //   player2.getGovernance().addAsset(building);
         //    player2.getGovernance().changeStorageStock(Material.STONE, 3);
 
-        //TODO handle storage completely
+        // TODO handle storage completely
 
         //     Assertions.assertEquals(TradeMenuMessage.ACCEPTED, tradeController.accept_trade(inputs));
         //   Assertions.assertEquals(TradeMenuMessage.ALREADY_ACCEPTED, tradeController.accept_trade(inputs));
