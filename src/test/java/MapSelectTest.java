@@ -54,31 +54,31 @@ public class MapSelectTest {
         Assertions.assertNull(selectedMap.get(controller));
         Assertions.assertFalse(isMapModifiable.getBoolean(controller));
         Assertions.assertEquals(controller.startGame(), MAP_NOT_SELECTED);
-        Assertions.assertEquals(controller.addPlayer("diba", "blue"), MAP_NOT_SELECTED);
+        Assertions.assertEquals(controller.addPlayer("diba", "red"), MAP_NOT_SELECTED);
 
 
-        Assertions.assertEquals(controller.selectMap("1001", true), MAP_SELECT_SUCCESS);
+        Assertions.assertEquals(controller.selectMap("1002", true), MAP_SELECT_SUCCESS);
         Assertions.assertNotNull(selectedMap.get(controller));
         Assertions.assertTrue(isMapModifiable.getBoolean(controller));
         Assertions.assertEquals(((Map) selectedMap.get(controller)).getPlayerCount(), 3);
         Assertions.assertEquals(controller.startGame(), NOT_ENOUGH_PLAYERS);
 
-        Assertions.assertEquals(controller.addPlayer("diba", "blue"), USERNAME_INVALID);
+        Assertions.assertEquals(controller.addPlayer("diba", "red"), USERNAME_INVALID);
         Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh", "white"), INVALID_COLOR);
 
         Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh", "red"), PLAYER_ADD_SUCCESS);
         Assertions.assertEquals(((HashMap<Color, Player>) players.get(controller)).get(Color.RED).getUsername(),
                 "dibaHadiEsfangereh");
-        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh", "yellow"), PLAYER_EXISTS);
+        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh", "blue"), PLAYER_EXISTS);
         Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh2", "red"), PICKED_COLOR);
         Assertions.assertEquals(controller.startGame(), NOT_ENOUGH_PLAYERS);
 
-        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh2", "yellow"),
+        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh2", "blue"),
                 PLAYER_ADD_SUCCESS);
         Assertions.assertEquals(controller.startGame(), NOT_ENOUGH_PLAYERS);
-        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh3", "gray"),
+        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh3", "green"),
                 PLAYER_ADD_SUCCESS);
-        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh2", "yellow"),
+        Assertions.assertEquals(controller.addPlayer("dibaHadiEsfangereh2", "red"),
                 PLAYER_COUNT_EXCEEDED);
         Assertions.assertEquals(controller.startGame(), GAME_CREATION_SUCCESS);
 

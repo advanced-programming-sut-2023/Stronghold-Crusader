@@ -35,7 +35,7 @@ public class BuildingPlacementTest {
         Stronghold.getInstance().addUser(user2);
         Stronghold.getInstance().addUser(user3);
         Stronghold.getInstance().updateData();
-        Map map = MapManager.load("1001");
+        Map map = MapManager.load("1002");
         Player player1 = new Player(user1);
         controller = new BuildingPlacementController(player1, map);
         mapField = controller.getClass().getDeclaredField("map");
@@ -74,6 +74,5 @@ public class BuildingPlacementTest {
                 BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS);
         Assertions.assertEquals(buildingCategory.get(controller), BuildingCategory.ENTRANCE);
     }
-
 
 }

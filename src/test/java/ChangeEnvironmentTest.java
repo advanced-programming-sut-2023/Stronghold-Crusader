@@ -40,14 +40,14 @@ public class ChangeEnvironmentTest {
         Stronghold.getInstance().addUser(user2);
         Stronghold.getInstance().addUser(user3);
         Stronghold.getInstance().updateData();
-        Map map = MapManager.load("1001");
+        Map map = MapManager.load("1002");
         Player player1 = new Player(user1);
         Player player2 = new Player(user2);
         Player player3 = new Player(user3);
         HashMap<Color, Player> players = new HashMap<>();
         players.put(Color.RED, player1);
         players.put(Color.BLUE, player2);
-        players.put(Color.GRAY, player3);
+        players.put(Color.GREEN, player3);
         Game game = new Game(map, players, true);
         controller = new ChangeEnvironmentController(map, game);
         mapField = controller.getClass().getDeclaredField("map");

@@ -45,9 +45,9 @@ public class TradeTest {
         player3 = new Player(user3);
         HashMap<Color, Player> players = new HashMap<>();
         players.put(Color.getColorWithSizeCheck("RED"), player1);
-        players.put(Color.getColorWithSizeCheck("ORNAGE"), player2);
-        players.put(Color.getColorWithSizeCheck("BLUE"), player3);
-        Map selectedMap = MapManager.load("1001");
+        players.put(Color.getColorWithSizeCheck("BLUE"), player2);
+        players.put(Color.getColorWithSizeCheck("GREEN"), player3);
+        Map selectedMap = MapManager.load("1002");
         game = new Game(selectedMap, players, false);
         game.setCurrentPlayer(player1);
         tradeController = new TradeController(game);
