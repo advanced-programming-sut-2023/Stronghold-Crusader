@@ -4,15 +4,18 @@ import model.ConstantManager;
 import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.*;
+import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
-import model.enums.CellType;
 import model.enums.AssetType.MapAssetType;
+import model.enums.CellType;
 import utils.Vector2D;
 import view.MapMenus.BuildingPlacementMenu;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
+
+import java.util.ArrayList;
 
 import static view.enums.messages.MapMessage.BuildingPlacementMessage.INVALID_BUILDING_TYPE;
 
@@ -61,8 +64,8 @@ public class BuildingPlacementController {
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         currentPlayer.getGovernance().addAsset(newBuilding);
-        if (reference.getType().equals(MapAssetType.OX_TETHER)){
-            MobileUnit cow = new MobileUnit( (MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
+        if (reference.getType().equals(MapAssetType.OX_TETHER)) {
+            MobileUnit cow = new MobileUnit((MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
                     coordinate, currentPlayer);
             map.addMapObject(coordinate, cow);
             currentPlayer.getGovernance().addAsset(cow);
@@ -70,7 +73,7 @@ public class BuildingPlacementController {
         currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
         if (reference.getNeededMaterial() != null)
             currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
-                    (-1)*reference.getNumberOfMaterialNeeded());
+                    (-1) * reference.getNumberOfMaterialNeeded());
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
 
@@ -129,21 +132,17 @@ public class BuildingPlacementController {
         return BuildingPlacementMessage.PLACEMENT_SIGHT_VALID;
     }
 
-    private boolean enoughWorkers(Building reference){
+    private boolean enoughWorkers(Building reference) {
         int neededNumber = reference.getWorkerCount();
         int playerWorkerCount = currentPlayer.getGovernance().getPeasantPopulation();
         return playerWorkerCount >= neededNumber;
     }
 
     private boolean hasTypeNearby(Vector2D coordinate, MapAssetType type) {
-        int[] a = {1, -1};
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
-                Vector2D newCoordinate = new Vector2D(coordinate.x + a[i], coordinate.y + a[j]);
-                if (map.isInMap(newCoordinate)) {
-                    Cell cell = map.getCell(coordinate);
-                    if (cell.containsType(type)) return true;
-                }
+        ArrayList<Cell> neighbors = map.getNeighbors(coordinate);
+        for (Cell neighbor : neighbors) {
+            for (MapAsset mapAsset : neighbor.getAllAssets()) {
+                if (mapAsset.getType().equals(type)) return true;
             }
         }
         return false;

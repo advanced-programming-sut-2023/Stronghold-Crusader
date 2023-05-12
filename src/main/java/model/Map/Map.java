@@ -104,7 +104,7 @@ public class Map {
         return nearbyCells;
     }
 
-    private ArrayList<Cell> getNeighbors(Vector2D point) {
+    public ArrayList<Cell> getNeighbors(Vector2D point) {
         ArrayList<Cell> neighbors = new ArrayList<>();
         if (isInMap(new Vector2D(point.x + 1, point.y)))
             neighbors.add(this.getCell(new Vector2D(point.x + 1, point.y)));

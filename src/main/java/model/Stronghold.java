@@ -30,7 +30,7 @@ public class Stronghold {
     }
 
     public User getUser(String username) {
-        if(!users.containsKey(username)) return null;
+        if (!users.containsKey(username)) return null;
         return users.get(username);
     }
 
@@ -42,12 +42,13 @@ public class Stronghold {
     }
 
     public void updateRankings() {
-        // TODO : fix this
-//        userRankings.sort(User::compareForRanks);
+        userRankings.sort((o1, o2) -> o2.getHighScore() - o1.getHighScore());
     }
 
     public int getUserRank(User user) {
-        //TODO fix this
+        for (int i = 0; i < userRankings.size(); i++) {
+            if (userRankings.get(i).equals(user)) return i + 1;
+        }
         return 0;
     }
 
