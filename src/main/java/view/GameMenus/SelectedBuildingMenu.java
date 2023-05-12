@@ -35,18 +35,38 @@ public class SelectedBuildingMenu {
                     System.out.println(selectedBuildingController.showInfo());
                     break;
                 case STOP_PRODUCTION:
-                    runChangeProductionMode();
                 case RESUME_PRODUCTION:
                     runChangeProductionMode();
+                    break;
+                case SET_FOOD_RATE:
+                    runSetFoodRate(matcher);
+                case SET_TAX_RATE:
+                    runSetTaxRate(matcher);
+                    break;
                 case CREATE_UNIT:
                     runCreateUnit(matcher);
+                    break;
                 case DELETE:
                     runDelete();
+                    break;
                 case CHANGE_ENTRANCE:
                     runEntranceGate();
+                    break;
+                case BACK:
                     return;
             }
         }
+    }
+
+
+    private void runSetTaxRate(Matcher matcher) {
+        int rate = Integer.parseInt(matcher.group("rate"));
+        selectedBuildingController.setTaxRate(rate).printMessage();
+    }
+
+    private void runSetFoodRate(Matcher matcher) {
+        int rate = Integer.parseInt(matcher.group("rate"));
+        selectedBuildingController.setFoodRate(rate).printMessage();
     }
 
     private void runRepair() {
@@ -65,7 +85,8 @@ public class SelectedBuildingMenu {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SelectedBuildingCommand.CREATE_UNIT.getRegex());
         selectedBuildingController.createUnit(inputs).printMessage();
     }
-    private void runEntranceGate(){
+
+    private void runEntranceGate() {
         selectedBuildingController.changeGate().printMessage();
     }
 }

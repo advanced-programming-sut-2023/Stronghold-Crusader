@@ -17,6 +17,10 @@ public enum SelectedBuildingMessage {
     SUCCESS_CREATING_UNIT("units has been successfully created"),
     SUCCESS("Success!"),
     ENEMY_IN_GATE("Access is not allowed"),
+    INVALID_FOOD_RATE("Invalid food rate"),
+    FOOD_RATE_CHANGE_SUCCESS("Successfully changed food rate"),
+    INVALID_TAX_RATE("Invalid tax rate"),
+    TAX_RATE_CHANGE_SUCCESS("Successfully changed tax rate"),
 
     INVALID_COMMAND("Invalid command");
 

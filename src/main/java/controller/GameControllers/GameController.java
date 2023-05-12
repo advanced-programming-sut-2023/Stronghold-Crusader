@@ -228,19 +228,6 @@ public class GameController {
         return output.toString();
     }
 
-    public GameMenuMessage setFoodRate(int foodRate) {
-        if (foodRate > 2 || foodRate < -2)
-            return GameMenuMessage.INVALID_FOOD_RATE;
-        game.getCurrentPlayer().getGovernance().setFoodRate(foodRate);
-        return GameMenuMessage.FOOD_RATE_CHANGE_SUCCESS;
-    }
-
-    public GameMenuMessage setTaxRate(int taxRate) {
-        if (taxRate > 8 || taxRate < -3)
-            return GameMenuMessage.INVALID_TAX_RATE;
-        game.getCurrentPlayer().getGovernance().setTaxRate(taxRate);
-        return GameMenuMessage.TAX_RATE_CHANGE_SUCCESS;
-    }
 
     public String showTaxRate() {
         return "Current tax rate: " + game.getCurrentPlayer().getGovernance().getTaxRate();

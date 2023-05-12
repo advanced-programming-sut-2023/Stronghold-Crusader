@@ -10,6 +10,10 @@ public enum SelectedBuildingCommand {
     RESUME_PRODUCTION("\\s*resume\\s+production\\s*"),
     CREATE_UNIT("\\s*createunit((\\s+-t\\s+(?<type>\\S+)|(\\s+-c\\s+(?<count>\\S+))*"),
     CHANGE_ENTRANCE("\\s*change\\s+entrance\\s+gate"),
+    SET_FOOD_RATE("\\s*food\\s+rate\\s+-r\\s+(?<rate>-?\\d+)\\s*"),
+    SET_TAX_RATE("\\s*tax\\s+rate\\s+-r\\s+(?<rate>-?\\d+)\\s*"),
+    BACK("\\s*back\\s*"),
+
     DELETE("\\s*delete\\s*");
 
     private final String regex;

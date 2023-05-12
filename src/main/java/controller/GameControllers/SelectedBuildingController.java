@@ -62,7 +62,6 @@ public class SelectedBuildingController {
     public SelectedBuildingMessage deleteBuilding() {
         if (map.getCell(coordinate).isThereUnit())
             return SelectedBuildingMessage.NOT_ALLOWED_TO_DELETE;
-        //TODO if Storage ...
         map.getCell(coordinate).removeMapAsset(building);
         player.getGovernance().removeAsset(building);
         return SelectedBuildingMessage.DELETED_BUILDING;
@@ -123,6 +122,25 @@ public class SelectedBuildingController {
         return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
     }
 
+    public SelectedBuildingMessage setFoodRate(int foodRate) {
+        if (!building.getType().equals(MapAssetType.FOOD_STORAGE))
+            return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
+        if (foodRate > 2 || foodRate < -2)
+            return SelectedBuildingMessage.INVALID_FOOD_RATE;
+        player.getGovernance().setFoodRate(foodRate);
+        return SelectedBuildingMessage.FOOD_RATE_CHANGE_SUCCESS;
+    }
+
+    public SelectedBuildingMessage setTaxRate(int taxRate) {
+        if (!building.getType().equals(MapAssetType.HEADQUARTER))
+            return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
+        if (taxRate > 8 || taxRate < -3)
+            return SelectedBuildingMessage.INVALID_TAX_RATE;
+        player.getGovernance().setTaxRate(taxRate);
+        return SelectedBuildingMessage.TAX_RATE_CHANGE_SUCCESS;
+    }
+
+
     private boolean isUnitMatchWithBuilding(String type) {
         MapAssetType person = MapAssetType.getPerson(type);
         if (person == null)
@@ -150,7 +168,6 @@ public class SelectedBuildingController {
                 * building.getNumberOfMaterialNeeded());
     }
 
-    //TODO Find nearby Cells
     private boolean isThereEnemy(int number) {
         ArrayList<Cell> cells = map.getNearbyCells(building.getCoordinate(), number);
         for (Cell cell : cells) {
