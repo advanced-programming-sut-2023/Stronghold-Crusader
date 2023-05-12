@@ -117,9 +117,9 @@ public class AttackingUnit extends MobileUnit {
     }
 
     @Override
-    public void selectPetrolPath(Vector2D v1, Vector2D v2) {
+    public void selectPatrolPath(Vector2D v1, Vector2D v2) {
         selectedAttackTarget = null;
-        super.selectPetrolPath(v1, v2);
+        super.selectPatrolPath(v1, v2);
     }
 
     public MapAsset getNextRoundAttackTarget() {

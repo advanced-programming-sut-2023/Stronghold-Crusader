@@ -14,7 +14,7 @@ public class MobileUnit extends MapAsset {
     private final boolean canClimbLadder;
     protected Vector2D finalMoveDestination;
     private Vector2D nextMoveDestination;
-    private Vector2D[] petrolPath;
+    private Vector2D[] patrolPath;
 
     public MobileUnit(MobileUnit reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
@@ -28,13 +28,13 @@ public class MobileUnit extends MapAsset {
         coordinate.x = nextMoveDestination.x;
         coordinate.y = nextMoveDestination.y;
         if (coordinate.equals(finalMoveDestination)) {
-            if (petrolPath == null)
+            if (patrolPath == null)
                 finalMoveDestination = null;
             else {
-                if (petrolPath[0].equals(coordinate))
-                    finalMoveDestination = petrolPath[1];
+                if (patrolPath[0].equals(coordinate))
+                    finalMoveDestination = patrolPath[1];
                 else
-                    finalMoveDestination = petrolPath[0];
+                    finalMoveDestination = patrolPath[0];
             }
         }
     }
@@ -58,14 +58,14 @@ public class MobileUnit extends MapAsset {
 
     public void selectMoveDestination(Vector2D dest) {
         finalMoveDestination = dest;
-        petrolPath = null;
+        patrolPath = null;
     }
 
-    public void selectPetrolPath(Vector2D v1, Vector2D v2) {
-        petrolPath = new Vector2D[2];
-        petrolPath[0] = new Vector2D(v1.x, v1.y);
-        petrolPath[1] = new Vector2D(v2.x, v2.y);
-        finalMoveDestination = petrolPath[0];
+    public void selectPatrolPath(Vector2D v1, Vector2D v2) {
+        patrolPath = new Vector2D[2];
+        patrolPath[0] = new Vector2D(v1.x, v1.y);
+        patrolPath[1] = new Vector2D(v2.x, v2.y);
+        finalMoveDestination = patrolPath[0];
     }
 
     public int getEngineersCount() {
