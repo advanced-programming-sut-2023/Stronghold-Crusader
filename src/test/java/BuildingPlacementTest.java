@@ -103,7 +103,7 @@ public class BuildingPlacementTest {
     }
 
 
-    // TODO : failes for siege tent / caged war dog / storehouse / oxtether / drawBridge / heaunting ground
+    // TODO : failes for siege tent / storehouse  / drawBridge
     @Test
     public void buildingPlacementTest() throws IllegalAccessException {
         Player player = (Player) currentPlayer.get(controller);
@@ -125,9 +125,8 @@ public class BuildingPlacementTest {
 
         for (int i=0; i<buildings.size(); i++){
             MapAssetType type = buildings.get(i);
-            if (type.equals(MapAssetType.SIEGE_TENT) || type.equals(MapAssetType.CAGED_WARDOG) ||
-                type.equals(MapAssetType.STORE_HOUSE) || type.equals(MapAssetType.OX_TETHER) ||
-                type.equals(MapAssetType.DRAW_BRIDGE) || type.equals(MapAssetType.HAUNTING_GROUND)) continue;
+            if (type.equals(MapAssetType.SIEGE_TENT) || type.equals(MapAssetType.STORE_HOUSE) ||
+                    type.equals(MapAssetType.DRAW_BRIDGE)) continue;
             Building reference = (Building) ConstantManager.getInstance().getAsset(type);
             Material needed = reference.getNeededMaterial();
             int neededAmount = reference.getNumberOfMaterialNeeded();

@@ -7,6 +7,7 @@ import model.Game.Game;
 import model.Game.Governance;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
+import model.MapAsset.Building.ProductionBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
@@ -35,7 +36,6 @@ public class GameController {
     }
 
     public String run() {
-        nextTurn();
         GameMenu gameMenu = new GameMenu(this);
         while (true) {
             switch (gameMenu.run()) {
@@ -72,13 +72,38 @@ public class GameController {
     }
 
     public void nextTurn() {
-        game.nextTurn();
         Governance governance = game.getCurrentPlayer().getGovernance();
         governance.processPopulation();
         governance.payTax();
         governance.distributeFoods();
-        //produce
         governance.calculatePopularity();
+        produce();
+        game.nextTurn();
+        if (game.isNextRound()) nextRound();
+    }
+
+    public void produce() {
+        for (Player player : game.getPlayers()) {
+            Governance governance = player.getGovernance();
+            for (Building building : player.getGovernance().getBuildings()) {
+                if (building instanceof ProductionBuilding) {
+                    ProductionBuilding productionBuilding = (ProductionBuilding) building;
+                    if (!productionBuilding.getProductionMode()) continue;
+
+                    ArrayList<Material> usingMaterial = productionBuilding.getProducingMaterial();
+                    ArrayList<Material> producingMaterial = productionBuilding.getProducingMaterial();
+
+                    for (int i = 0; i < usingMaterial.size(); i++) {
+                        governance.changeStorageStock(usingMaterial.get(i),
+                                (-1) * productionBuilding.getRateOfUsage().get(i));
+                    }
+                    for (int i = 0; i < producingMaterial.size(); i++) {
+                        governance.changeStorageStock(producingMaterial.get(i),
+                                productionBuilding.getRateOfProduction().get(i));
+                    }
+                }
+            }
+        }
     }
 
     public void nextRound() {
@@ -255,7 +280,6 @@ public class GameController {
         deleteAllAsset(player.getGovernance());
         game.getPlayers().remove(player);
         game.getDeadPlayers().add(new Pair(player.getUsername(), highScore, player.getGovernance().toString()));
-
     }
 
     private void deleteAllAsset(Governance governance) {
