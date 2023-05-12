@@ -45,4 +45,20 @@ public class ProductionBuilding extends Building {
                 ", rateOfProcess=" + rateOfProcess +
                 ", productionMode=" + productionMode;
     }
+
+    public ArrayList<Material> getProducingMaterial() {
+        return producingMaterial;
+    }
+
+    public ArrayList<Material> getUsingMaterial() {
+        return usingMaterial;
+    }
+
+    public ArrayList<Integer> getRateOfUsage() {
+        return rateOfUsage;
+    }
+
+    public ArrayList<Integer> getRateOfProduction() {
+        return rateOfProduction;
+    }
 }

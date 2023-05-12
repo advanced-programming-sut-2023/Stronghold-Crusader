@@ -41,7 +41,12 @@ public enum BuildingType {
     STABLE(BuildingCategory.STORAGE),
     SHORT_WALL(BuildingCategory.NORMAL),
     WALL(BuildingCategory.NORMAL),
-    STAIRS(BuildingCategory.NORMAL);
+    STAIRS(BuildingCategory.NORMAL),
+    HAUNTING_GROUND(BuildingCategory.PRODUCTION),
+    DRAW_BRIDGE(BuildingCategory.NORMAL),
+    OX_TETHER(BuildingCategory.NORMAL),
+    CAGED_WARDOG(BuildingCategory.NORMAL)
+    ;
 
     private final BuildingCategory category;
     BuildingType(BuildingCategory category){
