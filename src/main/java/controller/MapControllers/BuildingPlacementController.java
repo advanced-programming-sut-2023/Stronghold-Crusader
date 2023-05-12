@@ -4,6 +4,7 @@ import model.ConstantManager;
 import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.*;
+import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
@@ -49,13 +50,21 @@ public class BuildingPlacementController {
         BuildingPlacementMessage msg = isDropSightValid(assetType, reference, coordinate);
         if (msg != BuildingPlacementMessage.PLACEMENT_SIGHT_VALID) return msg;
 
-        if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(), reference.getNumberOfMaterialNeeded()))
+        if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(),
+                reference.getNumberOfMaterialNeeded()))
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
+        if (!enoughWorkers(reference)) return BuildingPlacementMessage.NOT_ENOUGH_WORKERS;
 
-        // TODO : Handel workers
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
+        if (reference.getType().equals(MapAssetType.OX_TETHER)){
+            MobileUnit cow = new MobileUnit( (MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
+                    coordinate, currentPlayer);
+            map.addMapObject(coordinate, cow);
+            currentPlayer.getGovernance().addAsset(cow);
+        }
         currentPlayer.getGovernance().addAsset(newBuilding);
+        currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
 
@@ -111,6 +120,12 @@ public class BuildingPlacementController {
 
         }
         return BuildingPlacementMessage.PLACEMENT_SIGHT_VALID;
+    }
+
+    private boolean enoughWorkers(Building reference){
+        int neededNumber = reference.getWorkerCount();
+        int playerWorkerCount = currentPlayer.getGovernance().getPeasantPopulation();
+        return playerWorkerCount >= neededNumber;
     }
 
     private boolean hasTypeNearby(Vector2D coordinate, MapAssetType type) {

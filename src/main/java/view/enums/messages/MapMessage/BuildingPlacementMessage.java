@@ -14,7 +14,8 @@ public enum BuildingPlacementMessage {
     NOT_EMPTY("A building has already been dropped in this cell"),
     NO_STOREHOUSE_NEARBY("StoreHouses have to be built next to each other"),
     NO_GATEHOUSE_NEARBY("You can only build a bridge next to a gatehouse"),
-    ENTER_MAIN("Entered main menu successfully");
+    ENTER_MAIN("Entered main menu successfully"),
+    NOT_ENOUGH_WORKERS("You don't have enough workers available");
     BuildingPlacementMessage(String message) {
         this.message = message;
     }
