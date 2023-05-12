@@ -100,11 +100,13 @@ public class SelectedBuildingController {
 
         player.getGovernance().changeGold(-1 * sampleMobileUnit.getCost() * count);
         if (sampleAttackingUnit != null) {
-            for (Material weapon : sampleAttackingUnit.getWeapons())
-                player.getGovernance().changeStorageStock(weapon, -1 * count);
+            if (sampleAttackingUnit.getWeapons() != null) {
+                for (Material weapon : sampleAttackingUnit.getWeapons())
+                    player.getGovernance().changeStorageStock(weapon, -1 * count);
+            }
         }
         for (int i = 0; i < count; i++) {
-            MobileUnit mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
+            MobileUnit mobileUnit = new MobileUnit(sampleMobileUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
             map.getCell(mobileUnit.getCoordinate()).addMapAsset(sampleMobileUnit);
             player.getGovernance().addAsset(mobileUnit);
         }
@@ -153,6 +155,7 @@ public class SelectedBuildingController {
     }
 
     private boolean isWeaponEnough(AttackingUnit attackingUnit, int count) {
+        if (attackingUnit.getWeapons() == null) return true;
         for (Material weapon : attackingUnit.getWeapons()) {
             if (player.getGovernance().getStorageStock(weapon) < count) return false;
         }

@@ -21,7 +21,7 @@ public class MapAsset {
         this.owner = owner;
         this.type = reference.type;
         this.maxHitPoint = reference.maxHitPoint;
-        this.hitPoint = this.maxHitPoint;
+        this.hitPoint = reference.maxHitPoint;
         this.cost = reference.cost;
     }
 

@@ -136,6 +136,7 @@ public class Cell {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder("Cell type: " + type.getName());
+
         for (MapAsset asset : assets) {
             output.append('\n').append(asset.toString());
         }

@@ -133,7 +133,7 @@ public class AttackingUnit extends MobileUnit {
         return super.toString() +
                 ", attack damage=" + attackDamage +
                 ", attack range=" + attackRange +
-                ", unit state=" + state.name().toLowerCase() +
+//                ", unit state=" + state.name().toLowerCase() +
                 ", weapon=" + weapon +
                 ", targets=" + targets;
     }
