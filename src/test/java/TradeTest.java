@@ -44,9 +44,9 @@ public class TradeTest {
         player2 = new Player(user2);
         player3 = new Player(user3);
         HashMap<Color, Player> players = new HashMap<>();
-        players.put(Color.getColor("RED"), player1);
-        players.put(Color.getColor("ORNAGE"), player2);
-        players.put(Color.getColor("BLUE"), player3);
+        players.put(Color.getColorWithSizeCheck("RED"), player1);
+        players.put(Color.getColorWithSizeCheck("ORNAGE"), player2);
+        players.put(Color.getColorWithSizeCheck("BLUE"), player3);
         Map selectedMap = MapManager.load("1001");
         game = new Game(selectedMap, players, false);
         game.setCurrentPlayer(player1);

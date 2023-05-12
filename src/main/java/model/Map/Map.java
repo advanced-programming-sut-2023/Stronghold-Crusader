@@ -2,14 +2,18 @@ package model.Map;
 
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
+import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.*;
 
+
 public class Map {
     private final String name;
     private final Vector2D size;
+    private final Vector<Vector2D> headQuarters;
+    private final Vector<Vector2D> storeHouses;
     private int playerCount;
     private Cell[][] map;
 
@@ -18,6 +22,8 @@ public class Map {
         this.size = size;
         initializeMap();
         playerCount = 0;
+        headQuarters = new Vector<>();
+        storeHouses = new Vector<>();
     }
 
     private void initializeMap() {
@@ -48,6 +54,10 @@ public class Map {
 
     public void addMapObject(Vector2D coordinate, MapAsset obj) {
         getCell(coordinate).addMapAsset(obj);
+        if (obj.getType() == MapAssetType.HEADQUARTER)
+            headQuarters.add(obj.getCoordinate());
+        if (obj.getType() == MapAssetType.STORE_HOUSE)
+            storeHouses.add(obj.getCoordinate());
     }
 
     public void removeMapObject(Vector2D coordinate, MapAsset obj) {
@@ -132,7 +142,6 @@ public class Map {
         return path;
     }
 
-
     private boolean isTraversable(Cell current, Cell destination) {
         if (current.hasWall()) return destination.isTraversableInWall();
         else if (current.hasGateHouse()) return destination.isTraversableInGateHouse();
@@ -149,6 +158,14 @@ public class Map {
 
     public Cell getCell(Vector2D coordinate) {
         return map[coordinate.y][coordinate.x];
+    }
+
+    public Vector2D getStoreHouseCoordinate(int index) {
+        return storeHouses.get(index);
+    }
+
+    public Vector2D getHeadQuarterCoordinate(int index) {
+        return headQuarters.get(index);
     }
 
     public boolean isInMap(Vector2D coordinate) {

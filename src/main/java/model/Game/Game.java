@@ -1,26 +1,26 @@
 package model.Game;
 
 import model.Map.Map;
+import model.MapAsset.MapAsset;
 import model.User.Player;
 import model.enums.User.Color;
+import utils.Vector2D;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 public class Game {
-    private final HashMap<String, Player> players;
-    private Player currentPlayer;
+    private final HashMap<Color, Player> players;
     private final boolean isEditableMode;
-    private int turnCounter;
     private final Map map;
+    private Player currentPlayer;
+    private int turnCounter;
 
-    public Game(Map map, HashMap<Color,Player> players, boolean isEditableMode) {
+    public Game(Map map, HashMap<Color, Player> players, boolean isEditableMode) {
         this.map = map;
         this.isEditableMode = isEditableMode;
-        this.players = new HashMap<>();
-        for(Player p : players.values()){
-            this.players.put(p.getUsername(), p);
-        }
+        this.players = players;
+        initializeColors();
     }
 
     public void nextPlayer() {
@@ -31,6 +31,10 @@ public class Game {
 
     public Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     public Player getPlayerByUsername(String username) {
@@ -53,7 +57,17 @@ public class Game {
         return players.values();
     }
 
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
+    private void initializeColors() {
+        for (java.util.Map.Entry<Color, Player> colorPlayerEntry : players.entrySet()) {
+            int colorIndex = colorPlayerEntry.getKey().ordinal();
+            Vector2D hqCoord = getMap().getHeadQuarterCoordinate(colorIndex);
+            MapAsset headQuarter = getMap().getCell(hqCoord).getAllAssets().get(0);
+            headQuarter.setOwner(colorPlayerEntry.getValue());
+            colorPlayerEntry.getValue().getGovernance().addAsset(headQuarter);
+            Vector2D storeCoord = getMap().getStoreHouseCoordinate(colorIndex);
+            MapAsset storeHouse = getMap().getCell(storeCoord).getAllAssets().get(0);
+            storeHouse.setOwner(colorPlayerEntry.getValue());
+            colorPlayerEntry.getValue().getGovernance().addAsset(storeHouse);
+        }
     }
 }

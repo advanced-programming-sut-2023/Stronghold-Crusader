@@ -25,6 +25,7 @@ public class GameController {
     private final User currentUser;
     private final Game game;
     private ShowMapController showMapController;
+    private int currentPlayerColorSelectionIndex = 0;
 
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;

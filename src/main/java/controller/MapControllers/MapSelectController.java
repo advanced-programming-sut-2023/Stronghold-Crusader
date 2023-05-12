@@ -62,7 +62,7 @@ public class MapSelectController {
     }
 
     public MapSelectMessage addPlayer(String username, String colorName) {
-        Color color = Color.getColor(colorName);
+        Color color = Color.getColorWithSizeCheck(colorName, selectedMap.getPlayerCount());
         User user = Stronghold.getInstance().getUser(username);
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED;
         if (players.size() == selectedMap.getPlayerCount()) return MapSelectMessage.PLAYER_COUNT_EXCEEDED;

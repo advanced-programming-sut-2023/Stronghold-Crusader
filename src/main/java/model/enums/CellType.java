@@ -21,9 +21,9 @@ public enum CellType {
     @SerializedName("8")
     DENSE_MEADOW("dense meadow", AnsiEscapeCodes.PURPLE_BACKGROUND_BRIGHT),
     @SerializedName("9")
-    OIL("oil", AnsiEscapeCodes.BLACK_BACKGROUND),
-    @SerializedName("10")
     PlAIN("plain", AnsiEscapeCodes.GREEN_BACKGROUND),
+    @SerializedName("10")
+    OIL("oil", AnsiEscapeCodes.BLACK_BACKGROUND),
     @SerializedName("11")
     SHALLOW_WATER("shallow water", AnsiEscapeCodes.BLUE_BACKGROUND),
     @SerializedName("12")

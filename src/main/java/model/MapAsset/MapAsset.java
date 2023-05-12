@@ -59,12 +59,12 @@ public class MapAsset {
 
     @Override
     public String toString() {
-        String ownerStr = "";
+        String ownerStr = "null";
         if (owner != null)
-            ownerStr = ", owner=" + owner.getNickname();
+            ownerStr = owner.getNickname();
         String coordStr = "";
         if (coordinate != null)
             coordStr = ": coordinate=" + coordinate;
-        return type.name().toLowerCase() + ownerStr + coordStr + ", hp=" + hitPoint + '/' + maxHitPoint;
+        return type.name().toLowerCase() + " (" + ownerStr + ")" + coordStr + ", hp=" + hitPoint + '/' + maxHitPoint;
     }
 }

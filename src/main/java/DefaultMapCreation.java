@@ -5,8 +5,11 @@ import model.MapAsset.Building.Building;
 import model.MapAsset.Building.StorageBuilding;
 import model.MapAsset.Tree;
 import model.enums.AssetType.MapAssetType;
+import model.enums.CellType;
 import model.enums.TreeType;
 import utils.Vector2D;
+
+import java.util.Random;
 
 public class DefaultMapCreation {
     public static void main(String[] args) {
@@ -25,6 +28,19 @@ public class DefaultMapCreation {
         coordinate.y = 3;
         coordinate.x = 0;
         map.addMapObject(coordinate, new Tree((Tree) ConstantManager.getInstance().getAsset(MapAssetType.TREE), null, null, TreeType.CHERRY));
+        Vector2D tempCoord = new Vector2D(0, 0);
+        Random random = new Random();
+        CellType[] values = CellType.values();
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < values.length; j++) {
+                tempCoord.x = random.nextInt(100);
+                tempCoord.y = random.nextInt(100);
+                if (j < 9)
+                    map.changeCellTypeTo(tempCoord, values[j]);
+                else if (i % 5 == 0)
+                    map.changeCellTypeTo(tempCoord, values[j]);
+            }
+        }
         MapManager.save(map, "1001");
 
         map = new Map(new Vector2D(50, 50), "Meadow");
@@ -43,7 +59,16 @@ public class DefaultMapCreation {
         map.addMapObject(coordinate, new Building((Building) ConstantManager.getInstance().getAsset(MapAssetType.HEADQUARTER), coordinate, null));
         coordinate.x--;
         map.addMapObject(coordinate, new StorageBuilding((StorageBuilding) ConstantManager.getInstance().getAsset(MapAssetType.STORE_HOUSE), coordinate, null));
-
+        for (int i = 0; i < 200; i++) {
+            for (int j = 0; j < values.length; j++) {
+                tempCoord.x = random.nextInt(50);
+                tempCoord.y = random.nextInt(50);
+                if (j < 11)
+                    map.changeCellTypeTo(tempCoord, values[j]);
+                else if (i % 2 == 0)
+                    map.changeCellTypeTo(tempCoord, values[j]);
+            }
+        }
         MapManager.save(map, "1002");
     }
 }
