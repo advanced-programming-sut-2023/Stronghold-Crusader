@@ -2,7 +2,6 @@ package model.Map;
 
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
-import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import utils.Vector2D;
 
@@ -107,10 +106,12 @@ public class Map {
             }
             ArrayList<Cell> neighbors = getNearbyCells(current, 1);
             neighbors.remove(this.getCell(current));
+
             for (Cell neighbor : neighbors) {
+                if (!isTraversable(currentUnit, this.getCell(current), neighbor)) break;
                 int distance = distances.get(current) + 1;
                 if ((!distances.containsKey(neighbor.getCoordinate()) || distance < distances.get(neighbor.getCoordinate()))
-                        && neighbor.isTraversable(currentUnit)) {
+                ) {
                     distances.put(neighbor.getCoordinate(), distance);
                     parents.put(neighbor.getCoordinate(), current);
                     queue.offer(neighbor.getCoordinate());
@@ -129,6 +130,13 @@ public class Map {
         Collections.reverse(path);
 
         return path;
+    }
+
+
+    private boolean isTraversable(MobileUnit currentUnit, Cell current, Cell destination) {
+        if (current.hasWall()) return destination.isTraversableInWall(currentUnit);
+        else if (current.hasGateHouse()) return destination.isTraversableInGateHouse(currentUnit);
+        return destination.isTraversable(currentUnit);
     }
 
     public void changeCellTypeTo(Vector2D coordinate, CellType type) {

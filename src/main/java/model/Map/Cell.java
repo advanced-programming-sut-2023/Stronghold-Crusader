@@ -1,6 +1,8 @@
 package model.Map;
 
 import model.MapAsset.Building.Building;
+import model.MapAsset.Building.DefenseAndAttackBuilding;
+import model.MapAsset.Building.EntranceBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
@@ -54,15 +56,23 @@ public class Cell {
         if (!CellType.isTraversableByType(type)) return false;
         for (MapAsset mapAsset : assets) {
             if (mapAsset instanceof Building) {
-                if (mapAsset.getOwner().equals(unit.getOwner()) && (mapAsset.getType().equals(MapAssetType.BIG_GATEHOUSE)
-                        || mapAsset.getType().equals(MapAssetType.SMALL_GATEHOUSE))) {
-                    //TODO is Gate open or not ?
-                    return true;
+                if (mapAsset instanceof EntranceBuilding) {
+                    return ((EntranceBuilding) mapAsset).isOpen();
+                    //TODO Ladder condition
                 }
                 return false;
             }
         }
         return true;
+    }
+
+    public boolean isTraversableInWall(MobileUnit unit) {
+        return hasWall();
+    }
+
+    public boolean isTraversableInGateHouse(MobileUnit unit) {
+        if (!CellType.isTraversableByType(type)) return false;
+        return hasWall();
     }
 
     public void clear() {
@@ -98,6 +108,20 @@ public class Cell {
     public boolean containsType(MapAssetType type) {
         for (MapAsset asset : assets) {
             if (asset.getType().equals(type)) return true;
+        }
+        return false;
+    }
+
+    public boolean hasWall() {
+        for (MapAsset mapAsset : this.assets) {
+            if (mapAsset instanceof DefenseAndAttackBuilding) return true;
+        }
+        return false;
+    }
+
+    public boolean hasGateHouse(){
+        for (MapAsset mapAsset : this.assets) {
+            if (mapAsset instanceof EntranceBuilding) return true;
         }
         return false;
     }
