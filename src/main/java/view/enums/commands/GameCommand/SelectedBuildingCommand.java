@@ -8,7 +8,7 @@ public enum SelectedBuildingCommand {
     INFO("\\s*info\\s*"),
     STOP_PRODUCTION("\\s*stop\\s+production\\s*"),
     RESUME_PRODUCTION("\\s*resume\\s+production\\s*"),
-    CREATE_UNIT("\\s*createunit((\\s+-t\\s+(?<type>\\S+)|(\\s+-c\\s+(?<count>\\S+))*"),
+    CREATE_UNIT("\\s*createunit((\\s+-t\\s+(?<type>\\S+))|(\\s+-c\\s+(?<count>\\S+)))*"),
     CHANGE_ENTRANCE("\\s*change\\s+entrance\\s+gate"),
     SET_FOOD_RATE("\\s*food\\s+rate\\s+-r\\s+(?<rate>-?\\d+)\\s*"),
     SET_TAX_RATE("\\s*tax\\s+rate\\s+-r\\s+(?<rate>-?\\d+)\\s*"),

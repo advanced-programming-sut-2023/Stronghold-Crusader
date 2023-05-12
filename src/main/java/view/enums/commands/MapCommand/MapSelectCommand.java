@@ -8,6 +8,7 @@ public enum MapSelectCommand {
     SELECT_MAP("\\s*select\\s+map\\s+-n\\s+(?<mapId>\\S+)(?<modifiable>\\s+--modifiable)?\\s*"),
     PLAYERS_COUNT("\\s*players\\s+count\\s*"),
     ADD_PLAYER("\\s*add\\s+player\\s+-u\\s+(?<username>\\S+)\\s+-c\\s+(?<color>\\S+)\\s*"),
+    BACK("\\s*back\\s*"),
     START_GAME("\\s*start\\s+game\\s*");
     private final String regex;
 

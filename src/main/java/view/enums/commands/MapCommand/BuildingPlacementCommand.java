@@ -5,9 +5,9 @@ import java.util.regex.Pattern;
 
 public enum BuildingPlacementCommand {
     BACK("\\s*back\\s*"),
-    DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y(?<y>\\S+)\\s+-t(?<type>\\S+)\\s*"),
+    DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*"),
     CHOOSE_CATEGORY("\\s*category\\s+-c\\s+(?<buildingCategory>\\S+)\\s*");
-    private String regex;
+    private final String regex;
 
     BuildingPlacementCommand(String regex) {
         this.regex = regex;
