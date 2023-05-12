@@ -5,8 +5,7 @@ import model.MapAsset.MobileUnit.MobileUnit;
 import model.enums.CellType;
 import utils.Vector2D;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class Map {
     private final String name;
@@ -92,51 +91,43 @@ public class Map {
         return nearbyCells;
     }
 
-    public ArrayList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
-        //TODO change the logic of searching
-        int numberOfVertices = map.length;
-        int[] dist = new int[numberOfVertices];
-        int[] prev = new int[numberOfVertices];
-        boolean[] visited = new boolean[numberOfVertices];
-        for (int i = 0; i < numberOfVertices; i++) {
-            dist[i] = Integer.MAX_VALUE;
-            prev[i] = -1;
-            visited[i] = false;
-        }
-        dist[Vector2D.translateVector2DToInt(currentUnit.getCoordinate(), size.x)] = 0;
-        for (int i = 0; i < numberOfVertices - 1; i++) {
-            int minDist = Integer.MAX_VALUE;
-            int minIndex = -1;
-            for (int j = 0; j < numberOfVertices; j++) {
-                if (!visited[j] && dist[j] < minDist) {
-                    minDist = dist[j];
-                    minIndex = j;
-                }
-            }
-            visited[minIndex] = true;
-            if (minIndex == Vector2D.translateVector2DToInt(destination, size.x)) {
+    public List<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
+        java.util.Map<Vector2D, Integer> distances = new HashMap<>();
+        java.util.Map<Vector2D, Vector2D> parents = new HashMap<>();
+
+        PriorityQueue<Vector2D> queue = new PriorityQueue<>((n1, n2) -> distances.get(n1) - distances.get(n2));
+        distances.put(currentUnit.getCoordinate(), 0);
+        queue.offer(currentUnit.getCoordinate());
+        while (!queue.isEmpty()) {
+            Vector2D current = queue.poll();
+            if (current == destination) {
                 break;
             }
-            for (int j = 0; j < numberOfVertices; j++) {
-                Vector2D v2 = Vector2D.translateIntToVector2D(j, size.x);
-                Cell cell = getCell(v2);
-                if (!visited[j] && dist[minIndex] != Integer.MAX_VALUE && cell.isTraversable(currentUnit)) {
-                    dist[j] = dist[minIndex] + 1;
-                    prev[j] = minIndex;
+            ArrayList<Cell> neighbors = getNearbyCells(current, 1);
+            neighbors.remove(this.getCell(current));
+            for (Cell neighbor : neighbors) {
+                int distance = distances.get(current) + 1;
+                if ((!distances.containsKey(neighbor.getCoordinate()) || distance < distances.get(neighbor.getCoordinate()))
+                        && neighbor.isTraversable(currentUnit)) {
+                    distances.put(neighbor.getCoordinate(), distance);
+                    parents.put(neighbor.getCoordinate(), current);
+                    queue.offer(neighbor.getCoordinate());
                 }
             }
         }
-        ArrayList<Vector2D> path = new ArrayList<>();
-        int curr = Vector2D.translateVector2DToInt(destination, size.x);
-        while (curr != -1) {
-            path.add(Vector2D.translateIntToVector2D(curr, size.x));
-            curr = prev[curr];
+
+        List<Vector2D> path = new ArrayList<>();
+        Vector2D current = destination;
+
+        while (current != null) {
+            path.add(current);
+            current = parents.get(current);
         }
+
         Collections.reverse(path);
-        System.out.println("Shortest path from " + currentUnit.getCoordinate() + " to " + destination + ": " + path);
+
         return path;
     }
-
 
     public void changeCellTypeTo(Vector2D coordinate, CellType type) {
         map[coordinate.y][coordinate.x].setType(type);

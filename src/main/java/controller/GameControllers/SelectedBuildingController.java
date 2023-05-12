@@ -1,6 +1,7 @@
 package controller.GameControllers;
 
 import model.ConstantManager;
+import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.EntranceBuilding;
@@ -34,7 +35,7 @@ public class SelectedBuildingController {
     }
 
     public void run() {
-        if (building.getType().equals(MapAssetType.STORE)){
+        if (building.getType().equals(MapAssetType.STORE)) {
             MarketController marketController = new MarketController(player);
             marketController.run();
         } else {
@@ -46,7 +47,7 @@ public class SelectedBuildingController {
     public SelectedBuildingMessage repair() {
         if (player.getGovernance().getStorageStock(building.getNeededMaterial()) < materialNeededForRepair())
             return SelectedBuildingMessage.MATERIAL_NEEDED;
-        if (isThereEnemy())
+        if (isThereEnemy(1))
             return SelectedBuildingMessage.ENEMY_EXIST;
         player.getGovernance().changeStorageStock(building.getNeededMaterial(), -1 * materialNeededForRepair());
         building.repair();
@@ -111,7 +112,8 @@ public class SelectedBuildingController {
     }
 
     public SelectedBuildingMessage changeGate() {
-        if (building instanceof EntranceBuilding ){
+        if (building instanceof EntranceBuilding) {
+            if (isThereEnemy(0)) return SelectedBuildingMessage.ENEMY_IN_GATE;
             if (((EntranceBuilding) building).isOpen())
                 ((EntranceBuilding) building).close();
             else ((EntranceBuilding) building).open();
@@ -125,7 +127,7 @@ public class SelectedBuildingController {
         if (person == null)
             return false;
         ArrayList<MapAssetType> persons = ((TrainingAndEmploymentBuilding) building).getPeopleType();
-        for (MapAssetType unit  : persons){
+        for (MapAssetType unit : persons) {
             if (unit.equals(person)) return true;
         }
         return false;
@@ -148,13 +150,15 @@ public class SelectedBuildingController {
     }
 
     //TODO Find nearby Cells
-    private boolean isThereEnemy() {
-        for (MapAsset mapAsset : map.getCell(coordinate).getAllAssets()) {
-            if (!mapAsset.getOwner().equals(player)) return true;
+    private boolean isThereEnemy(int number) {
+        ArrayList<Cell> cells = map.getNearbyCells(building.getCoordinate(), number);
+        for (Cell cell : cells) {
+            for (MapAsset mapAsset : cell.getAllAssets()) {
+                if (!mapAsset.getOwner().equals(player)) return true;
+            }
         }
         return false;
     }
-
 
 
 }

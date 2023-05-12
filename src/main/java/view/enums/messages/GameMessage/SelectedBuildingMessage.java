@@ -16,6 +16,7 @@ public enum SelectedBuildingMessage {
     INVALID_COUNT("The number of production soldiers requested is not valid"),
     SUCCESS_CREATING_UNIT("units has been successfully created"),
     SUCCESS("Success!"),
+    ENEMY_IN_GATE("Access is not allowed"),
 
     INVALID_COMMAND("Invalid command");
 
