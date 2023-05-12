@@ -91,8 +91,9 @@ public class SelectedBuildingController {
 
         MobileUnit sampleMobileUnit = (MobileUnit) ConstantManager.getInstance().getAsset(type);
 
-        AttackingUnit sampleAttackingUnit = (sampleMobileUnit instanceof AttackingUnit) ?
-                (AttackingUnit) sampleMobileUnit : null;
+        AttackingUnit sampleAttackingUnit = null;
+        if (sampleMobileUnit instanceof AttackingUnit)
+            sampleAttackingUnit = (AttackingUnit) sampleMobileUnit;
         if (sampleAttackingUnit != null && !isWeaponEnough(sampleAttackingUnit, count))
             return SelectedBuildingMessage.WEAPON_NEEDED;
         if (!isGoldEnough(sampleMobileUnit.getCost(), count))
@@ -106,8 +107,12 @@ public class SelectedBuildingController {
             }
         }
         for (int i = 0; i < count; i++) {
-            MobileUnit mobileUnit = new MobileUnit(sampleMobileUnit, new Vector2D(coordinate.x, coordinate.y + 1), player);
-            map.getCell(mobileUnit.getCoordinate()).addMapAsset(sampleMobileUnit);
+            MobileUnit mobileUnit;
+            if(sampleAttackingUnit == null)
+                mobileUnit = new MobileUnit(sampleMobileUnit, new Vector2D(coordinate.x, coordinate.y), player);
+            else
+                mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y), player);
+            map.getCell(mobileUnit.getCoordinate()).addMapAsset(mobileUnit);
             player.getGovernance().addAsset(mobileUnit);
         }
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
