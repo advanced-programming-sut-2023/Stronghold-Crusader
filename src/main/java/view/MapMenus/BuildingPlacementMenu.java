@@ -23,7 +23,7 @@ public class BuildingPlacementMenu {
         while (true) {
             input = scanner.nextLine();
             BuildingPlacementCommand cmd = BuildingPlacementCommand.getCommand(input);
-            if (input == null) {
+            if (cmd == null) {
                 MapMakerMessage.printMessage(MapMakerMessage.INVALID_COMMAND);
                 continue;
             }
