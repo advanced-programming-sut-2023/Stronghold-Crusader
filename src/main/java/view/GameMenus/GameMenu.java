@@ -18,6 +18,7 @@ public class GameMenu {
     }
 
     public String run() {
+        System.out.println(gameController.showGameInfo());
         String input;
         while (true) {
             input = scanner.nextLine();
@@ -51,6 +52,13 @@ public class GameMenu {
                     break;
                 case SET_FEAR_RATE:
                     runSetFearRate(matcher);
+                    break;
+                case NEXT_TURN:
+                    gameController.nextTurn();
+                    System.out.println(gameController.showGameInfo());
+                    break;
+                case SHOW_GAME_INFO:
+                    System.out.println(gameController.showGameInfo());
                     break;
                 case CHANGE_ENVIRONMENT:
                     if (!gameController.isModifiable()) {
