@@ -15,7 +15,8 @@ public enum BuildingPlacementMessage {
     NO_STOREHOUSE_NEARBY("StoreHouses have to be built next to each other"),
     NO_GATEHOUSE_NEARBY("You can only build a bridge next to a gatehouse"),
     ENTER_MAIN("Entered main menu successfully"),
-    NOT_ENOUGH_WORKERS("You don't have enough workers available");
+    NOT_ENOUGH_WORKERS("You don't have enough workers available"),
+    SELECT_CATEGORY("please select building category");
     BuildingPlacementMessage(String message) {
         this.message = message;
     }

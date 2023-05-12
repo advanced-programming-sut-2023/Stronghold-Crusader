@@ -38,11 +38,19 @@ public enum BuildingType {
     ARMOURY(BuildingCategory.STORAGE),
     FOOD_STORAGE(BuildingCategory.STORAGE),
     STORE_HOUSE(BuildingCategory.STORAGE),
-    STABLE(BuildingCategory.STORAGE);
+    STABLE(BuildingCategory.STORAGE),
+    SHORT_WALL(BuildingCategory.NORMAL),
+    WALL(BuildingCategory.NORMAL),
+    STAIRS(BuildingCategory.NORMAL);
 
     private final BuildingCategory category;
     BuildingType(BuildingCategory category){
         this.category = category;
+    }
+
+    public static BuildingCategory getCategory(String typeName) {
+        if (getType(typeName) == null) return null;
+        return getType(typeName).category;
     }
 
     public static BuildingType getType(String typeName){

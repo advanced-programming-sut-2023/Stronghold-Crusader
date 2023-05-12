@@ -14,6 +14,8 @@ import utils.Vector2D;
 import view.MapMenus.BuildingPlacementMenu;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
 
+import static view.enums.messages.MapMessage.BuildingPlacementMessage.INVALID_BUILDING_TYPE;
+
 public class BuildingPlacementController {
     private Player currentPlayer;
     private Map map;
@@ -39,11 +41,12 @@ public class BuildingPlacementController {
     }
 
     public BuildingPlacementMessage dropBuilding(String buildingTypeName, int x, int y) {
+        if (buildingCategory == null) return BuildingPlacementMessage.SELECT_CATEGORY;
         Vector2D coordinate = new Vector2D(x, y);
         BuildingType buildingType = BuildingType.getType(buildingTypeName);
         if (!map.isInMap(coordinate)) return BuildingPlacementMessage.INVALID_COORDINATE;
-        if (buildingType == null) return BuildingPlacementMessage.INVALID_BUILDING_TYPE;
-
+        if (buildingType == null) return INVALID_BUILDING_TYPE;
+        if (!BuildingType.getCategory(buildingTypeName).equals(buildingCategory)) return INVALID_BUILDING_TYPE;
 
         MapAssetType assetType = MapAssetType.getMapAssetType(buildingTypeName);
         Building reference = (Building) ConstantManager.getInstance().getAsset(assetType);
@@ -57,17 +60,17 @@ public class BuildingPlacementController {
 
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
+        currentPlayer.getGovernance().addAsset(newBuilding);
         if (reference.getType().equals(MapAssetType.OX_TETHER)){
             MobileUnit cow = new MobileUnit( (MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
                     coordinate, currentPlayer);
             map.addMapObject(coordinate, cow);
             currentPlayer.getGovernance().addAsset(cow);
         }
-        currentPlayer.getGovernance().addAsset(newBuilding);
         currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
         if (reference.getNeededMaterial() != null)
             currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
-                reference.getNumberOfMaterialNeeded());
+                    (-1)*reference.getNumberOfMaterialNeeded());
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
 

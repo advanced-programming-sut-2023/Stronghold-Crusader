@@ -19,6 +19,7 @@ public class ChangeEnvironmentController {
 
     public ChangeEnvironmentController(Map map, Game game) {
         this.map = map;
+        this.game = game;
     }
 
     public void run() {
@@ -64,6 +65,7 @@ public class ChangeEnvironmentController {
             }
         }
         map.getCell(coordinate).setType(CellType.PlAIN);
+        map.getCell(coordinate).clear();
         return MapMakerMessage.CLEAR_CELL_SUCCESS;
     }
 

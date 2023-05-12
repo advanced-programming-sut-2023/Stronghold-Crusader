@@ -56,4 +56,8 @@ public class Building extends MapAsset {
                 ", populationCapacity=" + populationCapacity +
                 ", workerCount=" + workerCount;
     }
+
+    public ArrayList<CellType> getBuildingGroundType() {
+        return buildingGroundType;
+    }
 }
