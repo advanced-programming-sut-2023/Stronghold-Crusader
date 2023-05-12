@@ -228,11 +228,14 @@ public class GameController {
 
     private void deleteAllAsset(Governance governance) {
         for (MapAsset mapAsset : governance.getBuildings()) {
-            eraseAsset(mapAsset);
+            game.getMap().removeMapObject(mapAsset.getCoordinate(), mapAsset);
         }
+        governance.getBuildings().clear();
+
         for (MapAsset mapAsset : governance.getUnits()) {
-            eraseAsset(mapAsset);
+            game.getMap().removeMapObject(mapAsset.getCoordinate(), mapAsset);
         }
+        governance.getUnits().clear();
     }
 
     private boolean isPlayerDead(Player player) {
