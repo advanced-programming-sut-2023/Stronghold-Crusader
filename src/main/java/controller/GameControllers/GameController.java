@@ -33,8 +33,6 @@ public class GameController {
 
     public String run() {
         GameMenu gameMenu = new GameMenu(this);
-        Tree asset = (Tree) game.getMap().getCell(new Vector2D(0, 3)).getAllAssets().get(0);
-        System.out.println(asset.toString());
         while (true) {
             switch (gameMenu.run()) {
                 case "changeEnvironment":
