@@ -33,4 +33,4 @@ public enum SelectedBuildingCommand {
     public String getRegex() {
         return regex;
     }
-    }
+}

@@ -1,6 +1,7 @@
 package controller.GameControllers;
 
 import model.ConstantManager;
+import model.Game.Game;
 import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
@@ -15,7 +16,7 @@ import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
 import utils.SignupAndLoginUtils;
 import utils.Vector2D;
-import view.GameMenus.SelectedAssetMenu;
+import view.GameMenus.SelectedBuildingMenu;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.ArrayList;
@@ -27,11 +28,11 @@ public class SelectedBuildingController {
     private final Map map;
     private final Vector2D coordinate;
 
-    public SelectedBuildingController(Building building, Player player, Map map, int x, int y) {
+    public SelectedBuildingController(Building building, Game game) {
         this.building = building;
-        this.player = player;
-        this.map = map;
-        coordinate = new Vector2D(x, y);
+        this.player = game.getCurrentPlayer();
+        this.map = game.getMap();
+        coordinate = building.getCoordinate();
     }
 
     public void run() {
@@ -39,8 +40,8 @@ public class SelectedBuildingController {
             MarketController marketController = new MarketController(player);
             marketController.run();
         } else {
-            SelectedAssetMenu selectedAssetMenu = new SelectedAssetMenu(this);
-            selectedAssetMenu.run();
+            SelectedBuildingMenu selectedBuildingMenu = new SelectedBuildingMenu(this);
+            selectedBuildingMenu.run();
         }
     }
 

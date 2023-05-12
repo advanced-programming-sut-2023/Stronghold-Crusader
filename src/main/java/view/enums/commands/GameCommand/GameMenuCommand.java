@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommand {
-    SHOW_POPULARITY_FACTORS("^\\s*show\\s+popularity\\s+factors\\s*$"),
+    SELECT_UNIT("\\s*select\\s+unit\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*"),
+    SELECT_BUILDING("\\s*select\\s+building\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*"),
+    SHOW_POPULARITY_FACTORS("\\s*show\\s+popularity\\s+factors\\s*"),
     SHOW_POPULARITY("\\s*show\\s+popularity\\s*"),
     SHOW_FOOD_RATE("\\s*food\\s+rate\\s+show\\s*"),
     SHOW_FOOD_LIST("\\s*show\\s+food\\s+list\\s*"),
@@ -15,7 +17,7 @@ public enum GameMenuCommand {
     PLACE_BUILDING("\\s*building\\s+placement\\s*"),
     CHANGE_ENVIRONMENT("\\s*change\\s+environment\\s*"),
     TRADE_MENU("\\s*trade\\s+menu\\s*"),
-    SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)"),
+    SHOW_MAP("\\s*show\\s+map\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*"),
     MARKET_MENU("\\s*market\\s+menu\\s*"),
     NEXT_TURN("\\s*next\\s+turn\\s*"),
     SHOW_GAME_INFO("\\s*show\\s+game\\s+info\\s*");

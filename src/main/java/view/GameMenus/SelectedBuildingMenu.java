@@ -9,10 +9,10 @@ import view.enums.messages.GameMessage.SelectedBuildingMessage;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
-public class SelectedAssetMenu {
+public class SelectedBuildingMenu {
     private final SelectedBuildingController selectedBuildingController;
 
-    public SelectedAssetMenu(SelectedBuildingController selectedBuildingController) {
+    public SelectedBuildingMenu(SelectedBuildingController selectedBuildingController) {
         this.selectedBuildingController = selectedBuildingController;
     }
 

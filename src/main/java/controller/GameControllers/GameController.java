@@ -6,6 +6,7 @@ import controller.MapControllers.ShowMapController;
 import model.Game.Game;
 import model.Game.Governance;
 import model.Map.Map;
+import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
@@ -25,6 +26,8 @@ public class GameController {
     private final User currentUser;
     private final Game game;
     private ShowMapController showMapController;
+    private SelectedBuildingController selectedBuildingController;
+    private SelectedUnitController selectedUnitController;
 
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
@@ -55,6 +58,14 @@ public class GameController {
                 case "marketMenu":
                     MarketController marketController = new MarketController(game.getCurrentPlayer());
                     marketController.run();
+                    break;
+                case "selectedBuilding":
+                    selectedBuildingController.run();
+                    selectedBuildingController = null;
+                    break;
+                case "selectedUnit":
+                    selectedUnitController.run();
+                    selectedUnitController = null;
                     break;
             }
         }
@@ -143,6 +154,40 @@ public class GameController {
         }
     }
 
+    public GameMenuMessage selectUnit(int x, int y) {
+        Vector2D coordinate = new Vector2D(x, y);
+        if (!game.getMap().isInMap(coordinate))
+            return GameMenuMessage.INVALID_COORDINATE;
+        ArrayList<MapAsset> assets = game.getMap().getCell(coordinate).getAllAssets();
+        ArrayList<MobileUnit> selectedUnits = new ArrayList<>();
+        for (MapAsset asset : assets) {
+            if (!(asset instanceof MobileUnit))
+                continue;
+            if (asset.getOwner().equals(game.getCurrentPlayer()))
+                selectedUnits.add((MobileUnit) asset);
+        }
+        if (assets.size() == 0)
+            return GameMenuMessage.NO_UNITS_IN_PLACE;
+        selectedUnitController = new SelectedUnitController(selectedUnits, game);
+        return GameMenuMessage.ENTER_UNIT_MENU;
+    }
+
+    public GameMenuMessage selectBuilding(int x, int y) {
+        Vector2D coordinate = new Vector2D(x, y);
+        if (!game.getMap().isInMap(coordinate))
+            return GameMenuMessage.INVALID_COORDINATE;
+        ArrayList<MapAsset> assets = game.getMap().getCell(coordinate).getAllAssets();
+        for (MapAsset asset : assets) {
+            if (!(asset instanceof Building))
+                continue;
+            if (!asset.getOwner().equals(game.getCurrentPlayer()))
+                return GameMenuMessage.WRONG_OWNER;
+            selectedBuildingController = new SelectedBuildingController((Building) asset, game);
+            return GameMenuMessage.ENTER_BUILDING_MENU;
+        }
+        return GameMenuMessage.NO_BUILDING_IN_PLACE;
+    }
+
     public String showGameInfo() {
         return "Round " + game.getRound() + ":\n" +
                 game.getCurrentPlayer().getNickname() + "'s Turn";
@@ -228,11 +273,14 @@ public class GameController {
 
     private void deleteAllAsset(Governance governance) {
         for (MapAsset mapAsset : governance.getBuildings()) {
-            eraseAsset(mapAsset);
+            game.getMap().removeMapObject(mapAsset.getCoordinate(), mapAsset);
         }
+        governance.getBuildings().clear();
+
         for (MapAsset mapAsset : governance.getUnits()) {
-            eraseAsset(mapAsset);
+            game.getMap().removeMapObject(mapAsset.getCoordinate(), mapAsset);
         }
+        governance.getUnits().clear();
     }
 
     private boolean isPlayerDead(Player player) {
