@@ -9,6 +9,7 @@ public enum SelectedBuildingCommand {
     STOP_PRODUCTION("\\s*stop\\s+production\\s*"),
     RESUME_PRODUCTION("\\s*resume\\s+production\\s*"),
     CREATE_UNIT("\\s*createunit((\\s+-t\\s+(?<type>\\S+)|(\\s+-c\\s+(?<count>\\S+))*"),
+    CHANGE_ENTRANCE("\\s*change\\s+entrance\\s+gate"),
     DELETE("\\s*delete\\s*");
 
     private final String regex;

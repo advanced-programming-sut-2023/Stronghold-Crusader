@@ -22,4 +22,8 @@ public class TrainingAndEmploymentBuilding extends Building {
                 ", peopleType=" + peopleType +
                 ", popularityChangeRate=" + popularityChangeRate;
     }
+
+    public ArrayList<MapAssetType> getPeopleType() {
+        return peopleType;
+    }
 }

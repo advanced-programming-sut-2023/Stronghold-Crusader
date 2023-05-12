@@ -32,4 +32,13 @@ public class EntranceBuilding extends Building {
     public void setFlag(boolean flag) {
         hasFlag = flag;
     }
+
+    @Override
+    public String toString() {
+        return  "EntranceBuilding{" +
+                super.toString() +
+                "isOpen=" + isOpen +
+                ", hasFlag=" + hasFlag +
+                '}';
+    }
 }

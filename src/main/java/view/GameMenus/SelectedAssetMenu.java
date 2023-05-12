@@ -42,6 +42,8 @@ public class SelectedAssetMenu {
                     runCreateUnit(matcher);
                 case DELETE:
                     runDelete();
+                case CHANGE_ENTRANCE:
+                    runEntranceGate();
                     return;
             }
         }
@@ -62,6 +64,9 @@ public class SelectedAssetMenu {
     private void runCreateUnit(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SelectedBuildingCommand.CREATE_UNIT.getRegex());
         selectedBuildingController.createUnit(inputs).printMessage();
+    }
+    private void runEntranceGate(){
+        selectedBuildingController.changeGate().printMessage();
     }
 }
 

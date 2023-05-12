@@ -3,6 +3,7 @@ package controller.GameControllers;
 import model.ConstantManager;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
+import model.MapAsset.Building.EntranceBuilding;
 import model.MapAsset.Building.ProductionBuilding;
 import model.MapAsset.Building.TrainingAndEmploymentBuilding;
 import model.MapAsset.MapAsset;
@@ -16,6 +17,7 @@ import utils.Vector2D;
 import view.GameMenus.SelectedAssetMenu;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SelectedBuildingController {
@@ -103,11 +105,24 @@ public class SelectedBuildingController {
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
     }
 
+    public SelectedBuildingMessage changeGate() {
+        if (building instanceof EntranceBuilding ){
+            if (((EntranceBuilding) building).isOpen())
+                ((EntranceBuilding) building).close();
+            else ((EntranceBuilding) building).open();
+            return SelectedBuildingMessage.SUCCESS;
+        }
+        return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
+    }
+
     private boolean isUnitMatchWithBuilding(String type) {
         MapAssetType person = MapAssetType.getPerson(type);
         if (person == null)
             return false;
-        // TODO kian
+        ArrayList<MapAssetType> persons = ((TrainingAndEmploymentBuilding) building).getPeopleType();
+        for (MapAssetType unit  : persons){
+            if (unit.equals(person)) return true;
+        }
         return false;
     }
 
@@ -134,4 +149,7 @@ public class SelectedBuildingController {
         }
         return false;
     }
+
+
+
 }

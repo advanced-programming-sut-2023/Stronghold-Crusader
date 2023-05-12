@@ -15,6 +15,7 @@ public enum SelectedBuildingMessage {
     EMPTY_FIELD("There are empty fields among the entered entries"),
     INVALID_COUNT("The number of production soldiers requested is not valid"),
     SUCCESS_CREATING_UNIT("units has been successfully created"),
+    SUCCESS("Success!"),
 
     INVALID_COMMAND("Invalid command");
 
