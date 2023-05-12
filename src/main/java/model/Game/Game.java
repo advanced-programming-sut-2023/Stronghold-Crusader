@@ -29,6 +29,7 @@ public class Game {
         this.roundCounter = 1;
         initializeColors();
         deadPlayers = new ArrayList<>();
+        currentPlayer = players.get(colors[0]);
     }
 
     public void nextTurn(){

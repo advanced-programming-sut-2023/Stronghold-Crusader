@@ -36,7 +36,6 @@ public class GameController {
     }
 
     public String run() {
-        nextTurn();
         GameMenu gameMenu = new GameMenu(this);
         while (true) {
             switch (gameMenu.run()) {
@@ -281,7 +280,6 @@ public class GameController {
         deleteAllAsset(player.getGovernance());
         game.getPlayers().remove(player);
         game.getDeadPlayers().add(new Pair(player.getUsername(), highScore, player.getGovernance().toString()));
-
     }
 
     private void deleteAllAsset(Governance governance) {

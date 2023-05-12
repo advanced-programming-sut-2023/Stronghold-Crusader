@@ -131,10 +131,10 @@ public class AttackingUnit extends MobileUnit {
     @Override
     public String toString() {
         return super.toString() +
-                ", attack damage=" + attackDamage +
-                ", attack range=" + attackRange +
-                ", unit state=" + state.name().toLowerCase() +
-                ", weapon=" + weapon +
-                ", targets=" + targets;
+                ", attack damage= " + attackDamage +
+                ", attack range= " + attackRange +
+                ", unit state= " + state.name().toLowerCase() +
+                ", weapon= " + weapon +
+                ", targets= " + targets;
     }
 }
