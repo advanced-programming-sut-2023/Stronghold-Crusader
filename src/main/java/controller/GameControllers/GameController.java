@@ -188,10 +188,10 @@ public class GameController {
         for (MapAsset asset : assets) {
             if (!(asset instanceof MobileUnit))
                 continue;
-            if (asset.getOwner().equals(game.getCurrentPlayer()))
-                selectedUnits.add((MobileUnit) asset);
+//            if (asset.getOwner().equals(game.getCurrentPlayer()))
+            selectedUnits.add((MobileUnit) asset);
         }
-        if (assets.size() == 0)
+        if (selectedUnits.size() == 0)
             return GameMenuMessage.NO_UNITS_IN_PLACE;
         selectedUnitController = new SelectedUnitController(selectedUnits, game);
         return GameMenuMessage.ENTER_UNIT_MENU;

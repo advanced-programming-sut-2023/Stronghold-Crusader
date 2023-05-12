@@ -26,8 +26,10 @@ public class SelectedUnitController {
         Vector2D coordinate = new Vector2D(x, y);
         if (!game.getMap().isInMap(coordinate))
             return SelectedUnitMessage.INVALID_COORDINATE;
-        for (MobileUnit selectedUnit : selectedUnits)
+        for (MobileUnit selectedUnit : selectedUnits) {
             selectedUnit.selectMoveDestination(coordinate);
+            selectedUnit.findNextMoveDest(game.getMap());
+        }
         return SelectedUnitMessage.MOVE_SUCCESS;
     }
 

@@ -6,7 +6,9 @@ import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import utils.Vector2D;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Vector;
 
 
 public class Map {
@@ -101,45 +103,47 @@ public class Map {
         }
         return nearbyCells;
     }
+    private ArrayList<Cell> getNeighbors(Vector2D point) {
+        ArrayList<Cell> neighbors = new ArrayList<>();
+        if (isInMap(new Vector2D(point.x+1, point.y)))
+            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y)));
+        if (isInMap(new Vector2D(point.x-1, point.y)))
+            neighbors.add(this.getCell(new Vector2D(point.x-1, point.y)));
+        if (isInMap(new Vector2D(point.x, point.y+1)))
+            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y+1)));
+        if (isInMap(new Vector2D(point.x, point.y-1)))
+            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y-1)));
+        return neighbors;
+    }
 
-    public List<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
-        java.util.Map<Vector2D, Integer> distances = new HashMap<>();
-        java.util.Map<Vector2D, Vector2D> parents = new HashMap<>();
 
-        PriorityQueue<Vector2D> queue = new PriorityQueue<>((n1, n2) -> distances.get(n1) - distances.get(n2));
-        distances.put(currentUnit.getCoordinate(), 0);
-        queue.offer(currentUnit.getCoordinate());
-        while (!queue.isEmpty()) {
-            Vector2D current = queue.poll();
-            if (current == destination) {
-                break;
+    public LinkedList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
+        LinkedList<LinkedList<Vector2D>> queue = new LinkedList<>();
+        LinkedList<Vector2D> currentPath = new LinkedList<>();
+        ArrayList<Vector2D> visited = new ArrayList<>();
+        Vector2D v2 = new Vector2D(10,11);
+        visited.add(v2);
+        currentPath.add(v2);
+        queue.add(currentPath);
+
+        while (queue.size() > 0) {
+            currentPath = queue.get(0);
+            queue.poll();
+            Vector2D currentPlace = currentPath.get(currentPath.size() - 1);
+            if (currentPlace.equals(destination)) {
+                return currentPath;
             }
-            ArrayList<Cell> neighbors = getNearbyCells(current, 1);
-            neighbors.remove(this.getCell(current));
-
+            ArrayList<Cell> neighbors = getNeighbors(currentPlace);
+            neighbors.remove(this.getCell(currentPlace));
             for (Cell neighbor : neighbors) {
-                if (!isTraversable(this.getCell(current), neighbor)) break;
-                int distance = distances.get(current) + 1;
-                if ((!distances.containsKey(neighbor.getCoordinate()) || distance < distances.get(neighbor.getCoordinate()))
-                ) {
-                    distances.put(neighbor.getCoordinate(), distance);
-                    parents.put(neighbor.getCoordinate(), current);
-                    queue.offer(neighbor.getCoordinate());
+                if (isTraversable(this.getCell(currentPlace), neighbor) && !visited.contains(neighbor.getCoordinate()) ) {
+                    LinkedList<Vector2D> newPath = new LinkedList<>(currentPath);
+                    newPath.add(neighbor.getCoordinate());
+                    queue.add(newPath);
                 }
             }
         }
-
-        List<Vector2D> path = new ArrayList<>();
-        Vector2D current = destination;
-
-        while (current != null) {
-            path.add(current);
-            current = parents.get(current);
-        }
-
-        Collections.reverse(path);
-
-        return path;
+        return new LinkedList<>();
     }
 
     private boolean isTraversable(Cell current, Cell destination) {

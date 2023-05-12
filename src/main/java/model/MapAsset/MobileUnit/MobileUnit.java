@@ -5,7 +5,7 @@ import model.MapAsset.MapAsset;
 import model.User.Player;
 import utils.Vector2D;
 
-import java.util.List;
+import java.util.LinkedList;
 
 public class MobileUnit extends MapAsset {
     private final int moveSpeed;
@@ -44,7 +44,7 @@ public class MobileUnit extends MapAsset {
             nextMoveDestination = null;
             return;
         }
-        List<Vector2D> traversePath = map.getTraversePath(this, finalMoveDestination);
+        LinkedList<Vector2D> traversePath = map.getTraversePath(this, finalMoveDestination);
         if (traversePath.isEmpty()) {
             nextMoveDestination = null;
             return;
