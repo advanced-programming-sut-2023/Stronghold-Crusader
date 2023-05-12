@@ -19,6 +19,7 @@ public class Game {
     private Player currentPlayer;
     private int turnCounter;
     private int roundCounter;
+    private boolean isNextRound;
     private final ArrayList<Pair> deadPlayers;
 
     public Game(Map map, HashMap<Color, Player> players, boolean isEditableMode) {
@@ -29,11 +30,12 @@ public class Game {
         this.roundCounter = 1;
         initializeColors();
         deadPlayers = new ArrayList<>();
-        currentPlayer = players.get(colors[0]);
     }
 
     public void nextTurn(){
+        isNextRound = false;
         if(turnCounter == map.getPlayerCount()){
+            isNextRound = true;
             turnCounter = 0;
             roundCounter++;
         }
@@ -42,7 +44,7 @@ public class Game {
     }
 
     public boolean isNextRound(){
-        return turnCounter == 0;
+        return isNextRound;
     }
 
     public Player getCurrentPlayer() {
