@@ -108,7 +108,7 @@ public class Map {
             neighbors.remove(this.getCell(current));
 
             for (Cell neighbor : neighbors) {
-                if (!isTraversable(currentUnit, this.getCell(current), neighbor)) break;
+                if (!isTraversable(this.getCell(current), neighbor)) break;
                 int distance = distances.get(current) + 1;
                 if ((!distances.containsKey(neighbor.getCoordinate()) || distance < distances.get(neighbor.getCoordinate()))
                 ) {
@@ -133,10 +133,10 @@ public class Map {
     }
 
 
-    private boolean isTraversable(MobileUnit currentUnit, Cell current, Cell destination) {
-        if (current.hasWall()) return destination.isTraversableInWall(currentUnit);
-        else if (current.hasGateHouse()) return destination.isTraversableInGateHouse(currentUnit);
-        return destination.isTraversable(currentUnit);
+    private boolean isTraversable(Cell current, Cell destination) {
+        if (current.hasWall()) return destination.isTraversableInWall();
+        else if (current.hasGateHouse()) return destination.isTraversableInGateHouse();
+        return destination.isTraversable();
     }
 
     public void changeCellTypeTo(Vector2D coordinate, CellType type) {

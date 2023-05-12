@@ -52,25 +52,24 @@ public class Cell {
         assets = newObjects;
     }
 
-    public boolean isTraversable(MobileUnit unit) {
+    public boolean isTraversable() {
         if (!CellType.isTraversableByType(type)) return false;
         for (MapAsset mapAsset : assets) {
             if (mapAsset instanceof Building) {
                 if (mapAsset instanceof EntranceBuilding) {
                     return ((EntranceBuilding) mapAsset).isOpen();
-                    //TODO Ladder condition
                 }
-                return false;
+                return (mapAsset.getType().equals(MapAssetType.STAIRS));
             }
         }
         return true;
     }
 
-    public boolean isTraversableInWall(MobileUnit unit) {
+    public boolean isTraversableInWall() {
         return hasWall();
     }
 
-    public boolean isTraversableInGateHouse(MobileUnit unit) {
+    public boolean isTraversableInGateHouse() {
         if (!CellType.isTraversableByType(type)) return false;
         return hasWall();
     }
@@ -119,9 +118,10 @@ public class Cell {
         return false;
     }
 
-    public boolean hasGateHouse(){
+    public boolean hasGateHouse() {
         for (MapAsset mapAsset : this.assets) {
             if (mapAsset instanceof EntranceBuilding) return true;
+            if (mapAsset.getType().equals(MapAssetType.STAIRS)) return true;
         }
         return false;
     }
