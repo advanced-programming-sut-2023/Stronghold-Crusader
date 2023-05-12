@@ -37,7 +37,7 @@ public class ShowMapController {
             return;
         ShowMapMenu showMapMenu = new ShowMapMenu(this);
         while (true) {
-            if (showMapMenu.run().equals("exit")) return;
+            if (showMapMenu.run().equals("back")) return;
         }
     }
 

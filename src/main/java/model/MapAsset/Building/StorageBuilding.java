@@ -46,10 +46,8 @@ public class StorageBuilding extends Building {
 
     @Override
     public String toString() {
-        return "StorageBuilding{" +
-                super.toString() +
+        return super.toString() +
                 ", totalCapacity=" + totalCapacity +
-                ", storage=" + storage +
-                '}';
+                ", storage=" + storage;
     }
 }

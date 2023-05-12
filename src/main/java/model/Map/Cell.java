@@ -65,8 +65,6 @@ public class Cell {
         return true;
     }
 
-
-
     public void clear() {
         assets.clear();
     }

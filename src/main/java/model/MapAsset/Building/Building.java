@@ -49,4 +49,11 @@ public class Building extends MapAsset {
     public boolean isCellTypeValid(CellType celltype) {
         return buildingGroundType.contains(celltype);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", populationCapacity=" + populationCapacity +
+                ", workerCount=" + workerCount;
+    }
 }
