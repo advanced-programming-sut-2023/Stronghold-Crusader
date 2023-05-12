@@ -4,8 +4,10 @@ import model.Map.Map;
 import model.MapAsset.MapAsset;
 import model.User.Player;
 import model.enums.User.Color;
+import utils.Pair;
 import utils.Vector2D;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -17,6 +19,7 @@ public class Game {
     private Player currentPlayer;
     private int turnCounter;
     private int roundCounter;
+    private final ArrayList<Pair> deadPlayers;
 
     public Game(Map map, HashMap<Color, Player> players, boolean isEditableMode) {
         this.map = map;
@@ -25,6 +28,7 @@ public class Game {
         this.turnCounter = 0;
         this.roundCounter = 1;
         initializeColors();
+        deadPlayers = new ArrayList<>();
     }
 
     public void nextTurn(){
@@ -80,5 +84,9 @@ public class Game {
 
     public boolean isEditableMode() {
         return isEditableMode;
+    }
+
+    public ArrayList<Pair> getDeadPlayers() {
+        return deadPlayers;
     }
 }

@@ -309,4 +309,22 @@ public class Governance {
         return amount <= getStorageStock(material);
     }
 
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+    public ArrayList<MobileUnit> getUnits() {
+        return units;
+    }
+
+    @Override
+    public String toString() {
+        return "Governance{" + "\n" +
+                "buildings=" + buildings + "\n" +
+                ", number of units=" + units.size() + "\n" +
+                ", totalPopulation=" + totalPopulation + "\n" +
+                ", gold=" + gold + "\n" +
+                ", total popularity" + getTotalPopularity() + "\n" +
+                '}';
+    }
 }

@@ -11,7 +11,9 @@ import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.User.User;
+import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
+import utils.Pair;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
@@ -71,7 +73,17 @@ public class GameController {
     public void nextRound() {
         processUnitDecisions();
         applyUnitDecisions();
-        //check for game end
+        Player currentPlayer = null;
+        //TODO handle two or more player
+        for (Player player : game.getPlayers()) {
+            if (isPlayerDead(player)) {
+                deletePlayer(player);
+            } else currentPlayer = player;
+        }
+        if (game.getPlayers().size() == 1) {
+            assert currentPlayer != null;
+            deletePlayer(currentPlayer);
+        }
     }
 
     private void applyUnitDecisions() {
@@ -131,7 +143,7 @@ public class GameController {
         }
     }
 
-    public String showGameInfo(){
+    public String showGameInfo() {
         return "Round " + game.getRound() + ":\n" +
                 game.getCurrentPlayer().getNickname() + "'s Turn";
     }
@@ -196,7 +208,35 @@ public class GameController {
         return GameMenuMessage.FEAR_RATE_CHANGE_SUCCESS;
     }
 
-    public boolean isModifiable(){
+    public boolean isModifiable() {
         return game.isEditableMode();
+    }
+
+    private void deletePlayer(Player player) {
+        int highScore = 0;
+        highScore += player.getGovernance().getGold() / 100;
+        highScore += player.getGovernance().getTotalPopularity() * 10;
+        highScore += player.getGovernance().getBuildings().size() / 10;
+        highScore += player.getGovernance().getUnits().size() / 10;
+        highScore += (game.getDeadPlayers().size()) * 200;
+        if (game.getPlayers().size() == 1) highScore += 3000;
+        deleteAllAsset(player.getGovernance());
+        game.getPlayers().remove(player);
+        game.getDeadPlayers().add(new Pair(player.getUsername(), highScore, player.getGovernance().toString()));
+
+    }
+
+    private void deleteAllAsset(Governance governance) {
+        for (MapAsset mapAsset : governance.getBuildings()) {
+            eraseAsset(mapAsset);
+        }
+        for (MapAsset mapAsset : governance.getUnits()) {
+            eraseAsset(mapAsset);
+        }
+    }
+
+    private boolean isPlayerDead(Player player) {
+        return player.getGovernance().getBuildings().size() == 0 ||
+                !player.getGovernance().getBuildings().get(0).getType().equals(MapAssetType.HEADQUARTER);
     }
 }
