@@ -121,9 +121,9 @@ public class Map {
         LinkedList<LinkedList<Vector2D>> queue = new LinkedList<>();
         LinkedList<Vector2D> currentPath = new LinkedList<>();
         ArrayList<Vector2D> visited = new ArrayList<>();
-        Vector2D v2 = new Vector2D(10,11);
-        visited.add(v2);
-        currentPath.add(v2);
+        //TODO current coordinate
+        visited.add(currentUnit.getCoordinate());
+        currentPath.add(currentUnit.getCoordinate());
         queue.add(currentPath);
 
         while (queue.size() > 0) {
