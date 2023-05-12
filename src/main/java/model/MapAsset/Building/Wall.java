@@ -25,4 +25,10 @@ public class Wall extends Building {
     public boolean hasLadder(Direction direction) {
         return ladderState.get(direction);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "ladderState=" + ladderState;
+    }
 }

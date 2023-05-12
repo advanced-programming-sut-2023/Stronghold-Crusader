@@ -6,9 +6,11 @@ import controller.MapControllers.ShowMapController;
 import model.Game.Game;
 import model.Game.Governance;
 import model.Map.Map;
+import model.MapAsset.Building.StorageBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
+import model.MapAsset.Tree;
 import model.User.Player;
 import model.User.User;
 import model.enums.AssetType.Material;
@@ -31,6 +33,8 @@ public class GameController {
 
     public String run() {
         GameMenu gameMenu = new GameMenu(this);
+        Tree asset = (Tree) game.getMap().getCell(new Vector2D(0, 3)).getAllAssets().get(0);
+        System.out.println(asset.toString());
         while (true) {
             switch (gameMenu.run()) {
                 case "changeEnvironment":

@@ -2,6 +2,7 @@ package model.Map;
 
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
+import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import utils.Vector2D;
 
@@ -18,6 +19,7 @@ public class Map {
         this.name = name;
         this.size = size;
         initializeMap();
+        playerCount = 0;
     }
 
     private void initializeMap() {

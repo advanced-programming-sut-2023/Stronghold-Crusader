@@ -35,10 +35,8 @@ public class EntranceBuilding extends Building {
 
     @Override
     public String toString() {
-        return  "EntranceBuilding{" +
-                super.toString() +
-                "isOpen=" + isOpen +
-                ", hasFlag=" + hasFlag +
-                '}';
+        return super.toString() +
+                ", isOpen=" + isOpen +
+                ", hasFlag=" + hasFlag;
     }
 }

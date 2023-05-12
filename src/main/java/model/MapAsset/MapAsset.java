@@ -5,7 +5,7 @@ import model.User.Player;
 import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
-public abstract class MapAsset {
+public class MapAsset {
     protected final double maxHitPoint;
     protected final MapAssetType type;
     private final int cost;
@@ -14,7 +14,10 @@ public abstract class MapAsset {
     protected double hitPoint;
 
     public MapAsset(MapAsset reference, Vector2D coordinate, Player owner) {
-        this.coordinate = coordinate;
+        if (coordinate == null)
+            this.coordinate = null;
+        else
+            this.coordinate = new Vector2D(coordinate.x, coordinate.y);
         this.owner = owner;
         this.type = reference.type;
         this.maxHitPoint = reference.maxHitPoint;
