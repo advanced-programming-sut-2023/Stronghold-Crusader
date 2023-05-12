@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum SelectedUnitCommand {
+    ATTACK("\\s*attack\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*"),
+    SET_STATE("\\s*set\\s+state\\s+(?<state>\\S+)\\s*"),
     MOVE_UNIT("\\s*move\\s+unit\\s+to\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*"),
     PATROL_UNIT("\\s*patrol\\s+unit\\s+-x1\\s+(?<x1>\\d+)\\s+-y1\\s+(?<y1>\\d+)\\s+-x2\\s+(?<x2>\\d+)\\s+-y2\\s+(?<y2>\\d+)"),
     DISBAND_UNIT("\\s*disband\\s+unit\\s*"),

@@ -102,6 +102,10 @@ public class AttackingUnit extends MobileUnit {
         return attackDamage;
     }
 
+    public ArrayList<AttackTarget> getTargets() {
+        return targets;
+    }
+
     public void setState(UnitState state) {
         this.state = state;
     }

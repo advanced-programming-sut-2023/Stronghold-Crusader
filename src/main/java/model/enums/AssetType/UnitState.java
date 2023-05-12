@@ -10,6 +10,14 @@ public enum UnitState {
         this.triggerRange = triggerRange;
     }
 
+    public static UnitState getState(String stateName) {
+        for (UnitState m : UnitState.values()) {
+            if (m.name().equalsIgnoreCase(stateName))
+                return m;
+        }
+        return null;
+    }
+
     public int getTriggerRange() {
         return triggerRange;
     }

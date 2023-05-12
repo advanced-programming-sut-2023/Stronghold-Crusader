@@ -32,10 +32,20 @@ public class SelectedUnitMenu {
                 case PATROL_UNIT:
                     runPatrolUnit(matcher);
                     break;
+                case SET_STATE:
+                    selectedUnitController.setState(matcher.group("state")).printMessage();
+                case ATTACK:
+                    runAttack(matcher);
                 case BACK:
                     return;
             }
         }
+    }
+
+    private void runAttack(Matcher matcher) {
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        selectedUnitController.setAttackTarget(x, y).printMessage();
     }
 
     private void runMoveUnit(Matcher matcher) {
