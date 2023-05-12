@@ -8,13 +8,15 @@ import view.enums.messages.UserMessage.MainMenuMessage;
 
 public class MainController {
     User currentUser;
-    MainController(User currentUser){
+
+    MainController(User currentUser) {
         this.currentUser = currentUser;
     }
-    public void run(){
+
+    public void run() {
         MainMenu mainMenu = new MainMenu(this);
-        while(true){
-            switch (mainMenu.run()){
+        while (true) {
+            switch (mainMenu.run()) {
                 case "logout":
                     UserManager.setLoggedInUser(null);
                     return;

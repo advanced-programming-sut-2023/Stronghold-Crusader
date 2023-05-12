@@ -20,7 +20,7 @@ public class StoreMaterial {
         return price;
     }
 
-    public static StoreMaterial getInstance(String materialName){
+    public static StoreMaterial getInstance(String materialName) {
         for (StoreMaterial m : materialList) {
             if (m.name.equals(materialName)) return m;
         }

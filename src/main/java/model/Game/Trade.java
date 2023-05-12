@@ -78,7 +78,7 @@ public class Trade {
                 "info = " + info + "\n" +
                 "message = " + message + '\'' + "\n" +
                 "acceptorMessage = " + acceptorMessage + '\'' + "\n" +
-                '}' +  "\n" ;
+                '}' + "\n";
     }
 
     public String showAcceptedTrade() {

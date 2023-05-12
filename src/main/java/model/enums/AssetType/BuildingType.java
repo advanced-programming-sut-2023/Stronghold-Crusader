@@ -45,11 +45,11 @@ public enum BuildingType {
     HAUNTING_GROUND(BuildingCategory.PRODUCTION),
     DRAW_BRIDGE(BuildingCategory.NORMAL),
     OX_TETHER(BuildingCategory.NORMAL),
-    CAGED_WARDOG(BuildingCategory.NORMAL)
-    ;
+    CAGED_WARDOG(BuildingCategory.NORMAL);
 
     private final BuildingCategory category;
-    BuildingType(BuildingCategory category){
+
+    BuildingType(BuildingCategory category) {
         this.category = category;
     }
 
@@ -58,9 +58,9 @@ public enum BuildingType {
         return getType(typeName).category;
     }
 
-    public static BuildingType getType(String typeName){
-        for(BuildingType type : BuildingType.values()){
-            if(typeName.equalsIgnoreCase(type.name())) return type;
+    public static BuildingType getType(String typeName) {
+        for (BuildingType type : BuildingType.values()) {
+            if (typeName.equalsIgnoreCase(type.name())) return type;
         }
         return null;
     }

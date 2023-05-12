@@ -12,7 +12,7 @@ public class MarketMenu {
     private MarketController marketController;
     private Scanner scanner;
 
-    public MarketMenu(MarketController marketController){
+    public MarketMenu(MarketController marketController) {
         this.scanner = Menu.getScanner();
         this.marketController = marketController;
     }
@@ -28,7 +28,7 @@ public class MarketMenu {
                 continue;
             }
             Matcher matcher = MarketCommand.getMatcher(input, cmd);
-            switch (cmd){
+            switch (cmd) {
                 case PRICE_LIST:
                     System.out.println(marketController.showPriceList());
                     break;
@@ -45,19 +45,19 @@ public class MarketMenu {
         }
     }
 
-    public boolean confirm(String output){
+    public boolean confirm(String output) {
         System.out.println(output);
         String input = scanner.nextLine();
         return input.matches("[yY]");
     }
 
-    private void runBuy(Matcher matcher){
+    private void runBuy(Matcher matcher) {
         String materialName = matcher.group("item");
         int amount = Integer.parseInt(matcher.group("amount"));
         System.out.println(marketController.buy(materialName, amount));
     }
 
-    private void runSell(Matcher matcher){
+    private void runSell(Matcher matcher) {
         String materialName = matcher.group("item");
         int amount = Integer.parseInt(matcher.group("amount"));
         System.out.println(marketController.sell(materialName, amount));

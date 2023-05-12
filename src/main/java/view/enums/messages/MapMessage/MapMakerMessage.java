@@ -17,10 +17,12 @@ public enum MapMakerMessage {
     ENTER_MAIN("Entered main menu successfully"),
     INVALID_CELL_TYPE("You can't drop this asset on this cell type");
     private String message;
-    private MapMakerMessage(String message){
+
+    private MapMakerMessage(String message) {
         this.message = message;
     }
-    public static void printMessage(MapMakerMessage msg){
+
+    public static void printMessage(MapMakerMessage msg) {
         System.out.println(msg.message);
     }
 }

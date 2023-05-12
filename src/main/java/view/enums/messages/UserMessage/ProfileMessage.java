@@ -21,13 +21,16 @@ public enum ProfileMessage {
     CAN_CHANGE_PASSWORD("true"),
     MAIN_MENU("Entered main menu");
     private String message;
-    private ProfileMessage(String message){
+
+    private ProfileMessage(String message) {
         this.message = message;
     }
-    public String getMessage(){
+
+    public String getMessage() {
         return message;
     }
-    public static void printMessage(ProfileMessage msg){
+
+    public static void printMessage(ProfileMessage msg) {
         System.out.println(msg.message);
     }
 }

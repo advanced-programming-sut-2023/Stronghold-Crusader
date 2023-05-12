@@ -49,11 +49,13 @@ public class EndGameController {
         }
         return result.toString();
     }
-    private void  updateScores() {
+
+    private void updateScores() {
         User currentUser;
         for (Pair player : players) {
             currentUser = Stronghold.getInstance().getUser(player.x);
-            if (currentUser.getHighScore() < Integer.parseInt(player.y)) currentUser.setHighScore(Integer.parseInt(player.y));
+            if (currentUser.getHighScore() < Integer.parseInt(player.y))
+                currentUser.setHighScore(Integer.parseInt(player.y));
         }
     }
 }

@@ -16,8 +16,8 @@ public class ProfileController {
 
     public void run() {
         ProfileMenu profileMenu = new ProfileMenu(this);
-        while (true){
-            if(profileMenu.run().equals("mainMenu")) return;
+        while (true) {
+            if (profileMenu.run().equals("mainMenu")) return;
         }
     }
 

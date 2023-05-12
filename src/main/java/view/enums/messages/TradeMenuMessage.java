@@ -15,8 +15,6 @@ public enum TradeMenuMessage {
     ENTER_MAIN("Entered main menu successfully");
 
 
-
-
     private final String output;
 
     TradeMenuMessage() {

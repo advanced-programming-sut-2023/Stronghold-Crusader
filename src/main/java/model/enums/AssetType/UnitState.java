@@ -5,7 +5,8 @@ public enum UnitState {
     STANDING(0),
     OFFENSIVE(10);
     private final int triggerRange;
-    UnitState(int triggerRange){
+
+    UnitState(int triggerRange) {
         this.triggerRange = triggerRange;
     }
 

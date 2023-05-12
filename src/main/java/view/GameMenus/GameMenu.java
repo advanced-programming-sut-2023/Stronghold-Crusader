@@ -111,7 +111,6 @@ public class GameMenu {
     }
 
 
-
     private void runSetFearRate(Matcher matcher) {
         int rate = Integer.parseInt(matcher.group("rate"));
         GameMenuMessage.printMessage(gameController.setFearRate(rate));

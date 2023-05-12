@@ -11,22 +11,23 @@ import java.util.regex.Matcher;
 public class ChangeEnvironmentMenu {
     private ChangeEnvironmentController controller;
     private Scanner scanner;
-    public ChangeEnvironmentMenu(ChangeEnvironmentController controller){
+
+    public ChangeEnvironmentMenu(ChangeEnvironmentController controller) {
         this.scanner = Menu.getScanner();
         this.controller = controller;
     }
 
-    public String run(){
+    public String run() {
         String input;
-        while (true){
+        while (true) {
             input = scanner.nextLine();
             MapMakerCommand cmd = MapMakerCommand.getCommand(input);
-            if(cmd == null){
+            if (cmd == null) {
                 MapMakerMessage.printMessage(MapMakerMessage.INVALID_COMMAND);
                 continue;
             }
             Matcher matcher = MapMakerCommand.getMatcher(input, cmd);
-            switch (cmd){
+            switch (cmd) {
                 case SET_TEXTURE:
                     runSetTexture(matcher);
                     break;
@@ -52,13 +53,14 @@ public class ChangeEnvironmentMenu {
         }
     }
 
-    private void runSetTexture(Matcher matcher){
+    private void runSetTexture(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         String type = matcher.group("type");
         MapMakerMessage.printMessage(controller.setTexture(x, y, type));
     }
-    private void runSetTextureBlock(Matcher matcher){
+
+    private void runSetTextureBlock(Matcher matcher) {
         int x1 = Integer.parseInt(matcher.group("x1"));
         int y1 = Integer.parseInt(matcher.group("y1"));
         int x2 = Integer.parseInt(matcher.group("x2"));
@@ -66,19 +68,22 @@ public class ChangeEnvironmentMenu {
         String type = matcher.group("type");
         MapMakerMessage.printMessage(controller.setTexture(x1, y1, x2, y2, type));
     }
-    private void runDropTree(Matcher matcher){
+
+    private void runDropTree(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         String type = matcher.group("type");
         MapMakerMessage.printMessage((controller.dropTree(x, y, type)));
     }
-    private void runDropRock(Matcher matcher){
+
+    private void runDropRock(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         String direction = matcher.group("direction");
         MapMakerMessage.printMessage((controller.dropRock(x, y, direction)));
     }
-    private void runClearCell(Matcher matcher){
+
+    private void runClearCell(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         MapMakerMessage.printMessage((controller.clearCell(x, y)));

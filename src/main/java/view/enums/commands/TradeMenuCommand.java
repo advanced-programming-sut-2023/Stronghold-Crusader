@@ -13,11 +13,13 @@ public enum TradeMenuCommand {
     BACK("\\s*back\\s*");
 
     private final String regex;
+
     TradeMenuCommand(String regex) {
         this.regex = regex;
     }
+
     public static TradeMenuCommand getCommand(String input) {
-        for (TradeMenuCommand cmd : TradeMenuCommand.values()){
+        for (TradeMenuCommand cmd : TradeMenuCommand.values()) {
             if (input.matches(cmd.regex)) return cmd;
         }
         return null;

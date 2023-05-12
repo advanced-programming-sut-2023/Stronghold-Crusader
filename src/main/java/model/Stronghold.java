@@ -30,7 +30,7 @@ public class Stronghold {
     }
 
     public User getUser(String username) {
-        if(!users.containsKey(username)) return null;
+        if (!users.containsKey(username)) return null;
         return users.get(username);
     }
 

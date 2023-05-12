@@ -32,9 +32,9 @@ public class Game {
         deadPlayers = new ArrayList<>();
     }
 
-    public void nextTurn(){
+    public void nextTurn() {
         isNextRound = false;
-        if(turnCounter == map.getPlayerCount()){
+        if (turnCounter == map.getPlayerCount()) {
             isNextRound = true;
             turnCounter = 0;
             roundCounter++;
@@ -43,7 +43,7 @@ public class Game {
         turnCounter++;
     }
 
-    public boolean isNextRound(){
+    public boolean isNextRound() {
         return isNextRound;
     }
 

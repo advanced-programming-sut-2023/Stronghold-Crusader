@@ -16,18 +16,19 @@ public enum ProfileCommand {
     PROFILE_INFO("^\\s*profile\\s+display\\s*$"),
     BACK("\\s*back\\s*");
     private final String regex;
+
     ProfileCommand(String regex) {
         this.regex = regex;
     }
 
-    public static ProfileCommand getCommand(String input){
-        for(ProfileCommand cmd : ProfileCommand.values()){
-            if(input.matches(cmd.regex)) return cmd;
+    public static ProfileCommand getCommand(String input) {
+        for (ProfileCommand cmd : ProfileCommand.values()) {
+            if (input.matches(cmd.regex)) return cmd;
         }
         return null;
     }
 
-    public static Matcher getMatcher(String input, ProfileCommand cmd){
+    public static Matcher getMatcher(String input, ProfileCommand cmd) {
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
         matcher.find();

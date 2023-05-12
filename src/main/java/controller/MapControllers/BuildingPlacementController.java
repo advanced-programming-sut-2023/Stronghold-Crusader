@@ -61,8 +61,8 @@ public class BuildingPlacementController {
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         currentPlayer.getGovernance().addAsset(newBuilding);
-        if (reference.getType().equals(MapAssetType.OX_TETHER)){
-            MobileUnit cow = new MobileUnit( (MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
+        if (reference.getType().equals(MapAssetType.OX_TETHER)) {
+            MobileUnit cow = new MobileUnit((MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
                     coordinate, currentPlayer);
             map.addMapObject(coordinate, cow);
             currentPlayer.getGovernance().addAsset(cow);
@@ -70,7 +70,7 @@ public class BuildingPlacementController {
         currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
         if (reference.getNeededMaterial() != null)
             currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
-                    (-1)*reference.getNumberOfMaterialNeeded());
+                    (-1) * reference.getNumberOfMaterialNeeded());
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
 
@@ -129,7 +129,7 @@ public class BuildingPlacementController {
         return BuildingPlacementMessage.PLACEMENT_SIGHT_VALID;
     }
 
-    private boolean enoughWorkers(Building reference){
+    private boolean enoughWorkers(Building reference) {
         int neededNumber = reference.getWorkerCount();
         int playerWorkerCount = currentPlayer.getGovernance().getPeasantPopulation();
         return playerWorkerCount >= neededNumber;

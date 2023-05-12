@@ -16,7 +16,7 @@ public class Vector2D {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Vector2D)
+        if (obj instanceof Vector2D)
             return ((Vector2D) obj).x == this.x && ((Vector2D) obj).y == this.y;
         return false;
     }
