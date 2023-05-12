@@ -117,9 +117,8 @@ public class Map {
             currentPath = queue.get(0);
             queue.poll();
             Vector2D currentPlace = currentPath.get(currentPath.size() - 1);
-            if (currentPlace.equals(destination)) {
+            if (currentPlace.equals(destination))
                 return currentPath;
-            }
             ArrayList<Cell> neighbors = getNearbyCells(currentPlace, 1);
             neighbors.remove(this.getCell(currentPlace));
             for (Cell neighbor : neighbors) {

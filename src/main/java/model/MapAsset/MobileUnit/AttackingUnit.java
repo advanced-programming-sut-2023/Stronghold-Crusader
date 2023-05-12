@@ -65,7 +65,7 @@ public class AttackingUnit extends MobileUnit {
     }
 
     private void checkForTargetDeath() {
-        if (selectedAttackTarget.getHitPoint() < 0)
+        if (selectedAttackTarget != null && selectedAttackTarget.getHitPoint() < 0)
             selectedAttackTarget = null;
     }
 
