@@ -216,7 +216,6 @@ public class Governance {
     }
 
 
-    //TODO HANDLE SET GOLD PROBLEM...
     public void changeGold(double gold) {
         this.gold += gold;
     }

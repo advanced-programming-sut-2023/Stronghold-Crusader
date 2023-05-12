@@ -106,4 +106,5 @@ public class User {
                 "\nemail : " + email +
                 "\nhighscore : " + highScore;
     }
+
 }
