@@ -47,7 +47,7 @@ public enum BuildingType {
 
     public static BuildingType getType(String typeName){
         for(BuildingType type : BuildingType.values()){
-            if(type.name().equals(typeName)) return type;
+            if(typeName.equalsIgnoreCase(type.name())) return type;
         }
         return null;
     }

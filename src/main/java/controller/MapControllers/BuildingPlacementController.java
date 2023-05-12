@@ -65,6 +65,9 @@ public class BuildingPlacementController {
         }
         currentPlayer.getGovernance().addAsset(newBuilding);
         currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
+        if (reference.getNeededMaterial() != null)
+            currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
+                reference.getNumberOfMaterialNeeded());
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
 
