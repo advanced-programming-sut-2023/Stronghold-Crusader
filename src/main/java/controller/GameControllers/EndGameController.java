@@ -16,7 +16,6 @@ public class EndGameController {
 
     public void run() {
         sortPlayers();
-        System.out.println(showPlayers());
         updateScores();
         EndGameMenu endGameMenu = new EndGameMenu(this);
         endGameMenu.run();
@@ -39,7 +38,7 @@ public class EndGameController {
         return null;
     }
 
-    private String showPlayers() {
+    public String showPlayers() {
         StringBuilder result = new StringBuilder();
         result.append("winner: ").append(players.get(0).x).append("\n");
         int index = 1;

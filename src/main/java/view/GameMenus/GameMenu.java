@@ -56,7 +56,10 @@ public class GameMenu {
                     runSetFearRate(matcher);
                     break;
                 case NEXT_TURN:
-                    gameController.nextTurn();
+                    String output = gameController.nextTurn();
+                    if (output.equals("endGame")){
+                        return "endGame";
+                    }
                     System.out.println(gameController.showGameInfo());
                     break;
                 case SHOW_GAME_INFO:

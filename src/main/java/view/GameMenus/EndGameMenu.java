@@ -16,7 +16,7 @@ public class EndGameMenu {
     public void run() {
         String selectedUser = "\\s*select\\s+-u\\s+(?<username>\\S+)\\s*";
         String exit = "\\s*exit\\s*";
-
+        System.out.println(endGameController.showPlayers());
         while (true) {
             String command = Menu.getScanner().nextLine();
             if (command.matches(selectedUser)) {
