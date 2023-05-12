@@ -123,6 +123,7 @@ public class AttackingUnit extends MobileUnit {
     }
 
     public MapAsset getNextRoundAttackTarget() {
+        if (nextRoundAttackTarget == null) return null;
         if (nextRoundAttackTarget.getHitPoint() < 0)
             return null;
         return nextRoundAttackTarget;
