@@ -19,11 +19,13 @@ public enum SignupAndLoginCommand {
     SIGNUP_MENU("\\s*signup menu\\s*");
 
     private final String regex;
+
     SignupAndLoginCommand(String regex) {
         this.regex = regex;
     }
+
     public static SignupAndLoginCommand getCommand(String input) {
-        for (SignupAndLoginCommand cmd : SignupAndLoginCommand.values()){
+        for (SignupAndLoginCommand cmd : SignupAndLoginCommand.values()) {
             if (input.matches(cmd.regex)) return cmd;
         }
         return null;

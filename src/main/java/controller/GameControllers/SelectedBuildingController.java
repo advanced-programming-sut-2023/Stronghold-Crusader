@@ -108,7 +108,7 @@ public class SelectedBuildingController {
         }
         for (int i = 0; i < count; i++) {
             MobileUnit mobileUnit;
-            if(sampleAttackingUnit == null)
+            if (sampleAttackingUnit == null)
                 mobileUnit = new MobileUnit(sampleMobileUnit, new Vector2D(coordinate.x, coordinate.y), player);
             else
                 mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y), player);

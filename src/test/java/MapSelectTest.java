@@ -3,7 +3,6 @@ import model.Map.Map;
 import model.Stronghold;
 import model.User.Player;
 import model.User.User;
-import model.User.UserManager;
 import model.enums.User.Color;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

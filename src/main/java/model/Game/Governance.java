@@ -329,8 +329,8 @@ public class Governance {
                 '}';
     }
 
-    public boolean containsType(MapAssetType type){
-        for (MapAsset building : buildings){
+    public boolean containsType(MapAssetType type) {
+        for (MapAsset building : buildings) {
             if (building.getType().equals(type)) return true;
         }
         return false;

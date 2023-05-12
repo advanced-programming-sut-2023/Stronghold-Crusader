@@ -11,53 +11,54 @@ import java.util.ArrayList;
 public class MarketController {
     private final Player currentPlayer;
     private MarketMenu menu;
-    public MarketController(Player player){
+
+    public MarketController(Player player) {
         this.currentPlayer = player;
     }
 
-    public void run(){
+    public void run() {
         menu = new MarketMenu(this);
-        while (true){
+        while (true) {
             if (menu.run().equals("back")) return;
         }
     }
 
-    public String showPriceList(){
+    public String showPriceList() {
         String output = "";
         ArrayList<StoreMaterial> materials = StoreMaterial.getMaterialList();
-        for (StoreMaterial material : materials){
+        for (StoreMaterial material : materials) {
             output += material.toString();
             output += "\n";
         }
         return output;
     }
 
-    public MarketMessage buy(String materialName, int amount){
+    public MarketMessage buy(String materialName, int amount) {
         StoreMaterial storeMaterial = StoreMaterial.getInstance(materialName);
         Material material = Material.getMaterial(materialName);
         if (storeMaterial == null) return MarketMessage.INVALID_MATERIAL;
         int gold = (int) currentPlayer.getGovernance().getGold();
 
-        if (gold < storeMaterial.getPrice()*amount) return MarketMessage.NOT_ENOUGH_GOLD;
+        if (gold < storeMaterial.getPrice() * amount) return MarketMessage.NOT_ENOUGH_GOLD;
         if (currentPlayer.getGovernance().getStorageRemainingCapacity(material) < amount)
             return MarketMessage.NOT_ENOUGH_SPACE;
         if (menu.confirm(confirmBuyMessage(materialName, amount,
-                storeMaterial.getPrice()*amount))){
+                storeMaterial.getPrice() * amount))) {
             currentPlayer.getGovernance().changeStorageStock(material, amount);
-            currentPlayer.getGovernance().changeGold((-1)*storeMaterial.getPrice()*amount);
+            currentPlayer.getGovernance().changeGold((-1) * storeMaterial.getPrice() * amount);
             return MarketMessage.BUY_SUCCESS;
         }
         return MarketMessage.BUY_FAIL;
     }
 
-    public MarketMessage sell(String materialName, int amount){
+    public MarketMessage sell(String materialName, int amount) {
         StoreMaterial storeMaterial = StoreMaterial.getInstance(materialName);
         Material material = Material.getMaterial(materialName);
         if (storeMaterial == null) return MarketMessage.INVALID_MATERIAL;
         int stock = currentPlayer.getGovernance().getStorageStock(material);
         if (stock < amount) return MarketMessage.NOT_ENOUGH_STOCK;
         if (menu.confirm(confirmSellMessage(materialName, amount,
-                storeMaterial.getPrice()*amount))){
+                storeMaterial.getPrice() * amount))) {
             currentPlayer.getGovernance().changeStorageStock(material, amount * (-1));
             int change = (int) (storeMaterial.getPrice() * amount * 0.8);
             currentPlayer.getGovernance().changeGold(change);
@@ -66,7 +67,7 @@ public class MarketController {
         return MarketMessage.BUY_FAIL;
     }
 
-    private String confirmBuyMessage(String materialName, int amount, int totalPrice){
+    private String confirmBuyMessage(String materialName, int amount, int totalPrice) {
         String output = "Do you confirm the following purchase : \n";
         output += "material name : " + materialName + "\n";
         output += "amount : " + amount + "\n";
@@ -74,7 +75,7 @@ public class MarketController {
         return output;
     }
 
-    private String confirmSellMessage(String materialName, int amount, int totalPrice){
+    private String confirmSellMessage(String materialName, int amount, int totalPrice) {
         String output = "Do you confirm the following retail : \n";
         output += "material name : " + materialName + "\n";
         output += "amount : " + amount + "\n";

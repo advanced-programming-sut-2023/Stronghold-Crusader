@@ -8,18 +8,19 @@ public enum MainMenuCommand {
     GAME_MAKER_MENU("\\s*new\\s+game\\s*"),
     BACK("\\s*back\\s*");
     private String regex;
+
     MainMenuCommand(String regex) {
         this.regex = regex;
     }
 
-    public static MainMenuCommand getCommand(String input){
-        for(MainMenuCommand cmd : MainMenuCommand.values()){
-            if(input.matches(cmd.regex)) return cmd;
+    public static MainMenuCommand getCommand(String input) {
+        for (MainMenuCommand cmd : MainMenuCommand.values()) {
+            if (input.matches(cmd.regex)) return cmd;
         }
         return null;
     }
 
-    public static Matcher getMatcher(String input, MainMenuCommand cmd){
+    public static Matcher getMatcher(String input, MainMenuCommand cmd) {
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
         return matcher;

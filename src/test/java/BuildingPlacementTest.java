@@ -6,9 +6,7 @@ import model.Game.Governance;
 import model.Map.Map;
 import model.Map.MapManager;
 import model.MapAsset.Building.Building;
-import model.MapAsset.Building.DefenseAndAttackBuilding;
 import model.MapAsset.Building.StorageBuilding;
-import model.MapAsset.MapAsset;
 import model.Stronghold;
 import model.User.Player;
 import model.User.User;
@@ -25,11 +23,9 @@ import view.enums.messages.MapMessage.BuildingPlacementMessage;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
+
 
 public class BuildingPlacementTest {
     private static User user1, user2, user3;

@@ -19,7 +19,8 @@ public class Pair {
         this.x = material.name();
         this.y = String.valueOf(y);
     }
-    public Pair(String x , int y, String z) {
+
+    public Pair(String x, int y, String z) {
         this.x = x;
         this.y = String.valueOf(y);
         this.z = z;

@@ -68,19 +68,25 @@ public class GameController {
                     selectedUnitController.run();
                     selectedUnitController = null;
                     break;
+                case "endGame":
+                    EndGameController endGameController = new EndGameController(game.getDeadPlayers());
+                    endGameController.run();
+                    break;
             }
         }
     }
 
-    public void nextTurn() {
+    public String nextTurn() {
         game.nextTurn();
-        if (game.isNextRound()) nextRound();
+        String output = "continue";
+        if (game.isNextRound()) output = nextRound();
         Governance governance = game.getCurrentPlayer().getGovernance();
         governance.processPopulation();
         governance.payTax();
         governance.distributeFoods();
         governance.calculatePopularity();
         produce();
+        return output;
     }
 
     public void produce() {
@@ -107,7 +113,8 @@ public class GameController {
         }
     }
 
-    public void nextRound() {
+
+    public String nextRound() {
         processUnitDecisions();
         applyUnitDecisions();
         Player currentPlayer = null;
@@ -121,6 +128,8 @@ public class GameController {
             assert currentPlayer != null;
             deletePlayer(currentPlayer);
         }
+        if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return  "endGame";
+        return "continue";
     }
 
     private void applyUnitDecisions() {

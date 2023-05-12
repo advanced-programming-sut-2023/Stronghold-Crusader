@@ -8,11 +8,12 @@ public enum MainMenuMessage {
     MAP_SELECT("Entered map selection menu"),
     PROFILE_MENU("Entered profile menu");
     private String message;
-    private MainMenuMessage(String message){
+
+    private MainMenuMessage(String message) {
         this.message = message;
     }
 
-    public static void printMessage(MainMenuMessage msg){
+    public static void printMessage(MainMenuMessage msg) {
         System.out.println(msg.message);
     }
 }

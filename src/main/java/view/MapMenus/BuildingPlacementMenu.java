@@ -42,14 +42,14 @@ public class BuildingPlacementMenu {
         }
     }
 
-    private void runDropBuilding(Matcher matcher){
+    private void runDropBuilding(Matcher matcher) {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         String buildingTypeName = matcher.group("type");
         BuildingPlacementMessage.printMessage(controller.dropBuilding(buildingTypeName, x, y));
     }
 
-    private void runChooseCategory(Matcher matcher){
+    private void runChooseCategory(Matcher matcher) {
         String category = matcher.group("buildingCategory");
         BuildingPlacementMessage.printMessage(controller.setBuildingCategory(category));
     }

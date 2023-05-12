@@ -12,9 +12,11 @@ public enum FormatValidation {
 
 
     private final String regex;
+
     FormatValidation(String regex) {
         this.regex = regex;
     }
+
     public static boolean isFormatValid(String input, FormatValidation format) {
         return input.matches(format.regex);
     }

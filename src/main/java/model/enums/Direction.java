@@ -15,7 +15,7 @@ public enum Direction {
     }
 
     public static Direction getDirection(String direction) {
-        if (direction.equals("r")){
+        if (direction.equals("r")) {
             Direction[] directions = {SOUTH, NORTH, EAST, WEST};
             int randomInt = new Random().nextInt(4);
             return directions[randomInt];

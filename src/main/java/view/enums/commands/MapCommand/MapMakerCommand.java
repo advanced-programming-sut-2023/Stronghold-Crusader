@@ -11,17 +11,19 @@ public enum MapMakerCommand {
     DROP_TREE("^\\s*droptree\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*$"),
     BACK("\\s*back\\s*");
     private String regex;
-    MapMakerCommand(String regex){
+
+    MapMakerCommand(String regex) {
         this.regex = regex;
     }
-    public static MapMakerCommand getCommand(String input){
-        for(MapMakerCommand cmd : MapMakerCommand.values()){
-            if(input.matches(cmd.regex)) return cmd;
+
+    public static MapMakerCommand getCommand(String input) {
+        for (MapMakerCommand cmd : MapMakerCommand.values()) {
+            if (input.matches(cmd.regex)) return cmd;
         }
         return null;
     }
 
-    public static Matcher getMatcher(String input, MapMakerCommand cmd){
+    public static Matcher getMatcher(String input, MapMakerCommand cmd) {
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
         return matcher;

@@ -19,6 +19,7 @@ public class SignupAndLoginUtils {
         }
         return inputs;
     }
+
     public static boolean isNumberValid(String count) {
         try {
             int number = Integer.parseInt(count);

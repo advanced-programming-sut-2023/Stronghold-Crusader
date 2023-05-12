@@ -5,18 +5,20 @@ import java.awt.image.BufferedImage;
 
 public class Captcha {
     private static String captcha;
-    public static void generateCaptcha(){
+
+    public static void generateCaptcha() {
         captcha = generateRandomCaptchaText();
         BufferedImage img = textToImage(captcha);
         showCaptcha(img);
         System.out.println(captcha);
     }
-    public static boolean isFilledCaptchaValid(String input){
+
+    public static boolean isFilledCaptchaValid(String input) {
         return input.matches(captcha);
     }
 
     private static String generateRandomCaptchaText() {
-        int size = (int)(Math.random()*4 + 4);
+        int size = (int) (Math.random() * 4 + 4);
         String captcha = "";
         String lettersAndNumbers = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         while (captcha.length() < size) {
@@ -25,7 +27,8 @@ public class Captcha {
         }
         return captcha;
     }
-    private static void showCaptcha(BufferedImage img){
+
+    private static void showCaptcha(BufferedImage img) {
         for (int y = 0; y < img.getHeight(); y++) {
             StringBuilder stringBuilder = new StringBuilder();
 

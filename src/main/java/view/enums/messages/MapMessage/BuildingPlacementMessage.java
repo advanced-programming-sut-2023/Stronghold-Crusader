@@ -17,6 +17,7 @@ public enum BuildingPlacementMessage {
     ENTER_MAIN("Entered main menu successfully"),
     NOT_ENOUGH_WORKERS("You don't have enough workers available"),
     SELECT_CATEGORY("please select building category");
+
     BuildingPlacementMessage(String message) {
         this.message = message;
     }
