@@ -45,7 +45,7 @@ public enum AttackingUnitConstants {
             new ArrayList<>(List.of(AttackTarget.TROOPS)), false),
     SLAVE(1, 8, 0, 30, 20, 1, false,
             MapAssetType.SLAVE, 5, null,
-            new ArrayList<>(List.of(AttackTarget.HOUSE)), false),
+            new ArrayList<>(List.of(AttackTarget.BUILDING)), false),
 
     SLINGER(1, 8, 0, 150, 20, 2, false,
             MapAssetType.SLINGER, 10, null,
@@ -61,7 +61,7 @@ public enum AttackingUnitConstants {
             new ArrayList<>(List.of(AttackTarget.TROOPS)), false),
     FIRE_THROWER(1, 8, 0, 800, 100, 2, false,
             MapAssetType.FIRE_THROWER, 90, null,
-            new ArrayList<>(List.of(AttackTarget.TROOPS, AttackTarget.HOUSE)), false),
+            new ArrayList<>(List.of(AttackTarget.TROOPS, AttackTarget.BUILDING)), false),
     //Siege warfare:
     BATTERING_RAM(1, 3, 4, 400, 500, 1, false,
             MapAssetType.BATTERING_RAM, 20, null,

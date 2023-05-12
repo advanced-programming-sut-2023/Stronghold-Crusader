@@ -10,7 +10,6 @@ import static model.enums.AssetType.MapAssetType.*;
 public enum AttackTarget {
     //TODO fill these
     BUILDING(new ArrayList<>(List.of(WALL))),
-    HOUSE(new ArrayList<>(List.of(INN))),
     TROOPS(new ArrayList<>(List.of(ARCHER)));
     private final ArrayList<MapAssetType> items;
 
