@@ -2,6 +2,7 @@ package model.Map;
 
 import Settings.Settings;
 import com.google.gson.*;
+import model.MapAsset.MapAsset;
 import utils.Pair;
 
 import java.io.*;
@@ -21,7 +22,8 @@ public class MapManager {
         } catch (FileNotFoundException e) {
             return null;
         }
-        Gson gson = new Gson();
+        ArrayList<MapAsset> al = new ArrayList<>();
+        Gson gson = new GsonBuilder().registerTypeAdapter(al.getClass(), new CustomGsonTypeAdapter()).create();
         return gson.fromJson(reader, Map.class);
     }
 
@@ -68,10 +70,10 @@ public class MapManager {
         return null;
     }
 
-    public static boolean isMapIDValid(String mapId){
+    public static boolean isMapIDValid(String mapId) {
         ArrayList<ArrayList<String>> maps = getMapList();
-        for (ArrayList<String> map : maps){
-            if(map.get(0).equals(mapId)) return true;
+        for (ArrayList<String> map : maps) {
+            if (map.get(0).equals(mapId)) return true;
         }
         return false;
     }
