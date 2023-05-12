@@ -39,7 +39,7 @@ public enum TrainingAndEmploymentConstants {
             CellType.MEADOW, CellType.DENSE_MEADOW)),
             0, new ArrayList<>(List.of(MapAssetType.BLACK_MONK)),
             2),
-    SIEGE_TENT(300, MapAssetType.CATHEDRAL, 1000, 0, null,
+    SIEGE_TENT(300, MapAssetType.SIEGE_TENT, 1000, 0, null,
             0, new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
             CellType.MEADOW, CellType.DENSE_MEADOW)),
             0, new ArrayList<>(List.of(MapAssetType.BLACK_MONK)),
