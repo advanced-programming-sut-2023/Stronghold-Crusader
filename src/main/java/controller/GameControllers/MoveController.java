@@ -7,7 +7,7 @@ import utils.Vector2D;
 import java.util.*;
 
 public class MoveController {
-    private model.Map.Map map;
+    private final model.Map.Map map;
 
     public MoveController(model.Map.Map map) {
         this.map = map;
@@ -15,7 +15,7 @@ public class MoveController {
 
 
     public LinkedList<Vector2D> findShortestPath(MobileUnit mobileUnit, Vector2D start, Vector2D goal) {
-        PriorityQueue<Vector2D> openSet = new PriorityQueue<>();
+        LinkedList<Vector2D> openSet = new LinkedList<>();
         Set<Vector2D> closedSet = new HashSet<>();
         Map<Vector2D, Vector2D> cameFrom = new HashMap<>();
         Map<Vector2D, Double> gScore = new HashMap<>();
@@ -27,7 +27,8 @@ public class MoveController {
 
         while (!openSet.isEmpty()) {
             Vector2D current = openSet.poll();
-            if (current == goal) {
+
+            if (current.equals(goal)) {
                 return reconstructPath(cameFrom, current);
             }
             closedSet.add(current);
@@ -48,7 +49,7 @@ public class MoveController {
             }
         }
 
-        return null; // no path found
+        return new LinkedList<>(); // no path found
     }
 
     private LinkedList<Vector2D> reconstructPath(Map<Vector2D, Vector2D> cameFrom, Vector2D current) {
