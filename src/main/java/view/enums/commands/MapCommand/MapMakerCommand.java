@@ -10,7 +10,7 @@ public enum MapMakerCommand {
     DROP_ROCK("^\\s*droprock\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-d\\s+(?<direction>\\S+)\\s*$"),
     DROP_TREE("^\\s*droptree\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*$"),
     DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t(?<type>\\S+)\\s*"),
-    DROP_UNIT("\\s*drop\\s+unit\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t(?<type>\\S+)\\s*"),
+    DROP_UNIT("\\s*drop\\s+unit\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*"),
 
     BACK("\\s*back\\s*");
     private String regex;
@@ -29,6 +29,7 @@ public enum MapMakerCommand {
     public static Matcher getMatcher(String input, MapMakerCommand cmd) {
         Pattern pattern = Pattern.compile(cmd.regex);
         Matcher matcher = pattern.matcher(input);
+        matcher.find();
         return matcher;
     }
 }
