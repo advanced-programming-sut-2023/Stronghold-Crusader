@@ -43,6 +43,12 @@ public class ChangeEnvironmentMenu {
                 case CLEAR_CELL:
                     runClearCell(matcher);
                     break;
+                case DROP_BUILDING:
+                    runDropBuilding(matcher);
+                    break;
+                case DROP_UNIT:
+                    runDropUnit(matcher);
+                    break;
                 case BACK:
                     MapMakerMessage.printMessage(MapMakerMessage.ENTER_MAIN);
                     return "back";
@@ -87,6 +93,20 @@ public class ChangeEnvironmentMenu {
         int x = Integer.parseInt(matcher.group("x"));
         int y = Integer.parseInt(matcher.group("y"));
         MapMakerMessage.printMessage((controller.clearCell(x, y)));
+    }
+
+    private void runDropBuilding(Matcher matcher){
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String type = matcher.group("type");
+        MapMakerMessage.printMessage(controller.dropBuilding(x, y, type));
+    }
+
+    private void runDropUnit(Matcher matcher){
+        int x = Integer.parseInt(matcher.group("x"));
+        int y = Integer.parseInt(matcher.group("y"));
+        String type = matcher.group("type");
+        MapMakerMessage.printMessage(controller.dropUnit(x, y, type));
     }
 
 }

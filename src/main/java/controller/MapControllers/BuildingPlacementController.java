@@ -102,7 +102,7 @@ public class BuildingPlacementController {
         return building;
     }
 
-    private BuildingPlacementMessage isDropSightValid(MapAssetType buildingType, Building reference,
+    public BuildingPlacementMessage isDropSightValid(MapAssetType buildingType, Building reference,
                                                       Vector2D coordinate) {
         switch (buildingType) {
             case SIEGE_TENT:

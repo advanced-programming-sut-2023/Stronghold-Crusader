@@ -15,7 +15,14 @@ public enum MapMakerMessage {
     NOT_EMPTY("Target cell is not empty"),
     DROP_HEADQUARTER_SUCCESS("Headquarter dropped successfully"),
     ENTER_MAIN("Entered main menu successfully"),
-    INVALID_CELL_TYPE("You can't drop this asset on this cell type");
+    INVALID_CELL_TYPE("You can't drop this asset on this cell type"),
+    INVALID_BUILDING("Invalid building type"),
+    INVALID_UNIT("Invalid unit type"),
+    PLACEMENT_SIGHT_VALID("valid"),
+    BUILDING_DROP_SUCCESS("Building dropped successfully"),
+    UNIT_DROP_SUCCESS("unit dropped successfully"),
+    NO_STOREHOUSE_NEARBY("StoreHouses have to be built next to each other"),
+    NO_GATEHOUSE_NEARBY("You can only build a bridge next to a gatehouse"),;
     private String message;
 
     private MapMakerMessage(String message) {
