@@ -84,6 +84,13 @@ public class SelectedUnitController {
         if (hasSet) return SelectedUnitMessage.TARGET_SELECT_SUCCESS;
         return SelectedUnitMessage.NO_TARGET;
     }
+
+    public String selectedUnitInfo() {
+        StringBuilder result = new StringBuilder();
+        for (MobileUnit selectedUnit : selectedUnits)
+            result.append(selectedUnit.toString()).append('\n');
+        return result.toString();
+    }
 }
 
 

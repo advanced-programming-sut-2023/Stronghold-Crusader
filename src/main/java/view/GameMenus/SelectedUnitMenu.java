@@ -34,8 +34,13 @@ public class SelectedUnitMenu {
                     break;
                 case SET_STATE:
                     selectedUnitController.setState(matcher.group("state")).printMessage();
+                    break;
                 case ATTACK:
                     runAttack(matcher);
+                    break;
+                case SHOW_SELECTED_UNITS:
+                    System.out.print(selectedUnitController.selectedUnitInfo());
+                    break;
                 case BACK:
                     return;
             }
