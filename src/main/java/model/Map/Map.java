@@ -1,5 +1,6 @@
 package model.Map;
 
+import controller.GameControllers.MoveController;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.enums.AssetType.MapAssetType;
@@ -7,7 +8,6 @@ import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -120,29 +120,8 @@ public class Map {
 
 
     public LinkedList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
-        if (!CellType.isTraversableByType(this.getCell(destination).getType())) return new LinkedList<>();
-        LinkedList<LinkedList<Vector2D>> queue = new LinkedList<>();
-        LinkedList<Vector2D> currentPath = new LinkedList<>();
-        currentPath.add(currentUnit.getCoordinate());
-        queue.add(currentPath);
-
-        while (queue.size() > 0) {
-            currentPath = queue.poll();
-            Vector2D currentPlace = currentPath.getLast();
-            if (currentPlace.equals(destination))
-                return currentPath;
-
-            ArrayList<Cell> neighbors = getNeighbors(currentPlace);
-            for (Cell neighbor : neighbors) {
-                if (isTraversable(this.getCell(currentPlace), neighbor) &&
-                        !currentPath.contains(neighbor.getCoordinate()) ) {
-                    LinkedList<Vector2D> newPath = new LinkedList<>(currentPath);
-                    newPath.add(neighbor.getCoordinate());
-                    queue.add(newPath);
-                }
-            }
-        }
-        return new LinkedList<>();
+        MoveController moveController = new MoveController(this);
+        return moveController.findShortestPath(currentUnit.getCoordinate(),destination);
     }
 
 
