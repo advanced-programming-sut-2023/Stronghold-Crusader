@@ -215,7 +215,6 @@ public class Governance {
         return gold;
     }
 
-
     public void changeGold(double gold) {
         this.gold += gold;
     }

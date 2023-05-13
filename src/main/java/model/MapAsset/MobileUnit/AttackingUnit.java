@@ -77,7 +77,8 @@ public class AttackingUnit extends MobileUnit {
         ArrayList<Cell> inRangeCells = map.getNearbyCells(coordinate, range);
         for (Cell cell : inRangeCells) {
             for (MapAsset asset : cell.getAllAssets()) {
-                if (asset.getOwner().equals(owner))
+                Player assetOwner = asset.getOwner();
+                if (assetOwner == null || assetOwner.equals(owner))
                     continue;
                 MapAssetType enemyType = asset.getType();
                 for (AttackTarget target : targets) {

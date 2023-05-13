@@ -1,7 +1,9 @@
 package model.Map;
 
+import model.Game.Game;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
+import model.User.Player;
 import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import utils.Vector2D;
@@ -107,14 +109,14 @@ public class Map {
 
     public ArrayList<Cell> getNeighbors(Vector2D point) {
         ArrayList<Cell> neighbors = new ArrayList<>();
-        if (isInMap(new Vector2D(point.x+1, point.y)))
-            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y)));
-        if (isInMap(new Vector2D(point.x-1, point.y)))
-            neighbors.add(this.getCell(new Vector2D(point.x-1, point.y)));
-        if (isInMap(new Vector2D(point.x, point.y+1)))
-            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y+1)));
-        if (isInMap(new Vector2D(point.x, point.y-1)))
-            neighbors.add(this.getCell(new Vector2D(point.x+1, point.y-1)));
+        if (isInMap(new Vector2D(point.x + 1, point.y)))
+            neighbors.add(this.getCell(new Vector2D(point.x + 1, point.y)));
+        if (isInMap(new Vector2D(point.x - 1, point.y)))
+            neighbors.add(this.getCell(new Vector2D(point.x - 1, point.y)));
+        if (isInMap(new Vector2D(point.x, point.y + 1)))
+            neighbors.add(this.getCell(new Vector2D(point.x, point.y + 1)));
+        if (isInMap(new Vector2D(point.x, point.y - 1)))
+            neighbors.add(this.getCell(new Vector2D(point.x, point.y - 1)));
         return neighbors;
     }
 
@@ -135,7 +137,7 @@ public class Map {
             ArrayList<Cell> neighbors = getNeighbors(currentPlace);
             for (Cell neighbor : neighbors) {
                 if (isTraversable(this.getCell(currentPlace), neighbor) &&
-                        !currentPath.contains(neighbor.getCoordinate()) ) {
+                        !currentPath.contains(neighbor.getCoordinate())) {
                     LinkedList<Vector2D> newPath = new LinkedList<>(currentPath);
                     newPath.add(neighbor.getCoordinate());
                     queue.add(newPath);
@@ -144,7 +146,6 @@ public class Map {
         }
         return new LinkedList<>();
     }
-
 
 
     private boolean isTraversable(Cell current, Cell destination) {
@@ -175,5 +176,30 @@ public class Map {
 
     public boolean isInMap(Vector2D coordinate) {
         return coordinate.x >= 0 && coordinate.y >= 0 && coordinate.y < size.y && coordinate.x < size.x;
+    }
+
+    public Vector2D[] findCowPatrolPath(Player currentPlayer) {
+        Vector2D storeHouseCoord = null;
+        Vector2D ironMineCoord = null;
+        Vector2D currentCoord = new Vector2D(0, 0);
+        for (int y = 0; y < size.y; y++) {
+            for (int x = 0; x < size.x; x++) {
+                currentCoord.x = x;
+                currentCoord.y = y;
+                for (MapAsset asset : getCell(currentCoord).getAllAssets()) {
+                    if (asset.getType() == MapAssetType.STORE_HOUSE && asset.getOwner().equals(currentPlayer)) {
+                        storeHouseCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                        if (ironMineCoord != null)
+                            return new Vector2D[]{ironMineCoord, storeHouseCoord};
+                    }
+                    if (asset.getType() == MapAssetType.IRON_MINE && asset.getOwner().equals(currentPlayer)) {
+                        ironMineCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                        if (storeHouseCoord != null)
+                            return new Vector2D[]{ironMineCoord, storeHouseCoord};
+                    }
+                }
+            }
+        }
+        return null;
     }
 }
