@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import static view.enums.messages.MapMessage.BuildingPlacementMessage.INVALID_BUILDING_TYPE;
 
 public class BuildingPlacementController {
-    private Player currentPlayer;
-    private Map map;
+    private final Player currentPlayer;
+    private final Map map;
     private BuildingCategory buildingCategory;
 
     public BuildingPlacementController(Player currentPlayer, Map map) {
@@ -69,6 +69,9 @@ public class BuildingPlacementController {
                     coordinate, currentPlayer);
             map.addMapObject(coordinate, cow);
             currentPlayer.getGovernance().addAsset(cow);
+            Vector2D[] cowPatrolPath = findCowPatrolPath();
+            if (cowPatrolPath != null)
+                cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
         }
         currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
         if (reference.getNeededMaterial() != null)
@@ -103,7 +106,7 @@ public class BuildingPlacementController {
     }
 
     public BuildingPlacementMessage isDropSightValid(MapAssetType buildingType, Building reference,
-                                                      Vector2D coordinate) {
+                                                     Vector2D coordinate) {
         switch (buildingType) {
             case SIEGE_TENT:
                 if (!map.getCell(coordinate).isEmpty() &&
@@ -146,6 +149,29 @@ public class BuildingPlacementController {
             }
         }
         return false;
+    }
+
+    private Vector2D[] findCowPatrolPath() {
+        Vector2D storeHouseCoord = null;
+        Vector2D quarryCoord = null;
+        Vector2D currentCoord = new Vector2D(0, 0);
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                currentCoord.x = x;
+                currentCoord.y = y;
+                for (MapAsset asset : map.getCell(currentCoord).getAllAssets()) {
+                    if (asset.getType() == MapAssetType.STORE_HOUSE && asset.getOwner().equals(currentPlayer)) {
+                        storeHouseCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                        if (quarryCoord != null) return new Vector2D[]{quarryCoord, storeHouseCoord};
+                    }
+                    if (asset.getType() == MapAssetType.QUARRY && asset.getOwner().equals(currentPlayer)) {
+                        quarryCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                        if (storeHouseCoord != null) return new Vector2D[]{quarryCoord, storeHouseCoord};
+                    }
+                }
+            }
+        }
+        return null;
     }
 }
 

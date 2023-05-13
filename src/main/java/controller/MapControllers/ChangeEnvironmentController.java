@@ -22,8 +22,8 @@ import view.enums.messages.MapMessage.MapMakerMessage;
 import java.util.ArrayList;
 
 public class ChangeEnvironmentController {
-    private Map map;
-    private Game game;
+    private final Map map;
+    private final Game game;
 
     public ChangeEnvironmentController(Map map, Game game) {
         this.map = map;
@@ -105,18 +105,18 @@ public class ChangeEnvironmentController {
         return MapMakerMessage.DROP_TREE_SUCCESS;
     }
 
-    public MapMakerMessage dropUnit(int x, int y, String typeName){
+    public MapMakerMessage dropUnit(int x, int y, String typeName) {
         Vector2D coordinate = new Vector2D(x, y);
         MapAssetType type = MapAssetType.getMapAssetType(typeName);
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
         if (type == null) return MapMakerMessage.INVALID_UNIT;
         if (!MapAssetType.getPeople().contains(type)) return MapMakerMessage.INVALID_UNIT;
         MobileUnit reference = (MobileUnit) ConstantManager.getInstance().getAsset(type);
-        if (reference instanceof AttackingUnit){
+        if (reference instanceof AttackingUnit) {
             AttackingUnit unit = new AttackingUnit((AttackingUnit) reference, coordinate, game.getCurrentPlayer());
             map.addMapObject(coordinate, unit);
             game.getCurrentPlayer().getGovernance().addAsset(unit);
-        }else {
+        } else {
             MobileUnit unit = new MobileUnit(reference, coordinate, game.getCurrentPlayer());
             map.addMapObject(coordinate, unit);
             game.getCurrentPlayer().getGovernance().addAsset(unit);
@@ -124,7 +124,7 @@ public class ChangeEnvironmentController {
         return MapMakerMessage.UNIT_DROP_SUCCESS;
     }
 
-    public MapMakerMessage dropBuilding(int x, int y, String typeName){
+    public MapMakerMessage dropBuilding(int x, int y, String typeName) {
         Vector2D coordinate = new Vector2D(x, y);
         MapAssetType type = MapAssetType.getMapAssetType(typeName);
         if (!map.isInMap(coordinate)) return MapMakerMessage.INVALID_COORDINATE;
@@ -143,12 +143,15 @@ public class ChangeEnvironmentController {
                     coordinate, game.getCurrentPlayer());
             map.addMapObject(coordinate, cow);
             game.getCurrentPlayer().getGovernance().addAsset(cow);
+            Vector2D[] cowPatrolPath = findCowPatrolPath();
+            if (cowPatrolPath != null)
+                cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
         }
         return MapMakerMessage.BUILDING_DROP_SUCCESS;
     }
 
     public MapMakerMessage isDropSightValid(MapAssetType buildingType, Building reference,
-                                                     Vector2D coordinate) {
+                                            Vector2D coordinate) {
         switch (buildingType) {
             case SIEGE_TENT:
                 if (!map.getCell(coordinate).isEmpty() &&
@@ -213,5 +216,28 @@ public class ChangeEnvironmentController {
         return building;
     }
 
-
+    private Vector2D[] findCowPatrolPath() {
+        Vector2D storeHouseCoord = null;
+        Vector2D ironMineCoord = null;
+        Vector2D currentCoord = new Vector2D(0, 0);
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                currentCoord.x = x;
+                currentCoord.y = y;
+                for (MapAsset asset : map.getCell(currentCoord).getAllAssets()) {
+                    if (asset.getType() == MapAssetType.STORE_HOUSE && asset.getOwner().equals(game.getCurrentPlayer())) {
+                        storeHouseCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                        if (ironMineCoord != null)
+                            return new Vector2D[]{ironMineCoord, storeHouseCoord};
+                    }
+                    if (asset.getType() == MapAssetType.IRON_MINE && asset.getOwner().equals(game.getCurrentPlayer())) {
+                        ironMineCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                        if (storeHouseCoord != null)
+                            return new Vector2D[]{ironMineCoord, storeHouseCoord};
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }
