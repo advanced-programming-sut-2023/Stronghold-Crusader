@@ -69,7 +69,7 @@ public class BuildingPlacementController {
                     coordinate, currentPlayer);
             map.addMapObject(coordinate, cow);
             currentPlayer.getGovernance().addAsset(cow);
-            Vector2D[] cowPatrolPath = findCowPatrolPath();
+            Vector2D[] cowPatrolPath = map.findCowPatrolPath(currentPlayer);
             if (cowPatrolPath != null)
                 cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
         }

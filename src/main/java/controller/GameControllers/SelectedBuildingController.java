@@ -98,7 +98,12 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.WEAPON_NEEDED;
         if (!isGoldEnough(sampleMobileUnit.getCost(), count))
             return SelectedBuildingMessage.GOLD_NEEDED;
-
+        if (sampleMobileUnit.getEngineersCount() != 0) {
+            int numberOfEngineers = player.getGovernance().getEngineers();
+            if (numberOfEngineers < sampleMobileUnit.getEngineersCount())
+                return SelectedBuildingMessage.ENGINEER_NEEDED;
+            else addEngineersToSiegeTent(sampleMobileUnit.getEngineersCount());
+        }
         player.getGovernance().changeGold(-1 * sampleMobileUnit.getCost() * count);
         if (sampleAttackingUnit != null) {
             if (sampleAttackingUnit.getWeapons() != null) {
@@ -136,6 +141,17 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.INVALID_FOOD_RATE;
         player.getGovernance().setFoodRate(foodRate);
         return SelectedBuildingMessage.FOOD_RATE_CHANGE_SUCCESS;
+    }
+
+    private void addEngineersToSiegeTent(int x) {
+        for (MapAsset mapAsset : player.getGovernance().getUnits()) {
+            if (mapAsset.getType().equals(MapAssetType.ENGINEER)) {
+                x--;
+                player.getGovernance().removeAsset(mapAsset);
+                map.getCell(mapAsset.getCoordinate()).removeMapAsset(mapAsset);
+                if (x == 0) return;
+            }
+        }
     }
 
     public SelectedBuildingMessage setTaxRate(int taxRate) {

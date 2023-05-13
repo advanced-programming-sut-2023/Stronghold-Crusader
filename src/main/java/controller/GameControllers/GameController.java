@@ -76,44 +76,6 @@ public class GameController {
         }
     }
 
-    public String nextTurn() {
-        game.nextTurn();
-        String output = "continue";
-        if (game.isNextRound()) output = nextRound();
-        Governance governance = game.getCurrentPlayer().getGovernance();
-        governance.processPopulation();
-        governance.payTax();
-        governance.distributeFoods();
-        governance.calculatePopularity();
-        produce();
-        return output;
-    }
-
-    public void produce() {
-        for (Player player : game.getPlayers()) {
-            Governance governance = player.getGovernance();
-            for (Building building : player.getGovernance().getBuildings()) {
-                if (building instanceof ProductionBuilding) {
-                    ProductionBuilding productionBuilding = (ProductionBuilding) building;
-                    if (!productionBuilding.getProductionMode()) continue;
-
-                    ArrayList<Material> usingMaterial = productionBuilding.getProducingMaterial();
-                    ArrayList<Material> producingMaterial = productionBuilding.getProducingMaterial();
-
-                    for (int i = 0; i < usingMaterial.size(); i++) {
-                        governance.changeStorageStock(usingMaterial.get(i),
-                                (-1) * productionBuilding.getRateOfUsage().get(i));
-                    }
-                    for (int i = 0; i < producingMaterial.size(); i++) {
-                        governance.changeStorageStock(producingMaterial.get(i),
-                                productionBuilding.getRateOfProduction().get(i));
-                    }
-                }
-            }
-        }
-    }
-
-
     public String nextRound() {
         processUnitDecisions();
         applyUnitDecisions();
@@ -130,6 +92,36 @@ public class GameController {
         }
         if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return "endGame";
         return "continue";
+    }
+
+    public String nextTurn() {
+        game.nextTurn();
+        String output = "continue";
+        if (game.isNextRound()) output = nextRound();
+        Governance governance = game.getCurrentPlayer().getGovernance();
+        governance.processPopulation();
+        governance.payTax();
+        governance.distributeFoods();
+        governance.calculatePopularity();
+        produce();
+        return output;
+    }
+
+    public void produce() {
+        Governance governance = game.getCurrentPlayer().getGovernance();
+        for (Building building : governance.getBuildings()) {
+            if (!(building instanceof ProductionBuilding)) continue;
+            ProductionBuilding productionBuilding = (ProductionBuilding) building;
+            if (!productionBuilding.getProductionMode()) continue;
+            if (productionBuilding.getType() == MapAssetType.QUARRY)
+                if (!cellHasCow(productionBuilding.getCoordinate())) continue;
+            ArrayList<Material> usingMaterial = productionBuilding.getProducingMaterial();
+            ArrayList<Material> producingMaterial = productionBuilding.getProducingMaterial();
+            for (int i = 0; i < usingMaterial.size(); i++)
+                governance.changeStorageStock(usingMaterial.get(i), (-1) * productionBuilding.getRateOfUsage().get(i));
+            for (int i = 0; i < producingMaterial.size(); i++)
+                governance.changeStorageStock(producingMaterial.get(i), productionBuilding.getRateOfProduction().get(i));
+        }
     }
 
     private void applyUnitDecisions() {
@@ -307,5 +299,13 @@ public class GameController {
     private boolean isPlayerDead(Player player) {
         return player.getGovernance().getBuildings().size() == 0 ||
                 !player.getGovernance().getBuildings().get(0).getType().equals(MapAssetType.HEADQUARTER);
+    }
+
+    private boolean cellHasCow(Vector2D coordinate) {
+        for (MapAsset asset : game.getMap().getCell(coordinate).getAllAssets()) {
+            if (asset.getType() == MapAssetType.COW && asset.getOwner().equals(game.getCurrentPlayer()))
+                return true;
+        }
+        return false;
     }
 }
