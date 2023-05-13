@@ -22,6 +22,11 @@ public class Vector2D {
     }
 
     @Override
+    public int hashCode() {
+        return (x + y) * (x + y + 1) / 2 + x;
+    }
+
+    @Override
     public String toString() {
         return "(" + x + "," + y + ")";
     }

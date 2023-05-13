@@ -7,6 +7,7 @@ import model.enums.CellType;
 import utils.Vector2D;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Vector;
 
@@ -122,22 +123,19 @@ public class Map {
         if (!CellType.isTraversableByType(this.getCell(destination).getType())) return new LinkedList<>();
         LinkedList<LinkedList<Vector2D>> queue = new LinkedList<>();
         LinkedList<Vector2D> currentPath = new LinkedList<>();
-        ArrayList<Vector2D> visited = new ArrayList<>();
-        //TODO current coordinate
-        visited.add(currentUnit.getCoordinate());
         currentPath.add(currentUnit.getCoordinate());
         queue.add(currentPath);
 
         while (queue.size() > 0) {
-            currentPath = queue.get(0);
-            queue.poll();
-            Vector2D currentPlace = currentPath.get(currentPath.size() - 1);
+            currentPath = queue.poll();
+            Vector2D currentPlace = currentPath.getLast();
             if (currentPlace.equals(destination))
                 return currentPath;
 
             ArrayList<Cell> neighbors = getNeighbors(currentPlace);
             for (Cell neighbor : neighbors) {
-                if (isTraversable(this.getCell(currentPlace), neighbor) && !visited.contains(neighbor.getCoordinate()) ) {
+                if (isTraversable(this.getCell(currentPlace), neighbor) &&
+                        !currentPath.contains(neighbor.getCoordinate()) ) {
                     LinkedList<Vector2D> newPath = new LinkedList<>(currentPath);
                     newPath.add(neighbor.getCoordinate());
                     queue.add(newPath);
@@ -146,6 +144,8 @@ public class Map {
         }
         return new LinkedList<>();
     }
+
+
 
     private boolean isTraversable(Cell current, Cell destination) {
         if (current.hasWall()) return destination.isTraversableInWall();
