@@ -10,7 +10,7 @@ public enum BuildingCategory {
 
     public static BuildingCategory getCategory(String categoryName) {
         for (BuildingCategory category : BuildingCategory.values()) {
-            if (category.name().toLowerCase().equals(categoryName)) return category;
+            if (category.name().equalsIgnoreCase(categoryName)) return category;
         }
         return null;
     }

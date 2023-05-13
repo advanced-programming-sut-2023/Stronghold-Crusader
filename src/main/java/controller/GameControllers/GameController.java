@@ -71,7 +71,7 @@ public class GameController {
                 case "endGame":
                     EndGameController endGameController = new EndGameController(game.getDeadPlayers());
                     endGameController.run();
-                    break;
+                    return "endGame";
             }
         }
     }
