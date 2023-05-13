@@ -31,6 +31,7 @@ public class MoveController {
             }
             closedSet.add(current);
             for (Cell neighbor : map.getNeighbors(current)) {
+                if (!map.isTraversable(map.getCell(current), neighbor)) continue;
                 if (closedSet.contains(neighbor.getCoordinate())) {
                     continue;
                 }
