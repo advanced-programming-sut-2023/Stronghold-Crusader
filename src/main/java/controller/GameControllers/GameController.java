@@ -79,17 +79,13 @@ public class GameController {
     public String nextRound() {
         processUnitDecisions();
         applyUnitDecisions();
-        Player currentPlayer = null;
         ArrayList<Player> players = game.getPlayers();
         for (int i = players.size() - 1; i >= 0; i--) {
             Player player = players.get(i);
             if (isPlayerDead(player)) deletePlayer(player);
-            else currentPlayer = player;
         }
-        if (game.getPlayers().size() == 1) {
-            assert currentPlayer != null;
-            deletePlayer(currentPlayer);
-        }
+        if (game.getPlayers().size() == 1)
+            deletePlayer(game.getPlayers().get(0));
         if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return "endGame";
         return "continue";
     }
@@ -280,7 +276,7 @@ public class GameController {
         highScore += (game.getDeadPlayers().size()) * 200;
         if (game.getPlayers().size() == 1) highScore += 3000;
         deleteAllAsset(player.getGovernance());
-        game.getPlayers().remove(player);
+        game.removePlayer(player);
         game.getDeadPlayers().add(new Pair(player.getUsername(), highScore, player.getGovernance().toString()));
     }
 

@@ -56,5 +56,6 @@ public class EndGameController {
             if (currentUser.getHighScore() < Integer.parseInt(player.y))
                 currentUser.setHighScore(Integer.parseInt(player.y));
         }
+        Stronghold.getInstance().updateData();
     }
 }
