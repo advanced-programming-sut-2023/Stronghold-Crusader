@@ -28,7 +28,9 @@ public class EndGameMenu {
 
     private Matcher getMatcher(String input, String cmd) {
         Pattern pattern = Pattern.compile(cmd);
-        return pattern.matcher(input);
+        Matcher matcher = pattern.matcher(input);
+        matcher.find();
+        return matcher;
     }
 
     private void selectUserRun(Matcher matcher) {
