@@ -3,7 +3,6 @@ package model.User;
 import Settings.Settings;
 import com.google.gson.*;
 import model.Stronghold;
-import model.User.User;
 
 import java.io.*;
 import java.util.Collection;

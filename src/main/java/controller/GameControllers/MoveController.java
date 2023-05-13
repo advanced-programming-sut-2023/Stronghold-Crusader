@@ -13,7 +13,6 @@ public class MoveController {
         this.map = map;
     }
 
-
     public LinkedList<Vector2D> findShortestPath(MobileUnit mobileUnit, Vector2D start, Vector2D goal) {
         LinkedList<Vector2D> openSet = new LinkedList<>();
         Set<Vector2D> closedSet = new HashSet<>();
@@ -27,10 +26,8 @@ public class MoveController {
 
         while (!openSet.isEmpty()) {
             Vector2D current = openSet.poll();
-
-            if (current.equals(goal)) {
+            if (current.equals(goal))
                 return reconstructPath(cameFrom, current);
-            }
             closedSet.add(current);
             for (Cell neighbor : map.getNeighbors(current)) {
                 if (!map.isTraversable(mobileUnit, map.getCell(current), neighbor)) continue;
@@ -48,7 +45,6 @@ public class MoveController {
                 }
             }
         }
-
         return new LinkedList<>(); // no path found
     }
 
@@ -67,7 +63,6 @@ public class MoveController {
         double dy = a.y - b.y;
         return Math.sqrt(dx * dx + dy * dy);
     }
-
 
     private double distance(Vector2D a, Vector2D b) {
         return (Math.sqrt((a.x - b.x) ^ 2 + (a.y - b.y) ^ 2));

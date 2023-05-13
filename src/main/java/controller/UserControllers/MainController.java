@@ -4,7 +4,6 @@ import controller.MapControllers.MapSelectController;
 import model.User.User;
 import model.User.UserManager;
 import view.UserMenus.MainMenu;
-import view.enums.messages.UserMessage.MainMenuMessage;
 
 public class MainController {
     User currentUser;

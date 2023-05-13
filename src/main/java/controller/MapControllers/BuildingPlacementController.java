@@ -182,28 +182,5 @@ public class BuildingPlacementController {
         }
         return false;
     }
-
-    private Vector2D[] findCowPatrolPath() {
-        Vector2D storeHouseCoord = null;
-        Vector2D quarryCoord = null;
-        Vector2D currentCoord = new Vector2D(0, 0);
-        for (int y = 0; y < map.getSize().y; y++) {
-            for (int x = 0; x < map.getSize().x; x++) {
-                currentCoord.x = x;
-                currentCoord.y = y;
-                for (MapAsset asset : map.getCell(currentCoord).getAllAssets()) {
-                    if (asset.getType() == MapAssetType.STORE_HOUSE && asset.getOwner().equals(currentPlayer)) {
-                        storeHouseCoord = new Vector2D(currentCoord.x, currentCoord.y);
-                        if (quarryCoord != null) return new Vector2D[]{quarryCoord, storeHouseCoord};
-                    }
-                    if (asset.getType() == MapAssetType.QUARRY && asset.getOwner().equals(currentPlayer)) {
-                        quarryCoord = new Vector2D(currentCoord.x, currentCoord.y);
-                        if (storeHouseCoord != null) return new Vector2D[]{quarryCoord, storeHouseCoord};
-                    }
-                }
-            }
-        }
-        return null;
-    }
 }
 

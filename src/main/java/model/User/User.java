@@ -21,10 +21,6 @@ public class User {
         this.highScore = 0;
     }
 
-    static Integer compareForRanks(User u1, User u2) {
-        return Integer.compare(u2.getHighScore(), u1.getHighScore());
-    }
-
     public String getUsername() {
         return username;
     }

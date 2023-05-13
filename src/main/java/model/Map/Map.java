@@ -119,7 +119,6 @@ public class Map {
         return neighbors;
     }
 
-
     public LinkedList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
         MoveController moveController = new MoveController(this);
         return moveController.findShortestPath(currentUnit, currentUnit.getCoordinate(), destination);

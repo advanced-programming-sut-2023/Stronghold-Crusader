@@ -45,7 +45,6 @@ public class MobileUnit extends MapAsset {
             return;
         }
         LinkedList<Vector2D> traversePath = map.getTraversePath(this, finalMoveDestination);
-        System.out.println(traversePath);
         if (traversePath.isEmpty()) {
             nextMoveDestination = null;
             return;

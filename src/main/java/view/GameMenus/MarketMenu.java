@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class MarketMenu {
-    private MarketController marketController;
-    private Scanner scanner;
+    private final MarketController marketController;
+    private final Scanner scanner;
 
     public MarketMenu(MarketController marketController) {
         this.scanner = Menu.getScanner();

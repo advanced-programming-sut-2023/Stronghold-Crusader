@@ -14,7 +14,6 @@ import view.enums.messages.UserMessage.SignupAndLoginMessage;
 import java.util.HashMap;
 
 public class SignupController {
-    public User currentUser = null;
     private final Stronghold stronghold = Stronghold.getInstance();
 
     public void run() {

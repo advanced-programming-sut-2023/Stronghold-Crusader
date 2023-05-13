@@ -19,13 +19,13 @@ public class Captcha {
 
     private static String generateRandomCaptchaText() {
         int size = (int) (Math.random() * 4 + 4);
-        String captcha = "";
+        StringBuilder captcha = new StringBuilder();
         String lettersAndNumbers = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         while (captcha.length() < size) {
             int character = (int) (Math.random() * 62);
-            captcha += lettersAndNumbers.substring(character, character + 1);
+            captcha.append(lettersAndNumbers.charAt(character));
         }
-        return captcha;
+        return captcha.toString();
     }
 
     private static void showCaptcha(BufferedImage img) {

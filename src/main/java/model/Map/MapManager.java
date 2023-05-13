@@ -3,7 +3,6 @@ package model.Map;
 import Settings.Settings;
 import com.google.gson.*;
 import model.MapAsset.MapAsset;
-import utils.Pair;
 
 import java.io.*;
 import java.util.ArrayList;

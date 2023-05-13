@@ -3,7 +3,7 @@ package controller.GameControllers;
 import model.Game.Game;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
-import model.MapAsset.MobileUnit.MobileUnit;;
+import model.MapAsset.MobileUnit.MobileUnit;
 import model.enums.AssetType.UnitState;
 import model.enums.AttackTarget;
 import utils.Vector2D;

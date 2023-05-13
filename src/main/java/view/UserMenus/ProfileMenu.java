@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class ProfileMenu {
-    private ProfileController profileController;
-    private Scanner scanner;
+    private final ProfileController profileController;
+    private final Scanner scanner;
 
     public ProfileMenu(ProfileController profileController) {
         this.profileController = profileController;

@@ -24,13 +24,13 @@ public class MarketController {
     }
 
     public String showPriceList() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         ArrayList<StoreMaterial> materials = StoreMaterial.getMaterialList();
         for (StoreMaterial material : materials) {
-            output += material.toString();
-            output += "\n";
+            output.append(material.toString());
+            output.append("\n");
         }
-        return output;
+        return output.toString();
     }
 
     public MarketMessage buy(String materialName, int amount) {

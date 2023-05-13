@@ -58,7 +58,7 @@ public class TradeController {
         StringBuilder result = new StringBuilder();
         for (Trade trade : trades) {
             if (trade.getOwner() == game.getCurrentPlayer() || trade.getAcceptor() == game.getCurrentPlayer())
-                result.append(trade.toString()).append("\n");
+                result.append(trade).append("\n");
         }
         if (result.length() == 0) return "you don't have any trades yet!";
         return result.toString();
