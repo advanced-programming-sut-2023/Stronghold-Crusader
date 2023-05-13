@@ -3,11 +3,13 @@ package model.Map;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.DefenseAndAttackBuilding;
 import model.MapAsset.Building.EntranceBuilding;
+import model.MapAsset.Building.Wall;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
+import model.enums.Direction;
 import utils.Vector2D;
 
 import java.util.ArrayList;
@@ -67,10 +69,15 @@ public class Cell {
                 if (mapAsset instanceof EntranceBuilding) {
                     return ((EntranceBuilding) mapAsset).isOpen();
                 }
+                if (mapAsset instanceof Wall) return hasLadder((Wall) mapAsset)  ;
                 return (mapAsset.getType().equals(MapAssetType.STAIRS));
             }
         }
         return true;
+    }
+    private boolean hasLadder(Wall wall) {
+        return wall.hasLadder(Direction.EAST) || wall.hasLadder(Direction.WEST) || wall.hasLadder(Direction.NORTH) ||
+                wall.hasLadder(Direction.SOUTH);
     }
 
     public boolean isTraversableInWall() {
