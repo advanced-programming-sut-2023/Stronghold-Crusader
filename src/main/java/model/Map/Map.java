@@ -125,8 +125,7 @@ public class Map {
         return moveController.findShortestPath(currentUnit.getCoordinate(), destination);
     }
 
-
-    private boolean isTraversable(Cell current, Cell destination) {
+    public boolean isTraversable(Cell current, Cell destination) {
         if (current.hasWall()) return destination.isTraversableInWall();
         else if (current.hasGateHouse()) return destination.isTraversableInGateHouse();
         return destination.isTraversable();
