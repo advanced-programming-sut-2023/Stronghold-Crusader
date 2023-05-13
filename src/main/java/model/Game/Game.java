@@ -70,6 +70,15 @@ public class Game {
         return new ArrayList<>(players.values());
     }
 
+    public void removePlayer(Player toBeRemoved){
+        for (java.util.Map.Entry<Color, Player> colorPlayerEntry : players.entrySet()) {
+            if(colorPlayerEntry.getValue().equals(toBeRemoved)){
+                players.remove(colorPlayerEntry.getKey());
+                return;
+            }
+        }
+    }
+
     private void initializeColors() {
         for (java.util.Map.Entry<Color, Player> colorPlayerEntry : players.entrySet()) {
             int colorIndex = colorPlayerEntry.getKey().ordinal();
