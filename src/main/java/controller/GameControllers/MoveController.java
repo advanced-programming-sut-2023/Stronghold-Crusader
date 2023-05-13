@@ -1,6 +1,7 @@
 package controller.GameControllers;
 
 import model.Map.Cell;
+import model.MapAsset.MobileUnit.MobileUnit;
 import utils.Vector2D;
 
 import java.util.*;
@@ -13,7 +14,7 @@ public class MoveController {
     }
 
 
-    public LinkedList<Vector2D> findShortestPath(Vector2D start, Vector2D goal) {
+    public LinkedList<Vector2D> findShortestPath(MobileUnit mobileUnit, Vector2D start, Vector2D goal) {
         PriorityQueue<Vector2D> openSet = new PriorityQueue<>();
         Set<Vector2D> closedSet = new HashSet<>();
         Map<Vector2D, Vector2D> cameFrom = new HashMap<>();
@@ -31,7 +32,7 @@ public class MoveController {
             }
             closedSet.add(current);
             for (Cell neighbor : map.getNeighbors(current)) {
-                if (!map.isTraversable(map.getCell(current), neighbor)) continue;
+                if (!map.isTraversable(mobileUnit, map.getCell(current), neighbor)) continue;
                 if (closedSet.contains(neighbor.getCoordinate())) {
                     continue;
                 }

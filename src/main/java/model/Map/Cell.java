@@ -62,7 +62,7 @@ public class Cell {
         assets = newObjects;
     }
 
-    public boolean isTraversable() {
+    public boolean isTraversable(MobileUnit mobileUnit) {
         if (!CellType.isTraversableByType(type)) return false;
         for (MapAsset mapAsset : assets) {
             if (mapAsset instanceof Building) {
@@ -70,6 +70,7 @@ public class Cell {
                     return ((EntranceBuilding) mapAsset).isOpen();
                 }
                 if (mapAsset instanceof Wall) return hasLadder((Wall) mapAsset)  ;
+                if(mapAsset.getType().equals(MapAssetType.QUARRY)) return mobileUnit.getType().equals(MapAssetType.OX_TETHER);
                 return (mapAsset.getType().equals(MapAssetType.STAIRS));
             }
         }

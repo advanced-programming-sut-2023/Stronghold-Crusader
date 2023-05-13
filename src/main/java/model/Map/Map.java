@@ -122,13 +122,13 @@ public class Map {
 
     public LinkedList<Vector2D> getTraversePath(MobileUnit currentUnit, Vector2D destination) {
         MoveController moveController = new MoveController(this);
-        return moveController.findShortestPath(currentUnit.getCoordinate(), destination);
+        return moveController.findShortestPath(currentUnit, currentUnit.getCoordinate(), destination);
     }
 
-    public boolean isTraversable(Cell current, Cell destination) {
+    public boolean isTraversable(MobileUnit mobileUnit, Cell current, Cell destination) {
         if (current.hasWall()) return destination.isTraversableInWall();
         else if (current.hasGateHouse()) return destination.isTraversableInGateHouse();
-        return destination.isTraversable();
+        return destination.isTraversable(mobileUnit);
     }
 
     public void changeCellTypeTo(Vector2D coordinate, CellType type) {
