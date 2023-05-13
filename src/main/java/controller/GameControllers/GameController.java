@@ -163,8 +163,8 @@ public class GameController {
         MapAsset targetUnit = attackingAsset.getNextRoundAttackTarget();
         if (targetUnit != null) {
             targetUnit.takeDamageFrom(attackingAsset);
-            if (targetUnit.getHitPoint() < 0)
-                eraseAsset(attackingAsset);
+            if (targetUnit.getHitPoint() <= 0)
+                eraseAsset(targetUnit);
         }
     }
 

@@ -9,7 +9,8 @@ public class Vector2D {
         this.y = y;
     }
 
-    public double getDistance(Vector2D v2) {
+    public double getDistance(Vector2D v2, boolean isDiagonal) {
+        if(isDiagonal) return Math.max(Math.abs(v2.x - x) , Math.abs(v2.y - y));
         return Math.abs(v2.x - x) + Math.abs(v2.y - y);
     }
 
