@@ -316,6 +316,15 @@ public class Governance {
     public ArrayList<MobileUnit> getUnits() {
         return units;
     }
+    public int getEngineers() {
+        int result = 0 ;
+        for (MapAsset mapAsset : units) {
+            if (mapAsset.getType().equals(MapAssetType.ENGINEER)) result ++ ;
+        }
+        return result;
+    }
+
+
 
     @Override
     public String toString() {
