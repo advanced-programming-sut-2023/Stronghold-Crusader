@@ -5,11 +5,13 @@ import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.*;
 import model.MapAsset.MapAsset;
+import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
+import model.enums.AssetType.UnitState;
 import model.enums.CellType;
 import utils.Vector2D;
 import view.MapMenus.BuildingPlacementMenu;
@@ -61,22 +63,14 @@ public class BuildingPlacementController {
             return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
         if (!enoughWorkers(reference)) return BuildingPlacementMessage.NOT_ENOUGH_WORKERS;
 
-        Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
-        map.addMapObject(coordinate, newBuilding);
-        currentPlayer.getGovernance().addAsset(newBuilding);
         if (reference.getType().equals(MapAssetType.OX_TETHER)) {
-            MobileUnit cow = new MobileUnit((MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
-                    coordinate, currentPlayer);
-            map.addMapObject(coordinate, cow);
-            currentPlayer.getGovernance().addAsset(cow);
-            Vector2D[] cowPatrolPath = map.findCowPatrolPath(currentPlayer);
-            if (cowPatrolPath != null)
-                cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
+            oxtetherOperations(coordinate);
         }
-        currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
-        if (reference.getNeededMaterial() != null)
-            currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
-                    (-1) * reference.getNumberOfMaterialNeeded());
+        if (reference.getType().equals(MapAssetType.CAGED_WARDOG)){
+            cagedWarDogOperations(coordinate);
+        }
+
+        createBuildingFinal(reference, coordinate);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
 
@@ -103,6 +97,39 @@ public class BuildingPlacementController {
                 break;
         }
         return building;
+    }
+
+    private void createBuildingFinal(Building reference, Vector2D coordinate){
+        currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
+        if (reference.getNeededMaterial() != null)
+            currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
+                    (-1) * reference.getNumberOfMaterialNeeded());
+        Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
+        map.addMapObject(coordinate, newBuilding);
+        currentPlayer.getGovernance().addAsset(newBuilding);
+    }
+
+    private void oxtetherOperations(Vector2D coordinate){
+        MobileUnit cow = new MobileUnit((MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
+                coordinate, currentPlayer);
+        map.addMapObject(coordinate, cow);
+        currentPlayer.getGovernance().addAsset(cow);
+        Vector2D[] cowPatrolPath = map.findCowPatrolPath(currentPlayer);
+        if (cowPatrolPath != null)
+            cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
+    }
+
+    private void cagedWarDogOperations(Vector2D coordinate){
+        AttackingUnit dog1 = new AttackingUnit((AttackingUnit) ConstantManager.getInstance().getAsset(MapAssetType.DOG),
+                coordinate, currentPlayer);
+        AttackingUnit dog2 = new AttackingUnit((AttackingUnit) ConstantManager.getInstance().getAsset(MapAssetType.DOG),
+                coordinate, currentPlayer);
+        dog1.setState(UnitState.OFFENSIVE);
+        dog2.setState(UnitState.OFFENSIVE);
+        map.addMapObject(coordinate, dog1);
+        currentPlayer.getGovernance().addAsset(dog1);
+        map.addMapObject(coordinate, dog2);
+        currentPlayer.getGovernance().addAsset(dog2);
     }
 
     public BuildingPlacementMessage isDropSightValid(MapAssetType buildingType, Building reference,
