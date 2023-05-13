@@ -33,13 +33,10 @@ public class AttackingUnit extends MobileUnit {
     }
 
     public void processNextRoundMove(Map map) {
-        nextRoundAttackTarget = null;
-        finalMoveDestination = null;
         checkForTargetDeath();
-        if (finalMoveDestination != null) {
-            nextRoundAttackTarget = null;
+        nextRoundAttackTarget = null;
+        if (finalMoveDestination != null)
             return;
-        }
         if (selectedAttackTarget != null) {
             if (coordinate.getDistance(selectedAttackTarget.getCoordinate(), true) <= attackRange) {
                 finalMoveDestination = null;
@@ -52,7 +49,7 @@ public class AttackingUnit extends MobileUnit {
         }
         MapAsset attackTarget = findTarget(map, attackRange);
         if (attackTarget != null) {
-            if(state == UnitState.OFFENSIVE)
+            if (state == UnitState.OFFENSIVE)
                 selectedAttackTarget = attackTarget;
             nextRoundAttackTarget = attackTarget;
             finalMoveDestination = null;
