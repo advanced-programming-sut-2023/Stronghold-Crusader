@@ -14,6 +14,7 @@ import model.User.Player;
 import model.enums.*;
 import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.MapAssetType;
+import model.enums.AssetType.UnitState;
 import utils.Vector2D;
 import view.MapMenus.ChangeEnvironmentMenu;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
@@ -138,16 +139,37 @@ public class ChangeEnvironmentController {
         Building newBuilding = createBuilding(game.getCurrentPlayer(), coordinate, reference, category);
         map.addMapObject(coordinate, newBuilding);
         game.getCurrentPlayer().getGovernance().addAsset(newBuilding);
+
         if (reference.getType().equals(MapAssetType.OX_TETHER)) {
-            MobileUnit cow = new MobileUnit((MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
-                    coordinate, game.getCurrentPlayer());
-            map.addMapObject(coordinate, cow);
-            game.getCurrentPlayer().getGovernance().addAsset(cow);
-            Vector2D[] cowPatrolPath = map.findCowPatrolPath(game.getCurrentPlayer());
-            if (cowPatrolPath != null)
-                cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
+            oxtetherOperations(coordinate);
+        }
+        if (reference.getType().equals(MapAssetType.CAGED_WARDOG)){
+            cagedWarDogOperations(coordinate);
         }
         return MapMakerMessage.BUILDING_DROP_SUCCESS;
+    }
+
+    private void cagedWarDogOperations(Vector2D coordinate){
+        AttackingUnit dog1 = new AttackingUnit((AttackingUnit) ConstantManager.getInstance().getAsset(MapAssetType.DOG),
+                coordinate, game.getCurrentPlayer());
+        AttackingUnit dog2 = new AttackingUnit((AttackingUnit) ConstantManager.getInstance().getAsset(MapAssetType.DOG),
+                coordinate, game.getCurrentPlayer());
+        dog1.setState(UnitState.OFFENSIVE);
+        dog2.setState(UnitState.OFFENSIVE);
+        map.addMapObject(coordinate, dog1);
+        game.getCurrentPlayer().getGovernance().addAsset(dog1);
+        map.addMapObject(coordinate, dog2);
+        game.getCurrentPlayer().getGovernance().addAsset(dog2);
+    }
+
+    private void oxtetherOperations(Vector2D coordinate){
+        MobileUnit cow = new MobileUnit((MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
+                coordinate, game.getCurrentPlayer());
+        map.addMapObject(coordinate, cow);
+        game.getCurrentPlayer().getGovernance().addAsset(cow);
+        Vector2D[] cowPatrolPath = map.findCowPatrolPath(game.getCurrentPlayer());
+        if (cowPatrolPath != null)
+            cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
     }
 
     public MapMakerMessage isDropSightValid(MapAssetType buildingType, Building reference,
