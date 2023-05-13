@@ -11,6 +11,7 @@ import view.GameMenus.SelectedUnitMenu;
 import view.enums.messages.GameMessage.SelectedUnitMessage;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class SelectedUnitController {
     private final Game game;
@@ -32,6 +33,11 @@ public class SelectedUnitController {
             return SelectedUnitMessage.INVALID_COORDINATE;
         for (MobileUnit selectedUnit : selectedUnits)
             selectedUnit.selectMoveDestination(coordinate);
+        LinkedList<Vector2D> sample = game.getMap().getTraversePath(selectedUnits.get(0), coordinate);
+        if (!game.getMap().getCell(coordinate).isTraversable(selectedUnits.get(0)))
+            return SelectedUnitMessage.INVALID_DESTINATION;
+
+        if (sample.size() == 0) return SelectedUnitMessage.NO_PATH;
         return SelectedUnitMessage.MOVE_SUCCESS;
     }
 
