@@ -10,8 +10,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class BuildingPlacementMenu {
-    private Scanner scanner;
-    private BuildingPlacementController controller;
+    private final Scanner scanner;
+    private final BuildingPlacementController controller;
 
     public BuildingPlacementMenu(BuildingPlacementController controller) {
         this.scanner = Menu.getScanner();

@@ -63,7 +63,4 @@ public class Stronghold {
         return users.containsKey(username);
     }
 
-    public HashMap<String, User> getUsers() {
-        return users;
-    }
 }

@@ -111,7 +111,7 @@ public class GameController {
             if (!productionBuilding.getProductionMode()) continue;
             if (productionBuilding.getType() == MapAssetType.QUARRY)
                 if (!cellHasCow(productionBuilding.getCoordinate())) continue;
-            ArrayList<Material> usingMaterial = productionBuilding.getProducingMaterial();
+            ArrayList<Material> usingMaterial = productionBuilding.getUsingMaterial();
             ArrayList<Material> producingMaterial = productionBuilding.getProducingMaterial();
             for (int i = 0; i < usingMaterial.size(); i++)
                 governance.changeStorageStock(usingMaterial.get(i), (-1) * productionBuilding.getRateOfUsage().get(i));

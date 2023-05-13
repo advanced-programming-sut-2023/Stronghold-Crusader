@@ -40,12 +40,12 @@ public class MapSelectController {
 
     public String getMapsList() {
         ArrayList<ArrayList<String>> maps = MapManager.getMapList();
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (ArrayList<String> map : maps) {
-            output += "Map id:" + map.get(0) + ", Map name:" + map.get(1) + ", Number of players:" + map.get(2);
-            output += "\n";
+            output.append("Map id:").append(map.get(0)).append(", Map name:").append(map.get(1)).append(", Number of players:").append(map.get(2));
+            output.append("\n");
         }
-        return output;
+        return output.toString();
     }
 
     public MapSelectMessage selectMap(String mapId, boolean isMapModifiable) {

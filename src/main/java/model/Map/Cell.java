@@ -29,14 +29,6 @@ public class Cell {
         return assets;
     }
 
-    public ArrayList<MapAsset> getAllAssets(Player player) {
-        ArrayList<MapAsset> newAssets = new ArrayList<>();
-        for (MapAsset asset : assets) {
-            if (asset.getOwner().equals(player)) newAssets.add(asset);
-        }
-        return newAssets;
-    }
-
     public CellType getType() {
         return type;
     }

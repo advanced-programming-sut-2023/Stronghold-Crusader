@@ -8,8 +8,8 @@ import view.enums.messages.UserMessage.MainMenuMessage;
 import java.util.Scanner;
 
 public class MainMenu {
-    private MainController mainController;
-    private Scanner scanner;
+    private final MainController mainController;
+    private final Scanner scanner;
     public MainMenu(MainController mainController){
         this.mainController = mainController;
         this.scanner = Menu.getScanner();

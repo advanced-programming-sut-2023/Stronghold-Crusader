@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class ChangeEnvironmentMenu {
-    private ChangeEnvironmentController controller;
-    private Scanner scanner;
+    private final ChangeEnvironmentController controller;
+    private final Scanner scanner;
 
     public ChangeEnvironmentMenu(ChangeEnvironmentController controller) {
         this.scanner = Menu.getScanner();

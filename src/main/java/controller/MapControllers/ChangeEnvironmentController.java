@@ -17,7 +17,6 @@ import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.UnitState;
 import utils.Vector2D;
 import view.MapMenus.ChangeEnvironmentMenu;
-import view.enums.messages.MapMessage.BuildingPlacementMessage;
 import view.enums.messages.MapMessage.MapMakerMessage;
 
 import java.util.ArrayList;
