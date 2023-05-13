@@ -8,7 +8,6 @@ import utils.Pair;
 import utils.Vector2D;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 public class Game {
@@ -67,8 +66,8 @@ public class Game {
         return null;
     }
 
-    public Collection<Player> getPlayers() {
-        return players.values();
+    public ArrayList<Player> getPlayers() {
+        return new ArrayList<>(players.values());
     }
 
     private void initializeColors() {

@@ -80,11 +80,11 @@ public class GameController {
         processUnitDecisions();
         applyUnitDecisions();
         Player currentPlayer = null;
-        //TODO handle two or more player
-        for (Player player : game.getPlayers()) {
-            if (isPlayerDead(player)) {
-                deletePlayer(player);
-            } else currentPlayer = player;
+        ArrayList<Player> players = game.getPlayers();
+        for (int i = players.size() - 1; i >= 0; i--) {
+            Player player = players.get(i);
+            if (isPlayerDead(player)) deletePlayer(player);
+            else currentPlayer = player;
         }
         if (game.getPlayers().size() == 1) {
             assert currentPlayer != null;
