@@ -125,6 +125,11 @@ public class BuildingPlacementController {
                 if (!hasTypeNearby(coordinate, MapAssetType.STORE_HOUSE))
                     return BuildingPlacementMessage.NO_STOREHOUSE_NEARBY;
                 break;
+            case FOOD_STORAGE:
+                if (!currentPlayer.getGovernance().containsType(MapAssetType.FOOD_STORAGE)) break;
+                if (!hasTypeNearby(coordinate, MapAssetType.FOOD_STORAGE))
+                    return BuildingPlacementMessage.NO_STOREHOUSE_NEARBY;
+                break;
             default:
                 if (!map.getCell(coordinate).isEmpty()) return BuildingPlacementMessage.NOT_EMPTY;
                 CellType targetCellType = map.getCell(coordinate).getType();
