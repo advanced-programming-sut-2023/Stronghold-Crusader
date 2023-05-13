@@ -9,7 +9,7 @@ public enum SelectedUnitCommand {
     MOVE_UNIT("\\s*move\\s+unit\\s+to\\s+-x\\s+(?<x>\\d+)\\s+-y\\s+(?<y>\\d+)\\s*"),
     PATROL_UNIT("\\s*patrol\\s+unit\\s+-x1\\s+(?<x1>\\d+)\\s+-y1\\s+(?<y1>\\d+)\\s+-x2\\s+(?<x2>\\d+)\\s+-y2\\s+(?<y2>\\d+)"),
     DISBAND_UNIT("\\s*disband\\s+unit\\s*"),
-    SHOW_SELECTED_UNITS("\\s*show\\s+info\\s*"),
+    INFO("\\s*info\\s*"),
     BACK("\\s*back\\s*");
     private final String regex;
 

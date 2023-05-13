@@ -85,7 +85,7 @@ public class SelectedUnitController {
         return SelectedUnitMessage.NO_TARGET;
     }
 
-    public String selectedUnitInfo() {
+    public String showInfo() {
         StringBuilder result = new StringBuilder();
         for (MobileUnit selectedUnit : selectedUnits)
             result.append(selectedUnit.toString()).append('\n');

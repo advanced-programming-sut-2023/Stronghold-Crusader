@@ -50,6 +50,8 @@ public class AttackingUnit extends MobileUnit {
         }
         MapAsset attackTarget = findTarget(map, attackRange);
         if (attackTarget != null) {
+            if(state == UnitState.OFFENSIVE)
+                selectedAttackTarget = attackTarget;
             nextRoundAttackTarget = attackTarget;
             finalMoveDestination = null;
             return;
@@ -73,14 +75,12 @@ public class AttackingUnit extends MobileUnit {
         ArrayList<Cell> inRangeCells = map.getNearbyCells(coordinate, range);
         for (Cell cell : inRangeCells) {
             for (MapAsset asset : cell.getAllAssets()) {
-                if (!asset.getOwner().equals(owner))
+                if (asset.getOwner().equals(owner))
                     continue;
                 MapAssetType enemyType = asset.getType();
                 for (AttackTarget target : targets) {
-                    for (MapAssetType assetType : target.getItems()) {
-                        if (enemyType == assetType)
-                            return asset;
-                    }
+                    for (MapAssetType assetType : target.getItems())
+                        if (enemyType == assetType) return asset;
                 }
             }
         }

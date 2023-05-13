@@ -38,8 +38,8 @@ public class SelectedUnitMenu {
                 case ATTACK:
                     runAttack(matcher);
                     break;
-                case SHOW_SELECTED_UNITS:
-                    System.out.print(selectedUnitController.selectedUnitInfo());
+                case INFO:
+                    System.out.print(selectedUnitController.showInfo());
                     break;
                 case BACK:
                     return;

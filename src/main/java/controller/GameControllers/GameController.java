@@ -128,7 +128,7 @@ public class GameController {
             assert currentPlayer != null;
             deletePlayer(currentPlayer);
         }
-        if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return  "endGame";
+        if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return "endGame";
         return "continue";
     }
 
@@ -180,10 +180,10 @@ public class GameController {
         for (int y = 0; y < map.getSize().y; y++) {
             for (int x = 0; x < map.getSize().x; x++) {
                 for (MapAsset asset : map.getCell(new Vector2D(x, y)).getAllAssets()) {
-                    if (!(asset instanceof AttackingUnit))
-                        continue;
-                    ((AttackingUnit) asset).processNextRoundMove(map);
-                    ((MobileUnit) asset).findNextMoveDest(map);
+                    if (asset instanceof AttackingUnit)
+                        ((AttackingUnit) asset).processNextRoundMove(map);
+                    if (asset instanceof MobileUnit)
+                        ((MobileUnit) asset).findNextMoveDest(map);
                 }
             }
         }
@@ -198,8 +198,8 @@ public class GameController {
         for (MapAsset asset : assets) {
             if (!(asset instanceof MobileUnit))
                 continue;
-//            if (asset.getOwner().equals(game.getCurrentPlayer()))
-            selectedUnits.add((MobileUnit) asset);
+            if (asset.getOwner().equals(game.getCurrentPlayer()))
+                selectedUnits.add((MobileUnit) asset);
         }
         if (selectedUnits.size() == 0)
             return GameMenuMessage.NO_UNITS_IN_PLACE;
