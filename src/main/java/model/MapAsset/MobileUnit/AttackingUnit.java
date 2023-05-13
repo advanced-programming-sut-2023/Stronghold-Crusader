@@ -33,13 +33,15 @@ public class AttackingUnit extends MobileUnit {
     }
 
     public void processNextRoundMove(Map map) {
+        nextRoundAttackTarget = null;
+        finalMoveDestination = null;
         checkForTargetDeath();
         if (finalMoveDestination != null) {
             nextRoundAttackTarget = null;
             return;
         }
         if (selectedAttackTarget != null) {
-            if (coordinate.getDistance(selectedAttackTarget.getCoordinate()) <= attackRange) {
+            if (coordinate.getDistance(selectedAttackTarget.getCoordinate(), true) <= attackRange) {
                 finalMoveDestination = null;
                 nextRoundAttackTarget = selectedAttackTarget;
             } else {
@@ -67,7 +69,7 @@ public class AttackingUnit extends MobileUnit {
     }
 
     private void checkForTargetDeath() {
-        if (selectedAttackTarget != null && selectedAttackTarget.getHitPoint() < 0)
+        if (selectedAttackTarget != null && selectedAttackTarget.getHitPoint() <= 0)
             selectedAttackTarget = null;
     }
 
@@ -128,7 +130,7 @@ public class AttackingUnit extends MobileUnit {
 
     public MapAsset getNextRoundAttackTarget() {
         if (nextRoundAttackTarget == null) return null;
-        if (nextRoundAttackTarget.getHitPoint() < 0)
+        if (nextRoundAttackTarget.getHitPoint() <= 0)
             return null;
         return nextRoundAttackTarget;
     }
