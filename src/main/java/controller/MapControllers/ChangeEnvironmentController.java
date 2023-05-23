@@ -197,13 +197,11 @@ public class ChangeEnvironmentController {
                 if (!hasTypeNearby(coordinate, MapAssetType.FOOD_STORAGE))
                     return MapMakerMessage.NO_STOREHOUSE_NEARBY;
                 break;
-            default:
-                if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
-                CellType targetCellType = map.getCell(coordinate).getType();
-                if (!reference.isCellTypeValid(targetCellType))
-                    return MapMakerMessage.INVALID_CELL_TYPE;
-
         }
+        if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
+        CellType targetCellType = map.getCell(coordinate).getType();
+        if (!reference.isCellTypeValid(targetCellType))
+            return MapMakerMessage.INVALID_CELL_TYPE;
         return MapMakerMessage.PLACEMENT_SIGHT_VALID;
     }
 
