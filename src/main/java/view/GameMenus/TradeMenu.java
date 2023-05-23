@@ -31,12 +31,16 @@ public class TradeMenu {
             switch (typeOfCommand) {
                 case REQUEST:
                     requestRun(matcher);
+                    break;
                 case ACCEPT_TRADE:
                     acceptTradeRun(matcher);
+                    break;
                 case TRADE_LIST:
                     tradeListRun();
+                    break;
                 case TRADE_HISTORY:
                     tradeHistoryRun();
+                    break;
                 case BACK:
                     System.out.println(TradeMenuMessage.ENTER_MAIN);
                     return "back";
