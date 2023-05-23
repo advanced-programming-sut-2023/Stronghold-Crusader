@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum MainMenuCommand {
     PROFILE_MENU("\\s*profile\\s+menu\\s*"),
     GAME_MAKER_MENU("\\s*new\\s+game\\s*"),
-    BACK("\\s*back\\s*");
+    LOG_OUT("\\s*log\\s*out\\s*");
     private String regex;
 
     MainMenuCommand(String regex) {
