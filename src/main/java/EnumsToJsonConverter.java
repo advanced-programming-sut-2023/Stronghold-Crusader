@@ -24,6 +24,7 @@ public class EnumsToJsonConverter {
     private static void convert() {
         JsonObject objectsData = new JsonObject();
         addNormalBuildings(objectsData);
+        addEntranceBuildings(objectsData);
         addStorageBuilding(objectsData);
         addAttackingUnits(objectsData);
         addMobileUnits(objectsData);
@@ -65,6 +66,15 @@ public class EnumsToJsonConverter {
             buildings.add(gson.toJsonTree(toBeAdded));
         }
         data.add(Building.class.getName(), gson.toJsonTree(buildings));
+    }
+
+    private static void addEntranceBuildings(JsonObject data) {
+        JsonArray buildings = new JsonArray();
+        for (EntranceBuildingConstants value : EntranceBuildingConstants.values()) {
+            EntranceBuilding toBeAdded = new EntranceBuilding(value.maxHitPoint, value.type, value.cost, value.populationCapacity, value.neededMaterial, value.workerCount, value.buildingGroundType, value.neededMaterialAmount);
+            buildings.add(gson.toJsonTree(toBeAdded));
+        }
+        data.add(EntranceBuilding.class.getName(), gson.toJsonTree(buildings));
     }
 
     private static void addStorageBuilding(JsonObject data) {

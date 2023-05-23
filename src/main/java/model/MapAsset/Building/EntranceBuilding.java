@@ -20,6 +20,8 @@ public class EntranceBuilding extends Building {
 
     public EntranceBuilding(double maxHitPoint, MapAssetType type, int cost, int populationCapacity, Material neededMaterial, int workerCount, ArrayList<CellType> buildingGroundType, int neededMaterialAmount) {
         super(maxHitPoint, type, cost, populationCapacity, neededMaterial, workerCount, buildingGroundType, neededMaterialAmount);
+        isOpen = true;
+        hasFlag = false;
     }
 
     public boolean isOpen() {

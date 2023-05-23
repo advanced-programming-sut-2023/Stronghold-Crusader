@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum BuildingConstants {
-
-    //Normal buildings
-
     HEADQUARTER(500, MapAssetType.HEADQUARTER, 0, 50,
             null, 0, 0,
             new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
@@ -48,22 +45,7 @@ public enum BuildingConstants {
     WALL(400, MapAssetType.WALL, 0, 0, Material.STONE,
             20, 0,
             new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
-                    CellType.MEADOW, CellType.DENSE_MEADOW))),
-
-    //Entrance buildings
-    BIG_GATE_HOUSE(300, MapAssetType.BIG_GATEHOUSE, 0, 10,
-            Material.STONE, 20, 0,
-            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
-                    CellType.MEADOW, CellType.DENSE_MEADOW))),
-    SMALL_GATE_HOUSE(300, MapAssetType.SMALL_GATEHOUSE, 0, 8,
-            null, 0, 0,
-            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
-                    CellType.MEADOW, CellType.DENSE_MEADOW))),
-    DRAW_BRIDGE(200, MapAssetType.DRAW_BRIDGE, 0, 0,
-            Material.WOOD, 10, 0,
-            new ArrayList<>(List.of(CellType.GRASS, CellType.FIELD,
                     CellType.MEADOW, CellType.DENSE_MEADOW)));
-
 
     public final int maxHitPoint;
     public final MapAssetType type;
