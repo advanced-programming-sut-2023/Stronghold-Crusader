@@ -34,12 +34,12 @@ public class SelectedBuildingMenu {
                 case INFO:
                     System.out.println(selectedBuildingController.showInfo());
                     break;
-                case STOP_PRODUCTION:
-                case RESUME_PRODUCTION:
+                case Change_PRODUCTION:
                     runChangeProductionMode();
                     break;
                 case SET_FOOD_RATE:
                     runSetFoodRate(matcher);
+                    break;
                 case SET_TAX_RATE:
                     runSetTaxRate(matcher);
                     break;

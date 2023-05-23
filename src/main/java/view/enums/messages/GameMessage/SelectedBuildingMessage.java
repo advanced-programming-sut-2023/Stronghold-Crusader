@@ -3,7 +3,7 @@ package view.enums.messages.GameMessage;
 public enum SelectedBuildingMessage {
     MATERIAL_NEEDED("material is needed"),
     ENEMY_EXIST("There is an enemy near the building"),
-    SUCCESS_REPAIR("The building has been repaired"),
+    SUCCESS_REPAIR("Success repair"),
     DELETED_BUILDING("The building was successfully deleted"),
     NOT_ALLOWED_TO_DELETE("Clearing the building is not allowed"),
     STOP_PRODUCTION("Production stopped"),
@@ -23,7 +23,8 @@ public enum SelectedBuildingMessage {
     INVALID_TAX_RATE("Invalid tax rate"),
     TAX_RATE_CHANGE_SUCCESS("Successfully changed tax rate"),
 
-    INVALID_COMMAND("Invalid command");
+    INVALID_COMMAND("Invalid command"),
+    HP_FULL("The HP of building is full");
 
     SelectedBuildingMessage(String message) {
         this.message = message;
