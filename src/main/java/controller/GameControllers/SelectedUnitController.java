@@ -31,13 +31,12 @@ public class SelectedUnitController {
         Vector2D coordinate = new Vector2D(x, y);
         if (!game.getMap().isInMap(coordinate))
             return SelectedUnitMessage.INVALID_COORDINATE;
-        for (MobileUnit selectedUnit : selectedUnits)
-            selectedUnit.selectMoveDestination(coordinate);
-        LinkedList<Vector2D> sample = game.getMap().getTraversePath(selectedUnits.get(0), coordinate);
         if (!game.getMap().getCell(coordinate).isTraversable(selectedUnits.get(0)))
             return SelectedUnitMessage.INVALID_DESTINATION;
-
+        LinkedList<Vector2D> sample = game.getMap().getTraversePath(selectedUnits.get(0), coordinate);
         if (sample.size() == 0) return SelectedUnitMessage.NO_PATH;
+        for (MobileUnit selectedUnit : selectedUnits)
+            selectedUnit.selectMoveDestination(coordinate);
         return SelectedUnitMessage.MOVE_SUCCESS;
     }
 
