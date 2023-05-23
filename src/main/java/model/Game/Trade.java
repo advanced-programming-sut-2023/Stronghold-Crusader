@@ -9,7 +9,7 @@ public class Trade {
     private final int id;
     private boolean acceptanceMode;
     private final Player owner;
-    private final Player acceptor;
+    private Player acceptor;
     private final int price;
     private final Pair info;
     private final String message;
@@ -57,8 +57,9 @@ public class Trade {
     }
 
 
-    public void accept() {
+    public void accept(Player acceptor) {
         acceptanceMode = true;
+        this.acceptor =  acceptor;
         owner.getNewTrades().add(this);
     }
 
