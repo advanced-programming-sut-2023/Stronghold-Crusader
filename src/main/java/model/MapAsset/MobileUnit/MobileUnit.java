@@ -1,8 +1,11 @@
 package model.MapAsset.MobileUnit;
 
+import model.Map.Cell;
 import model.Map.Map;
+import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
 import model.User.Player;
+import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
 import java.util.LinkedList;
@@ -15,6 +18,7 @@ public class MobileUnit extends MapAsset {
     protected Vector2D finalMoveDestination;
     private Vector2D nextMoveDestination;
     private Vector2D[] patrolPath;
+    private MapAsset steppedOnKillingPit;
 
     public MobileUnit(MobileUnit reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
@@ -22,6 +26,7 @@ public class MobileUnit extends MapAsset {
         this.defenceMultiplier = reference.defenceMultiplier;
         this.engineersCount = reference.engineersCount;
         this.canClimbLadder = reference.canClimbLadder;
+        steppedOnKillingPit = null;
     }
 
     public void move() {
@@ -49,7 +54,18 @@ public class MobileUnit extends MapAsset {
             nextMoveDestination = null;
             return;
         }
-        nextMoveDestination = traversePath.get(Math.min(traversePath.size() - 1, moveSpeed));
+        int finalDestIndex = Math.min(traversePath.size() - 1, moveSpeed);
+        nextMoveDestination = traversePath.get(finalDestIndex);
+        for (int i = 0; i <= finalDestIndex; i++) {
+            for (MapAsset asset : map.getCell(traversePath.get(i)).getAllAssets()) {
+                if (asset.getType().equals(MapAssetType.KILLING_PIT) && !asset.getOwner().equals(owner))
+                    steppedOnKillingPit = asset;
+            }
+        }
+    }
+
+    public MapAsset getSteppedOnKillingPit() {
+        return steppedOnKillingPit;
     }
 
     public boolean hasNextMoveDestination() {

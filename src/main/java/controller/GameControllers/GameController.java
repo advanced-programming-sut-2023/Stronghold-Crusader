@@ -110,7 +110,8 @@ public class GameController {
             ProductionBuilding productionBuilding = (ProductionBuilding) building;
             if (!productionBuilding.getProductionMode()) continue;
             if (productionBuilding.getType() == MapAssetType.QUARRY)
-                if (!cellHasCow(productionBuilding.getCoordinate())) continue;
+                if (!game.getMap().cellHasAsset(productionBuilding.getCoordinate(), MapAssetType.COW, game.getCurrentPlayer(), false))
+                    continue;
             ArrayList<Material> usingMaterial = productionBuilding.getUsingMaterial();
             ArrayList<Material> producingMaterial = productionBuilding.getProducingMaterial();
             for (int i = 0; i < usingMaterial.size(); i++)
@@ -130,12 +131,22 @@ public class GameController {
                 ArrayList<MapAsset> cellAssets = map.getCell(currentCoord).getAllAssets();
                 for (int i = cellAssets.size() - 1; i >= 0; i--) {
                     MapAsset asset = cellAssets.get(i);
-                    if (asset instanceof MobileUnit)
+                    if (asset instanceof MobileUnit){
                         processMovement(map, (MobileUnit) asset);
+                        processSteppedOnKillingPit(asset);
+                    }
                     if (asset instanceof AttackingUnit)
                         processAttack((AttackingUnit) asset);
                 }
             }
+        }
+    }
+
+    private void processSteppedOnKillingPit(MapAsset asset) {
+        MapAsset steppedOnKillingPit = ((MobileUnit) asset).getSteppedOnKillingPit();
+        if(steppedOnKillingPit != null){
+            eraseAsset(asset);
+            eraseAsset(steppedOnKillingPit);
         }
     }
 
@@ -295,13 +306,5 @@ public class GameController {
     private boolean isPlayerDead(Player player) {
         return player.getGovernance().getBuildings().size() == 0 ||
                 !player.getGovernance().getBuildings().get(0).getType().equals(MapAssetType.HEADQUARTER);
-    }
-
-    private boolean cellHasCow(Vector2D coordinate) {
-        for (MapAsset asset : game.getMap().getCell(coordinate).getAllAssets()) {
-            if (asset.getType() == MapAssetType.COW && asset.getOwner().equals(game.getCurrentPlayer()))
-                return true;
-        }
-        return false;
     }
 }

@@ -7,7 +7,7 @@ public class EntranceBuilding extends Building {
     private boolean isOpen;
     private boolean hasFlag;
 
-    public EntranceBuilding(Building reference, Vector2D coordinate, Player owner) {
+    public EntranceBuilding(EntranceBuilding reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
         isOpen = true;
         hasFlag = false;

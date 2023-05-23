@@ -93,7 +93,7 @@ public class BuildingPlacementController {
                 building = new Building(reference, coordinate, owner);
                 break;
             case ENTRANCE:
-                building = new EntranceBuilding(reference, coordinate, owner);
+                building = new EntranceBuilding((EntranceBuilding) reference, coordinate, owner);
                 break;
         }
         return building;
