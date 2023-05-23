@@ -18,7 +18,8 @@ public class ProductionBuilding extends Building {
     public ProductionBuilding(ProductionBuilding reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
         this.productionCapacity = reference.productionCapacity;
-        this.usingMaterial = reference.usingMaterial;
+        if (reference.usingMaterial == null) this.usingMaterial = new ArrayList<>();
+        else this.usingMaterial = reference.usingMaterial;
         this.producingMaterial = reference.producingMaterial;
         this.rateOfUsage = reference.rateOfUsage;
         this.rateOfProduction = reference.rateOfProduction;
