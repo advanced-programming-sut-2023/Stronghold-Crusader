@@ -13,6 +13,7 @@ import model.MapAsset.Tree;
 import model.User.Player;
 import model.enums.*;
 import model.enums.AssetType.BuildingCategory;
+import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.UnitState;
 import utils.Vector2D;
@@ -134,7 +135,7 @@ public class ChangeEnvironmentController {
         MapMakerMessage msg = isDropSightValid(type, reference, coordinate);
         if (msg != MapMakerMessage.PLACEMENT_SIGHT_VALID) return msg;
 
-        BuildingCategory category = BuildingCategory.getCategory(typeName);
+        BuildingCategory category = BuildingType.getCategory(typeName);
         Building newBuilding = createBuilding(game.getCurrentPlayer(), coordinate, reference, category);
         map.addMapObject(coordinate, newBuilding);
         game.getCurrentPlayer().getGovernance().addAsset(newBuilding);
