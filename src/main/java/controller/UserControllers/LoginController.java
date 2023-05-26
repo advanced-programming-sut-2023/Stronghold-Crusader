@@ -43,12 +43,10 @@ public class LoginController {
                 case "exit":
                     return;
                 case "signup menu":
-                    System.out.println(SignupAndLoginMessage.SIGNUP_MENU);
                     SignupController signupController = new SignupController();
                     signupController.run();
                     return;
                 case "login":
-                    System.out.println(SignupAndLoginMessage.MAIN_MENU);
                     mainController.run();
                     break;
             }

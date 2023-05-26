@@ -10,7 +10,7 @@ public class Captcha {
         captcha = generateRandomCaptchaText();
         BufferedImage img = textToImage(captcha);
         showCaptcha(img);
-        System.out.println(captcha);
+//        System.out.println(captcha);
     }
 
     public static boolean isFilledCaptchaValid(String input) {
@@ -119,7 +119,7 @@ public class Captcha {
 
     private static void drawCircles(Graphics2D g2d, int width, int height) {
         for (int i = 0; i < 5; i++) {
-            int x = 10 + (int) (Math.random() * 10);
+            int x = (int) (Math.random() * 10);
             g2d.fillOval((int) (Math.random() * width), (int) (Math.random() * height), x, x);
         }
     }

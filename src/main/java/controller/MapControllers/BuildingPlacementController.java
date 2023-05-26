@@ -93,7 +93,7 @@ public class BuildingPlacementController {
                 building = new Building(reference, coordinate, owner);
                 break;
             case ENTRANCE:
-                building = new EntranceBuilding(reference, coordinate, owner);
+                building = new EntranceBuilding((EntranceBuilding) reference, coordinate, owner);
                 break;
         }
         return building;
@@ -157,13 +157,11 @@ public class BuildingPlacementController {
                 if (!hasTypeNearby(coordinate, MapAssetType.FOOD_STORAGE))
                     return BuildingPlacementMessage.NO_STOREHOUSE_NEARBY;
                 break;
-            default:
-                if (!map.getCell(coordinate).isEmpty()) return BuildingPlacementMessage.NOT_EMPTY;
-                CellType targetCellType = map.getCell(coordinate).getType();
-                if (!reference.isCellTypeValid(targetCellType))
-                    return BuildingPlacementMessage.INVALID_CELL_TYPE;
-
         }
+        if (!map.getCell(coordinate).isEmpty()) return BuildingPlacementMessage.NOT_EMPTY;
+        CellType targetCellType = map.getCell(coordinate).getType();
+        if (!reference.isCellTypeValid(targetCellType))
+            return BuildingPlacementMessage.INVALID_CELL_TYPE;
         return BuildingPlacementMessage.PLACEMENT_SIGHT_VALID;
     }
 

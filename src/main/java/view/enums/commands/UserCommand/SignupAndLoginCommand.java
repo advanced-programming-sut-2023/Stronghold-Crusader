@@ -15,8 +15,8 @@ public enum SignupAndLoginCommand {
     CHANGE_PASSWORD("\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\\S+|(\"[^\"]+\"))\\s*"),
     LOGOUT("\\s*logout\\s*"),
     EXIT("\\s*exit\\s*"),
-    LOGIN_MENU("\\s*login menu\\s*"),
-    SIGNUP_MENU("\\s*signup menu\\s*");
+    LOGIN_MENU("\\s*login\\s+menu\\s*"),
+    SIGNUP_MENU("\\s*signup\\s+menu\\s*");
 
     private final String regex;
 

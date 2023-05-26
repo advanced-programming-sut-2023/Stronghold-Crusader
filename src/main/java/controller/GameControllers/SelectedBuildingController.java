@@ -46,6 +46,7 @@ public class SelectedBuildingController {
     }
 
     public SelectedBuildingMessage repair() {
+        if (building.getHitPoint() == building.getMaxHitPoint()) return SelectedBuildingMessage.HP_FULL;
         if (player.getGovernance().getStorageStock(building.getNeededMaterial()) < materialNeededForRepair())
             return SelectedBuildingMessage.MATERIAL_NEEDED;
         if (isThereEnemy(1))
@@ -137,6 +138,7 @@ public class SelectedBuildingController {
     public SelectedBuildingMessage setFoodRate(int foodRate) {
         if (!building.getType().equals(MapAssetType.FOOD_STORAGE))
             return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
+
         if (foodRate > 2 || foodRate < -2)
             return SelectedBuildingMessage.INVALID_FOOD_RATE;
         player.getGovernance().setFoodRate(foodRate);

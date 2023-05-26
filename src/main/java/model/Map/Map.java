@@ -156,26 +156,38 @@ public class Map {
 
     public Vector2D[] findCowPatrolPath(Player currentPlayer) {
         Vector2D storeHouseCoord = null;
-        Vector2D ironMineCoord = null;
+        Vector2D quarryCoord = null;
         Vector2D currentCoord = new Vector2D(0, 0);
         for (int y = 0; y < size.y; y++) {
             for (int x = 0; x < size.x; x++) {
                 currentCoord.x = x;
                 currentCoord.y = y;
-                for (MapAsset asset : getCell(currentCoord).getAllAssets()) {
-                    if (asset.getType() == MapAssetType.STORE_HOUSE && asset.getOwner().equals(currentPlayer)) {
-                        storeHouseCoord = new Vector2D(currentCoord.x, currentCoord.y);
-                        if (ironMineCoord != null)
-                            return new Vector2D[]{ironMineCoord, storeHouseCoord};
-                    }
-                    if (asset.getType() == MapAssetType.IRON_MINE && asset.getOwner().equals(currentPlayer)) {
-                        ironMineCoord = new Vector2D(currentCoord.x, currentCoord.y);
-                        if (storeHouseCoord != null)
-                            return new Vector2D[]{ironMineCoord, storeHouseCoord};
-                    }
+                if (cellHasAsset(currentCoord, MapAssetType.STORE_HOUSE, currentPlayer, false)) {
+                    storeHouseCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                    if (quarryCoord != null)
+                        return new Vector2D[]{quarryCoord, storeHouseCoord};
+                }
+                if (cellHasAsset(currentCoord, MapAssetType.QUARRY, currentPlayer, false)) {
+                    quarryCoord = new Vector2D(currentCoord.x, currentCoord.y);
+                    if (storeHouseCoord != null)
+                        return new Vector2D[]{quarryCoord, storeHouseCoord};
                 }
             }
         }
         return null;
+    }
+
+    public boolean cellHasAsset(Vector2D coordinate, MapAssetType mapAssetType, Player owner, boolean excludeOwner) {
+        for (MapAsset asset : getCell(coordinate).getAllAssets()) {
+            if (asset.getType() == mapAssetType) {
+                if (owner == null)
+                    return true;
+                if (excludeOwner && !asset.getOwner().equals(owner))
+                    return true;
+                if (!excludeOwner && asset.getOwner().equals(owner))
+                    return true;
+            }
+        }
+        return false;
     }
 }

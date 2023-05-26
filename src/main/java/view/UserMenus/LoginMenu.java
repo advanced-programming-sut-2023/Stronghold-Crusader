@@ -36,7 +36,6 @@ public class LoginMenu {
                     return "exit";
                 case LOGIN:
                     if (loginCall(matcher)) return "login";
-                    break;
                 case CHANGE_PASSWORD:
                     changePasswordCall(matcher);
                     break;

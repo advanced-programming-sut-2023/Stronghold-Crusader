@@ -27,6 +27,7 @@ public class ConstantManager {
     private HashMap<MapAssetType, StorageBuilding> storageBuildings;
     private HashMap<MapAssetType, TrainingAndEmploymentBuilding> trainingAndEmploymentBuildings;
     private HashMap<MapAssetType, Building> normalBuildings;
+    private HashMap<MapAssetType, EntranceBuilding> entranceBuildings;
     private Tree tree;
     private Cliff cliff;
 
@@ -57,6 +58,7 @@ public class ConstantManager {
         fillAttackingUnits(data);
         fillMobileUnits(data);
         fillNormalBuildings(data);
+        fillEntranceBuildings(data);
         fillProductionBuildings(data);
         fillStorageBuildings(data);
         fillTrainingAndEmploymentBuildings(data);
@@ -65,7 +67,6 @@ public class ConstantManager {
         fillMarketConstants();
     }
 
-
     public MapAsset getAsset(MapAssetType type) {
         MapAsset asset;
         if (type == MapAssetType.CLIFF)
@@ -73,6 +74,8 @@ public class ConstantManager {
         if (type == MapAssetType.TREE)
             return tree;
         if ((asset = normalBuildings.get(type)) != null)
+            return asset;
+        if ((asset = entranceBuildings.get(type)) != null)
             return asset;
         if ((asset = attackingUnits.get(type)) != null)
             return asset;
@@ -95,6 +98,15 @@ public class ConstantManager {
         for (JsonElement unitJson : unitsArray) {
             Building building = new Gson().fromJson(unitJson, Building.class);
             normalBuildings.put(building.getType(), building);
+        }
+    }
+
+    private void fillEntranceBuildings(JsonObject data) {
+        entranceBuildings = new HashMap<>();
+        JsonArray unitsArray = data.getAsJsonArray(EntranceBuilding.class.getName());
+        for (JsonElement unitJson : unitsArray) {
+            EntranceBuilding building = new Gson().fromJson(unitJson, EntranceBuilding.class);
+            entranceBuildings.put(building.getType(), building);
         }
     }
 

@@ -31,17 +31,15 @@ public class MoveController {
             closedSet.add(current);
             for (Cell neighbor : map.getNeighbors(current)) {
                 if (!map.isTraversable(mobileUnit, map.getCell(current), neighbor)) continue;
-                if (closedSet.contains(neighbor.getCoordinate())) {
+                if (closedSet.contains(neighbor.getCoordinate()))
                     continue;
-                }
                 double tentativeGScore = gScore.get(current) + distance(current, neighbor.getCoordinate());
                 if (!openSet.contains(neighbor.getCoordinate()) || tentativeGScore < gScore.get(neighbor.getCoordinate())) {
                     cameFrom.put(neighbor.getCoordinate(), current);
                     gScore.put(neighbor.getCoordinate(), tentativeGScore);
                     fScore.put(neighbor.getCoordinate(), tentativeGScore + heuristic(neighbor.getCoordinate(), goal));
-                    if (!openSet.contains(neighbor.getCoordinate())) {
+                    if (!openSet.contains(neighbor.getCoordinate()))
                         openSet.add(neighbor.getCoordinate());
-                    }
                 }
             }
         }

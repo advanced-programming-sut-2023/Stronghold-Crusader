@@ -13,6 +13,7 @@ import model.MapAsset.Tree;
 import model.User.Player;
 import model.enums.*;
 import model.enums.AssetType.BuildingCategory;
+import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.UnitState;
 import utils.Vector2D;
@@ -134,7 +135,7 @@ public class ChangeEnvironmentController {
         MapMakerMessage msg = isDropSightValid(type, reference, coordinate);
         if (msg != MapMakerMessage.PLACEMENT_SIGHT_VALID) return msg;
 
-        BuildingCategory category = BuildingCategory.getCategory(typeName);
+        BuildingCategory category = BuildingType.getCategory(typeName);
         Building newBuilding = createBuilding(game.getCurrentPlayer(), coordinate, reference, category);
         map.addMapObject(coordinate, newBuilding);
         game.getCurrentPlayer().getGovernance().addAsset(newBuilding);
@@ -196,13 +197,11 @@ public class ChangeEnvironmentController {
                 if (!hasTypeNearby(coordinate, MapAssetType.FOOD_STORAGE))
                     return MapMakerMessage.NO_STOREHOUSE_NEARBY;
                 break;
-            default:
-                if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
-                CellType targetCellType = map.getCell(coordinate).getType();
-                if (!reference.isCellTypeValid(targetCellType))
-                    return MapMakerMessage.INVALID_CELL_TYPE;
-
         }
+        if (!map.getCell(coordinate).isEmpty()) return MapMakerMessage.NOT_EMPTY;
+        CellType targetCellType = map.getCell(coordinate).getType();
+        if (!reference.isCellTypeValid(targetCellType))
+            return MapMakerMessage.INVALID_CELL_TYPE;
         return MapMakerMessage.PLACEMENT_SIGHT_VALID;
     }
 
@@ -236,7 +235,7 @@ public class ChangeEnvironmentController {
                 building = new Building(reference, coordinate, owner);
                 break;
             case ENTRANCE:
-                building = new EntranceBuilding(reference, coordinate, owner);
+                building = new EntranceBuilding((EntranceBuilding) reference, coordinate, owner);
                 break;
         }
         return building;

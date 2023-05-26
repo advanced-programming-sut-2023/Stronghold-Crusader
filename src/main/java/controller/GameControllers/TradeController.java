@@ -68,12 +68,15 @@ public class TradeController {
         if (game.getCurrentPlayer().getNewTrades().size() == 0) return "You don't have any new trades";
         StringBuilder result = new StringBuilder();
         for (Trade trade : game.getCurrentPlayer().getNewTrades()) {
-            if (trade.getOwner().equals(game.getCurrentPlayer()))
+            if (trade.getOwner().equals(game.getCurrentPlayer())) {
                 result.append(trade.showAcceptedTrade()).append("\n");
+            }
         }
         result.append("new Trades :").append("\n");
         for (Trade trade : game.getCurrentPlayer().getNewTrades()) {
-            result.append(trade.toString()).append("\n");
+            if (!trade.getOwner().equals(game.getCurrentPlayer())) {
+                result.append(trade.toString()).append("\n");
+            }
         }
         game.getCurrentPlayer().getNewTrades().clear();
         return result.toString();
@@ -92,9 +95,9 @@ public class TradeController {
         if (trade.isAccepted())
             return TradeMenuMessage.ALREADY_ACCEPTED;
         game.getCurrentPlayer().getGovernance().changeStorageStock(material, -1 * amount);
-        game.getCurrentPlayer().getGovernance().changeGold(trade.getPrice());
+        trade.getOwner().getGovernance().changeGold(trade.getPrice());
         trade.setAcceptorMessage(inputs.get("message"));
-        trade.accept();
+        trade.accept(game.getCurrentPlayer());
         return TradeMenuMessage.ACCEPTED;
     }
 

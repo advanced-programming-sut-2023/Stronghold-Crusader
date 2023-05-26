@@ -58,16 +58,17 @@ public class Cell {
         if (!CellType.isTraversableByType(type)) return false;
         for (MapAsset mapAsset : assets) {
             if (mapAsset instanceof Building) {
-                if (mapAsset instanceof EntranceBuilding) {
-                    return ((EntranceBuilding) mapAsset).isOpen();
-                }
-                if (mapAsset instanceof Wall) return hasLadder((Wall) mapAsset)  ;
-                if(mapAsset.getType().equals(MapAssetType.QUARRY)) return mobileUnit.getType().equals(MapAssetType.OX_TETHER);
+                if (mapAsset.getType().equals(MapAssetType.KILLING_PIT)) continue;
+                if (mapAsset instanceof EntranceBuilding) return ((EntranceBuilding) mapAsset).isOpen();
+                if (mapAsset instanceof Wall) return hasLadder((Wall) mapAsset);
+                if (mapAsset.getType().equals(MapAssetType.QUARRY) || mapAsset.getType().equals(MapAssetType.STORE_HOUSE))
+                    return mobileUnit.getType().equals(MapAssetType.COW);
                 return (mapAsset.getType().equals(MapAssetType.STAIRS));
             }
         }
         return true;
     }
+
     private boolean hasLadder(Wall wall) {
         return wall.hasLadder(Direction.EAST) || wall.hasLadder(Direction.WEST) || wall.hasLadder(Direction.NORTH) ||
                 wall.hasLadder(Direction.SOUTH);

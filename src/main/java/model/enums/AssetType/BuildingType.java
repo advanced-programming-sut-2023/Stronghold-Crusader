@@ -32,8 +32,8 @@ public enum BuildingType {
     CATHEDRAL(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     TUNNELER_POST(BuildingCategory.TRAINING_AND_EMPLOYMENT),
     HOUSE(BuildingCategory.NORMAL),
-    SMALL_GATEHOUSE(BuildingCategory.NORMAL),
-    BIG_GATEHOUSE(BuildingCategory.NORMAL),
+    SMALL_GATEHOUSE(BuildingCategory.ENTRANCE),
+    BIG_GATEHOUSE(BuildingCategory.ENTRANCE),
     STORE(BuildingCategory.NORMAL),
     ARMOURY(BuildingCategory.STORAGE),
     FOOD_STORAGE(BuildingCategory.STORAGE),
@@ -43,7 +43,7 @@ public enum BuildingType {
     WALL(BuildingCategory.NORMAL),
     STAIRS(BuildingCategory.NORMAL),
     HAUNTING_GROUND(BuildingCategory.PRODUCTION),
-    DRAW_BRIDGE(BuildingCategory.NORMAL),
+    DRAW_BRIDGE(BuildingCategory.ENTRANCE),
     OX_TETHER(BuildingCategory.NORMAL),
     CAGED_WARDOG(BuildingCategory.NORMAL);
 

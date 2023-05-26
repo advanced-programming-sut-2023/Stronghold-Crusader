@@ -9,7 +9,7 @@ public enum MapMakerCommand {
     CLEAR_CELL("^\\s*clear\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)"),
     DROP_ROCK("^\\s*droprock\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-d\\s+(?<direction>\\S+)\\s*$"),
     DROP_TREE("^\\s*droptree\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*$"),
-    DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t(?<type>\\S+)\\s*"),
+    DROP_BUILDING("\\s*drop\\s+building\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*"),
     DROP_UNIT("\\s*drop\\s+unit\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*"),
 
     BACK("\\s*back\\s*");
