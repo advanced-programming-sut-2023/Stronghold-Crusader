@@ -2,29 +2,43 @@ package view.UserMenus;
 
 import controller.UserControllers.LoginController;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import utils.FormatValidation;
-import utils.SignupAndLoginUtils;
-import view.Menu;
-import view.enums.commands.UserCommand.SignupAndLoginCommand;
-import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.regex.Matcher;
 
-public class LoginMenu extends Application {
-    private final LoginController loginController;
-    private final Scanner scanner;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    public LoginMenu(LoginController loginController) {
-        this.loginController = loginController;
-        this.scanner = Menu.getScanner();
+
+public class LoginMenu extends Application implements Initializable {
+    private LoginController loginController;
+    public static Stage mainStage;
+
+
+    public static void main(String[] args) {
+        launch(args);
     }
-
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        mainStage = stage;
+        stage.setTitle("Stronghold");
+        URL url = LoginMenu.class.getResource("FXML/loginMenu.fxml");
+        AnchorPane anchorPane = FXMLLoader.load(url);
+        Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
+        stage.show();
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loginController = new LoginController();
+    }
+
+
 }

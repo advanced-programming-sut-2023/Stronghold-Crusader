@@ -3,7 +3,6 @@ package controller.UserControllers;
 import model.Stronghold;
 import model.User.User;
 import model.User.UserManager;
-import view.UserMenus.LoginMenu;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.time.LocalDateTime;
@@ -31,27 +30,7 @@ public class LoginController {
         return LocalDateTime.now().until(this.loginTime, ChronoUnit.SECONDS);
     }
 
-    public void run() {
-        currentUser = UserManager.getLoggedInUser();
-        if (currentUser != null) {
-            mainController = new MainController(currentUser);
-            mainController.run();
-        }
-        LoginMenu loginMenu = new LoginMenu(this);
-        while (true) {
-            switch (loginMenu.run()) {
-                case "exit":
-                    return;
-                case "signup menu":
-                    SignupController signupController = new SignupController();
-                    signupController.run();
-                    return;
-                case "login":
-                    mainController.run();
-                    break;
-            }
-        }
-    }
+
 
     public SignupAndLoginMessage login(HashMap<String, String> inputs) {
         currentUser = Stronghold.getInstance().getUser(inputs.get("username"));

@@ -1,12 +1,13 @@
-import controller.UserControllers.LoginController;
+import javafx.stage.Stage;
 import model.ConstantManager;
 import model.Stronghold;
+import view.UserMenus.LoginMenu;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Stronghold.load();
         ConstantManager.load();
-        LoginController controller = new LoginController();
-        controller.run();
+
+        new LoginMenu().start(new Stage());
     }
 }

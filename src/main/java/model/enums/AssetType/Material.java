@@ -32,7 +32,7 @@ public enum Material {
 
     public static Material getMaterial(String materialName) {
         for (Material m : Material.values()) {
-            if (m.name().equals(materialName))
+            if (m.name().equalsIgnoreCase(materialName))
                 return m;
         }
         return null;
