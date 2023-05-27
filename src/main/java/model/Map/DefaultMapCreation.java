@@ -1,3 +1,5 @@
+package model.Map;
+
 import model.ConstantManager;
 import model.Map.Map;
 import model.Map.MapManager;

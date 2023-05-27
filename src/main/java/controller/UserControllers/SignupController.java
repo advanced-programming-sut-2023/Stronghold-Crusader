@@ -24,7 +24,7 @@ public class SignupController {
                     return;
                 case "login menu":
                     LoginController loginController = new LoginController();
-                    loginController.run();
+//                    loginController.run();
                     break;
             }
         }

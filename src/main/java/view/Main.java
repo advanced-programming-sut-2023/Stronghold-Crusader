@@ -1,3 +1,5 @@
+package view;
+
 import javafx.stage.Stage;
 import model.ConstantManager;
 import model.Stronghold;
