@@ -5,6 +5,7 @@ import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
 import model.Game.Game;
 import model.Game.Governance;
+import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.ProductionBuilding;
@@ -77,15 +78,10 @@ public class GameController {
     }
 
     public String nextRound() {
+        processTunnels();
         processUnitDecisions();
         applyUnitDecisions();
-        ArrayList<Player> players = game.getPlayers();
-        for (int i = players.size() - 1; i >= 0; i--) {
-            Player player = players.get(i);
-            if (isPlayerDead(player)) deletePlayer(player);
-        }
-        if (game.getPlayers().size() == 1)
-            deletePlayer(game.getPlayers().get(0));
+        deleteDeadPlayers();
         if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return "endGame";
         return "continue";
     }
@@ -121,6 +117,40 @@ public class GameController {
         }
     }
 
+    private void processTunnels() {
+        Map map = game.getMap();
+        Vector2D currentCoord = new Vector2D(0, 0);
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                currentCoord.x = x;
+                currentCoord.y = y;
+                Cell cell = map.getCell(currentCoord);
+                cell.tunnelNextRound();
+                if (cell.tunnelToBeDestroyed()) {
+                    for (MapAsset asset : cell.getAllAssets()) {
+                        if (!(asset instanceof Building)) continue;
+                        eraseAsset(asset);
+                    }
+                }
+            }
+        }
+    }
+
+    private void processUnitDecisions() {
+        Map map = game.getMap();
+        Vector2D currentCoord = new Vector2D(0, 0);
+        for (int y = 0; y < map.getSize().y; y++) {
+            for (int x = 0; x < map.getSize().x; x++) {
+                currentCoord.x = x;
+                currentCoord.y = y;
+                for (MapAsset asset : map.getCell(currentCoord).getAllAssets()) {
+                    if (asset instanceof AttackingUnit) ((AttackingUnit) asset).processNextRoundMove(map);
+                    if (asset instanceof MobileUnit) ((MobileUnit) asset).findNextMoveDest(map);
+                }
+            }
+        }
+    }
+
     private void applyUnitDecisions() {
         Map map = game.getMap();
         Vector2D currentCoord = new Vector2D(0, 0);
@@ -131,12 +161,11 @@ public class GameController {
                 ArrayList<MapAsset> cellAssets = map.getCell(currentCoord).getAllAssets();
                 for (int i = cellAssets.size() - 1; i >= 0; i--) {
                     MapAsset asset = cellAssets.get(i);
-                    if (asset instanceof MobileUnit){
+                    if (asset instanceof MobileUnit) {
                         processMovement(map, (MobileUnit) asset);
                         processSteppedOnKillingPit(asset);
                     }
-                    if (asset instanceof AttackingUnit)
-                        processAttack((AttackingUnit) asset);
+                    if (asset instanceof AttackingUnit) processAttack((AttackingUnit) asset);
                 }
             }
         }
@@ -144,7 +173,7 @@ public class GameController {
 
     private void processSteppedOnKillingPit(MapAsset asset) {
         MapAsset steppedOnKillingPit = ((MobileUnit) asset).getSteppedOnKillingPit();
-        if(steppedOnKillingPit != null){
+        if (steppedOnKillingPit != null) {
             eraseAsset(asset);
             eraseAsset(steppedOnKillingPit);
         }
@@ -174,18 +203,14 @@ public class GameController {
             owner.getGovernance().removeAsset(asset);
     }
 
-    private void processUnitDecisions() {
-        Map map = game.getMap();
-        for (int y = 0; y < map.getSize().y; y++) {
-            for (int x = 0; x < map.getSize().x; x++) {
-                for (MapAsset asset : map.getCell(new Vector2D(x, y)).getAllAssets()) {
-                    if (asset instanceof AttackingUnit)
-                        ((AttackingUnit) asset).processNextRoundMove(map);
-                    if (asset instanceof MobileUnit)
-                        ((MobileUnit) asset).findNextMoveDest(map);
-                }
-            }
+    private void deleteDeadPlayers() {
+        ArrayList<Player> players = game.getPlayers();
+        for (int i = players.size() - 1; i >= 0; i--) {
+            Player player = players.get(i);
+            if (isPlayerDead(player)) deletePlayer(player);
         }
+        if (game.getPlayers().size() == 1)
+            deletePlayer(game.getPlayers().get(0));
     }
 
     public GameMenuMessage selectUnit(int x, int y) {

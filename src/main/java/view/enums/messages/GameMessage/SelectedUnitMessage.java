@@ -9,8 +9,11 @@ public enum SelectedUnitMessage {
     PATROL_SUCCESS("Successfully selected patrol destination"),
     MOVE_SUCCESS("Successfully selected move destination"),
     INVALID_COORDINATE("Invalid coordinate"),
-    INVALID_DESTINATION("your destination is unattainable"),
-    NO_PATH("there is not any path to the destination"),
+    INVALID_DESTINATION("Your destination is unattainable"),
+    NO_PATH("There is not any path to the destination"),
+    TUNNEL_NOT_NEARBY("Tunnel destination not in range"),
+    NO_WALLS_OR_TOWERS("No walls or tunnels exist in the destination"),
+    TUNNEL_PLACEMENT_SUCCESS("Successfully placed tunnel"),
     INVALID_COMMAND("Invalid command");
     private final String message;
 
