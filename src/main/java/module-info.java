@@ -5,7 +5,6 @@ module project.group {
     requires com.google.gson;
     requires java.desktop;
 
-    exports model;
     exports view;
     exports model.enums.AssetType to com.google.gson;
     exports model.enums to com.google.gson;
