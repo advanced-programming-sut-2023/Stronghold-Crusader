@@ -23,6 +23,10 @@ public class DefenseAndAttackBuilding extends Building {
         this.currentTroopCount += offset;
     }
 
+    public int getFireRange() {
+        return fireRange;
+    }
+
     @Override
     public String toString() {
         return super.toString() +

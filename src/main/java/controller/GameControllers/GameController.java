@@ -8,6 +8,7 @@ import model.Game.Governance;
 import model.Map.Cell;
 import model.Map.Map;
 import model.MapAsset.Building.Building;
+import model.MapAsset.Building.EntranceBuilding;
 import model.MapAsset.Building.ProductionBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
@@ -78,8 +79,7 @@ public class GameController {
     }
 
     public String nextRound() {
-        processTunnels();
-        processUnitDecisions();
+        processLogics();
         applyUnitDecisions();
         deleteDeadPlayers();
         if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return "endGame";
@@ -117,7 +117,7 @@ public class GameController {
         }
     }
 
-    private void processTunnels() {
+    private void processLogics() {
         Map map = game.getMap();
         Vector2D currentCoord = new Vector2D(0, 0);
         for (int y = 0; y < map.getSize().y; y++) {
@@ -125,29 +125,70 @@ public class GameController {
                 currentCoord.x = x;
                 currentCoord.y = y;
                 Cell cell = map.getCell(currentCoord);
-                cell.tunnelNextRound();
-                if (cell.tunnelToBeDestroyed()) {
-                    for (MapAsset asset : cell.getAllAssets()) {
-                        if (!(asset instanceof Building)) continue;
-                        eraseAsset(asset);
-                    }
-                }
+                processTunnel(cell);
+                processDrawBridge(map, cell);
+                processGateHouseOpening(cell);
+                processMobileShield(map, cell);
+                processUnitDecisions(map, cell);
             }
         }
     }
 
-    private void processUnitDecisions() {
-        Map map = game.getMap();
-        Vector2D currentCoord = new Vector2D(0, 0);
-        for (int y = 0; y < map.getSize().y; y++) {
-            for (int x = 0; x < map.getSize().x; x++) {
-                currentCoord.x = x;
-                currentCoord.y = y;
-                for (MapAsset asset : map.getCell(currentCoord).getAllAssets()) {
-                    if (asset instanceof AttackingUnit) ((AttackingUnit) asset).processNextRoundMove(map);
-                    if (asset instanceof MobileUnit) ((MobileUnit) asset).findNextMoveDest(map);
-                }
+    private void processMobileShield(Map map, Cell cell) {
+        Player mobileShieldOwner = null;
+        for (MapAsset asset : cell.getAllAssets())
+            if (asset.getType().equals(MapAssetType.MOBILE_SHIELD))
+                mobileShieldOwner = asset.getOwner();
+        if (mobileShieldOwner == null) return;
+        for (Cell nearbyCell : map.getNearbyCells(cell.getCoordinate(), 2))
+            for (MapAsset asset : nearbyCell.getAllAssets())
+                if (asset instanceof MobileUnit && asset.getOwner().equals(mobileShieldOwner))
+                    ((MobileUnit) asset).setNearMobileShield(true);
+    }
+
+    private void processGateHouseOpening(Cell cell) {
+        EntranceBuilding gateHouse = null;
+        for (MapAsset asset : cell.getAllAssets())
+            if (asset.getType().equals(MapAssetType.BIG_GATEHOUSE) || asset.getType().equals(MapAssetType.SMALL_GATEHOUSE))
+                gateHouse = (EntranceBuilding) asset;
+        if (gateHouse == null) return;
+        for (MapAsset asset : cell.getAllAssets()) {
+            if (asset instanceof MobileUnit && !asset.getOwner().equals(gateHouse.getOwner())) {
+                gateHouse.open();
+                gateHouse.setFlag(true);
+                return;
             }
+        }
+    }
+
+    private void processTunnel(Cell cell) {
+        cell.tunnelNextRound();
+        if (cell.tunnelToBeDestroyed()) {
+            for (MapAsset asset : cell.getAllAssets()) {
+                if (!(asset instanceof Building)) continue;
+                eraseAsset(asset);
+            }
+        }
+    }
+
+    private void processDrawBridge(Map map, Cell cell) {
+        Player drawBridgeOwner = null;
+        for (MapAsset asset : cell.getAllAssets())
+            if (asset.getType().equals(MapAssetType.DRAW_BRIDGE))
+                drawBridgeOwner = asset.getOwner();
+        if (drawBridgeOwner == null) return;
+        for (Cell nearbyCell : map.getNearbyCells(cell.getCoordinate(), 1)) {
+            for (MapAsset asset : nearbyCell.getAllAssets()) {
+                if (!(asset instanceof MobileUnit) || asset.getOwner().equals(drawBridgeOwner)) continue;
+                ((MobileUnit) asset).reduceMoveSpeed();
+            }
+        }
+    }
+
+    private void processUnitDecisions(Map map, Cell cell) {
+        for (MapAsset asset : cell.getAllAssets()) {
+            if (asset instanceof AttackingUnit) ((AttackingUnit) asset).processNextRoundDecision(map);
+            if (asset instanceof MobileUnit) ((MobileUnit) asset).findNextMoveDest(map);
         }
     }
 
@@ -163,7 +204,7 @@ public class GameController {
                     MapAsset asset = cellAssets.get(i);
                     if (asset instanceof MobileUnit) {
                         processMovement(map, (MobileUnit) asset);
-                        processSteppedOnKillingPit(asset);
+                        processSteppedOnKillingPit((MobileUnit) asset);
                     }
                     if (asset instanceof AttackingUnit) processAttack((AttackingUnit) asset);
                 }
@@ -171,8 +212,8 @@ public class GameController {
         }
     }
 
-    private void processSteppedOnKillingPit(MapAsset asset) {
-        MapAsset steppedOnKillingPit = ((MobileUnit) asset).getSteppedOnKillingPit();
+    private void processSteppedOnKillingPit(MobileUnit asset) {
+        MapAsset steppedOnKillingPit = asset.getSteppedOnKillingPit();
         if (steppedOnKillingPit != null) {
             eraseAsset(asset);
             eraseAsset(steppedOnKillingPit);

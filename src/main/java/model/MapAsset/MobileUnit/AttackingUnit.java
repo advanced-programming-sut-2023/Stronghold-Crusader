@@ -2,6 +2,7 @@ package model.MapAsset.MobileUnit;
 
 import model.Map.Cell;
 import model.Map.Map;
+import model.MapAsset.Building.DefenseAndAttackBuilding;
 import model.MapAsset.MapAsset;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
@@ -32,13 +33,14 @@ public class AttackingUnit extends MobileUnit {
         state = UnitState.STANDING;
     }
 
-    public void processNextRoundMove(Map map) {
+    public void processNextRoundDecision(Map map) {
         checkForTargetDeath();
         nextRoundAttackTarget = null;
         if (finalMoveDestination != null)
             return;
+        int turnAttackRange = attackRange + getTurnAttackRange(map);
         if (selectedAttackTarget != null) {
-            if (coordinate.getDistance(selectedAttackTarget.getCoordinate(), true) <= attackRange) {
+            if (coordinate.getDistance(selectedAttackTarget.getCoordinate(), true) <= turnAttackRange) {
                 finalMoveDestination = null;
                 nextRoundAttackTarget = selectedAttackTarget;
             } else {
@@ -47,7 +49,7 @@ public class AttackingUnit extends MobileUnit {
             }
             return;
         }
-        MapAsset attackTarget = findTarget(map, attackRange);
+        MapAsset attackTarget = findTarget(map, turnAttackRange);
         if (attackTarget != null) {
             if (state == UnitState.OFFENSIVE)
                 selectedAttackTarget = attackTarget;
@@ -63,6 +65,15 @@ public class AttackingUnit extends MobileUnit {
         }
         nextRoundAttackTarget = null;
         finalMoveDestination = null;
+    }
+
+    private int getTurnAttackRange(Map map) {
+        DefenseAndAttackBuilding standingTower = null;
+        for (MapAsset asset : map.getCell(getCoordinate()).getAllAssets())
+            if(asset instanceof DefenseAndAttackBuilding)
+                standingTower = (DefenseAndAttackBuilding) asset;
+        if(standingTower == null) return 0;
+        return standingTower.getFireRange();
     }
 
     private void checkForTargetDeath() {

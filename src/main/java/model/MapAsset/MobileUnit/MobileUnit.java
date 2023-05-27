@@ -1,8 +1,6 @@
 package model.MapAsset.MobileUnit;
 
-import model.Map.Cell;
 import model.Map.Map;
-import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
@@ -11,6 +9,8 @@ import utils.Vector2D;
 import java.util.LinkedList;
 
 public class MobileUnit extends MapAsset {
+    private boolean isMoveSpeedReduced;
+    private boolean isNearMobileShield;
     private final int moveSpeed;
     private final double defenceMultiplier;
     private final int engineersCount;
@@ -27,6 +27,8 @@ public class MobileUnit extends MapAsset {
         this.engineersCount = reference.engineersCount;
         this.canClimbLadder = reference.canClimbLadder;
         steppedOnKillingPit = null;
+        isMoveSpeedReduced = false;
+        isNearMobileShield = false;
     }
 
     public void move() {
@@ -54,7 +56,12 @@ public class MobileUnit extends MapAsset {
             nextMoveDestination = null;
             return;
         }
-        int finalDestIndex = Math.min(traversePath.size() - 1, moveSpeed);
+        int currentTurnMoveSpeed = moveSpeed;
+        if (isMoveSpeedReduced) {
+            currentTurnMoveSpeed = 1;
+            isMoveSpeedReduced = false;
+        }
+        int finalDestIndex = Math.min(traversePath.size() - 1, currentTurnMoveSpeed);
         nextMoveDestination = traversePath.get(finalDestIndex);
         for (int i = 0; i <= finalDestIndex; i++) {
             for (MapAsset asset : map.getCell(traversePath.get(i)).getAllAssets()) {
@@ -92,9 +99,18 @@ public class MobileUnit extends MapAsset {
         return canClimbLadder;
     }
 
+    public void reduceMoveSpeed() {
+        isMoveSpeedReduced = true;
+    }
+
+    public void setNearMobileShield(boolean isNearMobileShield){
+        this.isNearMobileShield = isNearMobileShield;
+    }
+
     @Override
     public void takeDamageFrom(AttackingUnit attacker) {
-        hitPoint -= attacker.getAttackDamage() * defenceMultiplier;
+        if (!isNearMobileShield)
+            hitPoint -= attacker.getAttackDamage() * defenceMultiplier;
     }
 
     @Override
