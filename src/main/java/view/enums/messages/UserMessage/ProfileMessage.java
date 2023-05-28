@@ -20,7 +20,7 @@ public enum ProfileMessage {
     EMAIL_EXISTS("Email already exists"),
     CAN_CHANGE_PASSWORD("true"),
     MAIN_MENU("Entered main menu");
-    private String message;
+    private final String message;
 
     private ProfileMessage(String message) {
         this.message = message;

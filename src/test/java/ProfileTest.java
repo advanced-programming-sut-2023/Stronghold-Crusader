@@ -61,7 +61,7 @@ public class ProfileTest {
     public void testChangePassword() {
         User user = loadForTest();
         ProfileController controller = new ProfileController(user);
-        controller.setCurrentUser(user);
+//        controller.setCurrentUser(user);
 
         ProfileMessage msg = controller.changePassword("newPass", "newPass1", "Hadie83@");
         Assertions.assertEquals(msg, ProfileMessage.CONFIRMATION_INCORRECT);
@@ -99,7 +99,7 @@ public class ProfileTest {
     public void testChangeEmail() {
         User user = loadForTest();
         ProfileController controller = new ProfileController(user);
-        controller.setCurrentUser(user);
+//        controller.setCurrentUser(user);
 
         ProfileMessage msg = controller.changeEmail("dibahadie2@gmail.com");
         Assertions.assertEquals(msg, ProfileMessage.EMAIL_EXISTS);

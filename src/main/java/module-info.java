@@ -5,7 +5,6 @@ module project.group {
     requires com.google.gson;
     requires java.desktop;
 
-    exports view;
     exports model.enums.AssetType to com.google.gson;
     exports model.enums to com.google.gson;
     opens model to com.google.gson;
@@ -16,6 +15,13 @@ module project.group {
     opens model.MapAsset to com.google.gson;
     opens model.Game to com.google.gson;
     opens model.Game.Store to com.google.gson;
-    opens view to javafx.fxml;
 
+    opens view.UserMenus to javafx.fxml;
+    opens view.GameMenus to javafx.fxml;
+    opens view.MapMenus to javafx.fxml;
+
+    exports view.UserMenus;
+    exports view.GameMenus;
+    exports view.MapMenus;
+    exports view;
 }

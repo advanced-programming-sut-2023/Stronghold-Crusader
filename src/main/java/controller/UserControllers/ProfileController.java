@@ -7,24 +7,18 @@ import view.UserMenus.ProfileMenu;
 import view.enums.messages.UserMessage.ProfileMessage;
 
 public class ProfileController {
-    private User currentUser;
-    private final Stronghold stronghold = Stronghold.getInstance();
+    private final User currentUser;
 
     public ProfileController(User currentUser) {
         this.currentUser = currentUser;
     }
 
-    public void run() {
-        ProfileMenu profileMenu = new ProfileMenu(this);
-        while (true) {
-            if (profileMenu.run().equals("mainMenu")) return;
-        }
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     public ProfileMessage changeUsername(String newUsername) {
-        if (!FormatValidation.isFormatValid(newUsername, FormatValidation.USERNAME))
-            return ProfileMessage.INVALID_USERNAME_FORMAT;
-        if (stronghold.userExists(newUsername)) return ProfileMessage.USERNAME_TAKEN;
+        if (Stronghold.getInstance().userExists(newUsername)) return ProfileMessage.USERNAME_TAKEN;
         currentUser.changeUsername(newUsername);
         return ProfileMessage.USERNAME_CHANGE_SUCCESS;
     }
@@ -51,9 +45,7 @@ public class ProfileController {
     }
 
     public ProfileMessage changeEmail(String newEmail) {
-        if (stronghold.emailExists(newEmail)) return ProfileMessage.EMAIL_EXISTS;
-        if (!FormatValidation.isFormatValid(newEmail, FormatValidation.EMAIL))
-            return ProfileMessage.INVALID_EMAIL_FORMAT;
+        if (Stronghold.getInstance().emailExists(newEmail)) return ProfileMessage.EMAIL_EXISTS;
         currentUser.changeEmail(newEmail);
         return ProfileMessage.EMAIL_CHANGE_SUCCESS;
     }
@@ -73,7 +65,7 @@ public class ProfileController {
     }
 
     public int displayRank() {
-        return stronghold.getUserRank(currentUser);
+        return Stronghold.getInstance().getUserRank(currentUser);
     }
 
     public String displaySlogan() {
@@ -82,9 +74,5 @@ public class ProfileController {
 
     public String displayUserInfo() {
         return currentUser.toString();
-    }
-
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
     }
 }

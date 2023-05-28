@@ -1,101 +1,147 @@
 package view.UserMenus;
 
 import controller.UserControllers.ProfileController;
-import view.Menu;
-import view.enums.commands.UserCommand.ProfileCommand;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import model.Stronghold;
+import model.User.User;
+import utils.FormatValidation;
 import view.enums.messages.UserMessage.ProfileMessage;
 
-import java.util.Scanner;
-import java.util.regex.Matcher;
+public class ProfileMenu extends Application {
+    private static Stage stage;
+    private static Pane rootPane;
+    private static ProfileController controller = new ProfileController(new User("hi", "bye",
+            "asnx@gmail.com", "dns", "hoe"));
+    public TextField usernameTextField;
+    public TextField nicknameTextField;
+    public TextField emailTextField;
+    public Button usernameChangeButton;
+    public Button nicknameChangeButton;
+    public Button emailChangeButton;
+    public Label usernameError;
+    public Label nicknameError;
+    public Label emailError;
+    public AnchorPane containingPane;
+    public AnchorPane popUpPane;
+    public Label popUpLabel;
 
-public class ProfileMenu {
-    private final ProfileController profileController;
-    private final Scanner scanner;
-
-    public ProfileMenu(ProfileController profileController) {
-        this.profileController = profileController;
-        this.scanner = Menu.getScanner();
+    public static void setProfileController(ProfileController profileController) {
+        ProfileMenu.controller = profileController;
     }
 
-    public String run() {
-        String input;
-        while (true) {
-            input = scanner.nextLine();
-            ProfileCommand cmd = ProfileCommand.getCommand(input);
-            if (cmd == null) {
-                ProfileMessage.printMessage(ProfileMessage.INVALID_COMMAND);
-                continue;
-            }
-            Matcher matcher = ProfileCommand.getMatcher(input, cmd);
-            switch (cmd) {
-                case CHANGE_USERNAME:
-                    runChangeUsername(matcher);
-                    break;
-                case CHANGE_NICKNAME:
-                    runChangeNickname(matcher);
-                    break;
-                case CHANGE_PASSWORD:
-                    runChangePassword(matcher);
-                    break;
-                case CHANGE_EMAIL:
-                    runChangeEmail(matcher);
-                    break;
-                case CHANGE_SLOGAN:
-                    runChangeSlogan(matcher);
-                    break;
-                case DISPLAY_HIGHSCORE:
-                    System.out.println(profileController.displayHighscore());
-                    break;
-                case DISPLAY_RANK:
-                    System.out.println(profileController.displayRank());
-                    break;
-                case DISPLAY_SLOGAN:
-                    System.out.println(profileController.displaySlogan());
-                    break;
-                case PROFILE_INFO:
-                    System.out.println(profileController.displayUserInfo());
-                    break;
-                case REMOVE_SLOGAN:
-                    System.out.println(profileController.removeSlogan());
-                    break;
-                case BACK:
-                    System.out.println(ProfileMessage.MAIN_MENU.getMessage());
-                    return "mainMenu";
-                default:
-                    ProfileMessage.printMessage(ProfileMessage.INVALID_COMMAND);
-                    break;
+    @Override
+    public void start(Stage stage) throws Exception {
+        Stronghold.load();
+        rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/profileMenu.fxml"));
+        rootPane.setBackground(new Background(new BackgroundImage(new Image(
+                ProfileMenu.class.getResource("/assets/backgrounds/profileMenu.jpg").toExternalForm()),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false))));
+        stage.setScene(new Scene(rootPane));
+        ProfileMenu.stage = stage;
+        stage.setResizable(false);
+        stage.setFullScreen(true);
+        stage.show();
+    }
+
+    @FXML
+    private void initialize() {
+        containingPane.setBackground(new Background(new BackgroundFill(Color.SADDLEBROWN, new CornerRadii(30), null)));
+        popUpPane.setVisible(false);
+        popUpPane.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(20), null)));
+        usernameTextField.setText(controller.getCurrentUser().getUsername());
+        emailTextField.setText(controller.getCurrentUser().getEmail());
+        nicknameTextField.setText(controller.getCurrentUser().getNickname());
+        usernameChangeButton.setOnAction(actionEvent -> usernameChangeClicked());
+        emailChangeButton.setOnAction(actionEvent -> emailChangeClicked());
+        nicknameChangeButton.setOnAction(actionEvent -> nicknameChangeClicked());
+        usernameTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!FormatValidation.isFormatValid(newValue, FormatValidation.USERNAME))
+                usernameError.setText(ProfileMessage.INVALID_USERNAME_FORMAT.getMessage());
+            else
+                usernameError.setText("");
+        });
+        emailTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!FormatValidation.isFormatValid(newValue, FormatValidation.EMAIL))
+                emailError.setText(ProfileMessage.INVALID_EMAIL_FORMAT.getMessage());
+            else
+                emailError.setText("");
+        });
+
+    }
+
+    private void usernameChangeClicked() {
+        if (usernameTextField.isDisabled()) {
+            usernameTextField.setDisable(false);
+            usernameChangeButton.setText("Confirm");
+        } else {
+            if (!usernameError.getText().equals("")) return;
+            ProfileMessage resultMessage = controller.changeUsername(usernameTextField.getText());
+            showPopUp(resultMessage.getMessage());
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), actionEvent -> hidePopUp()));
+            timeline.play();
+            if (resultMessage.equals(ProfileMessage.USERNAME_CHANGE_SUCCESS)) {
+                usernameTextField.setDisable(true);
+                usernameChangeButton.setText("Change");
             }
         }
     }
 
-    private void runChangeUsername(Matcher matcher) {
-        String newUsername = matcher.group("newUsername");
-        System.out.println(profileController.changeUsername(newUsername).getMessage());
+    private void nicknameChangeClicked() {
+        if (nicknameTextField.isDisabled()) {
+            nicknameTextField.setDisable(false);
+            nicknameChangeButton.setText("Confirm");
+        } else {
+            if (!nicknameError.getText().equals("")) return;
+            ProfileMessage resultMessage = controller.changeNickname(nicknameTextField.getText());
+            showPopUp(resultMessage.getMessage());
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), actionEvent -> hidePopUp()));
+            timeline.play();
+            if (resultMessage.equals(ProfileMessage.NICKNAME_CHANGE_SUCCESS)) {
+                nicknameTextField.setDisable(true);
+                nicknameChangeButton.setText("Change");
+            }
+        }
     }
 
-    private void runChangeNickname(Matcher matcher) {
-        String newNickname = matcher.group("newNickname");
-        System.out.println(profileController.changeNickname(newNickname).getMessage());
+    private void emailChangeClicked() {
+        if (emailTextField.isDisabled()) {
+            emailTextField.setDisable(false);
+            emailChangeButton.setText("Confirm");
+        } else {
+            if (!emailError.getText().equals("")) return;
+            ProfileMessage resultMessage = controller.changeEmail(emailTextField.getText());
+            showPopUp(resultMessage.getMessage());
+            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), actionEvent1 -> hidePopUp()));
+            timeline.play();
+            if (resultMessage.equals(ProfileMessage.USERNAME_CHANGE_SUCCESS)) {
+                emailTextField.setDisable(true);
+                emailChangeButton.setText("Change");
+            }
+        }
     }
 
-    private void runChangePassword(Matcher matcher) {
-        String oldPass = matcher.group("oldPass");
-        String newPass = matcher.group("newPass");
-        String canChangePass = profileController.canChangePassword(oldPass, newPass).getMessage();
-        if (canChangePass.equals("true")) {
-            System.out.println(ProfileMessage.ENTER_NEWPASS_AGAIN.getMessage());
-            String confirmation = scanner.nextLine();
-            System.out.println(profileController.changePassword(newPass, confirmation, oldPass));
-        } else System.out.println(canChangePass);
+    private void showPopUp(String text) {
+        popUpPane.setVisible(true);
+        popUpLabel.setText(text);
     }
 
-    private void runChangeEmail(Matcher matcher) {
-        String newEmail = matcher.group("email");
-        System.out.println(profileController.changeEmail(newEmail).getMessage());
+    private void hidePopUp() {
+        popUpPane.setVisible(false);
+        popUpLabel.setText("");
     }
 
-    private void runChangeSlogan(Matcher matcher) {
-        String newSlogan = matcher.group("slogan");
-        System.out.println(profileController.changeSlogan(newSlogan).getMessage());
-    }
 }
