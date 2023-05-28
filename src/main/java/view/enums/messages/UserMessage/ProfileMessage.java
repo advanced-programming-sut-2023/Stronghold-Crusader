@@ -5,6 +5,7 @@ public enum ProfileMessage {
     INVALID_USERNAME_FORMAT("Invalid username"),
     INVALID_PASSWORD_FORMAT("Invalid password"),
     INVALID_EMAIL_FORMAT("Invalid email"),
+    INVALID_CAPTCHA("Invalid captcha"),
     INVALID_PASSWORD_LENGTH("Invalid password length"),
     USERNAME_TAKEN("User with given name already exists"),
     USERNAME_CHANGE_SUCCESS("Username changed successfully"),
@@ -13,8 +14,7 @@ public enum ProfileMessage {
     EMAIL_CHANGE_SUCCESS("Email changed successfully"),
     SLOGAN_CHANGE_SUCCESS("Slogan changed successfully"),
     SLOGAN_REMOVAL_SUCCESS("Slogan changed successfully"),
-    PASSWORD_INCORRECT("Current password is incorrect!"),
-    CONFIRMATION_INCORRECT("Password confirmation is incorrect"),
+    PASSWORD_INCORRECT("Old password is incorrect!"),
     PASSWORD_NOT_NEW("Please enter a new password!"),
     ENTER_NEWPASS_AGAIN("Please enter your new password again"),
     EMAIL_EXISTS("Email already exists"),
@@ -22,7 +22,7 @@ public enum ProfileMessage {
     MAIN_MENU("Entered main menu");
     private final String message;
 
-    private ProfileMessage(String message) {
+    ProfileMessage(String message) {
         this.message = message;
     }
 

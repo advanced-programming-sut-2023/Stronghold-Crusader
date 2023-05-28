@@ -1,16 +1,17 @@
 package utils;
 
+import javafx.scene.image.Image;
+
+import javafx.embed.swing.SwingFXUtils;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Captcha {
     private static String captcha;
-
-    public static void generateCaptcha() {
+    public static Image generateCaptcha() {
         captcha = generateRandomCaptchaText();
-        BufferedImage img = textToImage(captcha);
-        showCaptcha(img);
-//        System.out.println(captcha);
+        return SwingFXUtils.toFXImage(textToImage(captcha), null);
     }
 
     public static boolean isFilledCaptchaValid(String input) {
@@ -26,22 +27,6 @@ public class Captcha {
             captcha.append(lettersAndNumbers.charAt(character));
         }
         return captcha.toString();
-    }
-
-    private static void showCaptcha(BufferedImage img) {
-        for (int y = 0; y < img.getHeight(); y++) {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            for (int x = 0; x < img.getWidth(); x++) {
-                stringBuilder.append(img.getRGB(x, y) == -16777216 ? "*" : " ");
-            }
-
-            if (stringBuilder.toString().trim().isEmpty()) {
-                continue;
-            }
-
-            System.out.println(stringBuilder);
-        }
     }
 
     private static BufferedImage textToImage(String displayCode) {

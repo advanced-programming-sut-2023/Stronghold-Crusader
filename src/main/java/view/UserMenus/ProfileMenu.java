@@ -9,14 +9,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Stronghold;
 import model.User.User;
+import utils.Captcha;
 import utils.FormatValidation;
 import view.enums.messages.UserMessage.ProfileMessage;
 
@@ -37,6 +40,12 @@ public class ProfileMenu extends Application {
     public AnchorPane containingPane;
     public AnchorPane popUpPane;
     public Label popUpLabel;
+    public AnchorPane passwordPane;
+    public PasswordField oldPasswordField;
+    public PasswordField newPasswordField;
+    public TextField captchaField;
+    public Label newPasswordError;
+    public ImageView captchaImageView;
 
     public static void setProfileController(ProfileController profileController) {
         ProfileMenu.controller = profileController;
@@ -60,14 +69,22 @@ public class ProfileMenu extends Application {
     @FXML
     private void initialize() {
         containingPane.setBackground(new Background(new BackgroundFill(Color.SADDLEBROWN, new CornerRadii(30), null)));
-        popUpPane.setVisible(false);
         popUpPane.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(20), null)));
+        passwordPane.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(10), null)));
         usernameTextField.setText(controller.getCurrentUser().getUsername());
         emailTextField.setText(controller.getCurrentUser().getEmail());
         nicknameTextField.setText(controller.getCurrentUser().getNickname());
         usernameChangeButton.setOnAction(actionEvent -> usernameChangeClicked());
         emailChangeButton.setOnAction(actionEvent -> emailChangeClicked());
         nicknameChangeButton.setOnAction(actionEvent -> nicknameChangeClicked());
+        newPasswordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (!FormatValidation.isFormatValid(newValue, FormatValidation.PASSWORD_LENGTH))
+                newPasswordError.setText(ProfileMessage.INVALID_PASSWORD_LENGTH.getMessage());
+            else if (!FormatValidation.isFormatValid(newValue, FormatValidation.PASSWORD_LETTERS))
+                newPasswordError.setText(ProfileMessage.INVALID_PASSWORD_FORMAT.getMessage());
+            else
+                newPasswordError.setText("");
+        });
         usernameTextField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!FormatValidation.isFormatValid(newValue, FormatValidation.USERNAME))
                 usernameError.setText(ProfileMessage.INVALID_USERNAME_FORMAT.getMessage());
@@ -88,11 +105,10 @@ public class ProfileMenu extends Application {
             usernameTextField.setDisable(false);
             usernameChangeButton.setText("Confirm");
         } else {
-            if (!usernameError.getText().equals("")) return;
+            if (!usernameError.getText().isEmpty()) return;
             ProfileMessage resultMessage = controller.changeUsername(usernameTextField.getText());
             showPopUp(resultMessage.getMessage());
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), actionEvent -> hidePopUp()));
-            timeline.play();
+            new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> hidePopUp())).play();
             if (resultMessage.equals(ProfileMessage.USERNAME_CHANGE_SUCCESS)) {
                 usernameTextField.setDisable(true);
                 usernameChangeButton.setText("Change");
@@ -105,11 +121,10 @@ public class ProfileMenu extends Application {
             nicknameTextField.setDisable(false);
             nicknameChangeButton.setText("Confirm");
         } else {
-            if (!nicknameError.getText().equals("")) return;
+            if (!nicknameError.getText().isEmpty()) return;
             ProfileMessage resultMessage = controller.changeNickname(nicknameTextField.getText());
             showPopUp(resultMessage.getMessage());
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), actionEvent -> hidePopUp()));
-            timeline.play();
+            new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> hidePopUp())).play();
             if (resultMessage.equals(ProfileMessage.NICKNAME_CHANGE_SUCCESS)) {
                 nicknameTextField.setDisable(true);
                 nicknameChangeButton.setText("Change");
@@ -122,16 +137,38 @@ public class ProfileMenu extends Application {
             emailTextField.setDisable(false);
             emailChangeButton.setText("Confirm");
         } else {
-            if (!emailError.getText().equals("")) return;
+            if (!emailError.getText().isEmpty()) return;
             ProfileMessage resultMessage = controller.changeEmail(emailTextField.getText());
             showPopUp(resultMessage.getMessage());
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), actionEvent1 -> hidePopUp()));
-            timeline.play();
+            new Timeline(new KeyFrame(Duration.seconds(2), actionEvent1 -> hidePopUp())).play();
             if (resultMessage.equals(ProfileMessage.USERNAME_CHANGE_SUCCESS)) {
                 emailTextField.setDisable(true);
                 emailChangeButton.setText("Change");
             }
         }
+    }
+
+    public void changePasswordClicked() {
+        passwordPane.setVisible(true);
+        oldPasswordField.requestFocus();
+        captchaImageView.setImage(Captcha.generateCaptcha());
+    }
+
+    public void confirmPasswordClicked() {
+        if (!newPasswordError.getText().isEmpty()) return;
+        ProfileMessage resultMessage = controller.changePassword(newPasswordField.getText(),
+                oldPasswordField.getText(), captchaField.getText());
+        showPopUp(resultMessage.getMessage());
+        new Timeline(new KeyFrame(Duration.seconds(2), actionEvent1 -> hidePopUp())).play();
+        if (resultMessage.equals(ProfileMessage.PASSWORD_CHANGE_SUCCESS)) hidePasswordPane();
+    }
+
+    public void hidePasswordPane() {
+        passwordPane.setVisible(false);
+        oldPasswordField.clear();
+        newPasswordField.clear();
+        captchaField.clear();
+        newPasswordError.setText("");
     }
 
     private void showPopUp(String text) {
@@ -143,5 +180,4 @@ public class ProfileMenu extends Application {
         popUpPane.setVisible(false);
         popUpLabel.setText("");
     }
-
 }

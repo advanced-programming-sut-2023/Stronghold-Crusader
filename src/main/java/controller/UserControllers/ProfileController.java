@@ -2,6 +2,7 @@ package controller.UserControllers;
 
 import model.Stronghold;
 import model.User.User;
+import utils.Captcha;
 import utils.FormatValidation;
 import view.UserMenus.ProfileMenu;
 import view.enums.messages.UserMessage.ProfileMessage;
@@ -28,18 +29,10 @@ public class ProfileController {
         return ProfileMessage.NICKNAME_CHANGE_SUCCESS;
     }
 
-    public ProfileMessage canChangePassword(String oldPass, String newPass) {
+    public ProfileMessage changePassword(String newPass, String oldPass, String captcha) {
+        if(!Captcha.isFilledCaptchaValid(captcha)) return ProfileMessage.INVALID_CAPTCHA;
         if (!currentUser.isPasswordCorrect(oldPass)) return ProfileMessage.PASSWORD_INCORRECT;
-        if (!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LETTERS))
-            return ProfileMessage.INVALID_PASSWORD_FORMAT;
-        if (!FormatValidation.isFormatValid(newPass, FormatValidation.PASSWORD_LENGTH))
-            return ProfileMessage.INVALID_PASSWORD_LENGTH;
         if (oldPass.equals(newPass)) return ProfileMessage.PASSWORD_NOT_NEW;
-        return ProfileMessage.CAN_CHANGE_PASSWORD;
-    }
-
-    public ProfileMessage changePassword(String newPass, String passConfirm, String oldPass) {
-        if (!passConfirm.equals(newPass)) return ProfileMessage.CONFIRMATION_INCORRECT;
         currentUser.setPassword(newPass);
         return ProfileMessage.PASSWORD_CHANGE_SUCCESS;
     }
