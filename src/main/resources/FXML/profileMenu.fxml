@@ -6,7 +6,10 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.ProfileMenu">
-    <AnchorPane fx:id="containingPane" layoutX="348.0" layoutY="104.0" prefHeight="431.0" prefWidth="584.0">
+    <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true">
+        <Image url="@../../../../../../../../Users/Ayeen/Pictures/Saved Pictures/photo_2020-10-12_17-27-02.jpg" />
+    </ImageView>
+    <AnchorPane fx:id="containingPane" layoutX="348.0" layoutY="104.0" prefHeight="505.0" prefWidth="584.0">
         <Label layoutX="170.0" layoutY="36.0" text="Profile Menu">
             <font>
                 <Font name="Book Antiqua Bold" size="40.0" />
@@ -47,12 +50,23 @@
                 <Font name="Book Antiqua" size="16.0" />
             </font>
         </Button>
-        <Button layoutX="64.0" layoutY="364.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Change avatar">
+        <TextField fx:id="sloganTextField" disable="true" layoutX="231.0" layoutY="356.0" prefHeight="32.0" prefWidth="181.0" promptText="Slogan is empty" />
+        <Button fx:id="sloganChangeButton" layoutX="420.0" layoutY="356.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Change">
             <font>
                 <Font name="Book Antiqua" size="16.0" />
             </font>
         </Button>
-        <Button layoutX="226.0" layoutY="364.0" mnemonicParsing="false" onAction="#changePasswordClicked" prefHeight="32.0" prefWidth="175.0" text="Change Password">
+        <Button layoutX="420.0" layoutY="393.0" mnemonicParsing="false" onAction="#sloganClear" prefHeight="32.0" prefWidth="100.0" text="Clear">
+            <font>
+                <Font name="Book Antiqua" size="16.0" />
+            </font>
+        </Button>
+        <Button layoutX="64.0" layoutY="440.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="150.0" text="Change avatar">
+            <font>
+                <Font name="Book Antiqua" size="16.0" />
+            </font>
+        </Button>
+        <Button layoutX="226.0" layoutY="440.0" mnemonicParsing="false" onAction="#changePasswordClicked" prefHeight="32.0" prefWidth="175.0" text="Change Password">
             <font>
                 <Font name="Book Antiqua" size="16.0" />
             </font>
@@ -72,6 +86,11 @@
                 <Font size="13.0" />
             </font>
         </Label>
+        <Label fx:id="sloganError" layoutX="239.0" layoutY="390.0">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
         <Label layoutX="64.0" layoutY="207.0" prefHeight="39.0" prefWidth="127.0" text="Nickname">
             <font>
                 <Font name="Book Antiqua Bold" size="25.0" />
@@ -82,15 +101,17 @@
                 <Font name="Book Antiqua Bold" size="25.0" />
             </font>
         </Label>
-        <Button layoutX="420.0" layoutY="364.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Back">
+        <Label layoutX="64.0" layoutY="352.0" prefHeight="39.0" prefWidth="127.0" text="Slogan">
+            <font>
+                <Font name="Book Antiqua Bold" size="25.0" />
+            </font>
+        </Label>
+        <Button layoutX="420.0" layoutY="440.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Back">
             <font>
                 <Font name="Book Antiqua" size="16.0" />
             </font>
         </Button>
     </AnchorPane>
-    <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true">
-        <Image url="@../../../../../../../../Users/Ayeen/Pictures/Saved Pictures/photo_2020-10-12_17-27-02.jpg" />
-    </ImageView>
 
     <AnchorPane fx:id="popUpPane" layoutX="457.0" layoutY="308.0" prefHeight="112.0" prefWidth="365.0" visible="false">
         <Label fx:id="popUpLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="13.0" prefHeight="85.0" prefWidth="359.0" text="POP UP" wrapText="true">

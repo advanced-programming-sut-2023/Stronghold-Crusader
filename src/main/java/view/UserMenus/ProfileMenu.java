@@ -4,6 +4,7 @@ import controller.UserControllers.ProfileController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,7 +28,7 @@ public class ProfileMenu extends Application {
     private static Stage stage;
     private static Pane rootPane;
     private static ProfileController controller = new ProfileController(new User("hi", "bye",
-            "asnx@gmail.com", "dns", "hoe"));
+            "asnx@gmail.com", "dns", ""));
     public TextField usernameTextField;
     public TextField nicknameTextField;
     public TextField emailTextField;
@@ -46,6 +47,9 @@ public class ProfileMenu extends Application {
     public TextField captchaField;
     public Label newPasswordError;
     public ImageView captchaImageView;
+    public TextField sloganTextField;
+    public Button sloganChangeButton;
+    public Label sloganError;
 
     public static void setProfileController(ProfileController profileController) {
         ProfileMenu.controller = profileController;
@@ -74,9 +78,11 @@ public class ProfileMenu extends Application {
         usernameTextField.setText(controller.getCurrentUser().getUsername());
         emailTextField.setText(controller.getCurrentUser().getEmail());
         nicknameTextField.setText(controller.getCurrentUser().getNickname());
+        sloganTextField.setText(controller.getCurrentUser().getSlogan());
         usernameChangeButton.setOnAction(actionEvent -> usernameChangeClicked());
         emailChangeButton.setOnAction(actionEvent -> emailChangeClicked());
         nicknameChangeButton.setOnAction(actionEvent -> nicknameChangeClicked());
+        sloganChangeButton.setOnAction(actionEvent -> sloganChangeClicked());
         newPasswordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!FormatValidation.isFormatValid(newValue, FormatValidation.PASSWORD_LENGTH))
                 newPasswordError.setText(ProfileMessage.INVALID_PASSWORD_LENGTH.getMessage());
@@ -98,6 +104,22 @@ public class ProfileMenu extends Application {
                 emailError.setText("");
         });
 
+    }
+
+    private void sloganChangeClicked() {
+        if (sloganTextField.isDisabled()) {
+            sloganTextField.setDisable(false);
+            sloganChangeButton.setText("Confirm");
+        } else {
+            if (!sloganError.getText().isEmpty()) return;
+            ProfileMessage resultMessage = controller.changeSlogan(sloganTextField.getText());
+            showPopUp(resultMessage.getMessage());
+            new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> hidePopUp())).play();
+            if (resultMessage.equals(ProfileMessage.SLOGAN_CHANGE_SUCCESS)) {
+                sloganTextField.setDisable(true);
+                sloganChangeButton.setText("Change");
+            }
+        }
     }
 
     private void usernameChangeClicked() {
@@ -169,6 +191,13 @@ public class ProfileMenu extends Application {
         newPasswordField.clear();
         captchaField.clear();
         newPasswordError.setText("");
+    }
+
+    public void sloganClear() {
+        sloganTextField.clear();
+        ProfileMessage resultMessage = controller.removeSlogan();
+        showPopUp(resultMessage.getMessage());
+        new Timeline(new KeyFrame(Duration.seconds(2), actionEvent -> hidePopUp())).play();
     }
 
     private void showPopUp(String text) {
