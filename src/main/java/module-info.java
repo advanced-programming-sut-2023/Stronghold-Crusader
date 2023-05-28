@@ -2,6 +2,7 @@ module project.group {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.media;
+    requires javafx.swing;
     requires com.google.gson;
     requires java.desktop;
 
@@ -24,4 +25,5 @@ module project.group {
     exports view.GameMenus;
     exports view.MapMenus;
     exports view;
+
 }
