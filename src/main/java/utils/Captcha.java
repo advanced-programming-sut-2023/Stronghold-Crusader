@@ -66,15 +66,7 @@ public class Captcha {
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         return img;
-        //png file:
-//        try {
-//            File output = new File("binary_image.png");
-//            ImageIO.write(img, "png", output);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-    }
+     }
 
     private static Point generateRandomPoint(int width, int height) {
         int side = (int) (Math.random() * 3); //0=top, 1=bot, 2=left, 3=right
@@ -111,7 +103,7 @@ public class Captcha {
 
     private static void makeNoise(Graphics2D g2d, int width, int height) {
         drawCircles(g2d, width, height);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             Point rand1 = generateRandomPoint(width, height);
             Point rand2 = generateRandomPoint(width, height);
             g2d.drawLine(rand1.x, rand1.y, rand2.x, rand2.y);
