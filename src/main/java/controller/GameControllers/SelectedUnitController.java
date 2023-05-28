@@ -1,9 +1,12 @@
 package controller.GameControllers;
 
 import model.Game.Game;
+import model.Map.Cell;
+import model.MapAsset.Building.DefenseAndAttackBuilding;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
+import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.UnitState;
 import model.enums.AttackTarget;
 import utils.Vector2D;
@@ -88,6 +91,27 @@ public class SelectedUnitController {
         }
         if (hasSet) return SelectedUnitMessage.TARGET_SELECT_SUCCESS;
         return SelectedUnitMessage.NO_TARGET;
+    }
+
+    public SelectedUnitMessage digTunnel(int x, int y){
+        Vector2D coordinate = new Vector2D(x, y);
+        if (!game.getMap().isInMap(coordinate)) return SelectedUnitMessage.INVALID_COORDINATE;
+        Cell selectedCell = game.getMap().getCell(coordinate);
+        boolean isCellNeighbour = false;
+        for (Cell nearbyCell : game.getMap().getNearbyCells(coordinate, 1)) {
+            if(nearbyCell.equals(selectedCell)){
+                isCellNeighbour = true;
+                break;
+            }
+        }
+        if(!isCellNeighbour) return SelectedUnitMessage.TUNNEL_NOT_NEARBY;
+        for (MapAsset asset : selectedCell.getAllAssets()) {
+            if(asset.getType() == MapAssetType.WALL || asset instanceof DefenseAndAttackBuilding){
+                selectedCell.deployTunnel();
+                return SelectedUnitMessage.TUNNEL_PLACEMENT_SUCCESS;
+            }
+        }
+        return SelectedUnitMessage.NO_WALLS_OR_TOWERS;
     }
 
     public String showInfo() {

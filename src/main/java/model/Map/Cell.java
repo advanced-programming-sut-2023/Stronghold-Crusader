@@ -18,11 +18,29 @@ public class Cell {
     private final Vector2D coordinate;
     private CellType type;
     private ArrayList<MapAsset> assets;
+    private int tunnelDestroyCounter; // if -1, no tunnel is there
 
     public Cell(Vector2D coordinate, CellType type) {
         this.coordinate = coordinate;
         this.type = type;
         assets = new ArrayList<>();
+        tunnelDestroyCounter = -1;
+    }
+
+    public void deployTunnel(){
+        tunnelDestroyCounter = 4;
+    }
+
+    public void tunnelNextRound(){
+        if(tunnelDestroyCounter >= 0) tunnelDestroyCounter--;
+    }
+
+    public boolean tunnelToBeDestroyed(){
+        return tunnelDestroyCounter == 0;
+    }
+
+    public boolean hasTunnel(){
+        return tunnelDestroyCounter != -1;
     }
 
     public ArrayList<MapAsset> getAllAssets() {
@@ -55,6 +73,7 @@ public class Cell {
     }
 
     public boolean isTraversable(MobileUnit mobileUnit) {
+        //TODO @kian handle siege tower
         if (!CellType.isTraversableByType(type)) return false;
         for (MapAsset mapAsset : assets) {
             if (mapAsset instanceof Building) {
