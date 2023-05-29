@@ -74,7 +74,14 @@ public class SignupMenu extends Application implements Initializable {
             if (visiblePassword.isVisible()) password.setText(visiblePassword.getText());
             passwordError.setText(FormatValidation.isPasswordValid(password.getText()).getOutput());
         });
+
+        Email.textProperty().addListener((observable, oldText, newText) -> {
+            if (!FormatValidation.isFormatValid(Email.getText(), FormatValidation.EMAIL))
+                emailError.setText(SignupAndLoginMessage.INVALID_EMAIL_FORMAT.getOutput());
+            else emailError.setText("");
+        });
     }
+
 
     public static void setSignupController(SignupController signupController) {
         SignupMenu.signupController = signupController;
