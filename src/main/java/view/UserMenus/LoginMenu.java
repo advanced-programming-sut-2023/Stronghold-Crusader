@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.User.User;
 import utils.ToggleSwitch;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
@@ -111,11 +112,11 @@ public class LoginMenu extends Application {
                 passwordError.setText(loginMessage.getOutput());
                 userError.setText("");
             case SUCCESS_PROCESS:
-                goToMainMenu();
+                goToMainMenu(loginController.currentUser);
         }
     }
 
-    private void goToMainMenu() {
+    private void goToMainMenu(User user) {
 
     }
 }
