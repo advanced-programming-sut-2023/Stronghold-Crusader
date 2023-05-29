@@ -66,4 +66,8 @@ public class Stronghold {
     public Collection<User> getUsers() {
         return users.values();
     }
+
+    public ArrayList<User> getUserRankings() {
+        return userRankings;
+    }
 }
