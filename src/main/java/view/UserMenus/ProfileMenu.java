@@ -1,10 +1,10 @@
 package view.UserMenus;
 
+import controller.UserControllers.AvatarController;
 import controller.UserControllers.ProfileController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,7 +26,6 @@ import view.enums.messages.UserMessage.ProfileMessage;
 
 public class ProfileMenu extends Application {
     private static Stage stage;
-    private static Pane rootPane;
     private static ProfileController controller = new ProfileController(new User("hi", "bye",
             "asnx@gmail.com", "dns", ""));
     public TextField usernameTextField;
@@ -58,7 +57,7 @@ public class ProfileMenu extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Stronghold.load();
-        rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/profileMenu.fxml"));
+        Pane rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/profileMenu.fxml"));
         rootPane.setBackground(new Background(new BackgroundImage(new Image(
                 ProfileMenu.class.getResource("/assets/backgrounds/profileMenu.jpg").toExternalForm()),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
@@ -103,7 +102,6 @@ public class ProfileMenu extends Application {
             else
                 emailError.setText("");
         });
-
     }
 
     private void sloganChangeClicked() {
@@ -208,5 +206,10 @@ public class ProfileMenu extends Application {
     private void hidePopUp() {
         popUpPane.setVisible(false);
         popUpLabel.setText("");
+    }
+
+    public void openAvatarMenu() throws Exception {
+        AvatarMenu.setController(new AvatarController(controller.getCurrentUser()));
+        new AvatarMenu().start(stage);
     }
 }

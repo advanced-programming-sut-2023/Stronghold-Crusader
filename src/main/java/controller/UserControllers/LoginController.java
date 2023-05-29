@@ -14,7 +14,6 @@ public class LoginController {
     public User currentUser = null;
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
-    private MainController mainController;
 
     private void increaseFailedAttempts() {
         failedAttempts++;
@@ -33,8 +32,8 @@ public class LoginController {
 
 
     public SignupAndLoginMessage login(HashMap<String, String> inputs) {
-        currentUser = Stronghold.getInstance().getUser(inputs.get("username"));
-        if (inputs.get("username") == null || inputs.get("password") == null)
+        currentUser = stronghold.getUser(inputs.get("username"));
+        if (inputs.get("username").equals("") || inputs.get("password").equals(""))
             return SignupAndLoginMessage.EMPTY_FIELD;
         if (currentUser == null)
             return SignupAndLoginMessage.USER_DOES_NOT_EXIST;
@@ -46,7 +45,6 @@ public class LoginController {
         }
         failedAttemptsReset();
         if (inputs.get("stayLoggedIn") != null) UserManager.setLoggedInUser(currentUser);
-        mainController = new MainController(currentUser);
         return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
 

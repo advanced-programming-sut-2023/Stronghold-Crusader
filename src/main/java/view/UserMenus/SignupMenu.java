@@ -1,108 +1,157 @@
 package view.UserMenus;
 
 import controller.UserControllers.SignupController;
-import utils.FormatValidation;
+import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
 import utils.SignupAndLoginUtils;
-import view.Menu;
-import view.enums.commands.UserCommand.SignupAndLoginCommand;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
+import java.net.URL;
 import java.util.HashMap;
-import java.util.Scanner;
-import java.util.regex.Matcher;
 
-public class SignupMenu {
-    private final SignupController signupController;
-    private final Scanner scanner;
+public class SignupMenu extends Application {
+    private static SignupController signupController;
+    public TextField Email;
+    public CheckBox sloganShow;
 
-    public SignupMenu(SignupController signupController) {
-        this.signupController = signupController;
-        this.scanner = Menu.getScanner();
+    public TextField slogan;
+    public ImageView flagIcon;
+    public Button randomSloganButton;
+    public Text usernameError;
+    public Text passwordError;
+    public Text passwordConfirmationError;
+    public Text emailError;
+    public Text entireError;
+
+    @FXML
+    private TextField username;
+
+    @FXML
+    private PasswordField password;
+
+    @FXML
+    private PasswordField passwordConfirmation;
+
+    private  Popup popup = createPopUp();
+
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.setTitle("Stronghold");
+        URL url = LoginMenu.class.getResource("/FXML/signupMenu.fxml");
+        AnchorPane anchorPane = FXMLLoader.load(url);
+        Scene scene = new Scene(anchorPane);
+        stage.setFullScreen(true);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
+        stage.show();
     }
 
-    public String run() {
-        String nextCommand;
-        Matcher matcher;
-        while (true) {
-            nextCommand = scanner.nextLine();
-            SignupAndLoginCommand typeOfCommand = SignupAndLoginCommand.getCommand(nextCommand);
-            if (typeOfCommand == null) {
-                SignupAndLoginMessage.INVALID_COMMAND.printMessage();
-                continue;
-            }
-            matcher = SignupAndLoginCommand.getMatcher(nextCommand, typeOfCommand);
-            switch (typeOfCommand) {
-                case EXIT:
-                    return "exit";
-                case CREATE_USER:
-                    createUserCall(matcher);
-                    break;
-                case LOGIN_MENU:
-                    SignupAndLoginMessage.LOGIN_MENU.printMessage();
-                    return "login menu";
-            }
+    public static void setSignupController(SignupController signupController) {
+        SignupMenu.signupController = signupController;
+    }
+
+    public void goToLoginMenu(MouseEvent mouseEvent) throws Exception {
+        new LoginMenu().start(LoginMenu.stage);
+
+    }
+
+    public void generateRandomPassword(MouseEvent mouseEvent) {
+        password.setPromptText(SignupAndLoginUtils.generateRandomPassword());
+    }
+
+    public void generateRandomSlogan(MouseEvent mouseEvent) {
+        slogan.setText(signupController.generateRandomSlogan());
+    }
+
+    public void signup(MouseEvent mouseEvent) {
+        HashMap<String,String> inputs = getInputsFromBoxes();
+        clearBoxes();
+        showSignupResult(signupController.signup(inputs));
+    }
+
+    private void showSignupResult(SignupAndLoginMessage signupMessage) {
+        setAllErrors("");
+        switch (signupMessage){
+            case EMPTY_FIELD:
+                entireError.setText(signupMessage.getOutput());
+                break;
+            case EXISTING_USERNAME:
+                usernameError.setText(signupMessage.getOutput());
+                break;
+            case EXISTED_EMAIL:
+                emailError.setText(signupMessage.getOutput());
+                break;
+            case CONFIRMATION_ERROR:
+                passwordError.setText(signupMessage.getOutput());
+                passwordConfirmationError.setText(signupMessage.getOutput());
+                break;
+            case SUCCESS_PROCESS:
+                showSuccessMessage();
+                break;
         }
     }
 
-    private void createUserCall(Matcher matcher) {
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.CREATE_USER.getRegex());
-        signupController.changeNullSloganToEmpty(inputs);
-        boolean randomSlogan = inputs.get("slogan") != null && inputs.get("slogan").equals("random");
-        SignupAndLoginMessage message = signupController.signup(inputs);
-
-        if (message.equals(SignupAndLoginMessage.EXISTING_USERNAME)) {
-            message.printMessage();
-            if (isUsernameSuggestionAccept(inputs))
-                message = signupController.signup(inputs);
-        }
-        if (message.equals(SignupAndLoginMessage.RANDOM_PASSWORD)) {
-            if (randomSlogan) {
-                printRandomSlogan(inputs);
-                randomSlogan = false;
-            }
-            randomPasswordSuggestion(inputs);
-            message = signupController.signup(inputs);
-        }
-        message.printMessage();
-        if (message.equals(SignupAndLoginMessage.SUCCESS_PROCESS)) {
-            if (randomSlogan) printRandomSlogan(inputs);
-            pickUpQuestion(inputs);
-        }
+    private void showSuccessMessage() {
+        popup.show(LoginMenu.stage);
+    }
+    private Popup createPopUp() {
+        Label label = new Label("user create successfully");
+        label.setMinWidth(80);
+        label.setMinHeight(50);
+        label.getStylesheets().add(SignupMenu.class.getResource("/Css/style1.css").toString());
+        label.getStyleClass().add("pop-up-label");
+        label.setTranslateX(-480);
+        label.setTranslateY(635);
+        Popup popup = new Popup();
+        popup.getContent().add(label);
+        popup.setAutoHide(true);
+        return popup;
     }
 
-    private boolean isUsernameSuggestionAccept(HashMap<String, String> inputs) {
-        String username = inputs.get("username");
-        inputs.replace("username", username, SignupAndLoginUtils.generateRandomUsername(username));
-        System.out.println("Do you want to continue  registration process with " + inputs.get("username") + "?");
-        return (FormatValidation.isFormatValid(Menu.getScanner().nextLine(), FormatValidation.YES));
+
+    private HashMap<String,String> getInputsFromBoxes() {
+        HashMap<String,String> inputs = new HashMap<>();
+        inputs.put("username", username.getText());
+        inputs.put("password", password.getText());
+        inputs.put("passwordConfirmation", passwordConfirmation.getText());
+        inputs.put("email", Email.getText());
+        inputs.put("slogan", slogan.getText());
+        return inputs;
     }
 
-    private void randomPasswordSuggestion(HashMap<String, String> inputs) {
-        System.out.println("Your random password is: " + inputs.get("password"));
-        System.out.print("Please re-enter your password here:\t");
-        inputs.replace("passwordConfirmation", inputs.get("passwordConfirmation"), Menu.getScanner().nextLine());
+    private void clearBoxes() {
+        password.setText("");
+        passwordConfirmation.setText("");
     }
 
-    private void printRandomSlogan(HashMap<String, String> inputs) {
-        System.out.println("your random slogan is: " + inputs.get("slogan"));
+    public void changeExistenceOfSlogan(MouseEvent mouseEvent) {
+        if (!sloganShow.isSelected()) {
+            slogan.setText("");
+            slogan.setDisable(true);
+        } else slogan.setDisable(false);
     }
 
-    private void pickUpQuestion(HashMap<String, String> inputs) {
-        SignupAndLoginMessage message = SignupAndLoginMessage.FAIL_PICKING_UP_QUESTION;
-        do {
-            SignupAndLoginMessage.PICKING_QUESTION.printMessage();
-            String nextCommand = Menu.getScanner().nextLine();
-            Matcher matcher = SignupAndLoginCommand.getMatcher(nextCommand, SignupAndLoginCommand.QUESTION_PICK);
-            if (matcher == null)
-                System.out.println("some error founds");
-            else {
-                HashMap<String, String> pickQuestionInputs =
-                        SignupAndLoginUtils.getInputs(matcher, SignupAndLoginCommand.QUESTION_PICK.getRegex());
-                pickQuestionInputs.put("username", inputs.get("username"));
-                message = signupController.pickQuestion(pickQuestionInputs);
-                message.printMessage();
-            }
-        } while (!message.equals(SignupAndLoginMessage.SUCCESS_CREATING_USER));
-    }
+    private void setAllErrors(String string) {
+        usernameError.setText(string);
+        passwordError.setText(string);
+        passwordConfirmationError.setText(string);
+        emailError.setText(string);
+        entireError.setText(string);
 
+    }
 }
+
+
+

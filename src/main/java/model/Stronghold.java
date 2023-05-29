@@ -4,6 +4,7 @@ import model.User.User;
 import model.User.UserManager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Stronghold {
@@ -37,7 +38,6 @@ public class Stronghold {
     public void addUser(User user) {
         users.put(user.getUsername(), user);
         userRankings.add(user);
-        // do we need to call updateRankings() here?
         updateData();
     }
 
@@ -63,7 +63,7 @@ public class Stronghold {
         return users.containsKey(username);
     }
 
-    public ArrayList<User> getUserRankings() {
-        return userRankings;
+    public Collection<User> getUsers() {
+        return users.values();
     }
 }
