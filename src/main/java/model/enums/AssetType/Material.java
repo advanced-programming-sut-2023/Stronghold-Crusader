@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Material {
-    //Main foods
+    // foods
     MEAT, APPLE, BREAD, CHEESE,
 
     //Other

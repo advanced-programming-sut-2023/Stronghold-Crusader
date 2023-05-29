@@ -8,7 +8,6 @@ import utils.FormatValidation;
 import utils.Pair;
 import utils.SignupAndLoginUtils;
 import view.Menu;
-import view.UserMenus.SignupMenu;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.util.HashMap;
@@ -16,19 +15,7 @@ import java.util.HashMap;
 public class SignupController {
     private final Stronghold stronghold = Stronghold.getInstance();
 
-    public void run() {
-        SignupMenu signupMenu = new SignupMenu(this);
-        while (true) {
-            switch (signupMenu.run()) {
-                case "exit":
-                    return;
-                case "login menu":
-                    LoginController loginController = new LoginController();
-//                    loginController.run();
-                    break;
-            }
-        }
-    }
+
 
     public SignupAndLoginMessage signup(HashMap<String, String> inputs) {
         if (hasEmptyField(inputs))

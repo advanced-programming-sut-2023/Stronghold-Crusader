@@ -39,4 +39,7 @@ public enum SignupAndLoginMessage {
         if (!output.equals("")) System.out.println(output);
     }
 
+    public String getOutput() {
+        return output;
+    }
 }
