@@ -1,6 +1,7 @@
 package view.UserMenus;
 
 import controller.UserControllers.LoginController;
+import controller.UserControllers.SignupController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -70,6 +71,7 @@ public class LoginMenu extends Application {
     }
 
     public void goToSignUpMenu(MouseEvent mouseEvent) throws Exception {
+        SignupMenu.setSignupController(new SignupController());
         new SignupMenu().start(LoginMenu.stage);
     }
 
@@ -113,8 +115,10 @@ public class LoginMenu extends Application {
             case INCORRECT_PASSWORD:
                 passwordError.setText(loginMessage.getOutput());
                 userError.setText("");
+                break;
             case SUCCESS_PROCESS:
                 goToMainMenu(loginController.currentUser);
+                break;
         }
     }
 
@@ -123,4 +127,6 @@ public class LoginMenu extends Application {
             UserManager.setLoggedInUser(user);
 
     }
+
+
 }

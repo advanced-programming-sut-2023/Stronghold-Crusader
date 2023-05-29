@@ -6,7 +6,6 @@ import model.enums.User.Slogan;
 import utils.Captcha;
 import utils.FormatValidation;
 import utils.Pair;
-import utils.SignupAndLoginUtils;
 import view.Menu;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
@@ -15,26 +14,19 @@ import java.util.HashMap;
 public class SignupController {
     private final Stronghold stronghold = Stronghold.getInstance();
 
-
-
     public SignupAndLoginMessage signup(HashMap<String, String> inputs) {
         if (hasEmptyField(inputs))
             return SignupAndLoginMessage.EMPTY_FIELD;
-        if (inputs.get("slogan").equals("random"))
-            inputs.replace("slogan", inputs.get("slogan"), generateRandomSlogan());
 
         if (checkFormatOfInputs(inputs) != null)
             return checkFormatOfInputs(inputs);
-        if (!inputs.get("password").equals("random") && !inputs.get("password").equals(inputs.get("passwordConfirmation")))
+        if (!inputs.get("password").equals(inputs.get("passwordConfirmation")))
             return SignupAndLoginMessage.CONFIRMATION_ERROR;
         if (stronghold.emailExists(inputs.get("email")))
             return SignupAndLoginMessage.EXISTED_EMAIL;
         if (stronghold.userExists(inputs.get("username")))
             return SignupAndLoginMessage.EXISTING_USERNAME;
-        if (inputs.get("password").equals("random")) {
-            inputs.replace("password", inputs.get("password"), SignupAndLoginUtils.generateRandomPassword());
-            return SignupAndLoginMessage.RANDOM_PASSWORD;
-        }
+
         User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
         stronghold.addUser(newUser);
@@ -73,8 +65,8 @@ public class SignupController {
     }
 
     private boolean hasEmptyField(HashMap<String, String> inputs) {
-        return inputs.get("password") == null || inputs.get("email") == null
-                || inputs.get("email") == null || inputs.get("slogan") == null;
+        return inputs.get("password").equals("") || inputs.get("email").equals("")
+                || inputs.get("email").equals("") || inputs.get("slogan").equals("");
     }
 
     private SignupAndLoginMessage checkFormatOfInputs(HashMap<String, String> inputs) {
@@ -93,7 +85,7 @@ public class SignupController {
         return null;
     }
 
-    private String generateRandomSlogan() {
+    public String generateRandomSlogan() {
         return Slogan.values()[(int) (Math.random() * 5)].getSlogan();
     }
 
