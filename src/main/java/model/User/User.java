@@ -10,6 +10,7 @@ public class User {
     private String slogan;
     private String email;
     private Pair passwordRecovery;
+    private String avatarPath;
     private int highScore;
 
     public User(String username, String password, String email, String nickname, String slogan) {
@@ -19,6 +20,7 @@ public class User {
         this.nickname = nickname;
         this.slogan = slogan;
         this.highScore = 0;
+        this.avatarPath = User.class.getResource("/assets/avatars/defaults/default.png").toExternalForm();
     }
 
     public String getUsername() {
@@ -92,6 +94,15 @@ public class User {
     public void removeSlogan() {
         this.slogan = "";
         Stronghold.getInstance().updateData();
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+        Stronghold.getInstance().updateData();
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
     }
 
     @Override
