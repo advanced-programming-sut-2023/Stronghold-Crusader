@@ -137,16 +137,10 @@ public class SignupMenu extends Application {
     }
 
     public void changeExistenceOfSlogan(MouseEvent mouseEvent) {
-        setSloganVisibilityProperty(sloganShow.isSelected());
-        if (!sloganShow.isSelected())
+        if (!sloganShow.isSelected()) {
             slogan.setText("");
-        
-    }
-
-    private void setSloganVisibilityProperty(boolean b) {
-        slogan.setVisible(b);
-        flagIcon.setVisible(b);
-        randomSloganButton.setVisible(b);
+            slogan.setDisable(true);
+        } else slogan.setDisable(false);
     }
 
     private void setAllErrors(String string) {
