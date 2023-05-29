@@ -12,6 +12,7 @@ public class User {
     private Pair passwordRecovery;
     private String avatarPath;
     private int highScore;
+    private int rank;
 
     public User(String username, String password, String email, String nickname, String slogan) {
         this.username = username;
@@ -114,4 +115,8 @@ public class User {
                 "\nhighscore : " + highScore;
     }
 
+    public int getRank() {
+        rank = Stronghold.getInstance().getUserRank(this);
+        return rank;
+    }
 }
