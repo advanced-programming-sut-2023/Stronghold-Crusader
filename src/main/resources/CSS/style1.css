@@ -61,3 +61,11 @@
 .check-box .box {
 
 }
+
+.pop-up-label{
+    -fx-background-color: black;
+    -fx-text-fill: #00ff00;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+
+}

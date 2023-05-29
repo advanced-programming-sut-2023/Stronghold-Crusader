@@ -42,6 +42,7 @@ public class SignupMenu extends Application {
     @FXML
     private PasswordField passwordConfirmation;
 
+    private  Popup popup = createPopUp();
 
 
     @Override
@@ -93,8 +94,8 @@ public class SignupMenu extends Application {
                 emailError.setText(signupMessage.getOutput());
                 break;
             case CONFIRMATION_ERROR:
-                password.setText(signupMessage.getOutput());
-                passwordConfirmation.setText(signupMessage.getOutput());
+                passwordError.setText(signupMessage.getOutput());
+                passwordConfirmationError.setText(signupMessage.getOutput());
                 break;
             case SUCCESS_PROCESS:
                 showSuccessMessage();
@@ -103,14 +104,22 @@ public class SignupMenu extends Application {
     }
 
     private void showSuccessMessage() {
-        System.out.println("success");
-        Label label = new Label("this is a test");
-        label.setMinWidth(80);
-        label.setMinHeight(50);
-        Popup popup = new Popup();
-        popup.getContent().add(label);
         popup.show(LoginMenu.stage);
     }
+    private Popup createPopUp() {
+        Label label = new Label("user create successfully");
+        label.setMinWidth(80);
+        label.setMinHeight(50);
+        label.getStylesheets().add(SignupMenu.class.getResource("/Css/style1.css").toString());
+        label.getStyleClass().add("pop-up-label");
+        label.setTranslateX(-480);
+        label.setTranslateY(635);
+        Popup popup = new Popup();
+        popup.getContent().add(label);
+        popup.setAutoHide(true);
+        return popup;
+    }
+
 
     private HashMap<String,String> getInputsFromBoxes() {
         HashMap<String,String> inputs = new HashMap<>();
