@@ -63,4 +63,7 @@ public class Stronghold {
         return users.containsKey(username);
     }
 
+    public ArrayList<User> getUserRankings() {
+        return userRankings;
+    }
 }
