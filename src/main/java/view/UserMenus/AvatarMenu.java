@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -58,7 +59,10 @@ public class AvatarMenu extends Application {
         Region region = new Region();
         HBox.setHgrow(region, Priority.ALWAYS);
         Text username = new Text(user.getUsername());
-        ImageView imageView = new ImageView(new Image(user.getAvatarPath()));
+        username.setFont(new Font(20));
+        ImageView imageView = new ImageView();
+        if(user.getAvatarPath() != null)
+            imageView.setImage(new Image(user.getAvatarPath()));
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
         HBox hBox = new HBox(username, region, imageView);
