@@ -85,7 +85,7 @@ public class ProfileMenu extends Application {
         newPasswordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!FormatValidation.isFormatValid(newValue, FormatValidation.PASSWORD_LENGTH))
                 newPasswordError.setText(ProfileMessage.INVALID_PASSWORD_LENGTH.getMessage());
-            else if (!FormatValidation.isFormatValid(newValue, FormatValidation.PASSWORD_LETTERS))
+            else if (!FormatValidation.isFormatValid(newValue, FormatValidation.PASSWORD_LETTERS_NUMBER))
                 newPasswordError.setText(ProfileMessage.INVALID_PASSWORD_FORMAT.getMessage());
             else
                 newPasswordError.setText("");

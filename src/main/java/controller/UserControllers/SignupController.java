@@ -17,9 +17,9 @@ public class SignupController {
     public SignupAndLoginMessage signup(HashMap<String, String> inputs) {
         if (hasEmptyField(inputs))
             return SignupAndLoginMessage.EMPTY_FIELD;
+        if (checkFormatOfInputs(inputs) != null)
+            return checkFormatOfInputs(inputs);
 
-     //   if (checkFormatOfInputs(inputs) != null)
-     //       return checkFormatOfInputs(inputs);
         if (!inputs.get("password").equals(inputs.get("passwordConfirmation")))
             return SignupAndLoginMessage.CONFIRMATION_ERROR;
         if (stronghold.emailExists(inputs.get("email")))
@@ -73,13 +73,8 @@ public class SignupController {
         if (!FormatValidation.isFormatValid(inputs.get("username"), FormatValidation.USERNAME))
             return SignupAndLoginMessage.INVALID_USERNAME_FORMAT;
 
-        if (!inputs.get("password").equals("random")) {
-            if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LENGTH))
-                return SignupAndLoginMessage.PASSWORD_WEEK_LENGTH;
-            if (!FormatValidation.isFormatValid(inputs.get("password"), FormatValidation.PASSWORD_LETTERS))
-                return SignupAndLoginMessage.PASSWORD_WEEK_LETTERS_PROBLEM;
-        }
-
+        if (!FormatValidation.isPasswordValid(inputs.get("password")).equals(SignupAndLoginMessage.SUCCESS_PROCESS))
+            return FormatValidation.isPasswordValid(inputs.get("password"));
         if (!FormatValidation.isFormatValid(inputs.get("email"), FormatValidation.EMAIL))
             return SignupAndLoginMessage.INVALID_EMAIL_FORMAT;
         return null;
