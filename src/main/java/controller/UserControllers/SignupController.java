@@ -18,8 +18,8 @@ public class SignupController {
         if (hasEmptyField(inputs))
             return SignupAndLoginMessage.EMPTY_FIELD;
 
-        if (checkFormatOfInputs(inputs) != null)
-            return checkFormatOfInputs(inputs);
+     //   if (checkFormatOfInputs(inputs) != null)
+     //       return checkFormatOfInputs(inputs);
         if (!inputs.get("password").equals(inputs.get("passwordConfirmation")))
             return SignupAndLoginMessage.CONFIRMATION_ERROR;
         if (stronghold.emailExists(inputs.get("email")))
