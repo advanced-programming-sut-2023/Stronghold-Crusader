@@ -15,7 +15,7 @@ import javafx.util.Duration;
 
 public class ToggleSwitch extends Parent {
 
-    private BooleanProperty switchedOn = new SimpleBooleanProperty(false);
+    private final BooleanProperty switchedOn = new SimpleBooleanProperty(false);
 
     private TranslateTransition translateAnimation = new TranslateTransition(Duration.millis(250));
     private FillTransition fillAnimation = new FillTransition(Duration.seconds(0.25));
@@ -23,9 +23,6 @@ public class ToggleSwitch extends Parent {
     private ParallelTransition animation = new ParallelTransition(translateAnimation, fillAnimation);
 
 
-    public Boolean switchedOnProperty() {
-        return switchedOn.getValue();
-    }
 
     public ToggleSwitch(double size, Color color) {
         Rectangle background = new Rectangle(size, size/2);
@@ -66,4 +63,8 @@ public class ToggleSwitch extends Parent {
     public void setSwitchedOn(boolean switchedOn) {
         this.switchedOn.set(switchedOn);
     }
+    public Boolean getSwitchedOnProperty() {
+        return switchedOn.getValue();
+    }
+
 }

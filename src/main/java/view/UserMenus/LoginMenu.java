@@ -38,7 +38,7 @@ public class LoginMenu extends Application {
 
     @FXML
     private TextField username;
-    private ToggleSwitch toggleSwitch;
+    private final ToggleSwitch toggleSwitch = new ToggleSwitch(25, Color.TRANSPARENT);;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -46,7 +46,6 @@ public class LoginMenu extends Application {
         stage.setTitle("Stronghold");
         URL url = LoginMenu.class.getResource("/FXML/loginMenu.fxml");
         AnchorPane anchorPane = FXMLLoader.load(url);
-        toggleSwitch = new ToggleSwitch(25, Color.TRANSPARENT);
         toggleSwitch.setTranslateX(660);
         toggleSwitch.setTranslateY(405);
         anchorPane.getChildren().add(toggleSwitch);
@@ -123,10 +122,8 @@ public class LoginMenu extends Application {
     }
 
     private void goToMainMenu(User user) {
-        if (toggleSwitch.switchedOnProperty().equals(true))
+        if (toggleSwitch.getSwitchedOnProperty())
             UserManager.setLoggedInUser(user);
-
     }
-
 
 }
