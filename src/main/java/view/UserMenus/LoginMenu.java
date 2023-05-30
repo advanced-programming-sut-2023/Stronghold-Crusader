@@ -1,6 +1,7 @@
 package view.UserMenus;
 
 import controller.UserControllers.LoginController;
+import controller.UserControllers.ProfileController;
 import controller.UserControllers.SignupController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -63,7 +64,11 @@ public class LoginMenu extends Application {
          @Override
          public void handle(KeyEvent keyEvent) {
              if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                 login();
+                 try {
+                     login();
+                 } catch (Exception e) {
+                     throw new RuntimeException(e);
+                 }
              }
          }
      });
@@ -78,13 +83,13 @@ public class LoginMenu extends Application {
         LoginMenu.loginController = loginController;
     }
 
-    public void login(MouseEvent mouseEvent) {
+    public void login(MouseEvent mouseEvent) throws Exception {
         //TODO fix place
         HandleKeys();
         HashMap<String, String> inputs = getInputsFromBoxes();
         showLoginResult(loginController.login(inputs));
     }
-    public void login() {
+    public void login() throws Exception {
         HashMap<String, String> inputs = getInputsFromBoxes();
         showLoginResult(loginController.login(inputs));
     }
@@ -97,7 +102,7 @@ public class LoginMenu extends Application {
         return inputs;
     }
 
-    private void showLoginResult(SignupAndLoginMessage loginMessage) {
+    private void showLoginResult(SignupAndLoginMessage loginMessage) throws Exception {
         switch (loginMessage){
             case EMPTY_FIELD:
                 userError.setText(loginMessage.getOutput());
@@ -121,9 +126,11 @@ public class LoginMenu extends Application {
         }
     }
 
-    private void goToMainMenu(User user) {
+    private void goToMainMenu(User user) throws Exception {
         if (toggleSwitch.getSwitchedOnProperty())
             UserManager.setLoggedInUser(user);
+        ProfileMenu.setProfileController(new ProfileController(user));
+        new ProfileMenu().start(LoginMenu.stage);
     }
 
 }

@@ -17,10 +17,10 @@ public class ToggleSwitch extends Parent {
 
     private final BooleanProperty switchedOn = new SimpleBooleanProperty(false);
 
-    private TranslateTransition translateAnimation = new TranslateTransition(Duration.millis(250));
-    private FillTransition fillAnimation = new FillTransition(Duration.seconds(0.25));
+    private final TranslateTransition translateAnimation = new TranslateTransition(Duration.millis(250));
+    private final FillTransition fillAnimation = new FillTransition(Duration.seconds(0.25));
 
-    private ParallelTransition animation = new ParallelTransition(translateAnimation, fillAnimation);
+    private final ParallelTransition animation = new ParallelTransition(translateAnimation, fillAnimation);
 
 
 
