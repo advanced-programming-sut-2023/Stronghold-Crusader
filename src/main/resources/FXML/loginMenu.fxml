@@ -15,12 +15,12 @@
       <Button layoutX="1397.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#goToSignUpMenu" styleClass="button-1" text="Sign Up" />
       <Button layoutX="1233.0" layoutY="24.0" mnemonicParsing="false" onMouseClicked="#goToSignUpMenu" styleClass="button-2" text="Don't have an account ?" />
       <Text fill="#a0a2ab" layoutX="571.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remember me" wrappingWidth="101.60000000000014" />
-      <Button layoutX="583.0" layoutY="467.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="270.0" styleClass="button-2" text="Forgot password?" underline="true">
+      <Button layoutX="584.0" layoutY="467.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="270.0" styleClass="button-2" text="Forgot password?" underline="true">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button layoutX="790.0" layoutY="402.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="70.0" styleClass="button-3" text="Login" onMouseClicked="#login" fx:id="loginButton">
+      <Button fx:id="loginButton" layoutX="790.0" layoutY="402.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="32.0" prefWidth="70.0" styleClass="button-3" text="Login">
          <font>
             <Font size="13.0" />
          </font>
@@ -35,7 +35,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <TextField layoutX="601.0" layoutY="243.0" prefHeight="32.0" prefWidth="254.0" promptText="username" styleClass="field" fx:id="username" />
+      <TextField fx:id="username" layoutX="601.0" layoutY="243.0" prefHeight="32.0" prefWidth="254.0" promptText="username" styleClass="field" />
       <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="558.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/logo/icons8-user-64.png" />
@@ -46,13 +46,14 @@
             <Image url="@../assets/logo/icons8-lock-64.png" />
          </image>
       </ImageView>
-      <PasswordField layoutX="596.0" layoutY="336.0" prefHeight="26.0" prefWidth="263.0" promptText="password" styleClass="field" fx:id="password" />
+      <PasswordField fx:id="password" layoutX="596.0" layoutY="336.0" prefHeight="26.0" prefWidth="263.0" promptText="password" styleClass="field" />
       <ImageView fitHeight="192.0" fitWidth="204.0" layoutX="619.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/logo/Pic01.png" />
          </image>
       </ImageView>
-      <Text fill="#df1806" layoutX="596.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="254.39999999999986" fx:id="userError" />
-      <Text fill="#df1806" layoutX="596.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="254.39999999999986" fx:id="passwordError" />
+      <Text fx:id="userError" fill="#df1806" layoutX="596.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="254.39999999999986" />
+      <Text fx:id="passwordError" fill="#df1806" layoutX="596.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="254.39999999999986" />
+      <Text fx:id="attemptsError" fill="#df1806" layoutX="599.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER" wrappingWidth="254.39999999999986" />
    </children>
 </AnchorPane>

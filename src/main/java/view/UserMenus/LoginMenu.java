@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -24,22 +25,26 @@ import utils.ToggleSwitch;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 
-public class LoginMenu extends Application {
+public class LoginMenu extends Application implements Initializable {
     private static LoginController loginController;
     public static Stage stage;
     public Text passwordError;
     public Text userError;
     public Button loginButton;
+    public Text attemptsError;
 
     @FXML
     private PasswordField password;
 
     @FXML
     private TextField username;
-    private final ToggleSwitch toggleSwitch = new ToggleSwitch(25, Color.TRANSPARENT);;
+    private final ToggleSwitch toggleSwitch = new ToggleSwitch(25, Color.TRANSPARENT);
+    ;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -55,23 +60,23 @@ public class LoginMenu extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
-        loginController = new LoginController();
         stage.show();
     }
 
+
     private void HandleKeys() {
-     LoginMenu.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-         @Override
-         public void handle(KeyEvent keyEvent) {
-             if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                 try {
-                     login();
-                 } catch (Exception e) {
-                     throw new RuntimeException(e);
-                 }
-             }
-         }
-     });
+        LoginMenu.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                    try {
+                        login();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
     }
 
     public void goToSignUpMenu(MouseEvent mouseEvent) throws Exception {
@@ -89,24 +94,27 @@ public class LoginMenu extends Application {
         HashMap<String, String> inputs = getInputsFromBoxes();
         showLoginResult(loginController.login(inputs));
     }
+
     public void login() throws Exception {
         HashMap<String, String> inputs = getInputsFromBoxes();
         showLoginResult(loginController.login(inputs));
     }
-    private HashMap<String,String> getInputsFromBoxes(){
-        HashMap<String,String> inputs = new HashMap<>();
-        inputs.put("username",username.getText());
-        inputs.put("password",password.getText());
+
+    private HashMap<String, String> getInputsFromBoxes() {
+        HashMap<String, String> inputs = new HashMap<>();
+        inputs.put("username", username.getText());
+        inputs.put("password", password.getText());
         username.setText("");
         password.setText("");
         return inputs;
     }
 
     private void showLoginResult(SignupAndLoginMessage loginMessage) throws Exception {
-        switch (loginMessage){
+        switch (loginMessage) {
             case EMPTY_FIELD:
                 userError.setText(loginMessage.getOutput());
                 passwordError.setText(loginMessage.getOutput());
+                attemptsError.setText("");
                 break;
             case USER_DOES_NOT_EXIST:
                 userError.setText(loginMessage.getOutput());
@@ -126,6 +134,39 @@ public class LoginMenu extends Application {
         }
     }
 
+    private void setNewThreadForCountingLoginTime() {
+        Thread timeThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+
+                    if ((loginController.getLoginTime() != null) && LocalDateTime.now().isBefore(loginController.getLoginTime())) {
+                        int minutes = (int) (loginController.getTimeUntilLogin() / 60);
+                        int seconds = (int) (loginController.getTimeUntilLogin() % 60);
+                        attemptsError.setText("Too many failed attempts. Please wait " + minutes + " minutes and " +
+                                seconds + " seconds before trying again");
+                    } else
+                        attemptsError.setText("");
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        timeThread.setDaemon(true);
+        timeThread.start();
+    }
+
+    private void convertLoginTime() {
+        int minutes = (int) (loginController.getTimeUntilLogin() / 60);
+        int seconds = (int) (loginController.getTimeUntilLogin() % 60);
+        attemptsError.setText("Too many failed attempts. Please wait " + minutes + " minutes and " +
+                seconds + " seconds before trying again");
+    }
+
     private void goToMainMenu(User user) throws Exception {
         if (toggleSwitch.getSwitchedOnProperty())
             UserManager.setLoggedInUser(user);
@@ -133,4 +174,9 @@ public class LoginMenu extends Application {
         new ProfileMenu().start(LoginMenu.stage);
     }
 
+
+    @FXML
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setNewThreadForCountingLoginTime();
+    }
 }

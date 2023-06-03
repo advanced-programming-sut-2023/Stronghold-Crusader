@@ -55,4 +55,7 @@ public class LoginController {
         return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
 
+    public LocalDateTime getLoginTime() {
+        return loginTime;
+    }
 }
