@@ -84,8 +84,8 @@ public class SignupController {
         return Slogan.values()[(int) (Math.random() * 5)].getSlogan();
     }
 
-    public void changeNullSloganToEmpty(HashMap<String, String> inputs) {
-        if (inputs.get("sloganTest") == null) inputs.replace("slogan", null, "");
-    }
+//    public void changeNullSloganToEmpty(HashMap<String, String> inputs) {
+//        if (inputs.get("sloganTest") == null) inputs.replace("slogan", null, "");
+//    }
 
 }
