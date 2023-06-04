@@ -54,9 +54,8 @@ public class ToggleSwitch extends Parent {
 
             animation.play();
         });
-
-        setOnMouseClicked(event -> {
-            switchedOn.set(!switchedOn.get());
+         setOnMouseClicked(event -> {
+            setSwitchedOn(!switchedOn.get());
         });
     }
 

@@ -14,6 +14,7 @@ public class LoginController {
     public User currentUser = null;
     private int failedAttempts = 0;
     private LocalDateTime loginTime = null;
+    public boolean loggedInProperty = false;
 
     private void increaseFailedAttempts() {
         failedAttempts++;

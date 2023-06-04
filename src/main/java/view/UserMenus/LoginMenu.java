@@ -58,8 +58,7 @@ public class LoginMenu extends Application implements Initializable {
         stage.setTitle("Stronghold");
         URL url = LoginMenu.class.getResource("/FXML/loginMenu.fxml");
         AnchorPane anchorPane = FXMLLoader.load(url);
-        toggleSwitch.setTranslateX(157);
-        toggleSwitch.setTranslateY(188);
+        setToggleSwitch();
         Pane pane = (Pane) anchorPane.getChildren().get(5);
         pane.getChildren().add(toggleSwitch);
         Scene scene = new Scene(anchorPane);
@@ -68,6 +67,15 @@ public class LoginMenu extends Application implements Initializable {
         stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
         stage.show();
+    }
+
+    private void setToggleSwitch() {
+        toggleSwitch.setTranslateX(157);
+        toggleSwitch.setTranslateY(188);
+        toggleSwitch.setOnMouseClicked(event -> {
+            toggleSwitch.setSwitchedOn(!toggleSwitch.getSwitchedOnProperty());
+            loginController.loggedInProperty = !loginController.loggedInProperty;
+        });
     }
 
     @FXML
@@ -178,7 +186,7 @@ public class LoginMenu extends Application implements Initializable {
     }
 
     private void goToMainMenu(User user) throws Exception {
-        if (toggleSwitch.getSwitchedOnProperty())
+        if (loginController.loggedInProperty)
             UserManager.setLoggedInUser(user);
         ProfileMenu.setProfileController(new ProfileController(user));
         new ProfileMenu().start(LoginMenu.stage);
@@ -190,8 +198,9 @@ public class LoginMenu extends Application implements Initializable {
     public void goToChangePasswordPane(MouseEvent mouseEvent) throws IOException, InterruptedException {
         Parent fxml;
         fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/forgotPasswordPane.fxml"));
-        mainPane.getChildren().removeAll();
+        mainPane.getChildren().clear();
         mainPane.getChildren().setAll(fxml);
+
     }
 
     public void changePassword(MouseEvent mouseEvent) {
@@ -211,11 +220,9 @@ public class LoginMenu extends Application implements Initializable {
     public void backToLogin(MouseEvent mouseEvent) throws IOException {
         Parent fxml;
         fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/loginPane.fxml"));
-        mainPane.getChildren().removeAll();
+        mainPane.getChildren().clear();
         mainPane.getChildren().setAll(fxml);
         mainPane.getChildren().add(toggleSwitch);
-        toggleSwitch.setTranslateX(157);
-        toggleSwitch.setTranslateY(188);
-        System.out.println(timeThread.getState());
+        setToggleSwitch();
     }
 }
