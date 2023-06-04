@@ -216,6 +216,6 @@ public class LoginMenu extends Application implements Initializable {
         mainPane.getChildren().add(toggleSwitch);
         toggleSwitch.setTranslateX(157);
         toggleSwitch.setTranslateY(188);
-        timeThread.start();
+        System.out.println(timeThread.getState());
     }
 }

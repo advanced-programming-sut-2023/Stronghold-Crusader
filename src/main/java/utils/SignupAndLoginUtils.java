@@ -34,7 +34,7 @@ public class SignupAndLoginUtils {
         String randomPass = "";
         String lowerAlphabet = "abcdefghijklmnopqrstuvwxyz";
         String upperAlphabet = lowerAlphabet.toUpperCase();
-        String nonAlphanumeric = "@#$%^&****@#----";
+        String nonAlphanumeric = "@#$%^&****@#----@#^^";
         while (randomPass.length() < 6) {
             int character = (int) (Math.random() * 26);
             randomPass += lowerAlphabet.substring(character, character + 1);
