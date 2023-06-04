@@ -192,9 +192,6 @@ public class LoginMenu extends Application implements Initializable {
         new ProfileMenu().start(LoginMenu.stage);
     }
 
-
-
-
     public void goToChangePasswordPane(MouseEvent mouseEvent) throws IOException, InterruptedException {
         Parent fxml;
         fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/forgotPasswordPane.fxml"));
