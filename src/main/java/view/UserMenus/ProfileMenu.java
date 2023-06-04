@@ -5,6 +5,7 @@ import controller.UserControllers.ProfileController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -49,6 +50,7 @@ public class ProfileMenu extends Application {
     public TextField sloganTextField;
     public Button sloganChangeButton;
     public Label sloganError;
+    public ImageView avatarDisplay;
 
     public static void setProfileController(ProfileController profileController) {
         ProfileMenu.controller = profileController;
@@ -78,10 +80,19 @@ public class ProfileMenu extends Application {
         emailTextField.setText(controller.getCurrentUser().getEmail());
         nicknameTextField.setText(controller.getCurrentUser().getNickname());
         sloganTextField.setText(controller.getCurrentUser().getSlogan());
+        updateAvatarDisplay();
+        addActionEvents();
+        initializeFieldListeners();
+    }
+
+    private void addActionEvents() {
         usernameChangeButton.setOnAction(actionEvent -> usernameChangeClicked());
         emailChangeButton.setOnAction(actionEvent -> emailChangeClicked());
         nicknameChangeButton.setOnAction(actionEvent -> nicknameChangeClicked());
         sloganChangeButton.setOnAction(actionEvent -> sloganChangeClicked());
+    }
+
+    private void initializeFieldListeners() {
         newPasswordField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (!FormatValidation.isFormatValid(newValue, FormatValidation.PASSWORD_LENGTH))
                 newPasswordError.setText(ProfileMessage.INVALID_PASSWORD_LENGTH.getMessage());
@@ -102,6 +113,10 @@ public class ProfileMenu extends Application {
             else
                 emailError.setText("");
         });
+    }
+
+    private void updateAvatarDisplay() {
+        avatarDisplay.setImage(new Image(controller.getCurrentUser().getAvatarPath()));
     }
 
     private void sloganChangeClicked() {
@@ -211,5 +226,9 @@ public class ProfileMenu extends Application {
     public void openAvatarMenu() throws Exception {
         AvatarMenu.setController(new AvatarController(controller.getCurrentUser()));
         new AvatarMenu().start(stage);
+    }
+
+    public void back() {
+        //TODO add back to main menu
     }
 }

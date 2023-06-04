@@ -1,7 +1,9 @@
 package view.UserMenus;
 
 import controller.UserControllers.AvatarController;
+import controller.UserControllers.ProfileController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -59,7 +61,7 @@ public class AvatarMenu extends Application {
         Text username = new Text(user.getUsername());
         username.setFont(new Font(20));
         ImageView imageView = new ImageView();
-        if(user.getAvatarPath() != null)
+        if (user.getAvatarPath() != null)
             imageView.setImage(new Image(user.getAvatarPath()));
         imageView.setFitHeight(50);
         imageView.setFitWidth(50);
@@ -103,5 +105,9 @@ public class AvatarMenu extends Application {
         if (selectedPic == null) return;
         controller.setAvatar(selectedPic.getPath());
         updateAvatarDisplay();
+    }
+
+    public void back() throws Exception {
+        new ProfileMenu().start(stage);
     }
 }
