@@ -16,6 +16,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import utils.FormatValidation;
 import utils.SignupAndLoginUtils;
+import view.Main;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.net.URL;
@@ -88,7 +89,7 @@ public class SignupMenu extends Application implements Initializable {
     }
 
     public void goToLoginMenu(MouseEvent mouseEvent) throws Exception {
-        new LoginMenu().start(LoginMenu.stage);
+        new LoginMenu().start(Main.mainStage);
 
     }
 
@@ -132,7 +133,7 @@ public class SignupMenu extends Application implements Initializable {
     }
 
     private void showSuccessMessage() {
-        popup.show(LoginMenu.stage);
+        popup.show(Main.mainStage);
     }
 
     private Popup createPopUp() {

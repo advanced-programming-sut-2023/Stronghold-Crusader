@@ -1,40 +1,54 @@
 package view.UserMenus;
 
 import controller.UserControllers.MainController;
-import view.Menu;
-import view.enums.commands.UserCommand.MainMenuCommand;
-import view.enums.messages.UserMessage.MainMenuMessage;
+import controller.UserControllers.ProfileController;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import model.User.UserManager;
+import view.Main;
 
-import java.util.Scanner;
+public class MainMenu extends Application {
+    private static MainController mainController;
 
-public class MainMenu {
-    private final MainController mainController;
-    private final Scanner scanner;
-    public MainMenu(MainController mainController){
-        this.mainController = mainController;
-        this.scanner = Menu.getScanner();
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.setTitle("Stronghold");
+        AnchorPane anchorPane = FXMLLoader.load(MainMenu.class.getResource("/FXML/mainMenu.fxml"));
+        anchorPane.setBackground(new Background(new BackgroundImage(new Image(
+                MainMenu.class.getResource("/assets/backgrounds/profileMenu.jpg").toExternalForm()),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false))));
+        Scene scene = new Scene(anchorPane);
+        stage.setFullScreen(true);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        scene.setFill(Color.TRANSPARENT);
+        stage.show();
+
     }
 
-    public String run(){
-        String input;
-        while(true){
-            input = scanner.nextLine();
-            MainMenuCommand cmd = MainMenuCommand.getCommand(input);
-            if(cmd == null){
-                MainMenuMessage.printMessage(MainMenuMessage.INVALID_COMMAND);
-                continue;
-            }
-            switch (cmd){
-                case PROFILE_MENU:
-                    MainMenuMessage.printMessage(MainMenuMessage.ENTER_PROFILE);
-                    return "profileMenu";
-                case GAME_MAKER_MENU:
-                    MainMenuMessage.printMessage(MainMenuMessage.ENTER_NEW_GAME);
-                    return "newGame";
-                case LOG_OUT:
-                    MainMenuMessage.printMessage(MainMenuMessage.LOGOUT);
-                    return "logout";
-            }
-        }
+
+    public static void setMainController(MainController mainController) {
+        MainMenu.mainController = mainController;
+    }
+
+    public void goToSelectedMapMenu(MouseEvent mouseEvent) {
+
+    }
+
+    public void goToProfileMenu(MouseEvent mouseEvent) throws Exception {
+        ProfileMenu.setProfileController(new ProfileController(mainController.currentUser));
+        new ProfileMenu().start(Main.mainStage);
+    }
+
+    public void logout(MouseEvent mouseEvent) throws Exception {
+        UserManager.setLoggedInUser(null);
+        new LoginMenu().start(Main.mainStage);
     }
 }

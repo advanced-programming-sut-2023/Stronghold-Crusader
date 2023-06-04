@@ -8,6 +8,7 @@ import model.Stronghold;
 import view.UserMenus.LoginMenu;
 
 public class Main extends Application {
+    public static Stage mainStage;
     public static void main(String[] args) throws Exception {
         Stronghold.load();
         ConstantManager.load();
@@ -16,7 +17,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        mainStage = stage;
         LoginMenu.setLoginController(new LoginController());
-        new LoginMenu().start(stage);
+        new LoginMenu().start(mainStage);
     }
 }

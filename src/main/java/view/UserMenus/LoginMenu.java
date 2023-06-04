@@ -1,7 +1,7 @@
 package view.UserMenus;
 
 import controller.UserControllers.LoginController;
-import controller.UserControllers.ProfileController;
+import controller.UserControllers.MainController;
 import controller.UserControllers.SignupController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import model.User.User;
 import model.User.UserManager;
 import utils.ToggleSwitch;
+import view.Main;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.io.IOException;
@@ -35,7 +36,6 @@ import java.util.ResourceBundle;
 
 public class LoginMenu extends Application implements Initializable {
     private static LoginController loginController;
-    public static Stage stage;
     public Text passwordError;
     public Text userError;
     public Button loginButton;
@@ -49,12 +49,15 @@ public class LoginMenu extends Application implements Initializable {
     @FXML
     private TextField username;
     private final ToggleSwitch toggleSwitch = new ToggleSwitch(25, Color.TRANSPARENT);
-    private Thread timeThread;
+    private  Thread timeThread;
 
 
     @Override
     public void start(Stage stage) throws Exception {
-        LoginMenu.stage = stage;
+        if (UserManager.getLoggedInUser() != null) {
+            goToMainMenu(UserManager.getLoggedInUser());
+            return;
+        }
         stage.setTitle("Stronghold");
         URL url = LoginMenu.class.getResource("/FXML/loginMenu.fxml");
         AnchorPane anchorPane = FXMLLoader.load(url);
@@ -86,7 +89,7 @@ public class LoginMenu extends Application implements Initializable {
 
 
     private void HandleKeys() {
-        LoginMenu.stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+        Main.mainStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(KeyCode.ENTER)) {
@@ -102,7 +105,7 @@ public class LoginMenu extends Application implements Initializable {
 
     public void goToSignUpMenu(MouseEvent mouseEvent) throws Exception {
         SignupMenu.setSignupController(new SignupController());
-        new SignupMenu().start(LoginMenu.stage);
+        new SignupMenu().start(Main.mainStage);
     }
 
     public static void setLoginController(LoginController loginController) {
@@ -188,8 +191,8 @@ public class LoginMenu extends Application implements Initializable {
     private void goToMainMenu(User user) throws Exception {
         if (loginController.loggedInProperty)
             UserManager.setLoggedInUser(user);
-        ProfileMenu.setProfileController(new ProfileController(user));
-        new ProfileMenu().start(LoginMenu.stage);
+        MainMenu.setMainController(new MainController(user));
+        new MainMenu().start(Main.mainStage);
     }
 
     public void goToChangePasswordPane(MouseEvent mouseEvent) throws IOException, InterruptedException {
