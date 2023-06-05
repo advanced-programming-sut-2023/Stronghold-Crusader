@@ -101,7 +101,7 @@ public class ShowMapController {
     }
 
     private String colorizeBasedOnCellType(String str, CellType cellType) {
-        String colorCode = cellType.getAsniColor();
+        String colorCode = "j";
         return colorCode + str + AnsiEscapeCodes.RESET;
     }
 }
