@@ -27,6 +27,7 @@ public class GraphicsController {
     public GraphicsController(Game game) {
         this.map = game.getMap();
         mainGrid = new TilePane();
+        game.setGraphicsController(this);
         loadGraphics();
     }
 
@@ -45,18 +46,23 @@ public class GraphicsController {
                 Cell cell = map.getCell(coordinate);
                 GridPane gridPane = initializeCellGrid(cell);
                 mainGrid.getChildren().add(gridPane);
-                updateCellGrid(gridPane, cell);
+                updateCellGrid(cell);
             }
         }
     }
 
-    private void updateCellGrid(GridPane cellGrid, Cell cell) {
+    public void updateCellGrid(Cell cell) {
+        Vector2D cellCoord = cell.getCoordinate();
+        GridPane cellGrid = (GridPane) mainGrid.getChildren().get(cellCoord.x + map.getSize().y * cellCoord.y);
+        cellGrid.setBackground(new Background(new BackgroundImage(cell.getType().getImage(),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false))));
         cellGrid.getChildren().clear();
         for (MapAsset asset : cell.getAllAssets()) {
             ImageView imageView = new ImageView(asset.getType().getImage());
             double fitSize = 20;
             if (asset instanceof Building || asset instanceof Tree || asset instanceof Cliff)
-                fitSize = 75;
+                fitSize = 80;
             imageView.setFitHeight(fitSize);
             imageView.setFitWidth(fitSize);
             cellGrid.getChildren().add(imageView);
@@ -69,9 +75,6 @@ public class GraphicsController {
 
     private GridPane initializeCellGrid(Cell cell) {
         GridPane cellGrid = new GridPane();
-        cellGrid.setBackground(new Background(new BackgroundImage(cell.getType().getImage(),
-                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(1, 1, true, true, false, false))));
         Tooltip tooltip = new Tooltip(cell.toString());
         Tooltip.install(cellGrid, tooltip);
         return cellGrid;
@@ -131,13 +134,14 @@ public class GraphicsController {
     private void handleMouseReleased(MouseEvent event) {
         if (selectionRect == null) return;
         Bounds selectionBounds = selectionRect.getBoundsInParent();
-
         for (int i = 0; i < mainGrid.getChildren().size(); i++) {
             GridPane cellGrid = (GridPane) mainGrid.getChildren().get(i);
             Bounds bounds = cellGrid.getBoundsInParent();
             if (bounds.intersects(selectionBounds))
                 cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
                         CornerRadii.EMPTY, BorderStroke.MEDIUM)));
+            else
+                cellGrid.setBorder(null);
         }
         rootPane.getChildren().remove(selectionRect);
         selectionRect = null;
