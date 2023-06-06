@@ -1,5 +1,6 @@
 package model.Game;
 
+import controller.GameControllers.GraphicsController;
 import model.Map.Map;
 import model.MapAsset.MapAsset;
 import model.User.Player;
@@ -42,16 +43,16 @@ public class Game {
         turnCounter++;
     }
 
+    public void setGraphicsController(GraphicsController graphicsController){
+        map.setGraphicsController(graphicsController);
+    }
+
     public boolean isNextRound() {
         return isNextRound;
     }
 
     public Player getCurrentPlayer() {
         return currentPlayer;
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
     }
 
     public int getRound() {

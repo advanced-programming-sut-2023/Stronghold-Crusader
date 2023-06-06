@@ -1,5 +1,6 @@
 package model.Map;
 
+import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MoveController;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
@@ -14,6 +15,7 @@ import java.util.Vector;
 
 
 public class Map {
+    private GraphicsController graphicsController;
     private final String name;
     private final Vector2D size;
     private final Vector<Vector2D> headQuarters;
@@ -40,6 +42,10 @@ public class Map {
         }
     }
 
+    public void setGraphicsController(GraphicsController graphicsController) {
+        this.graphicsController = graphicsController;
+    }
+
     public String getName() {
         return name;
     }
@@ -62,10 +68,12 @@ public class Map {
             headQuarters.add(obj.getCoordinate());
         if (obj.getType() == MapAssetType.STORE_HOUSE)
             storeHouses.add(obj.getCoordinate());
+        graphicsController.updateCellGrid(getCell(coordinate));
     }
 
     public void removeMapObject(Vector2D coordinate, MapAsset obj) {
         getCell(coordinate).removeMapAsset(obj);
+        graphicsController.updateCellGrid(getCell(coordinate));
     }
 
     public void moveMapObject(Vector2D source, Vector2D dest, MapAsset obj) {
@@ -78,6 +86,7 @@ public class Map {
         for (Cell[] cells : map) {
             for (Cell cell : cells) {
                 cell.removeNonSavableAssets();
+                graphicsController.updateCellGrid(cell);
             }
         }
     }
@@ -132,10 +141,12 @@ public class Map {
 
     public void changeCellTypeTo(Vector2D coordinate, CellType type) {
         map[coordinate.y][coordinate.x].setType(type);
+        graphicsController.updateCellGrid(map[coordinate.y][coordinate.x]);
     }
 
     public void clearCell(Vector2D coordinate) {
-        map[coordinate.y][coordinate.x].clear();
+        getCell(coordinate).clear();
+        graphicsController.updateCellGrid(getCell(coordinate));
     }
 
     public Cell getCell(Vector2D coordinate) {
