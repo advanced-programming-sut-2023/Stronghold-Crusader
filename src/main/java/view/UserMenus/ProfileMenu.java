@@ -5,7 +5,6 @@ import controller.UserControllers.ProfileController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,15 +19,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Stronghold;
-import model.User.User;
 import utils.Captcha;
 import utils.FormatValidation;
 import view.enums.messages.UserMessage.ProfileMessage;
 
 public class ProfileMenu extends Application {
     private static Stage stage;
-    private static ProfileController controller = new ProfileController(new User("hi", "bye",
-            "asnx@gmail.com", "dns", ""));
+    private static ProfileController controller;
     public TextField usernameTextField;
     public TextField nicknameTextField;
     public TextField emailTextField;
@@ -58,7 +55,6 @@ public class ProfileMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Stronghold.load();
         Pane rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/profileMenu.fxml"));
         rootPane.setBackground(new Background(new BackgroundImage(new Image(
                 ProfileMenu.class.getResource("/assets/backgrounds/profileMenu.jpg").toExternalForm()),
@@ -66,9 +62,7 @@ public class ProfileMenu extends Application {
                 new BackgroundSize(1, 1, true, true, false, false))));
         stage.setScene(new Scene(rootPane));
         ProfileMenu.stage = stage;
-        stage.setResizable(false);
         stage.setFullScreen(true);
-        stage.show();
     }
 
     @FXML

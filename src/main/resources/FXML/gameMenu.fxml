@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
+    <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="728.0" prefWidth="1280.0" vbarPolicy="NEVER"/>
+</AnchorPane>

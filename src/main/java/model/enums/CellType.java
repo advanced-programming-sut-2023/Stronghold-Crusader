@@ -1,47 +1,48 @@
 package model.enums;
 
-import Settings.AnsiEscapeCodes;
 import com.google.gson.annotations.SerializedName;
+import javafx.scene.image.Image;
+
 
 public enum CellType {
     @SerializedName("1")
-    FIELD("field", AnsiEscapeCodes.YELLOW_BACKGROUND),
+    FIELD("field"),
     @SerializedName("2")
-    GRAVEL("gravel", AnsiEscapeCodes.YELLOW_BACKGROUND_BRIGHT),
+    GRAVEL("gravel"),
     @SerializedName("3")
-    STONE("stone", AnsiEscapeCodes.WHITE_BACKGROUND),
+    STONE("stone"),
     @SerializedName("4")
-    SLATE("slate", AnsiEscapeCodes.CYAN_BACKGROUND_BRIGHT),
+    SLATE("slate"),
     @SerializedName("5")
-    IRON("iron", AnsiEscapeCodes.WHITE_BACKGROUND_BRIGHT),
+    IRON("iron"),
     @SerializedName("6")
-    GRASS("grass", AnsiEscapeCodes.GREEN_BACKGROUND_BRIGHT),
+    GRASS("grass"),
     @SerializedName("7")
-    MEADOW("meadow", AnsiEscapeCodes.PURPLE_BACKGROUND),
+    MEADOW("meadow"),
     @SerializedName("8")
-    DENSE_MEADOW("dense meadow", AnsiEscapeCodes.PURPLE_BACKGROUND_BRIGHT),
+    DENSE_MEADOW("dense meadow"),
     @SerializedName("9")
-    PlAIN("plain", AnsiEscapeCodes.GREEN_BACKGROUND),
+    PlAIN("plain"),
     @SerializedName("10")
-    OIL("oil", AnsiEscapeCodes.BLACK_BACKGROUND),
+    OIL("oil"),
     @SerializedName("11")
-    SHALLOW_WATER("shallow water", AnsiEscapeCodes.BLUE_BACKGROUND),
+    SHALLOW_WATER("shallow water"),
     @SerializedName("12")
-    RIVER("river", AnsiEscapeCodes.BLUE_BACKGROUND),
+    RIVER("river"),
     @SerializedName("13")
-    SMALL_POOL("small pool", AnsiEscapeCodes.BLUE_BACKGROUND),
+    SMALL_POOL("small pool"),
     @SerializedName("14")
-    BIG_POOL("big pool", AnsiEscapeCodes.BLUE_BACKGROUND),
+    BIG_POOL("big pool"),
     @SerializedName("15")
-    BEACH("beach", AnsiEscapeCodes.BLUE_BACKGROUND),
+    BEACH("beach"),
     @SerializedName("16")
-    SEA("sea", AnsiEscapeCodes.BLUE_BACKGROUND);
+    SEA("sea");
     private final String name;
-    private final String asniColor;
+    private final Image image;
 
-    CellType(String name, String asniColor) {
-        this.asniColor = asniColor;
+    CellType(String name) {
         this.name = name;
+        image = new Image(CellType.class.getResource("/assets/graphic/tiles/" + this.ordinal() + ".jpg").toExternalForm());
     }
 
     public static CellType getType(String typeName) {
@@ -51,13 +52,13 @@ public enum CellType {
         return null;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
     public static boolean isTraversableByType(CellType type) {
         return type.equals(FIELD) || type.equals(GRAVEL) || type.equals(STONE) || type.equals(IRON) || type.equals(GRASS)
                 || type.equals(MEADOW) || type.equals(DENSE_MEADOW) || type.equals(PlAIN) || type.equals(SHALLOW_WATER);
-    }
-
-    public String getAsniColor() {
-        return asniColor;
     }
 
     public String getName() {

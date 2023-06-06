@@ -1,5 +1,6 @@
 package model.Map;
 
+import javafx.scene.shape.Rectangle;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.DefenseAndAttackBuilding;
 import model.MapAsset.Building.EntranceBuilding;
@@ -21,25 +22,26 @@ public class Cell {
     private int tunnelDestroyCounter; // if -1, no tunnel is there
 
     public Cell(Vector2D coordinate, CellType type) {
+        super();
         this.coordinate = coordinate;
         this.type = type;
         assets = new ArrayList<>();
         tunnelDestroyCounter = -1;
     }
 
-    public void deployTunnel(){
+    public void deployTunnel() {
         tunnelDestroyCounter = 4;
     }
 
-    public void tunnelNextRound(){
-        if(tunnelDestroyCounter >= 0) tunnelDestroyCounter--;
+    public void tunnelNextRound() {
+        if (tunnelDestroyCounter >= 0) tunnelDestroyCounter--;
     }
 
-    public boolean tunnelToBeDestroyed(){
+    public boolean tunnelToBeDestroyed() {
         return tunnelDestroyCounter == 0;
     }
 
-    public boolean hasTunnel(){
+    public boolean hasTunnel() {
         return tunnelDestroyCounter != -1;
     }
 

@@ -1,5 +1,8 @@
 package model.enums.AssetType;
 
+import javafx.scene.image.Image;
+import model.enums.CellType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,13 @@ public enum MapAssetType {
 
     //Nature objects
     TREE, CLIFF;
+
+    private final Image image;
+
+    MapAssetType() {
+        //TODO fix this @kian
+        image = new Image(CellType.class.getResource("/assets/graphic/tiles/3.jpg").toExternalForm());
+    }
 
     public static MapAssetType getMapAssetType(String typeName) {
         for (MapAssetType type : MapAssetType.values())
@@ -46,5 +56,9 @@ public enum MapAssetType {
                 GRAIN_FIELD, DIARY_FACTORY, APPLE_GARDEN, POLTURNER, FLETCHER, BLACKSMITH, ARMOURER, WOOD_CUTTER, QUARRY, SHORT_WALL, WALL, STAIRS,
                 PITCH_RIG, IRON_MINE, MILL, INN, KILLING_PIT, SIEGE_TENT, STABLE, BARRACK, MERCENARY_POST, ENGINEER_GUILD, CAGED_WARDOG,
                 CHURCH, CATHEDRAL, HOUSE, SMALL_GATEHOUSE, BIG_GATEHOUSE, ARMOURY, FOOD_STORAGE, STORE_HOUSE, STORE, OX_TETHER, DRAW_BRIDGE, HAUNTING_GROUND));
+    }
+
+    public Image getImage() {
+        return image;
     }
 }
