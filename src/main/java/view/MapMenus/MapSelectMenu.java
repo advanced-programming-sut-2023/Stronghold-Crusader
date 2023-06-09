@@ -51,7 +51,7 @@ public class MapSelectMenu {
 
     private void runSelectMap(Matcher matcher) {
         String mapId = matcher.group("mapId");
-        boolean flag = matcher.group("modifiable") != null;
+        boolean flag = matcher.group("modifle") != null;
         mapSelectController.selectMap(mapId, flag).printMessage();
     }
 

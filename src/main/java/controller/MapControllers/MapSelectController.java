@@ -54,7 +54,7 @@ public class MapSelectController {
         selectedMap = MapManager.load(mapId);
         players = new HashMap<>();
         return MapSelectMessage.MAP_SELECT_SUCCESS;
-    }
+    } 
 
     public String numberOfPlayers() {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED.getMessage();

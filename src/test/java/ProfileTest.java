@@ -100,7 +100,6 @@ public class ProfileTest {
         User user = loadForTest();
         ProfileController controller = new ProfileController(user);
 //        controller.setCurrentUser(user);
-
         ProfileMessage msg = controller.changeEmail("dibahadie2@gmail.com");
         Assertions.assertEquals(msg, ProfileMessage.EMAIL_EXISTS);
         Assertions.assertEquals(user.getEmail(), "dibahadie@gmail.com");

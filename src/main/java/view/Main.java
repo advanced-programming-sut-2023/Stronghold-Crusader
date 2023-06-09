@@ -2,7 +2,6 @@ package view;
 
 import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
-import controller.UserControllers.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.ConstantManager;
@@ -12,11 +11,11 @@ import model.Stronghold;
 import model.User.Player;
 import model.enums.User.Color;
 import view.GameMenus.GraphicGameMenu;
-import view.UserMenus.LoginMenu;
 
 import java.util.HashMap;
 
 public class Main extends Application {
+    public static Stage mainStage;
     public static void main(String[] args) throws Exception {
         Stronghold.load();
         ConstantManager.load();
