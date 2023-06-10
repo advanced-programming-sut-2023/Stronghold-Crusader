@@ -123,7 +123,8 @@ public enum MapAssetType {
     private final Image image;
 
     MapAssetType() {
-        image = new Image(CellType.class.getResource("/assets/graphic/buildings/" + this.ordinal() + ".png").toExternalForm());
+//        image = new Image(CellType.class.getResource("/assets/graphic/buildings/" + this.ordinal() + ".png").toExternalForm());
+        image = new Image(CellType.class.getResource("/assets/graphic/buildings/1" + ".png").toExternalForm());
     }
 
     public static MapAssetType getMapAssetType(String typeName) {

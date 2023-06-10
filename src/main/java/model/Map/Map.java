@@ -1,5 +1,6 @@
 package model.Map;
 
+import com.google.gson.annotations.Expose;
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MoveController;
 import model.MapAsset.MapAsset;
@@ -15,7 +16,7 @@ import java.util.Vector;
 
 
 public class Map {
-    private GraphicsController graphicsController;
+    private transient GraphicsController graphicsController;
     private final String name;
     private final Vector2D size;
     private final Vector<Vector2D> headQuarters;
