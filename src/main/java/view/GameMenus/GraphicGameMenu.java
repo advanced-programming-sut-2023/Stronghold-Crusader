@@ -86,19 +86,5 @@ public class GraphicGameMenu extends Application {
             }
             event.consume();
         });
-        mainScrollPane.setOnDragDropped(event -> {
-            Dragboard dragboard = event.getDragboard();
-            if (dragboard.hasString()){
-                String path = dragboard.getString();
-                Pattern pattern = Pattern.compile("/assets/graphic/buildings/(?<name>\\S+)\\.png");
-                Matcher matcher = pattern.matcher(path);
-                matcher.find();
-
-                Vector2D coordinate = graphicsController.getCoordinate(event, mainScrollPane);
-                System.out.println(GraphicBuildingPlacementMenu.controller.dropBuilding(
-                        "lookout_tower", coordinate.x, coordinate.y));
-            }
-            event.consume();
-        });
     }
 }

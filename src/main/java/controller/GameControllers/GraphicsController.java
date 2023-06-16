@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -18,7 +19,12 @@ import model.MapAsset.Building.Building;
 import model.MapAsset.Cliff;
 import model.MapAsset.MapAsset;
 import model.MapAsset.Tree;
+import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
+import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GraphicsController {
     private final TilePane mainGrid;
@@ -80,6 +86,19 @@ public class GraphicsController {
         GridPane cellGrid = new GridPane();
         Tooltip tooltip = new Tooltip(cell.toString());
         Tooltip.install(cellGrid, tooltip);
+        cellGrid.setOnDragDropped(e -> {
+            Dragboard dragboard = e.getDragboard();
+            if (dragboard.hasString()){
+                String path = dragboard.getString();
+                Pattern pattern = Pattern.compile("/assets/graphic/buildings/(?<name>\\S+)\\.png");
+                Matcher matcher = pattern.matcher(path);
+                matcher.find();
+                System.out.println(GraphicBuildingPlacementMenu.controller.dropBuilding(
+                        MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),
+                        cell.getCoordinate().x, cell.getCoordinate().y));
+            }
+            e.consume();
+        });
         return cellGrid;
     }
 
@@ -148,13 +167,5 @@ public class GraphicsController {
         }
         rootPane.getChildren().remove(selectionRect);
         selectionRect = null;
-    }
-
-    public Vector2D getCoordinate(DragEvent event, ScrollPane pane){
-        double yScrolled = pane.getVvalue() * map.getSize().y;
-        double xScrolled = pane.getHvalue() * map.getSize().x;
-        int x = (int) (event.getSceneX()/mainGrid.getPrefTileWidth() + xScrolled);
-        int y = (int) (event.getSceneY()/mainGrid.getPrefTileHeight() + yScrolled);
-        return new Vector2D(x, y);
     }
 }

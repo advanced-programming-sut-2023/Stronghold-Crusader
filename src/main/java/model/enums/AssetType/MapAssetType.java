@@ -124,8 +124,10 @@ public enum MapAssetType {
     private final Image image;
 
     MapAssetType() {
-//        image = new Image(CellType.class.getResource("/assets/graphic/buildings/" + this.ordinal() + ".png").toExternalForm());
-        image = new Image(CellType.class.getResource("/assets/graphic/buildings/1" + ".png").toExternalForm());
+        if (this.ordinal() <= 14)
+            image = new Image(CellType.class.getResource("/assets/graphic/buildings/" + this.ordinal() + ".png").toExternalForm());
+        else
+            image = new Image(CellType.class.getResource("/assets/graphic/buildings/1" + ".png").toExternalForm());
     }
 
     public static MapAssetType getMapAssetType(String typeName) {
@@ -159,7 +161,7 @@ public enum MapAssetType {
     }
     public static MapAssetType getTypeBySerial(int i){
         for (MapAssetType type : MapAssetType.values()) {
-            if (type.ordinal() + 1 == i){
+            if (type.ordinal() == i){
                 return type;
             }
         }
