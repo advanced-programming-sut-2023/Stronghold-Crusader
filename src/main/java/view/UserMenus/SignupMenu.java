@@ -56,7 +56,7 @@ public class SignupMenu extends Application implements Initializable {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("Stronghold");
-        URL url = LoginMenu.class.getResource("/FXML/signupMenu.fxml");
+        URL url = LoginMenu.class.getResource("/FXML/Userfxml/signupMenu.fxml");
         AnchorPane anchorPane = FXMLLoader.load(url);
         anchorPane.getChildren().get(0).setVisible(false);
         anchorPane.getChildren().get(2).setVisible(false);

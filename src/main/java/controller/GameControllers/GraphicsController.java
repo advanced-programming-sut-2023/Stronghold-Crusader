@@ -1,9 +1,12 @@
 package controller.GameControllers;
 
+import javafx.event.Event;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -31,7 +34,7 @@ public class GraphicsController {
         loadGraphics();
     }
 
-    private void loadGraphics() {
+    public void loadGraphics() {
         mainGrid.setPrefColumns(map.getSize().x);
         mainGrid.setPrefTileHeight(80);
         mainGrid.setPrefTileWidth(80);
@@ -145,5 +148,13 @@ public class GraphicsController {
         }
         rootPane.getChildren().remove(selectionRect);
         selectionRect = null;
+    }
+
+    public Vector2D getCoordinate(DragEvent event, ScrollPane pane){
+        double yScrolled = pane.getVvalue() * map.getSize().y;
+        double xScrolled = pane.getHvalue() * map.getSize().x;
+        int x = (int) (event.getSceneX()/mainGrid.getPrefTileWidth() + xScrolled);
+        int y = (int) (event.getSceneY()/mainGrid.getPrefTileHeight() + yScrolled);
+        return new Vector2D(x, y);
     }
 }

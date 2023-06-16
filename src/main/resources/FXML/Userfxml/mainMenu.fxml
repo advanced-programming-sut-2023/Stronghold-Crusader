@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="728" prefWidth="1280.0" stylesheets="@../CSS/stronghold.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.MainMenu">
+<AnchorPane prefHeight="728" prefWidth="1280.0" stylesheets="@../../CSS/stronghold.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.MainMenu">
    <children>
       <Button layoutX="550.0" layoutY="102.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="390.0" styleClass="button-1" text="New game" onMouseClicked="#goToSelectedMapMenu">
          <font>

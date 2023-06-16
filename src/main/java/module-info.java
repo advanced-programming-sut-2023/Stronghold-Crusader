@@ -26,10 +26,12 @@ module project.group {
     opens view.UserMenus to javafx.fxml;
     opens view.GameMenus to javafx.fxml;
     opens view.MapMenus to javafx.fxml;
+    opens view.MapMenus.dropBuildingMenu to javafx.fxml;
 
     exports view.UserMenus;
     exports view.GameMenus;
     exports view.MapMenus;
     exports view;
     exports model.User;
+    exports view.MapMenus.dropBuildingMenu;
 }

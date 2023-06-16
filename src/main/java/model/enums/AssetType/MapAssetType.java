@@ -14,7 +14,6 @@ public enum MapAssetType {
     HEADQUARTER,
     @SerializedName("2")
     LOOKOUT_TOWER,
-
     @SerializedName("3")
     PERIMETER_TOWER,
     @SerializedName("4")
@@ -108,6 +107,8 @@ public enum MapAssetType {
     DRAW_BRIDGE,
     @SerializedName("43")
     HAUNTING_GROUND,
+    @SerializedName("44")
+    TUNNELER_POST,
 
     //People
     WORKER, ARCHER, CROSSBOWMAN, SPEARMAN, PIKEMAN, MACEMAN, SWORDSMAN, KNIGHT, TUNNELER, BLACK_MONK, ARCHER_BOW, SLAVE, SLINGER, ASSASSIN,
@@ -155,5 +156,13 @@ public enum MapAssetType {
 
     public Image getImage() {
         return image;
+    }
+    public static MapAssetType getTypeBySerial(int i){
+        for (MapAssetType type : MapAssetType.values()) {
+            if (type.ordinal() + 1 == i){
+                return type;
+            }
+        }
+        return null;
     }
 }

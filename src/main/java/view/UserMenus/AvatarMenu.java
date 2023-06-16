@@ -1,9 +1,7 @@
 package view.UserMenus;
 
 import controller.UserControllers.AvatarController;
-import controller.UserControllers.ProfileController;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,7 +30,7 @@ public class AvatarMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Pane rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/avatarMenu.fxml"));
+        Pane rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/Userfxml/avatarMenu.fxml"));
         rootPane.setBackground(new Background(new BackgroundImage(new Image(
                 ProfileMenu.class.getResource("/assets/backgrounds/profileMenu.jpg").toExternalForm()),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,

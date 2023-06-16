@@ -59,7 +59,7 @@ public class LoginMenu extends Application implements Initializable {
             return;
         }
         stage.setTitle("Stronghold");
-        URL url = LoginMenu.class.getResource("/FXML/loginMenu.fxml");
+        URL url = LoginMenu.class.getResource("/FXML/Userfxml/loginMenu.fxml");
         AnchorPane anchorPane = FXMLLoader.load(url);
         setToggleSwitch();
         Pane pane = (Pane) anchorPane.getChildren().get(5);
@@ -197,7 +197,7 @@ public class LoginMenu extends Application implements Initializable {
 
     public void goToChangePasswordPane(MouseEvent mouseEvent) throws IOException, InterruptedException {
         Parent fxml;
-        fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/forgotPasswordPane.fxml"));
+        fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/Userfxml/forgotPasswordPane.fxml"));
         mainPane.getChildren().clear();
         mainPane.getChildren().setAll(fxml);
 
@@ -219,7 +219,7 @@ public class LoginMenu extends Application implements Initializable {
 
     public void backToLogin(MouseEvent mouseEvent) throws IOException {
         Parent fxml;
-        fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/loginPane.fxml"));
+        fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/Userfxml/loginPane.fxml"));
         mainPane.getChildren().clear();
         mainPane.getChildren().setAll(fxml);
         mainPane.getChildren().add(toggleSwitch);

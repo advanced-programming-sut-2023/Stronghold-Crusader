@@ -10,7 +10,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import model.Game.Game;
 import model.Stronghold;
 import model.User.User;
 

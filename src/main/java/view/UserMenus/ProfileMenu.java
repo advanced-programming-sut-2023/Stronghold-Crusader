@@ -18,7 +18,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Stronghold;
 import utils.Captcha;
 import utils.FormatValidation;
 import view.enums.messages.UserMessage.ProfileMessage;
@@ -55,7 +54,7 @@ public class ProfileMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Pane rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/profileMenu.fxml"));
+        Pane rootPane = FXMLLoader.load(ProfileMenu.class.getResource("/FXML/Userfxml/profileMenu.fxml"));
         rootPane.setBackground(new Background(new BackgroundImage(new Image(
                 ProfileMenu.class.getResource("/assets/backgrounds/profileMenu.jpg").toExternalForm()),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,

@@ -1,5 +1,7 @@
 package model.enums.AssetType;
 
+import java.util.ArrayList;
+
 public enum BuildingType {
     HEADQUARTER(BuildingCategory.NORMAL),
     LOOKOUT_TOWER(BuildingCategory.DEFENSE_AND_ATTACK),
@@ -63,5 +65,15 @@ public enum BuildingType {
             if (typeName.equalsIgnoreCase(type.name())) return type;
         }
         return null;
+    }
+
+    public static ArrayList<MapAssetType> getAllBuildings(BuildingCategory category){
+        ArrayList<MapAssetType> buildings = new ArrayList<>();
+        for (BuildingType type : BuildingType.values()){
+            if (type.category.equals(category)) {
+                buildings.add(MapAssetType.valueOf(type.name()));
+            }
+        }
+        return buildings;
     }
 }
