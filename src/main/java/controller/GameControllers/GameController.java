@@ -21,6 +21,7 @@ import utils.Pair;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
+import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,17 +31,17 @@ public class GameController {
     private final Game game;
     private ShowMapController showMapController;
     private SelectedBuildingController selectedBuildingController;
-    private SelectedUnitController selectedUnitController;
+    private final SelectedUnitController selectedUnitController;
 
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
         this.game = game;
         selectedBuildingController = null;
         selectedUnitController = new SelectedUnitController(new ArrayList<>(), game);
+        nextTurn();
     }
 
     public String run() {
-        nextTurn();
         GameMenu gameMenu = new GameMenu(this);
         while (true) {
             switch (gameMenu.run()) {
@@ -292,9 +293,12 @@ public class GameController {
         return selectedUnitController;
     }
 
-    public String showGameInfo() {
-        return "Round " + game.getRound() + ":\n" +
-                game.getCurrentPlayer().getNickname() + "'s Turn";
+    public String getCurrentPlayerName() {
+        return game.getCurrentPlayer().getNickname();
+    }
+
+    public int getRoundNum() {
+        return game.getRound();
     }
 
     public GameMenuMessage showMap(int x, int y) {
@@ -315,12 +319,12 @@ public class GameController {
                 "\n-Inn: " + currentGov.getInnPopularity();
     }
 
-    public String showPopularity() {
-        return "Popularity: " + game.getCurrentPlayer().getGovernance().getTotalPopularity();
+    public int getPopularity() {
+        return game.getCurrentPlayer().getGovernance().getTotalPopularity();
     }
 
-    public String showFoodRate() {
-        return "Current food rate: " + game.getCurrentPlayer().getGovernance().getFoodRate();
+    public int getFoodRate() {
+        return game.getCurrentPlayer().getGovernance().getFoodRate();
     }
 
     public String showFoodList() {
@@ -333,15 +337,33 @@ public class GameController {
     }
 
 
-    public String showTaxRate() {
-        return "Current tax rate: " + game.getCurrentPlayer().getGovernance().getTaxRate();
+    public int getTaxRate() {
+        return game.getCurrentPlayer().getGovernance().getTaxRate();
     }
 
-    public GameMenuMessage setFearRate(int fearRate) {
-        if (fearRate > 5 || fearRate < -5)
-            return GameMenuMessage.INVALID_FEAR_RATE;
+    public int getFearRate() {
+        return game.getCurrentPlayer().getGovernance().getFearRate();
+    }
+
+    public double getGold() {
+        return game.getCurrentPlayer().getGovernance().getGold();
+    }
+
+    public int getPopulation() {
+        return game.getCurrentPlayer().getGovernance().getTotalPopulation();
+    }
+
+    public void setFearRate(int fearRate) {
         game.getCurrentPlayer().getGovernance().setFearRate(fearRate);
-        return GameMenuMessage.FEAR_RATE_CHANGE_SUCCESS;
+    }
+
+    public void setTaxRate(int taxRate) {
+        game.getCurrentPlayer().getGovernance().setTaxRate(taxRate);
+
+    }
+
+    public void setFoodRate(int foodRate) {
+        game.getCurrentPlayer().getGovernance().setFoodRate(foodRate);
     }
 
     public boolean isModifiable() {
