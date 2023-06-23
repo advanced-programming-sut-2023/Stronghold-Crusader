@@ -124,10 +124,10 @@ public enum MapAssetType {
     private final Image image;
 
     MapAssetType() {
-        if (this.ordinal() <= 14)
-            image = new Image(CellType.class.getResource("/assets/graphic/buildings/" + this.ordinal() + ".png").toExternalForm());
+        if (this.ordinal() <= 43)
+            image = new Image(CellType.class.getResource("/assets/graphic/building/" + this.ordinal() + ".png").toExternalForm());
         else
-            image = new Image(CellType.class.getResource("/assets/graphic/buildings/1" + ".png").toExternalForm());
+            image = new Image(CellType.class.getResource("/assets/graphic/building/1" + ".png").toExternalForm());
     }
 
     public static MapAssetType getMapAssetType(String typeName) {
