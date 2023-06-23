@@ -21,7 +21,7 @@ public enum Material {
     private final Image image;
 
     Material() {
-        image = new Image(Material.class.getResource("/assets/graphic/item/" + this.name().toLowerCase() + ".png").toExternalForm());
+        image = new Image(Material.class.getResource("/assets/graphic/items/" + this.name().toLowerCase() + ".png").toExternalForm());
     }
 
     public static boolean contains(String input) {
