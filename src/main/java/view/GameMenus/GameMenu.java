@@ -18,7 +18,7 @@ public class GameMenu {
     }
 
     public String run() {
-        System.out.println(gameController.showGameInfo());
+//        System.out.println(gameController.showGameInfo());
         String input;
         while (true) {
             input = scanner.nextLine();
@@ -38,7 +38,7 @@ public class GameMenu {
                         return "selectedBuilding";
                     break;
                 case SHOW_POPULARITY:
-                    System.out.println(gameController.showPopularity());
+//                    System.out.println(gameController.showPopularity());
                     break;
                 case SHOW_POPULARITY_FACTORS:
                     System.out.println(gameController.showPopularityFactors());
@@ -47,10 +47,10 @@ public class GameMenu {
                     System.out.println(gameController.showFoodList());
                     break;
                 case SHOW_FOOD_RATE:
-                    System.out.println(gameController.showFoodRate());
+//                    System.out.println(gameController.showFoodRate());
                     break;
                 case SHOW_TAX_RATE:
-                    System.out.println(gameController.showTaxRate());
+//                    System.out.println(gameController.showTaxRate());
                     break;
                 case SET_FEAR_RATE:
                     runSetFearRate(matcher);
@@ -60,10 +60,10 @@ public class GameMenu {
                     if (output.equals("endGame")){
                         return "endGame";
                     }
-                    System.out.println(gameController.showGameInfo());
+//                    System.out.println(gameController.showGameInfo());
                     break;
                 case SHOW_GAME_INFO:
-                    System.out.println(gameController.showGameInfo());
+//                    System.out.println(gameController.showGameInfo());
                     break;
                 case CHANGE_ENVIRONMENT:
                     if (!gameController.isModifiable()) {
@@ -116,7 +116,7 @@ public class GameMenu {
 
     private void runSetFearRate(Matcher matcher) {
         int rate = Integer.parseInt(matcher.group("rate"));
-        GameMenuMessage.printMessage(gameController.setFearRate(rate));
+//        GameMenuMessage.printMessage(gameController.setFearRate(rate));
     }
 
 }

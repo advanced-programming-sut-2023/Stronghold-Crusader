@@ -204,6 +204,10 @@ public class Governance {
         this.fearRate = fearRate;
     }
 
+    public int getFearRate() {
+        return fearRate;
+    }
+
     public void changePeasantPopulation(int offset) {
         peasantPopulation += offset;
     }

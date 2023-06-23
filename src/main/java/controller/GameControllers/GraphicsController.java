@@ -117,11 +117,11 @@ public class GraphicsController {
     private void selectCell(GridPane cellGrid) {
         Cell selectedCell = getCellOfNode(cellGrid);
         GameMenuMessage result = gameController.selectBuilding(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
-        if(result == GameMenuMessage.BUILDING_SELECTED){
+        if (result == GameMenuMessage.BUILDING_SELECTED) {
             //TODO @kian
         }
         result = gameController.selectUnit(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
-        if(result == GameMenuMessage.UNIT_SELECTED){
+        if (result == GameMenuMessage.UNIT_SELECTED) {
             //TODO @kian
         }
     }

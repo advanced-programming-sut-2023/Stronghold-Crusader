@@ -11,6 +11,8 @@ public enum GameMenuMessage {
     ENTER_SHOW_MAP("Entered show map menu successfully"),
     INVALID_FEAR_RATE("Invalid fear rate"),
     FEAR_RATE_CHANGE_SUCCESS("Successfully changed fear rate"),
+    INVALID_TAX_RATE("Invalid tax rate"),
+    TAX_RATE_CHANGE_SUCCESS("Successfully changed tax rate"),
     CHANGE_ENVIRONMENT("Entered change environment menu successfully"),
     BUILDING_PLACEMENT("Entered building placement menu successfully"),
     TRADE("Entered trade menu successfully"),
