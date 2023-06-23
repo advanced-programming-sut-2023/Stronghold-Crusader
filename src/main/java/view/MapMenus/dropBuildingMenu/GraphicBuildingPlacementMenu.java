@@ -1,7 +1,6 @@
 package view.MapMenus.dropBuildingMenu;
 
 import controller.MapControllers.BuildingPlacementController;
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
@@ -10,7 +9,6 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
@@ -44,7 +42,7 @@ public class GraphicBuildingPlacementMenu {
     private void setCategoryButton(ImageView button) {
         button.setOnMouseClicked(e -> {
             String path = button.getImage().getUrl();
-            Pattern pattern = Pattern.compile("dropBuildingIcons\\/(?<name>\\S+)\\.png");
+            Pattern pattern = Pattern.compile("dropBuildingIcons/(?<name>\\S+)\\.png");
             Matcher matcher = pattern.matcher(path);
             matcher.find();
             String category = matcher.group("name");
