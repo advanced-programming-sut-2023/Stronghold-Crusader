@@ -7,22 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.enums.AssetType.BuildingType;
-import model.enums.AssetType.MapAssetType;
-import utils.Vector2D;
-import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GraphicGameMenu extends Application {
     private static Stage stage;

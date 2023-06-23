@@ -94,7 +94,7 @@ public class GameMenu {
         int y = Integer.parseInt(matcher.group("y"));
         GameMenuMessage msg = gameController.selectUnit(x, y);
         GameMenuMessage.printMessage(msg);
-        return msg.equals(GameMenuMessage.ENTER_UNIT_MENU);
+        return msg.equals(GameMenuMessage.UNIT_SELECTED);
     }
 
     private boolean runSelectBuilding(Matcher matcher) {
@@ -102,7 +102,7 @@ public class GameMenu {
         int y = Integer.parseInt(matcher.group("y"));
         GameMenuMessage msg = gameController.selectBuilding(x, y);
         GameMenuMessage.printMessage(msg);
-        return msg.equals(GameMenuMessage.ENTER_BUILDING_MENU);
+        return msg.equals(GameMenuMessage.BUILDING_SELECTED);
     }
 
     private boolean runShowMap(Matcher matcher) {

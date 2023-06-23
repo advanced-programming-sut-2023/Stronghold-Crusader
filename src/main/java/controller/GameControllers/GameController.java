@@ -35,6 +35,8 @@ public class GameController {
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
         this.game = game;
+        selectedBuildingController = null;
+        selectedUnitController = new SelectedUnitController(new ArrayList<>(), game);
     }
 
     public String run() {
@@ -61,14 +63,6 @@ public class GameController {
                 case "marketMenu":
                     MarketController marketController = new MarketController(game.getCurrentPlayer());
                     marketController.run();
-                    break;
-                case "selectedBuilding":
-                    selectedBuildingController.run();
-                    selectedBuildingController = null;
-                    break;
-                case "selectedUnit":
-                    selectedUnitController.run();
-                    selectedUnitController = null;
                     break;
                 case "endGame":
                     EndGameController endGameController = new EndGameController(game.getDeadPlayers());
@@ -255,6 +249,7 @@ public class GameController {
     }
 
     public GameMenuMessage selectUnit(int x, int y) {
+        selectedUnitController.deselectAll();
         Vector2D coordinate = new Vector2D(x, y);
         if (!game.getMap().isInMap(coordinate))
             return GameMenuMessage.INVALID_COORDINATE;
@@ -268,8 +263,9 @@ public class GameController {
         }
         if (selectedUnits.size() == 0)
             return GameMenuMessage.NO_UNITS_IN_PLACE;
-        selectedUnitController = new SelectedUnitController(selectedUnits, game);
-        return GameMenuMessage.ENTER_UNIT_MENU;
+        for (MobileUnit unit : selectedUnits)
+            selectedUnitController.addUnit(unit);
+        return GameMenuMessage.UNIT_SELECTED;
     }
 
     public GameMenuMessage selectBuilding(int x, int y) {
@@ -280,12 +276,20 @@ public class GameController {
         for (MapAsset asset : assets) {
             if (!(asset instanceof Building))
                 continue;
-            if (!asset.getOwner().equals(game.getCurrentPlayer()))
+            if (asset.getOwner() != null && !asset.getOwner().equals(game.getCurrentPlayer()))
                 return GameMenuMessage.WRONG_OWNER;
             selectedBuildingController = new SelectedBuildingController((Building) asset, game);
-            return GameMenuMessage.ENTER_BUILDING_MENU;
+            return GameMenuMessage.BUILDING_SELECTED;
         }
         return GameMenuMessage.NO_BUILDING_IN_PLACE;
+    }
+
+    public SelectedBuildingController getSelectedBuildingController() {
+        return selectedBuildingController;
+    }
+
+    public SelectedUnitController getSelectedUnitController() {
+        return selectedUnitController;
     }
 
     public String showGameInfo() {

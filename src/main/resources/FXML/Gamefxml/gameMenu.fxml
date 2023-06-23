@@ -10,18 +10,10 @@
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
     <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="728.0" prefWidth="1280.0"
                 vbarPolicy="NEVER">
-        <AnchorPane>
-
-        </AnchorPane>
     </ScrollPane>
     <ImageView fitHeight="245.0" fitWidth="1258.0" layoutX="24.0" layoutY="550.0" nodeOrientation="INHERIT"
-               pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@../../assets/graphic/overlay/bottom_menu.png"/>
-        </image>
-        <cursor>
-            <Cursor fx:constant="MOVE"/>
-        </cursor>
+               pickOnBounds="true">
+        <Image url="@../../assets/graphic/overlay/bottom_menu.png"/>
     </ImageView>
     <AnchorPane layoutX="300" layoutY="630.0" prefWidth="430" prefHeight="100" fx:id="bottomPane">
     </AnchorPane>

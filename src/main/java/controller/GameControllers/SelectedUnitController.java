@@ -93,20 +93,36 @@ public class SelectedUnitController {
         return SelectedUnitMessage.NO_TARGET;
     }
 
-    public SelectedUnitMessage digTunnel(int x, int y){
+    public boolean isAnythingSelected() {
+        return !selectedUnits.isEmpty();
+    }
+
+    public void addUnit(MobileUnit mobileUnit) {
+        selectedUnits.add(mobileUnit);
+    }
+
+    public void deselectAll() {
+        selectedUnits.clear();
+    }
+
+    public void removeUnit(MobileUnit mobileUnit) {
+        selectedUnits.remove(mobileUnit);
+    }
+
+    public SelectedUnitMessage digTunnel(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!game.getMap().isInMap(coordinate)) return SelectedUnitMessage.INVALID_COORDINATE;
         Cell selectedCell = game.getMap().getCell(coordinate);
         boolean isCellNeighbour = false;
         for (Cell nearbyCell : game.getMap().getNearbyCells(coordinate, 1)) {
-            if(nearbyCell.equals(selectedCell)){
+            if (nearbyCell.equals(selectedCell)) {
                 isCellNeighbour = true;
                 break;
             }
         }
-        if(!isCellNeighbour) return SelectedUnitMessage.TUNNEL_NOT_NEARBY;
+        if (!isCellNeighbour) return SelectedUnitMessage.TUNNEL_NOT_NEARBY;
         for (MapAsset asset : selectedCell.getAllAssets()) {
-            if(asset.getType() == MapAssetType.WALL || asset instanceof DefenseAndAttackBuilding){
+            if (asset.getType() == MapAssetType.WALL || asset instanceof DefenseAndAttackBuilding) {
                 selectedCell.deployTunnel();
                 return SelectedUnitMessage.TUNNEL_PLACEMENT_SUCCESS;
             }

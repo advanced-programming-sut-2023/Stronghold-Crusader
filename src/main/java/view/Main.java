@@ -38,8 +38,9 @@ public class Main extends Application {
         players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("kian")));
         Map map = MapManager.load("1001");
         Game game = new Game(map, players, true);
-        GraphicGameMenu.setGameController(new GameController(Stronghold.getInstance().getUser("ayeen"), game));
-        GraphicGameMenu.setGraphicsController(new GraphicsController(game));
+        GameController gameController = new GameController(Stronghold.getInstance().getUser("ayeen"), game);
+        GraphicGameMenu.setGameController(gameController);
+        GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game));
         GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map));
         new GraphicGameMenu().start(stage);
     }

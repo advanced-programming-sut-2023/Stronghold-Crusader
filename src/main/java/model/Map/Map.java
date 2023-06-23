@@ -1,6 +1,5 @@
 package model.Map;
 
-import com.google.gson.annotations.Expose;
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MoveController;
 import model.MapAsset.MapAsset;
@@ -15,6 +14,7 @@ import java.util.LinkedList;
 import java.util.Vector;
 
 
+@SuppressWarnings("ClassEscapesDefinedScope")
 public class Map {
     private transient GraphicsController graphicsController;
     private final String name;
