@@ -2,6 +2,7 @@ package controller.MapControllers;
 
 
 import controller.GameControllers.GameController;
+import controller.GameControllers.GraphicsController;
 import model.Game.Game;
 import model.Map.Map;
 import model.Map.MapManager;
@@ -9,6 +10,8 @@ import model.User.Player;
 import model.Stronghold;
 import model.User.User;
 import model.enums.User.Color;
+import view.GameMenus.GraphicGameMenu;
+import view.Main;
 import view.MapMenus.MapSelectMenu;
 import view.enums.messages.MapMessage.MapSelectMessage;
 
@@ -28,7 +31,7 @@ public class MapSelectController {
         this.isMapModifiable = false;
     }
 
-    public void run() {
+    public void run() throws Exception {
         MapSelectMenu mapSelectMenu = new MapSelectMenu(this);
         while (true) {
             if (mapSelectMenu.run().equals("startGame")) {
@@ -79,10 +82,15 @@ public class MapSelectController {
         return MapSelectMessage.PLAYER_ADD_SUCCESS;
     }
 
-    public MapSelectMessage startGame() {
+    public MapSelectMessage startGame() throws Exception {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED;
         if (players.size() < selectedMap.getPlayerCount()) return MapSelectMessage.NOT_ENOUGH_PLAYERS;
         newGame = new Game(selectedMap, players, isMapModifiable);
+        GameController controller = new GameController(currentUser, newGame);
+        GraphicGameMenu menu = new GraphicGameMenu();
+        GraphicGameMenu.setGameController(controller);
+        GraphicGameMenu.setGraphicsController(new GraphicsController(newGame));
+        menu.start(Main.mainStage);
         return MapSelectMessage.GAME_CREATION_SUCCESS;
     }
 

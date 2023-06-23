@@ -18,7 +18,7 @@ public class MapSelectMenu {
         this.scanner = Menu.getScanner();
     }
 
-    public String run() {
+    public String run() throws Exception {
         String input;
         while (true) {
             input = scanner.nextLine();

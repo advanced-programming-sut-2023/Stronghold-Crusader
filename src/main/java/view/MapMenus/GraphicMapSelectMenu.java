@@ -1,5 +1,6 @@
 package view.MapMenus;
 
+import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
 import controller.MapControllers.MapSelectController;
 import javafx.application.Application;
@@ -106,5 +107,12 @@ public class GraphicMapSelectMenu extends Application {
 
     public void back() throws Exception {
         MainMenu.mainController.menu.start(Main.mainStage);
+    }
+
+    public void startGame() throws Exception {
+        MapSelectMessage msg = mapSelectController.startGame();
+        if (msg.equals(MapSelectMessage.GAME_CREATION_SUCCESS)) {
+            mapSelectController.startGame();
+        }
     }
 }

@@ -48,14 +48,15 @@
         </image>
     </ImageView>
     <ImageView fx:id="startGameButton" fitHeight="30" fitWidth="210.0" layoutX="154.0" layoutY="536.0"
-               nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
+               nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73"
+               onMouseClicked="#startGame">
         <image>
             <Image url="@../../assets/buttons/startGame_btn.jpg"/>
         </image>
     </ImageView>
     <ImageView fx:id="backButton" fitHeight="30" fitWidth="210.0" layoutX="154.0" layoutY="573.0"
                nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73"
-    onMouseClicked="#back">
+               onMouseClicked="#back">
         <image>
             <Image url="@../../assets/buttons/back_btn.jpg"/>
         </image>
