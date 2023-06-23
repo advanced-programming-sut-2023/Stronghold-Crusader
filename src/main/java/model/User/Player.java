@@ -10,6 +10,7 @@ public class Player {
     private final String username;
     private final String nickname;
     private final String slogan;
+    private final String avatarPath;
     private final ArrayList<Trade> newTrades;
 
     public Player(User user) {
@@ -18,6 +19,7 @@ public class Player {
         this.slogan = user.getSlogan();
         governance = new Governance();
         newTrades = new ArrayList<>();
+        avatarPath = user.getAvatarPath();
     }
 
     public String getUsername() {
@@ -38,5 +40,9 @@ public class Player {
 
     public ArrayList<Trade> getNewTrades() {
         return newTrades;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
     }
 }

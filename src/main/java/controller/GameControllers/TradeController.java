@@ -121,4 +121,8 @@ public class TradeController {
         }
         return null;
     }
+
+    public Game getGame() {
+        return game;
+    }
 }
