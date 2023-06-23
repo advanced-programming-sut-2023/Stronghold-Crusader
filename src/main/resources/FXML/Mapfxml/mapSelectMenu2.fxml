@@ -10,18 +10,26 @@
             <Image url="@../../assets/backgrounds/mapSelect.png" />
         </image>
     </ImageView>
-    <ImageView fx:id="addMapButton" fitHeight="30" fitWidth="100" layoutX="331.0" layoutY="364.0" nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
+    <ImageView fx:id="addPlayerButton" fitHeight="30" fitWidth="100" layoutX="331.0" layoutY="364.0" nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
         <image>
             <Image url="@../../assets/buttons/add_btn.png" />
         </image>
     </ImageView>
-    <ImageView fx:id="addPlayerButton" fitHeight="30" fitWidth="100" layoutX="331.0" layoutY="325.0" nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
+    <ImageView fx:id="addMapButton" fitHeight="30" fitWidth="100" layoutX="331.0" layoutY="325.0" nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
         <image>
             <Image url="@../../assets/buttons/pick_btn.png" />
         </image>
     </ImageView>
-    <TextField layoutX="121.0" layoutY="398.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your map" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-    <TextField layoutX="121.0" layoutY="437.0" opacity="0.5" prefHeight="30.0" prefWidth="113.0" promptText="choose player" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-    <TextField layoutX="242.0" layoutY="437.0" opacity="0.5" prefHeight="30.0" prefWidth="129.0" promptText="choose color" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-    <ScrollPane fx:id="mapList" layoutX="120.0" layoutY="475.0" opacity="0.5" prefHeight="121.0" prefWidth="359.0" stylesheets="@../../CSS/MapCss/mapSelectStyle.css" />
+    <TextField fx:id="mapNameField" layoutX="121.0" layoutY="398.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your map" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
+    <TextField fx:id="playerNameField" layoutX="121.0" layoutY="437.0" opacity="0.5" prefHeight="30.0" prefWidth="113.0" promptText="choose player" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
+    <TextField fx:id="colorField" layoutX="242.0" layoutY="437.0" opacity="0.5" prefHeight="30.0" prefWidth="129.0" promptText="choose color" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
+    <ScrollPane fx:id="mapList" hbarPolicy="NEVER" layoutX="120.0" layoutY="475.0" opacity="0.5" prefHeight="121.0" prefWidth="359.0" stylesheets="@../../CSS/MapCss/mapSelectStyle.css" vbarPolicy="NEVER" />
+    <ScrollPane fx:id="mapPreview" hbarPolicy="NEVER" layoutX="575.0" layoutY="77.0" prefHeight="641.0" prefWidth="671.0" vbarPolicy="NEVER" />
+    <VBox fx:id="selectedPlayers" layoutX="575.0" layoutY="550.0" opacity="0.7" prefHeight="166.0" prefWidth="227.0" spacing="20" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;">
+    </VBox>
+    <ImageView fitHeight="30" fitWidth="227.0" layoutX="575.0" layoutY="520.0" nodeOrientation="INHERIT" pickOnBounds="true">
+        <image>
+            <Image url="@../../assets/buttons/selectedPlayers.jpg" />
+        </image>
+    </ImageView>
 </AnchorPane>
