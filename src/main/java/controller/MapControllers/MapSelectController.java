@@ -13,6 +13,7 @@ import model.enums.User.Color;
 import view.GameMenus.GraphicGameMenu;
 import view.Main;
 import view.MapMenus.MapSelectMenu;
+import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.MapMessage.MapSelectMessage;
 
 import java.util.ArrayList;
@@ -91,6 +92,7 @@ public class MapSelectController {
         GraphicGameMenu.setGameController(controller);
         GraphicGameMenu.setGraphicsController(new GraphicsController(newGame));
         menu.start(Main.mainStage);
+        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(newGame.getCurrentPlayer(), newGame.getMap()));
         return MapSelectMessage.GAME_CREATION_SUCCESS;
     }
 
