@@ -1,5 +1,7 @@
 package model.enums.AssetType;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,12 @@ public enum Material {
 
     //Stable
     HORSE;
+
+    private final Image image;
+
+    Material() {
+        image = new Image(Material.class.getResource("/assets/graphic/items/" + this.name().toLowerCase() + ".png").toExternalForm());
+    }
 
     public static boolean contains(String input) {
 
@@ -36,5 +44,9 @@ public enum Material {
                 return m;
         }
         return null;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }
