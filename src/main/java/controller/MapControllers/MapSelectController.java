@@ -85,4 +85,12 @@ public class MapSelectController {
         newGame = new Game(selectedMap, players, isMapModifiable);
         return MapSelectMessage.GAME_CREATION_SUCCESS;
     }
+
+    public Map getSelectedMap() {
+        return selectedMap;
+    }
+
+    public HashMap<Color, Player> getPlayers() {
+        return players;
+    }
 }

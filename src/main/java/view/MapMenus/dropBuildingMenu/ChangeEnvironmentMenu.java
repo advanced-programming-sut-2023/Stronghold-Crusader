@@ -1,4 +1,4 @@
-package view.MapMenus;
+package view.MapMenus.dropBuildingMenu;
 
 import controller.MapControllers.ChangeEnvironmentController;
 import view.Menu;

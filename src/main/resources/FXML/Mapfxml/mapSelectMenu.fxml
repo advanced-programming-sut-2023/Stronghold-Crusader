@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MapMenus.MapSelectMenu">
    <children>
-      <AnchorPane layoutX="249.0" layoutY="40.0" prefHeight="647.0" prefWidth="782.0" style="-fx-background-color: #7B3F00;" stylesheets="@../CSS/stronghold.css">
+      <AnchorPane layoutX="249.0" layoutY="40.0" prefHeight="647.0" prefWidth="782.0" style="-fx-background-color: #7B3F00;" stylesheets="@../../CSS/stronghold.css">
          <children>
             <ChoiceBox layoutX="398.0" layoutY="6.0" prefHeight="20.0" prefWidth="266.0" />
             <Button layoutX="14.0" layoutY="392.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="208.0" styleClass="button-1" text="Add">

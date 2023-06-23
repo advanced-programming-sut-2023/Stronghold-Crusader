@@ -21,16 +21,11 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class GraphicBuildingPlacementMenu extends Application {
+public class GraphicBuildingPlacementMenu {
     public static BuildingPlacementController controller;
     public ImageView entranceCategoryButton, trainingCategoryButton, normalCategoryButton, storageCategoryButton,
             defenseCategoryButton, productionCategoryButton;
     public ScrollPane scrollPane;
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-    }
 
     public static void setController(BuildingPlacementController controller) {
         GraphicBuildingPlacementMenu.controller = controller;

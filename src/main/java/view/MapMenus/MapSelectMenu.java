@@ -1,6 +1,7 @@
 package view.MapMenus;
 
 import controller.MapControllers.MapSelectController;
+import javafx.scene.layout.AnchorPane;
 import view.Menu;
 import view.enums.commands.MapCommand.MapSelectCommand;
 import view.enums.messages.MapMessage.MapSelectMessage;
