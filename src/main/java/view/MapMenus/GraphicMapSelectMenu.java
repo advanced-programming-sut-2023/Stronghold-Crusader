@@ -36,7 +36,7 @@ public class GraphicMapSelectMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        rootPane = FXMLLoader.load(GraphicGameMenu.class.getResource("/FXML/Mapfxml/mapSelectMenu2.fxml"));
+        rootPane = FXMLLoader.load(GraphicGameMenu.class.getResource("/FXML/Mapfxml/mapSelectMenu.fxml"));
         stage.setScene(new Scene(rootPane));
         stage.setFullScreen(true);
         rootPane.setBackground(new Background(new BackgroundImage(new Image(
