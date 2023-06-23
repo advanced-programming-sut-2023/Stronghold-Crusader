@@ -15,14 +15,14 @@
     </ImageView>
     <ImageView fitHeight="42.0" fitWidth="421.0" layoutX="822.0" layoutY="284.0" nodeOrientation="INHERIT"
                pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73"
-    fx:id="newGameButton">
+    fx:id="newGameButton" onMouseClicked="#goToSelectedMapMenu">
         <image>
             <Image url="@../../assets/buttons/newGame_btn.jpg"/>
         </image>
     </ImageView>
     <ImageView fitHeight="42.0" fitWidth="652.0" layoutX="822.0" layoutY="338.0" nodeOrientation="INHERIT"
                pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73"
-    fx:id="profileMenuButton">
+    fx:id="profileMenuButton" onMouseClicked="#goToProfileMenu">
         <image>
             <Image url="@../../assets/buttons/profileMenu_btn.jpg"/>
         </image>
@@ -36,9 +36,9 @@
     </ImageView>
     <ImageView fitHeight="42.0" fitWidth="384.0" layoutX="822.0" layoutY="441.0" nodeOrientation="INHERIT"
                pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73"
-    fx:id="exitButton">
+    fx:id="logoutButton" onMouseClicked="#logout">
         <image>
-            <Image url="@../../assets/buttons/exit_btn.jpg"/>
+            <Image url="@../../assets/buttons/logout_btn.jpg"/>
         </image>
     </ImageView>
 </AnchorPane>

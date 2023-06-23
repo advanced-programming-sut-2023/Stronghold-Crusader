@@ -1,5 +1,6 @@
 package view.UserMenus;
 
+import controller.MapControllers.MapSelectController;
 import controller.UserControllers.MainController;
 import controller.UserControllers.ProfileController;
 import javafx.application.Application;
@@ -11,13 +12,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.User.User;
 import model.User.UserManager;
 import view.Main;
 import view.MapMenus.GraphicMapSelectMenu;
 
 public class MainMenu extends Application {
-    private static MainController mainController;
-    public ImageView newGameButton, profileMenuButton, aboutButton, exitButton;
+    public static MainController mainController;
+    public ImageView newGameButton, profileMenuButton, aboutButton, logoutButton;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -35,17 +37,15 @@ public class MainMenu extends Application {
         stage.show();
     }
 
-    public void initialize(){
-        newGameButton.setOnMouseClicked(e -> goToSelectedMapMenu());
-    }
-
 
     public static void setMainController(MainController mainController) {
         MainMenu.mainController = mainController;
     }
 
-    public void goToSelectedMapMenu() {
+    public void goToSelectedMapMenu() throws Exception {
         GraphicMapSelectMenu mapSelectMenu = new GraphicMapSelectMenu();
+        GraphicMapSelectMenu.setMapSelectController(new MapSelectController(mainController.currentUser));
+        mapSelectMenu.start(Main.mainStage);
     }
 
     public void goToProfileMenu(MouseEvent mouseEvent) throws Exception {

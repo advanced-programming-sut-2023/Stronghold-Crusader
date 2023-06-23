@@ -191,8 +191,9 @@ public class LoginMenu extends Application implements Initializable {
     private void goToMainMenu(User user) throws Exception {
         if (loginController.loggedInProperty)
             UserManager.setLoggedInUser(user);
-        MainMenu.setMainController(new MainController(user));
-        new MainMenu().start(Main.mainStage);
+        MainMenu menu = new MainMenu();
+        MainMenu.setMainController(new MainController(user, menu));
+        menu.start(Main.mainStage);
     }
 
     public void goToChangePasswordPane(MouseEvent mouseEvent) throws IOException, InterruptedException {

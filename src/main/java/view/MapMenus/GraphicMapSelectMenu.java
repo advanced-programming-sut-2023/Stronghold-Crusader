@@ -16,6 +16,8 @@ import model.Game.Game;
 import model.Map.MapManager;
 import model.Stronghold;
 import view.GameMenus.GraphicGameMenu;
+import view.Main;
+import view.UserMenus.MainMenu;
 import view.UserMenus.ProfileMenu;
 import view.enums.messages.MapMessage.MapSelectMessage;
 
@@ -25,7 +27,7 @@ import java.util.ArrayList;
 public class GraphicMapSelectMenu extends Application {
     private static MapSelectController mapSelectController;
     public AnchorPane rootPane;
-    public ImageView addMapButton, addPlayerButton;
+    public ImageView addMapButton, addPlayerButton, startGameButton, backButton;
     public ScrollPane mapList, mapPreview;
     public TextField mapNameField, colorField, playerNameField;
     public VBox selectedPlayers;
@@ -100,5 +102,9 @@ public class GraphicMapSelectMenu extends Application {
         } else {
             // TODO : handle errors
         }
+    }
+
+    public void back() throws Exception {
+        MainMenu.mainController.menu.start(Main.mainStage);
     }
 }
