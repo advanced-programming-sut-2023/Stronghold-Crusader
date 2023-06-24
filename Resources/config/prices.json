@@ -8,17 +8,15 @@
     {"name" : "pitch", "price" : 10},
     {"name" : "iron", "price" : 20},
     {"name" : "stone", "price" : 7},
-    {"name" : "ale", "price" : 5},
-    {"name" : "hopes", "price" : 8},
     {"name" : "flour", "price" : 10},
     {"name" : "wheat", "price" : 5},
     {"name" : "bow", "price" : 10},
-    {"name" : "crossbow", "price" : 12},
+    {"name" : "cross_bow", "price" : 12},
     {"name" : "spear", "price" : 10},
     {"name" : "pike", "price" : 10},
     {"name" : "mace", "price" : 15},
     {"name" : "sword", "price" : 15},
-    {"name" : "leatherArmour", "price" : 30},
-    {"name" : "metalArmour", "price" : 30}
+    {"name" : "leather_west", "price" : 30},
+    {"name" : "armour", "price" : 30}
   ]
 }

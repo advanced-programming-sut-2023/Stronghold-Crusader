@@ -27,24 +27,24 @@ public class Main extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        LoginMenu.setLoginController(new LoginController());
-        mainStage = stage;
-        new LoginMenu().start(stage);
-    }
-
 //    @Override
 //    public void start(Stage stage) throws Exception {
-//        HashMap<Color, Player> players = new HashMap<>();
-//        players.put(Color.RED, new Player(Stronghold.getInstance().getUser("ayeen")));
-//        players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("kian")));
-//        Map map = MapManager.load("1001");
-//        Game game = new Game(map, players, true);
-//        GameController gameController = new GameController(Stronghold.getInstance().getUser("ayeen"), game);
-//        GraphicGameMenu.setGameController(gameController);
-//        GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game));
-//        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map));
-//        new GraphicGameMenu().start(stage);
+//        LoginMenu.setLoginController(new LoginController());
+//        mainStage = stage;
+//        new LoginMenu().start(stage);
 //    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        HashMap<Color, Player> players = new HashMap<>();
+        players.put(Color.RED, new Player(Stronghold.getInstance().getUser("ayeen")));
+        players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("kian")));
+        Map map = MapManager.load("1001");
+        Game game = new Game(map, players, true);
+        GameController gameController = new GameController(Stronghold.getInstance().getUser("ayeen"), game);
+        GraphicGameMenu.setGameController(gameController);
+        GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game));
+        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map));
+        new GraphicGameMenu().start(stage);
+    }
 }

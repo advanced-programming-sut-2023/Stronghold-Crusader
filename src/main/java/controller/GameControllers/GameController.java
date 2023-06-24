@@ -52,7 +52,7 @@ public class GameController {
                     break;
                 case "buildingPlacement":
                     BuildingPlacementController controller = new BuildingPlacementController(game.getCurrentPlayer(), game.getMap());
-                    controller.run();
+//                    controller.run();
                     break;
                 case "tradeMenu":
                     TradeController tradeController = new TradeController(game);
@@ -63,7 +63,7 @@ public class GameController {
                     break;
                 case "marketMenu":
                     MarketController marketController = new MarketController(game.getCurrentPlayer());
-                    marketController.run();
+//                    marketController.run();
                     break;
                 case "endGame":
                     EndGameController endGameController = new EndGameController(game.getDeadPlayers());

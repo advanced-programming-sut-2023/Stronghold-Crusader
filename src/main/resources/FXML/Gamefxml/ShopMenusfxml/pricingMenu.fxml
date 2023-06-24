@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="100" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.PricingMenu">
+    <ImageView fitHeight="31.0" fitWidth="241.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/other/Market/sellAndCost.png" />
+    </ImageView>
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="19.0" pannable="true" prefHeight="88.0" prefWidth="430" style="-fx-background-color: transparent" stylesheets="@../../../CSS/GameCss/BuildingPlacement.css" vbarPolicy="NEVER">
+    </ScrollPane>
+    <ImageView fitHeight="31.0" fitWidth="22.0" layoutX="409.0" pickOnBounds="true" preserveRatio="true"
+        onMouseClicked="#back">
+        <Image url="@../../../assets/buttons/marketBack_btn.jpg" />
+    </ImageView>
+</AnchorPane>

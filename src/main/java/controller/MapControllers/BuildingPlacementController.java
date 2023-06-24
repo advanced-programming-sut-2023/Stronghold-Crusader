@@ -14,7 +14,6 @@ import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.UnitState;
 import model.enums.CellType;
 import utils.Vector2D;
-import view.MapMenus.dropBuildingMenu.BuildingPlacementMenu;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
 
 import java.util.ArrayList;
@@ -29,13 +28,6 @@ public class BuildingPlacementController {
     public BuildingPlacementController(Player currentPlayer, Map map) {
         this.currentPlayer = currentPlayer;
         this.map = map;
-    }
-
-    public void run() {
-        BuildingPlacementMenu menu = new BuildingPlacementMenu(this);
-        while (true) {
-            if (menu.run().equals("back")) return;
-        }
     }
 
     public BuildingPlacementMessage setBuildingCategory(String categoryName) {
@@ -59,19 +51,18 @@ public class BuildingPlacementController {
 
         if (msg != BuildingPlacementMessage.PLACEMENT_SIGHT_VALID) return msg;
 
-        // TODO
-//        if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(),
-//                reference.getNumberOfMaterialNeeded()))
-//            return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
-//        if (!enoughWorkers(reference)) return BuildingPlacementMessage.NOT_ENOUGH_WORKERS;
-//
-//
-//        if (reference.getType().equals(MapAssetType.OX_TETHER)) {
-//            oxtetherOperations(coordinate);
-//        }
-//        if (reference.getType().equals(MapAssetType.CAGED_WARDOG)){
-//            cagedWarDogOperations(coordinate);
-//        }
+        if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(),
+                reference.getNumberOfMaterialNeeded()))
+            return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
+        if (!enoughWorkers(reference)) return BuildingPlacementMessage.NOT_ENOUGH_WORKERS;
+
+
+        if (reference.getType().equals(MapAssetType.OX_TETHER)) {
+            oxtetherOperations(coordinate);
+        }
+        if (reference.getType().equals(MapAssetType.CAGED_WARDOG)){
+            cagedWarDogOperations(coordinate);
+        }
         createBuildingFinal(reference, coordinate);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
@@ -102,11 +93,10 @@ public class BuildingPlacementController {
     }
 
     private void createBuildingFinal(Building reference, Vector2D coordinate){
-        // TODO
-//        currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
-//        if (reference.getNeededMaterial() != null)
-//            currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
-//                    (-1) * reference.getNumberOfMaterialNeeded());
+        currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
+        if (reference.getNeededMaterial() != null)
+            currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
+                    (-1) * reference.getNumberOfMaterialNeeded());
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         currentPlayer.getGovernance().addAsset(newBuilding);

@@ -35,15 +35,15 @@ public class SelectedBuildingController {
         coordinate = building.getCoordinate();
     }
 
-    public void run() {
-        if (building.getType().equals(MapAssetType.STORE)) {
-            MarketController marketController = new MarketController(player);
-            marketController.run();
-        } else {
-            SelectedBuildingMenu selectedBuildingMenu = new SelectedBuildingMenu(this);
-            selectedBuildingMenu.run();
-        }
-    }
+//    public void run() {
+//        if (building.getType().equals(MapAssetType.STORE)) {
+//            MarketController marketController = new MarketController(player);
+//            marketController.run();
+//        } else {
+//            SelectedBuildingMenu selectedBuildingMenu = new SelectedBuildingMenu(this);
+//            selectedBuildingMenu.run();
+//        }
+//    }
 
     public SelectedBuildingMessage repair() {
         if (building.getHitPoint() == building.getMaxHitPoint()) return SelectedBuildingMessage.HP_FULL;

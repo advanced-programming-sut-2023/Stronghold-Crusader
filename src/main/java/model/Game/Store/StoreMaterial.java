@@ -29,10 +29,7 @@ public class StoreMaterial {
 
     @Override
     public String toString() {
-        return "Material :" +
-                "name= " + name + ' ' +
-                ", price= " + price +
-                "\n";
+        return  name + "\n" + price;
     }
 
     public static void setMaterialList(ArrayList<StoreMaterial> materialList) {

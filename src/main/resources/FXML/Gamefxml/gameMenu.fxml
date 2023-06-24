@@ -1,103 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
-    <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0"
-                vbarPolicy="NEVER"/>
-    <ImageView fitHeight="245.0" fitWidth="1283.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT"
-               pickOnBounds="true">
-        <Image url="@../../assets/graphic/overlay/bottom_menu.png"/>
+<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
+    <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0" vbarPolicy="NEVER" />
+    <ImageView fitHeight="245.0" fitWidth="1283.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/graphic/overlay/bottom_menu.png" />
     </ImageView>
-    <AnchorPane fx:id="bottomPane" layoutX="300" layoutY="630.0" prefHeight="100" prefWidth="430">
+    <AnchorPane fx:id="bottomPane" layoutX="274.0" layoutY="629.0" prefHeight="100.0" prefWidth="437.0">
     </AnchorPane>
-    <ImageView fx:id="openLeftBarBtn" fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="300.0" pickOnBounds="true"
-               preserveRatio="true">
-        <Image url="@../../assets/icons/plus.png"/>
+    <ImageView fx:id="openLeftBarBtn" fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/icons/plus.png" />
     </ImageView>
-    <AnchorPane fx:id="leftPane" layoutX="-1.0" layoutY="-1.0" prefHeight="639.0" prefWidth="216.0">
+    <AnchorPane fx:id="leftPane" layoutX="-1.0" layoutY="-1.0" prefHeight="617.0" prefWidth="216.0">
         <AnchorPane prefHeight="147.0" prefWidth="216.0">
             <Label layoutX="15.0" layoutY="23.0" text="Round:">
                 <font>
-                    <Font name="System Bold" size="14.0"/>
+                    <Font name="System Bold" size="14.0" />
                 </font>
             </Label>
             <Label layoutX="14.0" layoutY="47.0" text="Now playing:">
                 <font>
-                    <Font name="System Bold" size="14.0"/>
+                    <Font name="System Bold" size="14.0" />
                 </font>
             </Label>
-            <Button layoutX="14.0" layoutY="80.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="76.0"
-                    text="Next round"/>
-            <Label fx:id="roundLabel" alignment="CENTER" layoutX="123.0" layoutY="25.0" prefHeight="17.0"
-                   prefWidth="38.0" text="{num}"/>
-            <Label fx:id="playerLabel" alignment="CENTER" layoutX="123.0" layoutY="49.0" prefHeight="17.0"
-                   prefWidth="38.0" text="{text}"/>
+            <Button layoutX="14.0" layoutY="80.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="76.0" text="Next round" />
+            <Label fx:id="roundLabel" alignment="CENTER" layoutX="123.0" layoutY="25.0" prefHeight="17.0" prefWidth="38.0" text="{num}" />
+            <Label fx:id="playerLabel" alignment="CENTER" layoutX="123.0" layoutY="49.0" prefHeight="17.0" prefWidth="38.0" text="{text}" />
         </AnchorPane>
         <AnchorPane layoutY="147.0" prefHeight="309.0" prefWidth="216.0">
             <Label layoutX="48.0" layoutY="18.0" text="Governance Menu">
                 <font>
-                    <Font name="System Bold" size="14.0"/>
+                    <Font name="System Bold" size="14.0" />
                 </font>
             </Label>
             <Label layoutX="79.0" layoutY="53.0" text="Popularity">
                 <font>
-                    <Font size="13.0"/>
+                    <Font size="13.0" />
                 </font>
             </Label>
-            <Label fx:id="popularityLabel" alignment="CENTER" layoutX="78.0" layoutY="72.0" prefHeight="17.0"
-                   prefWidth="59.0" text="{num}"/>
+            <Label fx:id="popularityLabel" alignment="CENTER" layoutX="78.0" layoutY="72.0" prefHeight="17.0" prefWidth="59.0" text="{num}" />
             <Label alignment="CENTER" layoutX="79.0" layoutY="95.0" prefHeight="19.0" prefWidth="59.0" text="Fear rate">
                 <font>
-                    <Font size="13.0"/>
+                    <Font size="13.0" />
                 </font>
             </Label>
-            <Slider fx:id="fearRateSlider" blockIncrement="1.0" layoutX="29.0" layoutY="118.0" majorTickUnit="1.0"
-                    max="5.0" min="-5.0" minorTickCount="1" prefHeight="33.0" prefWidth="159.0" showTickLabels="true"
-                    snapToTicks="true"/>
-            <Label alignment="CENTER" layoutX="79.0" layoutY="156.0" prefHeight="19.0" prefWidth="59.0"
-                   text="Food rate">
+            <Slider fx:id="fearRateSlider" blockIncrement="1.0" layoutX="29.0" layoutY="118.0" majorTickUnit="1.0" max="5.0" min="-5.0" minorTickCount="1" prefHeight="33.0" prefWidth="159.0" showTickLabels="true" snapToTicks="true" />
+            <Label alignment="CENTER" layoutX="79.0" layoutY="156.0" prefHeight="19.0" prefWidth="59.0" text="Food rate">
                 <font>
-                    <Font size="13.0"/>
+                    <Font size="13.0" />
                 </font>
             </Label>
-            <Slider fx:id="foodRateSlider" blockIncrement="1.0" layoutX="29.0" layoutY="178.0" majorTickUnit="1.0"
-                    max="2.0" min="-2.0" minorTickCount="0" prefHeight="11.0" prefWidth="159.0" showTickLabels="true"
-                    snapToTicks="true"/>
+            <Slider fx:id="foodRateSlider" blockIncrement="1.0" layoutX="29.0" layoutY="178.0" majorTickUnit="1.0" max="2.0" min="-2.0" minorTickCount="0" prefHeight="11.0" prefWidth="159.0" showTickLabels="true" snapToTicks="true" />
             <Label alignment="CENTER" layoutX="79.0" layoutY="213.0" prefHeight="19.0" prefWidth="59.0" text="Tax rate">
                 <font>
-                    <Font size="13.0"/>
+                    <Font size="13.0" />
                 </font>
             </Label>
-            <Slider fx:id="taxRateSlider" blockIncrement="1.0" layoutX="29.0" layoutY="234.0" majorTickUnit="1.0"
-                    max="8.0" min="-3.0" minorTickCount="0" prefHeight="20.0" prefWidth="159.0" showTickLabels="true"
-                    snapToTicks="true"/>
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="32.0" layoutY="276.0" pickOnBounds="true"
-                       preserveRatio="true">
-                <Image url="@../../assets/icons/coin.png"/>
+            <Slider fx:id="taxRateSlider" blockIncrement="1.0" layoutX="29.0" layoutY="232.0" majorTickUnit="1.0" max="8.0" min="-3.0" minorTickCount="0" prefHeight="20.0" prefWidth="159.0" showTickLabels="true" snapToTicks="true" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="32.0" layoutY="276.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../assets/icons/coin.png" />
             </ImageView>
-            <Label fx:id="goldLabel" alignment="CENTER" layoutX="57.0" layoutY="277.0" prefHeight="17.0"
-                   prefWidth="38.0" text="{num}"/>
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="120.0" layoutY="278.0" pickOnBounds="true"
-                       preserveRatio="true">
-                <Image url="@../../assets/icons/population.png"/>
+            <Label fx:id="goldLabel" alignment="CENTER" layoutX="57.0" layoutY="277.0" prefHeight="17.0" prefWidth="38.0" text="{num}" />
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="120.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../assets/icons/population.png" />
             </ImageView>
-            <Label fx:id="populationLabel" alignment="CENTER" layoutX="145.0" layoutY="276.0" prefHeight="17.0"
-                   prefWidth="38.0" text="{num}"/>
+            <Label fx:id="populationLabel" alignment="CENTER" layoutX="145.0" layoutY="276.0" prefHeight="17.0" prefWidth="38.0" text="{num}" />
         </AnchorPane>
-        <VBox fx:id="selectedUnitsMenu" layoutY="456.0" prefHeight="183.0" prefWidth="216.0"/>
-        <ImageView fx:id="closeLeftBarBtn" fitHeight="26.0" fitWidth="26.0" layoutX="185.0" layoutY="6.0"
-                   pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../assets/icons/close.png"/>
+        <VBox fx:id="selectedUnitsMenu" layoutY="456.0" prefHeight="161.0" prefWidth="216.0" />
+        <ImageView fx:id="closeLeftBarBtn" fitHeight="26.0" fitWidth="26.0" layoutX="185.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../assets/icons/close.png" />
         </ImageView>
     </AnchorPane>
 </AnchorPane>

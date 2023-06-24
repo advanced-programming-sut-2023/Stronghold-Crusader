@@ -39,6 +39,7 @@ public class GraphicGameMenu extends Application {
     public ImageView openLeftBarBtn;
     public Label roundLabel;
     public Label playerLabel;
+    public AnchorPane dropBuildingMenu, marketMenu;
 
     public static AnchorPane getRootPane() {
         return rootPane;
@@ -72,6 +73,7 @@ public class GraphicGameMenu extends Application {
         mainScrollPane.setOnMouseReleased(mouseEvent -> mainScrollPane.setPannable(true));
         initializeLeftPane();
         loadDropBuildingMenu();
+        loadMarket();
         updateMenuValues();
     }
 
@@ -119,14 +121,22 @@ public class GraphicGameMenu extends Application {
     }
 
     private void loadDropBuildingMenu() throws IOException {
-        AnchorPane pane = FXMLLoader.load(GraphicGameMenu.class.
+        dropBuildingMenu = FXMLLoader.load(GraphicGameMenu.class.
                 getResource("/FXML/Gamefxml/DropBuildingfxml/dropBuildingMenu.fxml"));
-        bottomPane.getChildren().setAll(pane);
+        bottomPane.getChildren().clear();
+        bottomPane.getChildren().add(dropBuildingMenu);
         mainScrollPane.setOnDragOver(event -> {
             if (event.getGestureSource() != mainScrollPane && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.COPY);
             }
             event.consume();
         });
+    }
+
+    private void loadMarket() throws IOException {
+        marketMenu = FXMLLoader.load(GraphicGameMenu.class.
+                getResource("/FXML/Gamefxml/ShopMenusfxml/shopMenu.fxml"));
+        bottomPane.getChildren().clear();
+        bottomPane.getChildren().add(marketMenu);
     }
 }

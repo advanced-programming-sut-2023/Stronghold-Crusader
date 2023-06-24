@@ -34,4 +34,6 @@ module project.group {
     exports view;
     exports model.User;
     exports view.MapMenus.dropBuildingMenu;
+    exports view.GameMenus.MarketMenus;
+    opens view.GameMenus.MarketMenus to javafx.fxml;
 }
