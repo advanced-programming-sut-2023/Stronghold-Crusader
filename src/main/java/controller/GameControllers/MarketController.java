@@ -26,7 +26,11 @@ public class MarketController {
         return output.toString();
     }
 
-//    public MarketMessage buy(String materialName, int amount) {
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    //    public MarketMessage buy(String materialName, int amount) {
 //        StoreMaterial storeMaterial = StoreMaterial.getInstance(materialName);
 //        Material material = Material.getMaterial(materialName);
 //        if (storeMaterial == null) return MarketMessage.INVALID_MATERIAL;

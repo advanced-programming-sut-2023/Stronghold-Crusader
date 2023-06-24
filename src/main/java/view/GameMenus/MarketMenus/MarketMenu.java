@@ -63,6 +63,7 @@ public class MarketMenu {
     public void getPurchaseMenu(String material) throws IOException {
         PurchaseMenu.setMaterial(material);
         PurchaseMenu.mainMarketMenu = this;
+        PurchaseMenu.setController(marketController);
         purchaseMenu = FXMLLoader.load(
                 new URL(MarketMenu.class.getResource("/FXML/Gamefxml/ShopMenusfxml/purchaseMenu.fxml").toExternalForm()));
         scrollPane.getChildren().setAll(purchaseMenu);

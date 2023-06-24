@@ -1,5 +1,6 @@
 package view.GameMenus.MarketMenus;
 
+import controller.GameControllers.MarketController;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
@@ -17,6 +18,7 @@ public class PurchaseMenu {
     public ScrollPane scrollPane;
     public HBox Hbox;
     public static MarketMenu mainMarketMenu;
+    public static MarketController controller;
     public static String material;
     public Text details;
     public ImageView image;
@@ -25,9 +27,15 @@ public class PurchaseMenu {
         PurchaseMenu.material = material;
     }
 
+    public static void setController(MarketController controller) {
+        PurchaseMenu.controller = controller;
+    }
+
     public void initialize(){
         StoreMaterial storeMaterial = StoreMaterial.getInstance(material);
-        details.setText(storeMaterial.toString());
+        System.out.println(controller);
+        int inventory = controller.getCurrentPlayer().getGovernance().getStorageStock(Material.getMaterial(material));
+        details.setText(storeMaterial.toString() + "\nstock : " + inventory);
         image.setImage(Material.getMaterial(material).getImage());
     }
 

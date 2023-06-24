@@ -399,4 +399,8 @@ public class GameController {
         return player.getGovernance().getBuildings().size() == 0 ||
                 !player.getGovernance().getBuildings().get(0).getType().equals(MapAssetType.HEADQUARTER);
     }
+
+    public Player getCurrentPlayer() {
+        return game.getCurrentPlayer();
+    }
 }
