@@ -39,7 +39,7 @@ public class SelectedUnitMenu {
                     runAttack(matcher);
                     break;
                 case INFO:
-                    System.out.print(selectedUnitController.showInfo());
+//                    System.out.print(selectedUnitController.showInfo());
                     break;
                 case BACK:
                     return;
