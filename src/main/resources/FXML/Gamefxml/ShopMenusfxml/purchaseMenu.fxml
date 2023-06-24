@@ -4,17 +4,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="100" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.PurchaseMenu">
-    <ImageView fitHeight="31.0" fitWidth="22.0" layoutX="409.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../../assets/buttons/marketBack_btn.jpg" />
+<AnchorPane prefHeight="100" prefWidth="430" style="-fx-background-color: transparent;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenus.MarketMenus.PurchaseMenu">
+    <ImageView fitHeight="31.0" fitWidth="22.0" layoutX="409.0" onMouseClicked="#back" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../../assets/buttons/marketBack_btn.jpg"/>
     </ImageView>
-    <ImageView fitHeight="25.0" fitWidth="121.0" layoutX="236.0" layoutY="56.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../../assets/buttons/buy_btn.jpg" />
+    <ImageView fitHeight="25.0" fitWidth="121.0" layoutX="236.0" layoutY="56.0" onMouseClicked="#buy"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/buttons/buy_btn.jpg"/>
     </ImageView>
-    <ImageView fitHeight="25.0" fitWidth="119.0" layoutX="236.0" layoutY="25.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../../assets/buttons/sell_btn.jpg" />
+    <ImageView fitHeight="25.0" fitWidth="119.0" layoutX="236.0" layoutY="25.0" onMouseClicked="#sell"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/buttons/sell_btn.jpg"/>
     </ImageView>
-    <ImageView fx:id="image" fitHeight="71.0" fitWidth="100" layoutX="68.0" layoutY="15.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="image" fitHeight="71.0" fitWidth="100" layoutX="68.0" layoutY="15.0" onMouseClicked="#back"
+               pickOnBounds="true" preserveRatio="true">
     </ImageView>
-    <Text fx:id="details" layoutX="168.0" layoutY="48.0" text="" wrappingWidth="57.0" />
+    <Text fx:id="details" layoutX="168.0" layoutY="48.0" text="" wrappingWidth="57.0"/>
 </AnchorPane>

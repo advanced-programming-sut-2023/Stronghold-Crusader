@@ -68,4 +68,8 @@ public class MarketMenu {
                 new URL(MarketMenu.class.getResource("/FXML/Gamefxml/ShopMenusfxml/purchaseMenu.fxml").toExternalForm()));
         scrollPane.getChildren().setAll(purchaseMenu);
     }
+
+    public boolean confirm(String msg){
+        return false;
+    }
 }
