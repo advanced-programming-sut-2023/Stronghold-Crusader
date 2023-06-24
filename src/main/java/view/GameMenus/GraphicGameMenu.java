@@ -66,6 +66,7 @@ public class GraphicGameMenu extends Application {
 
     @FXML
     private void initialize() throws IOException {
+        graphicsController.setSelectedUnitsMenu(selectedUnitsMenu);
         mainScrollPane.setContent((graphicsController.getMainGrid()));
         mainScrollPane.setOnKeyPressed(this::handleKeyPressed);
         mainScrollPane.setOnMousePressed(mouseEvent -> {
