@@ -4,8 +4,7 @@ import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MarketController;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +18,6 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import view.GameMenus.MarketMenus.MarketMenu;
-import view.GameMenus.MarketMenus.MaterialListMenu;
 
 import java.io.IOException;
 
@@ -107,7 +105,8 @@ public class GraphicGameMenu extends Application {
         foodRateSlider.setValue(gameController.getFoodRate());
         taxRateSlider.setValue(gameController.getTaxRate());
         populationLabel.setText(String.valueOf(gameController.getPopulation()));
-        goldLabel.setText(String.valueOf(gameController.getGold()));
+        goldLabel.setText(String.valueOf(gameController.getGold().get()));
+        goldLabel.textProperty().bind(Bindings.convert(gameController.getGold()));
         playerLabel.setText(gameController.getCurrentPlayerName());
         roundLabel.setText(String.valueOf(gameController.getRoundNum()));
     }

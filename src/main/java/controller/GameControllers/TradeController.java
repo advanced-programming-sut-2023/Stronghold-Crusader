@@ -38,7 +38,7 @@ public class TradeController {
         int resourceAmount = Integer.parseInt(inputs.get("resourceAmount"));
         Material resourceType = Material.valueOf(inputs.get("resourceType").toUpperCase());
 
-        if (game.getCurrentPlayer().getGovernance().getGold() < Integer.parseInt(inputs.get("price")))
+        if (game.getCurrentPlayer().getGovernance().getGold().get() < Integer.parseInt(inputs.get("price")))
             return TradeMenuMessage.GOLD_NEEDED;
         addTrade(resourceType, resourceAmount, Integer.parseInt(inputs.get("price")), inputs.get("message"));
         return TradeMenuMessage.REQUEST_SUCCESS;

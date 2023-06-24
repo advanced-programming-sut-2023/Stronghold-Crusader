@@ -1,6 +1,8 @@
 package model.Game;
 
 import Settings.GovernanceSettings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.StorageBuilding;
 import model.MapAsset.MapAsset;
@@ -26,7 +28,7 @@ public class Governance {
     private int taxPopularity;
     private int taxRate;
     private int fearRate;
-    private double gold;
+    private final DoubleProperty gold;
 
     public Governance() {
         buildings = new ArrayList<>();
@@ -35,7 +37,7 @@ public class Governance {
         foodRate = -2;
         taxRate = 0;
         fearRate = 0;
-        gold = 1000;
+        gold = new SimpleDoubleProperty(1000);
         foodPopularity = 0;
         taxPopularity = 0;
         totalPopularity = 0;
@@ -86,14 +88,14 @@ public class Governance {
     public void payTax() {
         adjustTaxRateForPayment();
         double taxToBePayed = GovernanceSettings.taxRates.get(taxRate)[0] * totalPopulation;
-        gold += taxToBePayed;
+        gold.set(gold.get() + taxToBePayed);
         taxPopularity += GovernanceSettings.taxRates.get(taxRate)[1];
     }
 
     private void adjustTaxRateForPayment() {
         while (taxRate < 0) {
             double taxToBePayed = GovernanceSettings.taxRates.get(taxRate)[0] * totalPopulation;
-            if (taxToBePayed + gold > 0)
+            if (taxToBePayed + gold.get() > 0)
                 break;
             taxRate++;
         }
@@ -220,12 +222,12 @@ public class Governance {
         return totalPopulation;
     }
 
-    public double getGold() {
+    public DoubleProperty getGold() {
         return gold;
     }
 
     public void changeGold(double gold) {
-        this.gold += gold;
+        this.gold.set(this.gold.get() + gold);
     }
 
     public void addAsset(MapAsset asset) {
