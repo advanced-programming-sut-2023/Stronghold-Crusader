@@ -20,7 +20,7 @@ public class TradeController {
     }
 
     public void run() {
-        TradeMenu menu = new TradeMenu(this);
+        TradeMenu menu = new TradeMenu();
         while (true) {
             if (menu.run().equals("back")) return;
         }
@@ -40,7 +40,8 @@ public class TradeController {
 
         if (game.getCurrentPlayer().getGovernance().getGold() < Integer.parseInt(inputs.get("price")))
             return TradeMenuMessage.GOLD_NEEDED;
-        addTrade(resourceType, resourceAmount, Integer.parseInt(inputs.get("price")), inputs.get("message"));
+        Trade trade = new Trade(game.getCurrentPlayer(), null, resourceType, resourceAmount, true );
+        addTrade(trade);
         return TradeMenuMessage.REQUEST_SUCCESS;
     }
 
@@ -95,9 +96,9 @@ public class TradeController {
         if (trade.isAccepted())
             return TradeMenuMessage.ALREADY_ACCEPTED;
         game.getCurrentPlayer().getGovernance().changeStorageStock(material, -1 * amount);
-        trade.getOwner().getGovernance().changeGold(trade.getPrice());
+        //  trade.getOwner().getGovernance().changeGold(trade.isRequest());
         trade.setAcceptorMessage(inputs.get("message"));
-        trade.accept(game.getCurrentPlayer());
+        trade.accept();
         return TradeMenuMessage.ACCEPTED;
     }
 
@@ -106,8 +107,7 @@ public class TradeController {
                 || inputs.get("price") == null || inputs.get("message") == null;
     }
 
-    private void addTrade(Material resourceType, int resourceAmount, int price, String message) {
-        Trade newTrade = new Trade(game.getCurrentPlayer(), message, resourceType, resourceAmount, price);
+    public void addTrade(Trade newTrade) {
         trades.add(newTrade);
         for (Player player : game.getPlayers()) {
             if (!player.equals(game.getCurrentPlayer())) player.getNewTrades().add(newTrade);

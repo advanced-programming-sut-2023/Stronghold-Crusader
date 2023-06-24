@@ -1,6 +1,5 @@
 package view.MapMenus;
 
-import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
 import controller.MapControllers.MapSelectController;
 import javafx.application.Application;
@@ -21,7 +20,6 @@ import view.Main;
 import view.UserMenus.MainMenu;
 import view.UserMenus.ProfileMenu;
 import view.enums.messages.MapMessage.MapSelectMessage;
-
 
 import java.util.ArrayList;
 
@@ -58,7 +56,10 @@ public class GraphicMapSelectMenu extends Application {
         addPlayerButton.setOnMouseClicked(e -> addPlayer());
         Stronghold.load();
         mapSelectController = new MapSelectController(Stronghold.getInstance().getUser("diba"));
+     //   startGameButton.setOnMouseClicked(e -> startGame());
     }
+
+
 
     private void initializeMapList(){
         ArrayList<ArrayList<String>> maps = MapManager.getMapList();

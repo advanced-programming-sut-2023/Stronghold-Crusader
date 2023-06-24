@@ -110,4 +110,6 @@ public class GraphicBuildingPlacementMenu {
             event.consume();
         });
     }
+
+
 }

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
+<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
     <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0" vbarPolicy="NEVER" />
     <ImageView fitHeight="245.0" fitWidth="1283.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
         <Image url="@../../assets/graphic/overlay/bottom_menu.png" />
@@ -75,4 +80,9 @@
             <Image url="@../../assets/icons/close.png" />
         </ImageView>
     </AnchorPane>
+   <ImageView fitHeight="40.0" fitWidth="135.0" layoutX="218.0" layoutY="693.0" onMouseClicked="#loadTrade" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../assets/icons/dropBuildingIcons/TRADE.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

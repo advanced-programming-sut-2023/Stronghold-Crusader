@@ -3,9 +3,8 @@ package view.GameMenus;
 import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MarketController;
+import controller.GameControllers.TradeController;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,11 +14,11 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import view.GameMenus.MarketMenus.MarketMenu;
-import view.GameMenus.MarketMenus.MaterialListMenu;
 
 import java.io.IOException;
 
@@ -142,5 +141,10 @@ public class GraphicGameMenu extends Application {
         bottomPane.getChildren().clear();
         bottomPane.getChildren().add(marketMenu);
         MarketMenu.marketController = new MarketController(gameController.getCurrentPlayer());
+    }
+
+    public void loadTrade(MouseEvent mouseEvent) throws Exception {
+        TradeMenu.setTradeController(new TradeController(gameController.getGame()));
+        new TradeMenu().start(new Stage());
     }
 }
