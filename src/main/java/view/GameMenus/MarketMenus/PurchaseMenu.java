@@ -30,7 +30,7 @@ public class PurchaseMenu {
     public static MarketMenu mainMarketMenu;
     public static MarketController controller;
     public static String material;
-    public static Popup successPopup;
+    public static Popup successPopup, failurePopup;
     public Text details;
     public ImageView image;
 
@@ -42,7 +42,7 @@ public class PurchaseMenu {
         PurchaseMenu.controller = controller;
     }
 
-    public void initialize(){
+    public void initialize() {
         StoreMaterial storeMaterial = StoreMaterial.getInstance(material);
         int inventory = controller.getCurrentPlayer().getGovernance().getStorageStock(Material.getMaterial(material));
         details.setText(storeMaterial.toString() + "\nstock : " + inventory);
@@ -56,19 +56,37 @@ public class PurchaseMenu {
     public void buy() throws IOException {
         MarketMessage msg = controller.buy(material, 1);
         System.out.println(msg);
-        if (msg.equals(MarketMessage.BUY_SUCCESS)){
+        if (msg.equals(MarketMessage.BUY_SUCCESS)) {
             successPopup = new Popup();
             AnchorPane pane = FXMLLoader.load(
                     new URL(MarketMenu.class.getResource("/FXML/Gamefxml/ShopMenusfxml/successPopup.fxml").toExternalForm()));
             successPopup.getContent().add(pane);
             successPopup.show(Main.mainStage);
+        } else {
+            failurePopup = new Popup();
+            FailurePopup.setErrorText(msg.getMessage());
+            AnchorPane pane = FXMLLoader.load(
+                    new URL(MarketMenu.class.getResource("/FXML/Gamefxml/ShopMenusfxml/failurePopup.fxml").toExternalForm()));
+            failurePopup.getContent().add(pane);
+            failurePopup.show(Main.mainStage);
         }
     }
 
     public void sell() throws IOException {
         MarketMessage msg = controller.sell(material, 1);
-        if (msg.equals(MarketMessage.BUY_SUCCESS)){
-
-            }
+        if (msg.equals(MarketMessage.BUY_SUCCESS)) {
+            successPopup = new Popup();
+            AnchorPane pane = FXMLLoader.load(
+                    new URL(MarketMenu.class.getResource("/FXML/Gamefxml/ShopMenusfxml/successPopup.fxml").toExternalForm()));
+            successPopup.getContent().add(pane);
+            successPopup.show(Main.mainStage);
+        } else {
+            failurePopup = new Popup();
+            FailurePopup.setErrorText(msg.getMessage());
+            AnchorPane pane = FXMLLoader.load(
+                    new URL(MarketMenu.class.getResource("/FXML/Gamefxml/ShopMenusfxml/failurePopup.fxml").toExternalForm()));
+            failurePopup.getContent().add(pane);
+            failurePopup.show(Main.mainStage);
+        }
     }
 }

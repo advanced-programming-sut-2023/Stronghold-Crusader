@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="174.0" prefWidth="200" style="-fx-background-color: #b29663; -fx-border-color: black" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.FailurePopup">
+    <Label layoutX="22.0" layoutY="3.0" text="Purchase Failed">
+        <font>
+            <Font name="Constantia" size="22.0" />
+        </font>
+    </Label>
+    <Text fx:id="error" layoutX="8.0" layoutY="41.0" wrappingWidth="180" textAlignment="CENTER">
+        <font>
+            <Font name="Constantia" size="13" />
+        </font>
+    </Text>
+    <ImageView fitHeight="95.0" fitWidth="126.0" layoutX="48.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/other/Market/market_icn.png" />
+    </ImageView>
+    <ImageView fitHeight="115.0" fitWidth="142.0" layoutX="28.0" layoutY="140.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/buttons/ok_btn.jpg" />
+    </ImageView>
+</AnchorPane>
