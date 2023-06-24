@@ -3,6 +3,7 @@ package controller.GameControllers;
 import controller.MapControllers.BuildingPlacementController;
 import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
+import javafx.beans.property.DoubleProperty;
 import model.Game.Game;
 import model.Game.Governance;
 import model.Map.Cell;
@@ -344,7 +345,7 @@ public class GameController {
         return game.getCurrentPlayer().getGovernance().getFearRate();
     }
 
-    public double getGold() {
+    public DoubleProperty getGold() {
         return game.getCurrentPlayer().getGovernance().getGold();
     }
 
@@ -371,7 +372,7 @@ public class GameController {
 
     private void deletePlayer(Player player) {
         int highScore = 0;
-        highScore += player.getGovernance().getGold() / 100;
+        highScore += player.getGovernance().getGold().get() / 100;
         highScore += player.getGovernance().getTotalPopularity() * 10;
         highScore += player.getGovernance().getBuildings().size() / 10;
         highScore += player.getGovernance().getUnits().size() / 10;

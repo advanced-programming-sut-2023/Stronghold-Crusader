@@ -186,7 +186,7 @@ public class SelectedBuildingController {
     }
 
     private boolean isGoldEnough(int gold, int count) {
-        return (player.getGovernance().getGold() >= gold * count);
+        return (player.getGovernance().getGold().get() >= gold * count);
     }
 
     private int materialNeededForRepair() {

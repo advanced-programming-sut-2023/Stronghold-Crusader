@@ -1,8 +1,10 @@
 package controller.GameControllers;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +17,7 @@ import model.Map.Map;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Cliff;
 import model.MapAsset.MapAsset;
+import model.MapAsset.MobileUnit.MobileUnit;
 import model.MapAsset.Tree;
 import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
@@ -30,6 +33,7 @@ public class GraphicsController {
     private final Map map;
     private Rectangle selectionRect;
     private AnchorPane rootPane;
+    private VBox selectedUnitsMenu;
     private double startX, startY;
 
     public GraphicsController(GameController gameController, Game game) {
@@ -92,6 +96,10 @@ public class GraphicsController {
         this.rootPane = rootPane;
     }
 
+    public void setSelectedUnitsMenu(VBox selectedUnitsMenu) {
+        this.selectedUnitsMenu = selectedUnitsMenu;
+    }
+
     private GridPane initializeCellGrid(Cell cell) {
         GridPane cellGrid = new GridPane();
         Tooltip tooltip = new Tooltip(cell.toString());
@@ -118,17 +126,47 @@ public class GraphicsController {
         Cell selectedCell = getCellOfNode(cellGrid);
         GameMenuMessage result = gameController.selectBuilding(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
         if (result == GameMenuMessage.BUILDING_SELECTED) {
+            SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
             //TODO @kian
         }
         result = gameController.selectUnit(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
         if (result == GameMenuMessage.UNIT_SELECTED) {
-            //TODO @kian
-        }
+            SelectedUnitController unitController = gameController.getSelectedUnitController();
+            TilePane tilePane = new TilePane();
+            tilePane.setPrefColumns(4);
+            selectedUnitsMenu.getChildren().add(tilePane);
+            for (MobileUnit unit : unitController.getSelectedUnits())
+                tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
+        } else
+            selectedUnitsMenu.getChildren().clear();
+    }
+
+    private HBox createUnitSelectionItem(MobileUnit unit, SelectedUnitController unitController) {
+        ImageView unitImage = new ImageView(unit.getType().getImage());
+        unitImage.setFitHeight(30);
+        unitImage.setFitWidth(30);
+        ImageView deselectedImage = new ImageView(new Image(GraphicsController.class.getResource("/assets/icons/red.png").toExternalForm()));
+        deselectedImage.setFitWidth(30);
+        deselectedImage.setFitHeight(30);
+        ImageView selectedImage = new ImageView(new Image(GraphicsController.class.getResource("/assets/icons/green.png").toExternalForm()));
+        selectedImage.setFitWidth(30);
+        selectedImage.setFitHeight(30);
+        deselectedImage.setOnMouseClicked(mouseEvent -> {
+            selectedImage.setVisible(true);
+            deselectedImage.setVisible(false);
+            unitController.addUnit(unit);
+        });
+        selectedImage.setOnMouseClicked(mouseEvent -> {
+            selectedImage.setVisible(false);
+            deselectedImage.setVisible(true);
+            unitController.removeUnit(unit);
+        });
+        return new HBox(unitImage, selectedImage, deselectedImage);
     }
 
     private Cell getCellOfNode(GridPane cellGrid) {
         int index = mainGrid.getChildren().indexOf(cellGrid);
-        Vector2D coordinate = new Vector2D(index / map.getSize().x, index % map.getSize().x);
+        Vector2D coordinate = new Vector2D(index % map.getSize().x, index / map.getSize().x);
         return map.getCell(coordinate);
     }
 
