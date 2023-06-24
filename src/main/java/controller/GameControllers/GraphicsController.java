@@ -118,6 +118,7 @@ public class GraphicsController {
         Cell selectedCell = getCellOfNode(cellGrid);
         GameMenuMessage result = gameController.selectBuilding(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
         if (result == GameMenuMessage.BUILDING_SELECTED) {
+            SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
             //TODO @kian
         }
         result = gameController.selectUnit(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
@@ -128,7 +129,7 @@ public class GraphicsController {
 
     private Cell getCellOfNode(GridPane cellGrid) {
         int index = mainGrid.getChildren().indexOf(cellGrid);
-        Vector2D coordinate = new Vector2D(index / map.getSize().x, index % map.getSize().x);
+        Vector2D coordinate = new Vector2D(index % map.getSize().x, index / map.getSize().x);
         return map.getCell(coordinate);
     }
 
