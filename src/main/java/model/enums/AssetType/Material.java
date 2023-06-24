@@ -37,7 +37,6 @@ public enum Material {
     public static ArrayList<Material> getMainFoods() {
         return new ArrayList<>(List.of(MEAT, CHEESE, APPLE, BREAD));
     }
-
     public static Material getMaterial(String materialName) {
         for (Material m : Material.values()) {
             if (m.name().equalsIgnoreCase(materialName))

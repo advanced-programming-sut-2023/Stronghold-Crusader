@@ -6,6 +6,7 @@ public class StoreMaterial {
     private static ArrayList<StoreMaterial> materialList;
     private String name;
     private int price;
+    private String type;
 
     public StoreMaterial(String name, int price) {
         this.name = name;
@@ -38,5 +39,32 @@ public class StoreMaterial {
 
     public static ArrayList<StoreMaterial> getMaterialList() {
         return materialList;
+    }
+    public static ArrayList<StoreMaterial> getMaterials() {
+        ArrayList<StoreMaterial> selected = new ArrayList<>();
+        for (StoreMaterial storeMaterial : materialList){
+            if (storeMaterial.type.equals("material")){
+                selected.add(storeMaterial);
+            }
+        }
+        return selected;
+    }
+    public static ArrayList<StoreMaterial> getFoods() {
+        ArrayList<StoreMaterial> selected = new ArrayList<>();
+        for (StoreMaterial storeMaterial : materialList){
+            if (storeMaterial.type.equals("food")){
+                selected.add(storeMaterial);
+            }
+        }
+        return selected;
+    }
+    public static ArrayList<StoreMaterial> getWeapons() {
+        ArrayList<StoreMaterial> selected = new ArrayList<>();
+        for (StoreMaterial storeMaterial : materialList){
+            if (storeMaterial.type.equals("weapon")){
+                selected.add(storeMaterial);
+            }
+        }
+        return selected;
     }
 }
