@@ -118,20 +118,33 @@ public class GraphicsController {
             }
             e.consume();
         });
-        cellGrid.setOnMouseClicked(mouseEvent -> selectCell(cellGrid));
+        cellGrid.setOnMouseClicked(mouseEvent -> {
+            removeAllSelectedBorders();
+            gameController.deselectUnits();
+            selectCell(cellGrid);
+        });
         return cellGrid;
+    }
+
+    private void removeAllSelectedBorders() {
+        for (int i = 0; i < mainGrid.getChildren().size(); i++) {
+            GridPane cellGrid = (GridPane) mainGrid.getChildren().get(i);
+            cellGrid.setBorder(null);
+        }
     }
 
     private void selectCell(GridPane cellGrid) {
         Cell selectedCell = getCellOfNode(cellGrid);
         GameMenuMessage result = gameController.selectBuilding(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
+        cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
+                CornerRadii.EMPTY, BorderStroke.MEDIUM)));
         if (result == GameMenuMessage.BUILDING_SELECTED) {
             SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
             //TODO @kian
         }
+        SelectedUnitController unitController = gameController.getSelectedUnitController();
         result = gameController.selectUnit(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
         if (result == GameMenuMessage.UNIT_SELECTED) {
-            SelectedUnitController unitController = gameController.getSelectedUnitController();
             TilePane tilePane = new TilePane();
             tilePane.setPrefColumns(4);
             selectedUnitsMenu.getChildren().add(tilePane);
@@ -228,8 +241,7 @@ public class GraphicsController {
             GridPane cellGrid = (GridPane) mainGrid.getChildren().get(i);
             Bounds bounds = cellGrid.getBoundsInParent();
             if (bounds.intersects(selectionBounds))
-                cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
-                        CornerRadii.EMPTY, BorderStroke.MEDIUM)));
+                selectCell(cellGrid);
             else
                 cellGrid.setBorder(null);
         }

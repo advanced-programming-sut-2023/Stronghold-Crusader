@@ -177,7 +177,6 @@ public class Governance {
     }
 
     public int getInnPopularity() {
-        //TODO fix this
         int innConuter = 0;
         for (Building building : buildings) {
             if (building.getType() == MapAssetType.INN)
