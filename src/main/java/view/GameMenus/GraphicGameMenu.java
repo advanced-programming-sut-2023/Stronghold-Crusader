@@ -5,6 +5,7 @@ import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MarketController;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -41,6 +43,7 @@ public class GraphicGameMenu extends Application {
     public Label roundLabel;
     public Label playerLabel;
     public AnchorPane dropBuildingMenu, marketMenu;
+    public ImageView minimap;
 
     public static AnchorPane getRootPane() {
         return rootPane;
@@ -73,10 +76,23 @@ public class GraphicGameMenu extends Application {
             if (mouseEvent.isSecondaryButtonDown()) mainScrollPane.setPannable(false);
         });
         mainScrollPane.setOnMouseReleased(mouseEvent -> mainScrollPane.setPannable(true));
+        initializeMinimap();
         initializeLeftPane();
         loadDropBuildingMenu();
         loadMarket();
         updateMenuValues();
+    }
+
+    private void initializeMinimap() {
+        minimap.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                double xRatio = mouseEvent.getX() / minimap.getBoundsInLocal().getWidth();
+                double yRatio = mouseEvent.getY() / minimap.getBoundsInLocal().getHeight();
+                mainScrollPane.setVvalue(xRatio);
+                mainScrollPane.setHvalue(yRatio);
+            }
+        });
     }
 
     private void initializeLeftPane() {
