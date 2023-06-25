@@ -58,7 +58,7 @@ public class MapSelectController {
         selectedMap = MapManager.load(mapId);
         players = new HashMap<>();
         return MapSelectMessage.MAP_SELECT_SUCCESS;
-    } 
+    }
 
     public String numberOfPlayers() {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED.getMessage();
@@ -90,7 +90,7 @@ public class MapSelectController {
         GameController controller = new GameController(currentUser, newGame);
         GraphicGameMenu menu = new GraphicGameMenu();
         GraphicGameMenu.setGameController(controller);
-        GraphicGameMenu.setGraphicsController(new GraphicsController(newGame));
+        GraphicGameMenu.setGraphicsController(new GraphicsController(controller, newGame));
         menu.start(Main.mainStage);
         GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(newGame.getCurrentPlayer(), newGame.getMap()));
         return MapSelectMessage.GAME_CREATION_SUCCESS;
