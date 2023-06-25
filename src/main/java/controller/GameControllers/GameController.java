@@ -250,8 +250,11 @@ public class GameController {
             deletePlayer(game.getPlayers().get(0));
     }
 
-    public GameMenuMessage selectUnit(int x, int y) {
+    public void deselectUnits() {
         selectedUnitController.deselectAll();
+    }
+
+    public GameMenuMessage selectUnit(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!game.getMap().isInMap(coordinate))
             return GameMenuMessage.INVALID_COORDINATE;
@@ -272,6 +275,7 @@ public class GameController {
 
     public GameMenuMessage selectBuilding(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
+        selectedBuildingController = null;
         if (!game.getMap().isInMap(coordinate))
             return GameMenuMessage.INVALID_COORDINATE;
         ArrayList<MapAsset> assets = game.getMap().getCell(coordinate).getAllAssets();
@@ -336,7 +340,6 @@ public class GameController {
         output.deleteCharAt(output.length() - 1);
         return output.toString();
     }
-
 
     public int getTaxRate() {
         return game.getCurrentPlayer().getGovernance().getTaxRate();
