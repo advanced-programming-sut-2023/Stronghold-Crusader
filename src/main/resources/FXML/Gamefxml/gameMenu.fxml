@@ -10,7 +10,7 @@
     <ImageView fitHeight="182.0" fitWidth="1293.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
         <Image url="@../../assets/graphic/overlay/bottom_menu.png" />
     </ImageView>
-    <AnchorPane fx:id="bottomPane" layoutX="274.0" layoutY="629.0" prefHeight="100.0" prefWidth="437.0">
+    <AnchorPane fx:id="bottomPane" layoutX="274.0" layoutY="615.0" prefHeight="113.0" prefWidth="437.0">
     </AnchorPane>
     <ImageView fx:id="openLeftBarBtn" fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../../assets/icons/plus.png" />
