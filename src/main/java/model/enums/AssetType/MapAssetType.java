@@ -111,8 +111,44 @@ public enum MapAssetType {
     TUNNELER_POST,
 
     //People
-    WORKER, ARCHER, CROSSBOWMAN, SPEARMAN, PIKEMAN, MACEMAN, SWORDSMAN, KNIGHT, TUNNELER, BLACK_MONK, ARCHER_BOW, SLAVE, SLINGER, ASSASSIN,
-    HORSE_ARCHER, ARABIAN_SWORDSMAN, FIRE_THROWER, ENGINEER, LADDER_MAN,
+    @SerializedName("45")
+    ARCHER,
+    @SerializedName("46")
+    CROSSBOWMAN,
+    @SerializedName("47")
+    SPEARMAN,
+    @SerializedName("48")
+    PIKEMAN,
+    @SerializedName("49")
+    MACEMAN,
+    @SerializedName("50")
+    SWORDSMAN,
+    @SerializedName("51")
+    KNIGHT,
+    @SerializedName("52")
+    TUNNELER,
+    @SerializedName("53")
+    BLACK_MONK,
+    @SerializedName("54")
+    ARCHER_BOW,
+    @SerializedName("55")
+    SLAVE,
+    @SerializedName("56")
+    SLINGER,
+    @SerializedName("57")
+    ASSASSIN,
+    @SerializedName("58")
+    HORSE_ARCHER,
+    @SerializedName("59")
+    ARABIAN_SWORDSMAN,
+    @SerializedName("60")
+    FIRE_THROWER,
+    @SerializedName("61")
+    ENGINEER,
+    @SerializedName("62")
+    LADDER_MAN,
+    @SerializedName("63")
+    WORKER,
 
     //Siege warfare
     BATTERING_RAM, CATAPULT, STABLE_CATAPULT, FIRE_CATAPULT, SIEGE_TOWER, MOBILE_SHIELD,
@@ -123,11 +159,16 @@ public enum MapAssetType {
 
     private final Image image;
 
+
     MapAssetType() {
         if (this.ordinal() <= 43)
             image = new Image(CellType.class.getResource("/assets/graphic/buildings/" + this.ordinal() + ".png").toExternalForm());
+        else if (this.ordinal() <= 62)
+            image = new Image(CellType.class.getResource("/assets/graphic/soldiers/" + this.ordinal() + ".png").toExternalForm());
         else
             image = new Image(CellType.class.getResource("/assets/graphic/buildings/1" + ".png").toExternalForm());
+
+
     }
 
     public static MapAssetType getMapAssetType(String typeName) {
@@ -159,9 +200,10 @@ public enum MapAssetType {
     public Image getImage() {
         return image;
     }
-    public static MapAssetType getTypeBySerial(int i){
+
+    public static MapAssetType getTypeBySerial(int i) {
         for (MapAssetType type : MapAssetType.values()) {
-            if (type.ordinal() == i){
+            if (type.ordinal() == i) {
                 return type;
             }
         }

@@ -1,6 +1,6 @@
 package controller.GameControllers;
 
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
@@ -25,6 +25,7 @@ import view.GameMenus.GraphicGameMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -53,7 +54,7 @@ public class GraphicsController {
         loadGraphics();
     }
 
-    public void loadGraphics() {
+    public void loadGraphics()  {
         mainGrid.setPrefColumns(map.getSize().x);
         mainGrid.setPrefTileHeight(80);
         mainGrid.setPrefTileWidth(80);
@@ -122,7 +123,11 @@ public class GraphicsController {
         cellGrid.setOnMouseClicked(mouseEvent -> {
             removeAllSelectedBorders();
             gameController.deselectUnits();
-            selectCell(cellGrid);
+            try {
+                selectCell(cellGrid);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
         return cellGrid;
     }
@@ -134,14 +139,22 @@ public class GraphicsController {
         }
     }
 
-    private void selectCell(GridPane cellGrid) {
+    private void selectCell(GridPane cellGrid) throws IOException {
         Cell selectedCell = getCellOfNode(cellGrid);
         GameMenuMessage result = gameController.selectBuilding(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
         cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
                 CornerRadii.EMPTY, BorderStroke.MEDIUM)));
         if (result == GameMenuMessage.BUILDING_SELECTED) {
             SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
-            //TODO @kian
+            if (buildingController.getBuilding().getType().equals(MapAssetType.MERCENARY_POST)){
+                System.out.println("here");
+                AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(2);
+                buttonPane.getChildren().clear();
+                AnchorPane merc = FXMLLoader.load(GraphicGameMenu.class.getResource
+                        ("/FXML/Gamefxml/selectedBuildingMenus/mercenaryPost.fxml"));
+                buttonPane.getChildren().add(merc);
+            }
+
         }
         SelectedUnitController unitController = gameController.getSelectedUnitController();
         result = gameController.selectUnit(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
@@ -235,14 +248,19 @@ public class GraphicsController {
         selectionRect.setHeight(maxY - minY);
     }
 
-    private void handleMouseReleased(MouseEvent event) {
+    private void handleMouseReleased(MouseEvent event)  {
         if (selectionRect == null) return;
         Bounds selectionBounds = selectionRect.getBoundsInParent();
         for (int i = 0; i < mainGrid.getChildren().size(); i++) {
             GridPane cellGrid = (GridPane) mainGrid.getChildren().get(i);
             Bounds bounds = cellGrid.getBoundsInParent();
-            if (bounds.intersects(selectionBounds))
-                selectCell(cellGrid);
+            if (bounds.intersects(selectionBounds)) {
+                try {
+                    selectCell(cellGrid);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             else
                 cellGrid.setBorder(null);
         }
