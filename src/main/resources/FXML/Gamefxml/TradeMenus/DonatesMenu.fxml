@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.TradeMenu">
+   <children>
+      <TableView prefHeight="500.0" prefWidth="800.0">
+        <columns>
+          <TableColumn prefWidth="102.4000244140625" text="State" />
+          <TableColumn minWidth="6.4000244140625" prefWidth="123.20001220703125" text="To" />
+            <TableColumn prefWidth="126.39996337890625" text="Good" />
+            <TableColumn prefWidth="77.59991455078125" text="Amount" />
+            <TableColumn prefWidth="368.0" text="Message" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

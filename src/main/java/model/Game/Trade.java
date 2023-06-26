@@ -13,6 +13,7 @@ public class Trade {
     private final boolean requestMode;
     private final Pair info;
     private String acceptorMessage;
+    private String message;
 
 
     public Trade(Player owner,Player acceptor, Material material, int amount, boolean isRequest  ) {
@@ -24,6 +25,7 @@ public class Trade {
         numberOfTrades++;
         id = numberOfTrades;
         acceptorMessage = null;
+        message = null;
     }
 
     public int getId() {
@@ -42,8 +44,12 @@ public class Trade {
         return acceptor;
     }
 
-    public Pair getInfo() {
-        return info;
+    public Material getMaterial() {
+        return Material.getMaterial(info.x);
+    }
+
+    public int getAmount() {
+        return Integer.parseInt(info.y);
     }
 
 
@@ -59,6 +65,10 @@ public class Trade {
 
     public void setAcceptorMessage(String acceptorMessage) {
         this.acceptorMessage = acceptorMessage;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override

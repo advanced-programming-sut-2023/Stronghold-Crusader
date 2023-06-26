@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +16,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.Game.Trade;
 import model.User.Player;
@@ -53,7 +55,7 @@ public class TradeMenu extends Application {
 
 
     public String run() {
-        System.out.println(tradeController.showNewTradesForPlayer());
+        // System.out.println(tradeController.showNewTradesForPlayer());
         String nextCommand;
         Matcher matcher;
         while (true) {
@@ -72,10 +74,7 @@ public class TradeMenu extends Application {
                     acceptTradeRun(matcher);
                     break;
                 case TRADE_LIST:
-                    tradeListRun();
-                    break;
                 case TRADE_HISTORY:
-                    tradeHistoryRun();
                     break;
                 case BACK:
                     System.out.println(TradeMenuMessage.ENTER_MAIN);
@@ -89,13 +88,6 @@ public class TradeMenu extends Application {
         tradeController.request(inputs).printMessage();
     }
 
-    private void tradeListRun() {
-        System.out.println(tradeController.showAllTrades());
-    }
-
-    private void tradeHistoryRun() {
-        System.out.println(tradeController.tradeHistory());
-    }
 
     private void acceptTradeRun(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.ACCEPT_TRADE.getRegex());
@@ -199,15 +191,51 @@ public class TradeMenu extends Application {
         return result[0];
     }
 
-    public void send(MouseEvent mouseEvent) {
+    public void send(MouseEvent mouseEvent) throws IOException {
         number.setText("0");
+        String result = trade.isRequest() ? "request" : "donate";
+        if (result.equals("donate"))
+            createPopUp(tradeController.isMaterialEnough(trade.getMaterial(), trade.getAmount()));
+        else
+            createPopUp(true);
         donateButton.setDisable(false);
         requestButton.setDisable(false);
         confirmButton.setDisable(true);
         tradeController.addTrade(trade);
     }
 
+    private void createPopUp(Boolean Mode) throws IOException {
+        Popup popup = new Popup();
+        AnchorPane pane = loadPane(popup, Mode);
+        popup.getContent().add(pane);
+        popup.show(stage);
+    }
+
+    private AnchorPane loadPane(Popup popup, Boolean mode) throws IOException {
+        AnchorPane pane;
+        if (!mode) {
+            pane = FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/ErrorPopUp.fxml"));
+            ((Circle) pane.getChildren().get(2)).setFill(acceptedMaterial.getFill());
+            popup.setAutoHide(true);
+        } else {
+            pane = FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/successTrade.fxml"));
+            popup.setAutoHide(false);
+            ((Button) pane.getChildren().get(1)).setOnMouseClicked(e -> {
+                trade.setMessage(((TextField) pane.getChildren().get(2)).getText());
+                popup.hide();
+            });
+        }
+        return pane;
+    }
+
+
     public void back(MouseEvent mouseEvent) throws Exception {
         this.start(stage);
+    }
+
+    public void goToDonatesMenu(MouseEvent mouseEvent) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/DonatesMenu.fxml"));
+        stage.setScene(new Scene(anchorPane));
+        stage.show();
     }
 }

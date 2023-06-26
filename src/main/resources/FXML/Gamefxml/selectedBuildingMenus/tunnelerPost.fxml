@@ -15,7 +15,7 @@
       </ImageView>
       <Text layoutX="9.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tunneler Post">
          <font>
-            <Font name="System Bold" size="27.0" />
+            <Font name="Constantia Bold" size="27.0" />
          </font>
       </Text>
       <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="148.0" layoutY="93.0" onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">

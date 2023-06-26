@@ -45,51 +45,15 @@ public class TradeController {
         return TradeMenuMessage.REQUEST_SUCCESS;
     }
 
-    public String showAllTrades() {
-        if (trades.size() == 0) return "There are not trades!";
-        StringBuilder result = new StringBuilder();
-        result.append("all trades:").append("\n");
-        for (Trade trade : trades) {
-            result.append(trade.toString()).append("\n");
-        }
-        return result.toString();
-    }
 
-    public String tradeHistory() {
-        StringBuilder result = new StringBuilder();
-        for (Trade trade : trades) {
-            if (trade.getOwner() == game.getCurrentPlayer() || trade.getAcceptor() == game.getCurrentPlayer())
-                result.append(trade).append("\n");
-        }
-        if (result.length() == 0) return "you don't have any trades yet!";
-        return result.toString();
-    }
-
-    public String showNewTradesForPlayer() {
-        if (game.getCurrentPlayer().getNewTrades().size() == 0) return "You don't have any new trades";
-        StringBuilder result = new StringBuilder();
-        for (Trade trade : game.getCurrentPlayer().getNewTrades()) {
-            if (trade.getOwner().equals(game.getCurrentPlayer())) {
-                result.append(trade.showAcceptedTrade()).append("\n");
-            }
-        }
-        result.append("new Trades :").append("\n");
-        for (Trade trade : game.getCurrentPlayer().getNewTrades()) {
-            if (!trade.getOwner().equals(game.getCurrentPlayer())) {
-                result.append(trade.toString()).append("\n");
-            }
-        }
-        game.getCurrentPlayer().getNewTrades().clear();
-        return result.toString();
-    }
 
     public TradeMenuMessage accept_trade(HashMap<String, String> inputs) {
         Trade trade = getTradeById(Integer.parseInt(inputs.get("id")));
         if (trade == null)
             return TradeMenuMessage.INVALID_ID;
 
-        int amount = Integer.parseInt(trade.getInfo().y);
-        Material material = Material.valueOf(trade.getInfo().x.toUpperCase());
+        int amount = trade.getAmount();
+        Material material = trade.getMaterial();
         if (game.getCurrentPlayer().getGovernance().getStorageCapacity(material)
                 < amount)
             return TradeMenuMessage.MATERIAL_NEEDED;
@@ -120,6 +84,9 @@ public class TradeController {
                 return trade;
         }
         return null;
+    }
+    public boolean isMaterialEnough(Material material, int amount) {
+       return game.getCurrentPlayer().getGovernance().getStorageCapacity(material) >=  amount;
     }
 
     public Game getGame() {

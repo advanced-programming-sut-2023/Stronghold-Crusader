@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="174.0" prefWidth="200" style="-fx-background-color: #b29663; -fx-border-color: black" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.SuccessPopup">
+   <children>
+      <Label layoutX="51.0" layoutY="14.0" prefHeight="27.0" prefWidth="118.0" text="Weapon  " textAlignment="CENTER">
+         <font>
+            <Font name="Constantia" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="51.0" prefHeight="27.0" prefWidth="142.0" text="is not Enough" textAlignment="CENTER">
+         <font>
+            <Font name="Constantia" size="22.0" />
+         </font>
+      </Label>
+      <Circle layoutX="102.0" layoutY="120.0" radius="38.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
+</AnchorPane>
