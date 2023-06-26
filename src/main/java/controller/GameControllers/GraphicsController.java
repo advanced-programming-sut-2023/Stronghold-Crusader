@@ -261,6 +261,16 @@ public class GraphicsController {
         else if (type.equals(MapAssetType.BARRACK)) loadBarrack(selectedBuilding);
         else if (type.equals(MapAssetType.ENGINEER_GUILD)) loadEngineerGuild(selectedBuilding);
         else if (type.equals(MapAssetType.TUNNELER_POST)) loadTunnelerPost(selectedBuilding);
+        else if (type.equals(MapAssetType.CATHEDRAL)) loadChruch(selectedBuilding);
+    }
+
+    private void loadChruch(AnchorPane selectedBuilding) throws IOException {
+        selectedBuilding.getChildren().clear();
+        AnchorPane engineersGuild = FXMLLoader.load(GraphicGameMenu.class.getResource
+                ("/FXML/Gamefxml/selectedBuildingMenus/church.fxml"));
+        engineersGuild.setLayoutX(0);
+        engineersGuild.setLayoutY(0);
+        selectedBuilding.getChildren().add(engineersGuild);
     }
 
     private void loadTunnelerPost(AnchorPane selectedBuilding) throws IOException {

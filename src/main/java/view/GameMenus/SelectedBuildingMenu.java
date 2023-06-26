@@ -38,7 +38,8 @@ public class SelectedBuildingMenu implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         checkHP();
-        if (!(selectedBuildingController.getBuilding() instanceof TrainingAndEmploymentBuilding))
+        if (!(selectedBuildingController.getBuilding() instanceof TrainingAndEmploymentBuilding) ||
+                selectedBuildingController.getBuilding().getType().equals(MapAssetType.CHURCH))
          {
             progressBar.setProgress(selectedBuildingController.getBuilding().getHitPoint()
                     / selectedBuildingController.getBuilding().getMaxHitPoint());
