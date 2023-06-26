@@ -1,6 +1,7 @@
 package view.GameMenus;
 
 import controller.GameControllers.SelectedBuildingController;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.enums.AssetType.MapAssetType;
 import utils.SignupAndLoginUtils;
@@ -10,6 +11,7 @@ import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SelectedBuildingMenu {
     private static SelectedBuildingController selectedBuildingController;
@@ -91,8 +93,13 @@ public class SelectedBuildingMenu {
     }
 
     public void createSoldier(MouseEvent mouseEvent){
-        System.out.println(mouseEvent);
-        int ordinal = 54;
+        int ordinal = 0;
+        Pattern pattern = Pattern.compile("\\d+");
+        String name =  ((ImageView) mouseEvent.getPickResult().getIntersectedNode()).getImage().getUrl().toString();
+        Matcher matcher = pattern.matcher(name);
+        while (matcher.find()) {
+            ordinal = Integer.parseInt(matcher.group());
+        }
         MapAssetType mapAssetType = MapAssetType.values()[ordinal];
         System.out.println(selectedBuildingController.createUnit(mapAssetType).getMessage());
     }

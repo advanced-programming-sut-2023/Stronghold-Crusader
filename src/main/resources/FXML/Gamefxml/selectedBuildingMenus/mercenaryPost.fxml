@@ -16,32 +16,32 @@
             <Image url="@../../../assets/graphic/soldiers/54.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="56.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="58.0" layoutX="56.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/graphic/soldiers/55.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="122.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="60.0" layoutX="122.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/graphic/soldiers/53.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="189.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="60.0" layoutX="189.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/graphic/soldiers/56.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="253.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="60.0" layoutX="253.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/graphic/soldiers/58.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="311.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="60.0" layoutX="311.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/graphic/soldiers/57.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="52.0" fitWidth="47.0" layoutX="383.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView onMouseClicked="#createSoldier" fitHeight="52.0" fitWidth="47.0" layoutX="383.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../assets/graphic/soldiers/59.png" />
          </image>
