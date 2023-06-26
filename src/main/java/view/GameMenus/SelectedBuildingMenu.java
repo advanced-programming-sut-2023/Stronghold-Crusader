@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.MapAsset.Building.EntranceBuilding;
 import model.MapAsset.Building.ProductionBuilding;
+import model.MapAsset.Building.TrainingAndEmploymentBuilding;
 import model.enums.AssetType.MapAssetType;
 import utils.SignupAndLoginUtils;
 import utils.Sound;
@@ -37,10 +38,8 @@ public class SelectedBuildingMenu implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         checkHP();
-        if (selectedBuildingController.getBuilding().getType() != MapAssetType.MERCENARY_POST
-                && selectedBuildingController.getBuilding().getType() != MapAssetType.ENGINEER_GUILD
-                && selectedBuildingController.getBuilding().getType() != MapAssetType.BARRACK
-        ) {
+        if (!(selectedBuildingController.getBuilding() instanceof TrainingAndEmploymentBuilding))
+         {
             progressBar.setProgress(selectedBuildingController.getBuilding().getHitPoint()
                     / selectedBuildingController.getBuilding().getMaxHitPoint());
             progressBarNumber.setText(selectedBuildingController.getBuilding().getHitPoint() + "/"

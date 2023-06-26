@@ -260,6 +260,16 @@ public class GraphicsController {
         if (type.equals(MapAssetType.MERCENARY_POST)) loadMercenaryPost(selectedBuilding);
         else if (type.equals(MapAssetType.BARRACK)) loadBarrack(selectedBuilding);
         else if (type.equals(MapAssetType.ENGINEER_GUILD)) loadEngineerGuild(selectedBuilding);
+        else if (type.equals(MapAssetType.TUNNELER_POST)) loadTunnelerPost(selectedBuilding);
+    }
+
+    private void loadTunnelerPost(AnchorPane selectedBuilding) throws IOException {
+        selectedBuilding.getChildren().clear();
+        AnchorPane engineersGuild = FXMLLoader.load(GraphicGameMenu.class.getResource
+                ("/FXML/Gamefxml/selectedBuildingMenus/tunnelerPost.fxml"));
+        engineersGuild.setLayoutX(0);
+        engineersGuild.setLayoutY(0);
+        selectedBuilding.getChildren().add(engineersGuild);
     }
 
     private void loadEngineerGuild(AnchorPane buttonPane) throws IOException {
