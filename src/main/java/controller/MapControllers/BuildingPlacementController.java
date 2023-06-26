@@ -165,7 +165,7 @@ public class BuildingPlacementController {
 
     private boolean enoughWorkers(Building reference) {
         int neededNumber = reference.getWorkerCount();
-        int playerWorkerCount = currentPlayer.getGovernance().getPeasantPopulation();
+        int playerWorkerCount = currentPlayer.getGovernance().getPeasantPopulation().get();
         return playerWorkerCount >= neededNumber;
     }
 

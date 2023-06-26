@@ -2,7 +2,9 @@ package model.Game;
 
 import Settings.GovernanceSettings;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.StorageBuilding;
 import model.MapAsset.MapAsset;
@@ -20,7 +22,7 @@ public class Governance {
     private final ArrayList<Building> buildings;
     private final ArrayList<MobileUnit> units;
     private int totalPopulation;
-    private int peasantPopulation;
+    private IntegerProperty peasantPopulation;
     private int populationCapacity;
     private int foodRate;
     private int totalPopularity;
@@ -33,7 +35,7 @@ public class Governance {
     public Governance() {
         buildings = new ArrayList<>();
         units = new ArrayList<>();
-        peasantPopulation = 50;
+        peasantPopulation = new SimpleIntegerProperty(50);
         foodRate = -2;
         taxRate = 0;
         fearRate = 0;
@@ -47,7 +49,7 @@ public class Governance {
         calculatePopulation();
         calculatePopulationCapacity();
         int growth = getPopulationGrowth();
-        peasantPopulation += growth;
+        peasantPopulation.set(peasantPopulation.get() + growth);
         totalPopulation += growth;
     }
 
@@ -59,12 +61,12 @@ public class Governance {
         else
             growth += totalPopularity * 2;
         if (growth < 0)
-            return Math.min(Math.max(growth, -1 * peasantPopulation), remainingHousehold);
+            return Math.min(Math.max(growth, -1 * peasantPopulation.get()), remainingHousehold);
         return Math.min(growth, remainingHousehold);
     }
 
     private void calculatePopulation() {
-        totalPopulation = peasantPopulation;
+        totalPopulation = peasantPopulation.get();
         for (Building building : buildings)
             totalPopulation += building.getWorkerCount();
         for (MobileUnit unit : units) {
@@ -210,10 +212,10 @@ public class Governance {
     }
 
     public void changePeasantPopulation(int offset) {
-        peasantPopulation += offset;
+        peasantPopulation.set(peasantPopulation.get() + offset);
     }
 
-    public int getPeasantPopulation() {
+    public IntegerProperty getPeasantPopulation() {
         return peasantPopulation;
     }
 

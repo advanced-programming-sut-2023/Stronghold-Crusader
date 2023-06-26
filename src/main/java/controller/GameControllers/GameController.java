@@ -1,9 +1,8 @@
 package controller.GameControllers;
 
-import controller.MapControllers.BuildingPlacementController;
-import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import model.Game.Game;
 import model.Game.Governance;
 import model.Map.Cell;
@@ -20,7 +19,6 @@ import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
 import utils.Pair;
 import utils.Vector2D;
-import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
 import java.util.ArrayList;
@@ -320,8 +318,8 @@ public class GameController {
         return game.getCurrentPlayer().getGovernance().getGold();
     }
 
-    public int getPopulation() {
-        return game.getCurrentPlayer().getGovernance().getTotalPopulation();
+    public IntegerProperty getPeasentPopulation() {
+        return game.getCurrentPlayer().getGovernance().getPeasantPopulation();
     }
 
     public void setFearRate(int fearRate) {
