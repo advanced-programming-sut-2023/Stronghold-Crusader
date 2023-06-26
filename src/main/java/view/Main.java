@@ -2,8 +2,8 @@ package view;
 
 import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
+import controller.GameControllers.SelectedBuildingController;
 import controller.MapControllers.BuildingPlacementController;
-import controller.UserControllers.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.ConstantManager;
@@ -46,6 +46,7 @@ public class Main extends Application {
         GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
         GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game, graphicGameMenu));
         GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map, true));
+        SelectedBuildingController.setIsModifiable(true);
         mainStage = stage;
         graphicGameMenu.start(stage);
     }

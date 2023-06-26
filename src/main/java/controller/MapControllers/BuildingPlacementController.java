@@ -24,7 +24,7 @@ public class BuildingPlacementController {
     private final Player currentPlayer;
     private final Map map;
     private BuildingCategory buildingCategory;
-    private boolean isModifiable;
+    private  final boolean isModifiable;
 
     public BuildingPlacementController(Player currentPlayer, Map map, boolean isModifiable) {
         this.isModifiable = isModifiable;
@@ -177,6 +177,10 @@ public class BuildingPlacementController {
             }
         }
         return false;
+    }
+
+    public  boolean isModifiable() {
+        return isModifiable;
     }
 }
 
