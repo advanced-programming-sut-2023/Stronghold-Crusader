@@ -8,7 +8,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
@@ -58,29 +63,34 @@ public class GraphicBuildingPlacementMenu {
     }
 
     private void loadScrollPane(String category) throws IOException {
-        StackPane pane = new StackPane();
+        HBox pane = new HBox();
         BuildingCategory buildingCategory = BuildingCategory.getCategory(category);
         ArrayList<MapAssetType> buildings = BuildingType.getAllBuildings(buildingCategory);
         int i = 0;
         for (MapAssetType type : buildings) {
+            VBox vBox = new VBox();
             ImageView imageView = new ImageView();
             imageView.setImage(type.getImage());
-            pane.getChildren().add(imageView);
-            imageView.setTranslateY(3);
-            imageView.setTranslateX(80 * i);
+            Text text = new Text(type.name().toLowerCase());
+            text.setTextAlignment(TextAlignment.CENTER);
+            text.setWrappingWidth(70);
+            text.setFont(new Font(9));
+            vBox.getChildren().addAll(imageView, text);
+            vBox.setAlignment(Pos.CENTER);
+            pane.getChildren().add(vBox);
             imageView.setFitHeight(60);
             imageView.setPreserveRatio(true);
             setDropBuilding(imageView, pane);
             i++;
         }
-        pane.setPrefWidth(i * 80);
+        pane.setSpacing(15);
         pane.setPrefHeight(65);
         pane.setStyle("-fx-background-color: transparent");
         pane.setAlignment(Pos.CENTER_LEFT);
         scrollPane.setContent(pane);
     }
 
-    private void setDropBuilding(ImageView building, StackPane pane){
+    private void setDropBuilding(ImageView building, HBox pane){
         AtomicReference<Double> mouseAnchorX = new AtomicReference<>((double) 0);
         AtomicReference<Double> mouseAnchorY = new AtomicReference<>((double) 0);
 
