@@ -13,7 +13,7 @@ public class Sound {
 
     static {
         //sample
-        //soundtracks[0] = Sound.class.getResource("assets/media/sth.mp3");
+        soundtracks[0] = Sound.class.getResource("/assets/media/2069104525.mp3");
     }
 
     public Sound() {
