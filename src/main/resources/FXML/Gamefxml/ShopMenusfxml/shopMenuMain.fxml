@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="100" prefWidth="430" style="-fx-background-color: transparent;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.GameMenus.MarketMenus.MarketMainMenu">
+<AnchorPane prefHeight="100" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.MarketMainMenu">
     <ImageView fitHeight="47.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../../../assets/other/Market/theMarketPlaceLable.png"/>
+        <Image url="@../../../assets/other/Market/theMarketPlaceLable.png" />
     </ImageView>
-    <ImageView fitHeight="61.0" fitWidth="79.0" layoutX="68.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true"
-    fx:id="foodButton" onMouseClicked="#buyFood">
-        <Image url="@../../../assets/other/Market/food.png"/>
+    <ImageView fx:id="foodButton" fitHeight="61.0" fitWidth="79.0" layoutX="68.0" layoutY="31.0" onMouseClicked="#buyFood" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/other/Market/food.png" />
     </ImageView>
-    <ImageView fitHeight="64.0" fitWidth="79.0" layoutX="151.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true"
-    fx:id="materialButton" onMouseClicked="#buyMaterial">
-        <Image url="@../../../assets/other/Market/material.png"/>
+    <ImageView fx:id="materialButton" fitHeight="64.0" fitWidth="79.0" layoutX="151.0" layoutY="32.0" onMouseClicked="#buyMaterial" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/other/Market/material.png" />
     </ImageView>
-    <ImageView fitHeight="64.0" fitWidth="79.0" layoutX="234.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true"
-    fx:id="weaponButton" onMouseClicked="#buyWeapon">
-        <Image url="@../../../assets/other/Market/weapon.png"/>
+    <ImageView fx:id="weaponButton" fitHeight="64.0" fitWidth="79.0" layoutX="234.0" layoutY="26.0" onMouseClicked="#buyWeapon" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/other/Market/weapon.png" />
     </ImageView>
-    <ImageView fitHeight="70.0" fitWidth="89.0" layoutX="310.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true"
-    fx:id="pricingListButton" onMouseClicked="#getPricing">
-        <Image url="@../../../assets/other/Market/pricingList.png"/>
+    <ImageView fx:id="pricingListButton" fitHeight="70.0" fitWidth="89.0" layoutX="310.0" layoutY="25.0" onMouseClicked="#getPricing" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/other/Market/pricingList.png" />
     </ImageView>
     <Text layoutX="107.0" layoutY="100.0" text="choose the goods type you want to buy">
         <font>
-            <Font name="Georgia" size="12.0"/>
+            <Font name="Georgia" size="12.0" />
         </font>
     </Text>
 </AnchorPane>

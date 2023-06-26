@@ -25,41 +25,27 @@ import java.io.IOException;
 
 public class GraphicGameMenu extends Application {
     private static Stage stage;
+    private static GraphicGameMenu graphicGameMenu;
     private static GameController gameController;
     private static GraphicsController graphicsController;
     private static AnchorPane rootPane;
     public ScrollPane mainScrollPane;
-    public AnchorPane bottomPane;
-    public AnchorPane leftPane;
-    public Label popularityLabel;
+    public AnchorPane bottomPane, leftPane;
+    public Label popularityLabel, populationLabel, goldLabel, roundLabel, playerLabel,
+            foodPopularity, religionPopularity, innPopularity, nextPopularityNum, fearPopularity, taxPopularity;
     public VBox selectedUnitsMenu;
-    public Slider fearRateSlider;
-    public Slider foodRateSlider;
-    public Slider taxRateSlider;
-    public Label goldLabel;
-    public Label populationLabel;
-    public ImageView closeLeftBarBtn;
-    public ImageView openLeftBarBtn;
-    public Label roundLabel;
-    public Label playerLabel;
-    public AnchorPane dropBuildingMenu, marketMenu;
-    public ImageView minimap;
-    public AnchorPane popularityMenu;
-    public ImageView foodFace;
-    public Label foodPopularity;
-    public ImageView religionFace;
-    public Label religionPopularity;
-    public ImageView taxFace;
-    public Label taxPopularity;
-    public ImageView fearFace;
-    public Label fearPopularity;
-    public ImageView innFace;
-    public Label innPopularity;
-    public ImageView closePopularityBarBtn;
-    public Label nextPopularityNum;
+    public Slider fearRateSlider, foodRateSlider, taxRateSlider;
+    public ImageView closeLeftBarBtn, openLeftBarBtn, minimap, religionFace, taxFace, innFace, closePopularityBarBtn
+            , fearFace, foodFace, backToDropButton;
+    public AnchorPane dropBuildingMenu, marketMenu, popularityMenu;
+    public ImageView marketBtn;
 
-    public static AnchorPane getRootPane() {
-        return rootPane;
+    public static GraphicGameMenu getGraphicGameMenu() {
+        return graphicGameMenu;
+    }
+
+    public static void setGraphicGameMenu(GraphicGameMenu graphicGameMenu) {
+        GraphicGameMenu.graphicGameMenu = graphicGameMenu;
     }
 
     public static void setGameController(GameController gameController) {
@@ -81,7 +67,7 @@ public class GraphicGameMenu extends Application {
     }
 
     @FXML
-    private void initialize() throws IOException {
+    public void initialize() throws IOException {
         graphicsController.setSelectedUnitsMenu(selectedUnitsMenu);
         mainScrollPane.setContent((graphicsController.getMainGrid()));
         mainScrollPane.setOnKeyPressed(this::handleKeyPressed);
@@ -92,8 +78,8 @@ public class GraphicGameMenu extends Application {
         initializeMinimap();
         initializeLeftPane();
         initializePopularityMenu();
-        loadDropBuildingMenu();
-        loadMarket();
+        initializeDropBuildingMenu();
+        initializeMarket();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
     }
@@ -186,7 +172,7 @@ public class GraphicGameMenu extends Application {
         }
     }
 
-    private void loadDropBuildingMenu() throws IOException {
+    public void initializeDropBuildingMenu() throws IOException {
         dropBuildingMenu = FXMLLoader.load(GraphicGameMenu.class.
                 getResource("/FXML/Gamefxml/DropBuildingfxml/dropBuildingMenu.fxml"));
         bottomPane.getChildren().clear();
@@ -199,7 +185,7 @@ public class GraphicGameMenu extends Application {
         });
     }
 
-    private void loadMarket() throws IOException {
+    public void initializeMarket() throws IOException {
         marketMenu = FXMLLoader.load(GraphicGameMenu.class.
                 getResource("/FXML/Gamefxml/ShopMenusfxml/shopMenu.fxml"));
         bottomPane.getChildren().clear();

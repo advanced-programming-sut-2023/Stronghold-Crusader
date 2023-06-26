@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Slider?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1"
+<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
     <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0"
                 vbarPolicy="NEVER"/>
-    <ImageView fitHeight="245.0" fitWidth="1283.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT"
+    <ImageView fitHeight="182.0" fitWidth="1293.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT"
                pickOnBounds="true" preserveRatio="true">
         <Image url="@../../assets/graphic/overlay/bottom_menu.png"/>
     </ImageView>
@@ -170,5 +165,17 @@
     <ImageView fx:id="minimap" fitHeight="180.0" fitWidth="180.0" layoutX="1028.0" layoutY="552.0" pickOnBounds="true"
                preserveRatio="true">
         <Image url="@../../assets/graphic/map1001.png"/>
+    </ImageView>
+    <ImageView fitHeight="30" fitWidth="120.0" layoutX="182.0" layoutY="659.0"
+               pickOnBounds="true" rotate="90">
+        <Image url="@../../assets/graphic/overlay/menus.jpg"/>
+    </ImageView>
+    <ImageView fx:id="backToDropButton" fitHeight="20.0" fitWidth="21.0" layoutX="233.0" layoutY="620.0"
+               onMouseClicked="#initializeDropBuildingMenu" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/buttons/dropBuilding_btn.png"/>
+    </ImageView>
+    <ImageView fx:id="marketBtn" fitHeight="25.0" fitWidth="20.0" layoutX="234.0" layoutY="643.0"
+               onMouseClicked="#initializeMarket" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/buttons/market_btn.png"/>
     </ImageView>
 </AnchorPane>

@@ -89,6 +89,7 @@ public class MapSelectController {
         newGame = new Game(selectedMap, players, isMapModifiable);
         GameController controller = new GameController(currentUser, newGame);
         GraphicGameMenu menu = new GraphicGameMenu();
+        GraphicGameMenu.setGraphicGameMenu(menu);
         GraphicGameMenu.setGameController(controller);
         GraphicGameMenu.setGraphicsController(new GraphicsController(controller, newGame));
         menu.start(Main.mainStage);

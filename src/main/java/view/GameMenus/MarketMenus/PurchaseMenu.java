@@ -55,7 +55,6 @@ public class PurchaseMenu {
 
     public void buy() throws IOException {
         MarketMessage msg = controller.buy(material, 1);
-        System.out.println(msg);
         if (msg.equals(MarketMessage.BUY_SUCCESS)) {
             successPopup = new Popup();
             AnchorPane pane = FXMLLoader.load(
