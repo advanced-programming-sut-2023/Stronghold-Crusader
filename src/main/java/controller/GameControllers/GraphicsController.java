@@ -169,8 +169,9 @@ public class GraphicsController {
                 BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
                         MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),
                         cell.getCoordinate().x, cell.getCoordinate().y);
-                if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS))
+                if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS)) {
                     gameMenu.printError(msg.getMessage());
+                }
             }
             e.consume();
         });
