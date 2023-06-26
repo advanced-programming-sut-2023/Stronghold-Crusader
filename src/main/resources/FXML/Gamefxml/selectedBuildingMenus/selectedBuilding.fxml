@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="150.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
+   <children>
+      <Button fx:id="repairButton" layoutX="140.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#repair" prefHeight="24.0" prefWidth="59.0" styleClass="repair-button" stylesheets="@../../../CSS/style1.css" text="repair" />
+      <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="452.0" layoutY="26.0" onMouseClicked="#info" onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/icons/selectedBuildingIcons/info_btn.png" />
+         </image>
+      </ImageView>
+      <Circle fill="#c9830a" layoutX="466.0" layoutY="14.0" onMouseClicked="#delete" onMouseDragged="#delete" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+      <FontAwesomeIcon glyphName="REMOVE" layoutX="460.0" layoutY="19.0" onMousePressed="#delete" size="15" />
+      <ProgressBar fx:id="progressBar" layoutX="209.0" layoutY="19.0" prefHeight="20.0" prefWidth="110.0" progress="0.0" style="-fx-background-color: #00BB00;" stylesheets="@../../../CSS/style1.css" />
+      <Text fx:id="progressBarNumber" layoutX="225.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="78.93670654296875" />
+   </children>
+</AnchorPane>

@@ -199,10 +199,7 @@ public class GraphicsController {
         cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
                 CornerRadii.EMPTY, BorderStroke.MEDIUM)));
         if (result == GameMenuMessage.BUILDING_SELECTED) {
-            SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
-            selectedBuildings.add(buildingController.getBuilding());
-            SelectedBuildingMenu.setSelectedBuildingController(buildingController);
-            loadSelectedBuildingFxml(buildingController.getBuilding().getType());
+            runSelectedBuilding();
         }
         SelectedUnitController unitController = gameController.getSelectedUnitController();
         result = gameController.selectUnit(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
@@ -215,6 +212,14 @@ public class GraphicsController {
         }
     }
 
+    private void runSelectedBuilding() throws IOException {
+        SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
+        selectedBuildings.add(buildingController.getBuilding());
+        SelectedBuildingMenu.setSelectedBuildingController(buildingController);
+        SelectedBuildingMenu.setGameMenu(this.gameMenu);
+        loadSelectedBuildingFxml(buildingController.getBuilding().getType());
+    }
+
     private void resetSelection() {
         removeAllSelectedBorders();
         gameController.deselectUnits();
@@ -225,20 +230,36 @@ public class GraphicsController {
     private void loadSelectedBuildingFxml(MapAssetType type) throws IOException {
         AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(2);
         buttonPane.getChildren().clear();
-        if (type.equals(MapAssetType.MERCENARY_POST)) loadMercenaryPost(buttonPane);
-        else if (type.equals(MapAssetType.BARRACK)) loadBarrack(buttonPane);
+        AnchorPane selectedBuilding = FXMLLoader.load(GraphicGameMenu.class
+                .getResource("/FXML/Gamefxml/selectedBuildingMenus/selectedBuilding.fxml"));
+        buttonPane.getChildren().add(selectedBuilding);
+        if (type.equals(MapAssetType.MERCENARY_POST)) loadMercenaryPost(selectedBuilding);
+        else if (type.equals(MapAssetType.BARRACK)) loadBarrack(selectedBuilding);
+        else if (type.equals(MapAssetType.ENGINEER_GUILD)) loadEngineerGuild(selectedBuilding);
 
+    }
+
+    private void loadEngineerGuild(AnchorPane buttonPane) throws IOException {
+        AnchorPane engineersGuild = FXMLLoader.load(GraphicGameMenu.class.getResource
+                ("/FXML/Gamefxml/selectedBuildingMenus/engineersGuild.fxml"));
+        engineersGuild.setLayoutX(0);
+        engineersGuild.setLayoutY(0);
+        buttonPane.getChildren().add(engineersGuild);
     }
 
     private void loadBarrack(AnchorPane buttonPane) throws IOException {
         AnchorPane barrack = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/barrack.fxml"));
+        barrack.setLayoutX(0);
+        barrack.setLayoutY(0);
         buttonPane.getChildren().add(barrack);
     }
 
     private void loadMercenaryPost(AnchorPane buttonPane) throws IOException {
         AnchorPane mercenaryPost = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/mercenaryPost.fxml"));
+        mercenaryPost.setLayoutX(0);
+        mercenaryPost.setLayoutY(0);
         buttonPane.getChildren().add(mercenaryPost);
     }
 

@@ -69,3 +69,20 @@
     -fx-border-radius: 10px;
 
 }
+
+
+.repair-button {
+    -fx-border-color: black;
+    -fx-background-color: gray;
+}
+
+.repair-button:hover {
+    -fx-background-color: transparent;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #00BB00;
+}
+.progress-bar {
+    -fx-background-color: #00BB00;
+}
