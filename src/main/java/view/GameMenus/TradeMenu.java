@@ -3,6 +3,7 @@ package view.GameMenus;
 import controller.GameControllers.TradeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -11,9 +12,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Game.Trade;
 import model.User.Player;
 import model.enums.AssetType.Material;
 import utils.SignupAndLoginUtils;
@@ -28,26 +31,26 @@ import java.util.regex.Matcher;
 public class TradeMenu extends Application {
     public Button donateButton;
     public Button requestButton;
+
     public Text number;
     public Circle acceptedMaterial;
     public Button confirmButton;
-    TradeController tradeController;
-    private final HashMap<Circle, Material> materials = new HashMap<>();
+    private static TradeController tradeController;
+    private final HashMap<Paint, Material> materials = new HashMap<>();
+    private Player sentTo;
+    private Trade trade;
 
-    Stage stage = new Stage();
+    private static Stage stage = new Stage();
 
     @Override
-    public void start(Stage stage) throws Exception {
-        this.stage = stage;
+    public void start(Stage newStage) throws Exception {
+        stage = newStage;
         AnchorPane rootPane =
                 FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/tradeMenu.fxml"));
         stage.setScene(new Scene(rootPane));
         stage.show();
     }
 
-    public TradeMenu(TradeController tradeController) {
-        this.tradeController = tradeController;
-    }
 
     public String run() {
         System.out.println(tradeController.showNewTradesForPlayer());
@@ -102,25 +105,35 @@ public class TradeMenu extends Application {
 
     public void newTrade(MouseEvent mouseEvent) {
         AnchorPane anchorPane = new AnchorPane();
-        HBox hBox = new HBox();
-        anchorPane.setMaxHeight(500);
-        anchorPane.setMaxWidth(800);
-        anchorPane.getChildren().add(hBox);
-        createAvatarsAndSelect(hBox);
+        HBox hBox1 = new HBox();
+        HBox hBox2 = new HBox();
+        hBox1.setTranslateX(50);
+        hBox1.setTranslateY(100);
+        hBox2.setTranslateY(200);
+        hBox2.setTranslateX(50);
+        hBox2.setSpacing(100);
+        hBox2.setAlignment(Pos.CENTER);
+        anchorPane.setMinHeight(500);
+        anchorPane.setMinWidth(800);
+        anchorPane.getChildren().add(hBox1);
+        anchorPane.getChildren().add(hBox2);
+        createAvatarsAndSelect(hBox1, hBox2);
         stage.setScene(new Scene(anchorPane));
+        stage.show();
     }
 
-    private void createAvatarsAndSelect(HBox hBox) {
+    private void createAvatarsAndSelect(HBox hBox, HBox hBox2) {
         for (Player player : tradeController.getGame().getPlayers()) {
             if (player.equals(tradeController.getGame().getCurrentPlayer())) continue;
             ImageView imageView = new ImageView();
-            imageView.setFitHeight(50);
-            imageView.setFitWidth(50);
+            imageView.setFitHeight(100);
+            imageView.setFitWidth(100);
             imageView.setImage(new Image(player.getAvatarPath()));
             hBox.getChildren().add(imageView);
+            hBox2.getChildren().add(new Text(player.getNickname()));
             imageView.setOnMouseClicked(mouseEvent -> {
                 try {
-                    createNewTrade(player);
+                    createNewTrade(materials, player);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -128,27 +141,27 @@ public class TradeMenu extends Application {
         }
     }
 
-    private void createNewTrade(Player player) throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/tradeMenu.fxml"));
-        donateButton.setDisable(true);
-        requestButton.setDisable(true);
-        confirmButton.setDisable(true);
+    private void createNewTrade(HashMap<Paint, Material> materials, Player player) throws IOException {
+        sentTo = player;
+        AnchorPane anchorPane = FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/newTradeMenu.fxml"));
         int counter = 0;
         for (Material material : Material.values()) {
             Circle circle = new Circle(23);
             circle.setFill(new ImagePattern(material.getImage()));
-            circle.setTranslateX(87 + 70 * counter);
+            circle.setTranslateX(87 + 70 * (counter % 9));
             circle.setTranslateY(63 + (int) (counter / 9) * 65);
             circle.setOnMouseClicked(mouseEvent -> {
-                acceptedMaterial = circle;
-                donateButton.setDisable(false);
-                requestButton.setDisable(false);
+                ((Circle) anchorPane.getChildren().get(0)).setFill(circle.getFill());
+                anchorPane.getChildren().get(1).setDisable(false);
+                anchorPane.getChildren().get(2).setDisable(false);
+                ((Text) anchorPane.getChildren().get(4)).setText("0");
             });
-            materials.put(circle, material);
+            materials.put(circle.getFill(), material);
+            anchorPane.getChildren().add(circle);
             counter++;
         }
-        anchorPane.getChildren().addAll(materials.keySet());
         stage.setScene(new Scene(anchorPane));
+        stage.show();
 
     }
 
@@ -162,5 +175,26 @@ public class TradeMenu extends Application {
         if (num == 0) num += 1;
         number.setText(Integer.valueOf(num - 1).toString());
 
+    }
+
+    public static void setTradeController(TradeController tradeController) {
+        TradeMenu.tradeController = tradeController;
+    }
+
+    public void confirmSituation(MouseEvent mouseEvent) {
+        boolean requestMode = (mouseEvent.getSource().toString().matches("[\\S\\s]*request[\\S\\s]*")) ? true : false;
+        trade = new Trade(tradeController.getGame().getCurrentPlayer(), sentTo, materials.get(acceptedMaterial.getFill()),
+                Integer.parseInt(number.getText()), requestMode);
+        donateButton.setDisable(true);
+        requestButton.setDisable(true);
+        confirmButton.setDisable(false);
+    }
+
+    public void send(MouseEvent mouseEvent) {
+        tradeController.addTrade(trade);
+    }
+
+    public void back(MouseEvent mouseEvent) throws Exception {
+        this.start(stage);
     }
 }

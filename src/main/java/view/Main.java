@@ -15,7 +15,6 @@ import model.User.Player;
 import model.enums.User.Color;
 import view.GameMenus.GraphicGameMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
-import view.UserMenus.LoginMenu;
 
 import java.util.HashMap;
 
@@ -34,6 +33,7 @@ public class Main extends Application {
 //        new LoginMenu().start(stage);
 //    }
 
+
     @Override
     public void start(Stage stage) throws Exception {
         HashMap<Color, Player> players = new HashMap<>();
@@ -44,10 +44,9 @@ public class Main extends Application {
         GameController gameController = new GameController(Stronghold.getInstance().getUser("ayeen"), game);
         GraphicGameMenu.setGameController(gameController);
         GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
-        GraphicGameMenu.setGraphicGameMenu(graphicGameMenu);
-        GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game));
-        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map));
+        GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game, graphicGameMenu));
+        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map, true));
         mainStage = stage;
         graphicGameMenu.start(stage);
     }
-}
+    }

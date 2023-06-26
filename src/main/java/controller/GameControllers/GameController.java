@@ -22,7 +22,6 @@ import utils.Pair;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
-import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,38 +39,6 @@ public class GameController {
         selectedBuildingController = null;
         selectedUnitController = new SelectedUnitController(new ArrayList<>(), game);
         nextTurn();
-    }
-
-    public String run() {
-        GameMenu gameMenu = new GameMenu(this);
-        while (true) {
-            switch (gameMenu.run()) {
-                case "changeEnvironment":
-                    ChangeEnvironmentController environmentController = new
-                            ChangeEnvironmentController(game.getMap(), game);
-                    environmentController.run();
-                    break;
-                case "buildingPlacement":
-                    BuildingPlacementController controller = new BuildingPlacementController(game.getCurrentPlayer(), game.getMap());
-//                    controller.run();
-                    break;
-                case "tradeMenu":
-                    TradeController tradeController = new TradeController(game);
-                    tradeController.run();
-                    break;
-                case "showMap":
-                    showMapController.run();
-                    break;
-                case "marketMenu":
-                    MarketController marketController = new MarketController(game.getCurrentPlayer());
-//                    marketController.run();
-                    break;
-                case "endGame":
-                    EndGameController endGameController = new EndGameController(game.getDeadPlayers());
-                    endGameController.run();
-                    return "endGame";
-            }
-        }
     }
 
     public String nextRound() {
@@ -406,5 +373,9 @@ public class GameController {
 
     public Player getCurrentPlayer() {
         return game.getCurrentPlayer();
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

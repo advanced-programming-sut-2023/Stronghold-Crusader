@@ -14,13 +14,10 @@ import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
-import utils.SignupAndLoginUtils;
 import utils.Vector2D;
-import view.GameMenus.SelectedBuildingMenu;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SelectedBuildingController {
     private final Building building;
@@ -82,26 +79,16 @@ public class SelectedBuildingController {
         else return SelectedBuildingMessage.STOP_PRODUCTION;
     }
 
-    public SelectedBuildingMessage createUnit(HashMap<String, String> inputs) {
-        if (inputs.get("type") == null || inputs.get("count") == null) return SelectedBuildingMessage.EMPTY_FIELD;
-        if (!SignupAndLoginUtils.isNumberValid(inputs.get("count")))
-            return SelectedBuildingMessage.INVALID_COUNT;
-        if (!(building instanceof TrainingAndEmploymentBuilding))
-            return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
-        if (!isUnitMatchWithBuilding(inputs.get("type")))
-            return SelectedBuildingMessage.INVALID_UNIT_FOR_CREATING;
-
-        int count = Integer.parseInt(inputs.get("count"));
-        MapAssetType type = MapAssetType.valueOf(inputs.get("type").toUpperCase());
+    public SelectedBuildingMessage createUnit(MapAssetType type) {
 
         MobileUnit sampleMobileUnit = (MobileUnit) ConstantManager.getInstance().getAsset(type);
 
         AttackingUnit sampleAttackingUnit = null;
         if (sampleMobileUnit instanceof AttackingUnit)
             sampleAttackingUnit = (AttackingUnit) sampleMobileUnit;
-        if (sampleAttackingUnit != null && !isWeaponEnough(sampleAttackingUnit, count))
+        if (sampleAttackingUnit != null && !isWeaponEnough(sampleAttackingUnit, 1))
             return SelectedBuildingMessage.WEAPON_NEEDED;
-        if (!isGoldEnough(sampleMobileUnit.getCost(), count))
+        if (!isGoldEnough(sampleMobileUnit.getCost(), 1))
             return SelectedBuildingMessage.GOLD_NEEDED;
         if (sampleMobileUnit.getEngineersCount() != 0) {
             int numberOfEngineers = player.getGovernance().getEngineers();
@@ -109,14 +96,13 @@ public class SelectedBuildingController {
                 return SelectedBuildingMessage.ENGINEER_NEEDED;
             else addEngineersToSiegeTent(sampleMobileUnit.getEngineersCount());
         }
-        player.getGovernance().changeGold(-1 * sampleMobileUnit.getCost() * count);
+        player.getGovernance().changeGold(-1 * sampleMobileUnit.getCost());
         if (sampleAttackingUnit != null) {
             if (sampleAttackingUnit.getWeapons() != null) {
                 for (Material weapon : sampleAttackingUnit.getWeapons())
-                    player.getGovernance().changeStorageStock(weapon, -1 * count);
+                    player.getGovernance().changeStorageStock(weapon, -1);
             }
         }
-        for (int i = 0; i < count; i++) {
             MobileUnit mobileUnit;
             if (sampleAttackingUnit == null)
                 mobileUnit = new MobileUnit(sampleMobileUnit, new Vector2D(coordinate.x, coordinate.y), player);
@@ -124,7 +110,7 @@ public class SelectedBuildingController {
                 mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y), player);
             map.getCell(mobileUnit.getCoordinate()).addMapAsset(mobileUnit);
             player.getGovernance().addAsset(mobileUnit);
-        }
+
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
     }
 
@@ -208,5 +194,7 @@ public class SelectedBuildingController {
         return false;
     }
 
-
+    public Building getBuilding() {
+        return building;
+    }
 }

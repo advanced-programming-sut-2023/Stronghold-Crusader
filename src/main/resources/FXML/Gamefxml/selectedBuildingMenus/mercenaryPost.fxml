@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="113.0" prefWidth="437.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
+   <children>
+      <ImageView fitHeight="120.0" fitWidth="444.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../../assets/graphic/overlay/merceneryPost.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="8.0" layoutY="29.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/graphic/soldiers/54.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="69.0" layoutY="25.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/graphic/soldiers/55.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="130.0" layoutY="27.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/graphic/soldiers/53.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="196.0" layoutY="29.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/graphic/soldiers/56.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="260.0" layoutY="27.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/graphic/soldiers/58.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="322.0" layoutY="27.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/graphic/soldiers/57.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="386.0" layoutY="32.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/graphic/soldiers/59.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

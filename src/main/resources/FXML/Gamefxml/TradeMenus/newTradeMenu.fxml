@@ -7,23 +7,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="500" prefWidth="800" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.TradeMenu">
    <children>
-      <Circle layoutX="92.0" layoutY="371.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" fx:id="acceptedMaterial" />
-      <Button layoutX="577.0" layoutY="337.0" mnemonicParsing="false" text="request" fx:id="requestButton"   />
-      <Button layoutX="653.0" layoutY="337.0" mnemonicParsing="false" text="donate" fx:id="donateButton" />
-      <Button layoutX="577.0" layoutY="375.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Confirm" fx:id="confirmButton">
+      <Circle fx:id="acceptedMaterial" layoutX="92.0" layoutY="371.0" radius="31.0" stroke="BLACK" strokeType="INSIDE" />
+      <Button fx:id="requestButton" disable="true" layoutX="577.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#confirmSituation" text="request" />
+      <Button fx:id="donateButton" disable="true" layoutX="653.0" layoutY="337.0" mnemonicParsing="false" onMouseClicked="#confirmSituation" text="donate" />
+      <Button fx:id="confirmButton" disable="true" layoutX="577.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#send" prefHeight="32.0" prefWidth="130.0" text="Confirm">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Text layoutX="378.0" layoutY="387.0" fx:id="number" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="86.9366455078125">
+      <Text fx:id="number" layoutX="378.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="86.9366455078125">
          <font>
             <Font size="31.0" />
          </font>
       </Text>
-      <FontAwesomeIcon glyphName="PLUS" layoutX="451.0" layoutY="392.0" size="35" text="" onMouseClicked="#plus" />
-      <FontAwesomeIcon glyphName="MINUS" layoutX="364.0" layoutY="393.0" size="35" tabSize="0" onMouseClicked="#minus" />
+      <FontAwesomeIcon glyphName="PLUS" layoutX="451.0" layoutY="392.0" onMouseClicked="#plus" size="35" text="" />
+      <FontAwesomeIcon glyphName="MINUS" layoutX="364.0" layoutY="393.0" onMouseClicked="#minus" size="35" tabSize="0" />
+      <Button   layoutX="14.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#back" text="back" />
    </children>
 </AnchorPane>

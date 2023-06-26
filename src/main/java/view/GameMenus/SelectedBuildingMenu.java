@@ -1,20 +1,23 @@
 package view.GameMenus;
 
 import controller.GameControllers.SelectedBuildingController;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import model.enums.AssetType.MapAssetType;
 import utils.SignupAndLoginUtils;
+import utils.Sound;
 import view.Menu;
 import view.enums.commands.GameCommand.SelectedBuildingCommand;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SelectedBuildingMenu {
-    private final SelectedBuildingController selectedBuildingController;
+    private static SelectedBuildingController selectedBuildingController;
 
-    public SelectedBuildingMenu(SelectedBuildingController selectedBuildingController) {
-        this.selectedBuildingController = selectedBuildingController;
-    }
+
 
     public void run() {
         String nextCommand;
@@ -83,11 +86,28 @@ public class SelectedBuildingMenu {
 
     private void runCreateUnit(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SelectedBuildingCommand.CREATE_UNIT.getRegex());
-        selectedBuildingController.createUnit(inputs).printMessage();
+        selectedBuildingController.createUnit(null).printMessage();
     }
 
     private void runEntranceGate() {
         selectedBuildingController.changeGate().printMessage();
+    }
+
+    public void createSoldier(MouseEvent mouseEvent){
+        new Sound(0).play();
+        int ordinal = 0;
+        Pattern pattern = Pattern.compile("\\d+");
+        String name =  ((ImageView) mouseEvent.getPickResult().getIntersectedNode()).getImage().getUrl().toString();
+        Matcher matcher = pattern.matcher(name);
+        while (matcher.find()) {
+            ordinal = Integer.parseInt(matcher.group());
+        }
+        MapAssetType mapAssetType = MapAssetType.values()[ordinal];
+        System.out.println(selectedBuildingController.createUnit(mapAssetType).getMessage());
+    }
+
+    public static void setSelectedBuildingController(SelectedBuildingController selectedBuildingController) {
+        SelectedBuildingMenu.selectedBuildingController = selectedBuildingController;
     }
 }
 
