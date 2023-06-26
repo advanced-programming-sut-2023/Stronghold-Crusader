@@ -17,6 +17,7 @@ import model.enums.AssetType.Material;
 import utils.Vector2D;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SelectedBuildingController {
@@ -62,10 +63,10 @@ public class SelectedBuildingController {
         return building.toString();
     }
 
-    public SelectedBuildingMessage deleteBuilding() {
+    public SelectedBuildingMessage deleteBuilding() throws IOException {
         if (map.getCell(coordinate).isThereUnit())
             return SelectedBuildingMessage.NOT_ALLOWED_TO_DELETE;
-        map.getCell(coordinate).removeMapAsset(building);
+        map.removeMapObject(coordinate, building);
         player.getGovernance().removeAsset(building);
         return SelectedBuildingMessage.DELETED_BUILDING;
     }
@@ -81,8 +82,6 @@ public class SelectedBuildingController {
     }
 
     public SelectedBuildingMessage createUnit(MapAssetType type) {
-        System.out.println(type.toString());
-        System.out.println(type.ordinal());
         MobileUnit sampleMobileUnit = (MobileUnit) ConstantManager.getInstance().getAsset(type);
 
         AttackingUnit sampleAttackingUnit = null;
@@ -105,16 +104,16 @@ public class SelectedBuildingController {
         if (sampleAttackingUnit != null) {
             if (sampleAttackingUnit.getWeapons() != null) {
                 for (Material weapon : sampleAttackingUnit.getWeapons())
-                  if(!isModifiable) player.getGovernance().changeStorageStock(weapon, -1);
+                    if (!isModifiable) player.getGovernance().changeStorageStock(weapon, -1);
             }
         }
-            MobileUnit mobileUnit;
-            if (sampleAttackingUnit == null)
-                mobileUnit = new MobileUnit(sampleMobileUnit, new Vector2D(coordinate.x, coordinate.y), player);
-            else
-                mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y), player);
-            map.getCell(mobileUnit.getCoordinate()).addMapAsset(mobileUnit);
-            player.getGovernance().addAsset(mobileUnit);
+        MobileUnit mobileUnit;
+        if (sampleAttackingUnit == null)
+            mobileUnit = new MobileUnit(sampleMobileUnit, new Vector2D(coordinate.x, coordinate.y), player);
+        else
+            mobileUnit = new AttackingUnit(sampleAttackingUnit, new Vector2D(coordinate.x, coordinate.y), player);
+        map.getCell(mobileUnit.getCoordinate()).addMapAsset(mobileUnit);
+        player.getGovernance().addAsset(mobileUnit);
 
         return SelectedBuildingMessage.SUCCESS_CREATING_UNIT;
     }

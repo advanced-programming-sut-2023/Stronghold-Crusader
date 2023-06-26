@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="mainPain" prefHeight="100.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
+    <children>
+
+        <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="231.0" layoutY="10.0" onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../assets/buttons/repair_btn.jpg" />
+            </image>
+        </ImageView>
+
+        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="231.0" layoutY="43.0" onMouseClicked="#info" onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../assets/buttons/info_btn.jpg" />
+            </image>
+        </ImageView>
+
+        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="231.0" layoutY="75.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../assets/buttons/delete_btn.jpg" />
+            </image>
+        </ImageView>
+        <ProgressBar fx:id="progressBar" layoutX="363.0" layoutY="48.0" prefHeight="27.0" prefWidth="79.0" progress="0.0" rotate="90" style="-fx-background-color: #00BB00;" stylesheets="@../../../CSS/style1.css" />
+        <Text fx:id="progressBarNumber" layoutX="363.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="78.93670654296875" />
+        <ImageView fx:id="buildingImage" fitHeight="100.0" fitWidth="116.0" layoutX="69.0" layoutY="11.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+        </ImageView>
+    </children>
+</AnchorPane>

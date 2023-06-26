@@ -1,7 +1,11 @@
 package controller.GameControllers;
 
+import controller.MapControllers.BuildingPlacementController;
+import controller.MapControllers.ChangeEnvironmentController;
 import controller.MapControllers.ShowMapController;
 import javafx.beans.property.DoubleProperty;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
 import javafx.beans.property.IntegerProperty;
 import model.Game.Game;
 import model.Game.Governance;
@@ -19,6 +23,7 @@ import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
 import utils.Pair;
 import utils.Vector2D;
+import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
 import java.util.ArrayList;
@@ -30,6 +35,7 @@ public class GameController {
     private ShowMapController showMapController;
     private SelectedBuildingController selectedBuildingController;
     private final SelectedUnitController selectedUnitController;
+    private GraphicsController graphicsController;
 
     public GameController(User currentUser, Game game) {
         this.currentUser = currentUser;
@@ -186,7 +192,9 @@ public class GameController {
         if (mobileUnit.hasNextMoveDestination())
             mobileUnit.move();
         Vector2D newCoordinate = mobileUnit.getCoordinate();
-        map.moveMapObject(pastCoordinate, newCoordinate, mobileUnit);
+        map.removeMapObject(pastCoordinate, mobileUnit);
+        graphicsController.addTransition(mobileUnit, pastCoordinate, newCoordinate);
+        map.addMapObject(newCoordinate, mobileUnit);
     }
 
     private void processAttack(AttackingUnit attackingAsset) {
@@ -375,5 +383,9 @@ public class GameController {
 
     public Game getGame() {
         return game;
+    }
+
+    public void setGraphicsController(GraphicsController graphicsController) {
+        this.graphicsController = graphicsController;
     }
 }

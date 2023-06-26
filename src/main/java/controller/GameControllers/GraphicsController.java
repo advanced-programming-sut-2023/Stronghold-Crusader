@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import controller.MapControllers.BuildingPlacementController;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
@@ -12,12 +12,11 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import model.Game.Game;
 import model.Map.Cell;
 import model.Map.Map;
@@ -58,6 +57,7 @@ public class GraphicsController {
 
     public GraphicsController(GameController gameController, Game game, GraphicGameMenu gameMenu) {
         this.gameController = gameController;
+        gameController.setGraphicsController(this);
         this.map = game.getMap();
         this.gameMenu = gameMenu;
         mainGrid = new TilePane();
@@ -223,10 +223,7 @@ public class GraphicsController {
         cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
                 CornerRadii.EMPTY, BorderStroke.MEDIUM)));
         if (result == GameMenuMessage.BUILDING_SELECTED) {
-            SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
-            selectedBuildings.add(buildingController.getBuilding());
-            SelectedBuildingMenu.setSelectedBuildingController(buildingController);
-            loadSelectedBuildingFxml(buildingController.getBuilding().getType());
+            runSelectedBuilding();
         }
         SelectedUnitController unitController = gameController.getSelectedUnitController();
         result = gameController.selectUnit(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
@@ -239,6 +236,14 @@ public class GraphicsController {
         }
     }
 
+    private void runSelectedBuilding() throws IOException {
+        SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
+        selectedBuildings.add(buildingController.getBuilding());
+        SelectedBuildingMenu.setSelectedBuildingController(buildingController);
+        SelectedBuildingMenu.setGameMenu(this.gameMenu);
+        loadSelectedBuildingFxml(buildingController.getBuilding().getType());
+    }
+
     private void resetSelection() {
         removeAllSelectedBorders();
         gameController.deselectUnits();
@@ -249,20 +254,35 @@ public class GraphicsController {
     private void loadSelectedBuildingFxml(MapAssetType type) throws IOException {
         AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(2);
         buttonPane.getChildren().clear();
-        if (type.equals(MapAssetType.MERCENARY_POST)) loadMercenaryPost(buttonPane);
-        else if (type.equals(MapAssetType.BARRACK)) loadBarrack(buttonPane);
+        AnchorPane selectedBuilding = FXMLLoader.load(GraphicGameMenu.class
+                .getResource("/FXML/Gamefxml/selectedBuildingMenus/selectedBuilding.fxml"));
+        buttonPane.getChildren().add(selectedBuilding);
+        if (type.equals(MapAssetType.MERCENARY_POST)) loadMercenaryPost(selectedBuilding);
+        else if (type.equals(MapAssetType.BARRACK)) loadBarrack(selectedBuilding);
+        else if (type.equals(MapAssetType.ENGINEER_GUILD)) loadEngineerGuild(selectedBuilding);
+    }
 
+    private void loadEngineerGuild(AnchorPane buttonPane) throws IOException {
+        AnchorPane engineersGuild = FXMLLoader.load(GraphicGameMenu.class.getResource
+                ("/FXML/Gamefxml/selectedBuildingMenus/engineersGuild.fxml"));
+        engineersGuild.setLayoutX(0);
+        engineersGuild.setLayoutY(0);
+        buttonPane.getChildren().add(engineersGuild);
     }
 
     private void loadBarrack(AnchorPane buttonPane) throws IOException {
         AnchorPane barrack = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/barrack.fxml"));
+        barrack.setLayoutX(0);
+        barrack.setLayoutY(0);
         buttonPane.getChildren().add(barrack);
     }
 
     private void loadMercenaryPost(AnchorPane buttonPane) throws IOException {
         AnchorPane mercenaryPost = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/mercenaryPost.fxml"));
+        mercenaryPost.setLayoutX(0);
+        mercenaryPost.setLayoutY(0);
         buttonPane.getChildren().add(mercenaryPost);
     }
 
@@ -364,5 +384,32 @@ public class GraphicsController {
         }
         rootPane.getChildren().remove(selectionRect);
         selectionRect = null;
+    }
+
+    public void addTransition(MobileUnit unit, Vector2D source, Vector2D dest){
+        GridPane initialCellGrid = (GridPane) mainGrid.getChildren().get(source.x + map.getSize().x * source.y);
+        GridPane finalCellGrid = (GridPane) mainGrid.getChildren().get(dest.x + map.getSize().x * dest.y);
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1));
+        for (Node node : initialCellGrid.getChildren()) {
+            if (node instanceof ImageView){
+                String path = ((ImageView) node).getImage().getUrl();
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(path);
+                int ordinal;
+                if (matcher.find()) {
+                    ordinal = Integer.parseInt(matcher.group());
+                    MapAssetType type = MapAssetType.getTypeBySerial(ordinal);
+                    if (type.equals(unit.getType())){
+                        transition.setNode(node);
+                        break;
+                    }
+                }
+            }
+        }
+        transition.setToX(finalCellGrid.getTranslateX());
+        transition.setToY(finalCellGrid.getTranslateY());
+        transition.setAutoReverse(false);
+        transition.setCycleCount(1);
+        transition.play();
     }
 }

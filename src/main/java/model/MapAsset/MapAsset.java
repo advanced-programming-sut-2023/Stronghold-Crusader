@@ -1,5 +1,6 @@
 package model.MapAsset;
 
+import javafx.scene.image.ImageView;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
@@ -12,7 +13,6 @@ public class MapAsset {
     protected Vector2D coordinate;
     protected Player owner;
     protected double hitPoint;
-
     public MapAsset(MapAsset reference, Vector2D coordinate, Player owner) {
         if (coordinate == null)
             this.coordinate = null;

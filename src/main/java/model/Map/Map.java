@@ -2,6 +2,7 @@ package model.Map;
 
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MoveController;
+import javafx.scene.image.ImageView;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
@@ -75,11 +76,6 @@ public class Map {
     public void removeMapObject(Vector2D coordinate, MapAsset obj) {
         getCell(coordinate).removeMapAsset(obj);
         graphicsController.updateCellGrid(getCell(coordinate));
-    }
-
-    public void moveMapObject(Vector2D source, Vector2D dest, MapAsset obj) {
-        addMapObject(dest, obj);
-        removeMapObject(source, obj);
     }
 
     //only gets called at the end of the game to prepare Map for saving.

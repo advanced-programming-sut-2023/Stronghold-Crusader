@@ -34,6 +34,8 @@ module project.group {
     exports view;
     exports model.User;
     exports model.Game.Store;
+    exports model.MapAsset.MobileUnit;
+    exports utils;
     exports view.MapMenus.dropBuildingMenu;
     exports view.GameMenus.MarketMenus;
     exports controller.GameControllers;
