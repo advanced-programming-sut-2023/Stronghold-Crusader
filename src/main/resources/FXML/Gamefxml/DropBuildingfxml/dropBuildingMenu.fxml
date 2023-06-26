@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="113" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu">
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="12.0" pannable="true" prefHeight="71.0" prefWidth="430" style="-fx-background-color: transparent" stylesheets="@../../../CSS/GameCss/BuildingPlacement.css" vbarPolicy="NEVER">
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="6.0" pannable="true" prefHeight="82.0" prefWidth="430" style="-fx-background-color: transparent" stylesheets="@../../../CSS/GameCss/BuildingPlacement.css" vbarPolicy="NEVER">
     </ScrollPane>
     <ImageView fx:id="productionCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="2" translateY="73">
         <image>
