@@ -44,7 +44,7 @@ public class GraphicGameMenu extends Application {
     public Slider fearRateSlider, foodRateSlider, taxRateSlider;
     public ImageView closeLeftBarBtn, openLeftBarBtn, minimap, religionFace, taxFace, innFace, closePopularityBarBtn
             , fearFace, foodFace, backToDropButton;
-    public AnchorPane dropBuildingMenu, marketMenu, popularityMenu;
+    public AnchorPane dropBuildingMenu, marketMenu, popularityMenu, mercenaryPostMenu;
     public ImageView marketBtn;
     public Label errorMessageText;
 
@@ -84,6 +84,7 @@ public class GraphicGameMenu extends Application {
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
     }
+
 
     private void initializePopularityMenu() {
         popularityMenu.setBackground(new Background(new BackgroundFill(Color.GRAY, new CornerRadii(10), null)));
@@ -192,6 +193,13 @@ public class GraphicGameMenu extends Application {
         bottomPane.getChildren().clear();
         bottomPane.getChildren().add(marketMenu);
         MarketMenu.marketController = new MarketController(gameController.getCurrentPlayer());
+    }
+
+
+
+
+    public static void initializeMercenaryPost()  {
+
     }
 
     public void openPopularity() {

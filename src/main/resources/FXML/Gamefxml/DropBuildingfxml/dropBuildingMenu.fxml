@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="100" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu">
-    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="70" prefWidth="430" style="-fx-background-color: transparent" vbarPolicy="NEVER"
-         stylesheets="@../../../CSS/GameCss/BuildingPlacement.css">
+<AnchorPane prefHeight="100" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu">
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="70" prefWidth="430" style="-fx-background-color: transparent" stylesheets="@../../../CSS/GameCss/BuildingPlacement.css" vbarPolicy="NEVER">
     </ScrollPane>
     <ImageView fx:id="productionCategoryButton" fitHeight="40" fitWidth="20" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="2" translateY="73">
         <image>

@@ -22,7 +22,6 @@ import utils.Pair;
 import utils.Vector2D;
 import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
-import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -374,5 +373,9 @@ public class GameController {
 
     public Player getCurrentPlayer() {
         return game.getCurrentPlayer();
+    }
+
+    public Game getGame() {
+        return game;
     }
 }

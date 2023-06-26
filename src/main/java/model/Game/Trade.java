@@ -9,22 +9,20 @@ public class Trade {
     private final int id;
     private boolean acceptanceMode;
     private final Player owner;
-    private Player acceptor;
-    private final int price;
+    private final Player acceptor;
+    private final boolean requestMode;
     private final Pair info;
-    private final String message;
     private String acceptorMessage;
 
 
-    public Trade(Player owner, String message, Material material, int amount, int price) {
+    public Trade(Player owner,Player acceptor, Material material, int amount, boolean isRequest  ) {
         info = new Pair(material, amount);
+        this.acceptor = acceptor;
         this.owner = owner;
-        this.price = price;
+        this.requestMode = isRequest;
         acceptanceMode = false;
         numberOfTrades++;
         id = numberOfTrades;
-        this.message = message;
-        acceptor = null;
         acceptorMessage = null;
     }
 
@@ -48,18 +46,14 @@ public class Trade {
         return info;
     }
 
-    public String getMessage() {
-        return message;
-    }
 
-    public int getPrice() {
-        return price;
+    public boolean isRequest() {
+        return requestMode;
     }
 
 
-    public void accept(Player acceptor) {
+    public void accept() {
         acceptanceMode = true;
-        this.acceptor =  acceptor;
         owner.getNewTrades().add(this);
     }
 
@@ -69,15 +63,14 @@ public class Trade {
 
     @Override
     public String toString() {
-        String trade = (price == 0) ? "Donation" : "Request";
+        String trade = (!requestMode) ? "Donation" : "Request";
         return trade + "{" + "\n" +
                 "id = " + id + "\n" +
                 "acceptanceMode = " + acceptanceMode + "\n" +
                 "owner = " + owner.getUsername() + "\n" +
                 "acceptor = " + acceptor + "\n" +
-                "price = " + price + "\n" +
+                "price = " + requestMode + "\n" +
                 "info = " + info + "\n" +
-                "message = " + message + '\'' + "\n" +
                 "acceptorMessage = " + acceptorMessage + '\'' + "\n" +
                 '}' + "\n";
     }

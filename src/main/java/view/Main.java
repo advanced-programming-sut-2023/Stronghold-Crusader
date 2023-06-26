@@ -15,7 +15,6 @@ import model.User.Player;
 import model.enums.User.Color;
 import view.GameMenus.GraphicGameMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
-import view.UserMenus.LoginMenu;
 
 import java.util.HashMap;
 
@@ -34,6 +33,7 @@ public class Main extends Application {
 //        new LoginMenu().start(stage);
 //    }
 
+
     @Override
     public void start(Stage stage) throws Exception {
         HashMap<Color, Player> players = new HashMap<>();
@@ -49,4 +49,4 @@ public class Main extends Application {
         mainStage = stage;
         graphicGameMenu.start(stage);
     }
-}
+    }

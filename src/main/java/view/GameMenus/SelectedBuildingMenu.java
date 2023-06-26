@@ -1,6 +1,8 @@
 package view.GameMenus;
 
 import controller.GameControllers.SelectedBuildingController;
+import javafx.scene.input.MouseEvent;
+import model.enums.AssetType.MapAssetType;
 import utils.SignupAndLoginUtils;
 import view.Menu;
 import view.enums.commands.GameCommand.SelectedBuildingCommand;
@@ -10,11 +12,9 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class SelectedBuildingMenu {
-    private final SelectedBuildingController selectedBuildingController;
+    private static SelectedBuildingController selectedBuildingController;
 
-    public SelectedBuildingMenu(SelectedBuildingController selectedBuildingController) {
-        this.selectedBuildingController = selectedBuildingController;
-    }
+
 
     public void run() {
         String nextCommand;
@@ -83,11 +83,21 @@ public class SelectedBuildingMenu {
 
     private void runCreateUnit(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SelectedBuildingCommand.CREATE_UNIT.getRegex());
-        selectedBuildingController.createUnit(inputs).printMessage();
+        selectedBuildingController.createUnit(null).printMessage();
     }
 
     private void runEntranceGate() {
         selectedBuildingController.changeGate().printMessage();
+    }
+
+    public void createSoldier(MouseEvent mouseEvent){
+        int ordinal = 54;
+        MapAssetType mapAssetType = MapAssetType.values()[ordinal];
+        System.out.println(selectedBuildingController.createUnit(mapAssetType).getMessage());
+    }
+
+    public static void setSelectedBuildingController(SelectedBuildingController selectedBuildingController) {
+        SelectedBuildingMenu.selectedBuildingController = selectedBuildingController;
     }
 }
 
