@@ -77,9 +77,8 @@ public class MapSelectController {
         Game newGame = new Game(selectedMap, players, isMapModifiable);
         GameController controller = new GameController(currentUser, newGame);
         GraphicGameMenu menu = new GraphicGameMenu();
-        GraphicGameMenu.setGraphicGameMenu(menu);
         GraphicGameMenu.setGameController(controller);
-        GraphicGameMenu.setGraphicsController(new GraphicsController(controller, newGame));
+        GraphicGameMenu.setGraphicsController(new GraphicsController(controller, newGame, menu));
         GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(newGame.getCurrentPlayer(), newGame.getMap(), isMapModifiable));
         menu.start(Main.mainStage);
         return MapSelectMessage.GAME_CREATION_SUCCESS;

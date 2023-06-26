@@ -24,6 +24,7 @@ import utils.Vector2D;
 import view.GameMenus.GraphicGameMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
+import view.enums.messages.MapMessage.BuildingPlacementMessage;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,14 +33,16 @@ public class GraphicsController {
     private final GameController gameController;
     private final TilePane mainGrid;
     private final Map map;
+    private GraphicGameMenu gameMenu;
     private Rectangle selectionRect;
     private AnchorPane rootPane;
     private VBox selectedUnitsMenu;
     private double startX, startY;
 
-    public GraphicsController(GameController gameController, Game game) {
+    public GraphicsController(GameController gameController, Game game, GraphicGameMenu gameMenu) {
         this.gameController = gameController;
         this.map = game.getMap();
+        this.gameMenu = gameMenu;
         mainGrid = new TilePane();
         game.setGraphicsController(this);
         loadGraphics();
@@ -113,9 +116,11 @@ public class GraphicsController {
                 Matcher matcher = pattern.matcher(path);
                 //noinspection ResultOfMethodCallIgnored
                 matcher.find();
-                System.out.println(GraphicBuildingPlacementMenu.controller.dropBuilding(
+                BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
                         MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),
-                        cell.getCoordinate().x, cell.getCoordinate().y));
+                        cell.getCoordinate().x, cell.getCoordinate().y);
+                if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS))
+                    gameMenu.printError(msg.getMessage());
             }
             e.consume();
         });

@@ -3,7 +3,10 @@ package view.GameMenus;
 import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MarketController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,15 +20,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Game.Governance;
 import view.GameMenus.MarketMenus.MarketMenu;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GraphicGameMenu extends Application {
     private static Stage stage;
-    private static GraphicGameMenu graphicGameMenu;
     private static GameController gameController;
     private static GraphicsController graphicsController;
     private static AnchorPane rootPane;
@@ -39,14 +46,7 @@ public class GraphicGameMenu extends Application {
             , fearFace, foodFace, backToDropButton;
     public AnchorPane dropBuildingMenu, marketMenu, popularityMenu;
     public ImageView marketBtn;
-
-    public static GraphicGameMenu getGraphicGameMenu() {
-        return graphicGameMenu;
-    }
-
-    public static void setGraphicGameMenu(GraphicGameMenu graphicGameMenu) {
-        GraphicGameMenu.graphicGameMenu = graphicGameMenu;
-    }
+    public Label errorMessageText;
 
     public static void setGameController(GameController gameController) {
         GraphicGameMenu.gameController = gameController;
@@ -54,6 +54,7 @@ public class GraphicGameMenu extends Application {
 
     public static void setGraphicsController(GraphicsController graphicsController) {
         GraphicGameMenu.graphicsController = graphicsController;
+
     }
 
     @Override
@@ -78,8 +79,8 @@ public class GraphicGameMenu extends Application {
         initializeMinimap();
         initializeLeftPane();
         initializePopularityMenu();
-        initializeDropBuildingMenu();
         initializeMarket();
+        initializeDropBuildingMenu();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
     }
@@ -195,5 +196,25 @@ public class GraphicGameMenu extends Application {
 
     public void openPopularity() {
         popularityMenu.setVisible(true);
+    }
+    public void printError(String text){
+        Platform.runLater(() -> {
+            errorMessageText = new Label();
+            errorMessageText.setLayoutX(285);
+            errorMessageText.setLayoutY(595);
+            errorMessageText.setPrefHeight(3);
+            errorMessageText.setPrefWidth(474);
+            errorMessageText.setTextFill(Color.WHITE);
+            errorMessageText.setText(text);
+            rootPane.getChildren().add(errorMessageText);
+
+            Timeline timeline = new Timeline(
+                    new KeyFrame(Duration.seconds(3), event -> {
+                        rootPane.getChildren().remove(errorMessageText);
+                    })
+            );
+            timeline.setCycleCount(1);
+            timeline.play();
+        });
     }
 }
