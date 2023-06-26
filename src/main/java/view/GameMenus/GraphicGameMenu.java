@@ -69,12 +69,7 @@ public class GraphicGameMenu extends Application {
     @FXML
     public void initialize() throws IOException {
         graphicsController.setSelectedUnitsMenu(selectedUnitsMenu);
-        mainScrollPane.setContent((graphicsController.getMainGrid()));
-        mainScrollPane.setOnKeyPressed(this::handleKeyPressed);
-        mainScrollPane.setOnMousePressed(mouseEvent -> {
-            if (mouseEvent.isSecondaryButtonDown()) mainScrollPane.setPannable(false);
-        });
-        mainScrollPane.setOnMouseReleased(mouseEvent -> mainScrollPane.setPannable(true));
+        initializeScrollPane();
         initializeMinimap();
         initializeLeftPane();
         initializePopularityMenu();
@@ -82,6 +77,15 @@ public class GraphicGameMenu extends Application {
         initializeMarket();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
+    }
+
+    private void initializeScrollPane() {
+        mainScrollPane.setContent((graphicsController.getMainGrid()));
+        mainScrollPane.setOnKeyPressed(this::handleKeyPressed);
+        mainScrollPane.setOnMousePressed(mouseEvent -> {
+            if (mouseEvent.isSecondaryButtonDown()) mainScrollPane.setPannable(false);
+        });
+        mainScrollPane.setOnMouseReleased(mouseEvent -> mainScrollPane.setPannable(true));
     }
 
     private void initializePopularityMenu() {

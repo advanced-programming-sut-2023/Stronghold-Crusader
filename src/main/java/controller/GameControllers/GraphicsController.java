@@ -1,13 +1,15 @@
 package controller.GameControllers;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -25,6 +27,13 @@ import view.GameMenus.GraphicGameMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +45,7 @@ public class GraphicsController {
     private AnchorPane rootPane;
     private VBox selectedUnitsMenu;
     private double startX, startY;
+    private ArrayList<Building> selectedBuildings;
 
     public GraphicsController(GameController gameController, Game game) {
         this.gameController = gameController;
@@ -60,6 +70,13 @@ public class GraphicsController {
         mainGrid.setOnMousePressed(this::handleMousePressed);
         mainGrid.setOnMouseDragged(this::handleMouseDragged);
         mainGrid.setOnMouseReleased(this::handleMouseReleased);
+        mainGrid.setOnKeyPressed(keyEvent -> {
+            if(keyEvent.getCode().equals(KeyCode.C) && keyEvent.isControlDown())
+                copySelectedBuildings();
+            else if(keyEvent.getCode().equals(KeyCode.V) && keyEvent.isControlDown()){
+                pasteSelectedBuildings();
+            }
+        });
         Vector2D coordinate = new Vector2D(0, 0);
         for (int y = 0; y < map.getSize().y; y++) {
             for (int x = 0; x < map.getSize().x; x++) {
@@ -70,6 +87,34 @@ public class GraphicsController {
                 mainGrid.getChildren().add(gridPane);
                 updateCellGrid(cell);
             }
+        }
+    }
+
+    private void copySelectedBuildings() {
+        Gson gson = new Gson();
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        JsonArray jsonArray = new JsonArray();
+        for (Building building : selectedBuildings)
+            jsonArray.add(gson.toJsonTree(building).getAsJsonObject());
+        clipboard.setContents(new StringSelection(gson.toJson(jsonArray)), null);
+    }
+
+    private void pasteSelectedBuildings() {
+        Gson gson = new Gson();
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String clipboardText = "";
+        try {
+            clipboardText = (String) clipboard.getData(DataFlavor.stringFlavor);
+            if(!clipboardText.startsWith("{")){
+                System.out.println("no buildings copied");
+                return;
+            }
+        } catch (UnsupportedFlavorException | IOException e) {
+            e.printStackTrace();
+        }
+        JsonArray jsonArray = gson.fromJson(clipboardText, JsonArray.class);
+        for (JsonElement jsonElement : jsonArray) {
+            Building building = gson.fromJson(jsonElement, Building.class);
         }
     }
 
@@ -122,6 +167,7 @@ public class GraphicsController {
         cellGrid.setOnMouseClicked(mouseEvent -> {
             removeAllSelectedBorders();
             gameController.deselectUnits();
+            selectedBuildings.clear();
             selectCell(cellGrid);
         });
         return cellGrid;
@@ -141,6 +187,7 @@ public class GraphicsController {
                 CornerRadii.EMPTY, BorderStroke.MEDIUM)));
         if (result == GameMenuMessage.BUILDING_SELECTED) {
             SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
+            selectedBuildings.add(buildingController.getBuilding());
             //TODO @kian
         }
         SelectedUnitController unitController = gameController.getSelectedUnitController();
@@ -213,7 +260,7 @@ public class GraphicsController {
         if (!event.isSecondaryButtonDown()) return;
         startX = event.getX();
         startY = event.getY();
-
+        selectedBuildings.clear();
         selectionRect = new Rectangle(startX, startY, 0, 0);
         selectionRect.setOpacity(0);
         rootPane.getChildren().add(selectionRect);

@@ -45,6 +45,10 @@ public class SelectedBuildingController {
 //        }
 //    }
 
+    public Building getBuilding() {
+        return building;
+    }
+
     public SelectedBuildingMessage repair() {
         if (building.getHitPoint() == building.getMaxHitPoint()) return SelectedBuildingMessage.HP_FULL;
         if (player.getGovernance().getStorageStock(building.getNeededMaterial()) < materialNeededForRepair())
