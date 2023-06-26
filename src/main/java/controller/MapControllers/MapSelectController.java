@@ -24,22 +24,10 @@ public class MapSelectController {
     private Map selectedMap;
     private HashMap<Color, Player> players;
     private boolean isMapModifiable;
-    private Game newGame;
 
     public MapSelectController(User currentUser) {
         this.currentUser = currentUser;
         this.players = new HashMap<>();
-        this.isMapModifiable = false;
-    }
-
-    public void run() throws Exception {
-        MapSelectMenu mapSelectMenu = new MapSelectMenu(this);
-        while (true) {
-            if (mapSelectMenu.run().equals("startGame")) {
-                GameController gameController = new GameController(currentUser, newGame);
-                if (gameController.run().equals("endGame")) return;
-            }
-        }
     }
 
     public String getMapsList() {
@@ -86,14 +74,14 @@ public class MapSelectController {
     public MapSelectMessage startGame() throws Exception {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED;
         if (players.size() < selectedMap.getPlayerCount()) return MapSelectMessage.NOT_ENOUGH_PLAYERS;
-        newGame = new Game(selectedMap, players, isMapModifiable);
+        Game newGame = new Game(selectedMap, players, isMapModifiable);
         GameController controller = new GameController(currentUser, newGame);
         GraphicGameMenu menu = new GraphicGameMenu();
         GraphicGameMenu.setGraphicGameMenu(menu);
         GraphicGameMenu.setGameController(controller);
         GraphicGameMenu.setGraphicsController(new GraphicsController(controller, newGame));
+        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(newGame.getCurrentPlayer(), newGame.getMap(), isMapModifiable));
         menu.start(Main.mainStage);
-        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(newGame.getCurrentPlayer(), newGame.getMap()));
         return MapSelectMessage.GAME_CREATION_SUCCESS;
     }
 

@@ -24,8 +24,10 @@ public class BuildingPlacementController {
     private final Player currentPlayer;
     private final Map map;
     private BuildingCategory buildingCategory;
+    private boolean isModifiable;
 
-    public BuildingPlacementController(Player currentPlayer, Map map) {
+    public BuildingPlacementController(Player currentPlayer, Map map, boolean isModifiable) {
+        this.isModifiable = isModifiable;
         this.currentPlayer = currentPlayer;
         this.map = map;
     }
@@ -51,11 +53,12 @@ public class BuildingPlacementController {
 
         if (msg != BuildingPlacementMessage.PLACEMENT_SIGHT_VALID) return msg;
 
-        if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(),
-                reference.getNumberOfMaterialNeeded()))
-            return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
-        if (!enoughWorkers(reference)) return BuildingPlacementMessage.NOT_ENOUGH_WORKERS;
-
+        if (!isModifiable){
+            if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(),
+                    reference.getNumberOfMaterialNeeded()))
+                return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
+            if (!enoughWorkers(reference)) return BuildingPlacementMessage.NOT_ENOUGH_WORKERS;
+        }
 
         if (reference.getType().equals(MapAssetType.OX_TETHER)) {
             oxtetherOperations(coordinate);
@@ -93,10 +96,12 @@ public class BuildingPlacementController {
     }
 
     private void createBuildingFinal(Building reference, Vector2D coordinate){
-        currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
-        if (reference.getNeededMaterial() != null)
-            currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
-                    (-1) * reference.getNumberOfMaterialNeeded());
+        if (!isModifiable) {
+            currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
+            if (reference.getNeededMaterial() != null)
+                currentPlayer.getGovernance().changeStorageStock(reference.getNeededMaterial(),
+                        (-1) * reference.getNumberOfMaterialNeeded());
+        }
         Building newBuilding = createBuilding(currentPlayer, coordinate, reference);
         map.addMapObject(coordinate, newBuilding);
         currentPlayer.getGovernance().addAsset(newBuilding);

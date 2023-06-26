@@ -41,38 +41,6 @@ public class GameController {
         nextTurn();
     }
 
-    public String run() {
-        GameMenu gameMenu = new GameMenu(this);
-        while (true) {
-            switch (gameMenu.run()) {
-                case "changeEnvironment":
-                    ChangeEnvironmentController environmentController = new
-                            ChangeEnvironmentController(game.getMap(), game);
-                    environmentController.run();
-                    break;
-                case "buildingPlacement":
-                    BuildingPlacementController controller = new BuildingPlacementController(game.getCurrentPlayer(), game.getMap());
-//                    controller.run();
-                    break;
-                case "tradeMenu":
-                    TradeController tradeController = new TradeController(game);
-                    tradeController.run();
-                    break;
-                case "showMap":
-                    showMapController.run();
-                    break;
-                case "marketMenu":
-                    MarketController marketController = new MarketController(game.getCurrentPlayer());
-//                    marketController.run();
-                    break;
-                case "endGame":
-                    EndGameController endGameController = new EndGameController(game.getDeadPlayers());
-                    endGameController.run();
-                    return "endGame";
-            }
-        }
-    }
-
     public String nextRound() {
         processLogics();
         applyUnitDecisions();

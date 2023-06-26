@@ -38,6 +38,7 @@ public class GraphicBuildingPlacementMenu {
         setCategoryButton(defenseCategoryButton);
         setCategoryButton(productionCategoryButton);
         loadScrollPane("production");
+        controller.setBuildingCategory("production");
     }
 
     private void setCategoryButton(ImageView button) {

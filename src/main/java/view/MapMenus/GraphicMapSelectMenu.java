@@ -5,6 +5,7 @@ import controller.MapControllers.MapSelectController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -30,6 +31,7 @@ public class GraphicMapSelectMenu extends Application {
     public ScrollPane mapList, mapPreview;
     public TextField mapNameField, colorField, playerNameField;
     public VBox selectedPlayers;
+    public CheckBox modifiabilityCheck;
 
     public static void setMapSelectController(MapSelectController mapSelectController) {
         GraphicMapSelectMenu.mapSelectController = mapSelectController;
@@ -79,10 +81,11 @@ public class GraphicMapSelectMenu extends Application {
     public void selectMap(){
         String mapId = mapNameField.getText();
         mapNameField.clear();
-        MapSelectMessage msg = mapSelectController.selectMap(mapId, false);
+        boolean modifiability = modifiabilityCheck.isSelected();
+        MapSelectMessage msg = mapSelectController.selectMap(mapId, modifiability);
         if (msg.equals(MapSelectMessage.MAP_SELECT_SUCCESS)) {
             GraphicsController graphicsController = new GraphicsController(
-                    new Game(mapSelectController.getSelectedMap(), mapSelectController.getPlayers(), false));
+                    new Game(mapSelectController.getSelectedMap(), mapSelectController.getPlayers(), modifiability));
             graphicsController.loadGraphics();
             mapPreview.setContent(graphicsController.getMainGrid());
             mapPreview.setOpacity(1);

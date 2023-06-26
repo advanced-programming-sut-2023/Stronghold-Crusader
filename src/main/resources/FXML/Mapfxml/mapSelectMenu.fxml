@@ -33,7 +33,7 @@
     <TextField fx:id="colorField" layoutX="242.0" layoutY="437.0" opacity="0.5" prefHeight="30.0" prefWidth="129.0"
                promptText="choose color" scaleShape="false"
                style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;"/>
-    <ScrollPane fx:id="mapList" hbarPolicy="NEVER" layoutX="120.0" layoutY="475.0" opacity="0.5" prefHeight="121.0"
+    <ScrollPane fx:id="mapList" hbarPolicy="NEVER" layoutX="120.0" layoutY="493.0" opacity="0.5" prefHeight="103.0"
                 prefWidth="359.0" stylesheets="@../../CSS/MapCss/mapSelectStyle.css" vbarPolicy="NEVER"/>
     <ScrollPane fx:id="mapPreview" hbarPolicy="NEVER" layoutX="575.0" layoutY="77.0" prefHeight="641.0"
                 prefWidth="671.0" vbarPolicy="NEVER"/>
@@ -48,17 +48,18 @@
         </image>
     </ImageView>
     <ImageView fx:id="startGameButton" fitHeight="30" fitWidth="210.0" layoutX="154.0" layoutY="536.0"
-               nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73"
-               onMouseClicked="#startGame">
+               nodeOrientation="INHERIT" onMouseClicked="#startGame" pickOnBounds="true" translateX="48"
+               translateY="73">
         <image>
             <Image url="@../../assets/buttons/startGame_btn.jpg"/>
         </image>
     </ImageView>
     <ImageView fx:id="backButton" fitHeight="30" fitWidth="210.0" layoutX="154.0" layoutY="573.0"
-               nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73"
-               onMouseClicked="#back">
+               nodeOrientation="INHERIT" onMouseClicked="#back" pickOnBounds="true" translateX="48" translateY="73">
         <image>
             <Image url="@../../assets/buttons/back_btn.jpg"/>
         </image>
     </ImageView>
+    <CheckBox layoutX="121.0" layoutY="471.0" mnemonicParsing="false" opacity="0.5" style="-fx-text-fill: white;"
+              stylesheets="@../../CSS/other/checkBox.css" text="Map Modifiability" fx:id="modifiabilityCheck"/>
 </AnchorPane>
