@@ -175,10 +175,7 @@ public class GraphicsController {
             e.consume();
         });
         cellGrid.setOnMouseClicked(mouseEvent -> {
-            removeAllSelectedBorders();
-            gameController.deselectUnits();
-            selectedUnitsMenu.getChildren().clear();
-            selectedBuildings.clear();
+            resetSelection();
             try {
                 selectCell(cellGrid);
             } catch (IOException e) {
@@ -214,8 +211,14 @@ public class GraphicsController {
             selectedUnitsMenu.getChildren().add(tilePane);
             for (MobileUnit unit : unitController.getSelectedUnits())
                 tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
-        } else
-            selectedUnitsMenu.getChildren().clear();
+        }
+    }
+
+    private void resetSelection() {
+        removeAllSelectedBorders();
+        gameController.deselectUnits();
+        selectedUnitsMenu.getChildren().clear();
+        selectedBuildings.clear();
     }
 
     private void loadSelectedBuildingFxml(MapAssetType type) throws IOException {
@@ -295,6 +298,7 @@ public class GraphicsController {
 
     private void handleMousePressed(MouseEvent event) {
         if (!event.isSecondaryButtonDown()) return;
+        resetSelection();
         startX = event.getX();
         startY = event.getY();
         selectedBuildings.clear();
@@ -332,8 +336,6 @@ public class GraphicsController {
                     throw new RuntimeException(e);
                 }
             }
-            else
-                cellGrid.setBorder(null);
         }
         rootPane.getChildren().remove(selectionRect);
         selectionRect = null;
