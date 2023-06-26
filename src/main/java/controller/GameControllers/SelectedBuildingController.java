@@ -199,10 +199,6 @@ public class SelectedBuildingController {
         return false;
     }
 
-    public Building getBuilding() {
-        return building;
-    }
-
     public static void setIsModifiable(boolean isModifiable) {
         SelectedBuildingController.isModifiable = isModifiable;
     }
