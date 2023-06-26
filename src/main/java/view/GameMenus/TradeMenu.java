@@ -154,6 +154,7 @@ public class TradeMenu extends Application {
                 ((Circle) anchorPane.getChildren().get(0)).setFill(circle.getFill());
                 anchorPane.getChildren().get(1).setDisable(false);
                 anchorPane.getChildren().get(2).setDisable(false);
+                anchorPane.getChildren().get(3).setDisable(true);
                 ((Text) anchorPane.getChildren().get(4)).setText("0");
             });
             materials.put(circle.getFill(), material);
@@ -182,15 +183,27 @@ public class TradeMenu extends Application {
     }
 
     public void confirmSituation(MouseEvent mouseEvent) {
-        boolean requestMode = (mouseEvent.getSource().toString().matches("[\\S\\s]*request[\\S\\s]*")) ? true : false;
-        trade = new Trade(tradeController.getGame().getCurrentPlayer(), sentTo, materials.get(acceptedMaterial.getFill()),
+        boolean requestMode = mouseEvent.getSource().toString().matches("[\\S\\s]*request[\\S\\s]*");
+        ImagePattern img = (ImagePattern) acceptedMaterial.getFill();
+        String material = getMaterialFromURL(img.getImage().getUrl());
+        trade = new Trade(tradeController.getGame().getCurrentPlayer(), sentTo, Material.getMaterial(material),
                 Integer.parseInt(number.getText()), requestMode);
         donateButton.setDisable(true);
         requestButton.setDisable(true);
         confirmButton.setDisable(false);
     }
 
+    private String getMaterialFromURL(String url) {
+        String[] sections = url.split("/");
+        String[] result = sections[sections.length - 1].split("\\.");
+        return result[0];
+    }
+
     public void send(MouseEvent mouseEvent) {
+        number.setText("0");
+        donateButton.setDisable(false);
+        requestButton.setDisable(false);
+        confirmButton.setDisable(true);
         tradeController.addTrade(trade);
     }
 
