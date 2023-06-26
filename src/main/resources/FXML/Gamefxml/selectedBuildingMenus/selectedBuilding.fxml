@@ -35,7 +35,7 @@
         <Text fx:id="progressBarNumber" layoutX="363.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0"
               text="Text" textAlignment="CENTER" wrappingWidth="78.93670654296875"/>
         <ImageView fx:id="buildingImage" fitHeight="100.0" fitWidth="116.0" layoutX="69.0" layoutY="11.0"
-                   onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+                   pickOnBounds="true" preserveRatio="true">
         </ImageView>
     </children>
 </AnchorPane>
