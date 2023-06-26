@@ -239,7 +239,6 @@ public class GraphicsController {
         if (type.equals(MapAssetType.MERCENARY_POST)) loadMercenaryPost(selectedBuilding);
         else if (type.equals(MapAssetType.BARRACK)) loadBarrack(selectedBuilding);
         else if (type.equals(MapAssetType.ENGINEER_GUILD)) loadEngineerGuild(selectedBuilding);
-
     }
 
     private void loadEngineerGuild(AnchorPane buttonPane) throws IOException {

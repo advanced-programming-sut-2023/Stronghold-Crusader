@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,63 +27,27 @@ import java.util.regex.Pattern;
 public class SelectedBuildingMenu implements Initializable {
     private static SelectedBuildingController selectedBuildingController;
     private static GraphicGameMenu gameMenu ;
-    public Button repairButton;
+    public ImageView repairButton;
     public ProgressBar progressBar;
     public Text progressBarNumber;
     public AnchorPane mainPain;
+    public ImageView buildingImage;
 
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         checkHP();
-        progressBar.setProgress(selectedBuildingController.getBuilding().getHitPoint()
-                /selectedBuildingController.getBuilding().getMaxHitPoint());
-        progressBarNumber.setText(selectedBuildingController.getBuilding().getHitPoint() + "/"
-                +  selectedBuildingController.getBuilding().getMaxHitPoint());
-    }
-
-
-    public void run() throws IOException {
-        String nextCommand;
-        Matcher matcher;
-        while (true) {
-            nextCommand = Menu.getScanner().nextLine();
-            SelectedBuildingCommand typeOfCommand = SelectedBuildingCommand.getCommand(nextCommand);
-            if (typeOfCommand == null) {
-                SelectedBuildingMessage.INVALID_COMMAND.printMessage();
-                continue;
-            }
-            matcher = SelectedBuildingCommand.getMatcher(nextCommand, typeOfCommand);
-            switch (typeOfCommand) {
-                case REPAIR:
-                    runRepair();
-                    break;
-                case INFO:
-                    System.out.println(selectedBuildingController.showInfo());
-                    break;
-                case Change_PRODUCTION:
-                    runChangeProductionMode();
-                    break;
-                case SET_FOOD_RATE:
-                    runSetFoodRate(matcher);
-                    break;
-                case SET_TAX_RATE:
-                    runSetTaxRate(matcher);
-                    break;
-                case CREATE_UNIT:
-                    runCreateUnit(matcher);
-                    break;
-                case DELETE:
-                    runDelete();
-                    break;
-                case CHANGE_ENTRANCE:
-                    runEntranceGate();
-                    break;
-                case BACK:
-                    return;
-            }
+        if (selectedBuildingController.getBuilding().getType() != MapAssetType.MERCENARY_POST
+                && selectedBuildingController.getBuilding().getType() != MapAssetType.ENGINEER_GUILD
+                && selectedBuildingController.getBuilding().getType() != MapAssetType.BARRACK) {
+            progressBar.setProgress(selectedBuildingController.getBuilding().getHitPoint()
+                    / selectedBuildingController.getBuilding().getMaxHitPoint());
+            progressBarNumber.setText(selectedBuildingController.getBuilding().getHitPoint() + "/"
+                    + selectedBuildingController.getBuilding().getMaxHitPoint());
+            setImage();
         }
     }
+
 
 
     private void runSetTaxRate(Matcher matcher) {
@@ -159,10 +124,16 @@ public class SelectedBuildingMenu implements Initializable {
     }
 
     private void checkHP() {
-        if (selectedBuildingController.getBuilding().getHitPoint() == selectedBuildingController.getBuilding().getMaxHitPoint())
+        if (selectedBuildingController.getBuilding().getHitPoint() == selectedBuildingController.getBuilding().getMaxHitPoint()
+        && selectedBuildingController.getBuilding().getType() != MapAssetType.MERCENARY_POST
+        && selectedBuildingController.getBuilding().getType() != MapAssetType.ENGINEER_GUILD
+        && selectedBuildingController.getBuilding().getType() != MapAssetType.BARRACK)
             repairButton.setDisable(true);
     }
 
-
+    private void setImage(){
+        Image image = selectedBuildingController.getBuilding().getType().getImage();
+        buildingImage.setImage(image);
+    }
 }
 

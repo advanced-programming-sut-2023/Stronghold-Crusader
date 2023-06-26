@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="mainPain" prefHeight="150.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
-   <children>
-      <Button fx:id="repairButton" layoutX="140.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#repair" prefHeight="24.0" prefWidth="59.0" styleClass="repair-button" stylesheets="@../../../CSS/style1.css" text="repair" />
-      <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="452.0" layoutY="26.0" onMouseClicked="#info" onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/icons/selectedBuildingIcons/info_btn.png" />
-         </image>
-      </ImageView>
-      <Circle fill="#c9830a" layoutX="466.0" layoutY="14.0" onMouseClicked="#delete" onMouseDragged="#delete" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-      <FontAwesomeIcon glyphName="REMOVE" layoutX="460.0" layoutY="19.0" onMousePressed="#delete" size="15" />
-      <ProgressBar fx:id="progressBar" layoutX="209.0" layoutY="19.0" prefHeight="20.0" prefWidth="110.0" progress="0.0" style="-fx-background-color: #00BB00;" stylesheets="@../../../CSS/style1.css" />
-      <Text fx:id="progressBarNumber" layoutX="225.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="78.93670654296875" />
-   </children>
+<AnchorPane fx:id="mainPain" prefHeight="100.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
+    <children>
+
+        <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="231.0" layoutY="10.0" onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../assets/buttons/repair_btn.jpg" />
+            </image>
+        </ImageView>
+
+        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="231.0" layoutY="43.0" onMouseClicked="#info" onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../assets/buttons/info_btn.jpg" />
+            </image>
+        </ImageView>
+
+        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="231.0" layoutY="75.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../assets/buttons/delete_btn.jpg" />
+            </image>
+        </ImageView>
+        <ProgressBar fx:id="progressBar" layoutX="363.0" layoutY="48.0" prefHeight="27.0" prefWidth="79.0" progress="0.0" rotate="90" style="-fx-background-color: #00BB00;" stylesheets="@../../../CSS/style1.css" />
+        <Text fx:id="progressBarNumber" layoutX="363.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="78.93670654296875" />
+        <ImageView fx:id="buildingImage" fitHeight="100.0" fitWidth="116.0" layoutX="69.0" layoutY="11.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+        </ImageView>
+    </children>
 </AnchorPane>
