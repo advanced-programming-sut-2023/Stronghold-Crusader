@@ -1,78 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="130" prefWidth="430" style="-fx-background-color: transparent;"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.GameMenus.SelectedBuildingMenu" fx:id="mainPane">
+<AnchorPane fx:id="mainPain" prefHeight="130" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
     <children>
-        <ImageView fitHeight="130.0" fitWidth="430.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="122.0" fitWidth="430.0" pickOnBounds="true">
             <image>
-                <Image url="@../../../assets/graphic/overlay/barracks.png"/>
+                <Image url="@../../../assets/graphic/overlay/barracks.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="70.0" fitWidth="58.0" layoutX="4.0" layoutY="29.0" onMouseClicked="#createSoldier"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="70.0" fitWidth="58.0" layoutX="4.0" layoutY="29.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/graphic/soldiers/44.png"/>
+                <Image url="@../../../assets/graphic/soldiers/44.png" />
             </image>
         </ImageView>
-        <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="58.0" layoutX="63.0" layoutY="29.0"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="63.0" layoutY="29.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/graphic/soldiers/45.png"/>
+                <Image url="@../../../assets/graphic/soldiers/45.png" />
             </image>
         </ImageView>
-        <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="58.0" layoutX="134.0" layoutY="25.0"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="134.0" layoutY="25.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/graphic/soldiers/46.png"/>
+                <Image url="@../../../assets/graphic/soldiers/46.png" />
             </image>
         </ImageView>
-        <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="60.0" layoutX="189.0" layoutY="28.0"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="189.0" layoutY="28.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/graphic/soldiers/48.png"/>
+                <Image url="@../../../assets/graphic/soldiers/48.png" />
             </image>
         </ImageView>
-        <ImageView onMouseClicked="#createSoldier" fitHeight="80.0" fitWidth="58.0" layoutX="256.0" layoutY="28.0"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="80.0" fitWidth="58.0" layoutX="256.0" layoutY="28.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/graphic/soldiers/47.png"/>
+                <Image url="@../../../assets/graphic/soldiers/47.png" />
             </image>
         </ImageView>
-        <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="60.0" layoutX="311.0" layoutY="27.0"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="311.0" layoutY="27.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/graphic/soldiers/49.png"/>
+                <Image url="@../../../assets/graphic/soldiers/49.png" />
             </image>
         </ImageView>
-        <ImageView onMouseClicked="#createSoldier" fitHeight="58.0" fitWidth="58.0" layoutX="372.0" layoutY="28.0"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="372.0" layoutY="28.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/graphic/soldiers/50.png"/>
+                <Image url="@../../../assets/graphic/soldiers/50.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="148.0" layoutY="93.0"
-                   onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="148.0" layoutY="93.0" onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/buttons/repair_btn.jpg"/>
+                <Image url="@../../../assets/buttons/repair_btn.jpg" />
             </image>
         </ImageView>
 
-        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="282.0" layoutY="93.0" onMouseClicked="#info"
-                   onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="282.0" layoutY="93.0" onMouseClicked="#info" onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/buttons/info_btn.jpg"/>
+                <Image url="@../../../assets/buttons/info_btn.jpg" />
             </image>
         </ImageView>
 
-        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="14.0" layoutY="93.0" onMouseClicked="#delete"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="14.0" layoutY="93.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../../../assets/buttons/delete_btn.jpg"/>
+                <Image url="@../../../assets/buttons/delete_btn.jpg" />
             </image>
         </ImageView>
     </children>
