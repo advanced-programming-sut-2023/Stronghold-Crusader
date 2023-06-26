@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import model.enums.AssetType.MapAssetType;
 import utils.SignupAndLoginUtils;
+import utils.Sound;
 import view.Menu;
 import view.enums.commands.GameCommand.SelectedBuildingCommand;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
@@ -93,6 +94,7 @@ public class SelectedBuildingMenu {
     }
 
     public void createSoldier(MouseEvent mouseEvent){
+        new Sound(0).play();
         int ordinal = 0;
         Pattern pattern = Pattern.compile("\\d+");
         String name =  ((ImageView) mouseEvent.getPickResult().getIntersectedNode()).getImage().getUrl().toString();
