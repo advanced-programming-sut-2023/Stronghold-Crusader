@@ -281,6 +281,7 @@ public class GraphicsController {
     }
 
     private void loadMercenaryPost(AnchorPane buttonPane) throws IOException {
+        buttonPane.getChildren().clear();
         AnchorPane mercenaryPost = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/mercenaryPost.fxml"));
         mercenaryPost.setLayoutX(0);
