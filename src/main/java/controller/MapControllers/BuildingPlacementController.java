@@ -24,7 +24,7 @@ public class BuildingPlacementController {
     private final Player currentPlayer;
     private final Map map;
     private BuildingCategory buildingCategory;
-    private  final boolean isModifiable;
+    private final boolean isModifiable;
 
     public BuildingPlacementController(Player currentPlayer, Map map, boolean isModifiable) {
         this.isModifiable = isModifiable;
@@ -32,28 +32,30 @@ public class BuildingPlacementController {
         this.map = map;
     }
 
-    public BuildingPlacementMessage setBuildingCategory(String categoryName) {
+    public void setBuildingCategory(String categoryName) {
         BuildingCategory category = BuildingCategory.getCategory(categoryName);
-        if (category == null) return BuildingPlacementMessage.INVALID_BUILDING_CATEGORY;
+        if (category == null) return;
         this.buildingCategory = category;
-        return BuildingPlacementMessage.BUILDING_CATEGORY_SUCCESS;
     }
 
-    public BuildingPlacementMessage dropBuilding(String buildingTypeName, int x, int y) {
-        if (buildingCategory == null) return BuildingPlacementMessage.SELECT_CATEGORY;
+    public BuildingPlacementMessage dropBuilding(String buildingTypeName, int x, int y, boolean copyPasteMode) {
+        if (!copyPasteMode) {
+            if (buildingCategory == null) return BuildingPlacementMessage.SELECT_CATEGORY;
+            BuildingType buildingType = BuildingType.getType(buildingTypeName);
+            if (!BuildingType.getCategory(buildingTypeName).equals(buildingCategory)) return INVALID_BUILDING_TYPE;
+            if (buildingType == null) return INVALID_BUILDING_TYPE;
+        }
+        else
+            buildingCategory = BuildingType.getCategory(buildingTypeName);
         Vector2D coordinate = new Vector2D(x, y);
-        BuildingType buildingType = BuildingType.getType(buildingTypeName);
         if (!map.isInMap(coordinate)) return BuildingPlacementMessage.INVALID_COORDINATE;
-        if (buildingType == null) return INVALID_BUILDING_TYPE;
-        if (!BuildingType.getCategory(buildingTypeName).equals(buildingCategory)) return INVALID_BUILDING_TYPE;
-
         MapAssetType assetType = MapAssetType.getMapAssetType(buildingTypeName);
         Building reference = (Building) ConstantManager.getInstance().getAsset(assetType);
         BuildingPlacementMessage msg = isDropSightValid(assetType, reference, coordinate);
 
         if (msg != BuildingPlacementMessage.PLACEMENT_SIGHT_VALID) return msg;
 
-        if (!isModifiable){
+        if (!isModifiable) {
             if (!currentPlayer.getGovernance().hasEnoughInStock(reference.getNeededMaterial(),
                     reference.getNumberOfMaterialNeeded()))
                 return BuildingPlacementMessage.NOT_ENOUGH_RESOURCE;
@@ -63,12 +65,13 @@ public class BuildingPlacementController {
         if (reference.getType().equals(MapAssetType.OX_TETHER)) {
             oxtetherOperations(coordinate);
         }
-        if (reference.getType().equals(MapAssetType.CAGED_WARDOG)){
+        if (reference.getType().equals(MapAssetType.CAGED_WARDOG)) {
             cagedWarDogOperations(coordinate);
         }
         createBuildingFinal(reference, coordinate);
         return BuildingPlacementMessage.BUILDING_DROP_SUCCESS;
     }
+
 
     private Building createBuilding(Player owner, Vector2D coordinate, Building reference) {
         Building building = null;
@@ -95,7 +98,7 @@ public class BuildingPlacementController {
         return building;
     }
 
-    private void createBuildingFinal(Building reference, Vector2D coordinate){
+    private void createBuildingFinal(Building reference, Vector2D coordinate) {
         if (!isModifiable) {
             currentPlayer.getGovernance().changePeasantPopulation((-1) * reference.getWorkerCount());
             if (reference.getNeededMaterial() != null)
@@ -107,7 +110,7 @@ public class BuildingPlacementController {
         currentPlayer.getGovernance().addAsset(newBuilding);
     }
 
-    private void oxtetherOperations(Vector2D coordinate){
+    private void oxtetherOperations(Vector2D coordinate) {
         MobileUnit cow = new MobileUnit((MobileUnit) ConstantManager.getInstance().getAsset(MapAssetType.COW),
                 coordinate, currentPlayer);
         map.addMapObject(coordinate, cow);
@@ -117,7 +120,7 @@ public class BuildingPlacementController {
             cow.selectPatrolPath(cowPatrolPath[0], cowPatrolPath[1]);
     }
 
-    private void cagedWarDogOperations(Vector2D coordinate){
+    private void cagedWarDogOperations(Vector2D coordinate) {
         AttackingUnit dog1 = new AttackingUnit((AttackingUnit) ConstantManager.getInstance().getAsset(MapAssetType.DOG),
                 coordinate, currentPlayer);
         AttackingUnit dog2 = new AttackingUnit((AttackingUnit) ConstantManager.getInstance().getAsset(MapAssetType.DOG),
@@ -179,7 +182,7 @@ public class BuildingPlacementController {
         return false;
     }
 
-    public  boolean isModifiable() {
+    public boolean isModifiable() {
         return isModifiable;
     }
 }

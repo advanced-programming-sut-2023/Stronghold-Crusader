@@ -3,6 +3,8 @@ package controller.GameControllers;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import controller.MapControllers.BuildingPlacementController;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
@@ -11,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -51,6 +54,7 @@ public class GraphicsController {
     private VBox selectedUnitsMenu;
     private double startX, startY;
     private final ArrayList<Building> selectedBuildings;
+    private Cell lastSelectedCell;
 
     public GraphicsController(GameController gameController, Game game, GraphicGameMenu gameMenu) {
         this.gameController = gameController;
@@ -71,20 +75,13 @@ public class GraphicsController {
         loadGraphics();
     }
 
-    public void loadGraphics()  {
+    public void loadGraphics() {
         mainGrid.setPrefColumns(map.getSize().x);
         mainGrid.setPrefTileHeight(80);
         mainGrid.setPrefTileWidth(80);
         mainGrid.setOnMousePressed(this::handleMousePressed);
         mainGrid.setOnMouseDragged(this::handleMouseDragged);
         mainGrid.setOnMouseReleased(this::handleMouseReleased);
-        mainGrid.setOnKeyPressed(keyEvent -> {
-            if(keyEvent.getCode().equals(KeyCode.C) && keyEvent.isControlDown())
-                copySelectedBuildings();
-            else if(keyEvent.getCode().equals(KeyCode.V) && keyEvent.isControlDown()){
-                pasteSelectedBuildings();
-            }
-        });
         Vector2D coordinate = new Vector2D(0, 0);
         for (int y = 0; y < map.getSize().y; y++) {
             for (int x = 0; x < map.getSize().x; x++) {
@@ -98,31 +95,58 @@ public class GraphicsController {
         }
     }
 
-    private void copySelectedBuildings() {
+    public void copySelectedBuildings() {
         Gson gson = new Gson();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         JsonArray jsonArray = new JsonArray();
-        for (Building building : selectedBuildings)
-            jsonArray.add(gson.toJsonTree(building).getAsJsonObject());
+        for (Building building : selectedBuildings){
+            JsonObject buildingInfo = new JsonObject();
+            buildingInfo.add("coord", gson.toJsonTree(building.getCoordinate()));
+            buildingInfo.add("type", gson.toJsonTree(building.getType()));
+            jsonArray.add(buildingInfo);
+        }
         clipboard.setContents(new StringSelection(gson.toJson(jsonArray)), null);
     }
 
-    private void pasteSelectedBuildings() {
+    public void pasteSelectedBuildings() {
+        if (lastSelectedCell == null)
+            return;
         Gson gson = new Gson();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         String clipboardText = "";
         try {
             clipboardText = (String) clipboard.getData(DataFlavor.stringFlavor);
-            if(!clipboardText.startsWith("{")){
-                System.out.println("no buildings copied");
+            if (!clipboardText.startsWith("[{")) {
+                gameMenu.printError("No buildings copied");
                 return;
             }
         } catch (UnsupportedFlavorException | IOException e) {
+            gameMenu.printError("No buildings copied");
             e.printStackTrace();
         }
         JsonArray jsonArray = gson.fromJson(clipboardText, JsonArray.class);
+        Vector2D topLeftCoordinate = new Vector2D(map.getSize().x, map.getSize().y);
+        ArrayList<Vector2D> copiedCoords = new ArrayList<>();
+        ArrayList<MapAssetType> copiedTypes = new ArrayList<>();
         for (JsonElement jsonElement : jsonArray) {
-            Building building = gson.fromJson(jsonElement, Building.class);
+            JsonObject buildingInfo = gson.fromJson(jsonElement, JsonObject.class);
+            Vector2D buildingCoord = gson.fromJson(buildingInfo.get("coord"), Vector2D.class);
+            copiedCoords.add(buildingCoord);
+            copiedTypes.add(gson.fromJson(buildingInfo.get("type"), MapAssetType.class));
+            if (topLeftCoordinate.x > buildingCoord.x)
+                topLeftCoordinate.x = buildingCoord.x;
+            if (topLeftCoordinate.y > buildingCoord.y)
+                topLeftCoordinate.y = buildingCoord.y;
+        }
+        for (int i = 0; i < copiedCoords.size(); i++) {
+            BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
+                    copiedTypes.get(i).name().toLowerCase(),
+                    lastSelectedCell.getCoordinate().x + copiedCoords.get(i).x - topLeftCoordinate.x,
+                    lastSelectedCell.getCoordinate().y + copiedCoords.get(i).y - topLeftCoordinate.y,
+                    true);
+            if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS)) {
+                gameMenu.printError(msg.getMessage());
+            }
         }
     }
 
@@ -168,7 +192,7 @@ public class GraphicsController {
                 matcher.find();
                 BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
                         MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),
-                        cell.getCoordinate().x, cell.getCoordinate().y);
+                        cell.getCoordinate().x, cell.getCoordinate().y, false);
                 if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS)) {
                     gameMenu.printError(msg.getMessage());
                 }
@@ -194,8 +218,8 @@ public class GraphicsController {
     }
 
     private void selectCell(GridPane cellGrid) throws IOException {
-        Cell selectedCell = getCellOfNode(cellGrid);
-        GameMenuMessage result = gameController.selectBuilding(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
+        lastSelectedCell = getCellOfNode(cellGrid);
+        GameMenuMessage result = gameController.selectBuilding(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
         cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
                 CornerRadii.EMPTY, BorderStroke.MEDIUM)));
         if (result == GameMenuMessage.BUILDING_SELECTED) {
@@ -205,7 +229,7 @@ public class GraphicsController {
             loadSelectedBuildingFxml(buildingController.getBuilding().getType());
         }
         SelectedUnitController unitController = gameController.getSelectedUnitController();
-        result = gameController.selectUnit(selectedCell.getCoordinate().x, selectedCell.getCoordinate().y);
+        result = gameController.selectUnit(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
         if (result == GameMenuMessage.UNIT_SELECTED) {
             TilePane tilePane = new TilePane();
             tilePane.setPrefColumns(4);
@@ -324,7 +348,7 @@ public class GraphicsController {
         selectionRect.setHeight(maxY - minY);
     }
 
-    private void handleMouseReleased(MouseEvent event)  {
+    private void handleMouseReleased(MouseEvent event) {
         if (selectionRect == null) return;
         Bounds selectionBounds = selectionRect.getBoundsInParent();
         for (int i = 0; i < mainGrid.getChildren().size(); i++) {

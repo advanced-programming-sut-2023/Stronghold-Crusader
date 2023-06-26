@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -42,8 +43,7 @@ public class GraphicGameMenu extends Application {
             foodPopularity, religionPopularity, innPopularity, nextPopularityNum, fearPopularity, taxPopularity;
     public VBox selectedUnitsMenu;
     public Slider fearRateSlider, foodRateSlider, taxRateSlider;
-    public ImageView closeLeftBarBtn, openLeftBarBtn, minimap, religionFace, taxFace, innFace, closePopularityBarBtn
-            , fearFace, foodFace, backToDropButton;
+    public ImageView closeLeftBarBtn, openLeftBarBtn, minimap, religionFace, taxFace, innFace, closePopularityBarBtn, fearFace, foodFace, backToDropButton;
     public AnchorPane dropBuildingMenu, marketMenu, popularityMenu, mercenaryPostMenu;
     public ImageView marketBtn;
     public Label errorMessageText;
@@ -175,6 +175,14 @@ public class GraphicGameMenu extends Application {
             case MINUS:
                 graphicsController.zoom(0.8);
                 break;
+            case C:
+                if (keyEvent.isControlDown())
+                    graphicsController.copySelectedBuildings();
+                break;
+            case V:
+                if (keyEvent.isControlDown())
+                    graphicsController.pasteSelectedBuildings();
+                break;
         }
     }
 
@@ -200,16 +208,15 @@ public class GraphicGameMenu extends Application {
     }
 
 
-
-
-    public static void initializeMercenaryPost()  {
+    public static void initializeMercenaryPost() {
 
     }
 
     public void openPopularity() {
         popularityMenu.setVisible(true);
     }
-    public void printError(String text){
+
+    public void printError(String text) {
         Platform.runLater(() -> {
             errorMessageText = new Label();
             errorMessageText.setLayoutX(285);

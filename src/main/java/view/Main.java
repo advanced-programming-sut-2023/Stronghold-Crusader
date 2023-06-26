@@ -20,6 +20,7 @@ import java.util.HashMap;
 
 public class Main extends Application {
     public static Stage mainStage;
+
     public static void main(String[] args) throws Exception {
         Stronghold.load();
         ConstantManager.load();
@@ -50,4 +51,4 @@ public class Main extends Application {
         mainStage = stage;
         graphicGameMenu.start(stage);
     }
-    }
+}
