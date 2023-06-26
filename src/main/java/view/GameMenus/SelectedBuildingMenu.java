@@ -12,11 +12,9 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 
 public class SelectedBuildingMenu {
-    private final SelectedBuildingController selectedBuildingController;
+    private static SelectedBuildingController selectedBuildingController;
 
-    public SelectedBuildingMenu(SelectedBuildingController selectedBuildingController) {
-        this.selectedBuildingController = selectedBuildingController;
-    }
+
 
     public void run() {
         String nextCommand;
@@ -93,9 +91,13 @@ public class SelectedBuildingMenu {
     }
 
     public void createSoldier(MouseEvent mouseEvent){
-        int ordinal = 50;
+        int ordinal = 54;
         MapAssetType mapAssetType = MapAssetType.values()[ordinal];
-        selectedBuildingController.createUnit(mapAssetType);
+        System.out.println(selectedBuildingController.createUnit(mapAssetType).getMessage());
+    }
+
+    public static void setSelectedBuildingController(SelectedBuildingController selectedBuildingController) {
+        SelectedBuildingMenu.selectedBuildingController = selectedBuildingController;
     }
 }
 

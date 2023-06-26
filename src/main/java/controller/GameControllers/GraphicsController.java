@@ -22,6 +22,7 @@ import model.MapAsset.Tree;
 import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 import view.GameMenus.GraphicGameMenu;
+import view.GameMenus.SelectedBuildingMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
@@ -146,14 +147,9 @@ public class GraphicsController {
                 CornerRadii.EMPTY, BorderStroke.MEDIUM)));
         if (result == GameMenuMessage.BUILDING_SELECTED) {
             SelectedBuildingController buildingController = gameController.getSelectedBuildingController();
-            if (buildingController.getBuilding().getType().equals(MapAssetType.MERCENARY_POST)){
-                System.out.println("here");
-                AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(2);
-                buttonPane.getChildren().clear();
-                AnchorPane merc = FXMLLoader.load(GraphicGameMenu.class.getResource
-                        ("/FXML/Gamefxml/selectedBuildingMenus/mercenaryPost.fxml"));
-                buttonPane.getChildren().add(merc);
-            }
+            SelectedBuildingMenu.setSelectedBuildingController(buildingController);
+            loadSelectedBuildingFxml(buildingController.getBuilding().getType());
+
 
         }
         SelectedUnitController unitController = gameController.getSelectedUnitController();
@@ -166,6 +162,14 @@ public class GraphicsController {
                 tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
         } else
             selectedUnitsMenu.getChildren().clear();
+    }
+
+    private void loadSelectedBuildingFxml(MapAssetType type) throws IOException {
+        AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(2);
+        buttonPane.getChildren().clear();
+        AnchorPane mercenaryPost = FXMLLoader.load(GraphicGameMenu.class.getResource
+                ("/FXML/Gamefxml/selectedBuildingMenus/mercenaryPost.fxml"));
+        buttonPane.getChildren().add(mercenaryPost);
     }
 
     private HBox createUnitSelectionItem(MobileUnit unit, SelectedUnitController unitController) {

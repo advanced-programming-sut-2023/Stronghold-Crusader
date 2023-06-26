@@ -44,7 +44,7 @@ public class Main extends Application {
         GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
         GraphicGameMenu.setGraphicGameMenu(graphicGameMenu);
         GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game));
-        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map));
+        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map, true));
         mainStage = stage;
         graphicGameMenu.start(stage);
     }
