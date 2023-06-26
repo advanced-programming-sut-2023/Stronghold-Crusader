@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.enums.AssetType.MapAssetType;
 import utils.SignupAndLoginUtils;
@@ -28,6 +29,7 @@ public class SelectedBuildingMenu implements Initializable {
     public Button repairButton;
     public ProgressBar progressBar;
     public Text progressBarNumber;
+    public AnchorPane mainPain;
 
 
     @FXML
@@ -151,6 +153,8 @@ public class SelectedBuildingMenu implements Initializable {
 
     public void delete(MouseEvent mouseEvent) throws IOException {
             runDelete();
+            if (selectedBuildingController.deleteBuilding().equals(SelectedBuildingMessage.DELETED_BUILDING))
+                mainPain.getChildren().clear();
 
     }
 
