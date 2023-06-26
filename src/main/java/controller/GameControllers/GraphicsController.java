@@ -50,13 +50,14 @@ public class GraphicsController {
     private AnchorPane rootPane;
     private VBox selectedUnitsMenu;
     private double startX, startY;
-    private ArrayList<Building> selectedBuildings;
+    private final ArrayList<Building> selectedBuildings;
 
     public GraphicsController(GameController gameController, Game game, GraphicGameMenu gameMenu) {
         this.gameController = gameController;
         this.map = game.getMap();
         this.gameMenu = gameMenu;
         mainGrid = new TilePane();
+        selectedBuildings = new ArrayList<>();
         game.setGraphicsController(this);
         loadGraphics();
     }
@@ -65,6 +66,7 @@ public class GraphicsController {
         this.gameController = null;
         this.map = game.getMap();
         mainGrid = new TilePane();
+        selectedBuildings = new ArrayList<>();
         game.setGraphicsController(this);
         loadGraphics();
     }
@@ -176,6 +178,7 @@ public class GraphicsController {
         cellGrid.setOnMouseClicked(mouseEvent -> {
             removeAllSelectedBorders();
             gameController.deselectUnits();
+            selectedUnitsMenu.getChildren().clear();
             selectedBuildings.clear();
             try {
                 selectCell(cellGrid);
@@ -243,6 +246,7 @@ public class GraphicsController {
         ImageView deselectedImage = new ImageView(new Image(GraphicsController.class.getResource("/assets/icons/red.png").toExternalForm()));
         deselectedImage.setFitWidth(30);
         deselectedImage.setFitHeight(30);
+        deselectedImage.setVisible(false);
         ImageView selectedImage = new ImageView(new Image(GraphicsController.class.getResource("/assets/icons/green.png").toExternalForm()));
         selectedImage.setFitWidth(30);
         selectedImage.setFitHeight(30);
