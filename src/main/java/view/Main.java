@@ -38,10 +38,10 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         HashMap<Color, Player> players = new HashMap<>();
         players.put(Color.RED, new Player(Stronghold.getInstance().getUser("ayeen")));
-        players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("someone")));
+        players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("kian")));
         Map map = MapManager.load("1001");
         Game game = new Game(map, players, true);
-        GameController gameController = new GameController(Stronghold.getInstance().getUser("ayeen"), game);
+        GameController gameController = new GameController(Stronghold.getInstance().getUser("kian"), game);
         GraphicGameMenu.setGameController(gameController);
         GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
         GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game, graphicGameMenu));
