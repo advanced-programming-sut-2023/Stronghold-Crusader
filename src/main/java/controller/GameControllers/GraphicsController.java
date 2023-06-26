@@ -263,6 +263,7 @@ public class GraphicsController {
     }
 
     private void loadEngineerGuild(AnchorPane buttonPane) throws IOException {
+        buttonPane.getChildren().clear();
         AnchorPane engineersGuild = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/engineersGuild.fxml"));
         engineersGuild.setLayoutX(0);
@@ -271,6 +272,7 @@ public class GraphicsController {
     }
 
     private void loadBarrack(AnchorPane buttonPane) throws IOException {
+        buttonPane.getChildren().clear();
         AnchorPane barrack = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/barrack.fxml"));
         barrack.setLayoutX(0);

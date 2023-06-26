@@ -23,5 +23,25 @@
             <Font name="System Bold" size="27.0" />
          </font>
       </Text>
+      <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="148.0" layoutY="93.0"
+                 onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/buttons/repair_btn.jpg"/>
+         </image>
+      </ImageView>
+
+      <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="282.0" layoutY="93.0" onMouseClicked="#info"
+                 onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/buttons/info_btn.jpg"/>
+         </image>
+      </ImageView>
+
+      <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="14.0" layoutY="93.0" onMouseClicked="#delete"
+                 pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/buttons/delete_btn.jpg"/>
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
