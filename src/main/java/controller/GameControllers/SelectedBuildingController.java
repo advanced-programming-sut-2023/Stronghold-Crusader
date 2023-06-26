@@ -124,7 +124,8 @@ public class SelectedBuildingController {
             if (((EntranceBuilding) building).isOpen())
                 ((EntranceBuilding) building).close();
             else ((EntranceBuilding) building).open();
-            return SelectedBuildingMessage.SUCCESS;
+            if (((EntranceBuilding) building).isOpen()) return SelectedBuildingMessage.SUCCESS_OPEN;
+            return SelectedBuildingMessage.SUCCESS_CLOSE;
         }
         return SelectedBuildingMessage.INVALID_COMMAND_FOR_BUILDING;
     }

@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="130" prefWidth="430" style="-fx-background-color: transparent;"
             xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.GameMenus.SelectedBuildingMenu" fx:id="mainPain">
+            fx:controller="view.GameMenus.SelectedBuildingMenu" fx:id="mainPane">
     <children>
         <ImageView fitHeight="100.0" fitWidth="110.0" layoutX="227.0" layoutY="15.0" onMouseClicked="#createSoldier"
                    pickOnBounds="true" preserveRatio="true">

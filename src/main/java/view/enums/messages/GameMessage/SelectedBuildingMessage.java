@@ -24,7 +24,8 @@ public enum SelectedBuildingMessage {
     TAX_RATE_CHANGE_SUCCESS("Successfully changed tax rate"),
 
     INVALID_COMMAND("Invalid command"),
-    HP_FULL("The HP of building is full");
+    HP_FULL("The HP of building is full"),
+    SUCCESS_OPEN("The Gate is open"), SUCCESS_CLOSE("The Gate is closed");
 
     SelectedBuildingMessage(String message) {
         this.message = message;

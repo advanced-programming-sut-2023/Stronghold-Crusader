@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import model.MapAsset.Building.EntranceBuilding;
+import model.MapAsset.Building.ProductionBuilding;
 import model.enums.AssetType.MapAssetType;
 import utils.SignupAndLoginUtils;
 import utils.Sound;
@@ -24,11 +26,11 @@ import java.util.regex.Pattern;
 
 public class SelectedBuildingMenu implements Initializable {
     private static SelectedBuildingController selectedBuildingController;
-    private static GraphicGameMenu gameMenu ;
+    private static GraphicGameMenu gameMenu;
     public ImageView repairButton;
     public ProgressBar progressBar;
     public Text progressBarNumber;
-    public AnchorPane mainPain;
+    public AnchorPane mainPane;
     public ImageView buildingImage;
 
 
@@ -37,15 +39,15 @@ public class SelectedBuildingMenu implements Initializable {
         checkHP();
         if (selectedBuildingController.getBuilding().getType() != MapAssetType.MERCENARY_POST
                 && selectedBuildingController.getBuilding().getType() != MapAssetType.ENGINEER_GUILD
-                && selectedBuildingController.getBuilding().getType() != MapAssetType.BARRACK) {
+                && selectedBuildingController.getBuilding().getType() != MapAssetType.BARRACK
+        ) {
             progressBar.setProgress(selectedBuildingController.getBuilding().getHitPoint()
                     / selectedBuildingController.getBuilding().getMaxHitPoint());
             progressBarNumber.setText(selectedBuildingController.getBuilding().getHitPoint() + "/"
                     + selectedBuildingController.getBuilding().getMaxHitPoint());
-            setImage();
+            setSpecificDetails();
         }
     }
-
 
 
     private void runSetTaxRate(Matcher matcher) {
@@ -67,7 +69,7 @@ public class SelectedBuildingMenu implements Initializable {
     }
 
     private void runChangeProductionMode() {
-        selectedBuildingController.changeProductionMode().printMessage();
+        gameMenu.printError(selectedBuildingController.changeProductionMode().getMessage());
     }
 
     private void runCreateUnit(Matcher matcher) {
@@ -76,14 +78,14 @@ public class SelectedBuildingMenu implements Initializable {
     }
 
     private void runEntranceGate() {
-        selectedBuildingController.changeGate().printMessage();
+        gameMenu.printError(selectedBuildingController.changeGate().getMessage());
     }
 
-    public void createSoldier(MouseEvent mouseEvent){
+    public void createSoldier(MouseEvent mouseEvent) {
         new Sound(0).play();
         int ordinal = 0;
         Pattern pattern = Pattern.compile("\\d+");
-        String name =  ((ImageView) mouseEvent.getPickResult().getIntersectedNode()).getImage().getUrl().toString();
+        String name = ((ImageView) mouseEvent.getPickResult().getIntersectedNode()).getImage().getUrl().toString();
         Matcher matcher = pattern.matcher(name);
         while (matcher.find()) {
             ordinal = Integer.parseInt(matcher.group());
@@ -115,23 +117,63 @@ public class SelectedBuildingMenu implements Initializable {
     }
 
     public void delete(MouseEvent mouseEvent) throws IOException {
-            runDelete();
-            if (selectedBuildingController.deleteBuilding().equals(SelectedBuildingMessage.DELETED_BUILDING))
-                mainPain.getChildren().clear();
+        runDelete();
+        if (selectedBuildingController.deleteBuilding().equals(SelectedBuildingMessage.DELETED_BUILDING))
+            mainPane.getChildren().clear();
 
     }
 
     private void checkHP() {
         if (selectedBuildingController.getBuilding().getHitPoint() == selectedBuildingController.getBuilding().getMaxHitPoint()
-        && selectedBuildingController.getBuilding().getType() != MapAssetType.MERCENARY_POST
-        && selectedBuildingController.getBuilding().getType() != MapAssetType.ENGINEER_GUILD
-        && selectedBuildingController.getBuilding().getType() != MapAssetType.BARRACK)
+                && selectedBuildingController.getBuilding().getType() != MapAssetType.MERCENARY_POST
+                && selectedBuildingController.getBuilding().getType() != MapAssetType.ENGINEER_GUILD
+                && selectedBuildingController.getBuilding().getType() != MapAssetType.BARRACK)
             repairButton.setDisable(true);
     }
 
-    private void setImage(){
-        Image image = selectedBuildingController.getBuilding().getType().getImage();
-        buildingImage.setImage(image);
+    private void setSpecificDetails() {
+        if (selectedBuildingController.getBuilding() instanceof EntranceBuilding) setOpenAndCloseMode();
+        else {
+            if (selectedBuildingController.getBuilding() instanceof ProductionBuilding) setChangeProductionButton();
+            Image image = selectedBuildingController.getBuilding().getType().getImage();
+            buildingImage.setImage(image);
+        }
+    }
+
+    private void setChangeProductionButton() {
+        ImageView changeProductionButton = new ImageView(new Image(SelectedBuildingMessage.class.getResource(
+                "/assets/icons/selectedBuildingIcons/productionMode.png").toString()));
+         changeProductionButton.setTranslateX(445);
+         changeProductionButton.setTranslateY(5);
+         changeProductionButton.setFitWidth(25);
+         changeProductionButton.setFitHeight(25);
+         changeProductionButton.setOnMouseClicked(e -> {runChangeProductionMode();});
+         mainPane.getChildren().add(changeProductionButton);
+    }
+
+    private void setOpenAndCloseMode() {
+        ImageView close = new ImageView();
+        close.setImage(new Image(SelectedBuildingMenu.class.getResource
+                ("/assets/icons/selectedBuildingIcons/closeGateHouse.png").toString()));
+        ImageView open = new ImageView();
+        open.setImage(new Image(SelectedBuildingMenu.class.getResource
+                ("/assets/icons/selectedBuildingIcons/openGateHouse.png").toString()));
+        addedChangeEntranceButtonSetting(close, open);
+        mainPane.getChildren().add(open);
+        mainPane.getChildren().add(close);
+    }
+
+    private void addedChangeEntranceButtonSetting(ImageView close, ImageView open) {
+        close.setTranslateX(40);
+        close.setTranslateY(40);
+        open.setTranslateX(90);
+        open.setTranslateY(40);
+        close.setFitHeight(50);
+        close.setFitWidth(50);
+        open.setFitHeight(50);
+        open.setFitWidth(50);
+        close.setOnMouseClicked(e -> runEntranceGate());
+        open.setOnMouseClicked(e -> runEntranceGate());
     }
 }
 

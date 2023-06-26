@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="113.0" prefWidth="437.0" style="-fx-background-color: transparent;"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.GameMenus.SelectedBuildingMenu" fx:id="mainPain">
+            fx:controller="view.GameMenus.SelectedBuildingMenu" fx:id="mainPane">
     <children>
         <ImageView fitHeight="120.0" fitWidth="444.0" pickOnBounds="true">
             <image>
