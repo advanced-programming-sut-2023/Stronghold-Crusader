@@ -68,7 +68,6 @@ public class SelectedBuildingController {
             return SelectedBuildingMessage.NOT_ALLOWED_TO_DELETE;
         map.removeMapObject(coordinate, building);
         player.getGovernance().removeAsset(building);
-      //  SelectedBuildingMenu.getGameMenu().initializeDropBuildingMenu();
         return SelectedBuildingMessage.DELETED_BUILDING;
     }
 

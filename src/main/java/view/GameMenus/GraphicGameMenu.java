@@ -232,4 +232,6 @@ public class GraphicGameMenu extends Application {
         TradeMenu.setTradeController(new TradeController(gameController.getGame()));
         new TradeMenu().start(new Stage());
     }
+
+
 }

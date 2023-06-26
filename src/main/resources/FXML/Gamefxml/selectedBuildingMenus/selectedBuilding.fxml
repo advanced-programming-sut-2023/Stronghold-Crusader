@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="150.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
+<AnchorPane fx:id="mainPain" prefHeight="150.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
    <children>
       <Button fx:id="repairButton" layoutX="140.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#repair" prefHeight="24.0" prefWidth="59.0" styleClass="repair-button" stylesheets="@../../../CSS/style1.css" text="repair" />
       <ImageView fitHeight="26.0" fitWidth="27.0" layoutX="452.0" layoutY="26.0" onMouseClicked="#info" onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
