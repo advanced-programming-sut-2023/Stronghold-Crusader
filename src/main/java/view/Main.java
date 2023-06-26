@@ -41,9 +41,11 @@ public class Main extends Application {
         Game game = new Game(map, players, true);
         GameController gameController = new GameController(Stronghold.getInstance().getUser("ayeen"), game);
         GraphicGameMenu.setGameController(gameController);
+        GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
+        GraphicGameMenu.setGraphicGameMenu(graphicGameMenu);
         GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game));
         GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map));
         mainStage = stage;
-        new GraphicGameMenu().start(stage);
+        graphicGameMenu.start(stage);
     }
 }

@@ -30,13 +30,14 @@ public class GraphicBuildingPlacementMenu {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         setCategoryButton(entranceCategoryButton);
         setCategoryButton(trainingCategoryButton);
         setCategoryButton(normalCategoryButton);
         setCategoryButton(storageCategoryButton);
         setCategoryButton(defenseCategoryButton);
         setCategoryButton(productionCategoryButton);
+        loadScrollPane("production");
     }
 
     private void setCategoryButton(ImageView button) {
