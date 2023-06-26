@@ -80,8 +80,8 @@ public class GraphicMapSelectMenu extends Application {
     public void selectMap(){
         String mapId = mapNameField.getText();
         mapNameField.clear();
-        MapSelectMessage msg = mapSelectController.selectMap(mapId, false);
         boolean modifiability = modifiabilityCheck.isSelected();
+        MapSelectMessage msg = mapSelectController.selectMap(mapId, modifiability);
         if (msg.equals(MapSelectMessage.MAP_SELECT_SUCCESS)) {
             GraphicsController graphicsController = new GraphicsController(
                     new Game(mapSelectController.getSelectedMap(), mapSelectController.getPlayers(), modifiability));
