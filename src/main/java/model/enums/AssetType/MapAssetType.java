@@ -163,8 +163,11 @@ public enum MapAssetType {
     MapAssetType() {
         if (this.ordinal() <= 43)
             image = new Image(CellType.class.getResource("/assets/graphic/buildings/" + this.ordinal() + ".png").toExternalForm());
-        else if (this.ordinal() <= 62)
+        else if (this.ordinal() <= 62){
+
             image = new Image(CellType.class.getResource("/assets/graphic/soldiers/" + this.ordinal() + ".png").toExternalForm());
+
+        }
         else
             image = new Image(CellType.class.getResource("/assets/graphic/buildings/1" + ".png").toExternalForm());
 

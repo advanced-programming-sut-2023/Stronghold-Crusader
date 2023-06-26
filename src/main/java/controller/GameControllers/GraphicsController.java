@@ -218,6 +218,18 @@ public class GraphicsController {
     private void loadSelectedBuildingFxml(MapAssetType type) throws IOException {
         AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(2);
         buttonPane.getChildren().clear();
+        if (type.equals(MapAssetType.MERCENARY_POST)) loadMercenaryPost(buttonPane);
+        else if (type.equals(MapAssetType.BARRACK)) loadBarrack(buttonPane);
+
+    }
+
+    private void loadBarrack(AnchorPane buttonPane) throws IOException {
+        AnchorPane barrack = FXMLLoader.load(GraphicGameMenu.class.getResource
+                ("/FXML/Gamefxml/selectedBuildingMenus/barrack.fxml"));
+        buttonPane.getChildren().add(barrack);
+    }
+
+    private void loadMercenaryPost(AnchorPane buttonPane) throws IOException {
         AnchorPane mercenaryPost = FXMLLoader.load(GraphicGameMenu.class.getResource
                 ("/FXML/Gamefxml/selectedBuildingMenus/mercenaryPost.fxml"));
         buttonPane.getChildren().add(mercenaryPost);

@@ -24,6 +24,7 @@ public class SelectedBuildingController {
     private final Player player;
     private final Map map;
     private final Vector2D coordinate;
+    private static boolean isModifiable;
 
     public SelectedBuildingController(Building building, Game game) {
         this.building = building;
@@ -80,27 +81,31 @@ public class SelectedBuildingController {
     }
 
     public SelectedBuildingMessage createUnit(MapAssetType type) {
-
+        System.out.println(type.toString());
+        System.out.println(type.ordinal());
         MobileUnit sampleMobileUnit = (MobileUnit) ConstantManager.getInstance().getAsset(type);
 
         AttackingUnit sampleAttackingUnit = null;
         if (sampleMobileUnit instanceof AttackingUnit)
             sampleAttackingUnit = (AttackingUnit) sampleMobileUnit;
-        if (sampleAttackingUnit != null && !isWeaponEnough(sampleAttackingUnit, 1))
-            return SelectedBuildingMessage.WEAPON_NEEDED;
-        if (!isGoldEnough(sampleMobileUnit.getCost(), 1))
-            return SelectedBuildingMessage.GOLD_NEEDED;
-        if (sampleMobileUnit.getEngineersCount() != 0) {
-            int numberOfEngineers = player.getGovernance().getEngineers();
-            if (numberOfEngineers < sampleMobileUnit.getEngineersCount())
-                return SelectedBuildingMessage.ENGINEER_NEEDED;
-            else addEngineersToSiegeTent(sampleMobileUnit.getEngineersCount());
+        if (!isModifiable) {
+            if (sampleAttackingUnit != null && !isWeaponEnough(sampleAttackingUnit, 1))
+                return SelectedBuildingMessage.WEAPON_NEEDED;
+            if (!isGoldEnough(sampleMobileUnit.getCost(), 1))
+                return SelectedBuildingMessage.GOLD_NEEDED;
+
+            if (sampleMobileUnit.getEngineersCount() != 0) {
+                int numberOfEngineers = player.getGovernance().getEngineers();
+                if (numberOfEngineers < sampleMobileUnit.getEngineersCount())
+                    return SelectedBuildingMessage.ENGINEER_NEEDED;
+                else addEngineersToSiegeTent(sampleMobileUnit.getEngineersCount());
+            }
+            player.getGovernance().changeGold(-1 * sampleMobileUnit.getCost());
         }
-        player.getGovernance().changeGold(-1 * sampleMobileUnit.getCost());
         if (sampleAttackingUnit != null) {
             if (sampleAttackingUnit.getWeapons() != null) {
                 for (Material weapon : sampleAttackingUnit.getWeapons())
-                    player.getGovernance().changeStorageStock(weapon, -1);
+                  if(!isModifiable) player.getGovernance().changeStorageStock(weapon, -1);
             }
         }
             MobileUnit mobileUnit;
@@ -196,5 +201,9 @@ public class SelectedBuildingController {
 
     public Building getBuilding() {
         return building;
+    }
+
+    public static void setIsModifiable(boolean isModifiable) {
+        SelectedBuildingController.isModifiable = isModifiable;
     }
 }
