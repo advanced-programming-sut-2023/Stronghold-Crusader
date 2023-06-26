@@ -67,13 +67,13 @@ public class GraphicBuildingPlacementMenu {
             imageView.setImage(type.getImage());
             pane.getChildren().add(imageView);
             imageView.setTranslateY(3);
-            imageView.setTranslateX(70 * i);
+            imageView.setTranslateX(80 * i);
             imageView.setFitHeight(60);
             imageView.setPreserveRatio(true);
             setDropBuilding(imageView, pane);
             i++;
         }
-        pane.setPrefWidth(i * 70);
+        pane.setPrefWidth(i * 80);
         pane.setPrefHeight(65);
         pane.setStyle("-fx-background-color: transparent");
         pane.setAlignment(Pos.CENTER_LEFT);
