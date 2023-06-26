@@ -124,7 +124,7 @@ public class SelectedBuildingMenu implements Initializable {
             ordinal = Integer.parseInt(matcher.group());
         }
         MapAssetType mapAssetType = MapAssetType.values()[ordinal];
-        gameMenu.printError(selectedBuildingController.createUnit(mapAssetType).getMessage());
+        SelectedBuildingMessage msg = selectedBuildingController.createUnit(mapAssetType);
     }
 
     public static void setSelectedBuildingController(SelectedBuildingController selectedBuildingController) {

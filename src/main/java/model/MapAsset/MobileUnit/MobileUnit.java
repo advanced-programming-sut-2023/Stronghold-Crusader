@@ -1,5 +1,6 @@
 package model.MapAsset.MobileUnit;
 
+import javafx.scene.image.ImageView;
 import model.Map.Map;
 import model.MapAsset.MapAsset;
 import model.User.Player;
@@ -119,5 +120,9 @@ public class MobileUnit extends MapAsset {
                 ", moveSpeed=" + moveSpeed +
                 ", climbs ladder=" + canClimbLadder +
                 ", engineersCount=" + engineersCount;
+    }
+
+    public Vector2D getNextMoveDestination() {
+        return nextMoveDestination;
     }
 }

@@ -1,11 +1,11 @@
 package model.MapAsset.MobileUnit;
 
+import javafx.scene.image.ImageView;
 import model.User.Player;
 import utils.Vector2D;
 
 public class Assassin extends AttackingUnit {
     private boolean invisibility;
-
     public Assassin(Assassin reference, Vector2D coordinate, Player owner) {
         super(reference, coordinate, owner);
     }

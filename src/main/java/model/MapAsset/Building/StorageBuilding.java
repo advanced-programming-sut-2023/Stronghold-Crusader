@@ -1,6 +1,7 @@
 package model.MapAsset.Building;
 
 import model.User.Player;
+import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
 import utils.Vector2D;
 
@@ -14,6 +15,10 @@ public class StorageBuilding extends Building {
         super(reference, coordinate, owner);
         this.totalCapacity = reference.totalCapacity;
         this.storage = reference.storage;
+        if (reference.type.equals(MapAssetType.STORE_HOUSE)){
+            storage.replace(Material.STONE, 500);
+            storage.replace(Material.WOOD, 500);
+        }
     }
 
     public void changeStock(Material material, int offset) {

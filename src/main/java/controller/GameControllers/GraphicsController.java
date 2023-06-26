@@ -3,6 +3,7 @@ package controller.GameControllers;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import model.Game.Game;
 import model.Map.Cell;
 import model.Map.Map;
@@ -54,6 +56,7 @@ public class GraphicsController {
 
     public GraphicsController(GameController gameController, Game game, GraphicGameMenu gameMenu) {
         this.gameController = gameController;
+        gameController.setGraphicsController(this);
         this.map = game.getMap();
         this.gameMenu = gameMenu;
         mainGrid = new TilePane();
@@ -361,5 +364,32 @@ public class GraphicsController {
         }
         rootPane.getChildren().remove(selectionRect);
         selectionRect = null;
+    }
+
+    public void addTransition(MobileUnit unit, Vector2D source, Vector2D dest){
+        GridPane initialCellGrid = (GridPane) mainGrid.getChildren().get(source.x + map.getSize().x * source.y);
+        GridPane finalCellGrid = (GridPane) mainGrid.getChildren().get(dest.x + map.getSize().x * dest.y);
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1));
+        for (Node node : initialCellGrid.getChildren()) {
+            if (node instanceof ImageView){
+                String path = ((ImageView) node).getImage().getUrl();
+                Pattern pattern = Pattern.compile("\\d+");
+                Matcher matcher = pattern.matcher(path);
+                int ordinal;
+                if (matcher.find()) {
+                    ordinal = Integer.parseInt(matcher.group());
+                    MapAssetType type = MapAssetType.getTypeBySerial(ordinal);
+                    if (type.equals(unit.getType())){
+                        transition.setNode(node);
+                        break;
+                    }
+                }
+            }
+        }
+        transition.setToX(finalCellGrid.getTranslateX());
+        transition.setToY(finalCellGrid.getTranslateY());
+        transition.setAutoReverse(false);
+        transition.setCycleCount(1);
+        transition.play();
     }
 }

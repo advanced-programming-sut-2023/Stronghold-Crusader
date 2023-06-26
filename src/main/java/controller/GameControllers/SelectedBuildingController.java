@@ -83,8 +83,6 @@ public class SelectedBuildingController {
     }
 
     public SelectedBuildingMessage createUnit(MapAssetType type) {
-        System.out.println(type.toString());
-        System.out.println(type.ordinal());
         MobileUnit sampleMobileUnit = (MobileUnit) ConstantManager.getInstance().getAsset(type);
 
         AttackingUnit sampleAttackingUnit = null;
