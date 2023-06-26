@@ -91,27 +91,6 @@ public class GraphicBuildingPlacementMenu {
     }
 
     private void setDropBuilding(ImageView building, HBox pane){
-        AtomicReference<Double> mouseAnchorX = new AtomicReference<>((double) 0);
-        AtomicReference<Double> mouseAnchorY = new AtomicReference<>((double) 0);
-
-        building.setOnMousePressed(mouseEvent -> {
-            mouseAnchorX.set(mouseEvent.getSceneX());
-            mouseAnchorY.set(mouseEvent.getSceneY());
-        });
-
-        building.setOnMouseDragged(mouseEvent -> {
-            ImageView imageView = new ImageView();
-            imageView.setImage(building.getImage());
-            pane.getChildren().add(imageView);
-            imageView.setTranslateY(building.getTranslateY());
-            imageView.setTranslateX(building.getTranslateX());
-            imageView.setFitHeight(60);
-            imageView.setPreserveRatio(true);
-            setDropBuilding(imageView, pane);
-            building.setTranslateX(mouseEvent.getSceneX() - mouseAnchorX.get());
-            building.setTranslateY(mouseEvent.getSceneY() - mouseAnchorY.get());
-        });
-
         building.setOnDragDetected(event -> {
             pane.getChildren().remove(building);
             Dragboard dragboard = scrollPane.startDragAndDrop(TransferMode.COPY);
@@ -122,6 +101,4 @@ public class GraphicBuildingPlacementMenu {
             event.consume();
         });
     }
-
-
 }
