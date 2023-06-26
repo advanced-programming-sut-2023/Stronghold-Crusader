@@ -91,6 +91,7 @@ public class SelectedBuildingMenu {
     }
 
     public void createSoldier(MouseEvent mouseEvent){
+        System.out.println(mouseEvent);
         int ordinal = 54;
         MapAssetType mapAssetType = MapAssetType.values()[ordinal];
         System.out.println(selectedBuildingController.createUnit(mapAssetType).getMessage());
