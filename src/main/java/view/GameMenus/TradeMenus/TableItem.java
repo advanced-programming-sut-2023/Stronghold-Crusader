@@ -1,24 +1,72 @@
 package view.GameMenus.TradeMenus;
 
-public class TableItem {
-    private final String State;
-    private final int ID ;
-    private final String To;
-    private final String Good;
-    private final int Amount;
-    private final String Message;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import model.Game.Trade;
+import view.enums.messages.TradeMenuMessage;
 
-    public TableItem(String state, int ID, String to, String good, int amount, String message) {
-        State = state;
-        this.ID = ID;
-        To = to;
-        Good = good;
-        Amount = amount;
-        Message = message;
+
+public class TableItem {
+    private final ImageView state = new ImageView();
+    private final int ID ;
+    private final String to;
+    private final String owner;
+    private final Circle good;
+    private final String type;
+    private final int amount;
+    private final String message;
+    private final Button denyButton = new Button("deny");
+    private final Button acceptButton = new Button("accept");
+
+    public TableItem(Trade trade) {
+        setState(trade);
+        state.setFitHeight(35);
+        state.setFitWidth(35);
+        this.ID = trade.getID();
+        to = trade.getAcceptor().getNickname();
+        owner = trade.getOwner().getNickname();
+        good = new Circle(17);
+        type = trade.isRequest() ? "request" : "donate";
+        good.setFill(new ImagePattern(trade.getMaterial().getImage()));
+        amount = trade.getAmount();
+        message = (TradeMenu.getTradeController().getGame().getCurrentPlayer().equals(trade.getOwner()))
+                ? trade.getAcceptorMessage() : trade.getMessage();
+        setClickedButtonOption(trade);
     }
 
-    public String getState() {
-        return State;
+    private void setClickedButtonOption(Trade trade) {
+        acceptButton.setOnMouseClicked(e -> {
+           String message =  TradeMenu.getTradeController().accept_trade(trade).getMessage();
+           if (message.equals(TradeMenuMessage.ACCEPTED.getMessage())){
+               setState(trade);
+               acceptButton.setVisible(false);
+               denyButton.setVisible(false);
+           }
+
+        });
+        denyButton.setOnMouseClicked(e ->{
+            trade.deny();
+            acceptButton.setVisible(false);
+            denyButton.setVisible(false);
+            setState(trade);
+        });
+    }
+
+    private void setState(Trade trade) {
+        if (!trade.isFinished()) {
+            this.state.setImage(new Image(TableItem.class.getResource("/assets/icons/undefine.png").toString()));
+            return;
+        }
+        if(trade.isAccepted())
+            this.state.setImage(new Image(TableItem.class.getResource("/assets/icons/accepted.png").toString()));
+        else this.state.setImage(new Image(TableItem.class.getResource("/assets/icons/deny.png").toString()));
+    }
+
+    public ImageView getState() {
+        return state;
     }
 
     public int getID() {
@@ -26,18 +74,34 @@ public class TableItem {
     }
 
     public String getTo() {
-        return To;
+        return to;
     }
 
-    public String getGood() {
-        return Good;
+    public Circle getGood() {
+        return good;
     }
 
     public int getAmount() {
-        return Amount;
+        return amount;
     }
 
     public String getMessage() {
-        return Message;
+        return message;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Button getDenyButton() {
+        return denyButton;
+    }
+
+    public Button getAcceptButton() {
+        return acceptButton;
     }
 }

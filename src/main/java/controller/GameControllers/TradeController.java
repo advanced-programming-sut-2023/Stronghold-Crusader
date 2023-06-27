@@ -26,14 +26,25 @@ public class TradeController {
         }
     }
 
-    public ArrayList<Trade> getDonates(){
+    public ArrayList<Trade> getMyTrades(){
         ArrayList<Trade> donates = new ArrayList<>();
         for (Trade trade: trades) {
-            if (trade.getOwner().equals(game.getCurrentPlayer()) && !trade.isRequest())
+            if (trade.getOwner().equals(game.getCurrentPlayer()))
                 donates.add(trade);
         }
             return donates;
     }
+
+    public ArrayList<Trade> getTradesToMe(){
+        ArrayList<Trade> donates = new ArrayList<>();
+        for (Trade trade: trades) {
+            if (trade.getAcceptor().equals(game.getCurrentPlayer()))
+                donates.add(trade);
+        }
+        return donates;
+    }
+
+
 
     public TradeMenuMessage request(HashMap<String, String> inputs) {
         if (hasEmptyFieldInRequest(inputs))
@@ -56,10 +67,7 @@ public class TradeController {
 
 
 
-    public TradeMenuMessage accept_trade(HashMap<String, String> inputs) {
-        Trade trade = getTradeById(Integer.parseInt(inputs.get("id")));
-        if (trade == null)
-            return TradeMenuMessage.INVALID_ID;
+    public TradeMenuMessage accept_trade(Trade trade) {
 
         int amount = trade.getAmount();
         Material material = trade.getMaterial();
@@ -70,7 +78,6 @@ public class TradeController {
             return TradeMenuMessage.ALREADY_ACCEPTED;
         game.getCurrentPlayer().getGovernance().changeStorageStock(material, -1 * amount);
         //  trade.getOwner().getGovernance().changeGold(trade.isRequest());
-        trade.setAcceptorMessage(inputs.get("message"));
         trade.accept();
         return TradeMenuMessage.ACCEPTED;
     }
@@ -83,7 +90,7 @@ public class TradeController {
     public void addTrade(Trade newTrade) {
         trades.add(newTrade);
         for (Player player : game.getPlayers()) {
-            if (!player.equals(game.getCurrentPlayer())) player.getNewTrades().add(newTrade);
+            if (player.equals(newTrade.getAcceptor())) player.getNewTrades().add(newTrade);
         }
     }
 

@@ -39,7 +39,7 @@ public class TradeMenu extends Application {
     public Button confirmButton;
     private static TradeController tradeController;
     private final HashMap<Paint, Material> materials = new HashMap<>();
-    private Player sentTo;
+    private static Player sentTo;
     private Trade trade;
 
     private static Stage stage = new Stage();
@@ -91,7 +91,7 @@ public class TradeMenu extends Application {
 
     private void acceptTradeRun(Matcher matcher) {
         HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.ACCEPT_TRADE.getRegex());
-        tradeController.accept_trade(inputs).printMessage();
+       // tradeController.accept_trade(inputs).printMessage();
     }
 
 
@@ -155,7 +155,6 @@ public class TradeMenu extends Application {
         }
         stage.setScene(new Scene(anchorPane));
         stage.show();
-
     }
 
     public void plus(MouseEvent mouseEvent) {
@@ -234,10 +233,16 @@ public class TradeMenu extends Application {
     }
 
     public void goToDonatesMenu(MouseEvent mouseEvent) throws Exception {
-        new DonateMenu().start(stage);
+        new myTradeList().start(stage);
     }
 
     public static TradeController getTradeController() {
         return tradeController;
+    }
+
+    public void goToRequestMenu(MouseEvent mouseEvent) throws IOException {
+        new RequestMenu().start(stage);
+
+
     }
 }

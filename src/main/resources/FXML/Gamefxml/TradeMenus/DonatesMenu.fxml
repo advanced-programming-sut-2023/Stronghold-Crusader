@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.TradeMenus.DonateMenu">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.TradeMenus.myTradeList">
    <children>
-      <TableView  fx:id="donateTrades" prefHeight="500.0" prefWidth="800.0">
+      <TableView fx:id="donateTrades" prefHeight="500.0" prefWidth="800.0">
         <columns>
-          <TableColumn fx:id="stateColumn" prefWidth="102.4000244140625" text="State" />
-            <TableColumn fx:id="IDColumn" prefWidth="48.800048828125" text="ID" />
-          <TableColumn fx:id="acceptorColumn" minWidth="6.4000244140625" prefWidth="144.79998779296875" text="To" />
-            <TableColumn fx:id="goodColumn" prefWidth="99.199951171875" text="Good" />
-            <TableColumn fx:id="amountColumn" minWidth="0.0" prefWidth="68.00006103515625" text="Amount" />
-            <TableColumn fx:id="messageColumn" maxWidth="333.5999755859375" prefWidth="329.59991455078125" text="Message" />
+          <TableColumn fx:id="stateColumn" prefWidth="42.399993896484375" text="State" />
+            <TableColumn fx:id="IDColumn" prefWidth="54.399993896484375" text="ID" />
+          <TableColumn fx:id="acceptorColumn" minWidth="6.4000244140625" prefWidth="106.39999389648438" text="To" />
+            <TableColumn fx:id="goodColumn" prefWidth="64.0" text="Good" />
+            <TableColumn fx:id="amountColumn" minWidth="0.0" prefWidth="64.0" text="Amount" />
+            <TableColumn fx:id="typeColumn" minWidth="0.0" prefWidth="70.4000244140625" text="Type" />
+            <TableColumn fx:id="messageColumn" maxWidth="420.0" prefWidth="396.79998779296875" text="Message" />
         </columns>
       </TableView>
+      <Button layoutX="24.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#back" text="back" />
    </children>
 </AnchorPane>
