@@ -7,9 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
@@ -60,6 +61,10 @@ public class SignupMenu extends Application implements Initializable {
         AnchorPane anchorPane = FXMLLoader.load(url);
         anchorPane.getChildren().get(0).setVisible(false);
         anchorPane.getChildren().get(2).setVisible(false);
+        anchorPane.setBackground(new Background(new BackgroundImage(new Image(
+                MainMenu.class.getResource("/assets/backgrounds/loginMenu.jpg").toExternalForm()),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false))));
         Scene scene = new Scene(anchorPane);
         stage.setFullScreen(true);
         stage.setResizable(false);

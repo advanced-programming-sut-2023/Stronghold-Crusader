@@ -13,11 +13,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -61,6 +61,10 @@ public class LoginMenu extends Application implements Initializable {
         stage.setTitle("Stronghold");
         URL url = LoginMenu.class.getResource("/FXML/Userfxml/loginMenu.fxml");
         AnchorPane anchorPane = FXMLLoader.load(url);
+        anchorPane.setBackground(new Background(new BackgroundImage(new Image(
+                MainMenu.class.getResource("/assets/backgrounds/loginMenu.jpg").toExternalForm()),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false))));
         setToggleSwitch();
         Pane pane = (Pane) anchorPane.getChildren().get(5);
         pane.getChildren().add(toggleSwitch);
