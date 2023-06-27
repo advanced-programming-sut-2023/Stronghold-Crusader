@@ -49,8 +49,7 @@ public class GraphicsController {
     private final Map map;
     private GraphicGameMenu gameMenu;
     private Rectangle selectionRect;
-    private AnchorPane rootPane;
-    private VBox selectedUnitsMenu;
+    private AnchorPane rootPane, selectedUnitMenu;
     private double startX, startY;
     private final ArrayList<Building> selectedBuildings;
     private Cell lastSelectedCell;
@@ -172,10 +171,7 @@ public class GraphicsController {
 
     public void setRootPane(AnchorPane rootPane) {
         this.rootPane = rootPane;
-    }
-
-    public void setSelectedUnitsMenu(VBox selectedUnitsMenu) {
-        this.selectedUnitsMenu = selectedUnitsMenu;
+        this.selectedUnitMenu = (AnchorPane) rootPane.getChildren().get(14);
     }
 
     private GridPane initializeCellGrid(Cell cell) {
@@ -228,9 +224,8 @@ public class GraphicsController {
         SelectedUnitController unitController = gameController.getSelectedUnitController();
         result = gameController.selectUnit(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
         if (result == GameMenuMessage.UNIT_SELECTED) {
-            TilePane tilePane = new TilePane();
-            tilePane.setPrefColumns(4);
-            selectedUnitsMenu.getChildren().add(tilePane);
+            loadSelectedUnitMenu();
+            TilePane tilePane = (TilePane) ((AnchorPane) selectedUnitMenu.getChildren().get(0)).getChildren().get(0);
             for (MobileUnit unit : unitController.getSelectedUnits())
                 tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
         }
@@ -247,12 +242,12 @@ public class GraphicsController {
     private void resetSelection() {
         removeAllSelectedBorders();
         gameController.deselectUnits();
-        selectedUnitsMenu.getChildren().clear();
+//        selectedUnitMenu.getChildren().clear();
         selectedBuildings.clear();
     }
 
     private void loadSelectedBuildingFxml(MapAssetType type) throws IOException {
-        AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(2);
+        AnchorPane buttonPane = (AnchorPane) rootPane.getChildren().get(4);
         buttonPane.getChildren().clear();
         AnchorPane selectedBuilding = FXMLLoader.load(GraphicGameMenu.class
                 .getResource("/FXML/Gamefxml/selectedBuildingMenus/selectedBuilding.fxml"));
@@ -434,5 +429,13 @@ public class GraphicsController {
         transition.setAutoReverse(false);
         transition.setCycleCount(1);
         transition.play();
+    }
+
+    public void loadSelectedUnitMenu() throws IOException {
+        System.out.println("loading");
+        selectedUnitMenu.getChildren().clear();
+        AnchorPane pane = FXMLLoader.load(GraphicGameMenu.class.
+                getResource("/FXML/Gamefxml/selectedUnitMenus/selectedUnitMain.fxml"));
+        selectedUnitMenu.getChildren().add(pane);
     }
 }

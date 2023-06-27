@@ -3,17 +3,21 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="208" prefWidth="216" style="-fx-background-color: transparent" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedUnitMenu">
-    <ImageView fitHeight="50.0" fitWidth="52.0" layoutY="7.0" pickOnBounds="true">
-        <Image url="@../../../assets/buttons/attack_btn.png" />
-    </ImageView>
-    <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="-3.0" layoutY="82.0" pickOnBounds="true">
-        <Image url="@../../../assets/buttons/move_btn.png" />
-    </ImageView>
-    <ImageView fitHeight="35.0" fitWidth="46.0" layoutX="2.0" layoutY="161.0" pickOnBounds="true" rotate="10">
-        <Image url="@../../../assets/buttons/patrol_btn.png" />
-    </ImageView>
-   <GridPane layoutX="52.0" prefHeight="208.0" prefWidth="199.0" fx:id="selectedUnits">
-   </GridPane>
-
+<AnchorPane prefHeight="208" prefWidth="216" style="-fx-background-color: transparent"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenus.SelectedUnitMenu">
+    <children>
+        <TilePane layoutX="52.0" prefHeight="208.0" prefWidth="199.0" fx:id="selectedUnits"
+        prefColumns="4">
+        </TilePane>
+        <ImageView fitHeight="50.0" fitWidth="52.0" layoutY="7.0" pickOnBounds="true">
+            <Image url="@../../../assets/buttons/attack_btn.png"/>
+        </ImageView>
+        <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="-3.0" layoutY="82.0" pickOnBounds="true">
+            <Image url="@../../../assets/buttons/move_btn.png"/>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="46.0" layoutX="2.0" layoutY="161.0" pickOnBounds="true" rotate="10">
+            <Image url="@../../../assets/buttons/patrol_btn.png"/>
+        </ImageView>
+    </children>
 </AnchorPane>

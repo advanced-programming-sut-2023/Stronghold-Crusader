@@ -40,7 +40,6 @@ public class GraphicGameMenu extends Application {
     public Label popularityLabel, populationLabel, goldLabel, roundLabel, playerLabel,
             foodPopularity, religionPopularity, innPopularity, nextPopularityNum, fearPopularity,
             taxPopularity, errorMessageText;
-    public VBox selectedUnitsMenu;
     public Slider fearRateSlider, foodRateSlider, taxRateSlider;
     public ImageView closeLeftBarBtn, openLeftBarBtn, minimap, religionFace, taxFace, innFace, closePopularityBarBtn,
             fearFace, foodFace, backToDropButton, marketBtn, selectedUnitButton;
@@ -52,7 +51,6 @@ public class GraphicGameMenu extends Application {
 
     public static void setGraphicsController(GraphicsController graphicsController) {
         GraphicGameMenu.graphicsController = graphicsController;
-
     }
 
     @Override
@@ -67,7 +65,6 @@ public class GraphicGameMenu extends Application {
 
     @FXML
     public void initialize() throws IOException {
-        graphicsController.setSelectedUnitsMenu(selectedUnitsMenu);
         initializeScrollPane();
         initializeMinimap();
         initializeLeftPane();
@@ -76,7 +73,6 @@ public class GraphicGameMenu extends Application {
         initializeDropBuildingMenu();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
-        loadSelectedUnitMenu();
     }
 
     private void initializeScrollPane() {
@@ -237,10 +233,5 @@ public class GraphicGameMenu extends Application {
         new TradeMenu().start(new Stage());
     }
 
-    public void loadSelectedUnitMenu() throws IOException {
-        selectedUnitMenu.getChildren().clear();
-        AnchorPane anchorPane = FXMLLoader.load(GraphicGameMenu.class.
-                getResource("/FXML/Gamefxml/selectedUnitMenus/selectedUnitMain.fxml"));
-        selectedUnitMenu.getChildren().add(anchorPane);
-    }
+
 }
