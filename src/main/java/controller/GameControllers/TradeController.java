@@ -5,7 +5,7 @@ import model.Game.Trade;
 import model.User.Player;
 import model.enums.AssetType.Material;
 import utils.SignupAndLoginUtils;
-import view.GameMenus.TradeMenu;
+import view.GameMenus.TradeMenus.TradeMenu;
 import view.enums.messages.TradeMenuMessage;
 
 import java.util.ArrayList;
@@ -24,6 +24,15 @@ public class TradeController {
         while (true) {
             if (menu.run().equals("back")) return;
         }
+    }
+
+    public ArrayList<Trade> getDonates(){
+        ArrayList<Trade> donates = new ArrayList<>();
+        for (Trade trade: trades) {
+            if (trade.getOwner().equals(game.getCurrentPlayer()) && !trade.isRequest())
+                donates.add(trade);
+        }
+            return donates;
     }
 
     public TradeMenuMessage request(HashMap<String, String> inputs) {
@@ -80,7 +89,7 @@ public class TradeController {
 
     private Trade getTradeById(int id) {
         for (Trade trade : trades) {
-            if (id == trade.getId())
+            if (id == trade.getID())
                 return trade;
         }
         return null;

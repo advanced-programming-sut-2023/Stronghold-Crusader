@@ -2,38 +2,39 @@ package model.Game;
 
 import model.enums.AssetType.Material;
 import model.User.Player;
-import utils.Pair;
 
 public class Trade {
     public static int numberOfTrades = 0;
-    private final int id;
-    private boolean acceptanceMode;
+    private final int ID;
+    private boolean state;
     private final Player owner;
     private final Player acceptor;
     private final boolean requestMode;
-    private final Pair info;
+    private final Material good;
+    private final int amount;
     private String acceptorMessage;
-    private String message;
+    private String Message;
 
 
-    public Trade(Player owner,Player acceptor, Material material, int amount, boolean isRequest  ) {
-        info = new Pair(material, amount);
+    public Trade(Player owner, Player acceptor, Material material, int amount, boolean isRequest  ) {
+        good = material;
+        this.amount = amount;
         this.acceptor = acceptor;
         this.owner = owner;
         this.requestMode = isRequest;
-        acceptanceMode = false;
+        state = false;
         numberOfTrades++;
-        id = numberOfTrades;
+        ID = numberOfTrades;
         acceptorMessage = null;
-        message = null;
+        Message = null;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
     public boolean isAccepted() {
-        return acceptanceMode;
+        return state;
     }
 
     public Player getOwner() {
@@ -45,13 +46,16 @@ public class Trade {
     }
 
     public Material getMaterial() {
-        return Material.getMaterial(info.x);
+        return good;
     }
 
     public int getAmount() {
-        return Integer.parseInt(info.y);
+        return amount;
     }
 
+    public String getMessage() {
+        return Message;
+    }
 
     public boolean isRequest() {
         return requestMode;
@@ -59,7 +63,7 @@ public class Trade {
 
 
     public void accept() {
-        acceptanceMode = true;
+        state = true;
         owner.getNewTrades().add(this);
     }
 
@@ -68,25 +72,25 @@ public class Trade {
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.Message = message;
     }
 
     @Override
     public String toString() {
         String trade = (!requestMode) ? "Donation" : "Request";
         return trade + "{" + "\n" +
-                "id = " + id + "\n" +
-                "acceptanceMode = " + acceptanceMode + "\n" +
+                "id = " + ID + "\n" +
+                "acceptanceMode = " + state + "\n" +
                 "owner = " + owner.getUsername() + "\n" +
                 "acceptor = " + acceptor + "\n" +
                 "price = " + requestMode + "\n" +
-                "info = " + info + "\n" +
+                "info = " + good + ":" + amount + "\n" +
                 "acceptorMessage = " + acceptorMessage + '\'' + "\n" +
                 '}' + "\n";
     }
 
     public String showAcceptedTrade() {
         assert acceptor != null;
-        return "the trade with id:[" + id + "]" + "accepted by " + acceptor.getUsername() + "\nmessage:" + acceptorMessage;
+        return "the trade with id:[" + ID + "]" + "accepted by " + acceptor.getUsername() + "\nmessage:" + acceptorMessage;
     }
 }

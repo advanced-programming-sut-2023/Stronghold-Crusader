@@ -1,4 +1,4 @@
-package view.GameMenus;
+package view.GameMenus.TradeMenus;
 
 import controller.GameControllers.TradeController;
 import javafx.application.Application;
@@ -233,9 +233,11 @@ public class TradeMenu extends Application {
         this.start(stage);
     }
 
-    public void goToDonatesMenu(MouseEvent mouseEvent) throws IOException {
-        AnchorPane anchorPane = FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/DonatesMenu.fxml"));
-        stage.setScene(new Scene(anchorPane));
-        stage.show();
+    public void goToDonatesMenu(MouseEvent mouseEvent) throws Exception {
+        new DonateMenu().start(stage);
+    }
+
+    public static TradeController getTradeController() {
+        return tradeController;
     }
 }

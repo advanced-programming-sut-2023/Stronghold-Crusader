@@ -9,7 +9,6 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Game.Governance;
 import view.GameMenus.MarketMenus.MarketMenu;
+import view.GameMenus.TradeMenus.TradeMenu;
 
 import java.io.IOException;
 
