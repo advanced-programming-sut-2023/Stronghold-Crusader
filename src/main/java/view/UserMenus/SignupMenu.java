@@ -86,6 +86,13 @@ public class SignupMenu extends Application implements Initializable {
                 emailError.setText(SignupAndLoginMessage.INVALID_EMAIL_FORMAT.getOutput());
             else emailError.setText("");
         });
+
+        username.textProperty().addListener((observable, oldText, newText) -> {
+            if (!FormatValidation.isFormatValid(username.getText(), FormatValidation.USERNAME)
+            && !username.getText().equals(""))
+                usernameError.setText(SignupAndLoginMessage.INVALID_USERNAME_FORMAT.getOutput());
+            else usernameError.setText("");
+        });
     }
 
 
