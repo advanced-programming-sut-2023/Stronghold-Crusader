@@ -10,7 +10,6 @@ import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.UnitState;
 import model.enums.AttackTarget;
 import utils.Vector2D;
-import view.GameMenus.SelectedUnitMenu;
 import view.enums.messages.GameMessage.SelectedUnitMessage;
 
 import java.util.ArrayList;

@@ -29,6 +29,7 @@ import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 import view.GameMenus.GraphicGameMenu;
 import view.GameMenus.SelectedBuildingMenu;
+import view.GameMenus.SelectedUnitMenus.SelectedUnitMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
@@ -160,6 +161,7 @@ public class GraphicsController {
         Tooltip.install(cellGrid, tooltip);
         for (MapAsset asset : cell.getAllAssets()) {
             ImageView imageView = new ImageView(asset.getType().getImage());
+            imageView.setPreserveRatio(true);
             double fitSize = 20;
             if (asset instanceof Building || asset instanceof Tree || asset instanceof Cliff)
                 fitSize = 80;
@@ -432,7 +434,8 @@ public class GraphicsController {
     }
 
     public void loadSelectedUnitMenu() throws IOException {
-        System.out.println("loading");
+        SelectedUnitMenu.setController(gameController.getSelectedUnitController());
+        SelectedUnitMenu.setGraphicGameMenu(gameMenu);
         selectedUnitMenu.getChildren().clear();
         AnchorPane pane = FXMLLoader.load(GraphicGameMenu.class.
                 getResource("/FXML/Gamefxml/selectedUnitMenus/selectedUnitMain.fxml"));

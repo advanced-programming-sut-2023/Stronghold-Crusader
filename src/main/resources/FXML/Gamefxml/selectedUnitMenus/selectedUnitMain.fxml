@@ -5,18 +5,21 @@
 
 <AnchorPane prefHeight="208" prefWidth="216" style="-fx-background-color: transparent"
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.GameMenus.SelectedUnitMenu" maxHeight="208">
+            fx:controller="view.GameMenus.SelectedUnitMenus.SelectedUnitMenu" maxHeight="208">
     <children>
         <TilePane fx:id="selectedUnits" layoutX="57.0" layoutY="9.0" prefColumns="2" prefHeight="192.0"
                   prefWidth="150.0" maxHeight="192.0" orientation="HORIZONTAL">
         </TilePane>
-        <ImageView fitHeight="50.0" fitWidth="52.0" layoutY="7.0" pickOnBounds="true">
+        <ImageView fitHeight="50.0" fitWidth="52.0" layoutY="7.0" pickOnBounds="true"
+                   fx:id="attackButton">
             <Image url="@../../../assets/buttons/attack_btn.png"/>
         </ImageView>
-        <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="-3.0" layoutY="82.0" pickOnBounds="true">
+        <ImageView fitHeight="50.0" fitWidth="52.0" layoutX="-3.0" layoutY="82.0" pickOnBounds="true"
+                   fx:id="moveButton">
             <Image url="@../../../assets/buttons/move_btn.png"/>
         </ImageView>
-        <ImageView fitHeight="35.0" fitWidth="46.0" layoutX="2.0" layoutY="161.0" pickOnBounds="true" rotate="10">
+        <ImageView fitHeight="35.0" fitWidth="46.0" layoutX="2.0" layoutY="161.0" pickOnBounds="true" rotate="10"
+                   fx:id="patrolButton">
             <Image url="@../../../assets/buttons/patrol_btn.png"/>
         </ImageView>
     </children>

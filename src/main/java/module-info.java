@@ -42,4 +42,6 @@ module project.group {
     opens view.GameMenus.MarketMenus to javafx.fxml;
     exports view.GameMenus.TradeMenus;
     opens view.GameMenus.TradeMenus to javafx.fxml;
+    exports view.GameMenus.SelectedUnitMenus;
+    opens view.GameMenus.SelectedUnitMenus to javafx.fxml;
 }
