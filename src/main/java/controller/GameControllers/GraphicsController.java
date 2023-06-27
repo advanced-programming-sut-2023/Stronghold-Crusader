@@ -12,6 +12,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -29,7 +30,9 @@ import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 import view.GameMenus.GraphicGameMenu;
 import view.GameMenus.SelectedBuildingMenu;
+import view.GameMenus.SelectedUnitMenus.CoordinatePopupMenu;
 import view.GameMenus.SelectedUnitMenus.SelectedUnitMenu;
+import view.Main;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 import view.enums.messages.MapMessage.BuildingPlacementMessage;
@@ -227,10 +230,38 @@ public class GraphicsController {
         result = gameController.selectUnit(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
         if (result == GameMenuMessage.UNIT_SELECTED) {
             loadSelectedUnitMenu();
+            runMoveShortcuts();
             TilePane tilePane = (TilePane) ((AnchorPane) selectedUnitMenu.getChildren().get(0)).getChildren().get(0);
             for (MobileUnit unit : unitController.getSelectedUnits())
                 tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
         }
+    }
+
+    private void runMoveShortcuts(){
+        Main.mainStage.getScene().setOnKeyPressed(e -> {
+            if (e.getCode().equals(KeyCode.M)) {
+                try {
+                    CoordinatePopupMenu.getMenu().openPopup();
+                    CoordinatePopupMenu.setMode("move");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else if (e.getCode().equals(KeyCode.A)){
+                try {
+                    CoordinatePopupMenu.getMenu().openPopup();
+                    CoordinatePopupMenu.setMode("attack");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else if (e.getCode().equals(KeyCode.P)){
+                try {
+                    CoordinatePopupMenu.getMenu().openPopup();
+                    CoordinatePopupMenu.setMode("patrol");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
     }
 
     private void runSelectedBuilding() throws IOException {

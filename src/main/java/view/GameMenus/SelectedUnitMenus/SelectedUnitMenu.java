@@ -40,6 +40,7 @@ public class SelectedUnitMenu {
     }
 
     public void initialize(){
+        CoordinatePopupMenu.setMenu(this);
         moveButton.setOnMouseClicked(e -> {
             try {
                 openPopup();
@@ -67,7 +68,6 @@ public class SelectedUnitMenu {
     }
 
     public void openPopup() throws IOException {
-        CoordinatePopupMenu.setMenu(this);
         popup = new Popup();
         AnchorPane pane = FXMLLoader.load(
                 new URL(SelectedUnitMenu.class.

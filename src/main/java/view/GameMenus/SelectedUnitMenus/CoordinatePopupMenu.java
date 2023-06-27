@@ -24,6 +24,10 @@ public class CoordinatePopupMenu {
         CoordinatePopupMenu.menu = menu;
     }
 
+    public static SelectedUnitMenu getMenu() {
+        return menu;
+    }
+
     public static void setMode(String mode) {
         CoordinatePopupMenu.mode = mode;
     }
