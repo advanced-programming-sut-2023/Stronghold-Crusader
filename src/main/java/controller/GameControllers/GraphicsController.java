@@ -242,7 +242,7 @@ public class GraphicsController {
     private void resetSelection() {
         removeAllSelectedBorders();
         gameController.deselectUnits();
-//        selectedUnitMenu.getChildren().clear();
+        selectedUnitMenu.getChildren().clear();
         selectedBuildings.clear();
     }
 

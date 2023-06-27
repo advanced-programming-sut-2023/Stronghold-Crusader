@@ -7,8 +7,8 @@
             xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="view.GameMenus.SelectedUnitMenu">
     <children>
-        <TilePane layoutX="52.0" prefHeight="208.0" prefWidth="199.0" fx:id="selectedUnits"
-        prefColumns="4">
+        <TilePane fx:id="selectedUnits" layoutX="57.0" layoutY="9.0" prefColumns="2" prefHeight="192.0"
+                  prefWidth="150.0" maxHeight="192.0" prefRows="6">
         </TilePane>
         <ImageView fitHeight="50.0" fitWidth="52.0" layoutY="7.0" pickOnBounds="true">
             <Image url="@../../../assets/buttons/attack_btn.png"/>
