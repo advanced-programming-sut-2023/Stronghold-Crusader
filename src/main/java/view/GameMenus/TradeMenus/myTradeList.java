@@ -3,7 +3,6 @@ package view.GameMenus.TradeMenus;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -21,11 +20,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class DonateMenu extends Application implements Initializable {
+public class myTradeList extends Application implements Initializable {
 
     public TableView<TableItem> donateTrades;
-    @FXML
-    private TableColumn<TableItem, ImageView> stateColumn;
+    public TableColumn<TableItem, String> typeColumn;
+
+    public TableColumn<TableItem, ImageView> stateColumn;
     public TableColumn<TableItem, Integer> IDColumn;
     public TableColumn<TableItem, String> acceptorColumn;
     public TableColumn<TableItem, Circle> goodColumn;
@@ -36,7 +36,7 @@ public class DonateMenu extends Application implements Initializable {
     @Override
     public void start(Stage newStage) throws Exception {
         stage = newStage;
-        AnchorPane anchorPane = FXMLLoader.load(DonateMenu.class.getResource("/FXML/Gamefxml/TradeMenus/DonatesMenu.fxml"));
+        AnchorPane anchorPane = FXMLLoader.load(myTradeList.class.getResource("/FXML/Gamefxml/TradeMenus/DonatesMenu.fxml"));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
         stage.show();
@@ -51,8 +51,9 @@ public class DonateMenu extends Application implements Initializable {
         goodColumn.setCellValueFactory(new PropertyValueFactory<TableItem, Circle>("good"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<TableItem, Integer>("amount"));
         messageColumn.setCellValueFactory(new PropertyValueFactory<TableItem, String>("message"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<TableItem, String>("type"));
 
-        ArrayList<Trade> trades = new ArrayList<>(TradeMenu.getTradeController().getDonates());
+        ArrayList<Trade> trades = new ArrayList<>(TradeMenu.getTradeController().getMyTrades());
         for (Trade trade : trades) {
             TableItem tableItem = new TableItem(trade);
             tradeList.add(tableItem);

@@ -28,4 +28,8 @@ public enum TradeMenuMessage {
     public void printMessage() {
         if (!output.equals("")) System.out.println(output);
     }
+
+    public String getMessage() {
+        return output;
+    }
 }
