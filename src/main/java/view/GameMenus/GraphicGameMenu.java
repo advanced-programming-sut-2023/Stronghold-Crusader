@@ -235,5 +235,7 @@ public class GraphicGameMenu extends Application {
 
     public void nextTurn(){
         gameController.nextTurn();
+        updateGovernmentMenuValues();
+        updatePopularityMenuValues();
     }
 }

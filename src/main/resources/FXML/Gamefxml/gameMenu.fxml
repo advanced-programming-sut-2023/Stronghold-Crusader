@@ -8,7 +8,8 @@
 <AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
     <children>
-        <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0"/>
+        <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true" prefHeight="639.0"
+                    prefWidth="1280.0"/>
         <ImageView fitHeight="182.0" fitWidth="1293.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT"
                    pickOnBounds="true" preserveRatio="true">
             <Image url="@../../assets/graphic/overlay/bottom_menu.png"/>

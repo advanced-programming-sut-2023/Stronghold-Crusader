@@ -489,7 +489,6 @@ public class GraphicsController {
                 }
             }
         }
-        getNodeOfCell(map.getCell(source)).toFront();
         transition.setToX(finalCellGrid.getTranslateX());
         transition.setToY(finalCellGrid.getTranslateY());
         transition.setCycleCount(1);
