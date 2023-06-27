@@ -161,6 +161,7 @@ public class GraphicsController {
         cellGrid.getChildren().clear();
         Tooltip tooltip = new Tooltip(cell.toString());
         Tooltip.install(cellGrid, tooltip);
+        int column = 0;
         for (MapAsset asset : cell.getAllAssets()) {
             ImageView imageView = new ImageView(asset.getType().getImage());
             imageView.setPreserveRatio(true);
@@ -169,7 +170,8 @@ public class GraphicsController {
                 fitSize = 80;
             imageView.setFitHeight(fitSize);
             imageView.setFitWidth(fitSize);
-            cellGrid.getChildren().add(imageView);
+            cellGrid.add(imageView, column % 4, column / 4);
+            column++;
         }
     }
 
