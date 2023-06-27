@@ -126,9 +126,7 @@ public class GraphicGameMenu extends Application {
         fearRateSlider.setValue(gameController.getFearRate());
         foodRateSlider.setValue(gameController.getFoodRate());
         taxRateSlider.setValue(gameController.getTaxRate());
-        populationLabel.setText(String.valueOf(gameController.getPeasentPopulation().get()));
         populationLabel.textProperty().bind(Bindings.convert(gameController.getPeasentPopulation()));
-        goldLabel.setText(String.valueOf(gameController.getGold().get()));
         goldLabel.textProperty().bind(Bindings.convert(gameController.getGold()));
         playerLabel.setText(gameController.getCurrentPlayerName());
         roundLabel.setText(String.valueOf(gameController.getRoundNum()));
