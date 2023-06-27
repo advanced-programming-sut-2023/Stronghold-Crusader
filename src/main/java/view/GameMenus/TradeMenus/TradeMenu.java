@@ -39,7 +39,7 @@ public class TradeMenu extends Application {
     public Button confirmButton;
     private static TradeController tradeController;
     private final HashMap<Paint, Material> materials = new HashMap<>();
-    private Player sentTo;
+    private static Player sentTo;
     private Trade trade;
 
     private static Stage stage = new Stage();
@@ -155,7 +155,6 @@ public class TradeMenu extends Application {
         }
         stage.setScene(new Scene(anchorPane));
         stage.show();
-
     }
 
     public void plus(MouseEvent mouseEvent) {
