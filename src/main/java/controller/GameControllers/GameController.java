@@ -388,4 +388,7 @@ public class GameController {
     public void setGraphicsController(GraphicsController graphicsController) {
         this.graphicsController = graphicsController;
     }
+     public boolean isBuildingSelected(){
+        return selectedBuildingController != null;
+     }
 }

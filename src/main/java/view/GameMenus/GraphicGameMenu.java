@@ -36,15 +36,15 @@ public class GraphicGameMenu extends Application {
     private static GraphicsController graphicsController;
     private static AnchorPane rootPane;
     public ScrollPane mainScrollPane;
-    public AnchorPane bottomPane, leftPane;
+    public AnchorPane bottomPane, leftPane, selectedUnitMenu;
     public Label popularityLabel, populationLabel, goldLabel, roundLabel, playerLabel,
-            foodPopularity, religionPopularity, innPopularity, nextPopularityNum, fearPopularity, taxPopularity;
+            foodPopularity, religionPopularity, innPopularity, nextPopularityNum, fearPopularity,
+            taxPopularity, errorMessageText;
     public VBox selectedUnitsMenu;
     public Slider fearRateSlider, foodRateSlider, taxRateSlider;
-    public ImageView closeLeftBarBtn, openLeftBarBtn, minimap, religionFace, taxFace, innFace, closePopularityBarBtn, fearFace, foodFace, backToDropButton;
+    public ImageView closeLeftBarBtn, openLeftBarBtn, minimap, religionFace, taxFace, innFace, closePopularityBarBtn,
+            fearFace, foodFace, backToDropButton, marketBtn, selectedUnitButton;
     public AnchorPane dropBuildingMenu, marketMenu, popularityMenu, mercenaryPostMenu;
-    public ImageView marketBtn;
-    public Label errorMessageText;
 
     public static void setGameController(GameController gameController) {
         GraphicGameMenu.gameController = gameController;
@@ -76,6 +76,7 @@ public class GraphicGameMenu extends Application {
         initializeDropBuildingMenu();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
+        loadSelectedUnitMenu();
     }
 
     private void initializeScrollPane() {
@@ -115,6 +116,7 @@ public class GraphicGameMenu extends Application {
         openLeftBarBtn.setVisible(false);
         openLeftBarBtn.setOnMouseClicked(mouseEvent -> {
             leftPane.setVisible(true);
+            selectedUnitButton.setVisible(gameController.isBuildingSelected());
             openLeftBarBtn.setVisible(false);
             closeLeftBarBtn.setVisible(true);
         });
@@ -205,11 +207,6 @@ public class GraphicGameMenu extends Application {
         MarketMenu.marketController = new MarketController(gameController.getCurrentPlayer());
     }
 
-
-    public static void initializeMercenaryPost() {
-
-    }
-
     public void openPopularity() {
         popularityMenu.setVisible(true);
     }
@@ -240,5 +237,10 @@ public class GraphicGameMenu extends Application {
         new TradeMenu().start(new Stage());
     }
 
-
+    public void loadSelectedUnitMenu() throws IOException {
+        selectedUnitMenu.getChildren().clear();
+        AnchorPane anchorPane = FXMLLoader.load(GraphicGameMenu.class.
+                getResource("/FXML/Gamefxml/selectedUnitMenus/selectedUnitMain.fxml"));
+        selectedUnitMenu.getChildren().add(anchorPane);
+    }
 }

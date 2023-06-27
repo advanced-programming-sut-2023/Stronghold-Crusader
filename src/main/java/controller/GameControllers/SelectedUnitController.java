@@ -26,8 +26,8 @@ public class SelectedUnitController {
     }
 
     public void run() {
-        SelectedUnitMenu selectedUnitMenu = new SelectedUnitMenu(this);
-        selectedUnitMenu.run();
+//        SelectedUnitMenu selectedUnitMenu = new SelectedUnitMenu(this);
+//        selectedUnitMenu.run();
     }
 
     public SelectedUnitMessage moveUnit(int x, int y) {
