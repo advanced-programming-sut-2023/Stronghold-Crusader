@@ -233,5 +233,7 @@ public class GraphicGameMenu extends Application {
         new TradeMenu().start(new Stage());
     }
 
-
+    public void nextTurn(){
+        gameController.nextTurn();
+    }
 }

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -470,7 +471,7 @@ public class GraphicsController {
     public void addTransition(MobileUnit unit, Vector2D source, Vector2D dest){
         GridPane initialCellGrid = (GridPane) mainGrid.getChildren().get(source.x + map.getSize().x * source.y);
         GridPane finalCellGrid = (GridPane) mainGrid.getChildren().get(dest.x + map.getSize().x * dest.y);
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(1));
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(2));
         for (Node node : initialCellGrid.getChildren()) {
             if (node instanceof ImageView){
                 String path = ((ImageView) node).getImage().getUrl();
@@ -487,11 +488,13 @@ public class GraphicsController {
                 }
             }
         }
-        transition.setToX(finalCellGrid.getTranslateX());
-        transition.setToY(finalCellGrid.getTranslateY());
-        transition.setAutoReverse(false);
+        getNodeOfCell(map.getCell(source)).toFront();
+        transition.setByX(finalCellGrid.getTranslateX() - initialCellGrid.getTranslateX());
+        transition.setByX(finalCellGrid.getTranslateY() - initialCellGrid.getTranslateY());
+//        transition.setToY();
         transition.setCycleCount(1);
         transition.play();
+        transition.setOnFinished(e -> map.addMapObject(dest, unit));
     }
 
     public void loadSelectedUnitMenu() throws IOException {
