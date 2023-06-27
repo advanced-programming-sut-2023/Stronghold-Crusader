@@ -307,13 +307,13 @@ public class GraphicsController {
     private HBox createUnitSelectionItem(MobileUnit unit, SelectedUnitController unitController) {
         ImageView unitImage = new ImageView(unit.getType().getImage());
         unitImage.setFitHeight(30);
-        unitImage.setFitWidth(30);
+        unitImage.setFitWidth(25);
         ImageView deselectedImage = new ImageView(new Image(GraphicsController.class.getResource("/assets/icons/red.png").toExternalForm()));
-        deselectedImage.setFitWidth(30);
+        deselectedImage.setFitWidth(25);
         deselectedImage.setFitHeight(30);
         deselectedImage.setVisible(false);
         ImageView selectedImage = new ImageView(new Image(GraphicsController.class.getResource("/assets/icons/green.png").toExternalForm()));
-        selectedImage.setFitWidth(30);
+        selectedImage.setFitWidth(25);
         selectedImage.setFitHeight(30);
         deselectedImage.setOnMouseClicked(mouseEvent -> {
             selectedImage.setVisible(true);

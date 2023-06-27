@@ -1,6 +1,7 @@
 package view.GameMenus;
 
 import controller.GameControllers.SelectedUnitController;
+import javafx.geometry.Orientation;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import view.Menu;
@@ -11,5 +12,7 @@ import java.util.regex.Matcher;
 
 public class SelectedUnitMenu {
     public TilePane selectedUnits;
+    public void initialize(){
 
+    }
 }
