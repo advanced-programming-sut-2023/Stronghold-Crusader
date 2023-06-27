@@ -26,7 +26,7 @@ public class SelectedUnitMenu {
     public TilePane selectedUnits;
     private static SelectedUnitController controller;
     private static GraphicGameMenu graphicGameMenu;
-    private static Popup popup;
+    private static Popup popup, moveTypePopup;
     public ImageView attackButton;
     public ImageView moveButton;
     public ImageView patrolButton;
@@ -76,6 +76,19 @@ public class SelectedUnitMenu {
         popup.show(Main.mainStage);
     }
 
+    public static void openMoveTypePopup() throws IOException {
+        moveTypePopup = new Popup();
+        AnchorPane pane = FXMLLoader.load(
+                new URL(SelectedUnitMenu.class.
+                        getResource("/FXML/Gamefxml/selectedUnitMenus/moveTypePopup.fxml").toExternalForm()));
+        moveTypePopup.getContent().add(pane);
+        moveTypePopup.show(Main.mainStage);
+    }
+
+
+    public static void closeMoveTypePopup(){
+        moveTypePopup.hide();
+    }
     public static void closePopup(){
         popup.hide();
     }

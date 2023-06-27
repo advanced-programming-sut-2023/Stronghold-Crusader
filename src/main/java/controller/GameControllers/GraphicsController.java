@@ -11,9 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -183,23 +181,7 @@ public class GraphicsController {
         GridPane cellGrid = new GridPane();
         Tooltip tooltip = new Tooltip(cell.toString());
         Tooltip.install(cellGrid, tooltip);
-        cellGrid.setOnDragDropped(e -> {
-            Dragboard dragboard = e.getDragboard();
-            if (dragboard.hasString()) {
-                String path = dragboard.getString();
-                Pattern pattern = Pattern.compile("/assets/graphic/buildings/(?<name>\\S+)\\.png");
-                Matcher matcher = pattern.matcher(path);
-                //noinspection ResultOfMethodCallIgnored
-                matcher.find();
-                BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
-                        MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),
-                        cell.getCoordinate().x, cell.getCoordinate().y, false);
-                if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS)) {
-                    gameMenu.printError(msg.getMessage());
-                }
-            }
-            e.consume();
-        });
+        setBuildingDrop(cellGrid, cell);
         cellGrid.setOnMouseClicked(mouseEvent -> {
             resetSelection();
             try {
@@ -210,6 +192,46 @@ public class GraphicsController {
         });
         return cellGrid;
     }
+
+    private void setBuildingDrop(GridPane cellGrid, Cell cell){
+        cellGrid.setOnDragDropped(e -> {
+            Dragboard dragboard = e.getDragboard();
+            if (dragboard.hasString()) {
+                String dragText = dragboard.getString();
+                Pattern pattern = Pattern.compile("/assets/graphic/buildings/(?<name>\\S+)\\.png");
+                Matcher matcher = pattern.matcher(dragText);
+                //noinspection ResultOfMethodCallIgnored
+                if (matcher.find()){
+                    BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
+                            MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),
+                            cell.getCoordinate().x, cell.getCoordinate().y, false);
+                    if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS)) {
+                        gameMenu.printError(msg.getMessage());
+                    }
+                } else if (dragText.equals("movingTroop")){
+                    CoordinatePopupMenu.setFinalCoordinate(cell.getCoordinate());
+                    try {
+                        SelectedUnitMenu.openMoveTypePopup();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+            e.consume();
+        });
+    }
+
+    private void setMoveByDrag(GridPane cellGrid){
+        cellGrid.setOnDragDetected(event -> {
+            Dragboard dragboard = mainGrid.startDragAndDrop(TransferMode.COPY);
+            ClipboardContent content = new ClipboardContent();
+            String draggedText = "movingTroop";
+            content.putString(draggedText);
+            dragboard.setContent(content);
+            event.consume();
+        });
+    }
+
 
     private void removeAllSelectedBorders() {
         for (int i = 0; i < mainGrid.getChildren().size(); i++) {
@@ -231,6 +253,7 @@ public class GraphicsController {
         if (result == GameMenuMessage.UNIT_SELECTED) {
             loadSelectedUnitMenu();
             runMoveShortcuts();
+            setMoveByDrag(cellGrid);
             TilePane tilePane = (TilePane) ((AnchorPane) selectedUnitMenu.getChildren().get(0)).getChildren().get(0);
             for (MobileUnit unit : unitController.getSelectedUnits())
                 tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
@@ -277,6 +300,7 @@ public class GraphicsController {
         gameController.deselectUnits();
         selectedUnitMenu.getChildren().clear();
         selectedBuildings.clear();
+        if (lastSelectedCell != null) getNodeOfCell(lastSelectedCell).setOnDragDetected(null);
     }
 
     private void loadSelectedBuildingFxml(MapAssetType type) throws IOException {
@@ -365,6 +389,12 @@ public class GraphicsController {
         int index = mainGrid.getChildren().indexOf(cellGrid);
         Vector2D coordinate = new Vector2D(index % map.getSize().x, index / map.getSize().x);
         return map.getCell(coordinate);
+    }
+
+    private GridPane getNodeOfCell(Cell cell) {
+        Vector2D cellCoord = cell.getCoordinate();
+        int index = cellCoord.x + map.getSize().x * cellCoord.y;
+        return (GridPane) mainGrid.getChildren().get(index);
     }
 
     public void zoom(double v) {

@@ -20,6 +20,10 @@ public class CoordinatePopupMenu {
         return finalCoordinate;
     }
 
+    public static void setFinalCoordinate(Vector2D finalCoordinate) {
+        CoordinatePopupMenu.finalCoordinate = finalCoordinate;
+    }
+
     public static void setMenu(SelectedUnitMenu menu) {
         CoordinatePopupMenu.menu = menu;
     }

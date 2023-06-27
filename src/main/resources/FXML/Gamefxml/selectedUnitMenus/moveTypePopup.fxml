@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="174.0" prefWidth="200" style="-fx-background-color: #b29663; -fx-border-color: black"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenus.SelectedUnitMenus.MoveTypeMenu">
+    <Label layoutX="1.0" layoutY="-1.0" prefHeight="60.0" prefWidth="200.0" text="Please Choose Your Action Type"
+           textAlignment="CENTER" wrapText="true">
+        <font>
+            <Font name="Constantia" size="16.0"/>
+        </font>
+    </Label>
+    <ImageView fitHeight="115.0" fitWidth="142.0" layoutX="28.0" layoutY="64.0"
+               pickOnBounds="true" preserveRatio="true" fx:id="move">
+        <Image url="@../../../assets/buttons/move2_btn.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="115.0" fitWidth="142.0" layoutX="28.0" layoutY="99.0"
+               pickOnBounds="true" preserveRatio="true" fx:id="attack">
+        <Image url="@../../../assets/buttons/attack2_btn.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="115.0" fitWidth="142.0" layoutX="28.0" layoutY="135.0"
+               pickOnBounds="true" preserveRatio="true" fx:id="petrol">
+        <Image url="@../../../assets/buttons/petrol2_btn.jpg"/>
+    </ImageView>
+</AnchorPane>
