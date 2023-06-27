@@ -161,20 +161,11 @@ public class GameController {
 
     private void applyUnitDecisions() {
         Map map = game.getMap();
-        Vector2D currentCoord = new Vector2D(0, 0);
-        for (int y = 0; y < map.getSize().y; y++) {
-            for (int x = 0; x < map.getSize().x; x++) {
-                currentCoord.x = x;
-                currentCoord.y = y;
-                ArrayList<MapAsset> cellAssets = map.getCell(currentCoord).getAllAssets();
-                for (int i = cellAssets.size() - 1; i >= 0; i--) {
-                    MapAsset asset = cellAssets.get(i);
-                    if (asset instanceof MobileUnit) {
-                        processMovement(map, (MobileUnit) asset);
-                        processSteppedOnKillingPit((MobileUnit) asset);
-                    }
-                    if (asset instanceof AttackingUnit) processAttack((AttackingUnit) asset);
-                }
+        for (Player player : game.getPlayers()) {
+            for (MobileUnit unit : player.getGovernance().getUnits()) {
+                processMovement(map, unit);
+                processSteppedOnKillingPit(unit);
+                if (unit instanceof AttackingUnit) processAttack((AttackingUnit) unit);
             }
         }
     }
@@ -188,7 +179,6 @@ public class GameController {
     }
 
     private void processMovement(Map map, MobileUnit mobileUnit) {
-        System.out.println(mobileUnit);
         Vector2D pastCoordinate = mobileUnit.getCoordinate();
         if (mobileUnit.hasNextMoveDestination())
             mobileUnit.move();
