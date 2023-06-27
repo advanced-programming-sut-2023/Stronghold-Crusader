@@ -469,6 +469,7 @@ public class GraphicsController {
     }
 
     public void addTransition(MobileUnit unit, Vector2D source, Vector2D dest){
+        System.out.println(unit);
         GridPane initialCellGrid = (GridPane) mainGrid.getChildren().get(source.x + map.getSize().x * source.y);
         GridPane finalCellGrid = (GridPane) mainGrid.getChildren().get(dest.x + map.getSize().x * dest.y);
         TranslateTransition transition = new TranslateTransition(Duration.seconds(2));
@@ -489,12 +490,13 @@ public class GraphicsController {
             }
         }
         getNodeOfCell(map.getCell(source)).toFront();
-        transition.setByX(finalCellGrid.getTranslateX() - initialCellGrid.getTranslateX());
-        transition.setByX(finalCellGrid.getTranslateY() - initialCellGrid.getTranslateY());
-//        transition.setToY();
+        transition.setToX(finalCellGrid.getTranslateX());
+        transition.setToY(finalCellGrid.getTranslateY());
         transition.setCycleCount(1);
+//        transition.setOnFinished(e -> {
+//            map.addMapObject(dest, unit);
+//        });
         transition.play();
-        transition.setOnFinished(e -> map.addMapObject(dest, unit));
     }
 
     public void loadSelectedUnitMenu() throws IOException {

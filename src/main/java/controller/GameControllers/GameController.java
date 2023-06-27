@@ -188,11 +188,12 @@ public class GameController {
     }
 
     private void processMovement(Map map, MobileUnit mobileUnit) {
+        System.out.println(mobileUnit);
         Vector2D pastCoordinate = mobileUnit.getCoordinate();
         if (mobileUnit.hasNextMoveDestination())
             mobileUnit.move();
         Vector2D newCoordinate = mobileUnit.getCoordinate();
-//        graphicsController.addTransition(mobileUnit, pastCoordinate, newCoordinate);
+        graphicsController.addTransition(mobileUnit, pastCoordinate, newCoordinate);
         map.removeMapObject(pastCoordinate, mobileUnit);
         map.addMapObject(newCoordinate, mobileUnit);
     }
