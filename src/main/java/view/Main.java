@@ -4,7 +4,6 @@ import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.SelectedBuildingController;
 import controller.MapControllers.BuildingPlacementController;
-import controller.UserControllers.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.ConstantManager;
@@ -16,7 +15,6 @@ import model.User.Player;
 import model.enums.User.Color;
 import view.GameMenus.GraphicGameMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
-import view.UserMenus.LoginMenu;
 
 import java.util.HashMap;
 
