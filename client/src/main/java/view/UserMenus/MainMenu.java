@@ -20,6 +20,8 @@ import view.MapMenus.GraphicMapSelectMenu;
 public class MainMenu extends Application {
     public static MainController mainController;
     public ImageView newGameButton, profileMenuButton, aboutButton, logoutButton;
+    public ImageView chatroomButton;
+    public ImageView FriendMenuButton;
 
     @Override
     public void start(Stage stage) throws Exception {

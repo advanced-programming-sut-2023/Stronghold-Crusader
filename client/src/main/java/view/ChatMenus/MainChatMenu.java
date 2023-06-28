@@ -1,5 +1,6 @@
 package view.ChatMenus;
 
+import controller.ChatControllers.ChatController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -34,6 +35,7 @@ public class MainChatMenu extends Application {
     public VBox chatPane;
     public ScrollPane chatPaneScroll;
     public ScrollPane chatListScroll;
+    private ChatController controller;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -66,9 +68,27 @@ public class MainChatMenu extends Application {
         Message msg = new Message("diba", content,
                 calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         sendMessage(msg);
+        // add to chat instance in controller
     }
 
+    public void processReceiveMessage() throws IOException {
+        String content = text.getText();
+        text.clear();
+        Date date = new Date();
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        Message msg = new Message("diba", content,
+                calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        sendMessage(msg);
+        // add to chat instance in controller
+        // notify the server to send the message to all other users
+    }
+
+
+
     public void loadChat(Chat chat) throws IOException {
+        // save previous chat (send chat file to all participants)
+        // add current chat to controller
         if (chat == null) chatPane = null;
         else {
             String userName = chat.getOwner();
@@ -122,6 +142,7 @@ public class MainChatMenu extends Application {
         if (msg.getSenderUsername().equals(userName)) {
             sendMessage(msg);
         } else {
+            // if message is unseen set it to seen and save it in the controller
             receiveMessage(msg);
         }
     }
