@@ -1,73 +1,89 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.User.User;
 import model.User.UserManager;
+import network.Connection;
+import network.Request;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Stronghold {
     private static Stronghold instance = null;
-    private final HashMap<String, User> users = new HashMap<>();
-    private final ArrayList<User> userRankings = new ArrayList<>();
 
     private Stronghold() {
     }
 
-    public static void load() {
-        if (instance == null) {
-            instance = new Stronghold();
-            UserManager.load(instance);
-        }
-    }
-
     public static Stronghold getInstance() {
+        if(instance == null)
+            instance = new Stronghold();
         return instance;
     }
 
-    public void updateData() {
-        UserManager.updateAllUsers(users.values());
-    }
-
     public User getUser(String username) {
-        if (!users.containsKey(username)) return null;
-        return users.get(username);
+        Request request = new Request();
+        request.setType("users_query");
+        request.setCommand("get_user");
+        request.addParameter("username", username);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.equals("no_user")) return null;
+        return new Gson().fromJson(result, User.class);
     }
 
     public void addUser(User user) {
-        users.put(user.getUsername(), user);
-        userRankings.add(user);
-        updateData();
-    }
-
-    public void updateRankings() {
-        userRankings.sort((o1, o2) -> o2.getHighScore() - o1.getHighScore());
+        Request request = new Request();
+        request.setType("users_query");
+        request.setCommand("add_user");
+        request.addParameter("user", new Gson().toJson(user));
+        Connection.getInstance().sendRequest(request);
     }
 
     public int getUserRank(User user) {
-        for (int i = 0; i < userRankings.size(); i++) {
-            if (userRankings.get(i).equals(user)) return i + 1;
-        }
-        return 0;
+        Request request = new Request();
+        request.setType("users_query");
+        request.setCommand("get_user_rank");
+        request.addParameter("username", user.getUsername());
+        String result = Connection.getInstance().sendRequest(request);
+        return Integer.parseInt(result);
     }
 
     public boolean emailExists(String email) {
-        for (User user : users.values()) {
-            if (user.getEmail().equalsIgnoreCase(email)) return true;
-        }
-        return false;
+        Request request = new Request();
+        request.setType("users_query");
+        request.setCommand("email_exists");
+        request.addParameter("email", email);
+        return Boolean.parseBoolean(Connection.getInstance().sendRequest(request));
     }
 
     public boolean userExists(String username) {
-        return users.containsKey(username);
+        Request request = new Request();
+        request.setType("users_query");
+        request.setCommand("user_exists");
+        request.addParameter("username", username);
+        return Boolean.parseBoolean(Connection.getInstance().sendRequest(request));
     }
 
     public Collection<User> getUsers() {
-        return users.values();
+        Request request = new Request();
+        request.setType("users_query");
+        request.setCommand("get_users");
+        String result = Connection.getInstance().sendRequest(request);
+        Type arrayListType = new TypeToken<ArrayList<User>>() {}.getType();
+        return new Gson().fromJson(result, arrayListType);
     }
 
     public ArrayList<User> getUserRankings() {
-        return userRankings;
+        Request request = new Request();
+        request.setType("users_query");
+        request.setCommand("get_rankings");
+        String result = Connection.getInstance().sendRequest(request);
+        Type arrayListType = new TypeToken<ArrayList<User>>() {}.getType();
+        return new Gson().fromJson(result, arrayListType);
     }
 }

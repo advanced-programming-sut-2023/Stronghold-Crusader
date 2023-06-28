@@ -30,8 +30,6 @@ public class LoginController {
         return LocalDateTime.now().until(this.loginTime, ChronoUnit.SECONDS);
     }
 
-
-
     public SignupAndLoginMessage login(HashMap<String, String> inputs) {
         currentUser = stronghold.getUser(inputs.get("username"));
         if (inputs.get("username").equals("") || inputs.get("password").equals(""))

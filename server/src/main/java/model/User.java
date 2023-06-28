@@ -1,7 +1,8 @@
-package model.User;
+package model;
 
-import model.Stronghold;
-import utils.*;
+import database.Database;
+import utils.Pair;
+import utils.PasswordConverter;
 
 public class User {
     private String username;
@@ -12,6 +13,7 @@ public class User {
     private Pair passwordRecovery;
     private String avatarPath;
     private int highScore;
+    private int rank;
 
     public User(String username, String password, String email, String nickname, String slogan) {
         this.username = username;
@@ -41,8 +43,8 @@ public class User {
 
     public void setHighScore(int highScore) {
         this.highScore = highScore;
-        Stronghold.getInstance().updateRankings();
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateRankings();
+        Database.getInstance().updateData();
     }
 
     public String getEmail() {
@@ -63,42 +65,42 @@ public class User {
 
     public void changeUsername(String username) {
         this.username = username;
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public void changeNickname(String nickname) {
         this.nickname = nickname;
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public void changeSlogan(String slogan) {
         this.slogan = slogan;
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public void changeEmail(String email) {
         this.email = email;
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public void setPasswordRecovery(Pair passwordRecovery) {
         this.passwordRecovery = passwordRecovery;
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public void setPassword(String newPass) {
         this.password = PasswordConverter.encodePassword(newPass);
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public void removeSlogan() {
         this.slogan = "";
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
-        Stronghold.getInstance().updateData();
+        Database.getInstance().updateData();
     }
 
     public String getAvatarPath() {
@@ -115,6 +117,6 @@ public class User {
     }
 
     public int getRank() {
-        return Stronghold.getInstance().getUserRank(this);
+        return rank = Database.getInstance().getUserRank(username);
     }
 }
