@@ -22,6 +22,7 @@ import view.UserMenus.MainMenu;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class MainChatMenu extends Application {
 
@@ -63,6 +64,31 @@ public class MainChatMenu extends Application {
             addMessage(msg, userName);
         }
         chatPaneScroll.setContent(chatPane);
+    }
+
+    public void loadRoomChats() throws IOException {
+        chatList = new VBox();
+        chatList.setPrefWidth(161);
+        chatList.setAlignment(Pos.CENTER);
+        ArrayList<Chat> chats = ChatManager.loadRoomChats();
+        for (Chat chat : chats) {
+            addChatItem(chat);
+        }
+        chatListScroll.setContent(chatList);
+    }
+
+    public void addChatItem(Chat chat) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
+                getResource("/FXML/Chatfxml/ChatIcon.fxml").toExternalForm()));
+        ((Label) anchorPane.getChildren().get(1)).setText(chat.getChatId());
+        anchorPane.setOnMouseClicked(e -> {
+            try {
+                loadChat(chat);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        chatList.getChildren().add(anchorPane);
     }
 
     public void addMessage(Message msg, String userName) throws IOException {

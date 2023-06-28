@@ -15,7 +15,7 @@
                 <Circle centerX="20" centerY="20" radius="18" />
             </clip>
         </ImageView>
-        <ImageView fitHeight="76.0" fitWidth="293.0" layoutX="208.0" pickOnBounds="true">
+        <ImageView fitHeight="64.0" fitWidth="293.0" layoutX="208.0" layoutY="4.0" pickOnBounds="true">
             <Image url="@../../assets/graphic/overlay/currentUsersTextBox.png" />
         </ImageView>
         <Label layoutX="228.0" layoutY="15.0" prefHeight="22.0" prefWidth="247.0" textFill="WHITE">

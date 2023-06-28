@@ -107,7 +107,7 @@ public class ChatManager {
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 String fileName = child.getName();
-                Pattern pattern = Pattern.compile("room(?<id>\\S+)");
+                Pattern pattern = Pattern.compile("room(?<id>\\S+)\\.json");
                 Matcher matcher = pattern.matcher(fileName);
                 if (matcher.find()){
                     chats.add(loadChat(matcher.group("id"), Chat.ChatMode.ROOM));
