@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -101,7 +100,7 @@ public class GraphicsController {
         Gson gson = new Gson();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         JsonArray jsonArray = new JsonArray();
-        for (Building building : selectedBuildings){
+        for (Building building : selectedBuildings) {
             JsonObject buildingInfo = new JsonObject();
             buildingInfo.add("coord", gson.toJsonTree(building.getCoordinate()));
             buildingInfo.add("type", gson.toJsonTree(building.getType()));
@@ -196,7 +195,7 @@ public class GraphicsController {
         return cellGrid;
     }
 
-    private void setBuildingDrop(GridPane cellGrid, Cell cell){
+    private void setBuildingDrop(GridPane cellGrid, Cell cell) {
         cellGrid.setOnDragDropped(e -> {
             Dragboard dragboard = e.getDragboard();
             if (dragboard.hasString()) {
@@ -204,14 +203,14 @@ public class GraphicsController {
                 Pattern pattern = Pattern.compile("/assets/graphic/buildings/(?<name>\\S+)\\.png");
                 Matcher matcher = pattern.matcher(dragText);
                 //noinspection ResultOfMethodCallIgnored
-                if (matcher.find()){
+                if (matcher.find()) {
                     BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
                             MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),
                             cell.getCoordinate().x, cell.getCoordinate().y, false);
                     if (!msg.equals(BuildingPlacementMessage.BUILDING_DROP_SUCCESS)) {
                         gameMenu.printError(msg.getMessage());
                     }
-                } else if (dragText.equals("movingTroop")){
+                } else if (dragText.equals("movingTroop")) {
                     CoordinatePopupMenu.setFinalCoordinate(cell.getCoordinate());
                     try {
                         SelectedUnitMenu.openMoveTypePopup();
@@ -224,7 +223,7 @@ public class GraphicsController {
         });
     }
 
-    private void setMoveByDrag(GridPane cellGrid){
+    private void setMoveByDrag(GridPane cellGrid) {
         cellGrid.setOnDragDetected(event -> {
             Dragboard dragboard = mainGrid.startDragAndDrop(TransferMode.COPY);
             ClipboardContent content = new ClipboardContent();
@@ -263,7 +262,7 @@ public class GraphicsController {
         }
     }
 
-    private void runMoveShortcuts(){
+    private void runMoveShortcuts() {
         Main.mainStage.getScene().setOnKeyPressed(e -> {
             if (e.getCode().equals(KeyCode.M)) {
                 try {
@@ -272,14 +271,14 @@ public class GraphicsController {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-            } else if (e.getCode().equals(KeyCode.A)){
+            } else if (e.getCode().equals(KeyCode.A)) {
                 try {
                     CoordinatePopupMenu.getMenu().openPopup();
                     CoordinatePopupMenu.setMode("attack");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-            } else if (e.getCode().equals(KeyCode.P)){
+            } else if (e.getCode().equals(KeyCode.P)) {
                 try {
                     CoordinatePopupMenu.getMenu().openPopup();
                     CoordinatePopupMenu.setMode("patrol");
@@ -470,13 +469,13 @@ public class GraphicsController {
         selectionRect = null;
     }
 
-    public void addTransition(MobileUnit unit, Vector2D source, Vector2D dest){
+    public void addTransition(MobileUnit unit, Vector2D source, Vector2D dest) {
         System.out.println(unit);
         GridPane initialCellGrid = (GridPane) mainGrid.getChildren().get(source.x + map.getSize().x * source.y);
         GridPane finalCellGrid = (GridPane) mainGrid.getChildren().get(dest.x + map.getSize().x * dest.y);
         TranslateTransition transition = new TranslateTransition(Duration.seconds(2));
         for (Node node : initialCellGrid.getChildren()) {
-            if (node instanceof ImageView){
+            if (node instanceof ImageView) {
                 String path = ((ImageView) node).getImage().getUrl();
                 Pattern pattern = Pattern.compile("\\d+");
                 Matcher matcher = pattern.matcher(path);
@@ -484,7 +483,7 @@ public class GraphicsController {
                 if (matcher.find()) {
                     ordinal = Integer.parseInt(matcher.group());
                     MapAssetType type = MapAssetType.getTypeBySerial(ordinal);
-                    if (type.equals(unit.getType())){
+                    if (type.equals(unit.getType())) {
                         transition.setNode(node);
                         break;
                     }
