@@ -13,7 +13,7 @@ import model.MapAsset.Building.EntranceBuilding;
 import model.MapAsset.Building.ProductionBuilding;
 import model.MapAsset.Building.TrainingAndEmploymentBuilding;
 import model.enums.AssetType.MapAssetType;
-import utils.SignupAndLoginUtils;
+import utils.MenusUtils;
 import utils.Sound;
 import view.enums.commands.GameCommand.SelectedBuildingCommand;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
@@ -73,7 +73,7 @@ public class SelectedBuildingMenu implements Initializable {
     }
 
     private void runCreateUnit(Matcher matcher) {
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, SelectedBuildingCommand.CREATE_UNIT.getRegex());
+        HashMap<String, String> inputs = MenusUtils.getInputs(matcher, SelectedBuildingCommand.CREATE_UNIT.getRegex());
         selectedBuildingController.createUnit(null).printMessage();
     }
 

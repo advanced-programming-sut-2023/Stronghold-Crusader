@@ -17,7 +17,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class ScoreBoardMenu extends Application {
-    private static Stage stage;
     public Pane rootPane;
     public TableView userRanking;
 
@@ -33,7 +32,6 @@ public class ScoreBoardMenu extends Application {
         Scene scene = new Scene(rootPane);
         scene.getStylesheets().add(ScoreBoardMenu.class.getResource("/CSS/scoreboardStyle.css").toExternalForm());
         stage.setScene(scene);
-        ScoreBoardMenu.stage = stage;
         stage.setResizable(false);
         stage.setFullScreen(true);
         stage.show();

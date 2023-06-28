@@ -3,16 +3,12 @@ package model;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import model.User.User;
-import model.User.UserManager;
 import network.Connection;
 import network.Request;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Stronghold {
     private static Stronghold instance = null;
@@ -21,7 +17,7 @@ public class Stronghold {
     }
 
     public static Stronghold getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new Stronghold();
         return instance;
     }
@@ -74,7 +70,8 @@ public class Stronghold {
         request.setType("users_query");
         request.setCommand("get_users");
         String result = Connection.getInstance().sendRequest(request);
-        Type arrayListType = new TypeToken<ArrayList<User>>() {}.getType();
+        Type arrayListType = new TypeToken<ArrayList<User>>() {
+        }.getType();
         return new Gson().fromJson(result, arrayListType);
     }
 
@@ -83,7 +80,8 @@ public class Stronghold {
         request.setType("users_query");
         request.setCommand("get_rankings");
         String result = Connection.getInstance().sendRequest(request);
-        Type arrayListType = new TypeToken<ArrayList<User>>() {}.getType();
+        Type arrayListType = new TypeToken<ArrayList<User>>() {
+        }.getType();
         return new Gson().fromJson(result, arrayListType);
     }
 }

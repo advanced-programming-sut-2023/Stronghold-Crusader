@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import model.Game.Trade;
 import model.User.Player;
 import model.enums.AssetType.Material;
-import utils.SignupAndLoginUtils;
+import utils.MenusUtils;
 import view.Menu;
 import view.enums.commands.TradeMenuCommand;
 import view.enums.messages.TradeMenuMessage;
@@ -84,13 +84,13 @@ public class TradeMenu extends Application {
     }
 
     private void requestRun(Matcher matcher) {
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
+        HashMap<String, String> inputs = MenusUtils.getInputs(matcher, TradeMenuCommand.REQUEST.getRegex());
         tradeController.request(inputs).printMessage();
     }
 
 
     private void acceptTradeRun(Matcher matcher) {
-        HashMap<String, String> inputs = SignupAndLoginUtils.getInputs(matcher, TradeMenuCommand.ACCEPT_TRADE.getRegex());
+        HashMap<String, String> inputs = MenusUtils.getInputs(matcher, TradeMenuCommand.ACCEPT_TRADE.getRegex());
        // tradeController.accept_trade(inputs).printMessage();
     }
 

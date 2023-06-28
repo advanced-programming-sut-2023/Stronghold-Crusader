@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="174.0" prefWidth="200" style="-fx-background-color: #b29663; -fx-border-color: black" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.SuccessPopup">
+   <children>
+      <Circle layoutX="100.0" layoutY="48.0" radius="42.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="5.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" textAlignment="CENTER" wrappingWidth="190.0">
+         <font>
+            <Font name="Constantia" size="26.0" />
+         </font>
+      </Text>
+      <FontAwesomeIcon glyphName="CLOSE" layoutX="178.0" layoutY="22.0" size="25" />
+      <Text layoutX="5.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you accept his/her request for friendship ?" textAlignment="CENTER" wrappingWidth="190.0">
+         <font>
+            <Font name="Constantia" size="14.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="99.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/icons/accepted.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="38.0" fitWidth="26.0" layoutX="70.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/icons/deny.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

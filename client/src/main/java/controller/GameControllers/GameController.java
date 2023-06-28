@@ -180,12 +180,10 @@ public class GameController {
 
     private void processMovement(Map map, MobileUnit mobileUnit) {
         Vector2D pastCoordinate = mobileUnit.getCoordinate();
-        if (mobileUnit.hasNextMoveDestination())
-            mobileUnit.move();
-        Vector2D newCoordinate = mobileUnit.getCoordinate();
-//        graphicsController.addTransition(mobileUnit, pastCoordinate, newCoordinate);
-        map.removeMapObject(pastCoordinate, mobileUnit);
-        map.addMapObject(newCoordinate, mobileUnit);
+        if (mobileUnit.hasNextMoveDestination()){
+            Vector2D newCoordinate = mobileUnit.getNextMoveDestination();
+            graphicsController.addTransition(mobileUnit, pastCoordinate, newCoordinate);
+        }
     }
 
     private void processAttack(AttackingUnit attackingAsset) {

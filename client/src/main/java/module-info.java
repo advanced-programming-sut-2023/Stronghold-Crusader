@@ -22,6 +22,7 @@ module project.group {
     opens model.Game to com.google.gson;
     opens model.Game.Store to com.google.gson;
     opens model.Map to com.google.gson;
+    opens model.chatRoom to com.google.gson;
 
     opens view.UserMenus to javafx.fxml;
     opens view.GameMenus to javafx.fxml;
@@ -31,10 +32,12 @@ module project.group {
     exports view.UserMenus;
     exports view.GameMenus;
     exports view.MapMenus;
+    exports view.ChatMenus;
     exports view;
     exports model.User;
     exports model.Game.Store;
     exports model.MapAsset.MobileUnit;
+    exports model.chatRoom;
     exports utils;
     exports view.MapMenus.dropBuildingMenu;
     exports view.GameMenus.MarketMenus;

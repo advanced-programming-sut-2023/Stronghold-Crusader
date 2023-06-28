@@ -3,6 +3,8 @@ package model.User;
 import model.Stronghold;
 import utils.*;
 
+import java.util.ArrayList;
+
 public class User {
     private String username;
     private String password;
@@ -11,9 +13,13 @@ public class User {
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;
+    private final ArrayList<User> friends;
+    private final ArrayList<User> senders;
     private int highScore;
 
     public User(String username, String password, String email, String nickname, String slogan) {
+        friends = new ArrayList<>();
+        senders = new ArrayList<>();
         this.username = username;
         this.password = PasswordConverter.encodePassword(password);
         this.email = email;
@@ -116,5 +122,36 @@ public class User {
 
     public int getRank() {
         return Stronghold.getInstance().getUserRank(this);
+    }
+
+    public void addFriend(User user) {
+        friends.add(user);
+    }
+
+    public void addSender(User user) {
+        senders.add(user);
+    }
+
+    public void removeFriend(User user) {
+        friends.remove(user);
+    }
+
+    public void removeSender(User user) {
+        senders.remove(user);
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
+
+    public ArrayList<User> getSenders() {
+        return senders;
+    }
+
+    public boolean isFriend(User user) {
+        return friends.contains(user);
+    }
+    public boolean isHaveRequestFrom(User user) {
+        return senders.contains(user);
     }
 }
