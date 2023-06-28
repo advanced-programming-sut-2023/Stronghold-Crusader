@@ -3,41 +3,46 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="728" prefWidth="1280.0" stylesheets="@../../CSS/stronghold.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.MainMenu">
+<AnchorPane prefHeight="728" prefWidth="1280.0" stylesheets="@../../CSS/stronghold.css"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.UserMenus.MainMenu">
 
-    <ImageView fitHeight="650" fitWidth="800" layoutX="707.0" layoutY="-34.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/backgrounds/mapSelect.png" />
-        </image>
+    <ImageView fitHeight="650" fitWidth="800" layoutX="707.0" layoutY="-34.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
+        <Image url="@../../assets/backgrounds/mapSelect.png"/>
     </ImageView>
-    <ImageView fx:id="newGameButton" fitHeight="31.0" fitWidth="272.0" layoutX="853.0" layoutY="256.0" nodeOrientation="INHERIT" onMouseClicked="#goToSelectedMapMenu" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/buttons/newGame_btn.jpg" />
-        </image>
+    <ImageView fx:id="newGameButton" fitHeight="31.0" fitWidth="272.0" layoutX="853.0" layoutY="256.0"
+               nodeOrientation="INHERIT" onMouseClicked="#goToSelectedMapMenu" pickOnBounds="true" preserveRatio="true"
+               translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/newGame_btn.jpg"/>
     </ImageView>
-    <ImageView fx:id="profileMenuButton" fitHeight="31.0" fitWidth="257.0" layoutX="853.0" layoutY="295.0" nodeOrientation="INHERIT" onMouseClicked="#goToProfileMenu" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/buttons/profileMenu_btn.jpg" />
-        </image>
+    <ImageView fx:id="profileMenuButton" fitHeight="31.0" fitWidth="257.0" layoutX="853.0" layoutY="295.0"
+               nodeOrientation="INHERIT" onMouseClicked="#goToProfileMenu" pickOnBounds="true" preserveRatio="true"
+               translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/profileMenu_btn.jpg"/>
     </ImageView>
-    <ImageView fx:id="chatroomButton" fitHeight="31.0" fitWidth="257.0" layoutX="853.0" layoutY="295.0" nodeOrientation="INHERIT" onMouseClicked="#goToProfileMenu" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/buttons/profileMenu_btn.jpg" />
-        </image>
+    <ImageView fx:id="chatroomButton" fitHeight="31.0" fitWidth="257.0" layoutX="853.0" layoutY="295.0"
+               nodeOrientation="INHERIT" onMouseClicked="#goToChatroom" pickOnBounds="true" preserveRatio="true"
+               translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/chatroom_btn.jpg"/>
     </ImageView>
-    <ImageView fx:id="FriendMenuButton" fitHeight="31.0" fitWidth="257.0" layoutX="853.0" layoutY="295.0" nodeOrientation="INHERIT" onMouseClicked="#goToProfileMenu" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/buttons/profileMenu_btn.jpg" />
-        </image>
+    <ImageView fx:id="FriendMenuButton" fitHeight="31.0" fitWidth="257.0" layoutX="853.0" layoutY="333.0"
+               nodeOrientation="INHERIT" onMouseClicked="#goToProfileMenu" pickOnBounds="true" preserveRatio="true"
+               translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/friendMenu_btn.jpg"/>
     </ImageView>
-    <ImageView fx:id="aboutButton" fitHeight="31.0" fitWidth="245.0" layoutX="854.0" layoutY="421.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/buttons/about_btn.jpg" />
-        </image>
+    <ImageView fx:id="ScoreBoardMenuButton" fitHeight="31.0" fitWidth="257.0" layoutX="853.0" layoutY="371.0"
+               nodeOrientation="INHERIT" onMouseClicked="#goToScoreBoard" pickOnBounds="true" preserveRatio="true"
+               translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/scoreBoard_btn.jpg"/>
     </ImageView>
-    <ImageView fx:id="logoutButton" fitHeight="31.0" fitWidth="261.0" layoutX="854.0" layoutY="458.0" nodeOrientation="INHERIT" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/buttons/logout_btn.jpg" />
-        </image>
+    <ImageView fx:id="aboutButton" fitHeight="31.0" fitWidth="245.0" layoutX="854.0" layoutY="408.0"
+               nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/about_btn.jpg"/>
+    </ImageView>
+    <ImageView fx:id="logoutButton" fitHeight="31.0" fitWidth="261.0" layoutX="854.0" layoutY="446.0"
+               nodeOrientation="INHERIT" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true"
+               translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/logout_btn.jpg"/>
     </ImageView>
 </AnchorPane>

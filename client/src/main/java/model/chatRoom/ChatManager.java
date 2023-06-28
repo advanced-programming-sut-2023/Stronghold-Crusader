@@ -2,6 +2,7 @@ package model.chatRoom;
 
 import Settings.Settings;
 import com.google.gson.*;
+import model.Stronghold;
 
 
 import java.io.*;
@@ -23,6 +24,14 @@ public class ChatManager {
         if (!resourceDir.exists()) {
             try {
                 new File(Settings.GLOBAL_CHAT_PATH).createNewFile();
+                ArrayList<String> users = new ArrayList<>();
+                users.add("diba");
+                Chat chat = new Chat(users, Chat.ChatMode.GLOBAL, "Chat", "diba");
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                JsonObject mainObject = gson.toJsonTree(chat).getAsJsonObject();
+                FileWriter fileWriter = new FileWriter(Settings.GLOBAL_CHAT_PATH);
+                fileWriter.write(gson.toJson(mainObject));
+                fileWriter.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

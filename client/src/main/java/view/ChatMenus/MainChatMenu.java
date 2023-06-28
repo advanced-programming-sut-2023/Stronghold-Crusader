@@ -37,6 +37,10 @@ public class MainChatMenu extends Application {
     public ScrollPane chatListScroll;
     private ChatController controller;
 
+    public void setController(ChatController controller) {
+        this.controller = controller;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         URL url = LoginMenu.class.getResource("/FXML/Chatfxml/MainChatFxml.fxml");
@@ -55,8 +59,7 @@ public class MainChatMenu extends Application {
 
 
     public void initialize() throws IOException {
-        Chat chat = ChatManager.loadChat("chat1", Chat.ChatMode.PRIVATE);
-        loadChat(chat);
+        loadChat(ChatManager.loadGlobalChat());
     }
 
     public void processSendMessage() throws IOException {
@@ -80,15 +83,13 @@ public class MainChatMenu extends Application {
         Message msg = new Message("diba", content,
                 calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         sendMessage(msg);
-        // add to chat instance in controller
-        // notify the server to send the message to all other users
+        controller.addMessage(msg);
     }
 
 
 
     public void loadChat(Chat chat) throws IOException {
-        // save previous chat (send chat file to all participants)
-        // add current chat to controller
+        if (controller != null) controller.changeCurrentChat(chat);
         if (chat == null) chatPane = null;
         else {
             String userName = chat.getOwner();
