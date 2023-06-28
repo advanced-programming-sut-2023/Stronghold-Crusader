@@ -6,12 +6,8 @@ import model.chatRoom.Message;
 
 public class ChatController {
     private Chat currentChat;
-    public ChatController(){
-        currentChat = ChatManager.loadGlobalChat();
-    }
 
-    public void changeCurrentChat(Chat chat) {
-        updateChat();
+    public void setCurrentChat(Chat chat) {
         currentChat = chat;
     }
 
@@ -20,7 +16,8 @@ public class ChatController {
     }
 
     public void updateChat(){
-        ChatManager.updateChat(currentChat, currentChat.getChatMode());
+        if (currentChat != null)
+            ChatManager.updateChat(currentChat, currentChat.getChatMode());
     }
 
     public void addMessage(Message msg){

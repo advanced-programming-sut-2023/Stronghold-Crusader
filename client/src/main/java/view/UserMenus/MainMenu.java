@@ -66,7 +66,7 @@ public class MainMenu extends Application {
     public void goToChatroom() throws Exception {
         ChatController chatController = new ChatController();
         MainChatMenu chatMenu = new MainChatMenu();
-        chatMenu.setController(chatController);
+        MainChatMenu.setController(chatController);
         chatMenu.start(Main.mainStage);
     }
 

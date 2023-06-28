@@ -35,10 +35,10 @@ public class MainChatMenu extends Application {
     public VBox chatPane;
     public ScrollPane chatPaneScroll;
     public ScrollPane chatListScroll;
-    private ChatController controller;
+    private static ChatController controller;
 
-    public void setController(ChatController controller) {
-        this.controller = controller;
+    public static void setController(ChatController controller) {
+        MainChatMenu.controller = controller;
     }
 
     @Override
@@ -57,7 +57,6 @@ public class MainChatMenu extends Application {
         stage.show();
     }
 
-
     public void initialize() throws IOException {
         loadChat(ChatManager.loadGlobalChat());
     }
@@ -71,7 +70,7 @@ public class MainChatMenu extends Application {
         Message msg = new Message("diba", content,
                 calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         sendMessage(msg);
-        // add to chat instance in controller
+        controller.addMessage(msg);
     }
 
     public void processReceiveMessage() throws IOException {
@@ -89,8 +88,9 @@ public class MainChatMenu extends Application {
 
 
     public void loadChat(Chat chat) throws IOException {
-        if (controller != null) controller.changeCurrentChat(chat);
-        if (chat == null) chatPane = null;
+        if (controller.getCurrentChat() != null) controller.updateChat();
+        controller.setCurrentChat(chat);
+        if (chat == null) chatPane = new VBox();
         else {
             String userName = chat.getOwner();
             chatPane = new VBox();
