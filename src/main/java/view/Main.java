@@ -41,7 +41,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         HashMap<Color, Player> players = new HashMap<>();
         players.put(Color.RED, new Player(Stronghold.getInstance().getUser("ayeen")));
-        players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("kian")));
+        players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("someone")));
         Map map = MapManager.load("1001");
         Game game = new Game(map, players, true);
         GameController gameController = new GameController(Stronghold.getInstance().getUser("ayeen"), game);

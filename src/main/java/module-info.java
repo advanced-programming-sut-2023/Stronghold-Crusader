@@ -31,6 +31,7 @@ module project.group {
     exports view.UserMenus;
     exports view.GameMenus;
     exports view.MapMenus;
+    exports view.ChatMenus;
     exports view;
     exports model.User;
     exports model.Game.Store;

@@ -471,10 +471,9 @@ public class GraphicsController {
     }
 
     public void addTransition(MobileUnit unit, Vector2D source, Vector2D dest){
-        System.out.println(unit);
         GridPane initialCellGrid = (GridPane) mainGrid.getChildren().get(source.x + map.getSize().x * source.y);
         GridPane finalCellGrid = (GridPane) mainGrid.getChildren().get(dest.x + map.getSize().x * dest.y);
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(2));
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(5));
         for (Node node : initialCellGrid.getChildren()) {
             if (node instanceof ImageView){
                 String path = ((ImageView) node).getImage().getUrl();
@@ -494,9 +493,12 @@ public class GraphicsController {
         transition.setToX(finalCellGrid.getTranslateX());
         transition.setToY(finalCellGrid.getTranslateY());
         transition.setCycleCount(1);
-//        transition.setOnFinished(e -> {
-//            map.addMapObject(dest, unit);
-//        });
+        transition.setOnFinished(e -> {
+            System.out.println("finised");
+            unit.move();
+            map.addMapObject(dest, unit);
+            map.removeMapObject(source, unit);
+        });
         transition.play();
     }
 
