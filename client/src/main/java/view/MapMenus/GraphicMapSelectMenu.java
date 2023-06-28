@@ -56,7 +56,6 @@ public class GraphicMapSelectMenu extends Application {
         mapPreview.setOpacity(0.5);
         addMapButton.setOnMouseClicked(e -> selectMap());
         addPlayerButton.setOnMouseClicked(e -> addPlayer());
-        Stronghold.load();
         mapSelectController = new MapSelectController(Stronghold.getInstance().getUser("diba"));
      //   startGameButton.setOnMouseClicked(e -> startGame());
     }

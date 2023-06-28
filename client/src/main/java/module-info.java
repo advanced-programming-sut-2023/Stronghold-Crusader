@@ -9,6 +9,7 @@ module project.group {
     exports model.enums.AssetType to com.google.gson;
     exports model.enums to com.google.gson;
     exports  model.Map to com.google.gson;
+    opens network to com.google.gson;
     opens model to com.google.gson;
     opens model.User to com.google.gson, javafx.fxml;
     opens utils to com.google.gson;

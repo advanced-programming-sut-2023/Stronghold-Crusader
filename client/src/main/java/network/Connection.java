@@ -7,9 +7,9 @@ import java.net.Socket;
 
 public class Connection {
     private static Connection instance;
-    private Socket socket;
-    private DataOutputStream outputStream;
-    private DataInputStream inputStream;
+    private final Socket socket;
+    private final DataOutputStream outputStream;
+    private final DataInputStream inputStream;
 
     public static void connect(String host, int port) {
         instance = new Connection(host, port);

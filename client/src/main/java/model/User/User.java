@@ -47,8 +47,8 @@ public class User {
 
     public void setHighScore(int highScore) {
         this.highScore = highScore;
-        Stronghold.getInstance().updateRankings();
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateRankings();
+//        Stronghold.getInstance().updateData();
     }
 
     public String getEmail() {
@@ -69,42 +69,42 @@ public class User {
 
     public void changeUsername(String username) {
         this.username = username;
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public void changeNickname(String nickname) {
         this.nickname = nickname;
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public void changeSlogan(String slogan) {
         this.slogan = slogan;
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public void changeEmail(String email) {
         this.email = email;
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public void setPasswordRecovery(Pair passwordRecovery) {
         this.passwordRecovery = passwordRecovery;
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public void setPassword(String newPass) {
         this.password = PasswordConverter.encodePassword(newPass);
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public void removeSlogan() {
         this.slogan = "";
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
-        Stronghold.getInstance().updateData();
+//        Stronghold.getInstance().updateData();
     }
 
     public String getAvatarPath() {
