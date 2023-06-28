@@ -2,19 +2,19 @@ package view.UserMenus;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import model.User.User;
 
 
 public class FriendsTable {
-    private final ImageView avatar = new ImageView();
+    private final Circle avatar = new Circle();
     private final String username;
     private final Button accept = new Button("select");
 
     public FriendsTable(User user) {
-        avatar.setImage(new Image(user.getAvatarPath()));
-        avatar.setFitWidth(40);
-        avatar.setFitHeight(40);
+        avatar.setFill(new ImagePattern(new Image(user.getAvatarPath())));
+        avatar.setRadius(24);
         this.username = user.getUsername();
         accept.setOnMouseClicked(e -> {
             openPopUp(user);
@@ -24,7 +24,7 @@ public class FriendsTable {
     private void openPopUp(User user) {
     }
 
-    public ImageView getAvatar() {
+    public Circle getAvatar() {
         return avatar;
     }
 

@@ -15,8 +15,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.User.User;
 
@@ -29,7 +29,7 @@ public class FriendsMenu extends Application implements Initializable {
     private static FriendsMenuController friendsMenuController;
 
     public TableView<FriendsTable> table;
-    public TableColumn<FriendsTable, ImageView> avatarColumn;
+    public TableColumn<FriendsTable, Circle> avatarColumn;
     public TableColumn<FriendsTable, String> usernameColumn;
     public TableColumn<FriendsTable, Button> selectColumn;
 
@@ -51,12 +51,11 @@ public class FriendsMenu extends Application implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        avatarColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, ImageView>("avatar"));
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Circle>("avatar"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, String>("username"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Button>("accept"));
         searchBox.textProperty().addListener((observable, oldText, newText) ->
                 translateUserToTableItem(friendsMenuController.getUsersFromText(searchBox.getText())));
-        System.out.println(showList);
                 table.setItems(showList);
         }
     private void translateUserToTableItem(ArrayList<User> users) {
