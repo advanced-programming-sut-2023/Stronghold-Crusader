@@ -20,8 +20,13 @@ public class ChatManager {
         if (!resourceDir.exists())
             resourceDir.mkdir();
         resourceDir = new File(Settings.GLOBAL_CHAT_PATH);
-        if (!resourceDir.exists())
-            resourceDir.mkdir();
+        if (!resourceDir.exists()) {
+            try {
+                new File(Settings.GLOBAL_CHAT_PATH).createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         resourceDir = new File(Settings.PRIVATE_CHAT_PATH);
         if (!resourceDir.exists())
             resourceDir.mkdir();
@@ -90,7 +95,7 @@ public class ChatManager {
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 String fileName = child.getName();
-                Pattern pattern = Pattern.compile("private(?<id>\\S+)");
+                Pattern pattern = Pattern.compile("private(?<id>\\S+)\\.json");
                 Matcher matcher = pattern.matcher(fileName);
                 if (matcher.find()){
                     chats.add(loadChat(matcher.group("id"), Chat.ChatMode.PRIVATE));
@@ -115,5 +120,20 @@ public class ChatManager {
             }
         }
         return chats;
+    }
+
+    public static Chat loadGlobalChat(){
+        Reader reader;
+        try {
+            reader = new FileReader(Settings.GLOBAL_CHAT_PATH);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+        if (jsonObject == null)
+            return null;
+        return gson.fromJson(jsonObject, Chat.class);
     }
 }

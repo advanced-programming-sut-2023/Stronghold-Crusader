@@ -56,12 +56,15 @@ public class MainChatMenu extends Application {
     }
 
     public void loadChat(Chat chat) throws IOException {
-        String userName = chat.getOwner();
-        chatPane = new VBox();
-        chatPane.setAlignment(Pos.CENTER);
-        chatPane.setPrefWidth(549);
-        for (Message msg : chat.getMessages()) {
-            addMessage(msg, userName);
+        if (chat == null) chatPane = null;
+        else {
+            String userName = chat.getOwner();
+            chatPane = new VBox();
+            chatPane.setAlignment(Pos.CENTER);
+            chatPane.setPrefWidth(549);
+            for (Message msg : chat.getMessages()) {
+                addMessage(msg, userName);
+            }
         }
         chatPaneScroll.setContent(chatPane);
     }
@@ -71,6 +74,17 @@ public class MainChatMenu extends Application {
         chatList.setPrefWidth(161);
         chatList.setAlignment(Pos.CENTER);
         ArrayList<Chat> chats = ChatManager.loadRoomChats();
+        for (Chat chat : chats) {
+            addChatItem(chat);
+        }
+        chatListScroll.setContent(chatList);
+    }
+
+    public void loadPrivateChat() throws IOException {
+        chatList = new VBox();
+        chatList.setPrefWidth(161);
+        chatList.setAlignment(Pos.CENTER);
+        ArrayList<Chat> chats = ChatManager.loadPrivateChats();
         for (Chat chat : chats) {
             addChatItem(chat);
         }
@@ -109,15 +123,12 @@ public class MainChatMenu extends Application {
         }
     }
 
-    private void createChatBox(Message msg) {
-
-    }
-
-    public void loadPrivateChats() {
-
-    }
-
-    public void loadChatRooms() {
-
+    public void loadGlobalChat(){
+        chatListScroll.setContent(null);
+        try {
+            loadChat(ChatManager.loadGlobalChat());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

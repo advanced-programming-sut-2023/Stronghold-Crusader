@@ -28,6 +28,10 @@ import java.util.List;
 public class Main extends Application {
     public static Stage mainStage;
 
+    public static void main(String[] args) {
+        Stronghold.load();
+    }
+
 
 //    @Override
 //    public void start(Stage stage) throws Exception {
