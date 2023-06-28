@@ -67,7 +67,7 @@ public class MainChatMenu extends Application {
         Date date = new Date();
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(date);
-        Message msg = new Message("diba", content,
+        Message msg = new Message(controller.getCurrentUsername(), content,
                 calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
         sendMessage(msg);
         controller.addMessage(msg);
@@ -92,12 +92,11 @@ public class MainChatMenu extends Application {
         controller.setCurrentChat(chat);
         if (chat == null) chatPane = new VBox();
         else {
-            String userName = chat.getOwner();
             chatPane = new VBox();
             chatPane.setAlignment(Pos.CENTER);
             chatPane.setPrefWidth(549);
             for (Message msg : chat.getMessages()) {
-                addMessage(msg, userName);
+                addMessage(msg);
             }
         }
         chatPaneScroll.setContent(chatPane);
@@ -139,8 +138,8 @@ public class MainChatMenu extends Application {
         chatList.getChildren().add(anchorPane);
     }
 
-    public void addMessage(Message msg, String userName) throws IOException {
-        if (msg.getSenderUsername().equals(userName)) {
+    public void addMessage(Message msg) throws IOException {
+        if (msg.getSenderUsername().equals(controller.getCurrentUsername())) {
             sendMessage(msg);
         } else {
             // if message is unseen set it to seen and save it in the controller
