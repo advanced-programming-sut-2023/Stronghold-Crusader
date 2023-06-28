@@ -25,6 +25,21 @@
             <Image url="@../../assets/graphic/overlay/selectedUnitOverlay.png" />
         </image>
     </ImageView>
+    <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="497.0" layoutY="577.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
+        <image>
+            <Image url="@../../assets/buttons/privateChat_btn.png" />
+        </image>
+    </ImageView>
+    <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="552.0" layoutY="577.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
+        <image>
+            <Image url="@../../assets/buttons/groupChat_btn.png" />
+        </image>
+    </ImageView>
+    <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="609.0" layoutY="575.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
+        <image>
+            <Image url="@../../assets/buttons/globalChat_btn.png" />
+        </image>
+    </ImageView>
     <AnchorPane layoutX="688.0" layoutY="41.0" prefHeight="620.0" prefWidth="549.0" />
     <TextField fx:id="text" layoutX="687.0" layoutY="662.0" opacity="0.5" prefHeight="32.0" prefWidth="549.0" promptText="Please enter your message" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
     <ImageView fx:id="sendButton" fitHeight="32.0" fitWidth="77.0" layoutX="1135.0" layoutY="589.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
