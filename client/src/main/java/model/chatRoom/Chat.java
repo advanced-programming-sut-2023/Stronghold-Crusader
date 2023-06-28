@@ -10,11 +10,13 @@ public class Chat {
     private final ArrayList<String> users;
     private ArrayList<Message> messages;
     private ChatMode chatMode;
-    public Chat(ArrayList<String> users, ChatMode chatMode, String id){
+    private final String owner;
+    public Chat(ArrayList<String> users, ChatMode chatMode, String id, String owner){
         this.users = users;
         this.chatMode = chatMode;
         messages = new ArrayList<>();
         chatId = chatMode.name().toLowerCase() + id;
+        this.owner = owner;
         ChatManager.updateChat(this, chatMode);
     }
 
@@ -37,5 +39,9 @@ public class Chat {
 
     public ArrayList<String> getUsers() {
         return users;
+    }
+
+    public String getOwner() {
+        return owner;
     }
 }

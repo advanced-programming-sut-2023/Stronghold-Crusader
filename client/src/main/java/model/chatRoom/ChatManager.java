@@ -2,10 +2,12 @@ package model.chatRoom;
 
 import Settings.Settings;
 import com.google.gson.*;
-import model.User.User;
 
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ChatManager {
 
@@ -79,5 +81,39 @@ public class ChatManager {
         if (jsonObject == null)
             return null;
         return gson.fromJson(jsonObject, Chat.class);
+    }
+
+    public static ArrayList<Chat> loadPrivateChats(){
+        ArrayList<Chat> chats = new ArrayList<>();
+        File file = new File(Settings.PRIVATE_CHAT_PATH);
+        File[] directoryListing = file.listFiles();
+        if (directoryListing != null) {
+            for (File child : directoryListing) {
+                String fileName = child.getName();
+                Pattern pattern = Pattern.compile("private(?<id>\\S+)");
+                Matcher matcher = pattern.matcher(fileName);
+                if (matcher.find()){
+                    chats.add(loadChat(matcher.group("id"), Chat.ChatMode.PRIVATE));
+                }
+            }
+        }
+        return chats;
+    }
+
+    public static ArrayList<Chat> loadRoomChats(){
+        ArrayList<Chat> chats = new ArrayList<>();
+        File file = new File(Settings.ROOM_CHAT_PATH);
+        File[] directoryListing = file.listFiles();
+        if (directoryListing != null) {
+            for (File child : directoryListing) {
+                String fileName = child.getName();
+                Pattern pattern = Pattern.compile("room(?<id>\\S+)");
+                Matcher matcher = pattern.matcher(fileName);
+                if (matcher.find()){
+                    chats.add(loadChat(matcher.group("id"), Chat.ChatMode.ROOM));
+                }
+            }
+        }
+        return chats;
     }
 }
