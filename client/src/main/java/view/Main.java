@@ -13,21 +13,21 @@ import model.Map.Map;
 import model.Map.MapManager;
 import model.Stronghold;
 import model.User.Player;
+import model.chatRoom.Chat;
+import model.chatRoom.ChatManager;
+import model.chatRoom.Message;
 import model.enums.User.Color;
 import view.GameMenus.GraphicGameMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.UserMenus.LoginMenu;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main extends Application {
     public static Stage mainStage;
 
-    public static void main(String[] args) throws Exception {
-        Stronghold.load();
-        ConstantManager.load();
-        launch(args);
-    }
 
 //    @Override
 //    public void start(Stage stage) throws Exception {

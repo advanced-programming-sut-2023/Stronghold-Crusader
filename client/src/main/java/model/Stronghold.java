@@ -2,6 +2,7 @@ package model;
 
 import model.User.User;
 import model.User.UserManager;
+import model.chatRoom.ChatManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class Stronghold {
         if (instance == null) {
             instance = new Stronghold();
             UserManager.load(instance);
+            ChatManager.load();
         }
     }
 

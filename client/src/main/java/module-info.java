@@ -22,6 +22,7 @@ module project.group {
     opens model.Game to com.google.gson;
     opens model.Game.Store to com.google.gson;
     opens model.Map to com.google.gson;
+    opens model.chatRoom to com.google.gson;
 
     opens view.UserMenus to javafx.fxml;
     opens view.GameMenus to javafx.fxml;
