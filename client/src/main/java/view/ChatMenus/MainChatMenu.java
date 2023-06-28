@@ -20,9 +20,11 @@ import view.UserMenus.LoginMenu;
 import view.UserMenus.MainMenu;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainChatMenu extends Application {
 
@@ -53,6 +55,17 @@ public class MainChatMenu extends Application {
     public void initialize() throws IOException {
         Chat chat = ChatManager.loadChat("chat1", Chat.ChatMode.PRIVATE);
         loadChat(chat);
+    }
+
+    public void processSendMessage() throws IOException {
+        String content = text.getText();
+        text.clear();
+        Date date = new Date();
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(date);
+        Message msg = new Message("diba", content,
+                calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
+        sendMessage(msg);
     }
 
     public void loadChat(Chat chat) throws IOException {
@@ -107,20 +120,28 @@ public class MainChatMenu extends Application {
 
     public void addMessage(Message msg, String userName) throws IOException {
         if (msg.getSenderUsername().equals(userName)) {
-            AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
-                    getResource("/FXML/Chatfxml/CurrentUserMessagefxml.fxml").toExternalForm()));
-            ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
-            String time = msg.getHour() + ":" + msg.getMinute();
-            ((Label) anchorPane.getChildren().get(3)).setText(time);
-            chatPane.getChildren().add(anchorPane);
+            sendMessage(msg);
         } else {
-            AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
-                    getResource("/FXML/Chatfxml/OtherUserMessagefxml.fxml").toExternalForm()));
-            ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
-            String time = msg.getHour() + ":" + msg.getMinute();
-            ((Label) anchorPane.getChildren().get(3)).setText(time);
-            chatPane.getChildren().add(anchorPane);
+            receiveMessage(msg);
         }
+    }
+
+    public void sendMessage(Message msg) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
+                getResource("/FXML/Chatfxml/CurrentUserMessagefxml.fxml").toExternalForm()));
+        ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
+        String time = msg.getHour() + ":" + msg.getMinute();
+        ((Label) anchorPane.getChildren().get(3)).setText(time);
+        chatPane.getChildren().add(anchorPane);
+    }
+
+    public void receiveMessage(Message msg) throws IOException {
+        AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
+                getResource("/FXML/Chatfxml/OtherUserMessagefxml.fxml").toExternalForm()));
+        ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
+        String time = msg.getHour() + ":" + msg.getMinute();
+        ((Label) anchorPane.getChildren().get(3)).setText(time);
+        chatPane.getChildren().add(anchorPane);
     }
 
     public void loadGlobalChat(){
