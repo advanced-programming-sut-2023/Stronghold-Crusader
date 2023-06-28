@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import utils.FormatValidation;
-import utils.SignupAndLoginUtils;
+import utils.MenusUtils;
 import view.Main;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
@@ -106,7 +106,7 @@ public class SignupMenu extends Application implements Initializable {
     }
 
     public void generateRandomPassword(MouseEvent mouseEvent) {
-        visiblePassword.setText(SignupAndLoginUtils.generateRandomPassword());
+        visiblePassword.setText(MenusUtils.generateRandomPassword());
         if (password.isVisible()) changePasswordVisibility();
     }
 

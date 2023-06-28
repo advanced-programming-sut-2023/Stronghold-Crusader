@@ -4,7 +4,7 @@ import model.Game.Game;
 import model.Game.Trade;
 import model.User.Player;
 import model.enums.AssetType.Material;
-import utils.SignupAndLoginUtils;
+import utils.MenusUtils;
 import view.GameMenus.TradeMenus.TradeMenu;
 import view.enums.messages.TradeMenuMessage;
 
@@ -51,8 +51,8 @@ public class TradeController {
             return TradeMenuMessage.EMPTY_FIELD;
         if (!Material.contains(inputs.get("resourceType").toUpperCase()))
             return TradeMenuMessage.INVALID_MATERIAL;
-        if (!SignupAndLoginUtils.isNumberValid(inputs.get("resourceAmount")) ||
-                !SignupAndLoginUtils.isNumberValid(inputs.get("price")))
+        if (!MenusUtils.isNumberValid(inputs.get("resourceAmount")) ||
+                !MenusUtils.isNumberValid(inputs.get("price")))
             return TradeMenuMessage.INVALID_AMOUNT;
 
         int resourceAmount = Integer.parseInt(inputs.get("resourceAmount"));

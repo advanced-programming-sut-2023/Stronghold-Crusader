@@ -6,10 +6,10 @@ import model.User.User;
 import java.util.ArrayList;
 
 public class FriendsMenuController {
-    private final User currentUser;
+    private static User currentUser;
 
     public  FriendsMenuController(User user) {
-        this.currentUser = user;
+        currentUser = user;
     }
 
     public ArrayList<User> getUsersFromText(String text) {
@@ -26,7 +26,8 @@ public class FriendsMenuController {
       }
         return searchResultUsers;
     }
-    public User getCurrentUser() {
+    public static User  getCurrentUser() {
         return currentUser;
     }
+
 }
