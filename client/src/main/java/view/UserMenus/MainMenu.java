@@ -1,5 +1,6 @@
 package view.UserMenus;
 
+import controller.ChatControllers.ChatController;
 import controller.MapControllers.MapSelectController;
 import controller.UserControllers.MainController;
 import controller.UserControllers.ProfileController;
@@ -14,12 +15,16 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.User.User;
 import model.User.UserManager;
+import view.ChatMenus.MainChatMenu;
 import view.Main;
 import view.MapMenus.GraphicMapSelectMenu;
 
 public class MainMenu extends Application {
     public static MainController mainController;
     public ImageView newGameButton, profileMenuButton, aboutButton, logoutButton;
+    public ImageView chatroomButton;
+    public ImageView FriendMenuButton;
+    public ImageView ScoreBoardMenuButton;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -56,5 +61,17 @@ public class MainMenu extends Application {
     public void logout(MouseEvent mouseEvent) throws Exception {
         UserManager.setLoggedInUser(null);
         new LoginMenu().start(Main.mainStage);
+    }
+
+    public void goToChatroom() throws Exception {
+        ChatController chatController = new ChatController();
+        MainChatMenu chatMenu = new MainChatMenu();
+        MainChatMenu.setController(chatController);
+        chatMenu.start(Main.mainStage);
+    }
+
+    public void goToScoreBoard() throws Exception {
+        ScoreBoardMenu scoreBoardMenu = new ScoreBoardMenu();
+        scoreBoardMenu.start(Main.mainStage);
     }
 }

@@ -20,6 +20,15 @@ public class Chat {
         ChatManager.updateChat(this, chatMode);
     }
 
+    public Chat(ArrayList<String> users){
+        this.users = users;
+        this.chatMode = ChatMode.GLOBAL;
+        messages = new ArrayList<>();
+        chatId = chatMode.name().toLowerCase() + "Chat";
+        this.owner = "";
+        ChatManager.updateChat(this, chatMode);
+    }
+
     public void addMessage(Message msg){
      messages.add(msg);
      ChatManager.updateChat(this, chatMode);
