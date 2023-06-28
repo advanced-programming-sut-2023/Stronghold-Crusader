@@ -1,10 +1,12 @@
 package view.UserMenus;
 
 import controller.UserControllers.AvatarController;
+import controller.UserControllers.FriendsMenuController;
 import controller.UserControllers.ProfileController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -221,7 +223,14 @@ public class ProfileMenu extends Application {
         new AvatarMenu().start(stage);
     }
 
-    public void back() {
-        //TODO add back to main menu
+    public void back() throws Exception {
+        new MainMenu().start(stage);
     }
+
+    public void openFriendsMenu(ActionEvent actionEvent) throws Exception {
+        FriendsMenu.setFriendsMenuController(new FriendsMenuController(controller.getCurrentUser()));
+       new FriendsMenu().start(stage);
+    }
+
+
 }
