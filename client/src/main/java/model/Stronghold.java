@@ -32,6 +32,15 @@ public class Stronghold {
         return new Gson().fromJson(result, User.class);
     }
 
+    public boolean isUserOnline(String username) {
+        Request request = new Request();
+        request.setType("user_query");
+        request.setCommand("user_online");
+        request.addParameter("username", username);
+        String result = Connection.getInstance().sendRequest(request);
+        return Boolean.parseBoolean(result);
+    }
+
     public void addUser(User user) {
         Request request = new Request();
         request.setType("user_change");
@@ -69,6 +78,16 @@ public class Stronghold {
         Request request = new Request();
         request.setType("user_query");
         request.setCommand("get_users");
+        String result = Connection.getInstance().sendRequest(request);
+        Type arrayListType = new TypeToken<ArrayList<User>>() {
+        }.getType();
+        return new Gson().fromJson(result, arrayListType);
+    }
+
+    public Collection<User> getOnlineUsers() {
+        Request request = new Request();
+        request.setType("user_query");
+        request.setCommand("get_online_users");
         String result = Connection.getInstance().sendRequest(request);
         Type arrayListType = new TypeToken<ArrayList<User>>() {
         }.getType();

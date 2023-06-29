@@ -144,7 +144,7 @@ public class Connection extends Thread {
             case "get_online_users":
                 outputStream.writeUTF(new Gson().toJson(Database.getInstance().getOnlineUsers()));
                 break;
-            case "is_user_online":
+            case "user_online":
                 outputStream.writeUTF(String.valueOf(
                         Database.getInstance().getUser(request.getParameters().get("username")).isOnline()));
                 break;
