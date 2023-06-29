@@ -1,48 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<AnchorPane id="pane" fx:id="rootPane" prefHeight="728.0" prefWidth="1280.0" stylesheets="@../CSS/scoreboardStyle.css"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="view.UserMenus.ScoreBoardMenu">
+<AnchorPane id="pane" fx:id="rootPane" prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.ScoreBoardMenu">
     <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true">
     </ImageView>
-    <VBox id="containingPane" fx:id="containingPane" layoutX="348.0" layoutY="104.0" prefHeight="505.0"
-          prefWidth="584.0" style="-fx-background-color: saddlebrown;" alignment="CENTER">
-        <Label layoutX="127.0" layoutY="36.0" prefHeight="58.0" prefWidth="359.0" text="Scoreboard Menu"
-               textAlignment="CENTER">
-            <font>
-                <Font name="Book Antiqua Bold" size="40.0"/>
-            </font>
-        </Label>
-        <TableView layoutX="44.0" layoutY="112.0" prefHeight="353.0" prefWidth="491.0"
-                   style="-fx-background-color: saddlebrown;" fx:id="userRanking">
-            <columns>
-                <TableColumn text="rank" prefWidth="100">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="rank"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn text="username" prefWidth="100">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="username"/>
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn text="HighScore" prefWidth="100">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="highScore"/>
-                    </cellValueFactory>
-                </TableColumn>
-            </columns>
-        </TableView>
-        <Button layoutX="420.0" layoutY="440.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="100.0" text="Back">
-            <font>
-                <Font name="Book Antiqua" size="16.0"/>
-            </font>
-        </Button>
-    </VBox>
+   <TableView fx:id="table" layoutX="393.0" layoutY="166.0" onMousePressed="#openProfile" prefHeight="338.0" prefWidth="583.0">
+      <columns>
+         <TableColumn fx:id="rankColumn" prefWidth="55.20001220703125" text="Rank" />
+         <TableColumn fx:id="avatarColumn" prefWidth="77.60000610351562" text="Avatar" />
+         <TableColumn fx:id="usernameColumn" prefWidth="95.2000732421875" text="Username" />
+         <TableColumn fx:id="highScoreColumn" prefWidth="92.800048828125" text="HighScore" />
+         <TableColumn fx:id="connectionColumn" prefWidth="72.79998779296875" text="Connection" />
+         <TableColumn fx:id="televisionColumn" prefWidth="93.5999755859375" text="Last Game" />
+         <TableColumn fx:id="selectColumn" prefWidth="93.5999755859375" text="Select" />
+      </columns>
+   </TableView>
+   <Text layoutX="523.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ScoreBoard" textAlignment="CENTER" wrappingWidth="355.7621765136719">
+      <font>
+         <Font name="Castellar" size="44.0" />
+      </font>
+   </Text>
+   <Button layoutX="70.0" layoutY="649.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="100.0" text="Back">
+      <font>
+         <Font name="Book Antiqua" size="16.0" />
+      </font>
+   </Button>
+   <Button layoutX="635.0" layoutY="511.0" mnemonicParsing="false" onAction="#update" prefHeight="32.0" prefWidth="100.0" text="Update">
+      <font>
+         <Font name="Book Antiqua" size="16.0" />
+      </font>
+   </Button>
+   <stylesheets>
+      <URL value="@../CSS/scoreboardStyle.css" />
+      <URL value="@../CSS/tables.css" />
+   </stylesheets>
 </AnchorPane>
