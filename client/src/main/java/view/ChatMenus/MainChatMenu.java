@@ -1,6 +1,7 @@
 package view.ChatMenus;
 
 import controller.ChatControllers.ChatController;
+import controller.ChatControllers.ChatCreationController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Stronghold;
 import model.chatRoom.Chat;
 import model.chatRoom.Message;
 import view.GameMenus.MarketMenus.MarketMenu;
@@ -200,7 +202,8 @@ public class MainChatMenu extends Application {
     public void goToChatCreation() throws Exception {
         ChatCreationMenu chatCreationMenu = new ChatCreationMenu();
         ChatCreationMenu.setChatMenu(this);
-        ChatCreationMenu.setController(controller);
+        ChatCreationMenu.setController(
+                new ChatCreationController(Stronghold.getInstance().getUser(controller.getCurrentUsername())));
         chatCreationMenu.start(Main.mainStage);
     }
 
