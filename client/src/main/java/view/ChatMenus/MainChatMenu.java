@@ -2,6 +2,7 @@ package view.ChatMenus;
 
 import controller.ChatControllers.ChatController;
 import controller.ChatControllers.ChatCreationController;
+import controller.ChatControllers.ReactionManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;

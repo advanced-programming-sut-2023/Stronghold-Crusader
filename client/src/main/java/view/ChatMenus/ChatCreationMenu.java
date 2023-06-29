@@ -97,7 +97,7 @@ public class ChatCreationMenu extends Application {
     }
 
     public void createChat() throws Exception {
-        ChatMessage msg = controller.CreateChat();
+        ChatMessage msg = controller.CreateChat(chatIdField.getText());
         if (!msg.equals(ChatMessage.CHAT_CREATED_SUCCESSFULLY)) printError(msg.getMessage());
         else {
             back();

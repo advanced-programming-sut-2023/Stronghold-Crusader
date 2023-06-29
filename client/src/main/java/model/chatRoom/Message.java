@@ -56,4 +56,7 @@ public class Message {
     public HashMap<String, Reaction> getReactions() {
         return reactions;
     }
+    public void replaceReaction(String username, Reaction old, Reaction newReaction){
+        reactions.replace(username, old, newReaction);
+    }
 }
