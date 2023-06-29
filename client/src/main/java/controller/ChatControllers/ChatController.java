@@ -47,7 +47,7 @@ public class ChatController {
         return currentUser.getUsername();
     }
 
-    public Chat getGlobalChat(){
+    public Chat getGlobalChat() {
         Request request = new Request();
         request.setType("chat");
         request.setCommand("get_global_chat");
@@ -79,4 +79,7 @@ public class ChatController {
         return roomChats;
     }
 
+    public void createChat(){
+
+    }
 }
