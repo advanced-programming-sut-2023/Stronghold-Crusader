@@ -15,6 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.Television.Television;
 import model.User.UserManager;
+import network.Connection;
+import network.Request;
 import view.ChatMenus.MainChatMenu;
 import view.Main;
 import view.MapMenus.GraphicMapSelectMenu;
@@ -53,13 +55,18 @@ public class MainMenu extends Application {
         mapSelectMenu.start(Main.mainStage);
     }
 
-    public void goToProfileMenu(MouseEvent mouseEvent) throws Exception {
+    public void goToProfileMenu() throws Exception {
         ProfileMenu.setProfileController(new ProfileController(mainController.currentUser));
         new ProfileMenu().start(Main.mainStage);
     }
 
-    public void logout(MouseEvent mouseEvent) throws Exception {
+    public void logout() throws Exception {
         UserManager.setLoggedInUser(null);
+        Request request = new Request();
+        request.setType("connect");
+        request.setCommand("logout");
+        request.addParameter("username", mainController.currentUser.getUsername());
+        Connection.getInstance().sendRequest(request);
         new LoginMenu().start(Main.mainStage);
     }
 
@@ -75,8 +82,7 @@ public class MainMenu extends Application {
         scoreBoardMenu.start(Main.mainStage);
     }
 
-    public void goToTelevision(MouseEvent mouseEvent) throws Exception {
+    public void goToTelevision() throws Exception {
         new Television().start(Main.mainStage);
-
     }
 }

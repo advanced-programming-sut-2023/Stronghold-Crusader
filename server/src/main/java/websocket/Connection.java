@@ -6,8 +6,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import database.ChatManager;
 import database.Database;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import model.Request;
 import model.User;
 import model.chatRoom.Chat;
@@ -15,15 +13,16 @@ import utils.Pair;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
+import java.net.SocketException;
 
 public class Connection extends Thread {
     private final Socket socket;
-    private String jwsToken;
     private final DataInputStream inputStream;
     private final DataOutputStream outputStream;
+    private User loggedInUser;
 
     public Connection(Socket socket) {
         this.socket = socket;
@@ -36,15 +35,28 @@ public class Connection extends Thread {
         }
     }
 
+    public void closedConnection() {
+        System.out.println("Disconnected " + socket.getInetAddress() + socket.getPort());
+        if (loggedInUser != null) {
+            loggedInUser.setSocket(null);
+            loggedInUser = null;
+        }
+    }
+
     @Override
     public void run() {
         Request request;
         try {
             while (true) {
-                request = new Gson().fromJson(inputStream.readUTF(), Request.class);
+                try {
+                    request = new Gson().fromJson(inputStream.readUTF(), Request.class);
+                } catch (EOFException e) {
+                    closedConnection();
+                    return;
+                }
                 switch (request.getType()) {
-                    case "login":
-                        handelLogin(request);
+                    case "connect":
+                        handelConnection(request);
                         break;
                     case "user_query":
                         handelUsersQuery(request);
@@ -71,25 +83,44 @@ public class Connection extends Thread {
                         outputStream.writeUTF("400: bad request");
                 }
             }
+        } catch (SocketException socketException) {
+            closedConnection();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void handelLogin(Request request) throws IOException {
-        request.getParameters().get("password");
-        jwsToken = Jwts.builder().setIssuer(request.getParameters().get("username"))
-                .signWith(SignatureAlgorithm.HS256,
-                        "JXJHHxjK3vpZtfsS0P4jhAJ1pdaU9e+xnTFfK2cwrO4=".getBytes(StandardCharsets.UTF_8))
-                .compact();
-        outputStream.writeUTF(jwsToken);
+    private void handelConnection(Request request) throws IOException {
+        User user = Database.getInstance().getUser(request.getParameters().get("username"));
+        if (user == null) {
+            outputStream.writeUTF("400: no_user");
+            return;
+        }
+        switch (request.getCommand()) {
+            case "login":
+                if (user.isOnline()) {
+                    outputStream.writeUTF("400: Already logged in");
+                    return;
+                }
+                user.setSocket(socket);
+                loggedInUser = user;
+                outputStream.writeUTF("200: Sign in success");
+                break;
+            case "logout":
+                loggedInUser = null;
+                user.setSocket(null);
+                outputStream.writeUTF("200: Log out success");
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+        }
     }
 
     private void handelUsersQuery(Request request) throws IOException {
         switch (request.getCommand()) {
             case "get_user":
                 User user = Database.getInstance().getUser(request.getParameters().get("username"));
-                if(user == null) outputStream.writeUTF("400: no_user");
+                if (user == null) outputStream.writeUTF("400: no_user");
                 else outputStream.writeUTF(new Gson().toJson(user));
                 break;
             case "user_exists":
@@ -110,19 +141,26 @@ public class Connection extends Thread {
                 outputStream.writeUTF(String.valueOf(
                         Database.getInstance().getUserRank(request.getParameters().get("username"))));
                 break;
+            case "get_online_users":
+                outputStream.writeUTF(new Gson().toJson(Database.getInstance().getOnlineUsers()));
+                break;
+            case "is_user_online":
+                outputStream.writeUTF(String.valueOf(
+                        Database.getInstance().getUser(request.getParameters().get("username")).isOnline()));
+                break;
             default:
                 outputStream.writeUTF("400: bad request");
         }
     }
 
     private void handelUsersChange(Request request) throws IOException {
-        if(request.getCommand().equals("add")){
+        if (request.getCommand().equals("add")) {
             Database.getInstance().addUser(new Gson().fromJson(request.getParameters().get("user"), User.class));
             outputStream.writeUTF("200: successfully added");
             return;
         }
         User user = Database.getInstance().getUser(request.getParameters().get("username"));
-        if(user == null){
+        if (user == null) {
             outputStream.writeUTF("400: no_user");
             return;
         }
@@ -162,7 +200,7 @@ public class Connection extends Thread {
     }
 
     private void handelChat(Request request) throws IOException {
-        switch (request.getCommand()){
+        switch (request.getCommand()) {
             case "update_chat":
                 Chat chat = new Gson().fromJson(request.getParameters().get("chat"), Chat.class);
                 ChatManager.updateChat(chat, chat.getChatMode());

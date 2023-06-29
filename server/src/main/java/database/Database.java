@@ -67,6 +67,14 @@ public class Database {
         return users.values();
     }
 
+    public Collection<User> getOnlineUsers() {
+        ArrayList<User> onlineUsers = new ArrayList<>();
+        for (User user : users.values())
+            if(user.isOnline())
+                onlineUsers.add(user);
+        return onlineUsers;
+    }
+
     public ArrayList<User> getUserRankings() {
         return userRankings;
     }

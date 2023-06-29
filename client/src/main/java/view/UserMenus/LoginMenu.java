@@ -23,6 +23,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.User.User;
 import model.User.UserManager;
+import network.Connection;
+import network.Request;
 import utils.ToggleSwitch;
 import view.Main;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
@@ -49,13 +51,19 @@ public class LoginMenu extends Application implements Initializable {
     @FXML
     private TextField username;
     private final ToggleSwitch toggleSwitch = new ToggleSwitch(25, Color.TRANSPARENT);
-    private  Thread timeThread;
+    private Thread timeThread;
 
 
     @Override
     public void start(Stage stage) throws Exception {
         if (UserManager.getLoggedInUser() != null) {
-            goToMainMenu(UserManager.getLoggedInUser());
+            Request request = new Request();
+            request.setType("connect");
+            request.setCommand("login");
+            request.addParameter("username", UserManager.getLoggedInUser().getUsername());
+            String response = Connection.getInstance().sendRequest(request);
+            if(!response.equals("400: Already logged in"))
+                goToMainMenu(UserManager.getLoggedInUser());
             return;
         }
         stage.setTitle("Stronghold");
@@ -145,6 +153,7 @@ public class LoginMenu extends Application implements Initializable {
                 attemptsError.setText("");
                 break;
             case USER_DOES_NOT_EXIST:
+            case ALREADY_LOGGED_IN:
                 userError.setText(loginMessage.getOutput());
                 passwordError.setText("");
                 break;
