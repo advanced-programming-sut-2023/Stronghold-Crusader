@@ -7,7 +7,21 @@ import java.io.*;
 import java.util.Collection;
 
 public class UserManager {
+    public static void initialize(){
+        File resourceDir = new File(Settings.DATABASE_PATH);
+        if (!resourceDir.exists())
+            resourceDir.mkdir();
+        resourceDir = new File(Settings.USERS_PATH);
+        if (!resourceDir.exists()) {
+            try {
+                new File(Settings.USERS_PATH).createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
     public static void load(Database database) {
+        initialize();
         Reader reader;
         try {
             reader = new FileReader(Settings.USERS_PATH);

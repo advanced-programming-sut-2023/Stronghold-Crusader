@@ -1,9 +1,11 @@
 package controller.ChatControllers;
 
+import com.google.gson.Gson;
 import model.User.User;
 import model.chatRoom.Chat;
-import model.chatRoom.ChatManager;
 import model.chatRoom.Message;
+import network.Connection;
+import network.Request;
 
 public class ChatController {
     private Chat currentChat;
@@ -21,8 +23,14 @@ public class ChatController {
     }
 
     public void updateChat(){
-        if (currentChat != null)
-            ChatManager.updateChat(currentChat, currentChat.getChatMode());
+        if (currentChat != null){
+            Request request = new Request();
+            request.setType("chat");
+            request.setCommand("update_chat");
+            request.addParameter("chat", new Gson().toJson(currentChat));
+            request.addParameter("chat_type", new Gson().toJson(currentChat.getChatMode()));
+            Connection.getInstance().sendRequest(request);
+        }
     }
 
     public void addMessage(Message msg){
@@ -32,5 +40,9 @@ public class ChatController {
 
     public String getCurrentUsername() {
         return currentUser.getUsername();
+    }
+
+    public Chat getGlobalChat(){
+
     }
 }

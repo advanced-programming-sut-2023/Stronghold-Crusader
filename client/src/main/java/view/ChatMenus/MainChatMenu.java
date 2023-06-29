@@ -14,7 +14,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.chatRoom.Chat;
-import model.chatRoom.ChatManager;
 import model.chatRoom.Message;
 import view.GameMenus.MarketMenus.MarketMenu;
 import view.UserMenus.LoginMenu;

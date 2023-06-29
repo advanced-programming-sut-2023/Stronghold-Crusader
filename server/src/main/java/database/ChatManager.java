@@ -1,9 +1,8 @@
-package model.chatRoom;
+package database;
 
-import Settings.Settings;
 import com.google.gson.*;
-import model.Stronghold;
-import model.User.User;
+import model.User;
+import model.chatRoom.Chat;
 
 
 import java.io.*;
@@ -148,7 +147,7 @@ public class ChatManager {
     }
 
     public static Chat createGlobaChat() {
-        Collection users = Stronghold.getInstance().getUsers();
+        Collection users = Database.getInstance().getUsers();
         ArrayList<String> chatParticipants = new ArrayList<>();
         for (Object user : users) {
             chatParticipants.add(((User) user).getUsername());

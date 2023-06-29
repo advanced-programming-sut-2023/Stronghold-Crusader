@@ -1,11 +1,13 @@
 package websocket;
 
 import com.google.gson.Gson;
+import database.ChatManager;
 import database.Database;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import model.Request;
 import model.User;
+import model.chatRoom.Chat;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -110,7 +112,13 @@ public class Connection extends Thread {
         }
     }
 
-    private void handelChat() {
+    private void handelChat(Request request) {
+        switch (request.getCommand()){
+            case "update_chat":
+                Chat chat = new Gson().fromJson(request.getParameters().get("chat"), Chat.class);
+                ChatManager.updateChat(chat, chat.getChatMode());
+                break;
+        }
     }
 
     private void handelFriend() {
