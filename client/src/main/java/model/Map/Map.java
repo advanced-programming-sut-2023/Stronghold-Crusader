@@ -198,5 +198,7 @@ public class Map {
         return false;
     }
 
-
+    public Cell[][] getMap() {
+        return map;
+    }
 }

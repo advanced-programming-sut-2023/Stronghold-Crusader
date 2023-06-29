@@ -12,13 +12,14 @@ import model.MapAsset.MobileUnit.MobileUnit;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-public class Governance {
+public class Governance implements Serializable {
     private final ArrayList<Building> buildings;
     private final ArrayList<MobileUnit> units;
     private int totalPopulation;

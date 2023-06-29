@@ -10,7 +10,7 @@
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="728.0" prefWidth="1280.0">
          <children>
-            <ScrollPane fx:id="mainGrid" hbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0" vbarPolicy="NEVER" />
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0" vbarPolicy="NEVER" />
             <ImageView fitHeight="182.0" fitWidth="1293.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/graphic/overlay/bottom_menu.png" />
@@ -36,7 +36,7 @@
                   <Image url="@../../assets/icons/dropBuildingIcons/TRADE.png" />
                </image>
             </ImageView>
-            <Button layoutX="442.0" layoutY="670.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="next" onMouseClicked="#load" />
+            <Button fx:id="stopAndPlayButton" layoutX="442.0" layoutY="670.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="Stop" onMouseClicked="#load" />
          </children>
       </AnchorPane>
    </children>

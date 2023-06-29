@@ -3,6 +3,7 @@ package controller.MapControllers;
 
 import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
+import controller.GameControllers.SelectedBuildingController;
 import model.Game.Game;
 import model.Map.Map;
 import model.Map.MapManager;
@@ -79,6 +80,7 @@ public class MapSelectController {
         GraphicGameMenu.setGameController(controller);
         GraphicGameMenu.setGraphicsController(new GraphicsController(controller, newGame, menu));
         GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(newGame.getCurrentPlayer(), newGame.getMap(), isMapModifiable));
+        SelectedBuildingController.setIsModifiable(isMapModifiable);
         menu.start(Main.mainStage);
         return MapSelectMessage.GAME_CREATION_SUCCESS;
     }

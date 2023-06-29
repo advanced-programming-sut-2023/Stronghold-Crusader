@@ -1,12 +1,13 @@
 package model.MapAsset;
 
-import javafx.scene.image.ImageView;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.User.Player;
 import model.enums.AssetType.MapAssetType;
 import utils.Vector2D;
 
-public class MapAsset {
+import java.io.Serializable;
+
+public class MapAsset implements Serializable {
     protected final double maxHitPoint;
     protected final MapAssetType type;
     private final int cost;

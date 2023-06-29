@@ -40,6 +40,10 @@
                nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
         <Image url="@../../assets/buttons/about_btn.jpg"/>
     </ImageView>
+    <ImageView  fitHeight="31.0" fitWidth="245.0" layoutX="854.0" layoutY="408.0"
+               nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73" onMouseClicked="#goToTelevision">
+        <Image url="@../../assets/buttons/television_btn.jpg"/>
+    </ImageView>
     <ImageView fx:id="logoutButton" fitHeight="31.0" fitWidth="261.0" layoutX="854.0" layoutY="446.0"
                nodeOrientation="INHERIT" onMouseClicked="#logout" pickOnBounds="true" preserveRatio="true"
                translateX="48" translateY="73">

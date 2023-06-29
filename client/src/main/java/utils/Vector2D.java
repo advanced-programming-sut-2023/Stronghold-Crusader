@@ -1,6 +1,8 @@
 package utils;
 
-public class Vector2D {
+import java.io.Serializable;
+
+public class Vector2D implements Serializable {
     public int x;
     public int y;
 
