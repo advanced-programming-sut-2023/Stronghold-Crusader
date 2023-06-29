@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Television.Television;
 import model.User.UserManager;
 import network.Connection;
 import network.Request;
@@ -78,5 +79,10 @@ public class MainMenu extends Application {
     public void goToScoreBoard() throws Exception {
         ScoreBoardMenu scoreBoardMenu = new ScoreBoardMenu();
         scoreBoardMenu.start(Main.mainStage);
+    }
+
+    public void goToTelevision(MouseEvent mouseEvent) throws Exception {
+        new Television().start(Main.mainStage);
+
     }
 }

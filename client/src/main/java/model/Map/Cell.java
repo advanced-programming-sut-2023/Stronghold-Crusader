@@ -1,6 +1,5 @@
 package model.Map;
 
-import javafx.scene.shape.Rectangle;
 import model.MapAsset.Building.Building;
 import model.MapAsset.Building.DefenseAndAttackBuilding;
 import model.MapAsset.Building.EntranceBuilding;
@@ -13,9 +12,10 @@ import model.enums.CellType;
 import model.enums.Direction;
 import utils.Vector2D;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cell {
+public class Cell implements Serializable {
     private final Vector2D coordinate;
     private CellType type;
     private ArrayList<MapAsset> assets;
