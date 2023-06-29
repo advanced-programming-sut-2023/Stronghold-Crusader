@@ -28,7 +28,6 @@ import model.Game.Governance;
 import model.Map.Cell;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
-import utils.Vector2D;
 import view.GameMenus.MarketMenus.MarketMenu;
 import view.GameMenus.TradeMenus.TradeMenu;
 
@@ -247,16 +246,16 @@ public class GraphicGameMenu extends Application {
     }
 
     private void loadCells(String[][] map, String[][] buildings) {
-        for (int y = 0; y < graphicsController.getMap().getSize().y; y++) {
-            for (int x = 0; x < graphicsController.getMap().getSize().x; x++) {
-                Vector2D coordinate = new Vector2D(x, y);
-                Cell cell = graphicsController.getMap().getCell(coordinate);
-                map[y][x] = cell.getType().getImage().getUrl().toString();
-                Building building = searchForBuildings(cell);
-                if (building == null) buildings[y][x] = null;
-                else buildings[y][x] = building.getType().getImage().getUrl().toString();
-            }
-        }
+//        for (int y = 0; y < graphicsController.getMap().getSize().y; y++) {
+//            for (int x = 0; x < graphicsController.getMap().getSize().x; x++) {
+//                Vector2D coordinate = new Vector2D(x, y);
+//                Cell cell = graphicsController.getMap().getCell(coordinate);
+//                map[y][x] = cell.getType().getImage().getUrl().toString();
+//                Building building = searchForBuildings(cell);
+//                if (building == null) buildings[y][x] = null;
+//                else buildings[y][x] = building.getType().getImage().getUrl().toString();
+//            }
+//        }
     }
 
     private Building searchForBuildings(Cell cell) {
