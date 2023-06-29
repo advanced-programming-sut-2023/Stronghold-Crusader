@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Television.Television;
 import model.User.UserManager;
 import view.ChatMenus.MainChatMenu;
 import view.Main;
@@ -72,5 +73,10 @@ public class MainMenu extends Application {
     public void goToScoreBoard() throws Exception {
         ScoreBoardMenu scoreBoardMenu = new ScoreBoardMenu();
         scoreBoardMenu.start(Main.mainStage);
+    }
+
+    public void goToTelevision(MouseEvent mouseEvent) throws Exception {
+        new Television().start(Main.mainStage);
+
     }
 }

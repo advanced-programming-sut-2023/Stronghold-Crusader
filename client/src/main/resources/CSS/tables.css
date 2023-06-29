@@ -3,7 +3,7 @@
 }
 .button:hover {
     -fx-cursor: hand;
-    -fx-background-color: transparent;
+    -fx-background-color: #aa2200;
 }
 
 .table-view {

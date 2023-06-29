@@ -3,9 +3,10 @@ package model.User;
 import model.Game.Governance;
 import model.Game.Trade;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Serializable {
     private final Governance governance;
     private final String username;
     private final String nickname;

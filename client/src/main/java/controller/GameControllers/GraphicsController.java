@@ -507,4 +507,8 @@ public class GraphicsController {
                 getResource("/FXML/Gamefxml/selectedUnitMenus/selectedUnitMain.fxml"));
         selectedUnitMenu.getChildren().add(pane);
     }
+
+    public Map getMap() {
+        return map;
+    }
 }
