@@ -175,19 +175,21 @@ public class MainChatMenu extends Application {
     public void sendMessage(Message msg) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
                 getResource("/FXML/Chatfxml/CurrentUserMessagefxml.fxml").toExternalForm()));
-        ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
-        String time = msg.getHour() + ":" + msg.getMinute();
-        ((Label) anchorPane.getChildren().get(3)).setText(time);
-        ReactionManager.setReactions(msg, anchorPane);
-        chatPane.getChildren().add(anchorPane);
+        processMessageBox(msg, anchorPane);
     }
 
     public void receiveMessage(Message msg) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
                 getResource("/FXML/Chatfxml/OtherUserMessagefxml.fxml").toExternalForm()));
+        processMessageBox(msg, anchorPane);
+    }
+
+    private void processMessageBox(Message msg, AnchorPane anchorPane) {
         ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
         String time = msg.getHour() + ":" + msg.getMinute();
         ((Label) anchorPane.getChildren().get(3)).setText(time);
+        ReactionManager.setReactions(msg, anchorPane);
+        ReactionManager.setReactionHandling(msg, anchorPane);
         chatPane.getChildren().add(anchorPane);
     }
 

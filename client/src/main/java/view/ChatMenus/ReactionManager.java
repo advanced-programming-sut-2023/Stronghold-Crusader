@@ -3,6 +3,7 @@ package view.ChatMenus;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import model.chatRoom.Message;
+import view.UserMenus.MainMenu;
 
 import java.util.HashMap;
 
@@ -32,31 +33,42 @@ public class ReactionManager {
         ((Label) anchorPane.getChildren().get(11)).setText(Integer.toString(likeCount));
     }
 
-    public static void like(AnchorPane anchorPane) {
+    public static void setReactionHandling(Message msg, AnchorPane anchorPane){
+        (anchorPane.getChildren().get(8)).setOnMouseClicked(e -> dislike(anchorPane, msg));
+        (anchorPane.getChildren().get(9)).setOnMouseClicked(e -> fire(anchorPane, msg));
+        (anchorPane.getChildren().get(10)).setOnMouseClicked(e -> heart(anchorPane, msg));
+        (anchorPane.getChildren().get(11)).setOnMouseClicked(e -> like(anchorPane, msg));
+    }
+
+    public static void like(AnchorPane anchorPane, Message msg) {
         String text = ((Label) anchorPane.getChildren().get(11)).getText();
         int num = Integer.parseInt(text);
         num++;
         ((Label) anchorPane.getChildren().get(11)).setText(Integer.toString(num));
+        msg.addReaction(MainMenu.mainController.currentUser.getUsername(), Message.Reaction.LIKE);
     }
 
-    public static void dislike(AnchorPane anchorPane) {
+    public static void dislike(AnchorPane anchorPane, Message msg) {
         String text = ((Label) anchorPane.getChildren().get(8)).getText();
         int num = Integer.parseInt(text);
         num++;
         ((Label) anchorPane.getChildren().get(8)).setText(Integer.toString(num));
+        msg.addReaction(MainMenu.mainController.currentUser.getUsername(), Message.Reaction.DISLIKE);
     }
 
-    public static void heart(AnchorPane anchorPane) {
+    public static void heart(AnchorPane anchorPane, Message msg) {
         String text = ((Label) anchorPane.getChildren().get(10)).getText();
         int num = Integer.parseInt(text);
         num++;
         ((Label) anchorPane.getChildren().get(10)).setText(Integer.toString(num));
+        msg.addReaction(MainMenu.mainController.currentUser.getUsername(), Message.Reaction.HEART);
     }
 
-    public static void fire(AnchorPane anchorPane) {
+    public static void fire(AnchorPane anchorPane, Message msg) {
         String text = ((Label) anchorPane.getChildren().get(9)).getText();
         int num = Integer.parseInt(text);
         num++;
         ((Label) anchorPane.getChildren().get(9)).setText(Integer.toString(num));
+        msg.addReaction(MainMenu.mainController.currentUser.getUsername(), Message.Reaction.FIRE);
     }
 }
