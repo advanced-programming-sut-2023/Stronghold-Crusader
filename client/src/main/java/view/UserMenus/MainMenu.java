@@ -13,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.User.User;
 import model.User.UserManager;
 import view.ChatMenus.MainChatMenu;
 import view.Main;

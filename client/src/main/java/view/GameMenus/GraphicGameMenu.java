@@ -25,6 +25,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Game.Governance;
+import model.Map.Cell;
+import model.MapAsset.Building.Building;
+import model.MapAsset.MapAsset;
+import utils.Vector2D;
 import view.GameMenus.MarketMenus.MarketMenu;
 import view.GameMenus.TradeMenus.TradeMenu;
 
@@ -231,9 +235,36 @@ public class GraphicGameMenu extends Application {
         new TradeMenu().start(new Stage());
     }
 
-    public void nextTurn(){
+    public void nextTurn() throws Exception {
+//        String[][] map = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
+//        String[][] buildings = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
+//        loadCells(map, buildings);
+//        ResourceManager.save(new SaveData(graphicsController.getMap().getSize().x, graphicsController.getMap().getSize().y
+//                , map, buildings),  SaveData.getNumber() + ".save");
         gameController.nextTurn();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
     }
+
+    private void loadCells(String[][] map, String[][] buildings) {
+        for (int y = 0; y < graphicsController.getMap().getSize().y; y++) {
+            for (int x = 0; x < graphicsController.getMap().getSize().x; x++) {
+                Vector2D coordinate = new Vector2D(x, y);
+                Cell cell = graphicsController.getMap().getCell(coordinate);
+                map[y][x] = cell.getType().getImage().getUrl().toString();
+                Building building = searchForBuildings(cell);
+                if (building == null) buildings[y][x] = null;
+                else buildings[y][x] = building.getType().getImage().getUrl().toString();
+            }
+        }
+    }
+
+    private Building searchForBuildings(Cell cell) {
+        for (MapAsset asset : cell.getAllAssets()) {
+            if (asset instanceof Building) return (Building) asset;
+        }
+        return null;
+    }
+
+
 }

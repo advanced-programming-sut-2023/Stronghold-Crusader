@@ -2,7 +2,6 @@ package model.Map;
 
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.MoveController;
-import javafx.scene.image.ImageView;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
@@ -198,4 +197,6 @@ public class Map {
         }
         return false;
     }
+
+
 }
