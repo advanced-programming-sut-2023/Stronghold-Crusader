@@ -4,6 +4,7 @@ import database.Database;
 import utils.Pair;
 import utils.PasswordConverter;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class User {
     private String username;
     private String password;
@@ -28,14 +29,6 @@ public class User {
         return username;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getSlogan() {
-        return slogan;
-    }
-
     public int getHighScore() {
         return highScore;
     }
@@ -50,17 +43,6 @@ public class User {
         return email;
     }
 
-    public String getPasswordRecoveryQuestion() {
-        return passwordRecovery.x;
-    }
-
-    public boolean isPasswordCorrect(String password) {
-        return this.password.equals(PasswordConverter.encodePassword(password));
-    }
-
-    public boolean isRecoveryPasswordCorrect(String recoveryAnswer) {
-        return passwordRecovery.y.equals(recoveryAnswer);
-    }
 
     public void changeUsername(String username) {
         this.username = username;
@@ -100,10 +82,6 @@ public class User {
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
         Database.getInstance().updateData();
-    }
-
-    public String getAvatarPath() {
-        return avatarPath;
     }
 
     @Override
