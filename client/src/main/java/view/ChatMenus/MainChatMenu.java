@@ -3,7 +3,6 @@ package view.ChatMenus;
 import controller.ChatControllers.ChatController;
 import controller.ChatControllers.ChatCreationController;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -68,15 +66,12 @@ public class MainChatMenu extends Application {
 
     private void sendWithEnterHandler(Stage stage) {
         if (stage.getScene().getOnKeyPressed() != null) return;
-        stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                    try {
-                        processSendMessage();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+        stage.getScene().setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    processSendMessage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });

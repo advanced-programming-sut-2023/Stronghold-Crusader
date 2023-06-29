@@ -1,6 +1,5 @@
 package view.ChatMenus;
 
-import controller.ChatControllers.ChatController;
 import controller.ChatControllers.ChatCreationController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -15,21 +14,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Map.MapManager;
 import model.Stronghold;
 import model.User.User;
 import model.chatRoom.Chat;
-import model.chatRoom.ChatManager;
 import view.Main;
 import view.UserMenus.LoginMenu;
 import view.UserMenus.MainMenu;
 import view.enums.messages.ChatMessage.ChatMessage;
 
 import java.net.URL;
-import java.util.ArrayList;
 
 public class ChatCreationMenu extends Application {
     public ImageView privateButton;
