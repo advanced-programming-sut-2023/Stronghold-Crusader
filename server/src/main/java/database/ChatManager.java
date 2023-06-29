@@ -142,7 +142,6 @@ public class ChatManager {
         if (jsonObject == null)
             return null;
         Chat chat = gson.fromJson(jsonObject, Chat.class);
-        System.out.println("hi");
         return chat;
     }
 
@@ -153,5 +152,9 @@ public class ChatManager {
             chatParticipants.add(user.getUsername());
         }
         return new Chat(chatParticipants);
+    }
+
+    public static void notifyAllMembers(){
+
     }
 }

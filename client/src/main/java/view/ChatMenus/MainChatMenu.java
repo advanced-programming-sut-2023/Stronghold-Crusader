@@ -200,6 +200,7 @@ public class MainChatMenu extends Application {
     public void goToChatCreation() throws Exception {
         ChatCreationMenu chatCreationMenu = new ChatCreationMenu();
         ChatCreationMenu.setChatMenu(this);
+        ChatCreationMenu.setController(controller);
         chatCreationMenu.start(Main.mainStage);
     }
 
