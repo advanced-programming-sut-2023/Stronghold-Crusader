@@ -1,5 +1,6 @@
 package websocket;
 
+import database.ChatManager;
 import database.Database;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.net.SocketAddress;
 public class Server {
     public static void main(String[] args) throws IOException {
         Database.load();
+        ChatManager.load();
         run(8080);
     }
 

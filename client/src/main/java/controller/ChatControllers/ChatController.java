@@ -1,15 +1,20 @@
 package controller.ChatControllers;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import model.User.User;
 import model.chatRoom.Chat;
 import model.chatRoom.Message;
 import network.Connection;
 import network.Request;
 
+import java.util.ArrayList;
+
 public class ChatController {
     private Chat currentChat;
-    private User currentUser;
+    private final User currentUser;
     public ChatController(User currentUser){
         this.currentUser = currentUser;
     }
@@ -43,6 +48,35 @@ public class ChatController {
     }
 
     public Chat getGlobalChat(){
-
+        Request request = new Request();
+        request.setType("chat");
+        request.setCommand("get_global_chat");
+        return new Gson().fromJson(Connection.getInstance().sendRequest(request), Chat.class);
     }
+
+    public ArrayList<Chat> loadRoomChats(){
+        Request request = new Request();
+        request.setType("chat");
+        request.setCommand("get_private_chats");
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(Connection.getInstance().sendRequest(request), JsonObject.class);
+        JsonArray chatsArray = jsonObject.getAsJsonArray("chats");
+        ArrayList<Chat> privateChats = new ArrayList<>();
+        for (JsonElement element : chatsArray)
+            privateChats.add(gson.fromJson(element, Chat.class));
+        return privateChats;
+    }
+    public ArrayList<Chat> loadPrivateChats(){
+        Request request = new Request();
+        request.setType("chat");
+        request.setCommand("get_room_chats");
+        Gson gson = new Gson();
+        JsonObject jsonObject = gson.fromJson(Connection.getInstance().sendRequest(request), JsonObject.class);
+        JsonArray chatsArray = jsonObject.getAsJsonArray("chats");
+        ArrayList<Chat> roomChats = new ArrayList<>();
+        for (JsonElement element : chatsArray)
+            roomChats.add(gson.fromJson(element, Chat.class));
+        return roomChats;
+    }
+
 }

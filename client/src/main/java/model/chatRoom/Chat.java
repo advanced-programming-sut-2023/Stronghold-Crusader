@@ -17,7 +17,7 @@ public class Chat {
         messages = new ArrayList<>();
         chatId = chatMode.name().toLowerCase() + id;
         this.owner = owner;
-        ChatManager.updateChat(this, chatMode);
+        ChatManager.updateChat(this);
     }
 
     public Chat(ArrayList<String> users){
@@ -26,12 +26,12 @@ public class Chat {
         messages = new ArrayList<>();
         chatId = chatMode.name().toLowerCase() + "Chat";
         this.owner = "";
-        ChatManager.updateChat(this, chatMode);
+        ChatManager.updateChat(this);
     }
 
     public void addMessage(Message msg){
      messages.add(msg);
-     ChatManager.updateChat(this, chatMode);
+     ChatManager.updateChat(this);
     }
 
     public String getChatId() {

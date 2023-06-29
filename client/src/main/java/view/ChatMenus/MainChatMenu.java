@@ -57,7 +57,7 @@ public class MainChatMenu extends Application {
     }
 
     public void initialize() throws IOException {
-        loadChat(ChatManager.loadGlobalChat());
+        loadChat(controller.getGlobalChat());
     }
 
     public void processSendMessage() throws IOException {
@@ -105,7 +105,7 @@ public class MainChatMenu extends Application {
         chatList = new VBox();
         chatList.setPrefWidth(161);
         chatList.setAlignment(Pos.CENTER);
-        ArrayList<Chat> chats = ChatManager.loadRoomChats();
+        ArrayList<Chat> chats = controller.loadRoomChats();
         for (Chat chat : chats) {
             addChatItem(chat);
         }
@@ -116,7 +116,7 @@ public class MainChatMenu extends Application {
         chatList = new VBox();
         chatList.setPrefWidth(161);
         chatList.setAlignment(Pos.CENTER);
-        ArrayList<Chat> chats = ChatManager.loadPrivateChats();
+        ArrayList<Chat> chats = controller.loadPrivateChats();
         for (Chat chat : chats) {
             addChatItem(chat);
         }
@@ -167,7 +167,7 @@ public class MainChatMenu extends Application {
     public void loadGlobalChat(){
         chatListScroll.setContent(null);
         try {
-            loadChat(ChatManager.loadGlobalChat());
+            loadChat(controller.getGlobalChat());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

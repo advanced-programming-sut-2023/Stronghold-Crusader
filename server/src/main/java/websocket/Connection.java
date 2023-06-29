@@ -1,6 +1,9 @@
 package websocket;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import database.ChatManager;
 import database.Database;
 import io.jsonwebtoken.Jwts;
@@ -46,7 +49,7 @@ public class Connection extends Thread {
                         handelUsersQuery(request);
                         break;
                     case "chat":
-                        handelChat();
+                        handelChat(request);
                         break;
                     case "friend":
                         handelFriend();
@@ -112,12 +115,43 @@ public class Connection extends Thread {
         }
     }
 
-    private void handelChat(Request request) {
+    private void handelChat(Request request) throws IOException {
         switch (request.getCommand()){
             case "update_chat":
                 Chat chat = new Gson().fromJson(request.getParameters().get("chat"), Chat.class);
                 ChatManager.updateChat(chat, chat.getChatMode());
+                outputStream.writeUTF("200: successfully updated");
                 break;
+            case "get_global_chat":
+                System.out.println("loading global chat");
+                String out = new Gson().toJson(ChatManager.loadGlobalChat());
+                System.out.println("sent global chat");
+                outputStream.writeUTF(out);
+                break;
+            case "get_private_chats":
+                Gson gson = new GsonBuilder().serializeNulls().create();
+                JsonObject mainObject = new JsonObject();
+                JsonArray usersArray = new JsonArray();
+                for (Chat pvChat : ChatManager.loadPrivateChats())
+                    usersArray.add(gson.toJsonTree(pvChat).getAsJsonObject());
+                mainObject.add("chats", usersArray);
+                outputStream.writeUTF(gson.toJson(mainObject));
+                break;
+            case "get_room_chats":
+                Gson gson1 = new GsonBuilder().serializeNulls().create();
+                JsonObject mainObject1 = new JsonObject();
+                JsonArray usersArray1 = new JsonArray();
+                for (Chat pvChat : ChatManager.loadRoomChats())
+                    usersArray1.add(gson1.toJsonTree(pvChat).getAsJsonObject());
+                mainObject1.add("chats", usersArray1);
+                outputStream.writeUTF(gson1.toJson(mainObject1));
+                break;
+            case "load_chat":
+                String out1 = new Gson().toJson(ChatManager.loadChat(request.getParameters().get("chat_id"),
+                        new Gson().fromJson(request.getParameters().get("chat_type"), Chat.ChatMode.class)));
+                outputStream.writeUTF(out1);
+                break;
+
         }
     }
 
