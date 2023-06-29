@@ -147,10 +147,10 @@ public class ChatManager {
     }
 
     public static Chat createGlobaChat() {
-        Collection users = Database.getInstance().getUsers();
+        Collection<User> users = Database.getInstance().getUsers();
         ArrayList<String> chatParticipants = new ArrayList<>();
-        for (Object user : users) {
-            chatParticipants.add(((User) user).getUsername());
+        for (User user : users) {
+            chatParticipants.add(user.getUsername());
         }
         return new Chat(chatParticipants);
     }
