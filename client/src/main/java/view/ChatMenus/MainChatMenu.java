@@ -178,6 +178,7 @@ public class MainChatMenu extends Application {
         ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
         String time = msg.getHour() + ":" + msg.getMinute();
         ((Label) anchorPane.getChildren().get(3)).setText(time);
+        ReactionManager.setReactions(msg, anchorPane);
         chatPane.getChildren().add(anchorPane);
     }
 

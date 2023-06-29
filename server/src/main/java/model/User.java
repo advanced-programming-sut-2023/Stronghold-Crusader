@@ -4,6 +4,8 @@ import database.Database;
 import utils.Pair;
 import utils.PasswordConverter;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("FieldCanBeLocal")
 public class User {
     private String username;
@@ -13,6 +15,8 @@ public class User {
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;
+    private ArrayList<User> friends;
+    private ArrayList<User> senders;
     private int highScore;
 
     public User(String username, String password, String email, String nickname, String slogan) {

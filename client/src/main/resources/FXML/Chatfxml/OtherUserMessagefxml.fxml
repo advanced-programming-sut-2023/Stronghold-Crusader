@@ -6,9 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="42.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-
-    <children>
+<AnchorPane prefHeight="71.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
         <ImageView fitHeight="40" fitWidth="40.0" layoutX="3.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../assets/avatars/defaults/default.png" />
             <clip>
@@ -18,7 +16,7 @@
         <ImageView fitHeight="67.0" fitWidth="293.0" layoutX="44.0" layoutY="2.0" pickOnBounds="true">
             <Image url="@../../assets/graphic/overlay/otherUsersTextBox.png" />
         </ImageView>
-        <Label layoutX="64.0" layoutY="14.0" prefHeight="17.0" prefWidth="247.0" textFill="WHITE">
+        <Label layoutX="66.0" layoutY="9.0" prefHeight="17.0" prefWidth="247.0" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
@@ -28,5 +26,37 @@
                 <Font size="9.0" />
             </font>
         </Label>
-    </children>
+    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="57.0" layoutY="34.0" pickOnBounds="true">
+        <Image url="@../../assets/buttons/like_btn.png" />
+    </ImageView>
+    <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="145.0" layoutY="45.0" pickOnBounds="true">
+        <Image url="@../../assets/buttons/dislike_btn.png" />
+    </ImageView>
+    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="114.0" layoutY="35.0" pickOnBounds="true">
+        <Image url="@../../assets/buttons/fire_btn.png" />
+    </ImageView>
+    <ImageView fitHeight="32.0" fitWidth="33.0" layoutX="89.0" layoutY="42.0" pickOnBounds="true">
+        <Image url="@../../assets/buttons/heart_btn.png" />
+    </ImageView>
+   <Label layoutX="162.0" layoutY="45.0" prefHeight="25.0" prefWidth="10.0">
+      <font>
+         <Font name="Arial Black" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="129.0" layoutY="45.0" prefHeight="25.0" prefWidth="10.0">
+      <font>
+         <Font name="Arial Black" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="100.0" layoutY="46.0" prefHeight="25.0" prefWidth="10.0">
+      <font>
+         <Font name="Arial Black" size="14.0" />
+      </font>
+   </Label>
+   <Label layoutX="74.0" layoutY="46.0" prefHeight="25.0" prefWidth="10.0">
+      <font>
+         <Font name="Arial Black" size="14.0" />
+      </font>
+   </Label>
+
 </AnchorPane>

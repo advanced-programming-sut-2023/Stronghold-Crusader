@@ -38,7 +38,6 @@ public class ChatCreationMenu extends Application {
     public TextField chatIdField;
     public ScrollPane participantList;
     public Label errorMessageText;
-    private Chat.ChatMode chatType;
     private VBox vBox;
     private static MainChatMenu chatMenu;
     private static ChatCreationController controller;
@@ -74,14 +73,12 @@ public class ChatCreationMenu extends Application {
     }
 
     public void selectPrivateChat() {
-        chatType = Chat.ChatMode.PRIVATE;
         privateButton.setOpacity(1);
         groupButton.setOpacity(0.5);
         controller.setMode(Chat.ChatMode.PRIVATE);
     }
 
     public void selectGroupChat() {
-        chatType = Chat.ChatMode.ROOM;
         groupButton.setOpacity(1);
         privateButton.setOpacity(0.5);
         controller.setMode(Chat.ChatMode.ROOM);

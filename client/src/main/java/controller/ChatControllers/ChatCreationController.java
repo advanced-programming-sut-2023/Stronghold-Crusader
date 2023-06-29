@@ -4,7 +4,6 @@ import model.Stronghold;
 import model.User.User;
 import model.chatRoom.Chat;
 import model.chatRoom.ChatManager;
-import view.ChatMenus.ChatCreationMenu;
 import view.enums.messages.ChatMessage.ChatMessage;
 
 import java.util.ArrayList;
