@@ -191,10 +191,12 @@ public class User {
         request.addParameter("username", this.username);
         request.addParameter("avatar_path", avatarPath);
         String result = Connection.getInstance().sendRequest(request);
-        if (result.startsWith("400")) try {
-            throw new Exception("User doesn't exist");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (result.startsWith("400")) {
+            try {
+                throw new Exception("User doesn't exist");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -208,24 +210,66 @@ public class User {
 
     public void addFriend(User user) {
         friends.add(user);
+        Request request = new Request();
+        request.setType("friend");
+        request.setCommand("add_friend");
+        request.addParameter("user", new Gson().toJson(user));
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void addSender(User user) {
         senders.add(user);
+        Request request = new Request();
+        request.setType("friend");
+        request.setCommand("add_sender");
+        request.addParameter("user", new Gson().toJson(user));
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void removeFriend(User user) {
         friends.remove(user);
+        Request request = new Request();
+        request.setType("friend");
+        request.setCommand("remove_friend");
+        request.addParameter("user", new Gson().toJson(user));
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void removeSender(User user) {
         senders.remove(user);
+        Request request = new Request();
+        request.setType("friend");
+        request.setCommand("remove_sender");
+        request.addParameter("user", new Gson().toJson(user));
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    //the arraylist returned must not be manipulated
     public ArrayList<User> getFriends() {
         return friends;
     }
 
+    //the arraylist returned must not be manipulated
     public ArrayList<User> getSenders() {
         return senders;
     }

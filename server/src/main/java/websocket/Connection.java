@@ -68,7 +68,7 @@ public class Connection extends Thread {
                         handelChat(request);
                         break;
                     case "friend":
-                        handelFriend();
+                        handelFriend(request);
                         break;
                     case "scoreboard":
                         handelScoreboard();
@@ -238,8 +238,29 @@ public class Connection extends Thread {
         }
     }
 
-    private void handelFriend() {
-
+    private void handelFriend(Request request) throws IOException {
+        User user = Database.getInstance().getUser(request.getParameters().get("username"));
+        if (user == null) {
+            outputStream.writeUTF("400: no_user");
+            return;
+        }
+        switch (request.getCommand()) {
+            case "add_friend":
+                user.addFriend((new Gson().fromJson(request.getParameters().get("user"), User.class)));
+                break;
+            case "remove_friend":
+                user.removeFriend((new Gson().fromJson(request.getParameters().get("user"), User.class)));
+                break;
+            case "add_sender":
+                user.addSender((new Gson().fromJson(request.getParameters().get("user"), User.class)));
+                break;
+            case "remove_sender":
+                user.removeSender((new Gson().fromJson(request.getParameters().get("user"), User.class)));
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+        }
+        outputStream.writeUTF("200: success");
     }
 
     private void handelScoreboard() {
