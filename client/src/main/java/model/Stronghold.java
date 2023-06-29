@@ -24,25 +24,25 @@ public class Stronghold {
 
     public User getUser(String username) {
         Request request = new Request();
-        request.setType("users_query");
+        request.setType("user_query");
         request.setCommand("get_user");
         request.addParameter("username", username);
         String result = Connection.getInstance().sendRequest(request);
-        if (result.equals("no_user")) return null;
+        if (result.startsWith("400")) return null;
         return new Gson().fromJson(result, User.class);
     }
 
     public void addUser(User user) {
         Request request = new Request();
-        request.setType("users_query");
-        request.setCommand("add_user");
+        request.setType("user_change");
+        request.setCommand("add");
         request.addParameter("user", new Gson().toJson(user));
         Connection.getInstance().sendRequest(request);
     }
 
     public int getUserRank(User user) {
         Request request = new Request();
-        request.setType("users_query");
+        request.setType("user_query");
         request.setCommand("get_user_rank");
         request.addParameter("username", user.getUsername());
         String result = Connection.getInstance().sendRequest(request);
@@ -51,7 +51,7 @@ public class Stronghold {
 
     public boolean emailExists(String email) {
         Request request = new Request();
-        request.setType("users_query");
+        request.setType("user_query");
         request.setCommand("email_exists");
         request.addParameter("email", email);
         return Boolean.parseBoolean(Connection.getInstance().sendRequest(request));
@@ -59,7 +59,7 @@ public class Stronghold {
 
     public boolean userExists(String username) {
         Request request = new Request();
-        request.setType("users_query");
+        request.setType("user_query");
         request.setCommand("user_exists");
         request.addParameter("username", username);
         return Boolean.parseBoolean(Connection.getInstance().sendRequest(request));
@@ -67,7 +67,7 @@ public class Stronghold {
 
     public Collection<User> getUsers() {
         Request request = new Request();
-        request.setType("users_query");
+        request.setType("user_query");
         request.setCommand("get_users");
         String result = Connection.getInstance().sendRequest(request);
         Type arrayListType = new TypeToken<ArrayList<User>>() {
@@ -77,7 +77,7 @@ public class Stronghold {
 
     public ArrayList<User> getUserRankings() {
         Request request = new Request();
-        request.setType("users_query");
+        request.setType("user_query");
         request.setCommand("get_rankings");
         String result = Connection.getInstance().sendRequest(request);
         Type arrayListType = new TypeToken<ArrayList<User>>() {

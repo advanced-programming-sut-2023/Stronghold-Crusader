@@ -11,6 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import model.Request;
 import model.User;
 import model.chatRoom.Chat;
+import utils.Pair;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -19,10 +20,10 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 public class Connection extends Thread {
-    private Socket socket;
+    private final Socket socket;
     private String jwsToken;
-    private DataInputStream inputStream;
-    private DataOutputStream outputStream;
+    private final DataInputStream inputStream;
+    private final DataOutputStream outputStream;
 
     public Connection(Socket socket) {
         this.socket = socket;
@@ -45,8 +46,11 @@ public class Connection extends Thread {
                     case "login":
                         handelLogin(request);
                         break;
-                    case "users_query":
+                    case "user_query":
                         handelUsersQuery(request);
+                        break;
+                    case "user_change":
+                        handelUsersChange(request);
                         break;
                     case "chat":
                         handelChat(request);
@@ -75,7 +79,7 @@ public class Connection extends Thread {
     private void handelLogin(Request request) throws IOException {
         request.getParameters().get("password");
         jwsToken = Jwts.builder().setIssuer(request.getParameters().get("username"))
-                .signWith(SignatureAlgorithm.ES256,
+                .signWith(SignatureAlgorithm.HS256,
                         "JXJHHxjK3vpZtfsS0P4jhAJ1pdaU9e+xnTFfK2cwrO4=".getBytes(StandardCharsets.UTF_8))
                 .compact();
         outputStream.writeUTF(jwsToken);
@@ -85,12 +89,8 @@ public class Connection extends Thread {
         switch (request.getCommand()) {
             case "get_user":
                 User user = Database.getInstance().getUser(request.getParameters().get("username"));
-                if(user == null) outputStream.writeUTF("no_user");
+                if(user == null) outputStream.writeUTF("400: no_user");
                 else outputStream.writeUTF(new Gson().toJson(user));
-                break;
-            case "add_user":
-                Database.getInstance().addUser(new Gson().fromJson(request.getParameters().get("user"), User.class));
-                outputStream.writeUTF("200: successfully added");
                 break;
             case "user_exists":
                 outputStream.writeUTF(String.valueOf(
@@ -113,6 +113,52 @@ public class Connection extends Thread {
             default:
                 outputStream.writeUTF("400: bad request");
         }
+    }
+
+    private void handelUsersChange(Request request) throws IOException {
+        if(request.getCommand().equals("add")){
+            Database.getInstance().addUser(new Gson().fromJson(request.getParameters().get("user"), User.class));
+            outputStream.writeUTF("200: successfully added");
+            return;
+        }
+        User user = Database.getInstance().getUser(request.getParameters().get("username"));
+        if(user == null){
+            outputStream.writeUTF("400: no_user");
+            return;
+        }
+        switch (request.getCommand()) {
+            case "highscore":
+                user.setHighScore(Integer.parseInt(request.getParameters().get("highscore")));
+                break;
+            case "username":
+                user.changeUsername(request.getParameters().get("new_username"));
+                break;
+            case "nickname":
+                user.changeNickname(request.getParameters().get("nickname"));
+                break;
+            case "slogan":
+                user.changeSlogan(request.getParameters().get("slogan"));
+                break;
+            case "email":
+                user.changeEmail(request.getParameters().get("email"));
+                break;
+            case "password_recovery":
+                user.setPasswordRecovery(new Gson().fromJson(request.getParameters().get("recovery"), Pair.class));
+                break;
+            case "setPassword":
+                user.setPassword(request.getParameters().get("password"));
+                break;
+            case "removeSlogan":
+                user.removeSlogan();
+                break;
+            case "set_avatar":
+                user.setAvatarPath(request.getParameters().get("avatar_path"));
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+                return;
+        }
+        outputStream.writeUTF("200: success");
     }
 
     private void handelChat(Request request) throws IOException {
