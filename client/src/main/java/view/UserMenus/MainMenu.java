@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -81,8 +82,7 @@ public class MainMenu extends Application {
         scoreBoardMenu.start(Main.mainStage);
     }
 
-    public void goToTelevision(MouseEvent mouseEvent) throws Exception {
+    public void goToTelevision() throws Exception {
         new Television().start(Main.mainStage);
-
     }
 }

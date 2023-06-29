@@ -105,13 +105,10 @@ public class Connection extends Thread {
                 user.setSocket(socket);
                 loggedInUser = user;
                 outputStream.writeUTF("200: Sign in success");
-                System.out.println(loggedInUser);
                 break;
             case "logout":
-                System.out.println(loggedInUser);
                 loggedInUser = null;
                 user.setSocket(null);
-                System.out.println(loggedInUser);
                 outputStream.writeUTF("200: Log out success");
                 break;
             default:
