@@ -23,17 +23,6 @@ public class User {
     private ArrayList<User> senders;
     private int highScore;
 
-    public User(String username, String password, String email, String nickname, String slogan) {
-        this.socket = null;
-        this.username = username;
-        this.password = PasswordConverter.encodePassword(password);
-        this.email = email;
-        this.nickname = nickname;
-        this.slogan = slogan;
-        this.highScore = 0;
-        this.avatarPath = User.class.getResource("/assets/avatars/defaults/default.png").toExternalForm();
-    }
-
     public String getUsername() {
         return username;
     }
@@ -90,6 +79,26 @@ public class User {
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
+        Database.getInstance().updateData();
+    }
+
+    public void addFriend(User user) {
+        friends.add(user);
+        Database.getInstance().updateData();
+    }
+
+    public void addSender(User user) {
+        senders.add(user);
+        Database.getInstance().updateData();
+    }
+
+    public void removeFriend(User user) {
+        friends.remove(user);
+        Database.getInstance().updateData();
+    }
+
+    public void removeSender(User user) {
+        senders.remove(user);
         Database.getInstance().updateData();
     }
 
