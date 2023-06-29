@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import model.chatRoom.Chat;
 import model.chatRoom.Message;
 import view.GameMenus.MarketMenus.MarketMenu;
+import view.Main;
 import view.UserMenus.LoginMenu;
 import view.UserMenus.MainMenu;
 
@@ -171,5 +172,15 @@ public class MainChatMenu extends Application {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void goToChatCreation() throws Exception {
+        ChatCreationMenu chatCreationMenu = new ChatCreationMenu();
+        ChatCreationMenu.setChatMenu(this);
+        chatCreationMenu.start(Main.mainStage);
+    }
+
+    public void back() throws Exception {
+        MainMenu.mainController.menu.start(Main.mainStage);
     }
 }

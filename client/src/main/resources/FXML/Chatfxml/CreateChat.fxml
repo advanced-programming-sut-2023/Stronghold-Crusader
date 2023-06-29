@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ChatMenus.ChatCreationMenu">
+    <ImageView fitHeight="650" fitWidth="800" layoutX="645.0" layoutY="-34.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
+        <Image url="@../../assets/backgrounds/mapSelect.png"/>
+    </ImageView>
+    <ImageView fitHeight="180.0" fitWidth="61.0" layoutX="951.0" layoutY="220.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" rotate="90" translateX="25" translateY="73">
+        <Image url="@../../assets/graphic/overlay/selectedUnitOverlay.png"/>
+    </ImageView>
+    <ImageView fx:id="privateButton" fitHeight="45.0" fitWidth="48.0" layoutX="900.0" layoutY="288.0"
+               nodeOrientation="INHERIT" onMouseClicked="#selectPrivateChat" opacity="0.5" pickOnBounds="true"
+               preserveRatio="true" translateX="25" translateY="73">
+        <Image url="@../../assets/buttons/privateChat_btn.png"/>
+    </ImageView>
+    <ImageView fx:id="groupButton" fitHeight="45.0" fitWidth="48.0" layoutX="958.0" layoutY="288.0"
+               nodeOrientation="INHERIT" onMouseClicked="#selectGroupChat" opacity="0.5" pickOnBounds="true"
+               preserveRatio="true" translateX="25" translateY="73">
+        <Image url="@../../assets/buttons/groupChat_btn.png"/>
+    </ImageView>
+    <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="1015.0" layoutY="287.0" nodeOrientation="INHERIT"
+               opacity="0.16" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
+        <Image url="@../../assets/buttons/globalChat_btn.png"/>
+    </ImageView>
+    <ImageView fitHeight="30" fitWidth="210.0" layoutX="796.0" layoutY="503.0" nodeOrientation="INHERIT"
+               onMouseClicked="#back" pickOnBounds="true" translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/back_btn.jpg"/>
+    </ImageView>
+    <Label layoutX="792.0" layoutY="346.0" prefHeight="74.0" prefWidth="127.0"
+           text="Select The Chat Type You Wish To Create" textFill="WHITE" wrapText="true">
+        <font>
+            <Font name="Arial Black" size="13.0"/>
+        </font>
+    </Label>
+    <Label layoutX="793.0" layoutY="423.0" prefHeight="29.0" prefWidth="59.0" text="Chat Id" textAlignment="CENTER"
+           textFill="WHITE" wrapText="true">
+        <font>
+            <Font name="Arial Black" size="13.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="mapNameField" layoutX="867.0" layoutY="422.0" opacity="0.5" prefHeight="30.0" prefWidth="230.0"
+               promptText="choose your map" scaleShape="false"
+               style="-fx-background-color: #3a0d05; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;"/>
+</AnchorPane>

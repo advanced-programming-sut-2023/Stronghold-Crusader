@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import model.Game.Game;
 import model.Map.MapManager;
 import model.Stronghold;
+import view.ChatMenus.MainChatMenu;
 import view.GameMenus.GraphicGameMenu;
 import view.Main;
 import view.UserMenus.MainMenu;

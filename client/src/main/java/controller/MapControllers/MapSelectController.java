@@ -12,7 +12,6 @@ import model.User.User;
 import model.enums.User.Color;
 import view.GameMenus.GraphicGameMenu;
 import view.Main;
-import view.MapMenus.MapSelectMenu;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.enums.messages.MapMessage.MapSelectMessage;
 
