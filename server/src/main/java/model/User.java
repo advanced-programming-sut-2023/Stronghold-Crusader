@@ -4,6 +4,7 @@ import database.Database;
 import utils.Pair;
 import utils.PasswordConverter;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class User {
     private String username;
     private String password;
@@ -13,7 +14,6 @@ public class User {
     private Pair passwordRecovery;
     private String avatarPath;
     private int highScore;
-    private int rank;
 
     public User(String username, String password, String email, String nickname, String slogan) {
         this.username = username;
@@ -27,14 +27,6 @@ public class User {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public String getSlogan() {
-        return slogan;
     }
 
     public int getHighScore() {
@@ -51,17 +43,6 @@ public class User {
         return email;
     }
 
-    public String getPasswordRecoveryQuestion() {
-        return passwordRecovery.x;
-    }
-
-    public boolean isPasswordCorrect(String password) {
-        return this.password.equals(PasswordConverter.encodePassword(password));
-    }
-
-    public boolean isRecoveryPasswordCorrect(String recoveryAnswer) {
-        return passwordRecovery.y.equals(recoveryAnswer);
-    }
 
     public void changeUsername(String username) {
         this.username = username;
@@ -89,7 +70,7 @@ public class User {
     }
 
     public void setPassword(String newPass) {
-        this.password = PasswordConverter.encodePassword(newPass);
+        this.password = newPass;
         Database.getInstance().updateData();
     }
 
@@ -103,10 +84,6 @@ public class User {
         Database.getInstance().updateData();
     }
 
-    public String getAvatarPath() {
-        return avatarPath;
-    }
-
     @Override
     public String toString() {
         return "username : " + username +
@@ -114,9 +91,5 @@ public class User {
                 "\nslogan : " + slogan +
                 "\nemail : " + email +
                 "\nhighscore : " + highScore;
-    }
-
-    public int getRank() {
-        return rank = Database.getInstance().getUserRank(username);
     }
 }

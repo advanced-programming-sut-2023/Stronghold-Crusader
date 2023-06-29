@@ -1,6 +1,9 @@
 package model.User;
 
+import com.google.gson.Gson;
 import model.Stronghold;
+import network.Connection;
+import network.Request;
 import utils.*;
 
 import java.util.ArrayList;
@@ -47,8 +50,17 @@ public class User {
 
     public void setHighScore(int highScore) {
         this.highScore = highScore;
-//        Stronghold.getInstance().updateRankings();
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("highscore");
+        request.addParameter("username", username);
+        request.addParameter("highscore", String.valueOf(highScore));
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getEmail() {
@@ -68,56 +80,126 @@ public class User {
     }
 
     public void changeUsername(String username) {
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("username");
+        request.addParameter("username", this.username);
         this.username = username;
-//        Stronghold.getInstance().updateData();
+        request.addParameter("new_username", username);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void changeNickname(String nickname) {
         this.nickname = nickname;
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("nickname");
+        request.addParameter("username", this.username);
+        request.addParameter("nickname", nickname);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void changeSlogan(String slogan) {
         this.slogan = slogan;
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("slogan");
+        request.addParameter("username", this.username);
+        request.addParameter("slogan", slogan);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void changeEmail(String email) {
         this.email = email;
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("email");
+        request.addParameter("username", this.username);
+        request.addParameter("email", email);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setPasswordRecovery(Pair passwordRecovery) {
         this.passwordRecovery = passwordRecovery;
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("password_recovery");
+        request.addParameter("username", this.username);
+        request.addParameter("recovery", new Gson().toJson(passwordRecovery));
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setPassword(String newPass) {
         this.password = PasswordConverter.encodePassword(newPass);
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("setPassword");
+        request.addParameter("username", this.username);
+        request.addParameter("password", password);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void removeSlogan() {
         this.slogan = "";
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("removeSlogan");
+        request.addParameter("username", this.username);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
-//        Stronghold.getInstance().updateData();
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("set_avatar");
+        request.addParameter("username", this.username);
+        request.addParameter("avatar_path", avatarPath);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("User doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getAvatarPath() {
         return avatarPath;
-    }
-
-    @Override
-    public String toString() {
-        return "username : " + username +
-                "\nnickname : " + nickname +
-                "\nslogan : " + slogan +
-                "\nemail : " + email +
-                "\nhighscore : " + highScore;
     }
 
     public int getRank() {
@@ -151,7 +233,17 @@ public class User {
     public boolean isFriend(User user) {
         return friends.contains(user);
     }
+
     public boolean isHaveRequestFrom(User user) {
         return senders.contains(user);
+    }
+
+    @Override
+    public String toString() {
+        return "username : " + username +
+                "\nnickname : " + nickname +
+                "\nslogan : " + slogan +
+                "\nemail : " + email +
+                "\nhighscore : " + highScore;
     }
 }
