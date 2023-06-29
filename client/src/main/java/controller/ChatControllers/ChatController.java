@@ -1,15 +1,15 @@
 package controller.ChatControllers;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import model.User.User;
 import model.chatRoom.Chat;
 import model.chatRoom.Message;
 import network.Connection;
 import network.Request;
+import view.ChatMenus.MainChatMenu;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ChatController {
@@ -18,6 +18,7 @@ public class ChatController {
     public ChatController(User currentUser){
         this.currentUser = currentUser;
     }
+    public static MainChatMenu currentMenu;
 
     public void setCurrentChat(Chat chat) {
         currentChat = chat;
@@ -27,20 +28,8 @@ public class ChatController {
         return currentChat;
     }
 
-    public void updateChat(){
-        if (currentChat != null){
-            Request request = new Request();
-            request.setType("chat");
-            request.setCommand("update_chat");
-            request.addParameter("chat", new Gson().toJson(currentChat));
-            request.addParameter("chat_type", new Gson().toJson(currentChat.getChatMode()));
-            Connection.getInstance().sendRequest(request);
-        }
-    }
-
     public void addMessage(Message msg){
         currentChat.addMessage(msg);
-        // notify the server to send the message to all other users
     }
 
     public String getCurrentUsername() {
@@ -51,35 +40,30 @@ public class ChatController {
         Request request = new Request();
         request.setType("chat");
         request.setCommand("get_global_chat");
-        return new Gson().fromJson(Connection.getInstance().sendRequest(request), Chat.class);
+        String in = Connection.getInstance().sendRequest(request);
+        return new Gson().fromJson(in, Chat.class);
     }
 
     public ArrayList<Chat> loadRoomChats(){
         Request request = new Request();
         request.setType("chat");
-        request.setCommand("get_private_chats");
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(Connection.getInstance().sendRequest(request), JsonObject.class);
-        JsonArray chatsArray = jsonObject.getAsJsonArray("chats");
-        ArrayList<Chat> privateChats = new ArrayList<>();
-        for (JsonElement element : chatsArray)
-            privateChats.add(gson.fromJson(element, Chat.class));
-        return privateChats;
+        request.setCommand("get_room_chats");
+        return getChats(request);
     }
     public ArrayList<Chat> loadPrivateChats(){
         Request request = new Request();
         request.setType("chat");
-        request.setCommand("get_room_chats");
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(Connection.getInstance().sendRequest(request), JsonObject.class);
-        JsonArray chatsArray = jsonObject.getAsJsonArray("chats");
-        ArrayList<Chat> roomChats = new ArrayList<>();
-        for (JsonElement element : chatsArray)
-            roomChats.add(gson.fromJson(element, Chat.class));
-        return roomChats;
+        request.setCommand("get_private_chats");
+        return getChats(request);
     }
 
-    public void createChat(){
-
+    private ArrayList<Chat> getChats(Request request) {
+        String result = Connection.getInstance().sendRequest(request);
+        Type arrayListType = new TypeToken<ArrayList<Chat>>() {
+        }.getType();
+        System.out.println();
+        System.out.println(result);
+        System.out.println();
+        return new Gson().fromJson(result, arrayListType);
     }
 }

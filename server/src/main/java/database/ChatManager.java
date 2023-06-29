@@ -6,6 +6,7 @@ import model.chatRoom.Chat;
 
 
 import java.io.*;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Matcher;
@@ -95,8 +96,8 @@ public class ChatManager {
         return gson.fromJson(jsonObject, Chat.class);
     }
 
-    public static ArrayList<Chat> loadPrivateChats() {
-        ArrayList<Chat> chats = new ArrayList<>();
+    public static Collection<Chat> loadPrivateChats() {
+        Collection<Chat> chats = new ArrayList<>();
         File file = new File(Settings.PRIVATE_CHAT_PATH);
         File[] directoryListing = file.listFiles();
         if (directoryListing != null) {
@@ -112,8 +113,8 @@ public class ChatManager {
         return chats;
     }
 
-    public static ArrayList<Chat> loadRoomChats() {
-        ArrayList<Chat> chats = new ArrayList<>();
+    public static Collection<Chat> loadRoomChats() {
+        Collection<Chat> chats = new ArrayList<>();
         File file = new File(Settings.ROOM_CHAT_PATH);
         File[] directoryListing = file.listFiles();
         if (directoryListing != null) {
@@ -154,7 +155,15 @@ public class ChatManager {
         return new Chat(chatParticipants);
     }
 
-    public static void notifyAllMembers(){
-
+    public static void notifyAllMembers(Chat chat) throws IOException {
+        for (User user : Database.getInstance().getOnlineUsers()){
+            if (chat.getUsers().contains(user.getUsername())){
+                Socket socket = user.getSocket();
+                OutputStream outputStream = socket.getOutputStream();
+                DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+                String output = new Gson().toJson(chat);
+                dataOutputStream.writeUTF("chat_updated:" + output);
+            }
+        }
     }
 }

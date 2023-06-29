@@ -47,6 +47,10 @@ public class MainChatMenu extends Application {
         MainChatMenu.controller = controller;
     }
 
+    public static ChatController getController() {
+        return controller;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         URL url = LoginMenu.class.getResource("/FXML/Chatfxml/MainChatFxml.fxml");
@@ -62,7 +66,7 @@ public class MainChatMenu extends Application {
         stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
         stage.show();
-
+        ChatController.currentMenu = this;
     }
 
     private void sendWithEnterHandler(Stage stage) {
@@ -107,9 +111,7 @@ public class MainChatMenu extends Application {
     }
 
 
-
     public void loadChat(Chat chat) throws IOException {
-        if (controller.getCurrentChat() != null) controller.updateChat();
         controller.setCurrentChat(chat);
         if (chat == null) chatPane = new VBox();
         else {
@@ -129,7 +131,8 @@ public class MainChatMenu extends Application {
         chatList.setAlignment(Pos.CENTER);
         ArrayList<Chat> chats = controller.loadRoomChats();
         for (Chat chat : chats) {
-            addChatItem(chat);
+            if (chat.getUsers().contains(controller.getCurrentUsername()))
+                addChatItem(chat);
         }
         chatListScroll.setContent(chatList);
     }
@@ -140,7 +143,8 @@ public class MainChatMenu extends Application {
         chatList.setAlignment(Pos.CENTER);
         ArrayList<Chat> chats = controller.loadPrivateChats();
         for (Chat chat : chats) {
-            addChatItem(chat);
+            if (chat.getUsers().contains(controller.getCurrentUsername()))
+                addChatItem(chat);
         }
         chatListScroll.setContent(chatList);
     }
@@ -189,7 +193,7 @@ public class MainChatMenu extends Application {
         chatPane.getChildren().add(anchorPane);
     }
 
-    public void loadGlobalChat(){
+    public void loadGlobalChat() {
         chatListScroll.setContent(null);
         try {
             loadChat(controller.getGlobalChat());
@@ -204,14 +208,16 @@ public class MainChatMenu extends Application {
         ChatCreationMenu.setController(
                 new ChatCreationController(Stronghold.getInstance().getUser(controller.getCurrentUsername())));
         chatCreationMenu.start(Main.mainStage);
+        ChatController.currentMenu = null;
     }
 
     public void back() throws Exception {
         MainMenu.mainController.menu.start(Main.mainStage);
+        ChatController.currentMenu = null;
     }
-
 
     public void EnterHandler(MouseEvent mouseEvent) {
         sendWithEnterHandler(mainStage);
     }
+
 }

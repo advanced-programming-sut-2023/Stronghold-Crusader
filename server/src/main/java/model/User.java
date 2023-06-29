@@ -118,4 +118,8 @@ public class User {
                 "\nemail : " + email +
                 "\nhighscore : " + highScore;
     }
+
+    public Socket getSocket() {
+        return socket;
+    }
 }

@@ -39,6 +39,7 @@ public class ChatCreationController {
         else if (users.size() == 0) return ChatMessage.SELECT_PARTICIPANT;
         else if (chatID == null || chatID.equals("")) return ChatMessage.ENTER_CHAT_ID;
         else {
+            users.add(currentUser.getUsername());
             Chat chat = new Chat(users, mode, chatID, currentUser.getUsername());
             ChatManager.updateChat(chat);
             return ChatMessage.CHAT_CREATED_SUCCESSFULLY;

@@ -1,6 +1,9 @@
 package network;
 
 import com.google.gson.Gson;
+import controller.ChatControllers.ChatController;
+import model.chatRoom.Chat;
+import view.ChatMenus.MainChatMenu;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -14,7 +17,7 @@ public class Listener extends Thread {
     private static LinkedBlockingQueue<String> lastContent = new LinkedBlockingQueue<>();
 
     private enum InputRegex {
-        CHAT_UPDATE("chat_updated:(?<request>\\S+)");
+        CHAT_UPDATE("chat_updated:(?<request>.+)");
         private final String regex;
 
         InputRegex(String regex) {
@@ -56,12 +59,18 @@ public class Listener extends Thread {
         }
     }
 
-    private void chatUpdate(String input) {
+    private void chatUpdate(String input) throws IOException {
         Pattern pattern = Pattern.compile(InputRegex.CHAT_UPDATE.regex);
         Matcher matcher = pattern.matcher(input);
         matcher.find();
         String requestStr = matcher.group("request");
-        Request request = new Gson().fromJson(requestStr, Request.class);
+        Chat chat = new Gson().fromJson(requestStr, Chat.class);
+        if (ChatController.currentMenu != null) {
+            MainChatMenu menu = ChatController.currentMenu;
+            if (MainChatMenu.getController().getCurrentChat().getChatId().equals(chat.getChatId())){
+                menu.loadChat(chat);
+            }
+        }
     }
 
     public static String consumeLastInput() throws InterruptedException {

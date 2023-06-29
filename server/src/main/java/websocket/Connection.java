@@ -11,6 +11,7 @@ import model.User;
 import model.chatRoom.Chat;
 import utils.Pair;
 
+import javax.crypto.spec.PSource;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -204,30 +205,17 @@ public class Connection extends Thread {
             case "update_chat":
                 Chat chat = new Gson().fromJson(request.getParameters().get("chat"), Chat.class);
                 ChatManager.updateChat(chat, chat.getChatMode());
-                ChatManager.notifyAllMembers();
                 outputStream.writeUTF("200: successfully updated");
+                ChatManager.notifyAllMembers(chat);
                 break;
             case "get_global_chat":
-                String out = new Gson().toJson(ChatManager.loadGlobalChat());
-                outputStream.writeUTF(out);
+                outputStream.writeUTF(new Gson().toJson(ChatManager.loadGlobalChat()));
                 break;
             case "get_private_chats":
-                Gson gson = new GsonBuilder().serializeNulls().create();
-                JsonObject mainObject = new JsonObject();
-                JsonArray usersArray = new JsonArray();
-                for (Chat pvChat : ChatManager.loadPrivateChats())
-                    usersArray.add(gson.toJsonTree(pvChat).getAsJsonObject());
-                mainObject.add("chats", usersArray);
-                outputStream.writeUTF(gson.toJson(mainObject));
+                outputStream.writeUTF(new Gson().toJson(ChatManager.loadPrivateChats()));
                 break;
             case "get_room_chats":
-                Gson gson1 = new GsonBuilder().serializeNulls().create();
-                JsonObject mainObject1 = new JsonObject();
-                JsonArray usersArray1 = new JsonArray();
-                for (Chat pvChat : ChatManager.loadRoomChats())
-                    usersArray1.add(gson1.toJsonTree(pvChat).getAsJsonObject());
-                mainObject1.add("chats", usersArray1);
-                outputStream.writeUTF(gson1.toJson(mainObject1));
+                outputStream.writeUTF(new Gson().toJson(ChatManager.loadRoomChats()));
                 break;
             case "load_chat":
                 String out1 = new Gson().toJson(ChatManager.loadChat(request.getParameters().get("chat_id"),
