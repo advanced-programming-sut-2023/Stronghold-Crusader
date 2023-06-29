@@ -30,6 +30,7 @@ public class Database {
     }
 
     public User getUser(String username) {
+        if (username == null) return null;
         if (!users.containsKey(username)) return null;
         return users.get(username);
     }

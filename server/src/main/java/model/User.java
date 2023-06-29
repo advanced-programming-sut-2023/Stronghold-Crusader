@@ -13,7 +13,6 @@ public class User {
     private Pair passwordRecovery;
     private String avatarPath;
     private int highScore;
-    private int rank;
 
     public User(String username, String password, String email, String nickname, String slogan) {
         this.username = username;
@@ -89,7 +88,7 @@ public class User {
     }
 
     public void setPassword(String newPass) {
-        this.password = PasswordConverter.encodePassword(newPass);
+        this.password = newPass;
         Database.getInstance().updateData();
     }
 
@@ -114,9 +113,5 @@ public class User {
                 "\nslogan : " + slogan +
                 "\nemail : " + email +
                 "\nhighscore : " + highScore;
-    }
-
-    public int getRank() {
-        return rank = Database.getInstance().getUserRank(username);
     }
 }
