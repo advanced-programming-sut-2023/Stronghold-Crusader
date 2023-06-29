@@ -7,6 +7,8 @@ import websocket.Connection;
 
 import java.net.Socket;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("FieldCanBeLocal")
 public class User {
     private transient Socket socket;
@@ -17,6 +19,8 @@ public class User {
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;
+    private ArrayList<User> friends;
+    private ArrayList<User> senders;
     private int highScore;
 
     public User(String username, String password, String email, String nickname, String slogan) {

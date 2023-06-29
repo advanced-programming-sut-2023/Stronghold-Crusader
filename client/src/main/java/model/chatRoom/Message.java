@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class Message {
     public enum Reaction{
-        HAPPY, SAD, HEART, FIRE;
+        LIKE, DISLIKE, HEART, FIRE;
     }
     private final String senderUsername;
     private String text;
@@ -51,5 +51,9 @@ public class Message {
 
     public void addReaction(String username, Reaction reaction){
         reactions.put(username, reaction);
+    }
+
+    public HashMap<String, Reaction> getReactions() {
+        return reactions;
     }
 }

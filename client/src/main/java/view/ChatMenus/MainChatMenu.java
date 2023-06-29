@@ -1,8 +1,8 @@
 package view.ChatMenus;
 
 import controller.ChatControllers.ChatController;
+import controller.ChatControllers.ChatCreationController;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,11 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import model.Stronghold;
 import model.chatRoom.Chat;
 import model.chatRoom.Message;
 import view.GameMenus.MarketMenus.MarketMenu;
@@ -66,15 +66,12 @@ public class MainChatMenu extends Application {
 
     private void sendWithEnterHandler(Stage stage) {
         if (stage.getScene().getOnKeyPressed() != null) return;
-        stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                    try {
-                        processSendMessage();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+        stage.getScene().setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    processSendMessage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -173,18 +170,21 @@ public class MainChatMenu extends Application {
     public void sendMessage(Message msg) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
                 getResource("/FXML/Chatfxml/CurrentUserMessagefxml.fxml").toExternalForm()));
-        ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
-        String time = msg.getHour() + ":" + msg.getMinute();
-        ((Label) anchorPane.getChildren().get(3)).setText(time);
-        chatPane.getChildren().add(anchorPane);
+        processMessageBox(msg, anchorPane);
     }
 
     public void receiveMessage(Message msg) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(new URL(MarketMenu.class.
                 getResource("/FXML/Chatfxml/OtherUserMessagefxml.fxml").toExternalForm()));
+        processMessageBox(msg, anchorPane);
+    }
+
+    private void processMessageBox(Message msg, AnchorPane anchorPane) {
         ((Label) anchorPane.getChildren().get(2)).setText(msg.getText());
         String time = msg.getHour() + ":" + msg.getMinute();
         ((Label) anchorPane.getChildren().get(3)).setText(time);
+        ReactionManager.setReactions(msg, anchorPane);
+        ReactionManager.setReactionHandling(msg, anchorPane);
         chatPane.getChildren().add(anchorPane);
     }
 
@@ -200,7 +200,8 @@ public class MainChatMenu extends Application {
     public void goToChatCreation() throws Exception {
         ChatCreationMenu chatCreationMenu = new ChatCreationMenu();
         ChatCreationMenu.setChatMenu(this);
-        ChatCreationMenu.setController(controller);
+        ChatCreationMenu.setController(
+                new ChatCreationController(Stronghold.getInstance().getUser(controller.getCurrentUsername())));
         chatCreationMenu.start(Main.mainStage);
     }
 
