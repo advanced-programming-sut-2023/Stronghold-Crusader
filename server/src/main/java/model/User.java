@@ -3,9 +3,13 @@ package model;
 import database.Database;
 import utils.Pair;
 import utils.PasswordConverter;
+import websocket.Connection;
+
+import java.net.Socket;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class User {
+    private transient Socket socket;
     private String username;
     private String password;
     private String nickname;
@@ -16,6 +20,7 @@ public class User {
     private int highScore;
 
     public User(String username, String password, String email, String nickname, String slogan) {
+        this.socket = null;
         this.username = username;
         this.password = PasswordConverter.encodePassword(password);
         this.email = email;
@@ -82,6 +87,14 @@ public class User {
     public void setAvatarPath(String avatarPath) {
         this.avatarPath = avatarPath;
         Database.getInstance().updateData();
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public boolean isOnline(){
+        return socket != null;
     }
 
     @Override

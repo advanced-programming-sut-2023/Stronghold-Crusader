@@ -1,6 +1,7 @@
 package view.enums.messages.UserMessage;
 
 public enum SignupAndLoginMessage {
+    ALREADY_LOGGED_IN("user already in a session"),
     EMPTY_FIELD("There are empty fields among the entered entries"),
     INVALID_USERNAME_FORMAT("Username format is not valid"),
     INVALID_EMAIL_FORMAT("Email format is not valid"),

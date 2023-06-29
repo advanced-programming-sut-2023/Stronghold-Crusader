@@ -3,6 +3,8 @@ package controller.UserControllers;
 import model.Stronghold;
 import model.User.User;
 import model.User.UserManager;
+import network.Connection;
+import network.Request;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.time.LocalDateTime;
@@ -42,6 +44,13 @@ public class LoginController {
             increaseFailedAttempts();
             return SignupAndLoginMessage.INCORRECT_PASSWORD;
         }
+        Request request = new Request();
+        request.setType("connect");
+        request.setCommand("login");
+        request.addParameter("username", currentUser.getUsername());
+        String response = Connection.getInstance().sendRequest(request);
+        if(response.equals("400: Already logged in"))
+            return SignupAndLoginMessage.ALREADY_LOGGED_IN;
         failedAttemptsReset();
         if (inputs.get("stayLoggedIn") != null) UserManager.setLoggedInUser(currentUser);
         return SignupAndLoginMessage.SUCCESS_PROCESS;

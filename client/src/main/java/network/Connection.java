@@ -32,6 +32,10 @@ public class Connection {
         return instance;
     }
 
+    public void closeConnection() throws IOException {
+        socket.close();
+    }
+
     public DataInputStream getInputStream() {
         return inputStream;
     }
@@ -43,8 +47,8 @@ public class Connection {
     public String sendRequest(Request request){
         try {
             outputStream.writeUTF(request.toJson());
-            return Listener.getLastInput();
-        } catch (IOException e) {
+            return Listener.consumeLastInput();
+        } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
