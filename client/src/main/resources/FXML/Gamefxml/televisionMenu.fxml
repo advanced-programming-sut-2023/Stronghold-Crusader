@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Television.Television">
+   <children>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="728.0" prefWidth="1280.0">
+         <children>
+            <ScrollPane fx:id="mainGrid" hbarPolicy="NEVER" pannable="true" prefHeight="639.0" prefWidth="1280.0" vbarPolicy="NEVER" />
+            <ImageView fitHeight="182.0" fitWidth="1293.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/graphic/overlay/bottom_menu.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30" fitWidth="120.0" layoutX="182.0" layoutY="659.0" pickOnBounds="true" rotate="90">
+               <image>
+                  <Image url="@../../assets/graphic/overlay/menus.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="233.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/buttons/dropBuilding_btn.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="20.0" layoutX="234.0" layoutY="643.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/buttons/market_btn.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="229.0" layoutY="668.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/icons/dropBuildingIcons/TRADE.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="442.0" layoutY="670.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="135.0" text="next" onMouseClicked="#load" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
