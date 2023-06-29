@@ -1,21 +1,30 @@
 package view.UserMenus;
 
-import controller.UserControllers.FriendsMenuController;
+import controller.UserControllers.MainController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Stronghold;
 import model.User.User;
 import utils.MenusUtils;
+import view.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,13 +33,15 @@ import java.util.ArrayList;
 public class ScoreBoardMenu extends Application {
     public Pane rootPane;
     public TableView<ScoreBoardTable> table;
-    public TableColumn avatarColumn;
-    public TableColumn rankColumn;
-    public TableColumn usernameColumn;
-    public TableColumn highScoreColumn;
-    public TableColumn connectionColumn;
-    public TableColumn televisionColumn;
-    public TableColumn selectColumn;
+    public TableColumn<ScoreBoardTable, Circle> avatarColumn;
+    public TableColumn<ScoreBoardTable, Integer> rankColumn;
+    public TableColumn<ScoreBoardTable, String> usernameColumn;
+    public TableColumn<ScoreBoardTable, Integer> highScoreColumn;
+    public TableColumn<ScoreBoardTable, ImageView> connectionColumn;
+    public TableColumn<ScoreBoardTable, ImageView> televisionColumn;
+    public TableColumn<ScoreBoardTable, Button> selectColumn;
+    private final ObservableList<ScoreBoardTable> rankingTable = FXCollections.observableArrayList();
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -49,24 +60,48 @@ public class ScoreBoardMenu extends Application {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
+        rankColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Integer>("rank"));
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Circle>("avatar"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, String>("username"));
+        highScoreColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Integer>("highScore"));
+        connectionColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, ImageView>("connectionMode"));
+        televisionColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, ImageView>("television"));
+        selectColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Button>("select"));
         addUsers();
+        makeTimeLineForUpdatingData();
+    }
+
+    private void makeTimeLineForUpdatingData() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+            addUsers();
+        }));
+        timeline.setCycleCount(-1);
+        timeline.play();
     }
 
     private void addUsers() {
+        rankingTable.clear();
+        table.getItems().clear();
         ArrayList<User> ranking = Stronghold.getInstance().getUserRankings();
-        ObservableList<User> userList = FXCollections.observableArrayList();
-        for (int i = 0; i < ranking.size() && i < 10; i++) {
-            User user = ranking.get(i);
-            userList.add(user);
+        for (User user : ranking) {
+            rankingTable.add(new ScoreBoardTable(user));
         }
-        userRanking.setItems(userList);
+        table.setItems(rankingTable);
     }
 
     public void openProfile(MouseEvent mouseEvent) throws IOException {
         if (table.getSelectionModel().getSelectedItem() != null) {
             User user = Stronghold.getInstance().getUser(table.getSelectionModel().getSelectedItem().getUsername());
-            MenusUtils.createProfileShowPopUp(user, FriendsMenuController.getCurrentUser().isFriend(user)).show(stage);
+            MenusUtils.createProfileShowPopUp(user, MainController.getCurrentUser().isFriend(user)).show(Main.mainStage);
         }
+    }
+
+    public void back(ActionEvent actionEvent) throws Exception {
+        new MainMenu().start(Main.mainStage);
+    }
+
+    public void update(ActionEvent actionEvent) {
+        addUsers();
     }
 }

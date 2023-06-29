@@ -1,6 +1,6 @@
 package view.UserMenus;
 
-import controller.UserControllers.FriendsMenuController;
+import controller.UserControllers.MainController;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,7 +29,7 @@ public class ScoreBoardTable {
         select.setOnMouseClicked(e -> {
             try {
                 MenusUtils.createProfileShowPopUp
-                        (user, FriendsMenuController.getCurrentUser().isFriend(user)).show(FriendsMenu.getStage());
+                        (user, MainController.getCurrentUser().isFriend(user)).show(FriendsMenu.getStage());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
@@ -44,10 +44,11 @@ public class ScoreBoardTable {
         television.setFitWidth(35);
         television.setFitHeight(35);
         if (Stronghold.getInstance().isUserOnline(user.getUsername()))
-            connectionMode.setImage(new Image(ScoreBoardTable.class.getResource("assets/icons/green.png").toExternalForm()));
-        else connectionMode.setImage(new Image(ScoreBoardTable.class.getResource("assets/icons/red.png").toExternalForm()));
+            connectionMode.setImage(new Image(ScoreBoardTable.class.getResource("/assets/icons/green.png").toString()));
+        else connectionMode.setImage(new Image(ScoreBoardTable.class.getResource("/assets/icons/red.png").toString()));
         avatar.setFill(new ImagePattern(new Image(user.getAvatarPath())));
-        television.setImage(new Image(ScoreBoardTable.class.getResource("assets/icons/television.png").toExternalForm()));
+        television.setImage(new Image(
+                ScoreBoardTable.class.getResource("/assets/icons/television.png").toString()));
     }
 
     public int getRank() {
