@@ -15,11 +15,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.Stronghold;
 import model.User.User;
+import utils.MenusUtils;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,6 +40,8 @@ public class FriendsMenu extends Application implements Initializable {
 
     public ObservableList<FriendsTable> showList = FXCollections.observableArrayList();
     public TextField searchBox;
+    public TableColumn<FriendsTable, ImageView> isFriendColumn;
+    public TableColumn<FriendsTable, String> emailColumn;
 
 
     @Override
@@ -54,6 +61,9 @@ public class FriendsMenu extends Application implements Initializable {
         avatarColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Circle>("avatar"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, String>("username"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Button>("accept"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, String>("email"));
+        isFriendColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, ImageView>("isFriend"));
+
         searchBox.textProperty().addListener((observable, oldText, newText) ->
                 translateUserToTableItem(friendsMenuController.getUsersFromText(searchBox.getText())));
                 table.setItems(showList);
@@ -75,5 +85,22 @@ public class FriendsMenu extends Application implements Initializable {
 
     public static Stage getStage() {
         return stage;
+    }
+
+    public void openProfile(MouseEvent mouseEvent) throws IOException {
+        if (table.getSelectionModel().getSelectedItem() != null) {
+            User user = Stronghold.getInstance().getUser(table.getSelectionModel().getSelectedItem().getUsername());
+            MenusUtils.createProfileShowPopUp(user, FriendsMenuController.getCurrentUser().isFriend(user)).show(stage);
+        }
+    }
+
+    public void showSenders(ActionEvent actionEvent) {
+        translateUserToTableItem(FriendsMenuController.getCurrentUser().getSenders());
+        table.setItems(showList);
+    }
+
+    public void showFriends(ActionEvent actionEvent) {
+        translateUserToTableItem(friendsMenuController.getUsersFromText(""));
+        table.setItems(showList);
     }
 }

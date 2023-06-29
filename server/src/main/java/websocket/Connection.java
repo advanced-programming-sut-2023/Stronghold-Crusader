@@ -166,12 +166,11 @@ public class Connection extends Thread {
             case "update_chat":
                 Chat chat = new Gson().fromJson(request.getParameters().get("chat"), Chat.class);
                 ChatManager.updateChat(chat, chat.getChatMode());
+                ChatManager.notifyAllMembers();
                 outputStream.writeUTF("200: successfully updated");
                 break;
             case "get_global_chat":
-                System.out.println("loading global chat");
                 String out = new Gson().toJson(ChatManager.loadGlobalChat());
-                System.out.println("sent global chat");
                 outputStream.writeUTF(out);
                 break;
             case "get_private_chats":

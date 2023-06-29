@@ -1,5 +1,6 @@
 package view.ChatMenus;
 
+import controller.ChatControllers.ChatController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +21,11 @@ public class ChatCreationMenu extends Application {
     public ImageView groupButton;
     private Chat.ChatMode chatType;
     private static MainChatMenu chatMenu;
+    private static ChatController controller;
+
+    public static void setController(ChatController controller) {
+        ChatCreationMenu.controller = controller;
+    }
 
     public static void setChatMenu(MainChatMenu chatMenu) {
         ChatCreationMenu.chatMenu = chatMenu;

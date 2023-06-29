@@ -10,10 +10,12 @@ public class Connection {
     private final Socket socket;
     private final DataOutputStream outputStream;
     private final DataInputStream inputStream;
+    private static Listener listener;
 
     public static void connect(String host, int port) {
         instance = new Connection(host, port);
         System.out.println("Successfully connected to " + host + port);
+        startListening();
     }
 
     private Connection(String host, int port) {
@@ -41,9 +43,14 @@ public class Connection {
     public String sendRequest(Request request){
         try {
             outputStream.writeUTF(request.toJson());
-            return inputStream.readUTF();
+            return Listener.getLastInput();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void startListening(){
+        listener = new Listener(Connection.getInstance().inputStream);
+        listener.start();
     }
 }

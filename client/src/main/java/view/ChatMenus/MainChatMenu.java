@@ -2,6 +2,7 @@ package view.ChatMenus;
 
 import controller.ChatControllers.ChatController;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,6 +11,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -36,6 +40,7 @@ public class MainChatMenu extends Application {
     public ScrollPane chatPaneScroll;
     public ScrollPane chatListScroll;
     private static ChatController controller;
+    private static Stage mainStage;
 
     public static void setController(ChatController controller) {
         MainChatMenu.controller = controller;
@@ -50,11 +55,29 @@ public class MainChatMenu extends Application {
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(1, 1, true, true, false, false))));
         Scene scene = new Scene(anchorPane);
+        mainStage = stage;
         stage.setFullScreen(true);
         stage.setResizable(false);
         stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
         stage.show();
+
+    }
+
+    private void sendWithEnterHandler(Stage stage) {
+        if (stage.getScene().getOnKeyPressed() != null) return;
+        stage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                    try {
+                        processSendMessage();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
     }
 
     public void initialize() throws IOException {
@@ -177,10 +200,16 @@ public class MainChatMenu extends Application {
     public void goToChatCreation() throws Exception {
         ChatCreationMenu chatCreationMenu = new ChatCreationMenu();
         ChatCreationMenu.setChatMenu(this);
+        ChatCreationMenu.setController(controller);
         chatCreationMenu.start(Main.mainStage);
     }
 
     public void back() throws Exception {
         MainMenu.mainController.menu.start(Main.mainStage);
+    }
+
+
+    public void EnterHandler(MouseEvent mouseEvent) {
+        sendWithEnterHandler(mainStage);
     }
 }

@@ -27,7 +27,7 @@
     <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="609.0" layoutY="575.0" nodeOrientation="INHERIT" onMouseClicked="#loadGlobalChat" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
         <Image url="@../../assets/buttons/globalChat_btn.png" />
     </ImageView>
-    <TextField fx:id="text" layoutX="687.0" layoutY="662.0" opacity="0.5" prefHeight="32.0" prefWidth="549.0" promptText="Please enter your message" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
+    <TextField onMousePressed="#EnterHandler" fx:id="text" layoutX="687.0" layoutY="662.0" opacity="0.5" prefHeight="32.0" prefWidth="549.0" promptText="Please enter your message" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
     <ImageView fx:id="sendButton" fitHeight="32.0" fitWidth="77.0" layoutX="1135.0" layoutY="589.0" nodeOrientation="INHERIT" onMouseClicked="#processSendMessage" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
         <Image url="@../../assets/buttons/send_btn.png" />
     </ImageView>
