@@ -2,6 +2,7 @@ package controller.ChatControllers;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import model.chatRoom.Chat;
 import model.chatRoom.Message;
 import view.UserMenus.MainMenu;
 
@@ -86,5 +87,26 @@ public class ReactionManager {
 
     public static boolean userNotReacted(String username, Message msg) {
         return !msg.getReactions().containsKey(username);
+    }
+
+    public static void setEdit(AnchorPane anchorPane, Message msg){
+        (anchorPane.getChildren().get(12)).setOnMouseClicked(e -> {
+
+        });
+    }
+    public static void setDelete(AnchorPane anchorPane, Message msg){
+        (anchorPane.getChildren().get(13)).setOnMouseClicked(e -> {
+            msg.setInvisibleFor(MainMenu.mainController.currentUser.getUsername());
+            anchorPane.setManaged(false);
+            anchorPane.setVisible(false);
+        });
+    }
+
+    public static void setTwoWayDelete(AnchorPane anchorPane, Message msg, Chat chat){
+        (anchorPane.getChildren().get(14)).setOnMouseClicked(e -> {
+            chat.getMessages().remove(msg);
+            anchorPane.setVisible(false);
+            anchorPane.setManaged(false);
+        });
     }
 }

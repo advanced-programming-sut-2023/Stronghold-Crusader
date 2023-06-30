@@ -41,6 +41,7 @@ public class MainChatMenu extends Application {
     public ScrollPane chatPaneScroll;
     public ScrollPane chatListScroll;
     private static ChatController controller;
+    public static MainChatMenu currentChatMenu;
     private static Stage mainStage;
 
     public static void setController(ChatController controller) {
@@ -119,9 +120,11 @@ public class MainChatMenu extends Application {
             chatPane.setAlignment(Pos.CENTER);
             chatPane.setPrefWidth(549);
             for (Message msg : chat.getMessages()) {
+                if (msg.isVisibleForUser(controller.getCurrentUsername())) continue;
                 addMessage(msg);
             }
         }
+        if (chatPaneScroll == null) chatPaneScroll = new ScrollPane();
         chatPaneScroll.setContent(chatPane);
     }
 
@@ -190,6 +193,8 @@ public class MainChatMenu extends Application {
         ((Label) anchorPane.getChildren().get(3)).setText(time);
         ReactionManager.setReactions(msg, anchorPane);
         ReactionManager.setReactionHandling(msg, anchorPane);
+        ReactionManager.setDelete(anchorPane, msg);
+        ReactionManager.setTwoWayDelete(anchorPane, msg, controller.getCurrentChat());
         chatPane.getChildren().add(anchorPane);
     }
 

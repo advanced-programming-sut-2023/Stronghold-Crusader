@@ -74,6 +74,7 @@ public class MainMenu extends Application {
         ChatController chatController = new ChatController(mainController.currentUser);
         MainChatMenu chatMenu = new MainChatMenu();
         MainChatMenu.setController(chatController);
+        MainChatMenu.currentChatMenu = chatMenu;
         chatMenu.start(Main.mainStage);
     }
 

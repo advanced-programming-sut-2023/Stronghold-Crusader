@@ -1,5 +1,6 @@
 package model.chatRoom;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Message {
@@ -11,7 +12,7 @@ public class Message {
     private final int hour;
     private final int minute;
     private boolean seenStatus = false;
-    private boolean visibleForSender = true;
+    private ArrayList<String> invisibleFor;
     private HashMap<String, Reaction> reactions;
     public Message(String senderUsername, String text, int hour, int minute){
         this.senderUsername = senderUsername;
@@ -19,6 +20,7 @@ public class Message {
         this.hour = hour;
         this.minute = minute;
         reactions = new HashMap<>();
+        invisibleFor = new ArrayList<>();
     }
 
     public int getHour() {
@@ -39,10 +41,6 @@ public class Message {
 
     public void setSeenStatus(boolean seenStatus) {
         this.seenStatus = seenStatus;
-    }
-
-    public void setVisibleForSender(boolean visibleForSender) {
-        this.visibleForSender = visibleForSender;
     }
 
     public void setText(String text) {

@@ -6,7 +6,8 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="42.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/17.0.2-ea">
+<AnchorPane prefHeight="42.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1">
 
     <ImageView fitHeight="40" fitWidth="40.0" layoutX="496.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../../assets/avatars/defaults/default.png"/>
@@ -59,4 +60,13 @@
             <Font name="Arial Black" size="14.0"/>
         </font>
     </Label>
+    <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="197.0" layoutY="43.0" pickOnBounds="true">
+        <Image url="@../../assets/buttons/edit_btn.png"/>
+    </ImageView>
+    <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="179.0" layoutY="43.0" pickOnBounds="true">
+        <Image url="@../../assets/buttons/trashOneWay_btn.png"/>
+    </ImageView>
+    <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="160.0" layoutY="42.0" pickOnBounds="true">
+        <Image url="@../../assets/buttons/trashTwoWay_btn.png"/>
+    </ImageView>
 </AnchorPane>
