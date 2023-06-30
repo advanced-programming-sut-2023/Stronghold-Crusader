@@ -217,6 +217,7 @@ public class User {
         Request request = new Request();
         request.setType("friend");
         request.setCommand("add_friend");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
@@ -231,6 +232,7 @@ public class User {
         Request request = new Request();
         request.setType("friend");
         request.setCommand("add_sender");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
@@ -245,6 +247,7 @@ public class User {
         Request request = new Request();
         request.setType("friend");
         request.setCommand("remove_friend");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
@@ -259,6 +262,7 @@ public class User {
         Request request = new Request();
         request.setType("friend");
         request.setCommand("remove_sender");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
