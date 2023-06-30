@@ -47,7 +47,7 @@
     </ImageView>
 
     <ImageView fx:id="updateButton" fitHeight="32.0" fitWidth="77.0" layoutX="1135.0" layoutY="589.0"
-               nodeOrientation="INHERIT" onMouseClicked="#processSendMessage" pickOnBounds="true" preserveRatio="true"
+               nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true"
                translateX="25" translateY="73">
         <Image url="@../../assets/buttons/update_btn.png"/>
     </ImageView>

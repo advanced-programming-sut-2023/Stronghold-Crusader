@@ -2,13 +2,17 @@ package controller.ChatControllers;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.chatRoom.Chat;
 import model.chatRoom.ChatManager;
 import model.chatRoom.Message;
 import view.ChatMenus.MainChatMenuController;
+import view.UserMenus.LoginMenu;
 import view.UserMenus.MainMenu;
 
+import java.net.URL;
 import java.util.HashMap;
 
 public class ReactionManager {
@@ -35,6 +39,16 @@ public class ReactionManager {
         ((Label) anchorPane.getChildren().get(9)).setText(Integer.toString(fireCount));
         ((Label) anchorPane.getChildren().get(10)).setText(Integer.toString(heartCount));
         ((Label) anchorPane.getChildren().get(11)).setText(Integer.toString(likeCount));
+    }
+
+    public static void setSeenStatus(Message msg, AnchorPane anchorPane){
+        if (msg.isSeenStatus()){
+            URL url = LoginMenu.class.getResource("/assets/icons/seen_icn.png");
+            ((ImageView) anchorPane.getChildren().get(15)).setImage(new Image(url.toExternalForm()));
+        } else if (!msg.getSenderUsername().equals(MainMenu.mainController.currentUser.getUsername())) {
+            msg.setSeenStatus(true);
+            ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
+        }
     }
 
     public static void setReactionHandling(Message msg, AnchorPane anchorPane) {
