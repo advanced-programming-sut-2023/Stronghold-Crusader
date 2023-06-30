@@ -1,7 +1,6 @@
 package model.Lobby;
 
 import com.google.gson.Gson;
-import model.Map.Map;
 import model.Map.MapManager;
 import model.User.User;
 import model.enums.User.Color;
@@ -13,12 +12,12 @@ import java.util.Set;
 
 public class Lobby {
     private final int capacity;
-    private final int id;
+    private final String id;
     private User admin;
     private final HashMap<User, Color> players = new HashMap<>();
     private final String mapId;
 
-    public Lobby(int id, User admin, Color color, String mapID) {
+    public Lobby(String id, User admin, Color color, String mapID) {
         this.id = id;
         this.admin = admin;
         capacity = MapManager.getMapPlayerCount(mapID);
@@ -53,7 +52,7 @@ public class Lobby {
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("remove_player");
-        request.addParameter("id", String.valueOf(id));
+        request.addParameter("id", id);
         request.addParameter("player", new Gson().toJson(player));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) {
@@ -70,7 +69,7 @@ public class Lobby {
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("set_admin");
-        request.addParameter("id", String.valueOf(id));
+        request.addParameter("id", id);
         request.addParameter("player", new Gson().toJson(admin));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) {
@@ -82,7 +81,7 @@ public class Lobby {
         }
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

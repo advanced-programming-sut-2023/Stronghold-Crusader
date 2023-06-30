@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import model.Lobby.GameRoom;
+import model.Lobby.Lobby;
 
 public class LobbyTable {
     private final String gameId;
@@ -16,11 +16,11 @@ public class LobbyTable {
     private final Circle avatar = new Circle();
     private final Button join = new Button("join");
 
-    public LobbyTable(GameRoom gameRoom) {
+    public LobbyTable(Lobby gameRoom) {
         avatar.setFill(new ImagePattern(new Image(gameRoom.getAdmin().getAvatarPath())));
         avatar.setRadius(25);
         addTelevision();
-        gameId = gameRoom.getGameID();
+        gameId = gameRoom.getId();
         admin = gameRoom.getAdmin().getNickname();
         mapId = gameRoom.getMapId();
         capacity = Integer.valueOf(gameRoom.getPlayersCount()).toString() + "/" +

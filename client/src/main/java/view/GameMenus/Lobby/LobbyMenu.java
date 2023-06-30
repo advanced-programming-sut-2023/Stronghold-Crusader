@@ -1,7 +1,6 @@
 package view.GameMenus.Lobby;
 
 import controller.GameControllers.LobbyController;
-import controller.UserControllers.MainController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,12 +15,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import model.Lobby.GameRoom;
+import model.Lobby.Lobby;
 import model.Lobby.LobbyManager;
 import model.User.User;
 import view.Main;
@@ -72,6 +70,9 @@ public class LobbyMenu extends Application implements Initializable {
 
     private void addGamesToTable() {
         gameList.clear();
+        for (Lobby lobby: LobbyManager.getGameRooms()) {
+            gameList.add(new LobbyTable(lobby));
+        }
         lobbyTable.setItems(gameList);
     }
 
@@ -84,7 +85,6 @@ public class LobbyMenu extends Application implements Initializable {
     }
 
     public void refresh(MouseEvent mouseEvent) throws IOException {
-        createInfoPopUp(new GameRoom(MainController.getCurrentUser(), Color.BLUE, null, null));
         addGamesToTable();
     }
 
@@ -95,12 +95,12 @@ public class LobbyMenu extends Application implements Initializable {
     public void openInfo(MouseEvent mouseEvent) throws IOException {
         System.out.println(lobbyTable.getSelectionModel().getSelectedItem());
         if (lobbyTable.getSelectionModel().getSelectedItem() != null) {
-            GameRoom gameRoom = LobbyManager.getGameRoom(lobbyTable.getSelectionModel().getSelectedItem().getGameId());
+            Lobby gameRoom = LobbyManager.getGameRoom(lobbyTable.getSelectionModel().getSelectedItem().getGameId());
             createInfoPopUp(gameRoom);
         }
     }
 
-    private void createInfoPopUp(GameRoom gameRoom) throws IOException {
+    private void createInfoPopUp(Lobby gameRoom) throws IOException {
         Popup popup = new Popup();
         popup.setAutoHide(true);
         createInfoPopUpPane(popup, gameRoom.getPlayers());

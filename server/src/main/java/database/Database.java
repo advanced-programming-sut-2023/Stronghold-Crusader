@@ -9,7 +9,7 @@ public class Database {
     private static Database instance = null;
     private final HashMap<String, User> users = new HashMap<>();
     private final ArrayList<User> userRankings = new ArrayList<>();
-    private final HashMap<Integer, Lobby> lobbies = new HashMap<>();
+    private final HashMap<String, Lobby> lobbies = new HashMap<>();
 
     private Database() {
     }

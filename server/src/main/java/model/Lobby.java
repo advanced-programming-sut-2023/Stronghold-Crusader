@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Lobby {
     private int capacity;
-    private int id;
+    private String id;
     private User admin;
     private final HashMap<User, Color> players = new HashMap<>();
     private String mapId;
@@ -26,7 +26,7 @@ public class Lobby {
         this.admin = admin;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
