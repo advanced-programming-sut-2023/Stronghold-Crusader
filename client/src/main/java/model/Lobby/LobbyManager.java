@@ -1,13 +1,14 @@
 package model.Lobby;
 
-import network.Request;
-
 import java.util.ArrayList;
 
 public class LobbyManager {
 
     public static ArrayList<GameRoom> getGameRooms() {
-        Request request = new Request();
-        request.setType();
+       return new ArrayList<GameRoom>();
+    }
+
+    public static GameRoom getGameRoomWithGameID(String gameID) {
+        return new GameRoom(null, null,null,null);
     }
 }
