@@ -260,6 +260,7 @@ public class Connection extends Thread {
         Lobby lobby;
         switch (request.getCommand()) {
             case "create_lobby":
+                System.out.println(request.getParameters().get("lobby"));
                 Database.getInstance().addLobby(new Gson().fromJson(request.getParameters().get("lobby"), Lobby.class));
                 outputStream.writeUTF("200: success");
                 break;

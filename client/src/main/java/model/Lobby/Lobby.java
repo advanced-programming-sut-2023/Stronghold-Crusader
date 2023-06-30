@@ -2,26 +2,28 @@ package model.Lobby;
 
 import com.google.gson.Gson;
 import model.Map.MapManager;
+import model.Stronghold;
 import model.User.User;
 import model.enums.User.Color;
 import network.Connection;
 import network.Request;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Lobby {
     private final int capacity;
     private final String id;
     private User admin;
-    private final HashMap<User, Color> players = new HashMap<>();
+    private final HashMap<String, Color> players = new HashMap<>();
     private final String mapId;
 
     public Lobby(String id, User admin, Color color, String mapID) {
         this.id = id;
         this.admin = admin;
         capacity = MapManager.getMapPlayerCount(mapID);
-        players.put(admin, color);
+        players.put(admin.getUsername(), color);
         this.mapId = mapID;
     }
 
@@ -30,7 +32,7 @@ public class Lobby {
     }
 
     public void addPlayer(User player, Color color) {
-        players.put(player, color);
+        players.put(player.getUsername(), color);
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("add_player");
@@ -48,7 +50,7 @@ public class Lobby {
     }
 
     public void removePlayer(User player) {
-        players.remove(player);
+        players.remove(player.getUsername());
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("remove_player");
@@ -98,7 +100,7 @@ public class Lobby {
     }
 
     public String getColor(User user) {
-        return players.get(user).toString();
+        return players.get(user.getUsername()).toString();
     }
 
     public int getPlayersCount() {
@@ -106,6 +108,9 @@ public class Lobby {
     }
 
     public Set<User> getPlayers() {
-        return players.keySet();
+        Set<User> users = new HashSet<>();
+        for (String username : players.keySet())
+            users.add(Stronghold.getInstance().getUser(username));
+        return users;
     }
 }
