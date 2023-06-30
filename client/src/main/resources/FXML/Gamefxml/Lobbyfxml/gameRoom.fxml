@@ -30,11 +30,11 @@
       <TableView fx:id="lobbyTable" layoutX="280.0" layoutY="64.0" prefHeight="454.0" prefWidth="525.0">
         <columns>
           <TableColumn fx:id="avatarColumn" prefWidth="75.0" text="Avatar" />
-          <TableColumn fx:id="nameColumn" prefWidth="165.5999755859375" text="Nickname" />
-            <TableColumn fx:id="colorColumn" prefWidth="53.5999755859375" text="Color" />
+          <TableColumn fx:id="nameColumn" prefWidth="318.4000549316406" text="Nickname" />
+            <TableColumn fx:id="colorColumn" minWidth="9.5999755859375" prefWidth="42.4000244140625" text="Color" />
         </columns>
       </TableView>
-      <Button fx:id="refreshButton" layoutX="472.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="59.0" prefWidth="130.0" text="refresh">
+      <Button fx:id="refreshButton" layoutX="472.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="59.0" prefWidth="130.0" style="-fx-background-color: #aa0000;" text="refresh">
          <font>
             <Font size="26.0" />
          </font>

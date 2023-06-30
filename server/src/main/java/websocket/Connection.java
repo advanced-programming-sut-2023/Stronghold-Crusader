@@ -264,7 +264,7 @@ public class Connection extends Thread {
                 outputStream.writeUTF("200: success");
                 break;
             case "delete_lobby":
-                Database.getInstance().removeLobby(Integer.parseInt(request.getParameters().get("id")));
+                Database.getInstance().removeLobby(request.getParameters().get("id"));
                 outputStream.writeUTF("200: success");
                 break;
             case "get_lobbies":

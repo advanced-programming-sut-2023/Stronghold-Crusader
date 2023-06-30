@@ -8,25 +8,27 @@ import java.util.Set;
 
 public class LobbyController {
     private Lobby gameRoom;
+    private String gameId;
 
     public LobbyController(Lobby gameRoom) {
         this.gameRoom = gameRoom;
+        gameId = gameRoom.getId();
     }
 
-    public void setGameRoom(Lobby gameRoom) {
-        this.gameRoom = gameRoom;
+    public void updateGameRoom() {
+        this.gameRoom = LobbyManager.getLobby(gameId);
     }
 
-    public void setAdmin(User admin){
+    public void setAdmin(User admin) {
         gameRoom.setAdmin(admin);
     }
 
 
-    public void removePlayer(User player){
+    public void removePlayer(User player) {
         gameRoom.removePlayer(player);
     }
 
-    public void refresh(){
+    public void refresh() {
         gameRoom = LobbyManager.getLobby(gameRoom.getId());
     }
 
@@ -35,14 +37,29 @@ public class LobbyController {
     }
 
     public boolean isAdmin(User player) {
-        return player.equals(gameRoom.getAdmin());
+
+        return player.getUsername().equals(gameRoom.getAdmin().getUsername());
     }
 
     public String getColor(User player) {
         return gameRoom.getColor(player);
     }
 
-    public int getPlayersCount(){
+    public int getPlayersCount() {
         return gameRoom.getPlayersCount();
+    }
+    public User getRandomPlayerForAdmin(){
+        int temp = getPlayersCount() - 1;
+        int randomNumber = (int)(Math.random() * temp);
+        temp = 0;
+        for (User player: getPlayers()) {
+            if (temp ==  randomNumber) return player;
+            temp ++;
+        }
+        return null;
+    }
+
+    public String getGameId() {
+        return gameId;
     }
 }

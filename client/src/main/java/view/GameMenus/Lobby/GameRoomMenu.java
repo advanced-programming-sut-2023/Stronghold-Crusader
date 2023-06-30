@@ -18,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.Lobby.LobbyManager;
 import model.User.User;
 import view.Main;
 import view.UserMenus.ProfileMenu;
@@ -65,6 +66,7 @@ public class GameRoomMenu extends Application implements Initializable {
 
     private void updateTable() {
         players.clear();
+        lobbyController.updateGameRoom();
         for (User player : lobbyController.getPlayers()) {
             players.add(new GameRoomTable(player, lobbyController.isAdmin(player), lobbyController.getColor(player)));
         }
@@ -77,6 +79,11 @@ public class GameRoomMenu extends Application implements Initializable {
 
     public void back(MouseEvent mouseEvent) throws Exception {
         lobbyController.removePlayer(MainController.getCurrentUser());
+        if (lobbyController.getPlayersCount() == 0) LobbyManager.deleteLobby(lobbyController.getGameId());
+        else if (lobbyController.isAdmin(MainController.getCurrentUser()))
+            lobbyController.setAdmin(lobbyController.getRandomPlayerForAdmin());
+        newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
+        updateTable();
         new LobbyMenu().start(Main.mainStage);
     }
 

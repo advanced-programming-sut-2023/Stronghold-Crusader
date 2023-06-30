@@ -12,8 +12,8 @@ public class GameRoomTable {
     private final Circle color = new Circle();
 
     public GameRoomTable(User user, boolean isAdmin, String color) {
-        this.nickname = user.getUsername();
-        if (isAdmin) nickname += "(Admin)";
+        if (isAdmin) nickname = user.getNickname() + "(Admin)";
+        else nickname = user.getNickname();
         avatar.setRadius(25);
         this.color.setRadius(10);
         this.color.setFill(Paint.valueOf(color));

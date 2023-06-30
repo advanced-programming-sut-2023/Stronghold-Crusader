@@ -91,7 +91,7 @@ public class Database {
         return lobbies.values();
     }
 
-    public void removeLobby(int id){
+    public void removeLobby(String id){
         lobbies.remove(id);
     }
 }
