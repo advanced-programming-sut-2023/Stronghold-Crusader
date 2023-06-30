@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import model.Stronghold;
+import model.User.User;
 import model.chatRoom.Chat;
 import model.chatRoom.ChatManager;
 import model.chatRoom.Message;
@@ -49,6 +51,10 @@ public class ReactionManager {
             msg.setSeenStatus(true);
             ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
         }
+    }
+
+    public static void setUserName(Message msg, AnchorPane anchorPane){
+        ((Label) anchorPane.getChildren().get(16)).setText(msg.getSenderUsername());
     }
 
     public static void setReactionHandling(Message msg, AnchorPane anchorPane) {

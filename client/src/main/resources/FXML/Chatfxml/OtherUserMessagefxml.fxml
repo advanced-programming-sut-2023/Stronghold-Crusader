@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="71.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-        <ImageView fitHeight="40" fitWidth="40.0" layoutX="3.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="40" fitWidth="40.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../assets/avatars/defaults/default.png" />
             <clip>
                 <Circle centerX="20" centerY="20" radius="18" />
@@ -70,4 +70,9 @@
     <ImageView fitHeight="16.0" fitWidth="16.0" layoutX="324.0" layoutY="3.0" pickOnBounds="true">
         <Image url="@../../assets/icons/sent_icn.png" />
     </ImageView>
+    <Label alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="42.0" opacity="0.77" prefHeight="32.0" prefWidth="40.0" textAlignment="CENTER" textFill="BLACK" wrapText="true">
+        <font>
+            <Font size="9.0" />
+        </font>
+    </Label>
 </AnchorPane>
