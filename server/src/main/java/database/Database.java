@@ -1,15 +1,15 @@
 package database;
 
+import model.Lobby;
 import model.User;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 public class Database {
     private static Database instance = null;
     private final HashMap<String, User> users = new HashMap<>();
     private final ArrayList<User> userRankings = new ArrayList<>();
+    private final HashMap<Integer, Lobby> lobbies = new HashMap<>();
 
     private Database() {
     }
@@ -77,5 +77,17 @@ public class Database {
 
     public ArrayList<User> getUserRankings() {
         return userRankings;
+    }
+
+    public void addLobby(Lobby lobby){
+        lobbies.put(lobby.getId(), lobby);
+    }
+
+    public Lobby getLobby(int id){
+        return lobbies.get(id);
+    }
+
+    public void removeLobby(int id){
+        lobbies.remove(id);
     }
 }

@@ -72,4 +72,8 @@ public class Message {
     public ArrayList<String> getInvisibleFor() {
         return invisibleFor;
     }
+
+    public boolean isSeenStatus() {
+        return seenStatus;
+    }
 }
