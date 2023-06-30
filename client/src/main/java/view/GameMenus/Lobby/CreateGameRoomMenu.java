@@ -1,6 +1,7 @@
 package view.GameMenus.Lobby;
 
 import controller.GameControllers.GraphicsController;
+import controller.GameControllers.LobbyController;
 import controller.MapControllers.MapSelectController;
 import controller.UserControllers.MainController;
 import javafx.application.Application;
@@ -79,7 +80,11 @@ public class CreateGameRoomMenu extends Application implements Initializable {
         });
 
         createNewGameButton.setOnMouseClicked(e -> {
-           createNewGameRoom();
+            try {
+                createNewGameRoom();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
 
     }
@@ -93,11 +98,13 @@ public class CreateGameRoomMenu extends Application implements Initializable {
         }
     }
 
-    private void createNewGameRoom() {
+    private void createNewGameRoom() throws Exception {
 
         Lobby lobby = new Lobby(gameID.getText(), MainController.getCurrentUser(),
                 Color.getColorWithSizeCheck(pickedColor.getText()), mapID.getText());
         LobbyManager.createLobby(lobby);
+        GameRoomMenu.setLobbyController(new LobbyController(lobby));
+        new GameRoomMenu().start(Main.mainStage);
     }
 
     private void addColor() {

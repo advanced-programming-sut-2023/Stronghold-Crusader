@@ -1,7 +1,6 @@
 package view.UserMenus;
 
 import controller.ChatControllers.ChatController;
-import controller.GameControllers.LobbyController;
 import controller.UserControllers.MainController;
 import controller.UserControllers.ProfileController;
 import javafx.application.Application;
@@ -50,7 +49,6 @@ public class MainMenu extends Application {
     }
 
     public void goToLobbyMenu() throws Exception {
-        LobbyMenu.setLobbyController(new LobbyController());
         new LobbyMenu().start(Main.mainStage);
     }
 
