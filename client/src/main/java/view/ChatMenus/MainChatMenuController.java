@@ -149,7 +149,6 @@ public class MainChatMenuController {
         if (msg.getSenderUsername().equals(controller.getCurrentUsername())) {
             sendMessage(msg);
         } else {
-            // if message is unseen set it to seen and save it in the controller
             receiveMessage(msg);
         }
     }
@@ -175,6 +174,8 @@ public class MainChatMenuController {
         ReactionManager.setDelete(anchorPane, msg);
         ReactionManager.setTwoWayDelete(anchorPane, msg, controller.getCurrentChat());
         ReactionManager.setEdit(anchorPane, msg);
+        ReactionManager.setSeenStatus(msg, anchorPane);
+        ReactionManager.setUserName(msg, anchorPane);
         chatPane.getChildren().add(anchorPane);
     }
 
