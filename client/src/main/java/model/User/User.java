@@ -1,11 +1,13 @@
 package model.User;
 
+import Settings.Settings;
 import com.google.gson.Gson;
 import model.Stronghold;
 import network.Connection;
 import network.Request;
 import utils.*;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class User {
@@ -29,7 +31,7 @@ public class User {
         this.nickname = nickname;
         this.slogan = slogan;
         this.highScore = 0;
-        this.avatarPath = User.class.getResource("/assets/avatars/defaults/default.png").toExternalForm();
+        this.avatarPath = User.class.getResource(Settings.DEFAULT_AVATAR).toExternalForm();
     }
 
     public String getUsername() {
@@ -201,7 +203,9 @@ public class User {
     }
 
     public String getAvatarPath() {
-        return avatarPath;
+        if(new File(avatarPath).exists())
+            return avatarPath;
+        return User.class.getResource(Settings.DEFAULT_AVATAR).toExternalForm();
     }
 
     public int getRank() {

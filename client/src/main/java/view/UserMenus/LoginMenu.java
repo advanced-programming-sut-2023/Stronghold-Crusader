@@ -21,6 +21,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Stronghold;
 import model.User.User;
 import model.User.UserManager;
 import network.Connection;
@@ -57,13 +58,15 @@ public class LoginMenu extends Application implements Initializable {
     @Override
     public void start(Stage stage) throws Exception {
         if (UserManager.getLoggedInUser() != null) {
+            User toBeLoggedIn = Stronghold.getInstance().getUser(UserManager.getLoggedInUser().getUsername());
+            UserManager.setLoggedInUser(toBeLoggedIn);
             Request request = new Request();
             request.setType("connect");
             request.setCommand("login");
             request.addParameter("username", UserManager.getLoggedInUser().getUsername());
             String response = Connection.getInstance().sendRequest(request);
             if(!response.equals("400: Already logged in"))
-                goToMainMenu(UserManager.getLoggedInUser());
+                goToMainMenu(toBeLoggedIn);
             return;
         }
         stage.setTitle("Stronghold");

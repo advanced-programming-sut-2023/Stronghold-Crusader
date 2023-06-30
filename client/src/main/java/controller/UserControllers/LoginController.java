@@ -40,7 +40,7 @@ public class LoginController {
             return SignupAndLoginMessage.USER_DOES_NOT_EXIST;
         if (this.loginTime != null && LocalDateTime.now().isBefore(loginTime))
             return SignupAndLoginMessage.TOO_MANY_ATTEMPTS;
-        if (!Stronghold.getInstance().getUser(inputs.get("username")).isPasswordCorrect(inputs.get("password"))) {
+        if (!currentUser.isPasswordCorrect(inputs.get("password"))) {
             increaseFailedAttempts();
             return SignupAndLoginMessage.INCORRECT_PASSWORD;
         }

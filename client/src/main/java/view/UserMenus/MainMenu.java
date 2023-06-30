@@ -55,7 +55,7 @@ public class MainMenu extends Application {
     }
 
     public void goToProfileMenu() throws Exception {
-        ProfileMenu.setProfileController(new ProfileController(mainController.currentUser));
+        ProfileMenu.setProfileController(new ProfileController(MainController.currentUser));
         new ProfileMenu().start(Main.mainStage);
     }
 
@@ -64,13 +64,13 @@ public class MainMenu extends Application {
         Request request = new Request();
         request.setType("connect");
         request.setCommand("logout");
-        request.addParameter("username", mainController.currentUser.getUsername());
+        request.addParameter("username", MainController.currentUser.getUsername());
         Connection.getInstance().sendRequest(request);
         new LoginMenu().start(Main.mainStage);
     }
 
     public void goToChatroom() throws Exception {
-        ChatController chatController = new ChatController(mainController.currentUser);
+        ChatController chatController = new ChatController(MainController.currentUser);
         MainChatMenu chatMenu = new MainChatMenu();
         MainChatMenuController.setController(chatController);
         MainChatMenuController.currentChatMenu = chatMenu;
