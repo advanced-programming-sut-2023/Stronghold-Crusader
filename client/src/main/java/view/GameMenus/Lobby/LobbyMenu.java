@@ -110,7 +110,7 @@ public class LobbyMenu extends Application implements Initializable {
         popup.setAutoHide(true);
         createInfoPopUpPane(popup, gameRoom.getPlayers());
         popup.setAnchorY(250);
-        popup.setAnchorX(500);
+        popup.setAnchorX(525);
         popup.show(Main.mainStage);
     }
 

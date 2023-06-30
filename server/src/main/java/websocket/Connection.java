@@ -271,12 +271,12 @@ public class Connection extends Thread {
                 outputStream.writeUTF(new Gson().toJson(Database.getInstance().getAllLobbies()));
                 break;
             case "get_lobby":
-                lobby = Database.getInstance().getLobby(Integer.parseInt(request.getParameters().get("id")));
+                lobby = Database.getInstance().getLobby(request.getParameters().get("id"));
                 if (lobby == null) outputStream.writeUTF("400: no_lobby");
                 else outputStream.writeUTF(new Gson().toJson(lobby));
                 break;
             case "lobby_exists":
-                lobby = Database.getInstance().getLobby(Integer.parseInt(request.getParameters().get("id")));
+                lobby = Database.getInstance().getLobby(request.getParameters().get("id"));
                 outputStream.writeUTF(String.valueOf(lobby != null));
                 break;
             default:
@@ -286,7 +286,7 @@ public class Connection extends Thread {
 
     private void handelLobbyChange(Request request) throws IOException {
         Map<String, String> parameters = request.getParameters();
-        Lobby lobby = Database.getInstance().getLobby(Integer.parseInt(parameters.get("id")));
+        Lobby lobby = Database.getInstance().getLobby(parameters.get("id"));
         if (lobby == null) {
             outputStream.writeUTF("400: no_user");
             return;

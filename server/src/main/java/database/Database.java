@@ -83,7 +83,7 @@ public class Database {
         lobbies.put(lobby.getId(), lobby);
     }
 
-    public Lobby getLobby(int id){
+    public Lobby getLobby(String id){
         return lobbies.get(id);
     }
 
