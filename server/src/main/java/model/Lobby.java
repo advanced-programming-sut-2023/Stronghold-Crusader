@@ -4,20 +4,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Lobby {
-    private final int capacity;
-    private final int id;
+    private int capacity;
+    private int id;
     private User admin;
     private final HashMap<User, Color> players = new HashMap<>();
-    private final String mapId;
-
-    public Lobby(int id, User admin, Color color, String mapID) {
-        this.id = id;
-        this.admin = admin;
-//        capacity = MapManager.getMapPlayerCount(mapID);
-        capacity = 0;
-        players.put(admin, color);
-        this.mapId = mapID;
-    }
+    private String mapId;
 
     public boolean isColorPicked(Color color) {
         return players.containsValue(color);
@@ -51,7 +42,7 @@ public class Lobby {
         return mapId;
     }
 
-    public int getPlayersCount(){
+    public int getPlayersCount() {
         return players.size();
     }
 
