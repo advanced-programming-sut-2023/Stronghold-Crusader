@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 
 <AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ChatMenus.MainChatMenu">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ChatMenus.MainChatMenuController">
     <ImageView fitHeight="672.0" fitWidth="586.0" layoutX="654.0" layoutY="-42.0" nodeOrientation="INHERIT"
                pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
         <Image url="@../../assets/graphic/overlay/chatOver.png"/>
@@ -44,6 +44,12 @@
                nodeOrientation="INHERIT" onMouseClicked="#processSendMessage" pickOnBounds="true" preserveRatio="true"
                translateX="25" translateY="73">
         <Image url="@../../assets/buttons/send_btn.png"/>
+    </ImageView>
+
+    <ImageView fx:id="updateButton" fitHeight="32.0" fitWidth="77.0" layoutX="1135.0" layoutY="589.0"
+               nodeOrientation="INHERIT" onMouseClicked="#processSendMessage" pickOnBounds="true" preserveRatio="true"
+               translateX="25" translateY="73">
+        <Image url="@../../assets/buttons/update_btn.png"/>
     </ImageView>
 
     <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="637.0" layoutY="601.0" pickOnBounds="true"

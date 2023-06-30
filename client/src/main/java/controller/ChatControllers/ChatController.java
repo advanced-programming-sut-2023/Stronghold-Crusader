@@ -8,6 +8,7 @@ import model.chatRoom.Message;
 import network.Connection;
 import network.Request;
 import view.ChatMenus.MainChatMenu;
+import view.ChatMenus.MainChatMenuController;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class ChatController {
     public ChatController(User currentUser){
         this.currentUser = currentUser;
     }
-    public static MainChatMenu currentMenu;
+    public static MainChatMenuController currentMenu;
 
     public void setCurrentChat(Chat chat) {
         currentChat = chat;
@@ -61,9 +62,6 @@ public class ChatController {
         String result = Connection.getInstance().sendRequest(request);
         Type arrayListType = new TypeToken<ArrayList<Chat>>() {
         }.getType();
-        System.out.println();
-        System.out.println(result);
-        System.out.println();
         return new Gson().fromJson(result, arrayListType);
     }
 }

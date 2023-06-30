@@ -206,7 +206,7 @@ public class Connection extends Thread {
                 Chat chat = new Gson().fromJson(request.getParameters().get("chat"), Chat.class);
                 ChatManager.updateChat(chat, chat.getChatMode());
                 outputStream.writeUTF("200: successfully updated");
-//                ChatManager.notifyAllMembers(chat);
+                ChatManager.notifyAllMembers(chat);
                 break;
             case "get_global_chat":
                 outputStream.writeUTF(new Gson().toJson(ChatManager.loadGlobalChat()));
