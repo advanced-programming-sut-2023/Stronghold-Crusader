@@ -30,7 +30,6 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        System.out.println(MainController.getCurrentUser());
         stage.setTitle("Stronghold");
         AnchorPane anchorPane = FXMLLoader.load(MainMenu.class.getResource("/FXML/Userfxml/mainMenu.fxml"));
         anchorPane.setBackground(new Background(new BackgroundImage(new Image(
