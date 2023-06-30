@@ -37,12 +37,12 @@
             </ImageView>
             <TextField fx:id="mapID" layoutX="320.0" layoutY="260.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your map" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
             <TextField fx:id="gameID" layoutX="320.0" layoutY="199.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your game ID" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-            <Text layoutX="320.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity:" wrappingWidth="199.99999999999994">
+            <Text fill="WHITE" layoutX="320.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity:" wrappingWidth="199.99999999999994">
                <font>
                   <Font name="Constantia" size="21.0" />
                </font>
             </Text>
-            <Text fx:id="capacity" layoutX="418.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="24.799987792968693">
+            <Text fx:id="capacity" fill="WHITE" layoutX="418.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="24.799987792968693">
                <font>
                   <Font name="Constantia" size="21.0" />
                </font>

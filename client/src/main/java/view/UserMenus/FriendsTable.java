@@ -1,6 +1,6 @@
 package view.UserMenus;
 
-import controller.UserControllers.FriendsMenuController;
+import controller.UserControllers.MainController;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +21,7 @@ public class FriendsTable {
 
     public FriendsTable(User user) {
         email = user.getEmail();
-        setIsFriendImage(FriendsMenuController.getCurrentUser().isFriend(user));
+        setIsFriendImage(MainController.getCurrentUser().isFriend(user));
         avatar.setFill(new ImagePattern(new Image(user.getAvatarPath())));
         avatar.setRadius(24);
         isFriend.setFitHeight(35);
@@ -30,7 +30,7 @@ public class FriendsTable {
         accept.setOnMouseClicked(e -> {
             try {
                 MenusUtils.createProfileShowPopUp
-                        (user, FriendsMenuController.getCurrentUser().isFriend(user)).show(FriendsMenu.getStage());
+                        (user, MainController.getCurrentUser().isFriend(user)).show(FriendsMenu.getStage());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }

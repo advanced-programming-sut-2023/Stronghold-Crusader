@@ -94,7 +94,7 @@ public class CreateGameRoomMenu extends Application implements Initializable {
     }
 
     private void createNewGameRoom() {
-        System.out.println("here");
+
         Lobby lobby = new Lobby(gameID.getText(), MainController.getCurrentUser(),
                 Color.getColorWithSizeCheck(pickedColor.getText()), mapID.getText());
         LobbyManager.createLobby(lobby);

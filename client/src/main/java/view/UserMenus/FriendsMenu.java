@@ -1,6 +1,7 @@
 package view.UserMenus;
 
 import controller.UserControllers.FriendsMenuController;
+import controller.UserControllers.MainController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -90,12 +91,12 @@ public class FriendsMenu extends Application implements Initializable {
     public void openProfile(MouseEvent mouseEvent) throws IOException {
         if (table.getSelectionModel().getSelectedItem() != null) {
             User user = Stronghold.getInstance().getUser(table.getSelectionModel().getSelectedItem().getUsername());
-            MenusUtils.createProfileShowPopUp(user, FriendsMenuController.getCurrentUser().isFriend(user)).show(stage);
+            MenusUtils.createProfileShowPopUp(user, MainController.getCurrentUser().isFriend(user)).show(stage);
         }
     }
 
     public void showSenders(ActionEvent actionEvent) {
-        translateUserToTableItem(FriendsMenuController.getCurrentUser().getSenders());
+        translateUserToTableItem(MainController.getCurrentUser().getSenders());
         table.setItems(showList);
     }
 

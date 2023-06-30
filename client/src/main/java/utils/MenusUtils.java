@@ -1,6 +1,6 @@
 package utils;
 
-import controller.UserControllers.FriendsMenuController;
+import controller.UserControllers.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -79,7 +79,7 @@ public class MenusUtils {
         Popup popup = new Popup();
         popup.setAutoHide(false);
         if (friendShip) loadFriendPopUp(user, popup);
-        else if (FriendsMenuController.getCurrentUser().isHaveRequestFrom(user))loadSenderPopUp(user, popup);
+        else if (MainController.getCurrentUser().isHaveRequestFrom(user))loadSenderPopUp(user, popup);
         else loadUnFriendPopUp(user, popup);
 //        Stronghold.getInstance().updateData();
         return popup;
@@ -93,10 +93,10 @@ public class MenusUtils {
         pane.getChildren().get(2).setOnMousePressed(e -> {
             popup.hide();
         });
-        if (user.isHaveRequestFrom(FriendsMenuController.getCurrentUser())) pane.getChildren().get(3).setVisible(false);
+        if (user.isHaveRequestFrom(MainController.getCurrentUser())) pane.getChildren().get(3).setVisible(false);
 
         pane.getChildren().get(3).setOnMouseClicked(e -> {
-            user.addSender(FriendsMenuController.getCurrentUser());
+            user.addSender(MainController.getCurrentUser());
             popup.hide();
         });
     }
@@ -110,15 +110,15 @@ public class MenusUtils {
             popup.hide();
         });
         pane.getChildren().get(4).setOnMousePressed(e -> {
-            user.addFriend(FriendsMenuController.getCurrentUser());
-            FriendsMenuController.getCurrentUser().addFriend(user);
-            user.removeSender(FriendsMenuController.getCurrentUser());
-            FriendsMenuController.getCurrentUser().removeSender(user);
+            user.addFriend(MainController.getCurrentUser());
+            MainController.getCurrentUser().addFriend(user);
+            user.removeSender(MainController.getCurrentUser());
+            MainController.getCurrentUser().removeSender(user);
             popup.hide();
         });
         pane.getChildren().get(5).setOnMousePressed(e -> {
-            user.removeSender(FriendsMenuController.getCurrentUser());
-            FriendsMenuController.getCurrentUser().removeSender(user);
+            user.removeSender(MainController.getCurrentUser());
+            MainController.getCurrentUser().removeSender(user);
             popup.hide();
         });
     }
@@ -132,8 +132,8 @@ public class MenusUtils {
         });
         pane.getChildren().get(3).setOnMouseClicked(e -> {
             popup.hide();
-            user.removeFriend(FriendsMenuController.getCurrentUser());
-            FriendsMenuController.getCurrentUser().removeFriend(user);
+            user.removeFriend(MainController.getCurrentUser());
+            MainController.getCurrentUser().removeFriend(user);
         });
     }
 
