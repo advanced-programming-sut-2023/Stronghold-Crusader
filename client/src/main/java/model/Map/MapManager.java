@@ -71,9 +71,15 @@ public class MapManager {
 
     public static boolean isMapIDValid(String mapId) {
         ArrayList<ArrayList<String>> maps = getMapList();
-        for (ArrayList<String> map : maps) {
+        for (ArrayList<String> map : maps)
             if (map.get(0).equals(mapId)) return true;
-        }
         return false;
+    }
+
+    public static int getMapPlayerCount(String mapId){
+        ArrayList<ArrayList<String>> maps = getMapList();
+        for (ArrayList<String> map : maps)
+            if (map.get(0).equals(mapId)) return Integer.parseInt(map.get(2));
+        return -1;
     }
 }

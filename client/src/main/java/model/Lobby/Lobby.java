@@ -8,23 +8,19 @@ import model.enums.User.Color;
 import java.util.HashMap;
 import java.util.Set;
 
-public class GameRoom {
-    private final String gameID;
-    private  User admin;
-    private final HashMap<User, Color> players = new HashMap<>();
-    private final Map map;
-    private final String mapId;
+public class Lobby {
     private final int capacity;
+    private final int id;
+    private User admin;
+    private final HashMap<User, Color> players = new HashMap<>();
+    private final String mapId;
 
-    public GameRoom(User admin, Color color, String mapID, String gameID) {
+    public Lobby(int id, User admin, Color color, String mapID) {
+        this.id = id;
         this.admin = admin;
-        this.map = MapManager.load(mapID);
-        assert map != null;
-        capacity = map.getPlayerCount();
+        capacity = MapManager.getMapPlayerCount(mapID);
         players.put(admin, color);
-        this.gameID = gameID;
         this.mapId = mapID;
-
     }
 
     public boolean isColorPicked(Color color) {
@@ -43,28 +39,24 @@ public class GameRoom {
         this.admin = admin;
     }
 
-    public boolean isAdmin(User player){
-        return admin.equals(player);
-    }
-
-    public int getPlayersCount() {
-        return players.size();
-    }
-
-    public String getGameID() {
-        return gameID;
+    public int getId() {
+        return id;
     }
 
     public User getAdmin() {
         return admin;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     public String getMapId() {
         return mapId;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getPlayersCount(){
+        return players.size();
     }
 
     public Set<User> getPlayers() {
