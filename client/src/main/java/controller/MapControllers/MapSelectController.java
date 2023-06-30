@@ -71,6 +71,11 @@ public class MapSelectController {
         return MapSelectMessage.PLAYER_ADD_SUCCESS;
     }
 
+    public boolean isColorValid(String pickedColor) {
+        Color color = Color.getColorWithSizeCheck(pickedColor, selectedMap.getPlayerCount());
+        return color != null;
+    }
+
     public MapSelectMessage startGame() throws Exception {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED;
         if (players.size() < selectedMap.getPlayerCount()) return MapSelectMessage.NOT_ENOUGH_PLAYERS;

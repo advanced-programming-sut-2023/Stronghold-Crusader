@@ -1,6 +1,8 @@
 package view.GameMenus.Lobby;
 
 import controller.GameControllers.LobbyController;
+import controller.MapControllers.MapSelectController;
+import controller.UserControllers.MainController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -81,7 +83,9 @@ public class LobbyMenu extends Application implements Initializable {
     }
 
 
-    public void createNewGame(MouseEvent mouseEvent) {
+    public void createNewGame(MouseEvent mouseEvent) throws Exception {
+        CreateGameRoomMenu.setMapSelectController(new MapSelectController(MainController.getCurrentUser()));
+        new CreateGameRoomMenu().start(Main.mainStage);
     }
 
     public void refresh(MouseEvent mouseEvent) throws IOException {
