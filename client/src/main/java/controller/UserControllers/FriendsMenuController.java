@@ -6,8 +6,15 @@ import model.User.User;
 import java.util.ArrayList;
 
 public class FriendsMenuController {
-
+    ArrayList<User> friends = new ArrayList<>();
     public  FriendsMenuController() {
+         createFriends();
+    }
+
+    public void createFriends() {
+        for (String username: MainController.getCurrentUser().getFriends()) {
+            friends.add(Stronghold.getInstance().getUser(username));
+        }
     }
 
     public ArrayList<User> getUsersFromText(String text) {
@@ -17,7 +24,7 @@ public class FriendsMenuController {
             searchResultUsers.remove(MainController.getCurrentUser());
         }
         else if (text.equals(""))
-            searchResultUsers.addAll(MainController.getCurrentUser().getFriends());
+            searchResultUsers.addAll(friends);
         else {
             for (User user : Stronghold.getInstance().getUsers()) {
                 if (user.getUsername().matches(text + ".*") && !user.equals(MainController.getCurrentUser())) searchResultUsers.add(user);

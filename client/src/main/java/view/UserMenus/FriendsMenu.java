@@ -2,6 +2,8 @@ package view.UserMenus;
 
 import controller.UserControllers.FriendsMenuController;
 import controller.UserControllers.MainController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Stronghold;
 import model.User.User;
 import utils.MenusUtils;
@@ -43,6 +46,7 @@ public class FriendsMenu extends Application implements Initializable {
     public TextField searchBox;
     public TableColumn<FriendsTable, ImageView> isFriendColumn;
     public TableColumn<FriendsTable, String> emailColumn;
+    public ArrayList<User> senders = new ArrayList<>();
 
 
     @Override
@@ -59,16 +63,35 @@ public class FriendsMenu extends Application implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        createSenders();
         avatarColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Circle>("avatar"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, String>("username"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Button>("accept"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, String>("email"));
         isFriendColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, ImageView>("isFriend"));
-
+        updateSendersAndFriends();
         searchBox.textProperty().addListener((observable, oldText, newText) ->
                 translateUserToTableItem(friendsMenuController.getUsersFromText(searchBox.getText())));
                 table.setItems(showList);
+
         }
+
+    private void updateSendersAndFriends() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e ->{
+          createSenders();
+          friendsMenuController.createFriends();
+        } ));
+        timeline.setCycleCount(-1);
+        timeline.play();
+
+    }
+
+    private void createSenders() {
+        for (String username: MainController.currentUser.getSenders())
+            senders.add(Stronghold.getInstance().getUser(username));
+        }
+
+
     private void translateUserToTableItem(ArrayList<User> users) {
         showList.clear();
         for (User user: users) {
@@ -96,7 +119,7 @@ public class FriendsMenu extends Application implements Initializable {
     }
 
     public void showSenders(ActionEvent actionEvent) {
-        translateUserToTableItem(MainController.getCurrentUser().getSenders());
+        translateUserToTableItem(senders);
         table.setItems(showList);
     }
 
