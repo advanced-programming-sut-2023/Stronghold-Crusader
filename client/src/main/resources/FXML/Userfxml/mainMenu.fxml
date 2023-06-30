@@ -12,7 +12,7 @@
         <Image url="@../../assets/backgrounds/mapSelect.png"/>
     </ImageView>
     <ImageView fx:id="newGameButton" fitHeight="31.0" fitWidth="272.0" layoutX="853.0" layoutY="256.0"
-               nodeOrientation="INHERIT" onMouseClicked="#goToSelectedMapMenu" pickOnBounds="true" preserveRatio="true"
+               nodeOrientation="INHERIT" onMouseClicked="#goToLobbyMenu" pickOnBounds="true" preserveRatio="true"
                translateX="48" translateY="73">
         <Image url="@../../assets/buttons/newGame_btn.jpg"/>
     </ImageView>
