@@ -1,9 +1,6 @@
 package websocket;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import database.ChatManager;
 import database.Database;
 import model.Request;
@@ -11,7 +8,6 @@ import model.User;
 import model.chatRoom.Chat;
 import utils.Pair;
 
-import javax.crypto.spec.PSource;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
@@ -75,7 +71,7 @@ public class Connection extends Thread {
                         handelScoreboard();
                         break;
                     case "lobby":
-                        handelLobby();
+                        handelLobby(request);
                         break;
                     case "game":
                         handelGame();
@@ -255,7 +251,16 @@ public class Connection extends Thread {
 
     }
 
-    private void handelLobby() {
+    private void handelLobby(Request request) throws IOException {
+
+        switch (request.getCommand()){
+            case "create_new_game" :
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+                return;
+        }
+        outputStream.writeUTF("200: success");
 
     }
 

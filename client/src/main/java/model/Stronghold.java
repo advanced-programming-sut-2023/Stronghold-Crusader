@@ -103,4 +103,5 @@ public class Stronghold {
         }.getType();
         return new Gson().fromJson(result, arrayListType);
     }
+
 }

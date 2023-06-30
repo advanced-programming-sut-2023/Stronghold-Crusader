@@ -45,6 +45,7 @@ public class ScoreBoardMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        System.out.println(MainController.currentUser);
         rootPane = FXMLLoader.load(
                 new URL(ScoreBoardMenu.class.getResource("/FXML/ScoreboardMenu.fxml").toExternalForm()));
         rootPane.setBackground(new Background(new BackgroundImage(new Image(

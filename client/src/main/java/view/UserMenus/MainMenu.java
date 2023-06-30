@@ -1,7 +1,6 @@
 package view.UserMenus;
 
 import controller.ChatControllers.ChatController;
-import controller.MapControllers.MapSelectController;
 import controller.UserControllers.MainController;
 import controller.UserControllers.ProfileController;
 import javafx.application.Application;
@@ -9,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -18,6 +16,7 @@ import model.User.UserManager;
 import network.Connection;
 import network.Request;
 import view.ChatMenus.MainChatMenu;
+import view.GameMenus.LobbyMenu;
 import view.Main;
 import view.MapMenus.GraphicMapSelectMenu;
 
@@ -30,6 +29,7 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        System.out.println(MainController.getCurrentUser());
         stage.setTitle("Stronghold");
         AnchorPane anchorPane = FXMLLoader.load(MainMenu.class.getResource("/FXML/Userfxml/mainMenu.fxml"));
         anchorPane.setBackground(new Background(new BackgroundImage(new Image(
@@ -49,10 +49,9 @@ public class MainMenu extends Application {
         MainMenu.mainController = mainController;
     }
 
-    public void goToSelectedMapMenu() throws Exception {
+    public void goToLobbyMenu() throws Exception {
         GraphicMapSelectMenu mapSelectMenu = new GraphicMapSelectMenu();
-        GraphicMapSelectMenu.setMapSelectController(new MapSelectController(mainController.currentUser));
-        mapSelectMenu.start(Main.mainStage);
+        new LobbyMenu().start(Main.mainStage);
     }
 
     public void goToProfileMenu() throws Exception {

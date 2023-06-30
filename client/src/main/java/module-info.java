@@ -51,4 +51,5 @@ module project.group {
     opens view.GameMenus.TradeMenus to javafx.fxml;
     exports view.GameMenus.SelectedUnitMenus;
     opens view.GameMenus.SelectedUnitMenus to javafx.fxml;
+    opens model.Lobby to com.google.gson;
 }
