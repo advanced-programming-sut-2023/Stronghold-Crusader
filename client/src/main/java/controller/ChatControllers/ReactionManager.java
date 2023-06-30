@@ -1,9 +1,12 @@
 package controller.ChatControllers;
 
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import model.chatRoom.Chat;
+import model.chatRoom.ChatManager;
 import model.chatRoom.Message;
+import view.ChatMenus.MainChatMenuController;
 import view.UserMenus.MainMenu;
 
 import java.util.HashMap;
@@ -49,6 +52,7 @@ public class ReactionManager {
             num++;
             ((Label) anchorPane.getChildren().get(11)).setText(Integer.toString(num));
             msg.addReaction(username, Message.Reaction.LIKE);
+            ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
         }
     }
 
@@ -60,6 +64,7 @@ public class ReactionManager {
             num++;
             ((Label) anchorPane.getChildren().get(8)).setText(Integer.toString(num));
             msg.addReaction(MainMenu.mainController.currentUser.getUsername(), Message.Reaction.DISLIKE);
+            ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
         }
     }
 
@@ -71,6 +76,7 @@ public class ReactionManager {
             num++;
             ((Label) anchorPane.getChildren().get(10)).setText(Integer.toString(num));
             msg.addReaction(MainMenu.mainController.currentUser.getUsername(), Message.Reaction.HEART);
+            ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
         }
     }
 
@@ -82,6 +88,7 @@ public class ReactionManager {
             num++;
             ((Label) anchorPane.getChildren().get(9)).setText(Integer.toString(num));
             msg.addReaction(MainMenu.mainController.currentUser.getUsername(), Message.Reaction.FIRE);
+            ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
         }
     }
 
@@ -91,7 +98,9 @@ public class ReactionManager {
 
     public static void setEdit(AnchorPane anchorPane, Message msg){
         (anchorPane.getChildren().get(12)).setOnMouseClicked(e -> {
-
+            Platform.runLater(() -> {
+                ChatController.currentMenu.showEditingContent(msg);
+            });
         });
     }
     public static void setDelete(AnchorPane anchorPane, Message msg){
@@ -99,6 +108,7 @@ public class ReactionManager {
             msg.setInvisibleFor(MainMenu.mainController.currentUser.getUsername());
             anchorPane.setManaged(false);
             anchorPane.setVisible(false);
+            ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
         });
     }
 
@@ -107,6 +117,7 @@ public class ReactionManager {
             chat.getMessages().remove(msg);
             anchorPane.setVisible(false);
             anchorPane.setManaged(false);
+            ChatManager.updateChat(MainChatMenuController.getController().getCurrentChat());
         });
     }
 }

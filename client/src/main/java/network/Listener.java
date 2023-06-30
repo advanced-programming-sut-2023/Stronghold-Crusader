@@ -2,8 +2,10 @@ package network;
 
 import com.google.gson.Gson;
 import controller.ChatControllers.ChatController;
+import javafx.application.Platform;
 import model.chatRoom.Chat;
 import view.ChatMenus.MainChatMenu;
+import view.ChatMenus.MainChatMenuController;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -66,9 +68,15 @@ public class Listener extends Thread {
         String requestStr = matcher.group("request");
         Chat chat = new Gson().fromJson(requestStr, Chat.class);
         if (ChatController.currentMenu != null) {
-            MainChatMenu menu = ChatController.currentMenu;
-            if (MainChatMenu.getController().getCurrentChat().getChatId().equals(chat.getChatId())){
-                menu.loadChat(chat);
+            MainChatMenuController menu = ChatController.currentMenu;
+            if (MainChatMenuController.getController().getCurrentChat().getChatId().equals(chat.getChatId())){
+                Platform.runLater(() -> {
+                    try {
+                        menu.loadChat(chat);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }
         }
     }

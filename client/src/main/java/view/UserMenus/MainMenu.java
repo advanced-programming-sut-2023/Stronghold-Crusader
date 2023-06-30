@@ -17,6 +17,7 @@ import model.User.UserManager;
 import network.Connection;
 import network.Request;
 import view.ChatMenus.MainChatMenu;
+import view.ChatMenus.MainChatMenuController;
 import view.GameMenus.Lobby.LobbyMenu;
 import view.Main;
 
@@ -72,8 +73,8 @@ public class MainMenu extends Application {
     public void goToChatroom() throws Exception {
         ChatController chatController = new ChatController(mainController.currentUser);
         MainChatMenu chatMenu = new MainChatMenu();
-        MainChatMenu.setController(chatController);
-        MainChatMenu.currentChatMenu = chatMenu;
+        MainChatMenuController.setController(chatController);
+        MainChatMenuController.currentChatMenu = chatMenu;
         chatMenu.start(Main.mainStage);
     }
 
