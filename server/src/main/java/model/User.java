@@ -2,11 +2,8 @@ package model;
 
 import database.Database;
 import utils.Pair;
-import utils.PasswordConverter;
-import websocket.Connection;
 
 import java.net.Socket;
-
 import java.util.ArrayList;
 
 @SuppressWarnings("FieldCanBeLocal")
@@ -19,8 +16,9 @@ public class User {
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;
-    private ArrayList<User> friends;
-    private ArrayList<User> senders;
+    private ArrayList<String> friends;
+
+    private ArrayList<String> senders;
     private int highScore;
 
     public String getUsername() {
@@ -83,22 +81,22 @@ public class User {
     }
 
     public void addFriend(User user) {
-        friends.add(user);
+        friends.add(user.getUsername());
         Database.getInstance().updateData();
     }
 
     public void addSender(User user) {
-        senders.add(user);
+        senders.add(user.getUsername());
         Database.getInstance().updateData();
     }
 
     public void removeFriend(User user) {
-        friends.remove(user);
+        friends.remove(user.getUsername());
         Database.getInstance().updateData();
     }
 
     public void removeSender(User user) {
-        senders.remove(user);
+        senders.remove(user.getUsername());
         Database.getInstance().updateData();
     }
 
