@@ -124,7 +124,6 @@ public class MainChatMenu extends Application {
                 addMessage(msg);
             }
         }
-        if (chatPaneScroll == null) chatPaneScroll = new ScrollPane();
         chatPaneScroll.setContent(chatPane);
     }
 
