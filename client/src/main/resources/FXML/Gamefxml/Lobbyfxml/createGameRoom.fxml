@@ -42,7 +42,7 @@
                   <Font name="Constantia" size="21.0" />
                </font>
             </Text>
-            <Text fx:id="capacity" fill="WHITE" layoutX="418.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="24.799987792968693">
+            <Text fx:id="capacity" fill="WHITE" layoutX="418.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="24.799987792968693">
                <font>
                   <Font name="Constantia" size="21.0" />
                </font>

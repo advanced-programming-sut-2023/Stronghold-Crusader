@@ -228,6 +228,7 @@ public class User {
     }
 
     public void addSender(User user) {
+        System.out.println(user);
         senders.add(user.getUsername());
         Request request = new Request();
         request.setType("friend");
