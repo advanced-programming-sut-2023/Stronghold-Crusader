@@ -31,7 +31,6 @@ import view.enums.messages.MapMessage.MapSelectMessage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class CreateGameRoomMenu extends Application implements Initializable {
     private static MapSelectController mapSelectController;
@@ -86,7 +85,7 @@ public class CreateGameRoomMenu extends Application implements Initializable {
     }
 
     private void initializeGameIdsForRooms() {
-        Set<Lobby> lobbies = LobbyManager.getGameRooms();
+        ArrayList<Lobby> lobbies = LobbyManager.getLobbies();
         if (lobbies != null) {
             for (Lobby lobby :lobbies) {
                 gameIds.add(lobby.getId());
@@ -98,7 +97,7 @@ public class CreateGameRoomMenu extends Application implements Initializable {
         System.out.println("here");
         Lobby lobby = new Lobby(gameID.getText(), MainController.getCurrentUser(),
                 Color.getColorWithSizeCheck(pickedColor.getText()), mapID.getText());
-        LobbyManager.addLobby(lobby);
+        LobbyManager.createLobby(lobby);
     }
 
     private void addColor() {

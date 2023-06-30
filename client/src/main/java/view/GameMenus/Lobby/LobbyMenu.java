@@ -72,7 +72,7 @@ public class LobbyMenu extends Application implements Initializable {
 
     private void addGamesToTable() {
         gameList.clear();
-        for (Lobby lobby: LobbyManager.getGameRooms()) {
+        for (Lobby lobby: LobbyManager.getLobbies()) {
             gameList.add(new LobbyTable(lobby));
         }
         lobbyTable.setItems(gameList);
@@ -99,7 +99,8 @@ public class LobbyMenu extends Application implements Initializable {
     public void openInfo(MouseEvent mouseEvent) throws IOException {
         System.out.println(lobbyTable.getSelectionModel().getSelectedItem());
         if (lobbyTable.getSelectionModel().getSelectedItem() != null) {
-            Lobby gameRoom = LobbyManager.getGameRoom(lobbyTable.getSelectionModel().getSelectedItem().getGameId());
+            Lobby gameRoom = LobbyManager.getLobby(lobbyTable.getSelectionModel().getSelectedItem().getGameId());
+            assert gameRoom != null;
             createInfoPopUp(gameRoom);
         }
     }

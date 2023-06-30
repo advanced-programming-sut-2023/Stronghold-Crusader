@@ -19,9 +19,7 @@ public class LobbyManager {
         return new Gson().fromJson(result, arrayListType);
     }
 
-    public static GameRoom getGameRoom(String lobbyId) {
-        return new GameRoom(null, null, null, null);
-    }
+
 
     public static Lobby getLobby(String lobbyId) {
         Request request = new Request();
