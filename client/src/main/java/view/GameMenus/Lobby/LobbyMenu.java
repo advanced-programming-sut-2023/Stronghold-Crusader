@@ -1,6 +1,7 @@
 package view.GameMenus.Lobby;
 
 import controller.GameControllers.LobbyController;
+import controller.UserControllers.MainController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,12 +16,22 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import model.Lobby.GameRoom;
+import model.Lobby.LobbyManager;
+import model.User.User;
+import view.Main;
+import view.UserMenus.MainMenu;
 import view.UserMenus.ProfileMenu;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class LobbyMenu extends Application implements Initializable {
     private static LobbyController lobbyController;
@@ -56,7 +67,6 @@ public class LobbyMenu extends Application implements Initializable {
         capacityColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("capacity"));
         televisionColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, ImageView>("television"));
         joinColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, Button>("join"));
-
         addGamesToTable();
     }
 
@@ -71,5 +81,45 @@ public class LobbyMenu extends Application implements Initializable {
 
 
     public void createNewGame(MouseEvent mouseEvent) {
+    }
+
+    public void refresh(MouseEvent mouseEvent) throws IOException {
+        createInfoPopUp(new GameRoom(MainController.getCurrentUser(), Color.BLUE, null, null));
+        addGamesToTable();
+    }
+
+    public void back(MouseEvent mouseEvent) throws Exception {
+        new MainMenu().start(Main.mainStage);
+    }
+
+    public void openInfo(MouseEvent mouseEvent) throws IOException {
+        System.out.println(lobbyTable.getSelectionModel().getSelectedItem());
+        if (lobbyTable.getSelectionModel().getSelectedItem() != null) {
+            GameRoom gameRoom = LobbyManager.getGameRoom(lobbyTable.getSelectionModel().getSelectedItem().getGameId());
+            createInfoPopUp(gameRoom);
+        }
+    }
+
+    private void createInfoPopUp(GameRoom gameRoom) throws IOException {
+        Popup popup = new Popup();
+        popup.setAutoHide(true);
+        createInfoPopUpPane(popup, gameRoom.getPlayers());
+        popup.setAnchorY(250);
+        popup.setAnchorX(500);
+        popup.show(Main.mainStage);
+    }
+
+    private void createInfoPopUpPane(Popup popup, Set<User> players) throws IOException {
+        AnchorPane info = FXMLLoader.load(LobbyMenu.class.getResource("/FXML/Gamefxml/Lobbyfxml/infoPopUp.fxml"));
+        int counter = 2;
+        for (User user: players) {
+            ((Text) info.getChildren().get(counter))
+                    .setText(user.getNickname());
+            counter ++;
+        }
+        info.getChildren().get(10).setOnMousePressed(e -> {
+            popup.hide();
+        });
+        popup.getContent().add(info);
     }
 }
