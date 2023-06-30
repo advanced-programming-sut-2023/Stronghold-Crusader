@@ -87,6 +87,10 @@ public class Database {
         return lobbies.get(id);
     }
 
+    public Collection<Lobby> getAllLobbies(){
+        return lobbies.values();
+    }
+
     public void removeLobby(int id){
         lobbies.remove(id);
     }

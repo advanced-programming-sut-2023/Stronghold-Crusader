@@ -3,6 +3,8 @@ package websocket;
 import com.google.gson.Gson;
 import database.ChatManager;
 import database.Database;
+import model.Color;
+import model.Lobby;
 import model.Request;
 import model.User;
 import model.chatRoom.Chat;
@@ -14,6 +16,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Map;
 
 public class Connection extends Thread {
     private final Socket socket;
@@ -73,6 +76,8 @@ public class Connection extends Thread {
                     case "lobby":
                         handelLobby(request);
                         break;
+                    case "lobby_change":
+                        handelLobbyChange(request);
                     case "game":
                         handelGame();
                         break;
@@ -252,16 +257,56 @@ public class Connection extends Thread {
     }
 
     private void handelLobby(Request request) throws IOException {
-
-        switch (request.getCommand()){
-            case "create_new_game" :
+        Lobby lobby;
+        switch (request.getCommand()) {
+            case "create_lobby":
+                Database.getInstance().addLobby(new Gson().fromJson(request.getParameters().get("lobby"), Lobby.class));
+                outputStream.writeUTF("200: success");
+                break;
+            case "delete_lobby":
+                Database.getInstance().removeLobby(Integer.parseInt(request.getParameters().get("id")));
+                outputStream.writeUTF("200: success");
+                break;
+            case "get_lobbies":
+                outputStream.writeUTF(new Gson().toJson(Database.getInstance().getAllLobbies()));
+                break;
+            case "get_lobby":
+                lobby = Database.getInstance().getLobby(Integer.parseInt(request.getParameters().get("id")));
+                if (lobby == null) outputStream.writeUTF("400: no_lobby");
+                else outputStream.writeUTF(new Gson().toJson(lobby));
+                break;
+            case "lobby_exists":
+                lobby = Database.getInstance().getLobby(Integer.parseInt(request.getParameters().get("id")));
+                outputStream.writeUTF(String.valueOf(lobby != null));
                 break;
             default:
                 outputStream.writeUTF("400: bad request");
-                return;
+        }
+    }
+
+    private void handelLobbyChange(Request request) throws IOException {
+        Map<String, String> parameters = request.getParameters();
+        Lobby lobby = Database.getInstance().getLobby(Integer.parseInt(parameters.get("id")));
+        if (lobby == null) {
+            outputStream.writeUTF("400: no_user");
+            return;
+        }
+        switch (request.getCommand()) {
+            case "add_player":
+                lobby.addPlayer(new Gson().fromJson(parameters.get("player"), User.class),
+                        Color.values()[Integer.parseInt(parameters.get("color"))]);
+                break;
+            case "remove_player":
+                lobby.removePlayer(new Gson().fromJson(parameters.get("player"), User.class));
+                break;
+            case "set_admin":
+                lobby.setAdmin(new Gson().fromJson(parameters.get("player"), User.class));
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+                break;
         }
         outputStream.writeUTF("200: success");
-
     }
 
     private void handelGame() {
