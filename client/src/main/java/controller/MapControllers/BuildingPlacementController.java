@@ -8,6 +8,7 @@ import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
+import model.User.User;
 import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
@@ -29,6 +30,12 @@ public class BuildingPlacementController {
     public BuildingPlacementController(Player currentPlayer, Map map, boolean isModifiable) {
         this.isModifiable = isModifiable;
         this.currentPlayer = currentPlayer;
+        this.map = map;
+    }
+
+    public BuildingPlacementController(Map map, boolean isModifiable){
+        this.isModifiable = isModifiable;
+        this.currentPlayer = new Player(new User("", "", "", "", ""));
         this.map = map;
     }
 

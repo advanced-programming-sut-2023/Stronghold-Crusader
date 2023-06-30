@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="113" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MapMenus.MapCreationMenu.GraphicChangeTextureMenu">
+    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="20.0" pannable="true" prefHeight="82.0" prefWidth="430" style="-fx-background-color: transparent" stylesheets="@../../CSS/GameCss/BuildingPlacement.css" vbarPolicy="NEVER">
+    </ScrollPane>
+</AnchorPane>

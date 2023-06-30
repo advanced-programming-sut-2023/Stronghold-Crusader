@@ -24,7 +24,9 @@ import model.MapAsset.Cliff;
 import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.MapAsset.Tree;
+import model.User.User;
 import model.enums.AssetType.MapAssetType;
+import model.enums.CellType;
 import utils.Vector2D;
 import view.GameMenus.GraphicGameMenu;
 import view.GameMenus.SelectedBuildingMenu;
@@ -55,6 +57,11 @@ public class GraphicsController {
     private double startX, startY;
     private final ArrayList<Building> selectedBuildings;
     private Cell lastSelectedCell;
+    private boolean isMapCreation = false;
+
+    public void setMapCreation(boolean mapCreation) {
+        isMapCreation = mapCreation;
+    }
 
     public GraphicsController(GameController gameController, Game game, GraphicGameMenu gameMenu) {
         this.gameController = gameController;
@@ -68,6 +75,7 @@ public class GraphicsController {
     }
 
     public GraphicsController(Game game) {
+        User user = new User("", "", "", "", "");
         this.gameController = null;
         this.map = game.getMap();
         mainGrid = new TilePane();
@@ -217,11 +225,19 @@ public class GraphicsController {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                } else {
+                    pattern = Pattern.compile("/assets/graphic/tiles/(?<name>\\S+)\\.jpg");
+                    matcher = pattern.matcher(dragText);
+                    if (matcher.find()){
+                        CellType cellType = CellType.getTypeBySerial(Integer.parseInt(matcher.group("name")));
+                        map.changeCellTypeTo(cell.getCoordinate(), cellType);
+                    }
                 }
             }
             e.consume();
         });
     }
+
 
     private void setMoveByDrag(GridPane cellGrid) {
         cellGrid.setOnDragDetected(event -> {
@@ -244,22 +260,24 @@ public class GraphicsController {
 
     private void selectCell(GridPane cellGrid) throws IOException {
         lastSelectedCell = getCellOfNode(cellGrid);
-        GameMenuMessage result = gameController.selectBuilding(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
+        if (!isMapCreation){
+            GameMenuMessage result = gameController.selectBuilding(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
+            if (result == GameMenuMessage.BUILDING_SELECTED) {
+                runSelectedBuilding();
+            }
+            SelectedUnitController unitController = gameController.getSelectedUnitController();
+            result = gameController.selectUnit(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
+            if (result == GameMenuMessage.UNIT_SELECTED) {
+                loadSelectedUnitMenu();
+                runMoveShortcuts();
+                setMoveByDrag(cellGrid);
+                TilePane tilePane = (TilePane) ((AnchorPane) selectedUnitMenu.getChildren().get(0)).getChildren().get(0);
+                for (MobileUnit unit : unitController.getSelectedUnits())
+                    tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
+            }
+        }
         cellGrid.setBorder(new Border(new BorderStroke(Color.CYAN, BorderStrokeStyle.DASHED,
                 CornerRadii.EMPTY, BorderStroke.MEDIUM)));
-        if (result == GameMenuMessage.BUILDING_SELECTED) {
-            runSelectedBuilding();
-        }
-        SelectedUnitController unitController = gameController.getSelectedUnitController();
-        result = gameController.selectUnit(lastSelectedCell.getCoordinate().x, lastSelectedCell.getCoordinate().y);
-        if (result == GameMenuMessage.UNIT_SELECTED) {
-            loadSelectedUnitMenu();
-            runMoveShortcuts();
-            setMoveByDrag(cellGrid);
-            TilePane tilePane = (TilePane) ((AnchorPane) selectedUnitMenu.getChildren().get(0)).getChildren().get(0);
-            for (MobileUnit unit : unitController.getSelectedUnits())
-                tilePane.getChildren().add(createUnitSelectionItem(unit, unitController));
-        }
     }
 
     private void runMoveShortcuts() {
@@ -299,9 +317,11 @@ public class GraphicsController {
 
     private void resetSelection() {
         removeAllSelectedBorders();
-        gameController.deselectUnits();
-        selectedUnitMenu.getChildren().clear();
-        selectedBuildings.clear();
+        if (!isMapCreation) {
+            gameController.deselectUnits();
+            selectedUnitMenu.getChildren().clear();
+            selectedBuildings.clear();
+        }
         if (lastSelectedCell != null) getNodeOfCell(lastSelectedCell).setOnDragDetected(null);
     }
 
@@ -424,7 +444,7 @@ public class GraphicsController {
         return mainGrid;
     }
 
-    private void handleMousePressed(MouseEvent event) {
+    public void handleMousePressed(MouseEvent event) {
         if (!event.isSecondaryButtonDown()) return;
         resetSelection();
         startX = event.getX();
@@ -435,7 +455,7 @@ public class GraphicsController {
         rootPane.getChildren().add(selectionRect);
     }
 
-    private void handleMouseDragged(MouseEvent event) {
+    public void handleMouseDragged(MouseEvent event) {
         if (selectionRect == null) return;
         double currentX = event.getX();
         double currentY = event.getY();
@@ -451,7 +471,7 @@ public class GraphicsController {
         selectionRect.setHeight(maxY - minY);
     }
 
-    private void handleMouseReleased(MouseEvent event) {
+    public void handleMouseReleased(MouseEvent event) {
         if (selectionRect == null) return;
         Bounds selectionBounds = selectionRect.getBoundsInParent();
         for (int i = 0; i < mainGrid.getChildren().size(); i++) {

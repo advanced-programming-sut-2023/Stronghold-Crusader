@@ -5,52 +5,73 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ChatMenus.ChatCreationMenu">
-    <ImageView fitHeight="650" fitWidth="800" layoutX="645.0" layoutY="-34.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <Image url="@../../assets/backgrounds/mapSelect.png" />
+<AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ChatMenus.ChatCreationMenu">
+    <ImageView fitHeight="650" fitWidth="800" layoutX="645.0" layoutY="-34.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
+        <Image url="@../../assets/backgrounds/mapSelect.png"/>
     </ImageView>
-    <ImageView fitHeight="180.0" fitWidth="61.0" layoutX="951.0" layoutY="220.0" nodeOrientation="INHERIT" pickOnBounds="true" rotate="90" translateX="25" translateY="73">
-        <Image url="@../../assets/graphic/overlay/selectedUnitOverlay.png" />
+    <ImageView fitHeight="180.0" fitWidth="61.0" layoutX="951.0" layoutY="220.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" rotate="90" translateX="25" translateY="73">
+        <Image url="@../../assets/graphic/overlay/selectedUnitOverlay.png"/>
     </ImageView>
-    <ImageView fx:id="privateButton" fitHeight="45.0" fitWidth="48.0" layoutX="900.0" layoutY="288.0" nodeOrientation="INHERIT" onMouseClicked="#selectPrivateChat" opacity="0.5" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
-        <Image url="@../../assets/buttons/privateChat_btn.png" />
+    <ImageView fx:id="privateButton" fitHeight="45.0" fitWidth="48.0" layoutX="900.0" layoutY="288.0"
+               nodeOrientation="INHERIT" onMouseClicked="#selectPrivateChat" opacity="0.5" pickOnBounds="true"
+               preserveRatio="true" translateX="25" translateY="73">
+        <Image url="@../../assets/buttons/privateChat_btn.png"/>
     </ImageView>
-    <ImageView fx:id="groupButton" fitHeight="45.0" fitWidth="48.0" layoutX="958.0" layoutY="288.0" nodeOrientation="INHERIT" onMouseClicked="#selectGroupChat" opacity="0.5" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
-        <Image url="@../../assets/buttons/groupChat_btn.png" />
+    <ImageView fx:id="groupButton" fitHeight="45.0" fitWidth="48.0" layoutX="958.0" layoutY="288.0"
+               nodeOrientation="INHERIT" onMouseClicked="#selectGroupChat" opacity="0.5" pickOnBounds="true"
+               preserveRatio="true" translateX="25" translateY="73">
+        <Image url="@../../assets/buttons/groupChat_btn.png"/>
     </ImageView>
-    <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="1015.0" layoutY="287.0" nodeOrientation="INHERIT" opacity="0.16" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
-        <Image url="@../../assets/buttons/globalChat_btn.png" />
+    <ImageView fitHeight="45.0" fitWidth="48.0" layoutX="1015.0" layoutY="287.0" nodeOrientation="INHERIT"
+               opacity="0.16" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
+        <Image url="@../../assets/buttons/globalChat_btn.png"/>
     </ImageView>
-    <ImageView fitHeight="30" fitWidth="210.0" layoutX="796.0" layoutY="524.0" nodeOrientation="INHERIT" onMouseClicked="#createChat" pickOnBounds="true" translateX="48" translateY="73">
-        <Image url="@../../assets/buttons/create_btn.jpg" />
+    <ImageView fitHeight="30" fitWidth="210.0" layoutX="796.0" layoutY="524.0" nodeOrientation="INHERIT"
+               onMouseClicked="#createChat" pickOnBounds="true" translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/create_btn.jpg"/>
     </ImageView>
-    <ImageView fitHeight="30" fitWidth="210.0" layoutX="795.0" layoutY="558.0" nodeOrientation="INHERIT" onMouseClicked="#back" pickOnBounds="true" translateX="48" translateY="73">
-        <Image url="@../../assets/buttons/back_btn.jpg" />
+    <ImageView fitHeight="30" fitWidth="210.0" layoutX="795.0" layoutY="558.0" nodeOrientation="INHERIT"
+               onMouseClicked="#back" pickOnBounds="true" translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/back_btn.jpg"/>
     </ImageView>
-    <Label layoutX="792.0" layoutY="346.0" prefHeight="74.0" prefWidth="127.0" text="Select The Chat Type You Wish To Create" textFill="WHITE" wrapText="true">
+    <Label layoutX="792.0" layoutY="346.0" prefHeight="74.0" prefWidth="127.0"
+           text="Select The Chat Type You Wish To Create" textFill="WHITE" wrapText="true">
         <font>
-            <Font name="Arial Black" size="13.0" />
+            <Font name="Arial Black" size="13.0"/>
         </font>
     </Label>
-    <Label layoutX="793.0" layoutY="423.0" prefHeight="29.0" prefWidth="59.0" text="Chat Id" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+    <Label layoutX="793.0" layoutY="423.0" prefHeight="29.0" prefWidth="59.0" text="Chat Id" textAlignment="CENTER"
+           textFill="WHITE" wrapText="true">
         <font>
-            <Font name="Arial Black" size="13.0" />
+            <Font name="Arial Black" size="13.0"/>
         </font>
     </Label>
-    <TextField fx:id="chatIdField" layoutX="867.0" layoutY="422.0" opacity="0.5" prefHeight="30.0" prefWidth="230.0" promptText="choose chat id" scaleShape="false" style="-fx-background-color: #3a0d05; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
+    <TextField fx:id="chatIdField" layoutX="867.0" layoutY="422.0" opacity="0.5" prefHeight="30.0" prefWidth="230.0"
+               promptText="choose chat id" scaleShape="false"
+               style="-fx-background-color: #3a0d05; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;"/>
     <AnchorPane layoutX="793.0" layoutY="457.0" prefHeight="30.0" prefWidth="309.0">
         <children>
-            <Label layoutX="1.0" layoutY="1.0" prefHeight="45.0" prefWidth="80.0" text="Participant" textFill="WHITE" wrapText="true">
+            <Label layoutX="1.0" layoutY="1.0" prefHeight="45.0" prefWidth="80.0" text="Participant" textFill="WHITE"
+                   wrapText="true">
                 <font>
-                    <Font name="Arial Black" size="13.0" />
+                    <Font name="Arial Black" size="13.0"/>
                 </font>
             </Label>
-            <TextField fx:id="participantField" layoutX="90.0" layoutY="10.0" opacity="0.5" prefHeight="30.0" prefWidth="136.0" promptText="choose participant" scaleShape="false" style="-fx-background-color: #3a0d05; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-            <ImageView fitHeight="30" fitWidth="92.0" layoutX="211.0" layoutY="9.0" nodeOrientation="INHERIT" onMouseClicked="#addParticipant" pickOnBounds="true">
-                <Image url="@../../assets/buttons/add_btn.png" />
+            <TextField fx:id="participantField" layoutX="90.0" layoutY="10.0" opacity="0.5" prefHeight="30.0"
+                       prefWidth="136.0" promptText="choose participant" scaleShape="false"
+                       style="-fx-background-color: #3a0d05; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;"/>
+            <ImageView fitHeight="30" fitWidth="92.0" layoutX="211.0" layoutY="9.0" nodeOrientation="INHERIT"
+                       onMouseClicked="#addParticipant" pickOnBounds="true">
+                <Image url="@../../assets/buttons/add_btn.png"/>
             </ImageView>
         </children>
     </AnchorPane>
-    <ScrollPane fx:id="participantList" hbarPolicy="NEVER" layoutX="794.0" layoutY="503.0" opacity="0.5" prefHeight="88.0" prefWidth="302.0" stylesheets="@../../CSS/MapCss/mapSelectStyle.css" vbarPolicy="NEVER" />
-    <Label fx:id="errorMessageText" alignment="CENTER" contentDisplay="CENTER" layoutX="825.0" layoutY="310.0" prefHeight="37.0" prefWidth="240.0" style="-fx-text-fill: red" textAlignment="CENTER" />
+    <ScrollPane fx:id="participantList" hbarPolicy="NEVER" layoutX="794.0" layoutY="503.0" opacity="0.5"
+                prefHeight="88.0" prefWidth="302.0" stylesheets="@../../CSS/MapCss/mapSelectStyle.css"
+                vbarPolicy="NEVER"/>
+    <Label fx:id="errorMessageText" alignment="CENTER" contentDisplay="CENTER" layoutX="825.0" layoutY="310.0"
+           prefHeight="37.0" prefWidth="240.0" style="-fx-text-fill: red" textAlignment="CENTER"/>
 </AnchorPane>

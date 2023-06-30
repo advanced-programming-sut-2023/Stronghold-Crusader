@@ -2,6 +2,7 @@ package model.enums;
 
 import com.google.gson.annotations.SerializedName;
 import javafx.scene.image.Image;
+import model.enums.AssetType.MapAssetType;
 
 
 public enum CellType {
@@ -63,5 +64,13 @@ public enum CellType {
 
     public String getName() {
         return name;
+    }
+    public static CellType getTypeBySerial(int i) {
+        for (CellType type : CellType.values()) {
+            if (type.ordinal() == i) {
+                return type;
+            }
+        }
+        return null;
     }
 }

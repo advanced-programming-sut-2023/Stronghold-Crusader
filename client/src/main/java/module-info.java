@@ -46,6 +46,7 @@ module project.group {
     exports controller.GameControllers;
     exports controller.UserControllers;
     exports controller.ChatControllers;
+    exports view.MapMenus.MapCreationMenu;
     opens view.GameMenus.MarketMenus to javafx.fxml;
     exports view.GameMenus.TradeMenus;
     opens view.GameMenus.TradeMenus to javafx.fxml;
