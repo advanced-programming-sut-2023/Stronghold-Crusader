@@ -175,6 +175,7 @@ public class MainChatMenuController {
         ReactionManager.setTwoWayDelete(anchorPane, msg, controller.getCurrentChat());
         ReactionManager.setEdit(anchorPane, msg);
         ReactionManager.setSeenStatus(msg, anchorPane);
+        ReactionManager.setUserName(msg, anchorPane);
         chatPane.getChildren().add(anchorPane);
     }
 
