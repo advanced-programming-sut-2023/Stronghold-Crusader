@@ -1,6 +1,4 @@
-package model.Lobby;
-
-import model.User;
+package model;
 
 import java.awt.*;
 import java.util.HashMap;
