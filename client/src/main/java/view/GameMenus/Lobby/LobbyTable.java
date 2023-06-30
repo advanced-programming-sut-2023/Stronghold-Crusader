@@ -3,7 +3,7 @@ package view.GameMenus.Lobby;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.Lobby.GameRoom;
+import model.Lobby.Lobby;
 
 public class LobbyTable {
     private final String gameId;
@@ -13,13 +13,13 @@ public class LobbyTable {
     private final ImageView television = new ImageView();
     private final Button join = new Button("join");
 
-    public LobbyTable(GameRoom gameRoom) {
+    public LobbyTable(Lobby lobby) {
         addTelevision();
-        gameId = gameRoom.getGameID();
-        admin = gameRoom.getAdmin().getNickname();
-        mapId = gameRoom.getMapId();
-        capacity = Integer.valueOf(gameRoom.getPlayersCount()).toString() + "/" +
-                Integer.valueOf(gameRoom.getCapacity()).toString();
+        gameId = String.valueOf(lobby.getId());
+        admin = lobby.getAdmin().getNickname();
+        mapId = lobby.getMapId();
+        capacity = Integer.valueOf(lobby.getPlayersCount()).toString() + "/" +
+                Integer.valueOf(lobby.getCapacity()).toString();
         join.setOnMouseClicked(e -> {
             goToGameRoom(gameId);
         });
