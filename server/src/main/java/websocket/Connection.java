@@ -8,6 +8,9 @@ import model.Color;
 import model.Lobby;
 import model.Request;
 import model.User;
+import model.*;
+import model.Television.ResourceManager;
+import model.Television.SaveData;
 import model.chatRoom.Chat;
 import utils.Pair;
 
@@ -82,6 +85,9 @@ public class Connection extends Thread {
                     case "game":
                         handelGame();
                         break;
+                    case "television":
+                        handleTelevision(request);
+                        break;
                     case "map":
                         handelMap(request);
                         break;
@@ -91,10 +97,11 @@ public class Connection extends Thread {
             }
         } catch (SocketException socketException) {
             closedConnection();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     private void handelConnection(Request request) throws IOException {
         User user = Database.getInstance().getUser(request.getParameters().get("username"));
@@ -268,19 +275,19 @@ public class Connection extends Thread {
                 outputStream.writeUTF("200: success");
                 break;
             case "delete_lobby":
-                Database.getInstance().removeLobby(Integer.parseInt(request.getParameters().get("id")));
+                Database.getInstance().removeLobby(request.getParameters().get("id"));
                 outputStream.writeUTF("200: success");
                 break;
             case "get_lobbies":
                 outputStream.writeUTF(new Gson().toJson(Database.getInstance().getAllLobbies()));
                 break;
             case "get_lobby":
-                lobby = Database.getInstance().getLobby(Integer.parseInt(request.getParameters().get("id")));
+                lobby = Database.getInstance().getLobby(request.getParameters().get("id"));
                 if (lobby == null) outputStream.writeUTF("400: no_lobby");
                 else outputStream.writeUTF(new Gson().toJson(lobby));
                 break;
             case "lobby_exists":
-                lobby = Database.getInstance().getLobby(Integer.parseInt(request.getParameters().get("id")));
+                lobby = Database.getInstance().getLobby(request.getParameters().get("id"));
                 outputStream.writeUTF(String.valueOf(lobby != null));
                 break;
             default:
@@ -306,11 +313,35 @@ public class Connection extends Thread {
             case "set_admin":
                 lobby.setAdmin(new Gson().fromJson(parameters.get("player"), User.class));
                 break;
+            case "change_status":
+                lobby.setLobbyStatus((lobby.getLobbyStatus().equals(LobbyStatus.PRIVATE)
+                        ? LobbyStatus.PUBLIC : LobbyStatus.PRIVATE));
+                break;
             default:
                 outputStream.writeUTF("400: bad request");
                 break;
         }
         outputStream.writeUTF("200: success");
+    }
+
+    private void handleTelevision(Request request) throws Exception {
+        String id = new Gson().fromJson(request.getParameters().get("id"), String.class);
+        String fileName = new Gson().fromJson(request.getParameters().get("filename"), String.class);
+
+        switch (request.getCommand()) {
+            case "save":
+                SaveData saveData = new Gson().fromJson(request.getParameters().get("saveData"), SaveData.class);
+                ResourceManager.save(saveData, id, fileName);
+                outputStream.writeUTF("200: success");
+                break;
+            case "load":
+                SaveData data = (SaveData) ResourceManager.load(id, fileName);
+                outputStream.writeUTF(new Gson().toJson(data));
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+                break;
+        }
     }
 
     private void handelGame() {

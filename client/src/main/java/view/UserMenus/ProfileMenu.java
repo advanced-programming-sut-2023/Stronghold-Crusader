@@ -228,7 +228,7 @@ public class ProfileMenu extends Application {
     }
 
     public void openFriendsMenu(ActionEvent actionEvent) throws Exception {
-        FriendsMenu.setFriendsMenuController(new FriendsMenuController(controller.getCurrentUser()));
+        FriendsMenu.setFriendsMenuController(new FriendsMenuController());
        new FriendsMenu().start(stage);
     }
 

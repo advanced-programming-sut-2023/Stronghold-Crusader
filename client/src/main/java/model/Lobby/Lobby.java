@@ -1,29 +1,32 @@
 package model.Lobby;
 
 import com.google.gson.Gson;
-import model.Map.Map;
 import model.Map.MapManager;
+import model.Stronghold;
 import model.User.User;
 import model.enums.User.Color;
 import network.Connection;
 import network.Request;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Lobby {
+    private LobbyStatus lobbyStatus;
     private final int capacity;
-    private final int id;
+    private final String id;
     private User admin;
-    private final HashMap<User, Color> players = new HashMap<>();
+    private final HashMap<String, Color> players = new HashMap<>();
     private final String mapId;
 
-    public Lobby(int id, User admin, Color color, String mapID) {
+    public Lobby(String id, User admin, Color color, String mapID) {
         this.id = id;
         this.admin = admin;
         capacity = MapManager.getMapPlayerCount(mapID);
-        players.put(admin, color);
+        players.put(admin.getUsername(), color);
         this.mapId = mapID;
+        lobbyStatus = LobbyStatus.PUBLIC;
     }
 
     public boolean isColorPicked(Color color) {
@@ -31,7 +34,7 @@ public class Lobby {
     }
 
     public void addPlayer(User player, Color color) {
-        players.put(player, color);
+        players.put(player.getUsername(), color);
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("add_player");
@@ -49,11 +52,11 @@ public class Lobby {
     }
 
     public void removePlayer(User player) {
-        players.remove(player);
+        players.remove(player.getUsername());
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("remove_player");
-        request.addParameter("id", String.valueOf(id));
+        request.addParameter("id", id);
         request.addParameter("player", new Gson().toJson(player));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) {
@@ -70,7 +73,7 @@ public class Lobby {
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("set_admin");
-        request.addParameter("id", String.valueOf(id));
+        request.addParameter("id", id);
         request.addParameter("player", new Gson().toJson(admin));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) {
@@ -81,8 +84,21 @@ public class Lobby {
             }
         }
     }
+    public void changePrivacy(){
+        Request request = new Request();
+        request.setType("lobby_change");
+        request.setCommand("change_status");
+        request.addParameter("id", id);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) {
+            try {
+                throw new Exception("Lobby doesn't exist");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }    }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -98,11 +114,22 @@ public class Lobby {
         return mapId;
     }
 
-    public int getPlayersCount(){
+    public String getColor(User user) {
+        return players.get(user.getUsername()).toString();
+    }
+
+    public int getPlayersCount() {
         return players.size();
     }
 
     public Set<User> getPlayers() {
-        return players.keySet();
+        Set<User> users = new HashSet<>();
+        for (String username : players.keySet())
+            users.add(Stronghold.getInstance().getUser(username));
+        return users;
+    }
+
+    public LobbyStatus getLobbyStatus() {
+        return lobbyStatus;
     }
 }

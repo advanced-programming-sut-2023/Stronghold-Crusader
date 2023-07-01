@@ -9,7 +9,7 @@ public class Database {
     private static Database instance = null;
     private final HashMap<String, User> users = new HashMap<>();
     private final ArrayList<User> userRankings = new ArrayList<>();
-    private final HashMap<Integer, Lobby> lobbies = new HashMap<>();
+    private final HashMap<String, Lobby> lobbies = new HashMap<>();
 
     private Database() {
     }
@@ -83,7 +83,7 @@ public class Database {
         lobbies.put(lobby.getId(), lobby);
     }
 
-    public Lobby getLobby(int id){
+    public Lobby getLobby(String id){
         return lobbies.get(id);
     }
 
@@ -91,7 +91,7 @@ public class Database {
         return lobbies.values();
     }
 
-    public void removeLobby(int id){
+    public void removeLobby(String id){
         lobbies.remove(id);
     }
 }

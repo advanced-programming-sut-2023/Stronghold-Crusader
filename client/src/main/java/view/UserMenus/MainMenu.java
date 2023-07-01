@@ -56,7 +56,6 @@ public class MainMenu extends Application {
     }
 
     public void goToLobbyMenu() throws Exception {
-        LobbyMenu.setLobbyController(new LobbyController());
         new LobbyMenu().start(Main.mainStage);
     }
 

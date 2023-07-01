@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="217.0" prefWidth="235.0" style="-fx-background-color: #AA0000; -fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.SuccessPopup">
+   <children>
+      <Label layoutX="72.0" layoutY="2.0" prefHeight="46.0" prefWidth="111.0" text="Error" textAlignment="CENTER">
+         <font>
+            <Font name="Constantia" size="41.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="76.0" fitWidth="89.0" layoutX="80.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/logo/140-1402285_village-christian-crusaders-hd-png-download-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="27.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="you can't join to this game room " wrappingWidth="179.7367000579834">
+         <font>
+            <Font name="Constantia" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="27.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="this may be for one of the following reasons" wrappingWidth="200.5367488861084">
+         <font>
+            <Font name="Constantia" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="26.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1.game is already started" wrappingWidth="179.7367000579834">
+         <font>
+            <Font name="Constantia" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="26.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.this gameroom is private" wrappingWidth="179.7367000579834">
+         <font>
+            <Font name="Constantia" size="12.0" />
+         </font>
+      </Text>
+      <Text layoutX="26.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3.There is a problem with connection" wrappingWidth="200.5367488861084">
+         <font>
+            <Font name="Constantia" size="12.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

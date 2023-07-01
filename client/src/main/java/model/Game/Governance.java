@@ -23,8 +23,10 @@ public class Governance implements Serializable {
     private final ArrayList<Building> buildings;
     private final ArrayList<MobileUnit> units;
     private int totalPopulation;
-    private IntegerProperty peasantPopulation;
+    private final IntegerProperty peasantPopulation;
     private int populationCapacity;
+    private final int maxPopularity;
+    private final int minPopularity;
     private int foodRate;
     private int totalPopularity;
     private int foodPopularity;
@@ -44,6 +46,8 @@ public class Governance implements Serializable {
         foodPopularity = 0;
         taxPopularity = 0;
         totalPopularity = 0;
+        maxPopularity = 100;
+        minPopularity = -50;
     }
 
     public void processPopulation() {
@@ -86,6 +90,10 @@ public class Governance implements Serializable {
     public void calculatePopularity() {
         totalPopularity = getFoodPopularity() + getFearPopularity() + getReligionPopularity() +
                 getTaxPopularity() + getInnPopularity();
+        if (totalPopularity > maxPopularity)
+            totalPopularity = maxPopularity;
+        if (totalPopularity < minPopularity)
+            totalPopularity = minPopularity;
     }
 
     public void payTax() {

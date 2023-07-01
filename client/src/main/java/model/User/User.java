@@ -18,8 +18,8 @@ public class User {
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;
-    private final ArrayList<User> friends;
-    private final ArrayList<User> senders;
+    private final ArrayList<String> friends;
+    private final ArrayList<String> senders;
     private int highScore;
 
     public User(String username, String password, String email, String nickname, String slogan) {
@@ -213,10 +213,11 @@ public class User {
     }
 
     public void addFriend(User user) {
-        friends.add(user);
+        friends.add(user.getUsername());
         Request request = new Request();
         request.setType("friend");
         request.setCommand("add_friend");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
@@ -227,10 +228,12 @@ public class User {
     }
 
     public void addSender(User user) {
-        senders.add(user);
+        System.out.println(user);
+        senders.add(user.getUsername());
         Request request = new Request();
         request.setType("friend");
         request.setCommand("add_sender");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
@@ -241,10 +244,11 @@ public class User {
     }
 
     public void removeFriend(User user) {
-        friends.remove(user);
+        friends.remove(user.getUsername());
         Request request = new Request();
         request.setType("friend");
         request.setCommand("remove_friend");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
@@ -255,10 +259,11 @@ public class User {
     }
 
     public void removeSender(User user) {
-        senders.remove(user);
+        senders.remove(user.getUsername());
         Request request = new Request();
         request.setType("friend");
         request.setCommand("remove_sender");
+        request.addParameter("username", username);
         request.addParameter("user", new Gson().toJson(user));
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) try {
@@ -269,12 +274,12 @@ public class User {
     }
 
     //the arraylist returned must not be manipulated
-    public ArrayList<User> getFriends() {
+    public ArrayList<String> getFriends() {
         return friends;
     }
 
     //the arraylist returned must not be manipulated
-    public ArrayList<User> getSenders() {
+    public ArrayList<String> getSenders() {
         return senders;
     }
 
@@ -283,7 +288,7 @@ public class User {
     }
 
     public boolean isHaveRequestFrom(User user) {
-        return senders.contains(user);
+        return senders.contains(user.getUsername());
     }
 
     @Override

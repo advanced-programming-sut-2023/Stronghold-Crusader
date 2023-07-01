@@ -28,8 +28,8 @@ import model.Game.Governance;
 import model.Map.Cell;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
-import model.Television.ResourceManager;
 import model.Television.SaveData;
+import model.Television.TelevisionManager;
 import utils.Vector2D;
 import view.GameMenus.MarketMenus.MarketMenu;
 import view.GameMenus.TradeMenus.TradeMenu;
@@ -241,8 +241,8 @@ public class GraphicGameMenu extends Application {
         String[][] map = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
         String[][] buildings = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
         loadCells(map, buildings);
-        ResourceManager.save(new SaveData(graphicsController.getMap().getSize().x, graphicsController.getMap().getSize().y
-                , map, buildings),  SaveData.getNumber() + ".save");
+        TelevisionManager.save(new SaveData(graphicsController.getMap().getSize().x, graphicsController.getMap().getSize().y
+                , map, buildings), gameController.getGame().getGameID(), SaveData.getNumber() + ".save");
         gameController.nextTurn();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
