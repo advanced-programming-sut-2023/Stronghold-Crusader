@@ -123,7 +123,7 @@ public class CreateGameRoomMenu extends Application implements Initializable {
         MapSelectMessage msg = mapSelectController.selectMap(mapID.getText(), true);
         if (msg.equals(MapSelectMessage.MAP_SELECT_SUCCESS)) {
             GraphicsController graphicsController = new GraphicsController(
-                    new Game(mapSelectController.getSelectedMap(), mapSelectController.getPlayers(), true));
+                    new Game(mapSelectController.getSelectedMap(), mapSelectController.getPlayers(), true, "test"));
             mapIdError.setText("");
             graphicsController.loadGraphics();
             mapPreview.setContent(graphicsController.getMainGrid());

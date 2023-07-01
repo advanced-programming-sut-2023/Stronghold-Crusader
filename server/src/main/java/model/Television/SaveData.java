@@ -8,9 +8,6 @@ public class SaveData implements Serializable {
     public static int mapX;
     public static int mapY;
 
-    public String[][] map ;
-    public String[][] buildings;
-
     public SaveData(int x, int y, String[][] map, String[][] buildings) {
         mapX = x;
         mapY = y;
@@ -20,6 +17,8 @@ public class SaveData implements Serializable {
     }
 
 
+    public String[][] map;
+    public String[][] buildings;
 
     public static int getNumber() {
         return number;

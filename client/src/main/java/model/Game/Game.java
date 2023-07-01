@@ -21,8 +21,9 @@ public class Game {
     private int roundCounter;
     private boolean isNextRound;
     private final ArrayList<Pair> deadPlayers;
+    private final String gameID;
 
-    public Game(Map map, HashMap<Color, Player> players, boolean isEditableMode) {
+    public Game(Map map, HashMap<Color, Player> players, boolean isEditableMode, String gameId ) {
         this.map = map;
         this.isEditableMode = isEditableMode;
         this.players = players;
@@ -30,6 +31,7 @@ public class Game {
         this.roundCounter = 1;
         initializeColors();
         deadPlayers = new ArrayList<>();
+        this.gameID = gameId;
     }
 
     public void nextTurn() {
@@ -100,5 +102,9 @@ public class Game {
 
     public ArrayList<Pair> getDeadPlayers() {
         return deadPlayers;
+    }
+
+    public String getGameID() {
+        return gameID;
     }
 }

@@ -15,8 +15,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Game.Game;
 import model.Map.MapManager;
-import model.Stronghold;
-import view.ChatMenus.MainChatMenu;
 import view.GameMenus.GraphicGameMenu;
 import view.Main;
 import view.UserMenus.MainMenu;
@@ -85,7 +83,7 @@ public class GraphicMapSelectMenu extends Application {
         MapSelectMessage msg = mapSelectController.selectMap(mapId, modifiability);
         if (msg.equals(MapSelectMessage.MAP_SELECT_SUCCESS)) {
             GraphicsController graphicsController = new GraphicsController(
-                    new Game(mapSelectController.getSelectedMap(), mapSelectController.getPlayers(), modifiability));
+                    new Game(mapSelectController.getSelectedMap(), mapSelectController.getPlayers(), modifiability, "test"));
             graphicsController.loadGraphics();
             mapPreview.setContent(graphicsController.getMainGrid());
             mapPreview.setOpacity(1);

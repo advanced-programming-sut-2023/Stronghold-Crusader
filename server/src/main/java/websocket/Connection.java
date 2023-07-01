@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import database.ChatManager;
 import database.Database;
 import model.*;
+import model.Television.ResourceManager;
+import model.Television.SaveData;
 import model.chatRoom.Chat;
 import utils.Pair;
 
@@ -78,16 +80,20 @@ public class Connection extends Thread {
                     case "game":
                         handelGame();
                         break;
+                    case "television":
+                        handleTelevision(request);
+                        break;
                     default:
                         outputStream.writeUTF("400: bad request");
                 }
             }
         } catch (SocketException socketException) {
             closedConnection();
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
 
     private void handelConnection(Request request) throws IOException {
         User user = Database.getInstance().getUser(request.getParameters().get("username"));
@@ -301,13 +307,33 @@ public class Connection extends Thread {
                 break;
             case "change_status":
                 lobby.setLobbyStatus((lobby.getLobbyStatus().equals(LobbyStatus.PRIVATE)
-                        ?  LobbyStatus.PUBLIC : LobbyStatus.PRIVATE));
+                        ? LobbyStatus.PUBLIC : LobbyStatus.PRIVATE));
                 break;
             default:
                 outputStream.writeUTF("400: bad request");
                 break;
         }
         outputStream.writeUTF("200: success");
+    }
+
+    private void handleTelevision(Request request) throws Exception {
+        String id = new Gson().fromJson(request.getParameters().get("id"), String.class);
+        String fileName = new Gson().fromJson(request.getParameters().get("filename"), String.class);
+
+        switch (request.getCommand()) {
+            case "save":
+                SaveData saveData = new Gson().fromJson(request.getParameters().get("saveData"), SaveData.class);
+                ResourceManager.save(saveData, id, fileName);
+                outputStream.writeUTF("200: success");
+                break;
+            case "load":
+                SaveData data = (SaveData) ResourceManager.load(id, fileName);
+                outputStream.writeUTF(new Gson().toJson(data));
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+                break;
+        }
     }
 
     private void handelGame() {

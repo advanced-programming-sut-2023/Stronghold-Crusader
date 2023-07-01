@@ -49,7 +49,7 @@ public class newMain extends Application {
         players.put(Color.RED, new Player(Stronghold.getInstance().getUser("diba")));
         players.put(Color.BLUE, new Player(Stronghold.getInstance().getUser("kian")));
         Map map = MapManager.load("1001");
-        Game game = new Game(map, players, true);
+        Game game = new Game(map, players, true, "test");
         GameController gameController = new GameController(Stronghold.getInstance().getUser("diba"), game);
         GraphicGameMenu.setGameController(gameController);
         GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
