@@ -37,6 +37,7 @@ public class GameRoomMenu extends Application implements Initializable {
     public Button newGameButton;
     public CheckBox modifiabilityCheck;
     public Button privacyButton;
+    private boolean editable = false;
 
 
     private ObservableList<GameRoomTable> players = FXCollections.observableArrayList();
@@ -81,6 +82,9 @@ public class GameRoomMenu extends Application implements Initializable {
             privacyButton.setText(lobbyController.getLobbyStatus().toString());
         });
 
+        modifiabilityCheck.setOnMousePressed(e ->{
+            editable = modifiabilityCheck.isSelected();
+        });
     }
 
     private void changeGameRoomPrivacy() {
