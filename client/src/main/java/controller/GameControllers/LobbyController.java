@@ -19,6 +19,9 @@ public class LobbyController {
     public void updateGameRoom() {
         this.gameRoom = LobbyManager.getLobby(gameId);
     }
+    public boolean isLobbyExist(){
+        return gameRoom != null;
+    }
 
     public void setAdmin(User admin) {
         gameRoom.setAdmin(admin);

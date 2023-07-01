@@ -60,14 +60,22 @@ public class GameRoomMenu extends Application implements Initializable {
         colorColumn.setCellValueFactory(new PropertyValueFactory<GameRoomTable, Circle>("color"));
         refreshButton.setOnMouseClicked(e -> {
             newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
-            updateTable();
+            try {
+                updateTable();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
         if (!lobbyController.isAdmin(MainController.getCurrentUser())){
             modifiabilityCheck.setDisable(true);
             privacyButton.setVisible(false);
         }
         newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
-        updateTable();
+        try {
+            updateTable();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         privacyButton.setOnMouseClicked( e -> {
             changeGameRoomPrivacy();
             privacyButton.setText(lobbyController.getLobbyStatus().toString());
@@ -79,13 +87,16 @@ public class GameRoomMenu extends Application implements Initializable {
         lobbyController.changePrivacy();
     }
 
-    private void updateTable() {
+    private void updateTable() throws Exception {
         players.clear();
         lobbyController.updateGameRoom();
-        for (User player : lobbyController.getPlayers()) {
-            players.add(new GameRoomTable(player, lobbyController.isAdmin(player), lobbyController.getColor(player)));
+        if (!lobbyController.isLobbyExist()) exitFromRoom(); else {
+
+            for (User player : lobbyController.getPlayers()) {
+                players.add(new GameRoomTable(player, lobbyController.isAdmin(player), lobbyController.getColor(player)));
+            }
+            lobbyTable.setItems(players);
         }
-        lobbyTable.setItems(players);
     }
 
     public static void setLobbyController(LobbyController lobbyController) {
@@ -93,6 +104,10 @@ public class GameRoomMenu extends Application implements Initializable {
     }
 
     public void back(MouseEvent mouseEvent) throws Exception {
+       exitFromRoom();
+    }
+
+    private void exitFromRoom() throws Exception {
         lobbyController.removePlayer(MainController.getCurrentUser());
         if (lobbyController.getPlayersCount() == 0) LobbyManager.deleteLobby(lobbyController.getGameId());
         else if (lobbyController.isAdmin(MainController.getCurrentUser()))
