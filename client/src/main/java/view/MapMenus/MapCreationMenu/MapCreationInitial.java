@@ -81,4 +81,8 @@ public class MapCreationInitial extends Application {
         timeline.setCycleCount(1);
         timeline.play();
     }
+
+    public void goToChatManager(){
+
+    }
 }
