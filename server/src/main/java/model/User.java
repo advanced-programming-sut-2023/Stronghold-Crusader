@@ -9,6 +9,7 @@ import java.util.ArrayList;
 @SuppressWarnings("FieldCanBeLocal")
 public class User {
     private transient Socket socket;
+    private long lastOnlineTime;
     private String username;
     private String password;
     private String nickname;
@@ -17,7 +18,6 @@ public class User {
     private Pair passwordRecovery;
     private String avatarPath;
     private ArrayList<String> friends;
-
     private ArrayList<String> senders;
     private int highScore;
     private ArrayList<String> mapList;
@@ -99,6 +99,11 @@ public class User {
 
     public void removeSender(User user) {
         senders.remove(user.getUsername());
+        Database.getInstance().updateData();
+    }
+
+    public void updateLastOnline(){
+        lastOnlineTime = System.currentTimeMillis();
         Database.getInstance().updateData();
     }
 
