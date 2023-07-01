@@ -15,7 +15,8 @@ public class SaveData implements Serializable {
         mapX = x;
         mapY = y;
         number++;
-        this.map = map;
+        //TODO MapId Method to save logs
+      //  this.map = map;
         this.buildings = buildings;
     }
 
