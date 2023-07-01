@@ -2,9 +2,7 @@ package model;
 
 import database.Database;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Lobby {
     private LobbyStatus lobbyStatus;
@@ -13,6 +11,7 @@ public class Lobby {
     private User admin;
     private final HashMap<String, Color> players = new HashMap<>();
     private String mapId;
+    private transient Timer expireTimer;
 
     public boolean isColorPicked(Color color) {
         return players.containsValue(color);
@@ -20,14 +19,36 @@ public class Lobby {
 
     public void addPlayer(User player, Color color) {
         players.put(player.getUsername(), color);
+        updateExpireTime();
     }
 
     public void removePlayer(User player) {
         players.remove(player.getUsername());
+        updateExpireTime();
     }
 
     public void setAdmin(User admin) {
         this.admin = admin;
+        updateExpireTime();
+    }
+
+    public void setLobbyStatus(LobbyStatus lobbyStatus) {
+        this.lobbyStatus = lobbyStatus;
+        updateExpireTime();
+    }
+
+    public void updateExpireTime() {
+        if (expireTimer != null)
+            expireTimer.cancel();
+        expireTimer = new Timer(true);
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Database.getInstance().removeLobby(id);
+                System.out.println("Removed lobby:" + id);
+            }
+        };
+        expireTimer.schedule(timerTask, 60000);
     }
 
     public String getId() {
@@ -59,9 +80,5 @@ public class Lobby {
 
     public LobbyStatus getLobbyStatus() {
         return lobbyStatus;
-    }
-
-    public void setLobbyStatus(LobbyStatus lobbyStatus) {
-        this.lobbyStatus = lobbyStatus;
     }
 }

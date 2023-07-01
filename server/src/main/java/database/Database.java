@@ -81,6 +81,7 @@ public class Database {
 
     public void addLobby(Lobby lobby){
         lobbies.put(lobby.getId(), lobby);
+        lobby.updateExpireTime();
     }
 
     public Lobby getLobby(String id){
