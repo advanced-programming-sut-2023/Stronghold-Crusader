@@ -27,7 +27,9 @@ import javafx.util.Duration;
 import model.Game.Governance;
 import model.Map.Cell;
 import model.MapAsset.Building.Building;
+import model.MapAsset.Cliff;
 import model.MapAsset.MapAsset;
+import model.MapAsset.Tree;
 import model.Television.SaveData;
 import model.Television.TelevisionManager;
 import utils.Vector2D;
@@ -238,32 +240,41 @@ public class GraphicGameMenu extends Application {
     }
 
     public void nextTurn() throws Exception {
-        String[][] map = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
-        String[][] buildings = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
-        loadCells(map, buildings);
+        String[][] buildings = new String[60][60];
+        String[][] people = new String[60][60];
+        loadCells(buildings, people);
         TelevisionManager.save(new SaveData(graphicsController.getMap().getSize().x, graphicsController.getMap().getSize().y
-                , map, buildings), gameController.getGame().getGameID(), SaveData.getNumber() + ".save");
+                , gameController.getGame().getMap().getMapId(), buildings, people), gameController.getGame().getGameID(), SaveData.getNumber() + ".save");
         gameController.nextTurn();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
     }
 
-    private void loadCells(String[][] map, String[][] buildings) {
-        for (int y = 0; y < graphicsController.getMap().getSize().y; y++) {
-            for (int x = 0; x < graphicsController.getMap().getSize().x; x++) {
+    private void loadCells(String[][] buildings, String[][] people) {
+        for (int y = 0; y < graphicsController.getMap().getSize().y && y < 60; y++) {
+            for (int x = 0; x < graphicsController.getMap().getSize().x && x < 60; x++) {
                 Vector2D coordinate = new Vector2D(x, y);
                 Cell cell = graphicsController.getMap().getCell(coordinate);
-                map[y][x] = cell.getType().getImage().getUrl().toString();
-                Building building = searchForBuildings(cell);
+                MapAsset building = searchForBuildings(cell);
+                MapAsset soldier = searchForPeople(cell);
+                if (soldier == null) people[y][x] = null;
+                else people[y][x] = soldier.getType().getImage().getUrl().toString();
                 if (building == null) buildings[y][x] = null;
                 else buildings[y][x] = building.getType().getImage().getUrl().toString();
             }
         }
     }
 
-    private Building searchForBuildings(Cell cell) {
+    private MapAsset searchForPeople(Cell cell) {
         for (MapAsset asset : cell.getAllAssets()) {
-            if (asset instanceof Building) return (Building) asset;
+            if (!(asset instanceof Building || asset instanceof Tree || asset instanceof Cliff)) return  asset;
+        }
+        return null;
+    }
+
+    private MapAsset searchForBuildings(Cell cell) {
+        for (MapAsset asset : cell.getAllAssets()) {
+            if (asset instanceof Building || asset instanceof Tree || asset instanceof Cliff) return  asset;
         }
         return null;
     }

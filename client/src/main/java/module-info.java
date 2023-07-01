@@ -5,6 +5,7 @@ module project.group {
     requires javafx.swing;
     requires com.google.gson;
     requires java.desktop;
+    requires fontawesomefx;
 
     exports model.enums.AssetType to com.google.gson;
     exports model.enums to com.google.gson;

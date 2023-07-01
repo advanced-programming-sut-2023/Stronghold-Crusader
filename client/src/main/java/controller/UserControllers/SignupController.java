@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 public class SignupController {
     private final Stronghold stronghold = Stronghold.getInstance();
+    private User newUser;
 
     public SignupAndLoginMessage signup(HashMap<String, String> inputs) {
         if (hasEmptyField(inputs))
@@ -27,9 +28,8 @@ public class SignupController {
         if (stronghold.userExists(inputs.get("username")))
             return SignupAndLoginMessage.EXISTING_USERNAME;
 
-        User newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
+        this.newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
-        stronghold.addUser(newUser);
         return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
 
@@ -64,6 +64,17 @@ public class SignupController {
         return SignupAndLoginMessage.SUCCESS_CREATING_USER;
     }
 
+    public SignupAndLoginMessage pickQuestion(String question, String answer, String confirmation, String captcha) {
+        if (!Captcha.isFilledCaptchaValid(captcha))
+            return SignupAndLoginMessage.INVALID_CAPTCHA;
+        if (!answer.equals(confirmation))
+            return SignupAndLoginMessage.FAIL_PICKING_UP_QUESTION;
+        Pair pair = new Pair(question, answer);
+        Stronghold.getInstance().addUser(newUser);
+        newUser.setPasswordRecovery(pair);
+        return SignupAndLoginMessage.SUCCESS_CREATING_USER;
+    }
+
     private boolean hasEmptyField(HashMap<String, String> inputs) {
         return inputs.get("password").equals("") || inputs.get("email").equals("")
                 || inputs.get("email").equals("") || inputs.get("slogan").equals("");
@@ -88,4 +99,12 @@ public class SignupController {
 //        if (inputs.get("sloganTest") == null) inputs.replace("slogan", null, "");
 //    }
 
+
+    public User getNewUser() {
+        return newUser;
+    }
+
+    public void setNewUser(User newUser) {
+        this.newUser = newUser;
+    }
 }

@@ -16,6 +16,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.Map.Map;
+import model.Map.MapManager;
 import utils.Vector2D;
 
 import java.net.URL;
@@ -24,11 +26,11 @@ import java.util.ResourceBundle;
 public class Television extends Application implements Initializable {
     public ScrollPane scrollPane;
     public Button stopAndPlayButton;
-    private SaveData mainSaveData;
     private static TilePane mainGrid = new TilePane();
     private Timeline timeline;
-    private int number = 13;
+    private int number = 1;
     private static String ID;
+
     @Override
     public void start(Stage stage) throws Exception {
         AnchorPane rootPane = FXMLLoader.load(Television.class.getResource("/FXML/Gamefxml/televisionMenu.fxml"));
@@ -45,11 +47,29 @@ public class Television extends Application implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            mainSaveData = TelevisionManager.load(ID, number + ".save");
+            SaveData saveData = TelevisionManager.load("test", number + ".save");
+            Map map = MapManager.load(saveData.mapId);
+            loadMap(map);
             number++;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        scrollPane.setContent(mainGrid);
+        timeline = new Timeline();
+        timeline.setCycleCount(-1);
+        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), e -> {
+            try {
+                initializeScrollPane(scrollPane);
+                number++;
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }));
+        timeline.play();
+    }
+
+    private void loadMap(Map map) {
         mainGrid.setPrefColumns(100);
         mainGrid.setPrefTileHeight(80);
         mainGrid.setPrefTileWidth(80);
@@ -58,37 +78,27 @@ public class Television extends Application implements Initializable {
             for (int x = 0; x < 100; x++) {
                 coordinate.x = x;
                 coordinate.y = y;
-                GridPane gridPane = initializeCellGrid(mainSaveData.map[y][x]);
+
+                GridPane gridPane = initializeCellGrid(map.getCell(coordinate).getType().getImage().toString());
                 mainGrid.getChildren().add(gridPane);
                 GridPane cellGrid = (GridPane) mainGrid.getChildren().get(x + 100 * y);
-                cellGrid.setBackground(new Background(new BackgroundImage(new Image(mainSaveData.map[y][x]),
+                cellGrid.setBackground(new Background(new BackgroundImage((map.getCell(coordinate).getType().getImage()),
                         BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                        new BackgroundSize(1, 1, true, true, false, false))));            }
-               // updateCellGrid(x,y,);
-        }
-        scrollPane.setContent(mainGrid);
-        timeline = new Timeline();
-        timeline.setCycleCount(-1);
-        timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), e -> {
-            try {
-                initializeScrollPane(scrollPane);
-                number ++;
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                        new BackgroundSize(1, 1, true, true, false, false))));
             }
-        }));
-        timeline.play();
+            // updateCellGrid(x,y,);
+        }
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) throws Exception {
-        SaveData saveData = TelevisionManager.load(ID, number + ".save");
+        SaveData saveData = TelevisionManager.load("test", number + ".save");
         if (saveData == null) {
             timeline.stop();
             return;
         }
         for (int y = 0; y < 100; y++) {
             for (int x = 0; x < 100; x++) {
-                updateCellGrid(x, y, saveData.map[y][x], mainGrid, saveData);
+                updateCellGrid(x, y, mainGrid, saveData);
             }
         }
         scrollPane.setContent(mainGrid);
@@ -112,26 +122,31 @@ public class Television extends Application implements Initializable {
 
     }
 
-    public void updateCellGrid(int x, int y, String cell, TilePane mainGrid, SaveData saveData) {
+    public void updateCellGrid(int x, int y, TilePane mainGrid, SaveData saveData) {
         Vector2D cellCoord = new Vector2D(x, y);
         GridPane cellGrid = (GridPane) mainGrid.getChildren().get(cellCoord.x + 100 * cellCoord.y);
         cellGrid.getChildren().clear();
-
         int column = 0;
-        // for (MapAsset asset : cell.getAllAssets()) {
-        if (saveData.buildings[y][x] != null) {
-            ImageView imageView = new ImageView(new Image(saveData.buildings[y][x]));
+        if (saveData.assets[x][y] != null) {
+            ImageView imageView = new ImageView(new Image(saveData.assets[x][y]));
             imageView.setPreserveRatio(true);
-            double fitSize = 20;
-            //   if (asset instanceof Building || asset instanceof Tree || asset instanceof Cliff)
-            fitSize = 80;
+            double fitSize = 80;
             imageView.setFitHeight(fitSize);
             imageView.setFitWidth(fitSize);
-            cellGrid.add(imageView, column % 4, column / 4);
+            cellGrid.add(imageView, 0, 0);
             column++;
         }
+//        if (saveData.assets[1][y][x] != null) {
+//            double size = 20;
+//            while (column < 5) {
+//                ImageView soldier = new ImageView(new Image(saveData.assets[1][y][x]));
+//                soldier.setPreserveRatio(true);
+//                soldier.setFitWidth(size);
+//                soldier.setFitHeight(size);
+//                cellGrid.add(soldier, column % 4, column / 4);
+//                column ++;
+//            }
         //}
     }
-
 
 }

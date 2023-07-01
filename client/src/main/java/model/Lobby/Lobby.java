@@ -84,7 +84,8 @@ public class Lobby {
             }
         }
     }
-    public void changePrivacy(){
+
+    public void changePrivacy() {
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("change_status");
@@ -96,7 +97,8 @@ public class Lobby {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }    }
+        }
+    }
 
     public String getId() {
         return id;

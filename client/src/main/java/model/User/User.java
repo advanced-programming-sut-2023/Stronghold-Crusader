@@ -18,10 +18,11 @@ public class User {
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;
-    private final ArrayList<String> friends;
-    private final ArrayList<String> senders;
+    private ArrayList<String> friends;
+    private ArrayList<String> senders;
     private int highScore;
     private final ArrayList<String> mapList;
+    private long lastOnlineTime;
 
     public User(String username, String password, String email, String nickname, String slogan) {
         friends = new ArrayList<>();
@@ -205,7 +206,7 @@ public class User {
     }
 
     public String getAvatarPath() {
-        if(new File(avatarPath).exists())
+        if (new File(avatarPath).exists())
             return avatarPath;
         return User.class.getResource(Settings.DEFAULT_AVATAR).toExternalForm();
     }
@@ -230,7 +231,6 @@ public class User {
     }
 
     public void addSender(User user) {
-        System.out.println(user);
         senders.add(user.getUsername());
         Request request = new Request();
         request.setType("friend");
@@ -293,19 +293,15 @@ public class User {
         return senders.contains(user.getUsername());
     }
 
-    @Override
-    public String toString() {
-        return "username : " + username +
-                "\nnickname : " + nickname +
-                "\nslogan : " + slogan +
-                "\nemail : " + email +
-                "\nhighscore : " + highScore;
+    public long getLastOnlineTime() {
+        return lastOnlineTime;
     }
 
     public ArrayList<String> getMapList() {
         return mapList;
     }
-    public void addMap(String mapId){
+
+    public void addMap(String mapId) {
         mapList.add(mapId);
         Request request = new Request();
         request.setType("map");
@@ -317,5 +313,20 @@ public class User {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "username : " + username +
+                "\nnickname : " + nickname +
+                "\nslogan : " + slogan +
+                "\nemail : " + email +
+                "\nhighscore : " + highScore;
+    }
+
+    public void updateLists() {
+        User user = Stronghold.getInstance().getUser(username);
+        friends = user.friends;
+        senders = user.senders;
     }
 }

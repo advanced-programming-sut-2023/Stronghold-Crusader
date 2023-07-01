@@ -23,11 +23,11 @@ public class TelevisionManager {
         }
     }
 
-    public static SaveData load(String mapId , String filename) {
+    public static SaveData load(String gameId , String filename) {
         Request request = new Request();
         request.setType("television");
         request.setCommand("load");
-        request.addParameter("id", mapId );
+        request.addParameter("id", gameId );
         request.addParameter("filename", filename);
         String result = Connection.getInstance().sendRequest(request);
 

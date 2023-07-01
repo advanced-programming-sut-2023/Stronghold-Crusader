@@ -8,4 +8,5 @@ public class Settings {
     public static final String GLOBAL_CHAT_PATH = CHAT_PATH + "globalChat.json";
     public static final String PRIVATE_CHAT_PATH = CHAT_PATH + "privateChats/";
     public static final String ROOM_CHAT_PATH = CHAT_PATH + "roomChats/";
+    public static final  String TELEVISION_PATH = DATABASE_PATH + "television/";
 }

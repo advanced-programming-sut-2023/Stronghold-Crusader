@@ -215,4 +215,9 @@ public class Map {
     public Cell[][] getMap() {
         return map;
     }
+
+    public String getMapId() {
+        //TODO fix map ID
+        return "1001";
+    }
 }
