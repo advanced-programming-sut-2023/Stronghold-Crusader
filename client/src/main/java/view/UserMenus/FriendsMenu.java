@@ -72,29 +72,29 @@ public class FriendsMenu extends Application implements Initializable {
         updateSendersAndFriends();
         searchBox.textProperty().addListener((observable, oldText, newText) ->
                 translateUserToTableItem(friendsMenuController.getUsersFromText(searchBox.getText())));
-                table.setItems(showList);
-
-        }
-
-    private void updateSendersAndFriends() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e ->{
-          createSenders();
-          friendsMenuController.createFriends();
-        } ));
-        timeline.setCycleCount(-1);
-        timeline.play();
+        table.setItems(showList);
 
     }
 
+    private void updateSendersAndFriends() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
+            MainController.currentUser.updateLists();
+            createSenders();
+            friendsMenuController.createFriends();
+        }));
+        timeline.setCycleCount(-1);
+        timeline.play();
+    }
+
     private void createSenders() {
-        for (String username: MainController.currentUser.getSenders())
+        for (String username : MainController.currentUser.getSenders())
             senders.add(Stronghold.getInstance().getUser(username));
-        }
+    }
 
 
     private void translateUserToTableItem(ArrayList<User> users) {
         showList.clear();
-        for (User user: users) {
+        for (User user : users) {
             showList.add(new FriendsTable(user));
         }
     }
