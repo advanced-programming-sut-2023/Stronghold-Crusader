@@ -91,7 +91,7 @@ public class Television extends Application implements Initializable {
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) throws Exception {
-        SaveData saveData = TelevisionManager.load(ID, number + ".save");
+        SaveData saveData = TelevisionManager.load("test", number + ".save");
         if (saveData == null) {
             timeline.stop();
             return;
