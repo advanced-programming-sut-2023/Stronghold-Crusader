@@ -17,7 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
@@ -47,7 +46,7 @@ public class LobbyMenu extends Application implements Initializable {
     public TableColumn<LobbyTable, String> adminColumn;
     public TableColumn<LobbyTable, String> mapIdColumn;
     public TableColumn<LobbyTable, String> capacityColumn;
-    public TableColumn<LobbyTable, ImageView> televisionColumn;
+    public TableColumn<LobbyTable, Button> televisionColumn;
     public TableColumn<LobbyTable, Button> joinColumn;
     public Text error;
     public TextField privateRoomJoining;
@@ -74,7 +73,7 @@ public class LobbyMenu extends Application implements Initializable {
         adminColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("admin"));
         mapIdColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("mapId"));
         capacityColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("capacity"));
-        televisionColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, ImageView>("television"));
+        televisionColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, Button>("television"));
         joinColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, Button>("join"));
         join.setOnMouseClicked(e -> {
             try {

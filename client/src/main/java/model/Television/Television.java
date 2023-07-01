@@ -30,6 +30,8 @@ public class Television extends Application implements Initializable {
     private Timeline timeline;
     private int number = 1;
     private static String ID;
+    private static boolean live = false;
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -54,7 +56,7 @@ public class Television extends Application implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
+        if (live) goToLive();
         scrollPane.setContent(mainGrid);
         timeline = new Timeline();
         timeline.setCycleCount(-1);
@@ -67,6 +69,13 @@ public class Television extends Application implements Initializable {
             }
         }));
         timeline.play();
+    }
+
+    private void goToLive() {
+        while (TelevisionManager.load("test", number + ".save") != null){
+            number ++;
+        }
+        number -- ;
     }
 
     private void loadMap(Map map) {
@@ -93,7 +102,8 @@ public class Television extends Application implements Initializable {
     private void initializeScrollPane(ScrollPane scrollPane) throws Exception {
         SaveData saveData = TelevisionManager.load("test", number + ".save");
         if (saveData == null) {
-            timeline.stop();
+            if (!live) timeline.stop();
+            number --;
             return;
         }
         for (int y = 0; y < 100; y++) {
@@ -122,6 +132,10 @@ public class Television extends Application implements Initializable {
 
     }
 
+    public static void setLive(boolean live) {
+        Television.live = live;
+    }
+
     public void updateCellGrid(int x, int y, TilePane mainGrid, SaveData saveData) {
         Vector2D cellCoord = new Vector2D(x, y);
         GridPane cellGrid = (GridPane) mainGrid.getChildren().get(cellCoord.x + 100 * cellCoord.y);
@@ -147,6 +161,7 @@ public class Television extends Application implements Initializable {
 //                column ++;
 //            }
         //}
+
     }
 
 }

@@ -5,7 +5,6 @@ import controller.UserControllers.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -13,6 +12,7 @@ import javafx.stage.Popup;
 import model.Lobby.Lobby;
 import model.Lobby.LobbyManager;
 import model.Lobby.LobbyStatus;
+import model.Television.Television;
 import model.enums.User.Color;
 import view.Main;
 
@@ -23,14 +23,14 @@ public class LobbyTable {
     private final String admin;
     private final String mapId;
     private final String capacity;
-    private final ImageView television = new ImageView();
+    private final Button television = new Button("Live");
     private final Circle avatar = new Circle();
     private final Button join = new Button("join");
 
     public LobbyTable(Lobby gameRoom) {
         avatar.setFill(new ImagePattern(new Image(gameRoom.getAdmin().getAvatarPath())));
         avatar.setRadius(25);
-        addTelevision();
+
         gameId = gameRoom.getId();
         admin = gameRoom.getAdmin().getNickname();
         mapId = gameRoom.getMapId();
@@ -39,6 +39,14 @@ public class LobbyTable {
         join.setOnMouseClicked(e -> {
             try {
                 goToGameRoom(gameId);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        television.setOnMousePressed(e -> {
+            Television.setLive(true);
+            try {
+                new Television().start(Main.mainStage);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -76,14 +84,7 @@ public class LobbyTable {
         popup.show(Main.mainStage);
     }
 
-    private void addTelevision() {
-        television.setFitHeight(35);
-        television.setFitWidth(35);
-        television.setImage(new Image(LobbyTable.class.getResource("/assets/icons/television.png").toString()));
-        television.setOnMouseClicked(e -> {
-            //TODO add live
-        });
-    }
+
 
     public String getGameId() {
         return gameId;
@@ -101,7 +102,7 @@ public class LobbyTable {
         return capacity;
     }
 
-    public ImageView getTelevision() {
+    public Button getTelevision() {
         return television;
     }
 
