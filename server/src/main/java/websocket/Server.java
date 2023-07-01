@@ -12,9 +12,6 @@ public class Server {
     public static void main(String[] args) throws IOException {
         Database.load();
         ChatManager.load();
-//        LobbyRemover lobbyRemover = new LobbyRemover();
-//        lobbyRemover.setDaemon(true);
-//        lobbyRemover.start();
         run(8080);
     }
 
