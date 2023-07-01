@@ -51,6 +51,4 @@ public class CoordinatePopupMenu {
         }
         SelectedUnitMenu.closePopup();
     }
-
-
 }

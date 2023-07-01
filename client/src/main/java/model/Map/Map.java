@@ -33,6 +33,14 @@ public class Map {
         storeHouses = new Vector<>();
     }
 
+    public Vector<Vector2D> getHeadQuarters() {
+        return headQuarters;
+    }
+
+    public Vector<Vector2D> getStoreHouses() {
+        return storeHouses;
+    }
+
     private void initializeMap() {
         map = new Cell[size.y][size.x];
         for (int y = 0; y < size.y; y++) {
@@ -150,10 +158,12 @@ public class Map {
     }
 
     public Vector2D getStoreHouseCoordinate(int index) {
+        if (storeHouses.size() <= index) return null;
         return storeHouses.get(index);
     }
 
     public Vector2D getHeadQuarterCoordinate(int index) {
+        if (headQuarters.size() <= index) return null;
         return headQuarters.get(index);
     }
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="67.0" prefWidth="186.0" style="-fx-background-color: transparent" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView fitHeight="26.0" fitWidth="126.0" layoutX="54.0" layoutY="5.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/buttons/addHeaquarter_btn.jpg" />
+    </ImageView>
+    <ImageView fitHeight="30.0" fitWidth="126.0" layoutX="54.0" layoutY="35.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/buttons/addStoreHouse_btn.jpg" />
+    </ImageView>
+    <ImageView fitHeight="59.0" fitWidth="56.0" layoutX="-2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/icons/shield.PNG" />
+    </ImageView>
+</AnchorPane>

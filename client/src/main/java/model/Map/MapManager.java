@@ -3,6 +3,7 @@ package model.Map;
 import Settings.Settings;
 import com.google.gson.*;
 import model.MapAsset.MapAsset;
+import utils.Vector2D;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -81,5 +82,25 @@ public class MapManager {
         for (ArrayList<String> map : maps)
             if (map.get(0).equals(mapId)) return Integer.parseInt(map.get(2));
         return -1;
+    }
+
+    public static void createSavableMap(Map map){
+        int[][] cellOrdinals = new int[map.getSize().x][map.getSize().y];
+        ArrayList[][] buildings = new ArrayList[map.getSize().x][map.getSize().y];
+        for (int j=0; j<map.getSize().y; j++){
+            for (int i=0; i<map.getSize().x; i++){
+                cellOrdinals[i][j] = map.getCell(new Vector2D(i, j)).getType().ordinal();
+                ArrayList<Integer> building = new ArrayList<>();
+                for (MapAsset mapAsset : map.getCell(new Vector2D(i, j)).getAllAssets())
+                    building.add(mapAsset.getType().ordinal());
+                buildings[i][j] = building;
+            }
+        }
+        String cellOrdinalGson = new Gson().toJson(cellOrdinals);
+        String buildingGson = new Gson().toJson(buildings);
+    }
+
+    public static void convertSavableToMap(){
+
     }
 }
