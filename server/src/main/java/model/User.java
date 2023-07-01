@@ -20,6 +20,8 @@ public class User {
 
     private ArrayList<String> senders;
     private int highScore;
+    private ArrayList<String> mapList;
+
 
     public String getUsername() {
         return username;
@@ -119,5 +121,10 @@ public class User {
 
     public Socket getSocket() {
         return socket;
+    }
+
+    public void addMap(String mapId){
+        mapList.add(mapId);
+        Database.getInstance().updateData();
     }
 }

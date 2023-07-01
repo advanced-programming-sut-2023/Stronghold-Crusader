@@ -358,6 +358,9 @@ public class Connection extends Thread {
             case "load_map":
                 outputStream.writeUTF(MapManager.loadMap(parameters.get("id")));
                 break;
+            case "add_map":
+                loggedInUser.addMap(parameters.get("id"));
+                break;
             default:
                 outputStream.writeUTF("400: bad request");
         }

@@ -21,10 +21,12 @@ public class User {
     private final ArrayList<String> friends;
     private final ArrayList<String> senders;
     private int highScore;
+    private final ArrayList<String> mapList;
 
     public User(String username, String password, String email, String nickname, String slogan) {
         friends = new ArrayList<>();
         senders = new ArrayList<>();
+        mapList = new ArrayList<>();
         this.username = username;
         this.password = PasswordConverter.encodePassword(password);
         this.email = email;
@@ -298,5 +300,22 @@ public class User {
                 "\nslogan : " + slogan +
                 "\nemail : " + email +
                 "\nhighscore : " + highScore;
+    }
+
+    public ArrayList<String> getMapList() {
+        return mapList;
+    }
+    public void addMap(String mapId){
+        mapList.add(mapId);
+        Request request = new Request();
+        request.setType("map");
+        request.setCommand("add_map");
+        request.addParameter("id", mapId);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) try {
+            throw new Exception("Map doesn't exist");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

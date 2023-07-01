@@ -121,7 +121,7 @@ public class MapManager {
         request.addParameter("id", id);
         System.out.println(Connection.getInstance().sendRequest(request));
     }
-    public static void convertSavableToMap(String id){
+    public static Map convertSavableToMap(String id){
         Request request = new Request();
         request.setType("map");
         request.setCommand("load_map");
@@ -145,6 +145,7 @@ public class MapManager {
         map.setPlayerCount(playerCount);
         setMapTexture(cellOrdinals, map);
         setBuildings(buildings, map);
+        return map;
     }
 
     private static void setMapTexture(int[][] cellOrdinals, Map map){
