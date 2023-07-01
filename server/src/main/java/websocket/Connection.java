@@ -42,6 +42,7 @@ public class Connection extends Thread {
     public void closedConnection() {
         System.out.println("Disconnected " + socket.getInetAddress() + socket.getPort());
         if (loggedInUser != null) {
+            loggedInUser.updateLastOnline();
             loggedInUser.setSocket(null);
             loggedInUser = null;
         }
