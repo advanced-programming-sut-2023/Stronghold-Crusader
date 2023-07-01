@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Lobby {
+    private LobbyStatus lobbyStatus;
     private final int capacity;
     private final String id;
     private User admin;
@@ -25,6 +26,7 @@ public class Lobby {
         capacity = MapManager.getMapPlayerCount(mapID);
         players.put(admin.getUsername(), color);
         this.mapId = mapID;
+        lobbyStatus = LobbyStatus.PUBLIC;
     }
 
     public boolean isColorPicked(Color color) {
@@ -82,6 +84,19 @@ public class Lobby {
             }
         }
     }
+    public void changePrivacy(){
+        Request request = new Request();
+        request.setType("lobby_change");
+        request.setCommand("change_status");
+        request.addParameter("id", id);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) {
+            try {
+                throw new Exception("Lobby doesn't exist");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }    }
 
     public String getId() {
         return id;
@@ -112,5 +127,9 @@ public class Lobby {
         for (String username : players.keySet())
             users.add(Stronghold.getInstance().getUser(username));
         return users;
+    }
+
+    public LobbyStatus getLobbyStatus() {
+        return lobbyStatus;
     }
 }

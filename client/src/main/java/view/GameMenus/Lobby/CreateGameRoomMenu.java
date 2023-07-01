@@ -62,7 +62,6 @@ public class CreateGameRoomMenu extends Application implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        mapPreview.setOpacity(0.5);
         initializeGameIdsForRooms();
         createNewGameButton.setDisable(true);
         colorCircle.setVisible(false);

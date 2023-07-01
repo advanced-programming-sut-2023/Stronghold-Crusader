@@ -2,6 +2,7 @@ package controller.GameControllers;
 
 import model.Lobby.Lobby;
 import model.Lobby.LobbyManager;
+import model.Lobby.LobbyStatus;
 import model.User.User;
 
 import java.util.Set;
@@ -62,4 +63,14 @@ public class LobbyController {
     public String getGameId() {
         return gameId;
     }
+    public LobbyStatus getLobbyStatus(){
+        return gameRoom.getLobbyStatus();
+    }
+
+    public void changePrivacy(){
+        gameRoom.changePrivacy();
+        updateGameRoom();
+    }
+
+
 }

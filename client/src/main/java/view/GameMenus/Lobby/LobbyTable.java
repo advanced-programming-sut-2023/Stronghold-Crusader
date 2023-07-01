@@ -12,6 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Popup;
 import model.Lobby.Lobby;
 import model.Lobby.LobbyManager;
+import model.Lobby.LobbyStatus;
 import model.enums.User.Color;
 import view.Main;
 
@@ -46,7 +47,7 @@ public class LobbyTable {
 
     private void goToGameRoom(String gameId) throws Exception {
        Lobby lobby = LobbyManager.getLobby(gameId);
-       if (lobby == null || lobby.getCapacity() == lobby.getPlayersCount()) {
+       if (lobby == null || lobby.getCapacity() == lobby.getPlayersCount() || lobby.getLobbyStatus().equals(LobbyStatus.RUNNING)) {
            loadPopUp();
        } else {
            Color color = pickColor(lobby);
@@ -56,7 +57,7 @@ public class LobbyTable {
        }
     }
 
-    private Color pickColor(Lobby lobby) {
+    public static Color pickColor(Lobby lobby) {
         Color choosedColor = null;
         for (Color color: Color.values()) {
             choosedColor = Color.getColorWithSizeCheck(color.toString(), lobby.getCapacity());
@@ -65,7 +66,7 @@ public class LobbyTable {
         return null;
     }
 
-    private void loadPopUp() throws IOException {
+    public static void loadPopUp() throws IOException {
         Popup popup = new Popup();
         AnchorPane pane = FXMLLoader.load(LobbyTable.class.getResource("/FXML/Gamefxml/Lobbyfxml/JoiningErrorPopUp.fxml"));
         popup.setAutoHide(true);

@@ -3,10 +3,7 @@ package websocket;
 import com.google.gson.Gson;
 import database.ChatManager;
 import database.Database;
-import model.Color;
-import model.Lobby;
-import model.Request;
-import model.User;
+import model.*;
 import model.chatRoom.Chat;
 import utils.Pair;
 
@@ -301,6 +298,10 @@ public class Connection extends Thread {
                 break;
             case "set_admin":
                 lobby.setAdmin(new Gson().fromJson(parameters.get("player"), User.class));
+                break;
+            case "change_status":
+                lobby.setLobbyStatus((lobby.getLobbyStatus().equals(LobbyStatus.PRIVATE)
+                        ?  LobbyStatus.PUBLIC : LobbyStatus.PRIVATE));
                 break;
             default:
                 outputStream.writeUTF("400: bad request");

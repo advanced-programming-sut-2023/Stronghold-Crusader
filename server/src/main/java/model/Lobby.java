@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Lobby {
+    private LobbyStatus lobbyStatus;
     private int capacity;
     private String id;
     private User admin;
@@ -54,5 +55,13 @@ public class Lobby {
         for (String username : players.keySet())
             users.add(Database.getInstance().getUser(username));
         return users;
+    }
+
+    public LobbyStatus getLobbyStatus() {
+        return lobbyStatus;
+    }
+
+    public void setLobbyStatus(LobbyStatus lobbyStatus) {
+        this.lobbyStatus = lobbyStatus;
     }
 }

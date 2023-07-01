@@ -55,4 +55,6 @@ public class LobbyManager {
         String result = Connection.getInstance().sendRequest(request);
         return Boolean.parseBoolean(result);
     }
+
+
 }

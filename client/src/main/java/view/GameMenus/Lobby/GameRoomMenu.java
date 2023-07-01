@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,6 +35,8 @@ public class GameRoomMenu extends Application implements Initializable {
     public TableColumn<GameRoomTable, Circle> colorColumn;
     public Button refreshButton;
     public Button newGameButton;
+    public CheckBox modifiabilityCheck;
+    public Button privacyButton;
 
 
     private ObservableList<GameRoomTable> players = FXCollections.observableArrayList();
@@ -47,7 +50,7 @@ public class GameRoomMenu extends Application implements Initializable {
                 ProfileMenu.class.getResource("/assets/backgrounds/lobbyBackGround.jpg").toExternalForm()),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(1, 1, true, true, false, false))));
-        stage.show();
+
     }
 
     @FXML
@@ -59,9 +62,21 @@ public class GameRoomMenu extends Application implements Initializable {
             newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
             updateTable();
         });
+        if (!lobbyController.isAdmin(MainController.getCurrentUser())){
+            modifiabilityCheck.setDisable(true);
+            privacyButton.setVisible(false);
+        }
         newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
         updateTable();
+        privacyButton.setOnMouseClicked( e -> {
+            changeGameRoomPrivacy();
+            privacyButton.setText(lobbyController.getLobbyStatus().toString());
+        });
 
+    }
+
+    private void changeGameRoomPrivacy() {
+        lobbyController.changePrivacy();
     }
 
     private void updateTable() {
