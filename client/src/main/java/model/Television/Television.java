@@ -27,6 +27,7 @@ public class Television extends Application implements Initializable {
     private SaveData mainSaveData;
     private static TilePane mainGrid = new TilePane();
     private Timeline timeline;
+    private int number = 13;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -40,7 +41,8 @@ public class Television extends Application implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            mainSaveData = (SaveData) ResourceManager.load(SaveData.where() + ".save");
+            mainSaveData = (SaveData) ResourceManager.load(number + ".save");
+            number++;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -66,6 +68,7 @@ public class Television extends Application implements Initializable {
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), e -> {
             try {
                 initializeScrollPane(scrollPane);
+                number ++;
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -74,7 +77,11 @@ public class Television extends Application implements Initializable {
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) throws Exception {
-        SaveData saveData = (SaveData) ResourceManager.load(SaveData.where() + ".save");
+        SaveData saveData = (SaveData) ResourceManager.load(number + ".save");
+        if (saveData == null) {
+            timeline.stop();
+            return;
+        }
         for (int y = 0; y < 100; y++) {
             for (int x = 0; x < 100; x++) {
                 updateCellGrid(x, y, saveData.map[y][x], mainGrid, saveData);

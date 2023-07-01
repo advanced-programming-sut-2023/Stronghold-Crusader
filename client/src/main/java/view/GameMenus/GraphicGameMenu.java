@@ -242,7 +242,7 @@ public class GraphicGameMenu extends Application {
         String[][] buildings = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
         loadCells(map, buildings);
         ResourceManager.save(new SaveData(graphicsController.getMap().getSize().x, graphicsController.getMap().getSize().y
-                , map, buildings),  SaveData.getNumber() + ".save");
+                , map, buildings),   + SaveData.getNumber() + ".save");
         gameController.nextTurn();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();

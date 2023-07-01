@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 public class SaveData implements Serializable {
     private static int number = 0;
-    private static int maxNumber;
     private static final long serialVersionID = 1L;
     public static int mapX;
     public static int mapY;
@@ -15,7 +14,6 @@ public class SaveData implements Serializable {
         number++;
         this.map = map;
         this.buildings = buildings;
-        maxNumber = number;
     }
 
 
@@ -30,9 +28,5 @@ public class SaveData implements Serializable {
         number--;
     }
 
-    public static int where() {
-        load();
-        return maxNumber - number;
-    }
 }
 
