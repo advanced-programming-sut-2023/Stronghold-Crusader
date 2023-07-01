@@ -327,7 +327,6 @@ public class Connection extends Thread {
     private void handleTelevision(Request request) throws Exception {
         String id = new Gson().fromJson(request.getParameters().get("id"), String.class);
         String fileName = new Gson().fromJson(request.getParameters().get("filename"), String.class);
-
         switch (request.getCommand()) {
             case "save":
                 SaveData saveData = new Gson().fromJson(request.getParameters().get("saveData"), SaveData.class);

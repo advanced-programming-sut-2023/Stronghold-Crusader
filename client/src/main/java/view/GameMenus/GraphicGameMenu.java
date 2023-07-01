@@ -238,22 +238,20 @@ public class GraphicGameMenu extends Application {
     }
 
     public void nextTurn() throws Exception {
-        String[][] map = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
         String[][] buildings = new String[graphicsController.getMap().getSize().y][graphicsController.getMap().getSize().x];
-        loadCells(map, buildings);
+        loadCells(buildings);
         TelevisionManager.save(new SaveData(graphicsController.getMap().getSize().x, graphicsController.getMap().getSize().y
-                , map, buildings), gameController.getGame().getGameID(), SaveData.getNumber() + ".save");
+                , gameController.getGame().getMap().getMapId(), buildings), gameController.getGame().getGameID(), SaveData.getNumber() + ".save");
         gameController.nextTurn();
         updateGovernmentMenuValues();
         updatePopularityMenuValues();
     }
 
-    private void loadCells(String[][] map, String[][] buildings) {
+    private void loadCells(String[][] buildings) {
         for (int y = 0; y < graphicsController.getMap().getSize().y; y++) {
             for (int x = 0; x < graphicsController.getMap().getSize().x; x++) {
                 Vector2D coordinate = new Vector2D(x, y);
                 Cell cell = graphicsController.getMap().getCell(coordinate);
-                map[y][x] = cell.getType().getImage().getUrl().toString();
                 Building building = searchForBuildings(cell);
                 if (building == null) buildings[y][x] = null;
                 else buildings[y][x] = building.getType().getImage().getUrl().toString();

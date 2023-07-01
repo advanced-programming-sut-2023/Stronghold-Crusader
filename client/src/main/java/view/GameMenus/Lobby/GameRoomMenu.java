@@ -59,12 +59,12 @@ public class GameRoomMenu extends Application implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<GameRoomTable, String>("nickname"));
         colorColumn.setCellValueFactory(new PropertyValueFactory<GameRoomTable, Circle>("color"));
         refreshButton.setOnMouseClicked(e -> {
-            newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
             try {
                 updateTable();
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
+            newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
         });
         if (!lobbyController.isAdmin(MainController.getCurrentUser())){
             modifiabilityCheck.setDisable(true);
@@ -109,11 +109,10 @@ public class GameRoomMenu extends Application implements Initializable {
 
     private void exitFromRoom() throws Exception {
         lobbyController.removePlayer(MainController.getCurrentUser());
-        if (lobbyController.getPlayersCount() == 0) LobbyManager.deleteLobby(lobbyController.getGameId());
+        if (lobbyController.getPlayersCount() == 0 && lobbyController.isLobbyExist()) LobbyManager.deleteLobby(lobbyController.getGameId());
         else if (lobbyController.isAdmin(MainController.getCurrentUser()))
             lobbyController.setAdmin(lobbyController.getRandomPlayerForAdmin());
         newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
-        updateTable();
         new LobbyMenu().start(Main.mainStage);
     }
 

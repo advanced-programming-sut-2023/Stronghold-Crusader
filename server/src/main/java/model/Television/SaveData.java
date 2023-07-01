@@ -8,16 +8,16 @@ public class SaveData implements Serializable {
     public static int mapX;
     public static int mapY;
 
-    public SaveData(int x, int y, String[][] map, String[][] buildings) {
+    public SaveData(int x, int y, String mapId, String[][] buildings) {
         mapX = x;
         mapY = y;
         number++;
-        this.map = map;
+        this.mapId = mapId;
         this.buildings = buildings;
     }
 
 
-    public String[][] map;
+    public String mapId;
     public String[][] buildings;
 
     public static int getNumber() {
