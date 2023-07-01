@@ -297,7 +297,7 @@ public class Connection extends Thread {
 
     private void handelLobbyChange(Request request) throws IOException {
         Map<String, String> parameters = request.getParameters();
-        Lobby lobby = Database.getInstance().getLobby(Integer.parseInt(parameters.get("id")));
+        Lobby lobby = Database.getInstance().getLobby(parameters.get("id"));
         if (lobby == null) {
             outputStream.writeUTF("400: no_user");
             return;

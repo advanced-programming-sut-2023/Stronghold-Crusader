@@ -29,7 +29,7 @@ public class MapCreationController {
 
     public void goToMapCreationMenu() throws Exception {
         MapCreationMenu mapCreationMenu = new MapCreationMenu();
-        Game game = new Game(map, new HashMap<>(), true);
+        Game game = new Game(map, new HashMap<>(), true, "");
         GraphicsController graphicsController = new GraphicsController(game);
         MapCreationGraphicController.setGraphicsController(graphicsController);
         MapCreationGraphicController.setController(this);
