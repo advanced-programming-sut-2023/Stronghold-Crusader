@@ -28,21 +28,6 @@ public class newMain extends Application {
         launch(args);
     }
 
-//    @Override
-//    public void start(Stage stage) throws Exception {
-//        LoginMenu.setLoginController(new LoginController());
-//        mainStage = stage;
-//        stage.setOnCloseRequest(event -> {
-//            try {
-//                Connection.getInstance().closeConnection();
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
-//        new LoginMenu().start(stage);
-//    }
-
-
     @Override
     public void start(Stage stage) throws Exception {
         HashMap<Color, Player> players = new HashMap<>();
