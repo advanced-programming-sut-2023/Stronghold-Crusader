@@ -11,84 +11,84 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="702.0" prefWidth="960.0" styleClass="pane" stylesheets="@../../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.SignupMenu">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="pane" stylesheets="@../../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.SignupMenu">
     <children>
-      <TextField fx:id="visiblePassword" layoutX="382.0" layoutY="307.0" prefHeight="26.0" prefWidth="180.0" promptText="password" styleClass="field" />
-      <ImageView fx:id="eye" fitHeight="25.0" fitWidth="30.0" layoutX="576.0" layoutY="309.0" onMouseClicked="#changePasswordVisibility" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../assets/logo/icons8-eye-50.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="closeEye" fitHeight="25.0" fitWidth="30.0" layoutX="576.0" layoutY="309.0" onMouseClicked="#changePasswordVisibility" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../assets/logo/icons8-unseen-50.png" />
-         </image>
-      </ImageView>
-        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="405.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+        <TextField fx:id="visiblePassword" layoutX="583.0" layoutY="303.0" prefHeight="26.0" prefWidth="180.0" promptText="password" styleClass="field" />
+        <ImageView fx:id="eye" fitHeight="25.0" fitWidth="30.0" layoutX="777.0" layoutY="305.0" onMouseClicked="#changePasswordVisibility" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../assets/logo/icons8-eye-50.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="closeEye" fitHeight="25.0" fitWidth="30.0" layoutX="777.0" layoutY="305.0" onMouseClicked="#changePasswordVisibility" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../assets/logo/icons8-unseen-50.png" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="610.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../assets/logo/Pic01.png" />
             </image>
         </ImageView>
-        <Label layoutX="402.0" layoutY="168.0" text="STRONG" textFill="#2196f3">
+        <Label layoutX="603.0" layoutY="164.0" text="STRONG" textFill="#2196f3">
             <font>
                 <Font name="System Bold" size="25.0" />
             </font>
         </Label>
-        <Label layoutX="503.0" layoutY="168.0" text="HOLD" textFill="WHITE">
+        <Label layoutX="704.0" layoutY="164.0" text="HOLD" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="25.0" />
             </font>
         </Label>
-        <Button layoutX="879.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#goToLoginMenu" prefHeight="27.0" prefWidth="59.0" styleClass="button-1" text="Login" />
-        <Button layoutX="754.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#goToLoginMenu" styleClass="button-2" text="Have an account ?" />
-        <TextField fx:id="username" layoutX="387.0" layoutY="237.0" prefHeight="32.0" prefWidth="170.0" promptText="username" styleClass="field" />
-        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="352.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true">
+        <Button layoutX="1143.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#goToLoginMenu" prefHeight="27.0" prefWidth="59.0" styleClass="button-1" text="Login" />
+        <Button layoutX="1018.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#goToLoginMenu" styleClass="button-2" text="Have an account ?" />
+        <TextField fx:id="username" layoutX="588.0" layoutY="233.0" prefHeight="32.0" prefWidth="170.0" promptText="username" styleClass="field" />
+        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="553.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../assets/logo/icons8-user-64.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="350.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="551.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../assets/logo/icons8-lock-64.png" />
             </image>
         </ImageView>
-        <PasswordField fx:id="password" layoutX="382.0" layoutY="307.0" prefHeight="26.0" prefWidth="180.0" promptText="password" styleClass="field" />
-        <Button layoutX="285.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#generateRandomPassword" styleClass="button-2" text="random" />
-        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="347.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+        <PasswordField fx:id="password" layoutX="583.0" layoutY="303.0" prefHeight="26.0" prefWidth="180.0" promptText="password" styleClass="field" />
+        <Button layoutX="486.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#generateRandomPassword" styleClass="button-2" text="random" />
+        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="548.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../assets/logo/icons8-lock-64.png" />
             </image>
         </ImageView>
-        <PasswordField fx:id="passwordConfirmation" layoutX="379.0" layoutY="367.0" prefHeight="27.0" prefWidth="186.0" promptText="password Confirmation" styleClass="field" />
-        <TextField fx:id="Email" layoutX="382.0" layoutY="419.0" prefHeight="32.0" prefWidth="180.0" promptText="Email" styleClass="field" />
-        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="347.0" layoutY="424.0" pickOnBounds="true" preserveRatio="true">
+        <PasswordField fx:id="passwordConfirmation" layoutX="580.0" layoutY="363.0" prefHeight="27.0" prefWidth="186.0" promptText="password Confirmation" styleClass="field" />
+        <TextField fx:id="Email" layoutX="583.0" layoutY="415.0" prefHeight="32.0" prefWidth="180.0" promptText="Email" styleClass="field" />
+        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="548.0" layoutY="420.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../assets/logo/icons8-email-48.png" />
             </image>
         </ImageView>
-        <CheckBox fx:id="sloganShow" layoutX="525.0" layoutY="602.0" mnemonicParsing="false" onMouseClicked="#changeExistenceOfSlogan" selected="true" styleClass="button-2" text="Slogan" textFill="#a0a2ab" />
-        <TextField fx:id="slogan" layoutX="382.0" layoutY="521.0" prefHeight="32.0" prefWidth="180.0" promptText="Slogan" styleClass="field" />
-        <ImageView fx:id="flagIcon" fitHeight="25.0" fitWidth="30.0" layoutX="347.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
+        <CheckBox fx:id="sloganShow" layoutX="726.0" layoutY="598.0" mnemonicParsing="false" onMouseClicked="#changeExistenceOfSlogan" selected="true" styleClass="button-2" text="Slogan" textFill="#a0a2ab" />
+        <TextField fx:id="slogan" layoutX="583.0" layoutY="517.0" prefHeight="32.0" prefWidth="180.0" promptText="Slogan" styleClass="field" />
+        <ImageView fx:id="flagIcon" fitHeight="25.0" fitWidth="30.0" layoutX="548.0" layoutY="519.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../assets/logo/icons8-flag-48.png" />
             </image>
         </ImageView>
-        <Button fx:id="randomSloganButton" layoutX="272.0" layoutY="523.0" mnemonicParsing="false" onMouseClicked="#generateRandomSlogan" styleClass="button-2" text="random" />
-      <Button layoutX="346.0" layoutY="593.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="30.0" prefWidth="102.0" styleClass="button-3" text="Sign Up">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
-      <Text fx:id="usernameError" fill="#df1806" layoutX="387.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
-      <Text fx:id="passwordError" fill="#df1806" layoutX="385.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
-      <Text fx:id="passwordConfirmationError" fill="#df1806" layoutX="385.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
-      <Text fx:id="emailError" fill="#df1806" layoutX="380.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
-      <Text fx:id="entireError" fill="#df1806" layoutX="353.0" layoutY="574.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="264.00003662109384" />
-      <TextField fx:id="nickname" layoutX="380.0" layoutY="470.0" prefHeight="32.0" prefWidth="180.0" promptText="nickname" styleClass="field" />
-      <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="345.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../assets/logo/icons8-name-50.png" />
-         </image>
-      </ImageView>
+        <Button fx:id="randomSloganButton" layoutX="473.0" layoutY="519.0" mnemonicParsing="false" onMouseClicked="#generateRandomSlogan" styleClass="button-2" text="random" />
+        <Button layoutX="547.0" layoutY="589.0" mnemonicParsing="false" onMouseClicked="#signup" prefHeight="30.0" prefWidth="102.0" styleClass="button-3" text="Sign Up">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <Text fx:id="usernameError" fill="#df1806" layoutX="588.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
+        <Text fx:id="passwordError" fill="#df1806" layoutX="586.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
+        <Text fx:id="passwordConfirmationError" fill="#df1806" layoutX="586.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
+        <Text fx:id="emailError" fill="#df1806" layoutX="581.0" layoutY="466.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="170.4000000000001" />
+        <Text fx:id="entireError" fill="#df1806" layoutX="554.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="264.00003662109384" />
+        <TextField fx:id="nickname" layoutX="581.0" layoutY="466.0" prefHeight="32.0" prefWidth="180.0" promptText="nickname" styleClass="field" />
+        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="546.0" layoutY="471.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../assets/logo/icons8-name-50.png" />
+            </image>
+        </ImageView>
     </children>
 </AnchorPane>

@@ -80,3 +80,26 @@
 .progress-bar {
     -fx-background-color: #00BB00;
 }
+
+
+.choice-box {
+    -fx-background-color: #ACACAC;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
+    -fx-border-color: whitesmoke;
+    -fx-text-fill: #2196f3;
+
+
+}
+.choice-box:hover {
+    -fx-text-fill: #2196f3 ;
+}
+
+.choice-box-base:hover {
+    -fx-border-color: #2196f3;
+
+}
+
+.choice-box .list-view {
+    -fx-background-color: #2196f3;
+}
