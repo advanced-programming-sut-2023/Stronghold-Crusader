@@ -3,6 +3,7 @@ package websocket;
 import com.google.gson.Gson;
 import database.ChatManager;
 import database.Database;
+import database.MapManager;
 import model.Color;
 import model.Lobby;
 import model.Request;
@@ -80,6 +81,9 @@ public class Connection extends Thread {
                         handelLobbyChange(request);
                     case "game":
                         handelGame();
+                        break;
+                    case "map":
+                        handelMap(request);
                         break;
                     default:
                         outputStream.writeUTF("400: bad request");
@@ -311,5 +315,20 @@ public class Connection extends Thread {
 
     private void handelGame() {
 
+    }
+
+    private void handelMap(Request request) throws IOException {
+        Map<String, String> parameters = request.getParameters();
+        switch (request.getCommand()) {
+            case "create_map":
+                MapManager.saveMap(parameters.get("map"), parameters.get("id"));
+                outputStream.writeUTF("200: success");
+                break;
+            case "load_map":
+                outputStream.writeUTF(MapManager.loadMap(parameters.get("id")));
+                break;
+            default:
+                outputStream.writeUTF("400: bad request");
+        }
     }
 }

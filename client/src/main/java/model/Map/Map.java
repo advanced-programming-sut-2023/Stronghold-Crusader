@@ -41,6 +41,10 @@ public class Map {
         return storeHouses;
     }
 
+    public void setMap(Cell[][] map) {
+        this.map = map;
+    }
+
     private void initializeMap() {
         map = new Cell[size.y][size.x];
         for (int y = 0; y < size.y; y++) {

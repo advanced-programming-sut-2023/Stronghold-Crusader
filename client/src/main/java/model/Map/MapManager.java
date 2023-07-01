@@ -2,11 +2,21 @@ package model.Map;
 
 import Settings.Settings;
 import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import model.ConstantManager;
+import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
+import model.chatRoom.Chat;
+import model.enums.AssetType.MapAssetType;
+import model.enums.CellType;
+import network.Connection;
+import network.Request;
 import utils.Vector2D;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,9 +108,63 @@ public class MapManager {
         }
         String cellOrdinalGson = new Gson().toJson(cellOrdinals);
         String buildingGson = new Gson().toJson(buildings);
+        String mapStr = "cellOrdinal:" + cellOrdinalGson + "buildingGson:" + buildingGson;
+        String info = "playerCount:" + map.getPlayerCount() + "size:" + map.getSize().x + "-" + map.getSize().y;
+        saveMapInServer(info + mapStr, map.getName());
     }
 
-    public static void convertSavableToMap(){
+    public static void saveMapInServer(String map, String id){
+        Request request = new Request();
+        request.setType("map");
+        request.setCommand("create_map");
+        request.addParameter("map", map);
+        request.addParameter("id", id);
+        System.out.println(Connection.getInstance().sendRequest(request));
+    }
+    public static void convertSavableToMap(String id){
+        Request request = new Request();
+        request.setType("map");
+        request.setCommand("load_map");
+        request.addParameter("id", id);
+        String mapStr = Connection.getInstance().sendRequest(request);
+        Pattern pattern = Pattern.compile("playerCount:(?<count>\\S+)size:(?<x>\\S+)-(?<y>\\S+)cellOrdinal:(?<cellOrdinal>\\S+)buildingGson:(?<buildingGson>\\S+)");
+        Matcher matcher = pattern.matcher(mapStr);
+        matcher.find();
+        int playerCount = Integer.parseInt(matcher.group("count"));
+        int mapX = Integer.parseInt(matcher.group("x"));
+        int mapY = Integer.parseInt(matcher.group("y"));
+        String cellOrdinalGson = matcher.group("cellOrdinal");
+        String buildingGson = matcher.group("buildingGson");
+        Type arrayListType = new TypeToken<ArrayList[][]>() {
+        }.getType();
+        ArrayList[][] buildings = new Gson().fromJson(buildingGson, arrayListType);
+        arrayListType = new TypeToken<int[][]>() {
+        }.getType();
+        int[][] cellOrdinals = new Gson().fromJson(cellOrdinalGson, arrayListType);
+        Map map = new Map(new Vector2D(mapX, mapY), id);
+        map.setPlayerCount(playerCount);
+        setMapTexture(cellOrdinals, map);
+        setBuildings(buildings, map);
+    }
 
+    private static void setMapTexture(int[][] cellOrdinals, Map map){
+        for (int j=0; j<map.getSize().y; j++){
+            for (int i=0; i<map.getSize().x; i++){
+                CellType type = CellType.getTypeBySerial(cellOrdinals[i][j]);
+                map.changeCellTypeTo(new Vector2D(i, j), type);
+            }
+        }
+    }
+
+    private static void setBuildings(ArrayList[][] buildings, Map map){
+        for (int j=0; j<map.getSize().y; j++){
+            for (int i=0; i<map.getSize().x; i++){
+                Vector2D coordinate = new Vector2D(i, j);
+                for (Object ordinal : buildings[i][j]){
+                    map.addMapObject(coordinate, new Building((Building) ConstantManager.getInstance()
+                            .getAsset(MapAssetType.getTypeBySerial((Integer) ordinal)), coordinate, null));
+                }
+            }
+        }
     }
 }

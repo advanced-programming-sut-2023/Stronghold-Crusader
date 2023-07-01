@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import model.Map.Map;
 import model.Map.MapManager;
 import view.GameMenus.GraphicGameMenu;
+import view.Main;
+import view.UserMenus.MainMenu;
 
 import java.io.IOException;
 
@@ -83,9 +85,10 @@ public class MapCreationGraphicController {
         }
     }
 
-    public void createMap(){
+    public void createMap() throws Exception {
         if (map.getHeadQuarters().size() < map.getPlayerCount()) return;
         if (map.getStoreHouses().size() < map.getPlayerCount()) return;
         MapManager.createSavableMap(map);
+        MainMenu.mainController.menu.start(Main.mainStage);
     }
 }
