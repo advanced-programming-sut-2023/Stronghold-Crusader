@@ -61,7 +61,7 @@ public class Television extends Application implements Initializable {
         timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4), e -> {
             try {
                 initializeScrollPane(scrollPane);
-                number ++;
+                number++;
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -126,22 +126,27 @@ public class Television extends Application implements Initializable {
         Vector2D cellCoord = new Vector2D(x, y);
         GridPane cellGrid = (GridPane) mainGrid.getChildren().get(cellCoord.x + 100 * cellCoord.y);
         cellGrid.getChildren().clear();
-
         int column = 0;
-        // for (MapAsset asset : cell.getAllAssets()) {
-        if (saveData.buildings[y][x] != null) {
-            ImageView imageView = new ImageView(new Image(saveData.buildings[y][x]));
+        if (saveData.assets[x][y] != null) {
+            ImageView imageView = new ImageView(new Image(saveData.assets[x][y]));
             imageView.setPreserveRatio(true);
-            double fitSize = 20;
-            //   if (asset instanceof Building || asset instanceof Tree || asset instanceof Cliff)
-            fitSize = 80;
+            double fitSize = 80;
             imageView.setFitHeight(fitSize);
             imageView.setFitWidth(fitSize);
-            cellGrid.add(imageView, column % 4, column / 4);
+            cellGrid.add(imageView, 0, 0);
             column++;
         }
+//        if (saveData.assets[1][y][x] != null) {
+//            double size = 20;
+//            while (column < 5) {
+//                ImageView soldier = new ImageView(new Image(saveData.assets[1][y][x]));
+//                soldier.setPreserveRatio(true);
+//                soldier.setFitWidth(size);
+//                soldier.setFitHeight(size);
+//                cellGrid.add(soldier, column % 4, column / 4);
+//                column ++;
+//            }
         //}
     }
-
 
 }
