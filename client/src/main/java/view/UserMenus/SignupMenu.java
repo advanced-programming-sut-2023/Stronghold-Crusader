@@ -6,14 +6,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import utils.FormatValidation;
 import utils.MenusUtils;
@@ -51,31 +53,28 @@ public class SignupMenu extends Application implements Initializable {
     @FXML
     private PasswordField passwordConfirmation;
 
-    private final Popup popup = createPopUp();
 
 
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("Stronghold");
-        URL url = LoginMenu.class.getResource("/FXML/Userfxml/signupMenu.fxml");
-        AnchorPane anchorPane = FXMLLoader.load(url);
-        anchorPane.getChildren().get(0).setVisible(false);
-        anchorPane.getChildren().get(2).setVisible(false);
+        AnchorPane anchorPane = FXMLLoader.load(LoginMenu.class.getResource("/FXML/Userfxml/signupMenu.fxml"));
+
         anchorPane.setBackground(new Background(new BackgroundImage(new Image(
                 MainMenu.class.getResource("/assets/backgrounds/loginMenu.jpg").toExternalForm()),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(1, 1, true, true, false, false))));
         Scene scene = new Scene(anchorPane);
+        stage.setScene(scene);
         stage.setFullScreen(true);
         stage.setResizable(false);
-        stage.setScene(scene);
         scene.setFill(Color.TRANSPARENT);
-        stage.show();
     }
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        closeEye.setVisible(false);
+        visiblePassword.setVisible(false);
         password.textProperty().addListener((observable, oldText, newText) -> {
             if (visiblePassword.isVisible()) password.setText(visiblePassword.getText());
             passwordError.setText(FormatValidation.isPasswordValid(password.getText()).getOutput());
@@ -114,12 +113,12 @@ public class SignupMenu extends Application implements Initializable {
         slogan.setText(signupController.generateRandomSlogan());
     }
 
-    public void signup(MouseEvent mouseEvent) {
+    public void signup(MouseEvent mouseEvent) throws Exception {
         HashMap<String, String> inputs = getInputsFromBoxes();
         showSignupResult(signupController.signup(inputs));
     }
 
-    private void showSignupResult(SignupAndLoginMessage signupMessage) {
+    private void showSignupResult(SignupAndLoginMessage signupMessage) throws Exception {
         password.setText("");
         passwordConfirmation.setText("");
         visiblePassword.setText("");
@@ -139,29 +138,14 @@ public class SignupMenu extends Application implements Initializable {
                 break;
             case SUCCESS_PROCESS:
                 clearBoxes();
-                showSuccessMessage();
+                RecoveryQuestionMenu.setController(signupController);
+                new RecoveryQuestionMenu().start(Main.mainStage);
                 break;
         }
     }
 
-    private void showSuccessMessage() {
-        popup.show(Main.mainStage);
-    }
 
-    private Popup createPopUp() {
-        Label label = new Label("user create successfully");
-        label.setMinWidth(80);
-        label.setMinHeight(50);
-        label.getStylesheets().add(SignupMenu.class.getResource("/Css/style1.css").toString());
-        label.getStyleClass().add("pop-up-label");
-        //TODO dynamic size
-        label.setTranslateX(-480);
-        label.setTranslateY(635);
-        Popup popup = new Popup();
-        popup.getContent().add(label);
-        popup.setAutoHide(true);
-        return popup;
-    }
+
 
 
     private HashMap<String, String> getInputsFromBoxes() {
