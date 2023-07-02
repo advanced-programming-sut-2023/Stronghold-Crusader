@@ -182,7 +182,9 @@ public class GameController {
         Vector2D pastCoordinate = mobileUnit.getCoordinate();
         if (mobileUnit.hasNextMoveDestination()){
             Vector2D newCoordinate = mobileUnit.getNextMoveDestination();
-            graphicsController.addTransition(mobileUnit, pastCoordinate, newCoordinate);
+            map.removeMapObject(pastCoordinate, mobileUnit);
+            map.addMapObject(newCoordinate, mobileUnit);
+//            graphicsController.addTransition(mobileUnit, pastCoordinate, newCoordinate);
         }
     }
 

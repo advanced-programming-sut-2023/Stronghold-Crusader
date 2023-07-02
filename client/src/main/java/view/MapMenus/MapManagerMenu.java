@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import network.Connection;
+import network.Request;
 import view.Main;
 import view.UserMenus.LoginMenu;
 import view.UserMenus.MainMenu;
@@ -67,6 +69,20 @@ public class MapManagerMenu extends Application {
 
     public void loadRequests(){
 
+    }
+
+    public void sendRequest(){
+        String mapId = mapNameField.getText();
+        String user = usernameField.getText();
+        mapNameField.clear();
+        usernameField.clear();
+        Request request = new Request();
+        request.setType("map");
+        request.setCommand("send_map");
+        request.addParameter("id", mapId);
+        request.addParameter("user", user);
+        request.addParameter("sender", MainController.currentUser.getUsername());
+        Connection.getInstance().sendRequest(request);
     }
     public void back() throws Exception {
         MainMenu.mainController.menu.start(Main.mainStage);

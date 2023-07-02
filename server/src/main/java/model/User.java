@@ -5,6 +5,7 @@ import utils.Pair;
 
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class User {
@@ -21,6 +22,7 @@ public class User {
     private ArrayList<String> senders;
     private int highScore;
     private ArrayList<String> mapList;
+    private HashMap<String, String> pendingMaps;
 
 
     public String getUsername() {
@@ -131,5 +133,9 @@ public class User {
     public void addMap(String mapId){
         mapList.add(mapId);
         Database.getInstance().updateData();
+    }
+
+    public void addToPending(String mapId, String sender){
+        pendingMaps.put(mapId, sender);
     }
 }

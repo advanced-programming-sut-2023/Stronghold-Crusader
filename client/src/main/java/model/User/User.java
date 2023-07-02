@@ -9,6 +9,7 @@ import utils.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
     private String username;
@@ -22,7 +23,10 @@ public class User {
     private ArrayList<String> senders;
     private int highScore;
     private final ArrayList<String> mapList;
+    private HashMap<String, String> pendingMaps;
+
     private long lastOnlineTime;
+
 
     public User(String username, String password, String email, String nickname, String slogan) {
         friends = new ArrayList<>();
@@ -328,5 +332,9 @@ public class User {
         User user = Stronghold.getInstance().getUser(username);
         friends = user.friends;
         senders = user.senders;
+    }
+
+    public void removeFromPending(String mapId){
+        pendingMaps.remove(mapId);
     }
 }

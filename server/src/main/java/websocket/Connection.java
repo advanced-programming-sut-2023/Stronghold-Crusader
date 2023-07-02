@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import database.ChatManager;
 import database.Database;
 import database.MapManager;
+import database.UserManager;
 import model.Color;
 import model.Lobby;
 import model.Request;
@@ -361,6 +362,8 @@ public class Connection extends Thread {
             case "add_map":
                 loggedInUser.addMap(parameters.get("id"));
                 break;
+            case "send_map":
+                Database.getInstance().getUser(parameters.get("user")).addToPending();
             default:
                 outputStream.writeUTF("400: bad request");
         }
