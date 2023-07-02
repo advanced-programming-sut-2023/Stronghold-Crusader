@@ -22,7 +22,6 @@ public class User {
     private ArrayList<String> friends;
     private ArrayList<String> senders;
     private int highScore;
-    private final ArrayList<String> mapList;
     private String lastGameId;
     private ArrayList<String> mapList;
     private HashMap<String, String> pendingMaps;
