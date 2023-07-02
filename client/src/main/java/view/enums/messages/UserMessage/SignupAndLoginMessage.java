@@ -21,6 +21,8 @@ public enum SignupAndLoginMessage {
     SUCCESS_CREATING_USER("user created successfully"),
     USER_DOES_NOT_EXIST("There is no user with this username"),
     INCORRECT_PASSWORD("The password entered is incorrect"),
+    INCORECT_RECOVERY_ANSWER,
+    WEEK_SIMPLE_PASSWORD,
     TOO_MANY_ATTEMPTS,
     SUCCESS_PROCESS,
     INVALID_CAPTCHA("Invalid CAPTCHA"),

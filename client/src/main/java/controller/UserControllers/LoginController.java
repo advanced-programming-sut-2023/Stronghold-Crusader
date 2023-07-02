@@ -5,6 +5,7 @@ import model.User.User;
 import model.User.UserManager;
 import network.Connection;
 import network.Request;
+import utils.FormatValidation;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.time.LocalDateTime;
@@ -57,9 +58,18 @@ public class LoginController {
     }
 
     public SignupAndLoginMessage checkUserExist(String username) {
+
         currentUser = stronghold.getUser(username);
         if (currentUser == null)
             return SignupAndLoginMessage.USER_DOES_NOT_EXIST;
+        return SignupAndLoginMessage.SUCCESS_PROCESS;
+    }
+
+    public SignupAndLoginMessage changePassword(String answer , String newPass){
+        if (!currentUser.isRecoveryPasswordCorrect(answer)) return SignupAndLoginMessage.INCORECT_RECOVERY_ANSWER;
+        else if (!FormatValidation.isPasswordValid(newPass).equals(SignupAndLoginMessage.SUCCESS_PROCESS))
+            return SignupAndLoginMessage.WEEK_SIMPLE_PASSWORD;
+        currentUser.setPassword(newPass);
         return SignupAndLoginMessage.SUCCESS_PROCESS;
     }
 

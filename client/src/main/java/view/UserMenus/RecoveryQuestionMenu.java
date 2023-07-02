@@ -141,7 +141,7 @@ public class RecoveryQuestionMenu extends Application implements Initializable {
         label.getStylesheets().add(SignupMenu.class.getResource("/Css/style1.css").toString());
         label.getStyleClass().add("pop-up-label");
         //TODO dynamic size
-        label.setTranslateX(-420);
+        label.setTranslateX(0);
         label.setTranslateY(635);
         Popup popup = new Popup();
         popup.getContent().add(label);

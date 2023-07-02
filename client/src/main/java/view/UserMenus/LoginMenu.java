@@ -3,6 +3,8 @@ package view.UserMenus;
 import controller.UserControllers.LoginController;
 import controller.UserControllers.MainController;
 import controller.UserControllers.SignupController;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,7 +23,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Stronghold;
 import model.User.User;
 import model.User.UserManager;
@@ -44,6 +49,10 @@ public class LoginMenu extends Application implements Initializable {
     public Button loginButton;
     public Text attemptsError;
     public Pane mainPane;
+    public TextField answer;
+    public Text recoveryQuestion;
+    public TextField newPassword;
+    public Text recoveryError;
 
 
     @FXML
@@ -217,7 +226,15 @@ public class LoginMenu extends Application implements Initializable {
         fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/Userfxml/forgotPasswordPane.fxml"));
         mainPane.getChildren().clear();
         mainPane.getChildren().setAll(fxml);
+        initializePane();
+    }
 
+    private void initializePane() {
+        Pane pane = (Pane) mainPane.getChildren().get(0);
+        pane.getChildren().get(0).setVisible(false);
+        pane.getChildren().get(6).setVisible(false);
+        pane.getChildren().get(7).setVisible(false);
+        pane.getChildren().get(8).setVisible(false);
     }
 
     public void changePassword(MouseEvent mouseEvent) {
@@ -227,19 +244,69 @@ public class LoginMenu extends Application implements Initializable {
                 userError.setText(checkUser.getOutput());
                 break;
             case SUCCESS_PROCESS:
+                visibleItems();
                 userError.setText("");
+                recoveryQuestion.setText(loginController.currentUser.getPasswordRecoveryQuestion());
                 break;
 
         }
         username.setText("");
     }
 
-    public void backToLogin(MouseEvent mouseEvent) throws IOException {
-        Parent fxml;
-        fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/Userfxml/loginPane.fxml"));
-        mainPane.getChildren().clear();
-        mainPane.getChildren().setAll(fxml);
-        mainPane.getChildren().add(toggleSwitch);
-        setToggleSwitch();
+    private void visibleItems() {
+        mainPane.getChildren().get(0).setVisible(true);
+        mainPane.getChildren().get(6).setVisible(true);
+        mainPane.getChildren().get(7).setVisible(true);
+        mainPane.getChildren().get(8).setVisible(true);
+    }
+
+    public void backToLogin(MouseEvent mouseEvent) throws Exception {
+        LoginMenu.setLoginController(new LoginController());
+        new LoginMenu().start(Main.mainStage);
+    }
+
+    public void checkPasswordValidation(MouseEvent mouseEvent) {
+        switch (loginController.changePassword(answer.getText(), newPassword.getText())) {
+            case INCORECT_RECOVERY_ANSWER:
+                recoveryError.setText("your recovery answer is incorrect");
+                break;
+            case WEEK_SIMPLE_PASSWORD:
+                recoveryError.setText("your password is week");
+                break;
+            case SUCCESS_PROCESS:
+                createPopUp().show(Main.mainStage);
+                break;
+        }
+        answer.setText("");
+        newPassword.setText("");
+        new Timeline(new KeyFrame(Duration.seconds(3), e -> {
+            recoveryError.setText("");
+        })).play();
+
+    }
+
+    private Popup createPopUp() {
+        Label label = new Label("user create successfully");
+        label.setMinWidth(80);
+        label.setMinHeight(50);
+        label.getStylesheets().add(SignupMenu.class.getResource("/Css/style1.css").toString());
+        label.getStyleClass().add("pop-up-label");
+        //TODO dynamic size
+        label.setTranslateX(-150);
+        label.setTranslateY(635);
+        Popup popup = new Popup();
+        popup.getContent().add(label);
+        popup.setAutoHide(true);
+        new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+            popup.hide();
+            LoginMenu.setLoginController(new LoginController());
+            try {
+                new LoginMenu().start(Main.mainStage);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        })).play();
+        return popup;
+
     }
 }

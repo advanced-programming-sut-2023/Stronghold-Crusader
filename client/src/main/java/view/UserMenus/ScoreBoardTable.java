@@ -9,6 +9,7 @@ import javafx.scene.shape.Circle;
 import model.Stronghold;
 import model.User.User;
 import utils.MenusUtils;
+import view.Main;
 
 import java.io.IOException;
 
@@ -29,12 +30,11 @@ public class ScoreBoardTable {
         select.setOnMouseClicked(e -> {
             try {
                 MenusUtils.createProfileShowPopUp
-                        (user, MainController.getCurrentUser().isFriend(user)).show(FriendsMenu.getStage());
+                        (user, MainController.getCurrentUser().isFriend(user)).show(Main.mainStage);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         });
-
     }
 
     private void setDetailsForImages(User user) {
@@ -49,6 +49,8 @@ public class ScoreBoardTable {
         avatar.setFill(new ImagePattern(new Image(user.getAvatarPath())));
         television.setImage(new Image(
                 ScoreBoardTable.class.getResource("/assets/icons/television.png").toString()));
+
+
     }
 
     public int getRank() {

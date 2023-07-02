@@ -240,8 +240,8 @@ public class GraphicGameMenu extends Application {
     }
 
     public void nextTurn() throws Exception {
-        String[][] buildings = new String[60][60];
-        String[][] people = new String[60][60];
+        String[][] buildings = new String[100][100];
+        String[][] people = new String[100][100];
         loadCells(buildings, people);
         TelevisionManager.save(new SaveData(graphicsController.getMap().getSize().x, graphicsController.getMap().getSize().y
                 , gameController.getGame().getMap().getMapId(), buildings, people), gameController.getGame().getGameID(), SaveData.getNumber() + ".save");
@@ -251,8 +251,8 @@ public class GraphicGameMenu extends Application {
     }
 
     private void loadCells(String[][] buildings, String[][] people) {
-        for (int y = 0; y < graphicsController.getMap().getSize().y && y < 60; y++) {
-            for (int x = 0; x < graphicsController.getMap().getSize().x && x < 60; x++) {
+        for (int y = 0; y < graphicsController.getMap().getSize().y; y++) {
+            for (int x = 0; x < graphicsController.getMap().getSize().x; x++) {
                 Vector2D coordinate = new Vector2D(x, y);
                 Cell cell = graphicsController.getMap().getCell(coordinate);
                 MapAsset building = searchForBuildings(cell);

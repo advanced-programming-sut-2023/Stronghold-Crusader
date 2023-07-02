@@ -12,7 +12,7 @@
 <AnchorPane id="pane" fx:id="rootPane" prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.ScoreBoardMenu">
     <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="45.0" layoutY="45.0" pickOnBounds="true">
     </ImageView>
-   <TableView fx:id="table" layoutX="393.0" layoutY="166.0" onMousePressed="#openProfile" prefHeight="338.0" prefWidth="583.0">
+   <TableView fx:id="table" layoutX="393.0" layoutY="166.0" onMousePressed="#openProfile"  prefHeight="338.0" prefWidth="583.0">
       <columns>
          <TableColumn fx:id="rankColumn" prefWidth="55.20001220703125" text="Rank" />
          <TableColumn fx:id="avatarColumn" prefWidth="77.60000610351562" text="Avatar" />

@@ -1,6 +1,5 @@
 package view.UserMenus;
 
-import controller.UserControllers.MainController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -22,8 +21,8 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Stronghold;
+import model.Television.Television;
 import model.User.User;
-import utils.MenusUtils;
 import view.Main;
 
 import java.io.IOException;
@@ -92,8 +91,13 @@ public class ScoreBoardMenu extends Application {
 
     public void openProfile(MouseEvent mouseEvent) throws IOException {
         if (table.getSelectionModel().getSelectedItem() != null) {
-            User user = Stronghold.getInstance().getUser(table.getSelectionModel().getSelectedItem().getUsername());
-            MenusUtils.createProfileShowPopUp(user, MainController.getCurrentUser().isFriend(user)).show(Main.mainStage);
+//            User user = Stronghold.getInstance().getUser(table.getSelectionModel().getSelectedItem().getUsername());
+//            MenusUtils.createProfileShowPopUp(user, MainController.getCurrentUser().isFriend(user)).show(Main.mainStage);
+            try {
+                new Television().start(Main.mainStage);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
