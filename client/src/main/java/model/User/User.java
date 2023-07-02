@@ -210,6 +210,23 @@ public class User {
         }
     }
 
+    public void setLastGameId(String lastGameId) {
+        this.lastGameId = lastGameId;
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("set_lastgameid");
+        request.addParameter("username", this.username);
+        request.addParameter("lastgameid", lastGameId);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) {
+            try {
+                throw new Exception("User doesn't exist");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
     public String getAvatarPath() {
         if (new File(avatarPath).exists())
             return avatarPath;

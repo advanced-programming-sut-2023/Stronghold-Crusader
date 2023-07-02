@@ -92,8 +92,8 @@ public class LobbyController {
         return gameRoom.getLobbyStatus();
     }
 
-    public void changePrivacy() {
-        gameRoom.changePrivacy();
+    public void setStatus(LobbyStatus lobbyStatus) {
+        gameRoom.setStatus(lobbyStatus);
         updateGameRoom();
     }
 

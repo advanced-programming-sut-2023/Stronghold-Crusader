@@ -85,10 +85,11 @@ public class Lobby {
         }
     }
 
-    public void changePrivacy() {
+    public void setStatus(LobbyStatus lobbyStatus) {
         Request request = new Request();
         request.setType("lobby_change");
         request.setCommand("change_status");
+        request.addParameter("status", String.valueOf(lobbyStatus.ordinal()));
         request.addParameter("id", id);
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) {

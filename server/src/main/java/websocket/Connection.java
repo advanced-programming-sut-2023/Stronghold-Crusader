@@ -4,11 +4,6 @@ import com.google.gson.Gson;
 import database.ChatManager;
 import database.Database;
 import database.MapManager;
-import database.UserManager;
-import model.Color;
-import model.Lobby;
-import model.Request;
-import model.User;
 import model.*;
 import model.Television.ResourceManager;
 import model.Television.SaveData;
@@ -207,6 +202,9 @@ public class Connection extends Thread {
             case "set_avatar":
                 user.setAvatarPath(request.getParameters().get("avatar_path"));
                 break;
+            case "set_lastgameid":
+                user.setLastGameId(request.getParameters().get("lastgameid"));
+                break;
             case "accept_map":
                 user.addMap(request.getParameters().get("id"));
                 user.removeFromPending(request.getParameters().get("id"));
@@ -320,8 +318,8 @@ public class Connection extends Thread {
                 lobby.setAdmin(new Gson().fromJson(parameters.get("player"), User.class));
                 break;
             case "change_status":
-                lobby.setLobbyStatus((lobby.getLobbyStatus().equals(LobbyStatus.PRIVATE)
-                        ? LobbyStatus.PUBLIC : LobbyStatus.PRIVATE));
+                LobbyStatus newStatus = LobbyStatus.values()[Integer.parseInt(request.getParameters().get("status"))];
+                lobby.setLobbyStatus(newStatus);
                 break;
             default:
                 outputStream.writeUTF("400: bad request");
