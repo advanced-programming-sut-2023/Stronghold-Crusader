@@ -41,6 +41,7 @@ public class newMain extends Application {
         GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game, graphicGameMenu));
         GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map, true));
         SelectedBuildingController.setIsModifiable(true);
+        Main.mainStage = stage;
         mainStage = stage;
         stage.setFullScreen(true);
         graphicGameMenu.start(stage);

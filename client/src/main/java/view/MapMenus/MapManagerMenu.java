@@ -19,6 +19,7 @@ import view.UserMenus.MainMenu;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MapManagerMenu extends Application {
 
@@ -68,7 +69,26 @@ public class MapManagerMenu extends Application {
     }
 
     public void loadRequests(){
+        HashMap<String, String> requests = MainController.currentUser.getPendingMaps();
+        VBox vBox = new VBox();
+        int i=1;
+        for (String mapId : requests.keySet()){
+            String output = (i++) + ". Map id: " + mapId + ", sender : " + requests.get(mapId);
+            Label label = new Label(output);
+            label.setStyle("-fx-text-fill: white");
+            vBox.getChildren().add(label);
+        }
+        receivedRequestScroll.setContent(vBox);
+    }
 
+    public void acceptRequest(String id){
+        MainController.currentUser.acceptMap(id);
+        loadRequests();
+    }
+
+    public void rejectRequest(String mapId){
+        MainController.currentUser.rejectMap(mapId);
+        loadRequests();
     }
 
     public void sendRequest(){
@@ -81,7 +101,6 @@ public class MapManagerMenu extends Application {
         request.setCommand("send_map");
         request.addParameter("id", mapId);
         request.addParameter("user", user);
-        request.addParameter("sender", MainController.currentUser.getUsername());
         Connection.getInstance().sendRequest(request);
     }
     public void back() throws Exception {

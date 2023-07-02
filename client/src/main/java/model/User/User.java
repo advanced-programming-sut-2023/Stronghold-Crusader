@@ -32,6 +32,7 @@ public class User {
         friends = new ArrayList<>();
         senders = new ArrayList<>();
         mapList = new ArrayList<>();
+        pendingMaps = new HashMap<>();
         this.username = username;
         this.password = PasswordConverter.encodePassword(password);
         this.email = email;
@@ -311,16 +312,6 @@ public class User {
 
     public void addMap(String mapId) {
         mapList.add(mapId);
-        Request request = new Request();
-        request.setType("map");
-        request.setCommand("add_map");
-        request.addParameter("id", mapId);
-        String result = Connection.getInstance().sendRequest(request);
-        if (result.startsWith("400")) try {
-            throw new Exception("Map doesn't exist");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -338,7 +329,28 @@ public class User {
         senders = user.senders;
     }
 
-    public void removeFromPending(String mapId){
+    public void acceptMap(String mapId){
+        addMap(mapId);
         pendingMaps.remove(mapId);
+        Request request = new Request();
+        request.setType("user_change");
+        request.setCommand("accept_map");
+        request.addParameter("id", mapId);
+        String result = Connection.getInstance().sendRequest(request);
+        if (result.startsWith("400")) {
+            try {
+                throw new Exception("User doesn't exist");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public void rejectMap(String mapId){
+        pendingMaps.remove(mapId);
+    }
+
+    public HashMap<String, String> getPendingMaps() {
+        return pendingMaps;
     }
 }

@@ -34,7 +34,7 @@
         <Image url="@../../assets/buttons/createMap_btn.jpg"/>
     </ImageView>
     <ImageView fitHeight="30" fitWidth="210.0" layoutX="474.0" layoutY="455.0" nodeOrientation="INHERIT"
-               onMouseClicked="#goToChatManager" pickOnBounds="true" translateX="48" translateY="73">
+               onMouseClicked="#goToMapManager" pickOnBounds="true" translateX="48" translateY="73">
         <Image url="@../../assets/buttons/chatManager_btn.jpg"/>
     </ImageView>
     <ImageView fitHeight="30" fitWidth="210.0" layoutX="473.0" layoutY="490.0" nodeOrientation="INHERIT"
