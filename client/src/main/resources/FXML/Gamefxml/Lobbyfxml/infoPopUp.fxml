@@ -8,26 +8,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="217.0" prefWidth="235.0" style="-fx-background-color: #AA0000; -fx-border-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.MarketMenus.SuccessPopup">
-   <children>
-      <Label layoutX="37.0" layoutY="3.0" text="GameRoom Info">
-         <font>
-            <Font name="Constantia" size="22.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="76.0" fitWidth="89.0" layoutX="80.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/logo/140-1402285_village-christian-crusaders-hd-png-download-removebg-preview.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="14.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <Text layoutX="113.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <Text layoutX="14.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <Text layoutX="113.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <Text layoutX="14.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <Text layoutX="113.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <Text layoutX="14.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <Text layoutX="113.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="94.13672637939453" />
-      <FontAwesomeIcon glyphName="CLOSE" layoutX="213.0" layoutY="22.0" size="25" />
-   </children>
+<AnchorPane prefHeight="217.0" prefWidth="235.0" style="-fx-background-color: #AA0000; -fx-border-color: black;"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenus.MarketMenus.SuccessPopup">
+    <Label layoutX="37.0" layoutY="3.0" text="GameRoom Info">
+        <font>
+          <Font name="Constantia" size="22.0"/>
+        </font>
+    </Label>
+    <ImageView fitHeight="76.0" fitWidth="89.0" layoutX="80.0" layoutY="46.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../../assets/logo/140-1402285_village-christian-crusaders-hd-png-download-removebg-preview.png"/>
+    </ImageView>
+    <Text layoutX="14.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <Text layoutX="113.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <Text layoutX="14.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <Text layoutX="113.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <Text layoutX="14.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <Text layoutX="113.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <Text layoutX="14.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <Text layoutX="113.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER"
+          wrappingWidth="94.13672637939453"/>
+    <FontAwesomeIcon glyphName="CLOSE" layoutX="213.0" layoutY="22.0" size="25"/>
 </AnchorPane>

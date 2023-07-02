@@ -7,8 +7,6 @@ import controller.GameControllers.SelectedBuildingController;
 import controller.MapControllers.BuildingPlacementController;
 import controller.UserControllers.MainController;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,7 +53,7 @@ public class GameRoomMenu extends Application implements Initializable {
     private boolean editable = false;
 
 
-    private ObservableList<GameRoomTable> players = FXCollections.observableArrayList();
+    private final ObservableList<GameRoomTable> players = FXCollections.observableArrayList();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -71,9 +69,9 @@ public class GameRoomMenu extends Application implements Initializable {
 
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        avatarColumn.setCellValueFactory(new PropertyValueFactory<GameRoomTable, Circle>("avatar"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<GameRoomTable, String>("nickname"));
-        colorColumn.setCellValueFactory(new PropertyValueFactory<GameRoomTable, Circle>("color"));
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("avatar"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("nickname"));
+        colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
         refreshButton.setOnMouseClicked(e -> {
             try {
                 updateTable();
@@ -146,7 +144,7 @@ public class GameRoomMenu extends Application implements Initializable {
             players.put(lobbyController.getColor(user), new Player(user));
         Map map = MapManager.load(lobbyController.getMapId());
         Game game = new Game(map, players, editable, lobbyController.getGameId());
-        GameController gameController = new GameController(MainController.getCurrentUser(), game);
+        GameController gameController = new GameController(game);
         GraphicGameMenu.setGameController(gameController);
         GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
         GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game, graphicGameMenu));

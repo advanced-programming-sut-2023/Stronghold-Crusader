@@ -8,7 +8,7 @@ import model.User.User;
 
 public class GameRoomTable {
     private final Circle avatar = new Circle();
-    private  String nickname;
+    private final String nickname;
     private final Circle color = new Circle();
 
     public GameRoomTable(User user, boolean isAdmin, String color) {

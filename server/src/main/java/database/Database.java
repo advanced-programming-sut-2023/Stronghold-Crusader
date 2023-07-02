@@ -70,7 +70,7 @@ public class Database {
     public Collection<User> getOnlineUsers() {
         ArrayList<User> onlineUsers = new ArrayList<>();
         for (User user : users.values())
-            if(user.isOnline())
+            if (user.isOnline())
                 onlineUsers.add(user);
         return onlineUsers;
     }
@@ -79,20 +79,20 @@ public class Database {
         return userRankings;
     }
 
-    public void addLobby(Lobby lobby){
+    public void addLobby(Lobby lobby) {
         lobbies.put(lobby.getId(), lobby);
         lobby.updateExpireTime();
     }
 
-    public Lobby getLobby(String id){
+    public Lobby getLobby(String id) {
         return lobbies.get(id);
     }
 
-    public Collection<Lobby> getAllLobbies(){
+    public Collection<Lobby> getAllLobbies() {
         return lobbies.values();
     }
 
-    public void removeLobby(String id){
+    public void removeLobby(String id) {
         lobbies.remove(id);
     }
 }

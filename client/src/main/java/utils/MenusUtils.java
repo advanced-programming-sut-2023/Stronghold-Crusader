@@ -90,9 +90,7 @@ public class MenusUtils {
         AnchorPane pane = FXMLLoader.load(MenusUtils.class.getResource("/FXML/Userfxml/FriendMenu/unFriendUserPopUp.fxml"));
         loadPopUpPaneSetting(user, pane);
         popup.getContent().add(pane);
-        pane.getChildren().get(2).setOnMousePressed(e -> {
-            popup.hide();
-        });
+        pane.getChildren().get(2).setOnMousePressed(e -> popup.hide());
         if (user.isHaveRequestFrom(MainController.getCurrentUser())) pane.getChildren().get(3).setVisible(false);
 
         pane.getChildren().get(3).setOnMouseClicked(e -> {
@@ -106,9 +104,7 @@ public class MenusUtils {
         AnchorPane pane = FXMLLoader.load(MenusUtils.class.getResource("/FXML/Userfxml/FriendMenu/senderUserPopUp.fxml"));
         loadPopUpPaneSetting(user, pane);
         popup.getContent().add(pane);
-        pane.getChildren().get(2).setOnMousePressed(e -> {
-            popup.hide();
-        });
+        pane.getChildren().get(2).setOnMousePressed(e -> popup.hide());
         pane.getChildren().get(4).setOnMousePressed(e -> {
             user.addFriend(MainController.getCurrentUser());
             MainController.getCurrentUser().addFriend(user);
@@ -127,9 +123,7 @@ public class MenusUtils {
         AnchorPane pane = FXMLLoader.load(MenusUtils.class.getResource("/FXML/Userfxml/FriendMenu/friendUserPopUp.fxml"));
         loadPopUpPaneSetting(user, pane);
         popup.getContent().add(pane);
-        pane.getChildren().get(2).setOnMousePressed(e -> {
-            popup.hide();
-        });
+        pane.getChildren().get(2).setOnMousePressed(e -> popup.hide());
         pane.getChildren().get(3).setOnMouseClicked(e -> {
             popup.hide();
             user.removeFriend(MainController.getCurrentUser());

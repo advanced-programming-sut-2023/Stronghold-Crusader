@@ -6,8 +6,6 @@ import model.enums.AssetType.Material;
 import view.GameMenus.MarketMenus.MarketMenu;
 import view.enums.messages.GameMessage.MarketMessage;
 
-import java.util.ArrayList;
-
 public class MarketController {
     private final Player currentPlayer;
     private MarketMenu menu;

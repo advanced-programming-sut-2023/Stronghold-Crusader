@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
     public static Stage mainStage;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Connection.connect("localhost", 8080);
         ConstantManager.load();
         launch(args);

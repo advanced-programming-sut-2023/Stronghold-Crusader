@@ -4,8 +4,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import utils.Vector2D;
 
-import java.io.IOException;
-
 public class CoordinatePopupMenu {
 
     public Text error;
@@ -36,7 +34,7 @@ public class CoordinatePopupMenu {
         CoordinatePopupMenu.mode = mode;
     }
 
-    public void back() throws IOException {
+    public void back() {
         finalCoordinate = new Vector2D(Integer.parseInt(xCord.getText()), Integer.parseInt(yCord.getText()));
         switch (mode){
             case "move":

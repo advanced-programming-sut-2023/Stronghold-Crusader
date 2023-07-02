@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.Collection;
 
 public class UserManager {
-    public static void initialize(){
+    public static void initialize() {
         File resourceDir = new File(Settings.DATABASE_PATH);
         if (!resourceDir.exists())
             resourceDir.mkdir();
@@ -20,6 +20,7 @@ public class UserManager {
             }
         }
     }
+
     public static void load(Database database) {
         initialize();
         Reader reader;

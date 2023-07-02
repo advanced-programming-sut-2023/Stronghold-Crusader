@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class ChatCreationController {
     private Chat.ChatMode mode;
-    private ArrayList<String> users;
-    private User currentUser;
+    private final ArrayList<String> users;
+    private final User currentUser;
     private ChatCreationMenu menu;
 
     public ChatCreationController(User user){

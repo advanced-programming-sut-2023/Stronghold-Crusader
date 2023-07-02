@@ -51,7 +51,7 @@ public class LobbyMenu extends Application implements Initializable {
     public Text error;
     public TextField privateRoomJoining;
     public Button join;
-    private ObservableList<LobbyTable> gameList = FXCollections.observableArrayList();
+    private final ObservableList<LobbyTable> gameList = FXCollections.observableArrayList();
 
 
     @Override
@@ -68,13 +68,13 @@ public class LobbyMenu extends Application implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        gameIdColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("gameId"));
-        avatarColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, Circle>("avatar"));
-        adminColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("admin"));
-        mapIdColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("mapId"));
-        capacityColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, String>("capacity"));
-        televisionColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, Button>("television"));
-        joinColumn.setCellValueFactory(new PropertyValueFactory<LobbyTable, Button>("join"));
+        gameIdColumn.setCellValueFactory(new PropertyValueFactory<>("gameId"));
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("avatar"));
+        adminColumn.setCellValueFactory(new PropertyValueFactory<>("admin"));
+        mapIdColumn.setCellValueFactory(new PropertyValueFactory<>("mapId"));
+        capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+        televisionColumn.setCellValueFactory(new PropertyValueFactory<>("television"));
+        joinColumn.setCellValueFactory(new PropertyValueFactory<>("join"));
         join.setOnMouseClicked(e -> {
             try {
                 joinToGame(privateRoomJoining.getText());
@@ -90,9 +90,7 @@ public class LobbyMenu extends Application implements Initializable {
         Lobby lobby = LobbyManager.getLobby(gameId);
         if (lobby == null) {
             error.setText("there is not any gameRoom with this ID");
-            new Timeline(new KeyFrame(Duration.seconds(2), e -> {
-                error.setText("");
-            })).play();
+            new Timeline(new KeyFrame(Duration.seconds(2), e -> error.setText(""))).play();
         } else {
             if (lobby.getCapacity() == lobby.getPlayersCount() || lobby.getLobbyStatus().equals(LobbyStatus.RUNNING))
                 LobbyTable.loadPopUp();
@@ -120,11 +118,11 @@ public class LobbyMenu extends Application implements Initializable {
 
 
     public void createNewGame(MouseEvent mouseEvent) throws Exception {
-        CreateGameRoomMenu.setMapSelectController(new MapSelectController(MainController.getCurrentUser()));
+        CreateGameRoomMenu.setMapSelectController(new MapSelectController());
         new CreateGameRoomMenu().start(Main.mainStage);
     }
 
-    public void refresh(MouseEvent mouseEvent) throws IOException {
+    public void refresh(MouseEvent mouseEvent) {
         addGamesToTable();
     }
 
@@ -158,9 +156,7 @@ public class LobbyMenu extends Application implements Initializable {
                     .setText(user.getNickname());
             counter++;
         }
-        info.getChildren().get(10).setOnMousePressed(e -> {
-            popup.hide();
-        });
+        info.getChildren().get(10).setOnMousePressed(e -> popup.hide());
         popup.getContent().add(info);
     }
 }

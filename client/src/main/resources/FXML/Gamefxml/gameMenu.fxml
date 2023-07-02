@@ -7,196 +7,192 @@
 
 <AnchorPane prefHeight="728.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.GraphicGameMenu">
-    <children>
-        <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true" prefHeight="639.0"
-                    prefWidth="1280.0"/>
-        <ImageView fitHeight="182.0" fitWidth="1293.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT"
-                   pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../assets/graphic/overlay/bottom_menu.png"/>
-        </ImageView>
-        <ImageView fitHeight="224.0" fitWidth="258.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../assets/graphic/overlay/selectedUnit.png"/>
-        </ImageView>
-        <ImageView fitHeight="224.0" fitWidth="67.0" layoutX="-1.0" layoutY="509.0" pickOnBounds="true">
-            <Image url="@../../assets/graphic/overlay/selectedUnitOverlay.png"/>
-        </ImageView>
-        <AnchorPane fx:id="bottomPane" layoutX="274.0" layoutY="615.0" prefHeight="113.0" prefWidth="437.0">
-        </AnchorPane>
-        <AnchorPane fx:id="leftPane" layoutX="-1.0" layoutY="-1.0" prefHeight="412.0" prefWidth="216.0">
-            <AnchorPane layoutX="4.0" layoutY="13.0" prefHeight="113.0" prefWidth="208.0">
-                <Label layoutX="15.0" layoutY="23.0" text="Round:">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="47.0" text="Now playing:">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                </Label>
-                <ImageView fitHeight="25.0" fitWidth="180.0" layoutX="15.0" layoutY="75.0" onMouseClicked="#nextTurn">
-                    <Image url="@../../assets/buttons/nextTurn_btn.jpg"/>
-                </ImageView>
+    <ScrollPane fx:id="mainScrollPane" hbarPolicy="NEVER" vbarPolicy="NEVER" pannable="true" prefHeight="639.0"
+                prefWidth="1280.0"/>
+    <ImageView fitHeight="182.0" fitWidth="1293.0" layoutX="-6.0" layoutY="550.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/graphic/overlay/bottom_menu.png"/>
+    </ImageView>
+    <ImageView fitHeight="224.0" fitWidth="258.0" layoutY="509.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/graphic/overlay/selectedUnit.png"/>
+    </ImageView>
+    <ImageView fitHeight="224.0" fitWidth="67.0" layoutX="-1.0" layoutY="509.0" pickOnBounds="true">
+        <Image url="@../../assets/graphic/overlay/selectedUnitOverlay.png"/>
+    </ImageView>
+    <AnchorPane fx:id="bottomPane" layoutX="274.0" layoutY="615.0" prefHeight="113.0" prefWidth="437.0">
+    </AnchorPane>
+    <AnchorPane fx:id="leftPane" layoutX="-1.0" layoutY="-1.0" prefHeight="412.0" prefWidth="216.0">
+        <AnchorPane layoutX="4.0" layoutY="13.0" prefHeight="113.0" prefWidth="208.0">
+            <Label layoutX="15.0" layoutY="23.0" text="Round:">
+                <font>
+                    <Font name="System Bold" size="14.0"/>
+                </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="47.0" text="Now playing:">
+                <font>
+                    <Font name="System Bold" size="14.0"/>
+                </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="180.0" layoutX="15.0" layoutY="75.0" onMouseClicked="#nextTurn">
+                <Image url="@../../assets/buttons/nextTurn_btn.jpg"/>
+            </ImageView>
 
-                <Label fx:id="roundLabel" alignment="CENTER" layoutX="123.0" layoutY="25.0" prefHeight="17.0"
-                       prefWidth="38.0" text="{num}"/>
-                <Label fx:id="playerLabel" alignment="CENTER" layoutX="123.0" layoutY="49.0" prefHeight="17.0"
-                       prefWidth="38.0" text="{text}"/>
-            </AnchorPane>
-            <AnchorPane layoutX="-2.0" layoutY="116.0" prefHeight="297.0" prefWidth="216.0">
-                <Label layoutX="19.0" layoutY="4.0" text="Governance Menu">
-                    <font>
-                        <Font name="System Bold" size="14.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="23.0" layoutY="36.0" onMouseClicked="#openPopularity" text="Popularity">
-                    <font>
-                        <Font size="13.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="popularityLabel" alignment="CENTER" layoutX="79.0" layoutY="37.0"
-                       onMouseClicked="#openPopularity" prefHeight="17.0" prefWidth="59.0" text="{num}"/>
-                <Label alignment="CENTER" layoutX="18.0" layoutY="56.0" prefHeight="19.0" prefWidth="59.0"
-                       text="Fear rate">
-                    <font>
-                        <Font size="13.0"/>
-                    </font>
-                </Label>
-                <Slider fx:id="fearRateSlider" blockIncrement="1.0" layoutX="41.0" layoutY="78.0" majorTickUnit="1.0"
-                        max="5.0" min="-5.0" minorTickCount="1" prefHeight="33.0" prefWidth="159.0"
-                        showTickLabels="true" snapToTicks="true"/>
-                <Label alignment="CENTER" layoutX="21.0" layoutY="111.0" prefHeight="19.0" prefWidth="59.0"
-                       text="Food rate">
-                    <font>
-                        <Font size="13.0"/>
-                    </font>
-                </Label>
-                <Slider fx:id="foodRateSlider" blockIncrement="1.0" layoutX="41.0" layoutY="138.0" majorTickUnit="1.0"
-                        max="2.0" min="-2.0" minorTickCount="0" prefHeight="11.0" prefWidth="159.0"
-                        showTickLabels="true" snapToTicks="true"/>
-                <Label alignment="CENTER" layoutX="23.0" layoutY="171.0" prefHeight="19.0" prefWidth="59.0"
-                       text="Tax rate">
-                    <font>
-                        <Font size="13.0"/>
-                    </font>
-                </Label>
-                <Slider fx:id="taxRateSlider" blockIncrement="1.0" layoutX="41.0" layoutY="202.0" majorTickUnit="1.0"
-                        max="8.0" min="-3.0" minorTickCount="0" prefHeight="20.0" prefWidth="159.0"
-                        showTickLabels="true" snapToTicks="true"/>
-                <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="21.0" layoutY="244.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../../assets/icons/coin.png"/>
-                </ImageView>
-                <Label fx:id="goldLabel" alignment="CENTER" layoutX="51.0" layoutY="245.0" prefHeight="17.0"
-                       prefWidth="38.0" text="{num}"/>
-                <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="21.0" layoutY="271.0" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../../assets/icons/population.png"/>
-                </ImageView>
-                <Label fx:id="populationLabel" alignment="CENTER" layoutX="51.0" layoutY="270.0" prefHeight="17.0"
-                       prefWidth="38.0" text="{num}"/>
-            </AnchorPane>
-            <VBox fx:id="selectedUnitsMenu" layoutY="406.0" prefHeight="2.0" prefWidth="216.0"/>
-            <ImageView fx:id="closeLeftBarBtn" fitHeight="26.0" fitWidth="26.0" layoutX="185.0" layoutY="6.0"
-                       pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/icons/close.png"/>
-            </ImageView>
+            <Label fx:id="roundLabel" alignment="CENTER" layoutX="123.0" layoutY="25.0" prefHeight="17.0"
+                   prefWidth="38.0" text="{num}"/>
+            <Label fx:id="playerLabel" alignment="CENTER" layoutX="123.0" layoutY="49.0" prefHeight="17.0"
+                   prefWidth="38.0" text="{text}"/>
         </AnchorPane>
-        <AnchorPane fx:id="popularityMenu" layoutX="461.0" layoutY="155.0" prefHeight="339.0" prefWidth="357.0">
-            <Label layoutX="162.0" layoutY="97.0" text="Food">
+        <AnchorPane layoutX="-2.0" layoutY="116.0" prefHeight="297.0" prefWidth="216.0">
+            <Label layoutX="19.0" layoutY="4.0" text="Governance Menu">
                 <font>
-                    <Font size="14.0"/>
+                    <Font name="System Bold" size="14.0"/>
                 </font>
             </Label>
-            <Label layoutX="122.0" layoutY="35.0" text="Popularity">
+            <Label layoutX="23.0" layoutY="36.0" onMouseClicked="#openPopularity" text="Popularity">
                 <font>
-                    <Font name="System Bold" size="23.0"/>
+                    <Font size="13.0"/>
                 </font>
             </Label>
-            <ImageView fx:id="foodFace" fitHeight="30.0" fitWidth="30.0" layoutX="93.0" layoutY="92.0"
-                       pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/icons/normal.png"/>
+            <Label fx:id="popularityLabel" alignment="CENTER" layoutX="79.0" layoutY="37.0"
+                   onMouseClicked="#openPopularity" prefHeight="17.0" prefWidth="59.0" text="{num}"/>
+            <Label alignment="CENTER" layoutX="18.0" layoutY="56.0" prefHeight="19.0" prefWidth="59.0"
+                   text="Fear rate">
+                <font>
+                    <Font size="13.0"/>
+                </font>
+            </Label>
+            <Slider fx:id="fearRateSlider" blockIncrement="1.0" layoutX="41.0" layoutY="78.0" majorTickUnit="1.0"
+                    max="5.0" min="-5.0" minorTickCount="1" prefHeight="33.0" prefWidth="159.0"
+                    showTickLabels="true" snapToTicks="true"/>
+            <Label alignment="CENTER" layoutX="21.0" layoutY="111.0" prefHeight="19.0" prefWidth="59.0"
+                   text="Food rate">
+                <font>
+                    <Font size="13.0"/>
+                </font>
+            </Label>
+            <Slider fx:id="foodRateSlider" blockIncrement="1.0" layoutX="41.0" layoutY="138.0" majorTickUnit="1.0"
+                    max="2.0" min="-2.0" minorTickCount="0" prefHeight="11.0" prefWidth="159.0"
+                    showTickLabels="true" snapToTicks="true"/>
+            <Label alignment="CENTER" layoutX="23.0" layoutY="171.0" prefHeight="19.0" prefWidth="59.0"
+                   text="Tax rate">
+                <font>
+                    <Font size="13.0"/>
+                </font>
+            </Label>
+            <Slider fx:id="taxRateSlider" blockIncrement="1.0" layoutX="41.0" layoutY="202.0" majorTickUnit="1.0"
+                    max="8.0" min="-3.0" minorTickCount="0" prefHeight="20.0" prefWidth="159.0"
+                    showTickLabels="true" snapToTicks="true"/>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="21.0" layoutY="244.0" pickOnBounds="true"
+                       preserveRatio="true">
+                <Image url="@../../assets/icons/coin.png"/>
             </ImageView>
-            <Label fx:id="foodPopularity" layoutX="233.0" layoutY="98.0" text="{num}"/>
-            <Label layoutX="153.0" layoutY="135.0" text="Religion">
-                <font>
-                    <Font size="14.0"/>
-                </font>
-            </Label>
-            <ImageView fx:id="religionFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="130.0"
-                       pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/icons/normal.png"/>
+            <Label fx:id="goldLabel" alignment="CENTER" layoutX="51.0" layoutY="245.0" prefHeight="17.0"
+                   prefWidth="38.0" text="{num}"/>
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="21.0" layoutY="271.0" pickOnBounds="true"
+                       preserveRatio="true">
+                <Image url="@../../assets/icons/population.png"/>
             </ImageView>
-            <Label fx:id="religionPopularity" layoutX="233.0" layoutY="136.0" text="{num}"/>
-            <Label layoutX="167.0" layoutY="175.0" text="Tax">
-                <font>
-                    <Font size="14.0"/>
-                </font>
-            </Label>
-            <ImageView fx:id="taxFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="170.0"
-                       pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/icons/normal.png"/>
-            </ImageView>
-            <Label fx:id="taxPopularity" layoutX="232.0" layoutY="176.0" text="{num}"/>
-            <Label layoutX="166.0" layoutY="214.0" text="Fear">
-                <font>
-                    <Font size="14.0"/>
-                </font>
-            </Label>
-            <ImageView fx:id="fearFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="209.0"
-                       pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/icons/normal.png"/>
-            </ImageView>
-            <Label fx:id="fearPopularity" layoutX="232.0" layoutY="215.0" text="{num}"/>
-            <Label layoutX="169.0" layoutY="252.0" text="Inn">
-                <font>
-                    <Font size="14.0"/>
-                </font>
-            </Label>
-            <ImageView fx:id="innFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="247.0"
-                       pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/icons/normal.png"/>
-            </ImageView>
-            <Label fx:id="innPopularity" layoutX="232.0" layoutY="253.0" text="{num}"/>
-            <ImageView fx:id="closePopularityBarBtn" fitHeight="26.0" fitWidth="26.0" layoutX="314.0" layoutY="19.0"
-                       pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../assets/icons/close.png"/>
-            </ImageView>
-            <Label layoutX="98.0" layoutY="293.0" text="Next round change:">
-                <font>
-                    <Font size="14.0"/>
-                </font>
-            </Label>
-            <Label fx:id="nextPopularityNum" layoutX="229.0" layoutY="294.0" text="{num}"/>
+            <Label fx:id="populationLabel" alignment="CENTER" layoutX="51.0" layoutY="270.0" prefHeight="17.0"
+                   prefWidth="38.0" text="{num}"/>
         </AnchorPane>
-        <ImageView fx:id="minimap" fitHeight="180.0" fitWidth="180.0" layoutX="1028.0" layoutY="552.0"
+        <VBox fx:id="selectedUnitsMenu" layoutY="406.0" prefHeight="2.0" prefWidth="216.0"/>
+        <ImageView fx:id="closeLeftBarBtn" fitHeight="26.0" fitWidth="26.0" layoutX="185.0" layoutY="6.0"
                    pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../assets/graphic/map1001.png"/>
+            <Image url="@../../assets/icons/close.png"/>
         </ImageView>
-        <ImageView fitHeight="30" fitWidth="120.0" layoutX="182.0" layoutY="659.0" pickOnBounds="true" rotate="90">
-            <Image url="@../../assets/graphic/overlay/menus.jpg"/>
-        </ImageView>
-        <ImageView fx:id="backToDropButton" fitHeight="20.0" fitWidth="21.0" layoutX="233.0" layoutY="620.0"
-                   onMouseClicked="#initializeDropBuildingMenu" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../assets/buttons/dropBuilding_btn.png"/>
-        </ImageView>
-        <ImageView fx:id="marketBtn" fitHeight="25.0" fitWidth="20.0" layoutX="234.0" layoutY="643.0"
-                   onMouseClicked="#initializeMarket" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../assets/buttons/market_btn.png"/>
-        </ImageView>
-        <ImageView fitHeight="19.0" fitWidth="488.0" layoutX="272.0" layoutY="595.0" pickOnBounds="true">
-            <Image url="@../../assets/graphic/overlay/menus.jpg"/>
-        </ImageView>
-        <ImageView fx:id="selectedUnitButton" fitHeight="30.0" fitWidth="31.0" layoutX="229.0" layoutY="668.0"
-                   onMouseClicked="#openTradeMenu" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../assets/icons/dropBuildingIcons/TRADE.png"/>
-            </image>
-        </ImageView>
-        <ImageView fx:id="openLeftBarBtn" fitHeight="45.0" fitWidth="30.0" layoutX="5.0" layoutY="5.0"
+    </AnchorPane>
+    <AnchorPane fx:id="popularityMenu" layoutX="461.0" layoutY="155.0" prefHeight="339.0" prefWidth="357.0">
+        <Label layoutX="162.0" layoutY="97.0" text="Food">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label layoutX="122.0" layoutY="35.0" text="Popularity">
+            <font>
+                <Font name="System Bold" size="23.0"/>
+            </font>
+        </Label>
+        <ImageView fx:id="foodFace" fitHeight="30.0" fitWidth="30.0" layoutX="93.0" layoutY="92.0"
                    pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../assets/icons/plus.png"/>
+            <Image url="@../../assets/icons/normal.png"/>
         </ImageView>
-        <AnchorPane fx:id="selectedUnitMenu" layoutX="7.0" layoutY="516.0" prefHeight="208.0" prefWidth="216.0"/>
-    </children>
+        <Label fx:id="foodPopularity" layoutX="233.0" layoutY="98.0" text="{num}"/>
+        <Label layoutX="153.0" layoutY="135.0" text="Religion">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ImageView fx:id="religionFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="130.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../assets/icons/normal.png"/>
+        </ImageView>
+        <Label fx:id="religionPopularity" layoutX="233.0" layoutY="136.0" text="{num}"/>
+        <Label layoutX="167.0" layoutY="175.0" text="Tax">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ImageView fx:id="taxFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="170.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../assets/icons/normal.png"/>
+        </ImageView>
+        <Label fx:id="taxPopularity" layoutX="232.0" layoutY="176.0" text="{num}"/>
+        <Label layoutX="166.0" layoutY="214.0" text="Fear">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ImageView fx:id="fearFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="209.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../assets/icons/normal.png"/>
+        </ImageView>
+        <Label fx:id="fearPopularity" layoutX="232.0" layoutY="215.0" text="{num}"/>
+        <Label layoutX="169.0" layoutY="252.0" text="Inn">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ImageView fx:id="innFace" fitHeight="30.0" fitWidth="30.0" layoutX="92.0" layoutY="247.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../assets/icons/normal.png"/>
+        </ImageView>
+        <Label fx:id="innPopularity" layoutX="232.0" layoutY="253.0" text="{num}"/>
+        <ImageView fx:id="closePopularityBarBtn" fitHeight="26.0" fitWidth="26.0" layoutX="314.0" layoutY="19.0"
+                   pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../assets/icons/close.png"/>
+        </ImageView>
+        <Label layoutX="98.0" layoutY="293.0" text="Next round change:">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <Label fx:id="nextPopularityNum" layoutX="229.0" layoutY="294.0" text="{num}"/>
+    </AnchorPane>
+    <ImageView fx:id="minimap" fitHeight="180.0" fitWidth="180.0" layoutX="1028.0" layoutY="552.0"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/graphic/map1001.png"/>
+    </ImageView>
+    <ImageView fitHeight="30" fitWidth="120.0" layoutX="182.0" layoutY="659.0" pickOnBounds="true" rotate="90">
+        <Image url="@../../assets/graphic/overlay/menus.jpg"/>
+    </ImageView>
+    <ImageView fx:id="backToDropButton" fitHeight="20.0" fitWidth="21.0" layoutX="233.0" layoutY="620.0"
+               onMouseClicked="#initializeDropBuildingMenu" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/buttons/dropBuilding_btn.png"/>
+    </ImageView>
+    <ImageView fx:id="marketBtn" fitHeight="25.0" fitWidth="20.0" layoutX="234.0" layoutY="643.0"
+               onMouseClicked="#initializeMarket" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/buttons/market_btn.png"/>
+    </ImageView>
+    <ImageView fitHeight="19.0" fitWidth="488.0" layoutX="272.0" layoutY="595.0" pickOnBounds="true">
+        <Image url="@../../assets/graphic/overlay/menus.jpg"/>
+    </ImageView>
+    <ImageView fx:id="selectedUnitButton" fitHeight="30.0" fitWidth="31.0" layoutX="229.0" layoutY="668.0"
+               onMouseClicked="#openTradeMenu" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/icons/dropBuildingIcons/TRADE.png"/>
+    </ImageView>
+    <ImageView fx:id="openLeftBarBtn" fitHeight="45.0" fitWidth="30.0" layoutX="5.0" layoutY="5.0"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../assets/icons/plus.png"/>
+    </ImageView>
+    <AnchorPane fx:id="selectedUnitMenu" layoutX="7.0" layoutY="516.0" prefHeight="208.0" prefWidth="216.0"/>
 </AnchorPane>

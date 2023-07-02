@@ -1,24 +1,19 @@
 package database;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class MapManager {
-
     public static void initializeMapFolder() {
         File resourceDir = new File(Settings.MAP_PATH);
         if (!resourceDir.exists())
             resourceDir.mkdir();
     }
 
-    public static void saveMap(String mapString, String mapId){
+    public static void saveMap(String mapString, String mapId) {
         initializeMapFolder();
         String mapPath = Settings.MAP_PATH + mapId;
         try {

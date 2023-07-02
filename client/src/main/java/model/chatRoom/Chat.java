@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Chat {
     public enum ChatMode{
-        GLOBAL, PRIVATE, ROOM;
+        GLOBAL, PRIVATE, ROOM
     }
     private final String chatId;
     private final ArrayList<String> users;
-    private ArrayList<Message> messages;
-    private ChatMode chatMode;
+    private final ArrayList<Message> messages;
+    private final ChatMode chatMode;
     private final String owner;
     public Chat(ArrayList<String> users, ChatMode chatMode, String id, String owner){
         this.users = users;

@@ -6,7 +6,6 @@ import controller.UserControllers.SignupController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +17,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -113,15 +111,12 @@ public class LoginMenu extends Application implements Initializable {
 
 
     private void HandleKeys() {
-        Main.mainStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-                    try {
-                        login();
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+        Main.mainStage.getScene().setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                try {
+                    login();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -184,21 +179,18 @@ public class LoginMenu extends Application implements Initializable {
     }
 
     private Thread setNewThreadForCountingLoginTime() {
-        Thread timeThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    if (attemptsError == null) break;
-                    if ((loginController.getLoginTime() != null) && LocalDateTime.now().isBefore(loginController.getLoginTime())) {
-                        convertLoginTime();
-                    } else
-                        attemptsError.setText("");
+        Thread timeThread = new Thread(() -> {
+            while (true) {
+                if (attemptsError == null) break;
+                if ((loginController.getLoginTime() != null) && LocalDateTime.now().isBefore(loginController.getLoginTime())) {
+                    convertLoginTime();
+                } else
+                    attemptsError.setText("");
 
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -221,7 +213,7 @@ public class LoginMenu extends Application implements Initializable {
         menu.start(Main.mainStage);
     }
 
-    public void goToChangePasswordPane(MouseEvent mouseEvent) throws IOException, InterruptedException {
+    public void goToChangePasswordPane(MouseEvent mouseEvent) throws IOException {
         Parent fxml;
         fxml = FXMLLoader.load(LoginMenu.class.getResource("/FXML/Userfxml/forgotPasswordPane.fxml"));
         mainPane.getChildren().clear();
@@ -279,9 +271,7 @@ public class LoginMenu extends Application implements Initializable {
         }
         answer.setText("");
         newPassword.setText("");
-        new Timeline(new KeyFrame(Duration.seconds(3), e -> {
-            recoveryError.setText("");
-        })).play();
+        new Timeline(new KeyFrame(Duration.seconds(3), e -> recoveryError.setText(""))).play();
 
     }
 

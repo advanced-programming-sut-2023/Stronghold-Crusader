@@ -4,47 +4,38 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" prefHeight="130" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.SelectedBuildingMenu">
-   <children>
-      <ImageView fitHeight="121.0" fitWidth="167.0" layoutX="193.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/graphic/overlay/ovelayBase.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="157.0" layoutX="276.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/graphic/overlay/ovelayBase.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="83.0" layoutX="359.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/graphic/overlay/ovelayBase.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="86.0" fitWidth="100.0" layoutX="184.0" layoutY="18.0" onMouseClicked="#createSoldier" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/graphic/soldiers/52.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="286.0" layoutY="47.0" onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/buttons/repair_btn.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="286.0" layoutY="81.0" onMouseClicked="#info" onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/buttons/info_btn.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="121.0" fitWidth="208.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/graphic/overlay/churchLeft.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="286.0" layoutY="14.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../assets/buttons/delete_btn.jpg" />
-         </image>
-      </ImageView>
-   </children>
+<AnchorPane fx:id="mainPane" prefHeight="130" prefWidth="430" style="-fx-background-color: transparent;"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenus.SelectedBuildingMenu">
+    <ImageView fitHeight="121.0" fitWidth="167.0" layoutX="193.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/graphic/overlay/ovelayBase.png"/>
+    </ImageView>
+    <ImageView fitHeight="121.0" fitWidth="157.0" layoutX="276.0" layoutY="-2.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../../assets/graphic/overlay/ovelayBase.png"/>
+    </ImageView>
+    <ImageView fitHeight="121.0" fitWidth="83.0" layoutX="359.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/graphic/overlay/ovelayBase.png"/>
+    </ImageView>
+    <ImageView fitHeight="86.0" fitWidth="100.0" layoutX="184.0" layoutY="18.0" onMouseClicked="#createSoldier"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/graphic/soldiers/52.png"/>
+    </ImageView>
+    <ImageView fx:id="repairButton" fitHeight="65.0" fitWidth="130.0" layoutX="286.0" layoutY="47.0"
+               onMouseClicked="#repair" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/buttons/repair_btn.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="286.0" layoutY="81.0" onMouseClicked="#info"
+               onMouseDragged="#info" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/buttons/info_btn.jpg"/>
+    </ImageView>
+    <ImageView fitHeight="121.0" fitWidth="208.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/graphic/overlay/churchLeft.png"/>
+    </ImageView>
+    <ImageView fitHeight="65.0" fitWidth="130.0" layoutX="286.0" layoutY="14.0" onMouseClicked="#delete"
+               pickOnBounds="true" preserveRatio="true">
+        <Image url="@../../../assets/buttons/delete_btn.jpg"/>
+    </ImageView>
 </AnchorPane>

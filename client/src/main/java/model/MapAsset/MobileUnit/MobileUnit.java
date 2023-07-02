@@ -1,6 +1,5 @@
 package model.MapAsset.MobileUnit;
 
-import javafx.scene.image.ImageView;
 import model.Map.Map;
 import model.MapAsset.MapAsset;
 import model.User.Player;

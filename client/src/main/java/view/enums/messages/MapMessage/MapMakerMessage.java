@@ -23,7 +23,7 @@ public enum MapMakerMessage {
     UNIT_DROP_SUCCESS("unit dropped successfully"),
     NO_STOREHOUSE_NEARBY("StoreHouses have to be built next to each other"),
     NO_GATEHOUSE_NEARBY("You can only build a bridge next to a gatehouse"),;
-    private String message;
+    private final String message;
 
     private MapMakerMessage(String message) {
         this.message = message;

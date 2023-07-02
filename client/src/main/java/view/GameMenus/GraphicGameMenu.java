@@ -225,9 +225,7 @@ public class GraphicGameMenu extends Application {
             rootPane.getChildren().add(errorMessageText);
 
             Timeline timeline = new Timeline(
-                    new KeyFrame(Duration.seconds(3), event -> {
-                        rootPane.getChildren().remove(errorMessageText);
-                    })
+                    new KeyFrame(Duration.seconds(3), event -> rootPane.getChildren().remove(errorMessageText))
             );
             timeline.setCycleCount(1);
             timeline.play();
@@ -239,7 +237,7 @@ public class GraphicGameMenu extends Application {
         new TradeMenu().start(new Stage());
     }
 
-    public void nextTurn() throws Exception {
+    public void nextTurn() {
         String[][] buildings = new String[100][100];
         String[][] people = new String[100][100];
         loadCells(buildings, people);
@@ -258,23 +256,23 @@ public class GraphicGameMenu extends Application {
                 MapAsset building = searchForBuildings(cell);
                 MapAsset soldier = searchForPeople(cell);
                 if (soldier == null) people[y][x] = null;
-                else people[y][x] = soldier.getType().getImage().getUrl().toString();
+                else people[y][x] = soldier.getType().getImage().getUrl();
                 if (building == null) buildings[y][x] = null;
-                else buildings[y][x] = building.getType().getImage().getUrl().toString();
+                else buildings[y][x] = building.getType().getImage().getUrl();
             }
         }
     }
 
     private MapAsset searchForPeople(Cell cell) {
         for (MapAsset asset : cell.getAllAssets()) {
-            if (!(asset instanceof Building || asset instanceof Tree || asset instanceof Cliff)) return  asset;
+            if (!(asset instanceof Building || asset instanceof Tree || asset instanceof Cliff)) return asset;
         }
         return null;
     }
 
     private MapAsset searchForBuildings(Cell cell) {
         for (MapAsset asset : cell.getAllAssets()) {
-            if (asset instanceof Building || asset instanceof Tree || asset instanceof Cliff) return  asset;
+            if (asset instanceof Building || asset instanceof Tree || asset instanceof Cliff) return asset;
         }
         return null;
     }

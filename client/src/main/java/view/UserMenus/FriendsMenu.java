@@ -64,11 +64,11 @@ public class FriendsMenu extends Application implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         createSenders();
-        avatarColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Circle>("avatar"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, String>("username"));
-        selectColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, Button>("accept"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, String>("email"));
-        isFriendColumn.setCellValueFactory(new PropertyValueFactory<FriendsTable, ImageView>("isFriend"));
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("avatar"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("accept"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        isFriendColumn.setCellValueFactory(new PropertyValueFactory<>("isFriend"));
         updateSendersAndFriends();
         searchBox.textProperty().addListener((observable, oldText, newText) ->
                 translateUserToTableItem(friendsMenuController.getUsersFromText(searchBox.getText())));

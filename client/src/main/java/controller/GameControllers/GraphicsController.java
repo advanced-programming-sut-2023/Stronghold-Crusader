@@ -65,7 +65,6 @@ public class GraphicsController {
 
     public GraphicsController(GameController gameController, Game game, GraphicGameMenu gameMenu) {
         this.gameController = gameController;
-        gameController.setGraphicsController(this);
         this.map = game.getMap();
         this.gameMenu = gameMenu;
         mainGrid = new TilePane();
@@ -210,7 +209,6 @@ public class GraphicsController {
                 String dragText = dragboard.getString();
                 Pattern pattern = Pattern.compile("/assets/graphic/buildings/(?<name>\\S+)\\.png");
                 Matcher matcher = pattern.matcher(dragText);
-                //noinspection ResultOfMethodCallIgnored
                 if (matcher.find()) {
                     BuildingPlacementMessage msg = GraphicBuildingPlacementMenu.controller.dropBuilding(
                             MapAssetType.getTypeBySerial(Integer.parseInt(matcher.group("name"))).name().toLowerCase(),

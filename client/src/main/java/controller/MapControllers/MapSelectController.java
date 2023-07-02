@@ -20,13 +20,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MapSelectController {
-    private final User currentUser;
     private Map selectedMap;
     private HashMap<Color, Player> players;
     private boolean isMapModifiable;
 
-    public MapSelectController(User currentUser) {
-        this.currentUser = currentUser;
+    public MapSelectController() {
         this.players = new HashMap<>();
     }
 
@@ -80,7 +78,7 @@ public class MapSelectController {
         if (selectedMap == null) return MapSelectMessage.MAP_NOT_SELECTED;
         if (players.size() < selectedMap.getPlayerCount()) return MapSelectMessage.NOT_ENOUGH_PLAYERS;
         Game newGame = new Game(selectedMap, players, isMapModifiable, "test");
-        GameController controller = new GameController(currentUser, newGame);
+        GameController controller = new GameController(newGame);
         GraphicGameMenu menu = new GraphicGameMenu();
         GraphicGameMenu.setGameController(controller);
         GraphicGameMenu.setGraphicsController(new GraphicsController(controller, newGame, menu));

@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 public class Television extends Application implements Initializable {
     public ScrollPane scrollPane;
     public Button stopAndPlayButton;
-    private static TilePane mainGrid = new TilePane();
+    private static final TilePane mainGrid = new TilePane();
     private Timeline timeline;
     private int number = 1;
     private static String ID;
@@ -107,7 +107,7 @@ public class Television extends Application implements Initializable {
         }
     }
 
-    private void initializeScrollPane(ScrollPane scrollPane) throws Exception {
+    private void initializeScrollPane(ScrollPane scrollPane) {
         SaveData saveData = TelevisionManager.load(gameId, number + ".save");
         if (saveData == null) {
             if (!live) timeline.stop();
@@ -129,7 +129,7 @@ public class Television extends Application implements Initializable {
         return cellGrid;
     }
 
-    public void load(MouseEvent mouseEvent) throws Exception {
+    public void load(MouseEvent mouseEvent) {
         if (timeline.getStatus().equals(Animation.Status.RUNNING)) {
             timeline.stop();
             stopAndPlayButton.setText("Play");

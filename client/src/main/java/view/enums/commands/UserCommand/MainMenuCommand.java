@@ -7,7 +7,7 @@ public enum MainMenuCommand {
     PROFILE_MENU("\\s*profile\\s+menu\\s*"),
     GAME_MAKER_MENU("\\s*new\\s+game\\s*"),
     LOG_OUT("\\s*log\\s*out\\s*");
-    private String regex;
+    private final String regex;
 
     MainMenuCommand(String regex) {
         this.regex = regex;
@@ -22,7 +22,6 @@ public enum MainMenuCommand {
 
     public static Matcher getMatcher(String input, MainMenuCommand cmd) {
         Pattern pattern = Pattern.compile(cmd.regex);
-        Matcher matcher = pattern.matcher(input);
-        return matcher;
+        return pattern.matcher(input);
     }
 }

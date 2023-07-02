@@ -1,11 +1,6 @@
 package controller.GameControllers;
 
-import controller.MapControllers.BuildingPlacementController;
-import controller.MapControllers.ChangeEnvironmentController;
-import controller.MapControllers.ShowMapController;
 import javafx.beans.property.DoubleProperty;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.TilePane;
 import javafx.beans.property.IntegerProperty;
 import model.Game.Game;
 import model.Game.Governance;
@@ -18,52 +13,43 @@ import model.MapAsset.MapAsset;
 import model.MapAsset.MobileUnit.AttackingUnit;
 import model.MapAsset.MobileUnit.MobileUnit;
 import model.User.Player;
-import model.User.User;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.Material;
 import utils.Pair;
 import utils.Vector2D;
-import view.GameMenus.GameMenu;
 import view.enums.messages.GameMessage.GameMenuMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameController {
-    private final User currentUser;
     private final Game game;
-    private ShowMapController showMapController;
     private SelectedBuildingController selectedBuildingController;
     private final SelectedUnitController selectedUnitController;
-    private GraphicsController graphicsController;
 
-    public GameController(User currentUser, Game game) {
-        this.currentUser = currentUser;
+    public GameController(Game game) {
         this.game = game;
         selectedBuildingController = null;
         selectedUnitController = new SelectedUnitController(new ArrayList<>(), game);
         nextTurn();
     }
 
-    public String nextRound() {
+    public void nextRound() {
         processLogics();
         applyUnitDecisions();
         deleteDeadPlayers();
-        if (game.getDeadPlayers().size() == game.getMap().getPlayerCount()) return "endGame";
-        return "continue";
     }
 
-    public String nextTurn() {
+    public void nextTurn() {
         game.nextTurn();
         String output = "continue";
-        if (game.isNextRound()) output = nextRound();
+        if (game.isNextRound()) nextRound();
         Governance governance = game.getCurrentPlayer().getGovernance();
         governance.processPopulation();
         governance.payTax();
         governance.distributeFoods();
         governance.calculatePopularity();
         produce();
-        return output;
     }
 
     public void produce() {
@@ -180,7 +166,7 @@ public class GameController {
 
     private void processMovement(Map map, MobileUnit mobileUnit) {
         Vector2D pastCoordinate = mobileUnit.getCoordinate();
-        if (mobileUnit.hasNextMoveDestination()){
+        if (mobileUnit.hasNextMoveDestination()) {
             Vector2D newCoordinate = mobileUnit.getNextMoveDestination();
             map.removeMapObject(pastCoordinate, mobileUnit);
             map.addMapObject(newCoordinate, mobileUnit);
@@ -268,24 +254,6 @@ public class GameController {
 
     public int getRoundNum() {
         return game.getRound();
-    }
-
-    public GameMenuMessage showMap(int x, int y) {
-        Vector2D coordinate = new Vector2D(x, y);
-        if (!ShowMapController.isCenterValid(coordinate, game.getMap()))
-            return GameMenuMessage.INVALID_COORDINATE;
-        showMapController = new ShowMapController(game.getMap(), coordinate);
-        return GameMenuMessage.ENTER_SHOW_MAP;
-    }
-
-    public String showPopularityFactors() {
-        Governance currentGov = game.getCurrentPlayer().getGovernance();
-        return "Popularity factors:" +
-                "\n-Food: " + currentGov.getFoodPopularity() +
-                "\n-Tax: " + currentGov.getTaxPopularity() +
-                "\n-Religion: " + currentGov.getReligionPopularity() +
-                "\n-Fear rate: " + currentGov.getFearPopularity() +
-                "\n-Inn: " + currentGov.getInnPopularity();
     }
 
     public int getPopularity() {
@@ -376,10 +344,7 @@ public class GameController {
         return game;
     }
 
-    public void setGraphicsController(GraphicsController graphicsController) {
-        this.graphicsController = graphicsController;
-    }
-     public boolean isBuildingSelected(){
+    public boolean isBuildingSelected() {
         return selectedBuildingController != null;
-     }
+    }
 }

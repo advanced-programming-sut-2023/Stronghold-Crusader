@@ -1,6 +1,5 @@
 package view.MapMenus.MapCreationMenu;
 
-import controller.MapControllers.BuildingPlacementController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
@@ -13,25 +12,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import model.enums.AssetType.BuildingCategory;
-import model.enums.AssetType.BuildingType;
-import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GraphicChangeTextureMenu {
     public ScrollPane scrollPane;
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
         loadScrollPane();
     }
 
-    private void loadScrollPane() throws IOException {
+    private void loadScrollPane() {
         HBox pane = new HBox();
         CellType[] cellTypes = CellType.values();
         for (CellType type : cellTypes) {

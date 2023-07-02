@@ -13,7 +13,7 @@ public enum MapMakerCommand {
     DROP_UNIT("\\s*drop\\s+unit\\s+-x\\s+(?<x>\\S+)\\s+-y\\s+(?<y>\\S+)\\s+-t\\s+(?<type>\\S+)\\s*"),
 
     BACK("\\s*back\\s*");
-    private String regex;
+    private final String regex;
 
     MapMakerCommand(String regex) {
         this.regex = regex;

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import controller.ChatControllers.ChatController;
 import javafx.application.Platform;
 import model.chatRoom.Chat;
-import view.ChatMenus.MainChatMenu;
 import view.ChatMenus.MainChatMenuController;
 
 import java.io.DataInputStream;
@@ -16,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class Listener extends Thread {
     private final DataInputStream dataInputStream;
-    private static LinkedBlockingQueue<String> lastContent = new LinkedBlockingQueue<>();
+    private static final LinkedBlockingQueue<String> lastContent = new LinkedBlockingQueue<>();
 
     private enum InputRegex {
         CHAT_UPDATE("chat_updated:(?<request>.+)");
@@ -61,7 +60,7 @@ public class Listener extends Thread {
         }
     }
 
-    private void chatUpdate(String input) throws IOException {
+    private void chatUpdate(String input) {
         Pattern pattern = Pattern.compile(InputRegex.CHAT_UPDATE.regex);
         Matcher matcher = pattern.matcher(input);
         matcher.find();
@@ -69,7 +68,7 @@ public class Listener extends Thread {
         Chat chat = new Gson().fromJson(requestStr, Chat.class);
         if (ChatController.currentMenu != null) {
             MainChatMenuController menu = ChatController.currentMenu;
-            if (MainChatMenuController.getController().getCurrentChat().getChatId().equals(chat.getChatId())){
+            if (MainChatMenuController.getController().getCurrentChat().getChatId().equals(chat.getChatId())) {
                 Platform.runLater(() -> {
                     try {
                         menu.loadChat(chat);

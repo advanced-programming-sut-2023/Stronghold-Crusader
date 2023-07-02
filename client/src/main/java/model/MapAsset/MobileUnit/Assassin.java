@@ -1,6 +1,5 @@
 package model.MapAsset.MobileUnit;
 
-import javafx.scene.image.ImageView;
 import model.User.Player;
 import utils.Vector2D;
 

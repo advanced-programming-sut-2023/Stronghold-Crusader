@@ -142,8 +142,7 @@ public class ChatManager {
         JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
         if (jsonObject == null)
             return null;
-        Chat chat = gson.fromJson(jsonObject, Chat.class);
-        return chat;
+        return gson.fromJson(jsonObject, Chat.class);
     }
 
     public static Chat createGlobaChat() {

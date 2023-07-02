@@ -24,11 +24,6 @@ public class SelectedUnitController {
         this.selectedUnits = selectedUnits;
     }
 
-    public void run() {
-//        SelectedUnitMenu selectedUnitMenu = new SelectedUnitMenu(this);
-//        selectedUnitMenu.run();
-    }
-
     public SelectedUnitMessage moveUnit(int x, int y) {
         Vector2D coordinate = new Vector2D(x, y);
         if (!game.getMap().isInMap(coordinate))

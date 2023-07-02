@@ -2,27 +2,19 @@ package view.GameMenus.MarketMenus;
 
 import controller.GameControllers.MarketController;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import model.Game.Store.StoreMaterial;
 import model.enums.AssetType.Material;
-import view.GameMenus.GameMenu;
 import view.Main;
 import view.enums.messages.GameMessage.MarketMessage;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class PurchaseMenu {
     public ScrollPane scrollPane;

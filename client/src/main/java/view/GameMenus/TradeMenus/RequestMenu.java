@@ -49,15 +49,15 @@ public class RequestMenu extends Application implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<TableItem> tradeList = FXCollections.observableArrayList();
-        stateColumn.setCellValueFactory(new PropertyValueFactory<TableItem, ImageView>("state"));
-        IDColumn.setCellValueFactory(new PropertyValueFactory<TableItem, Integer>("ID"));
-        acceptorColumn.setCellValueFactory(new PropertyValueFactory<TableItem, String>("owner"));
-        goodColumn.setCellValueFactory(new PropertyValueFactory<TableItem, Circle>("good"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<TableItem, Integer>("amount"));
-        messageColumn.setCellValueFactory(new PropertyValueFactory<TableItem, String>("message"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<TableItem, String>("type"));
-        acceptColumn.setCellValueFactory(new PropertyValueFactory<TableItem, Button>("acceptButton"));
-        denyColumn.setCellValueFactory(new PropertyValueFactory<TableItem, Button>("denyButton"));
+        stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
+        IDColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        acceptorColumn.setCellValueFactory(new PropertyValueFactory<>("owner"));
+        goodColumn.setCellValueFactory(new PropertyValueFactory<>("good"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        acceptColumn.setCellValueFactory(new PropertyValueFactory<>("acceptButton"));
+        denyColumn.setCellValueFactory(new PropertyValueFactory<>("denyButton"));
 
 
         ArrayList<Trade> trades = new ArrayList<>(TradeMenu.getTradeController().getTradesToMe());

@@ -2,7 +2,6 @@ package view.MapMenus.MapCreationMenu;
 
 import controller.GameControllers.GraphicsController;
 import controller.MapControllers.MapCreationController;
-import controller.UserControllers.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.TransferMode;

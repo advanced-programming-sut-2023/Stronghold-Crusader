@@ -9,7 +9,6 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -18,7 +17,6 @@ import model.enums.AssetType.BuildingCategory;
 import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +32,7 @@ public class GraphicBuildingPlacementMenu {
     }
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
         setCategoryButton(entranceCategoryButton);
         setCategoryButton(trainingCategoryButton);
         setCategoryButton(normalCategoryButton);
@@ -53,15 +51,11 @@ public class GraphicBuildingPlacementMenu {
             matcher.find();
             String category = matcher.group("name");
             controller.setBuildingCategory(category);
-            try {
-                loadScrollPane(category);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            loadScrollPane(category);
         });
     }
 
-    private void loadScrollPane(String category) throws IOException {
+    private void loadScrollPane(String category) {
         HBox pane = new HBox();
         BuildingCategory buildingCategory = BuildingCategory.getCategory(category);
         ArrayList<MapAssetType> buildings = BuildingType.getAllBuildings(buildingCategory);

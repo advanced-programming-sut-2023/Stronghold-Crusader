@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Lobby {
-    private LobbyStatus lobbyStatus;
+    private final LobbyStatus lobbyStatus;
     private final int capacity;
     private final String id;
     private User admin;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class StoreMaterial {
     private static ArrayList<StoreMaterial> materialList;
-    private String name;
-    private int price;
+    private final String name;
+    private final int price;
     private String type;
 
     public StoreMaterial(String name, int price) {

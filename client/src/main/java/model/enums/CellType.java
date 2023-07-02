@@ -2,7 +2,6 @@ package model.enums;
 
 import com.google.gson.annotations.SerializedName;
 import javafx.scene.image.Image;
-import model.enums.AssetType.MapAssetType;
 
 
 public enum CellType {

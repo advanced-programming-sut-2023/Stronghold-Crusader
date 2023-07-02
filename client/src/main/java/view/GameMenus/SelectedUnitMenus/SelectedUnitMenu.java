@@ -1,26 +1,18 @@
 package view.GameMenus.SelectedUnitMenus;
 
-import controller.GameControllers.GraphicsController;
 import controller.GameControllers.SelectedUnitController;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Orientation;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Popup;
 import utils.Vector2D;
 import view.GameMenus.GraphicGameMenu;
-import view.GameMenus.MarketMenus.MarketMenu;
 import view.Main;
-import view.Menu;
-import view.enums.commands.GameCommand.SelectedUnitCommand;
 import view.enums.messages.GameMessage.SelectedUnitMessage;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.regex.Matcher;
 
 public class SelectedUnitMenu {
     public TilePane selectedUnits;

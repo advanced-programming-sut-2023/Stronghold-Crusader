@@ -29,7 +29,7 @@ public class ResourceManager {
     }
 
 
-    public static Object load(String gameId, String filename) throws Exception {
+    public static Object load(String gameId, String filename) {
 
         try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get("server","database",
                 "television", gameId, filename)))) {

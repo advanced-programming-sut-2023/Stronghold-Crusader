@@ -5,8 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import model.Stronghold;
-import model.User.User;
 import model.chatRoom.Chat;
 import model.chatRoom.ChatManager;
 import model.chatRoom.Message;
@@ -117,11 +115,7 @@ public class ReactionManager {
     }
 
     public static void setEdit(AnchorPane anchorPane, Message msg){
-        (anchorPane.getChildren().get(12)).setOnMouseClicked(e -> {
-            Platform.runLater(() -> {
-                ChatController.currentMenu.showEditingContent(msg);
-            });
-        });
+        (anchorPane.getChildren().get(12)).setOnMouseClicked(e -> Platform.runLater(() -> ChatController.currentMenu.showEditingContent(msg)));
     }
     public static void setDelete(AnchorPane anchorPane, Message msg){
         (anchorPane.getChildren().get(13)).setOnMouseClicked(e -> {

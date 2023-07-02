@@ -6,7 +6,6 @@ import model.enums.User.Slogan;
 import utils.Captcha;
 import utils.FormatValidation;
 import utils.Pair;
-import view.Menu;
 import view.enums.messages.UserMessage.SignupAndLoginMessage;
 
 import java.util.HashMap;
@@ -31,37 +30,6 @@ public class SignupController {
         this.newUser = new User(inputs.get("username"), inputs.get("password"), inputs.get("email"),
                 inputs.get("nickname"), inputs.get("slogan"));
         return SignupAndLoginMessage.SUCCESS_PROCESS;
-    }
-
-    public SignupAndLoginMessage pickQuestion(HashMap<String, String> inputs) {
-        int number = Integer.parseInt(inputs.get("questionNumber"));
-        if (!inputs.get("answer").equals(inputs.get("answerConfirm")) || (number < 1 || number > 3))
-            return SignupAndLoginMessage.FAIL_PICKING_UP_QUESTION;
-        while (true) {
-            System.out.println("Enter the code shown below :");
-            Captcha.generateCaptcha();
-            if (!Captcha.isFilledCaptchaValid(Menu.getScanner().nextLine()))
-                return SignupAndLoginMessage.INVALID_CAPTCHA;
-            else break;
-        }
-        Pair pair;
-        User user = stronghold.getUser(inputs.get("username"));
-        switch (number) {
-            case 1:
-                pair = new Pair("What is my father’s name?", inputs.get("answer"));
-                break;
-            case 2:
-                pair = new Pair("What was my first pet’s name?", inputs.get("answer"));
-                break;
-            case 3:
-                pair = new Pair("What is my mother’s last name?", inputs.get("answer"));
-                break;
-            default:
-                pair = new Pair("", "");
-                break;
-        }
-        user.setPasswordRecovery(pair);
-        return SignupAndLoginMessage.SUCCESS_CREATING_USER;
     }
 
     public SignupAndLoginMessage pickQuestion(String question, String answer, String confirmation, String captcha) {

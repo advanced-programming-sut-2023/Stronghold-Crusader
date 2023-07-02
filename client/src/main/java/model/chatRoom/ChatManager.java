@@ -4,9 +4,6 @@ import com.google.gson.Gson;
 import network.Connection;
 import network.Request;
 
-
-import java.io.*;
-
 public class ChatManager {
 
     public static String updateChat(Chat chat) {

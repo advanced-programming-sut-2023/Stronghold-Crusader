@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Message {
     public enum Reaction {
-        LIKE, DISLIKE, HEART, FIRE;
+        LIKE, DISLIKE, HEART, FIRE
     }
 
     private final String senderUsername;
@@ -14,7 +14,7 @@ public class Message {
     private final int minute;
     private boolean seenStatus = false;
     private final ArrayList<String> invisibleFor;
-    private HashMap<String, Reaction> reactions;
+    private final HashMap<String, Reaction> reactions;
 
     public Message(String senderUsername, String text, int hour, int minute) {
         this.senderUsername = senderUsername;

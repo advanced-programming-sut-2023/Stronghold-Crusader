@@ -17,7 +17,6 @@ import model.enums.AssetType.BuildingType;
 import model.enums.AssetType.MapAssetType;
 import model.enums.AssetType.UnitState;
 import utils.Vector2D;
-import view.MapMenus.dropBuildingMenu.ChangeEnvironmentMenu;
 import view.enums.messages.MapMessage.MapMakerMessage;
 
 import java.util.ArrayList;
@@ -29,13 +28,6 @@ public class ChangeEnvironmentController {
     public ChangeEnvironmentController(Map map, Game game) {
         this.map = map;
         this.game = game;
-    }
-
-    public void run() {
-        ChangeEnvironmentMenu menu = new ChangeEnvironmentMenu(this);
-        while (true) {
-            if (menu.run().equals("back")) return;
-        }
     }
 
     public MapMakerMessage setTexture(int x, int y, String textureName) {

@@ -22,9 +22,7 @@ import model.Game.Trade;
 import model.User.Player;
 import model.enums.AssetType.Material;
 import utils.MenusUtils;
-import view.Menu;
 import view.enums.commands.TradeMenuCommand;
-import view.enums.messages.TradeMenuMessage;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -52,36 +50,6 @@ public class TradeMenu extends Application {
         stage.setScene(new Scene(rootPane));
         stage.setFullScreen(true);
         stage.show();
-    }
-
-
-    public String run() {
-        // System.out.println(tradeController.showNewTradesForPlayer());
-        String nextCommand;
-        Matcher matcher;
-        while (true) {
-            nextCommand = Menu.getScanner().nextLine();
-            TradeMenuCommand typeOfCommand = TradeMenuCommand.getCommand(nextCommand);
-            if (typeOfCommand == null) {
-                TradeMenuMessage.INVALID_COMMAND.printMessage();
-                continue;
-            }
-            matcher = TradeMenuCommand.getMatcher(nextCommand, typeOfCommand);
-            switch (typeOfCommand) {
-                case REQUEST:
-                    requestRun(matcher);
-                    break;
-                case ACCEPT_TRADE:
-                    acceptTradeRun(matcher);
-                    break;
-                case TRADE_LIST:
-                case TRADE_HISTORY:
-                    break;
-                case BACK:
-                    System.out.println(TradeMenuMessage.ENTER_MAIN);
-                    return "back";
-            }
-        }
     }
 
     private void requestRun(Matcher matcher) {
@@ -142,7 +110,7 @@ public class TradeMenu extends Application {
             Circle circle = new Circle(23);
             circle.setFill(new ImagePattern(material.getImage()));
             circle.setTranslateX(87 + 70 * (counter % 9));
-            circle.setTranslateY(63 + (int) (counter / 9) * 65);
+            circle.setTranslateY(63 + (counter / 9) * 65);
             circle.setOnMouseClicked(mouseEvent -> {
                 ((Circle) anchorPane.getChildren().get(0)).setFill(circle.getFill());
                 anchorPane.getChildren().get(1).setDisable(false);
@@ -220,7 +188,7 @@ public class TradeMenu extends Application {
         } else {
             pane = FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/successTrade.fxml"));
             popup.setAutoHide(false);
-            ((Button) pane.getChildren().get(1)).setOnMouseClicked(e -> {
+            pane.getChildren().get(1).setOnMouseClicked(e -> {
                 trade.setMessage(((TextField) pane.getChildren().get(2)).getText());
                 popup.hide();
             });

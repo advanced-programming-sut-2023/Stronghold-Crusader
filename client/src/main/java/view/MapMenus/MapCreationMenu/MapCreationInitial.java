@@ -4,17 +4,14 @@ import controller.MapControllers.MapCreationController;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Game.Game;
 import view.GameMenus.GraphicGameMenu;
 import view.Main;
 import view.MapMenus.MapManagerMenu;
@@ -75,9 +72,7 @@ public class MapCreationInitial extends Application {
     public void printError(String text) {
         errorMessageText.setText(text);
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(3), event -> {
-                    errorMessageText.setText("");
-                })
+                new KeyFrame(Duration.seconds(3), event -> errorMessageText.setText(""))
         );
         timeline.setCycleCount(1);
         timeline.play();

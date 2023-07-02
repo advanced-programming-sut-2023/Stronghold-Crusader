@@ -2,10 +2,8 @@ package model.User;
 
 import Settings.Settings;
 import com.google.gson.*;
-import model.Stronghold;
 
 import java.io.*;
-import java.util.Collection;
 
 public class UserManager {
     public static User getLoggedInUser() {

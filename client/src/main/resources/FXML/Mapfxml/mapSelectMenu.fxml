@@ -11,10 +11,9 @@
     <ImageView fx:id="addPlayerButton" fitHeight="30" fitWidth="100" layoutX="331.0" layoutY="364.0" nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
         <Image url="@../../assets/buttons/add_btn.png" />
     </ImageView>
-    <ImageView fx:id="addMapButton" fitHeight="30" fitWidth="100" layoutX="331.0" layoutY="325.0" nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../assets/buttons/pick_btn.png" />
-        </image>
+    <ImageView fx:id="addMapButton" fitHeight="30" fitWidth="100" layoutX="331.0" layoutY="325.0"
+               nodeOrientation="INHERIT" pickOnBounds="true" translateX="48" translateY="73">
+        <Image url="@../../assets/buttons/pick_btn.png"/>
     </ImageView>
     <TextField fx:id="mapNameField" layoutX="121.0" layoutY="398.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your map" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
     <TextField fx:id="playerNameField" layoutX="121.0" layoutY="437.0" opacity="0.5" prefHeight="30.0" prefWidth="113.0" promptText="choose player" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />

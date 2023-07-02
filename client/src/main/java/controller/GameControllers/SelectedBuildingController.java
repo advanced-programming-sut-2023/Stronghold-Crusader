@@ -17,7 +17,6 @@ import model.enums.AssetType.Material;
 import utils.Vector2D;
 import view.enums.messages.GameMessage.SelectedBuildingMessage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SelectedBuildingController {
@@ -33,16 +32,6 @@ public class SelectedBuildingController {
         this.map = game.getMap();
         coordinate = building.getCoordinate();
     }
-
-//    public void run() {
-//        if (building.getType().equals(MapAssetType.STORE)) {
-//            MarketController marketController = new MarketController(player);
-//            marketController.run();
-//        } else {
-//            SelectedBuildingMenu selectedBuildingMenu = new SelectedBuildingMenu(this);
-//            selectedBuildingMenu.run();
-//        }
-//    }
 
     public Building getBuilding() {
         return building;
@@ -63,7 +52,7 @@ public class SelectedBuildingController {
         return building.toString();
     }
 
-    public SelectedBuildingMessage deleteBuilding() throws IOException {
+    public SelectedBuildingMessage deleteBuilding() {
         if (map.getCell(coordinate).isThereUnit())
             return SelectedBuildingMessage.NOT_ALLOWED_TO_DELETE;
         map.removeMapObject(coordinate, building);

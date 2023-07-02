@@ -9,33 +9,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="mainPane" prefHeight="458.0" prefWidth="408.0" styleClass="pane" stylesheets="@../../CSS/style1.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.LoginMenu">
-    <children>
-        <Text fill="#a0a2ab" layoutX="66.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remember me" wrappingWidth="101.60000000000014" />
-        <Button layoutX="79.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#goToChangePasswordPane" prefHeight="36.0" prefWidth="270.0" styleClass="button-2" text="Forgot password?" underline="true">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Button>
-        <Button fx:id="loginButton" layoutX="285.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#login" prefHeight="32.0" prefWidth="70.0" styleClass="button-3" text="Login">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Button>
-        <TextField fx:id="username" layoutX="96.0" layoutY="26.0" prefHeight="32.0" prefWidth="254.0" promptText="username" styleClass="field" />
-        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="53.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../assets/logo/icons8-user-64.png" />
-            </image>
-        </ImageView>
-        <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="51.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../assets/logo/icons8-lock-64.png" />
-            </image>
-        </ImageView>
-        <PasswordField fx:id="password" layoutX="91.0" layoutY="119.0" prefHeight="26.0" prefWidth="263.0" promptText="password" styleClass="field" />
-        <Text fx:id="userError" fill="#df1806" layoutX="87.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="254.39999999999986" />
-        <Text fx:id="passwordError" fill="#df1806" layoutX="91.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="254.39999999999986" />
-        <Text fx:id="attemptsError" fill="#df1806" layoutX="94.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" textAlignment="CENTER" wrappingWidth="254.39999999999986" />
-    </children>
+<Pane fx:id="mainPane" prefHeight="458.0" prefWidth="408.0" styleClass="pane" stylesheets="@../../CSS/style1.css"
+      xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserMenus.LoginMenu">
+    <Text fill="#a0a2ab" layoutX="66.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remember me"
+          wrappingWidth="101.60000000000014"/>
+    <Button layoutX="79.0" layoutY="250.0" mnemonicParsing="false" onMouseClicked="#goToChangePasswordPane"
+            prefHeight="36.0" prefWidth="270.0" styleClass="button-2" text="Forgot password?" underline="true">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Button>
+    <Button fx:id="loginButton" layoutX="285.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#login"
+            prefHeight="32.0" prefWidth="70.0" styleClass="button-3" text="Login">
+        <font>
+            <Font size="13.0"/>
+        </font>
+    </Button>
+    <TextField fx:id="username" layoutX="96.0" layoutY="26.0" prefHeight="32.0" prefWidth="254.0" promptText="username"
+               styleClass="field"/>
+    <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="53.0" layoutY="30.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../assets/logo/icons8-user-64.png"/>
+    </ImageView>
+    <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="51.0" layoutY="120.0" pickOnBounds="true"
+               preserveRatio="true">
+        <Image url="@../../assets/logo/icons8-lock-64.png"/>
+    </ImageView>
+    <PasswordField fx:id="password" layoutX="91.0" layoutY="119.0" prefHeight="26.0" prefWidth="263.0"
+                   promptText="password" styleClass="field"/>
+    <Text fx:id="userError" fill="#df1806" layoutX="87.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text=""
+          wrappingWidth="254.39999999999986"/>
+    <Text fx:id="passwordError" fill="#df1806" layoutX="91.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="" wrappingWidth="254.39999999999986"/>
+    <Text fx:id="attemptsError" fill="#df1806" layoutX="94.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="" textAlignment="CENTER" wrappingWidth="254.39999999999986"/>
 </Pane>

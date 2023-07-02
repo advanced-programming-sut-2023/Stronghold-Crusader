@@ -5,7 +5,6 @@ import model.Game.Trade;
 import model.User.Player;
 import model.enums.AssetType.Material;
 import utils.MenusUtils;
-import view.GameMenus.TradeMenus.TradeMenu;
 import view.enums.messages.TradeMenuMessage;
 
 import java.util.ArrayList;
@@ -17,13 +16,6 @@ public class TradeController {
 
     public TradeController(Game game) {
         this.game = game;
-    }
-
-    public void run() {
-        TradeMenu menu = new TradeMenu();
-        while (true) {
-            if (menu.run().equals("back")) return;
-        }
     }
 
     public ArrayList<Trade> getMyTrades(){

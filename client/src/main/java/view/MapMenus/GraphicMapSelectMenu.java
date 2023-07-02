@@ -48,7 +48,7 @@ public class GraphicMapSelectMenu extends Application {
         stage.show();
     }
 
-    public void initialize(){
+    public void initialize() {
         initializeMapList();
         mapPreview.getStylesheets().add(
                 GraphicGameMenu.class.getResource("/CSS/MapCss/mapSelectStyle.css").toExternalForm());
@@ -56,12 +56,11 @@ public class GraphicMapSelectMenu extends Application {
         addMapButton.setOnMouseClicked(e -> selectMap());
         addPlayerButton.setOnMouseClicked(e -> addPlayer());
 //        mapSelectController = new MapSelectController(Stronghold.getInstance().getUser("diba"));
-     //   startGameButton.setOnMouseClicked(e -> startGame());
+        //   startGameButton.setOnMouseClicked(e -> startGame());
     }
 
 
-
-    private void initializeMapList(){
+    private void initializeMapList() {
         ArrayList<ArrayList<String>> maps = MapManager.getMapList();
         VBox vBox = new VBox();
         vBox.setSpacing(10);
@@ -76,7 +75,7 @@ public class GraphicMapSelectMenu extends Application {
         mapList.setContent(vBox);
     }
 
-    public void selectMap(){
+    public void selectMap() {
         String mapId = mapNameField.getText();
         mapNameField.clear();
         boolean modifiability = modifiabilityCheck.isSelected();
@@ -87,12 +86,11 @@ public class GraphicMapSelectMenu extends Application {
             graphicsController.loadGraphics();
             mapPreview.setContent(graphicsController.getMainGrid());
             mapPreview.setOpacity(1);
-        } else {
-            // TODO : Handle errors
         }
+
     }
 
-    public void addPlayer(){
+    public void addPlayer() {
         String username = playerNameField.getText();
         String colorName = colorField.getText();
         playerNameField.clear();
@@ -102,8 +100,6 @@ public class GraphicMapSelectMenu extends Application {
             Label label = new Label(" " + username + " ,color : " + colorName);
             label.setStyle("-fx-text-fill: white; -fx-font-size: 15;");
             selectedPlayers.getChildren().add(label);
-        } else {
-            // TODO : handle errors
         }
     }
 

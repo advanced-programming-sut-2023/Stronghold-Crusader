@@ -1,6 +1,5 @@
 package view.GameMenus.MarketMenus;
 
-import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 import java.io.IOException;

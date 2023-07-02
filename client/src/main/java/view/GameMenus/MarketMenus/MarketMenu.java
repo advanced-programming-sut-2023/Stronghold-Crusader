@@ -7,14 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import model.Game.Store.StoreMaterial;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
 
 public class MarketMenu {
     public ImageView foodButton, materialButton, weaponButton, pricingListButton;
     public static MarketController marketController;
-    private Scanner scanner;
     public AnchorPane scrollPane;
     public AnchorPane mainMenu, pricingMenu, listMenu, purchaseMenu;
 

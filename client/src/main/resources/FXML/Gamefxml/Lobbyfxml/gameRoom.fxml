@@ -10,44 +10,49 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/lobby.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.Lobby.GameRoomMenu">
-   <children>
-      <Pane layoutX="40.0" layoutY="-4.0" opacity="0.56" prefHeight="660.0" prefWidth="200.0" style="-fx-background-color: #aa0000;" styleClass="pane">
-         <children>
-            <Button fx:id="newGameButton" layoutX="31.0" layoutY="480.0" mnemonicParsing="false" onMouseClicked="#createGame" prefHeight="59.0" prefWidth="130.0" text="Create Game">
-               <font>
-                  <Font size="15.0" />
-               </font></Button>
-            <ImageView fitHeight="161.0" fitWidth="147.0" layoutX="27.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../assets/logo/140-1402285_village-christian-crusaders-hd-png-download-removebg-preview.png" />
-               </image>
-            </ImageView>
-            <Button layoutX="31.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="59.0" prefWidth="130.0" text="Exit">
-               <font>
-                  <Font size="26.0" />
-               </font>
-            </Button>
-            <Button fx:id="privacyButton" layoutX="40.0" layoutY="188.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="113.0" text="PUBLIC">0
-               <font>
-                  <Font size="21.0" />
-               </font>
-            </Button>
-            <CheckBox fx:id="modifiabilityCheck" layoutX="35.0" layoutY="258.0" mnemonicParsing="false" opacity="0.5" style="-fx-text-fill: white;" stylesheets="@../../../CSS/other/checkBox.css" text="Map Modifiability" />
-         </children>
-      </Pane>
-
-      <TableView fx:id="lobbyTable" layoutX="280.0" layoutY="64.0" prefHeight="454.0" prefWidth="525.0">
-        <columns>
-          <TableColumn fx:id="avatarColumn" prefWidth="75.0" text="Avatar" />
-          <TableColumn fx:id="nameColumn" prefWidth="318.4000549316406" text="Nickname" />
-            <TableColumn fx:id="colorColumn" minWidth="9.5999755859375" prefWidth="42.4000244140625" text="Color" />
-        </columns>
-      </TableView>
-      <Button fx:id="refreshButton" layoutX="472.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="59.0" prefWidth="130.0" style="-fx-background-color: #aa0000;" text="refresh">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/lobby.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenus.Lobby.GameRoomMenu">
+   <Pane layoutX="40.0" layoutY="-4.0" opacity="0.56" prefHeight="660.0" prefWidth="200.0"
+         style="-fx-background-color: #aa0000;" styleClass="pane">
+      <Button fx:id="newGameButton" layoutX="31.0" layoutY="480.0" mnemonicParsing="false"
+              onMouseClicked="#createGame" prefHeight="59.0" prefWidth="130.0" text="Create Game">
          <font>
-            <Font size="26.0" />
+            <Font size="15.0"/>
          </font>
       </Button>
-   </children>
+      <ImageView fitHeight="161.0" fitWidth="147.0" layoutX="27.0" layoutY="21.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../../../assets/logo/140-1402285_village-christian-crusaders-hd-png-download-removebg-preview.png"/>
+      </ImageView>
+      <Button layoutX="31.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="59.0"
+              prefWidth="130.0" text="Exit">
+         <font>
+            <Font size="26.0"/>
+         </font>
+      </Button>
+      <Button fx:id="privacyButton" layoutX="40.0" layoutY="188.0" mnemonicParsing="false" prefHeight="48.0"
+              prefWidth="113.0" text="PUBLIC">0
+         <font>
+            <Font size="21.0"/>
+         </font>
+      </Button>
+      <CheckBox fx:id="modifiabilityCheck" layoutX="35.0" layoutY="258.0" mnemonicParsing="false" opacity="0.5"
+                style="-fx-text-fill: white;" stylesheets="@../../../CSS/other/checkBox.css"
+                text="Map Modifiability"/>
+   </Pane>
+
+   <TableView fx:id="lobbyTable" layoutX="280.0" layoutY="64.0" prefHeight="454.0" prefWidth="525.0">
+      <columns>
+         <TableColumn fx:id="avatarColumn" prefWidth="75.0" text="Avatar"/>
+         <TableColumn fx:id="nameColumn" prefWidth="318.4000549316406" text="Nickname"/>
+         <TableColumn fx:id="colorColumn" minWidth="9.5999755859375" prefWidth="42.4000244140625" text="Color"/>
+      </columns>
+   </TableView>
+   <Button fx:id="refreshButton" layoutX="472.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#back"
+           prefHeight="59.0" prefWidth="130.0" style="-fx-background-color: #aa0000;" text="refresh">
+      <font>
+         <Font size="26.0"/>
+      </font>
+   </Button>
 </AnchorPane>

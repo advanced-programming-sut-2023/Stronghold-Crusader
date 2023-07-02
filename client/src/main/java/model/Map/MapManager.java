@@ -6,7 +6,6 @@ import com.google.gson.reflect.TypeToken;
 import model.ConstantManager;
 import model.MapAsset.Building.Building;
 import model.MapAsset.MapAsset;
-import model.chatRoom.Chat;
 import model.enums.AssetType.MapAssetType;
 import model.enums.CellType;
 import network.Connection;
@@ -16,7 +15,6 @@ import utils.Vector2D;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

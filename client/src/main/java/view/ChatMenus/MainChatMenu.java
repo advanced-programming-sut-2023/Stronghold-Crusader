@@ -1,36 +1,16 @@
 package view.ChatMenus;
 
-import controller.ChatControllers.ChatController;
-import controller.ChatControllers.ChatCreationController;
-import controller.ChatControllers.ReactionManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.Stronghold;
-import model.chatRoom.Chat;
-import model.chatRoom.Message;
-import view.GameMenus.MarketMenus.MarketMenu;
-import view.Main;
 import view.UserMenus.LoginMenu;
 import view.UserMenus.MainMenu;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class MainChatMenu extends Application {
 

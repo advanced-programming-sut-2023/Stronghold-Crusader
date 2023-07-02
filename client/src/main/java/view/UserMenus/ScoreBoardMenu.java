@@ -25,7 +25,6 @@ import model.Television.Television;
 import model.User.User;
 import view.Main;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -61,23 +60,21 @@ public class ScoreBoardMenu extends Application {
 
     @FXML
     public void initialize() {
-        rankColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Integer>("rank"));
-        avatarColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Circle>("avatar"));
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, String>("username"));
-        highScoreColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Integer>("highScore"));
-        connectionColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, ImageView>("connectionMode"));
-        televisionColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, ImageView>("television"));
-        selectColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Button>("select"));
-        lastSeenColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, String>("lastSeen"));
+        rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
+        avatarColumn.setCellValueFactory(new PropertyValueFactory<>("avatar"));
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        highScoreColumn.setCellValueFactory(new PropertyValueFactory<>("highScore"));
+        connectionColumn.setCellValueFactory(new PropertyValueFactory<>("connectionMode"));
+        televisionColumn.setCellValueFactory(new PropertyValueFactory<>("television"));
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
+        lastSeenColumn.setCellValueFactory(new PropertyValueFactory<>("lastSeen"));
 
         addUsers();
         makeTimeLineForUpdatingData();
     }
 
     private void makeTimeLineForUpdatingData() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> {
-            addUsers();
-        }));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), e -> addUsers()));
         timeline.setCycleCount(-1);
         timeline.play();
     }
@@ -92,7 +89,7 @@ public class ScoreBoardMenu extends Application {
         table.setItems(rankingTable);
     }
 
-    public void openProfile(MouseEvent mouseEvent) throws IOException {
+    public void openProfile(MouseEvent mouseEvent) {
         if (table.getSelectionModel().getSelectedItem() != null) {
 //            User user = Stronghold.getInstance().getUser(table.getSelectionModel().getSelectedItem().getUsername());
 //            MenusUtils.createProfileShowPopUp(user, MainController.getCurrentUser().isFriend(user)).show(Main.mainStage);

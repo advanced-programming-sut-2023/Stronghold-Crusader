@@ -24,7 +24,7 @@ public class User {
     private int highScore;
     private String lastGameId;
     private ArrayList<String> mapList;
-    private HashMap<String, String> pendingMaps;
+    private final HashMap<String, String> pendingMaps;
     private long lastOnlineTime;
 
 

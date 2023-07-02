@@ -7,7 +7,6 @@ import model.chatRoom.Chat;
 import model.chatRoom.Message;
 import network.Connection;
 import network.Request;
-import view.ChatMenus.MainChatMenu;
 import view.ChatMenus.MainChatMenuController;
 
 import java.lang.reflect.Type;

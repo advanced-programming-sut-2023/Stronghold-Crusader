@@ -11,66 +11,75 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameMenus.Lobby.CreateGameRoomMenu">
-   <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../CSS/lobby.css">
-         <children>
-            <Pane layoutX="40.0" layoutY="-4.0" opacity="0.53" prefHeight="660.0" prefWidth="200.0" style="-fx-background-color: #aa0000;" styleClass="pane">
-               <children>
-                  <Button fx:id="createNewGameButton" layoutX="31.0" layoutY="480.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="130.0" text="Create Game Room" />
-                  <ImageView fitHeight="161.0" fitWidth="147.0" layoutX="27.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../assets/logo/140-1402285_village-christian-crusaders-hd-png-download-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <Button layoutX="31.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="59.0" prefWidth="130.0" text="Back">
-                     <font>
-                        <Font size="26.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
-            <ImageView fx:id="addMapButton" fitHeight="30" fitWidth="100" layoutX="590.0" layoutY="260.0" nodeOrientation="INHERIT" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../assets/buttons/pick_btn.png" />
-               </image>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.GameMenus.Lobby.CreateGameRoomMenu">
+    <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="720.0" prefWidth="1280.0"
+                stylesheets="@../../../CSS/lobby.css">
+        <Pane layoutX="40.0" layoutY="-4.0" opacity="0.53" prefHeight="660.0" prefWidth="200.0"
+              style="-fx-background-color: #aa0000;" styleClass="pane">
+            <Button fx:id="createNewGameButton" layoutX="31.0" layoutY="480.0" mnemonicParsing="false"
+                    prefHeight="59.0" prefWidth="130.0" text="Create Game Room"/>
+            <ImageView fitHeight="161.0" fitWidth="147.0" layoutX="27.0" layoutY="21.0" pickOnBounds="true"
+                       preserveRatio="true">
+                <Image url="@../../../assets/logo/140-1402285_village-christian-crusaders-hd-png-download-removebg-preview.png"/>
             </ImageView>
-            <TextField fx:id="mapID" layoutX="320.0" layoutY="260.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your map" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-            <TextField fx:id="gameID" layoutX="320.0" layoutY="199.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your game ID" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-            <Text fill="WHITE" layoutX="320.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity:" wrappingWidth="199.99999999999994">
-               <font>
-                  <Font name="Constantia" size="21.0" />
-               </font>
-            </Text>
-            <Text fx:id="capacity" fill="WHITE" layoutX="418.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="24.799987792968693">
-               <font>
-                  <Font name="Constantia" size="21.0" />
-               </font>
-            </Text>
-            <ScrollPane fx:id="mapPreview" layoutX="305.0" layoutY="422.0" opacity="0.0" prefHeight="267.0" prefWidth="454.0" />
-            <Text fx:id="gameIdError" fill="#ef1818" layoutX="323.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="190.3999633789062">
-               <font>
-                  <Font name="Constantia" size="12.0" />
-               </font>
-            </Text>
-            <TextField fx:id="pickedColor" layoutX="317.0" layoutY="311.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0" promptText="choose your Color" scaleShape="false" style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;" />
-            <ImageView fx:id="pickColor" fitHeight="30" fitWidth="100" layoutX="590.0" layoutY="311.0" nodeOrientation="INHERIT" pickOnBounds="true">
-               <image>
-                  <Image url="@../../../assets/buttons/pick_btn.png" />
-               </image>
-            </ImageView>
-            <Text fx:id="colorError" fill="#ef1818" layoutX="319.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="190.3999633789062">
-               <font>
-                  <Font name="Constantia" size="12.0" />
-               </font>
-            </Text>
-            <Text fx:id="mapIdError" fill="#ef1818" layoutX="320.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="190.3999633789062">
-               <font>
-                  <Font name="Constantia" size="12.0" />
-               </font>
-            </Text>
-            <Circle fx:id="colorCircle" layoutX="297.0" layoutY="326.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-         </children>
-      </AnchorPane>
-   </children>
+            <Button layoutX="31.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#back" prefHeight="59.0"
+                    prefWidth="130.0" text="Back">
+                <font>
+                    <Font size="26.0"/>
+                </font>
+            </Button>
+        </Pane>
+        <ImageView fx:id="addMapButton" fitHeight="30" fitWidth="100" layoutX="590.0" layoutY="260.0"
+                   nodeOrientation="INHERIT" pickOnBounds="true">
+            <Image url="@../../../assets/buttons/pick_btn.png"/>
+        </ImageView>
+        <TextField fx:id="mapID" layoutX="320.0" layoutY="260.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0"
+                   promptText="choose your map" scaleShape="false"
+                   style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;"/>
+        <TextField fx:id="gameID" layoutX="320.0" layoutY="199.0" opacity="0.5" prefHeight="30.0" prefWidth="250.0"
+                   promptText="choose your game ID" scaleShape="false"
+                   style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;"/>
+        <Text fill="WHITE" layoutX="320.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity:"
+              wrappingWidth="199.99999999999994">
+            <font>
+                <Font name="Constantia" size="21.0"/>
+            </font>
+        </Text>
+        <Text fx:id="capacity" fill="WHITE" layoutX="418.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="0" textAlignment="CENTER" wrappingWidth="24.799987792968693">
+            <font>
+                <Font name="Constantia" size="21.0"/>
+            </font>
+        </Text>
+        <ScrollPane fx:id="mapPreview" layoutX="305.0" layoutY="422.0" opacity="0.0" prefHeight="267.0"
+                    prefWidth="454.0"/>
+        <Text fx:id="gameIdError" fill="#ef1818" layoutX="323.0" layoutY="240.0" strokeType="OUTSIDE"
+              strokeWidth="0.0" text="" wrappingWidth="190.3999633789062">
+            <font>
+                <Font name="Constantia" size="12.0"/>
+            </font>
+        </Text>
+        <TextField fx:id="pickedColor" layoutX="317.0" layoutY="311.0" opacity="0.5" prefHeight="30.0"
+                   prefWidth="250.0" promptText="choose your Color" scaleShape="false"
+                   style="-fx-background-color: #3a1a03; -fx-text-fill: white; -fx-border-radius: 0; -fx-background-radius: 0;"/>
+        <ImageView fx:id="pickColor" fitHeight="30" fitWidth="100" layoutX="590.0" layoutY="311.0"
+                   nodeOrientation="INHERIT" pickOnBounds="true">
+            <Image url="@../../../assets/buttons/pick_btn.png"/>
+        </ImageView>
+        <Text fx:id="colorError" fill="#ef1818" layoutX="319.0" layoutY="352.0" strokeType="OUTSIDE"
+              strokeWidth="0.0" text="" wrappingWidth="190.3999633789062">
+            <font>
+                <Font name="Constantia" size="12.0"/>
+            </font>
+        </Text>
+        <Text fx:id="mapIdError" fill="#ef1818" layoutX="320.0" layoutY="301.0" strokeType="OUTSIDE"
+              strokeWidth="0.0" text="" wrappingWidth="190.3999633789062">
+            <font>
+                <Font name="Constantia" size="12.0"/>
+            </font>
+        </Text>
+        <Circle fx:id="colorCircle" layoutX="297.0" layoutY="326.0" radius="12.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+    </AnchorPane>
 </AnchorPane>

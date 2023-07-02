@@ -7,35 +7,29 @@
 <AnchorPane prefHeight="113" prefWidth="430" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu">
     <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutY="6.0" pannable="true" prefHeight="82.0" prefWidth="430" style="-fx-background-color: transparent" stylesheets="@../../../CSS/GameCss/BuildingPlacement.css" vbarPolicy="NEVER">
     </ScrollPane>
-    <ImageView fx:id="productionCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="2" translateY="73">
-        <image>
-            <Image url="@../../../assets/icons/dropBuildingIcons/PRODUCTION.png" />
-        </image>
+    <ImageView fx:id="productionCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="2" translateY="73">
+        <Image url="@../../../assets/icons/dropBuildingIcons/PRODUCTION.png"/>
     </ImageView>
-    <ImageView fx:id="defenseCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
-        <image>
-            <Image url="@../../../assets/icons/dropBuildingIcons/DEFENSE_AND_ATTACK.png" />
-        </image>
+    <ImageView fx:id="defenseCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="25" translateY="73">
+        <Image url="@../../../assets/icons/dropBuildingIcons/DEFENSE_AND_ATTACK.png"/>
     </ImageView>
-    <ImageView fx:id="storageCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
-        <image>
-            <Image url="@../../../assets/icons/dropBuildingIcons/STORAGE.png" />
-        </image>
+    <ImageView fx:id="storageCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="48" translateY="73">
+        <Image url="@../../../assets/icons/dropBuildingIcons/STORAGE.png"/>
     </ImageView>
-    <ImageView fx:id="trainingCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="71" translateY="73">
-        <image>
-            <Image url="@../../../assets/icons/dropBuildingIcons/TRAINING_AND_EMPLOYMENT.png" />
-        </image>
+    <ImageView fx:id="trainingCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="71" translateY="73">
+        <Image url="@../../../assets/icons/dropBuildingIcons/TRAINING_AND_EMPLOYMENT.png"/>
     </ImageView>
-    <ImageView fx:id="normalCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="94" translateY="73">
-        <image>
-            <Image url="@../../../assets/icons/dropBuildingIcons/NORMAL.png" />
-        </image>
+    <ImageView fx:id="normalCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="94" translateY="73">
+        <Image url="@../../../assets/icons/dropBuildingIcons/NORMAL.png"/>
     </ImageView>
 
-    <ImageView fx:id="entranceCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" translateX="117" translateY="73">
-        <image>
-            <Image url="@../../../assets/icons/dropBuildingIcons/ENTRANCE.png" />
-        </image>
+    <ImageView fx:id="entranceCategoryButton" fitHeight="40" fitWidth="20" layoutY="13.0" nodeOrientation="INHERIT"
+               pickOnBounds="true" preserveRatio="true" translateX="117" translateY="73">
+        <Image url="@../../../assets/icons/dropBuildingIcons/ENTRANCE.png"/>
     </ImageView>
 </AnchorPane>

@@ -70,13 +70,9 @@ public class CreateGameRoomMenu extends Application implements Initializable {
             else gameIdError.setText("");
         });
 
-        addMapButton.setOnMousePressed(e -> {
-            addMap();
-        });
+        addMapButton.setOnMousePressed(e -> addMap());
 
-        pickColor.setOnMousePressed(e -> {
-            addColor();
-        });
+        pickColor.setOnMousePressed(e -> addColor());
 
         createNewGameButton.setOnMouseClicked(e -> {
             try {

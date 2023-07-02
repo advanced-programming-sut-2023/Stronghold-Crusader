@@ -3,7 +3,6 @@ package controller.GameControllers;
 import model.Stronghold;
 import model.User.User;
 import utils.Pair;
-import view.GameMenus.EndGameMenu;
 
 import java.util.ArrayList;
 
@@ -12,13 +11,6 @@ public class EndGameController {
 
     public EndGameController(ArrayList<Pair> players) {
         this.players = players;
-    }
-
-    public void run() {
-        sortPlayers();
-        updateScores();
-        EndGameMenu endGameMenu = new EndGameMenu(this);
-        endGameMenu.run();
     }
 
     public String showInfo(String username) {

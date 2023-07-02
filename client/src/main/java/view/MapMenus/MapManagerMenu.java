@@ -133,9 +133,7 @@ public class MapManagerMenu extends Application {
     public void printError(String text) {
         errorMessageText.setText(text);
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(3), event -> {
-                    errorMessageText.setText("");
-                })
+                new KeyFrame(Duration.seconds(3), event -> errorMessageText.setText(""))
         );
         timeline.setCycleCount(1);
         timeline.play();

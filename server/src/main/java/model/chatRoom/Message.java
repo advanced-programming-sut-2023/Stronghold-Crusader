@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Message {
-    public enum Reaction{
+    public enum Reaction {
         LIKE, DISLIKE, HEART, FIRE
     }
+
     private final String senderUsername;
     private String text;
     private final int hour;
     private final int minute;
     private boolean seenStatus = false;
-    private ArrayList<String> invisibleFor;
-    private HashMap<String, Reaction> reactions;
-    public Message(String senderUsername, String text, int hour, int minute){
+    private final ArrayList<String> invisibleFor;
+    private final HashMap<String, Reaction> reactions;
+
+    public Message(String senderUsername, String text, int hour, int minute) {
         this.senderUsername = senderUsername;
         this.text = text;
         this.hour = hour;
@@ -47,7 +49,7 @@ public class Message {
         this.text = text;
     }
 
-    public void addReaction(String username, Reaction reaction){
+    public void addReaction(String username, Reaction reaction) {
         reactions.put(username, reaction);
     }
 }

@@ -1,11 +1,6 @@
 package view.GameMenus.SelectedUnitMenus;
 
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
-import utils.Vector2D;
-
-import java.io.IOException;
 
 public class MoveTypeMenu {
 

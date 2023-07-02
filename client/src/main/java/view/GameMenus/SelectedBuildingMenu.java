@@ -64,7 +64,7 @@ public class SelectedBuildingMenu implements Initializable {
         gameMenu.printError(selectedBuildingController.repair().getMessage());
     }
 
-    private void runDelete() throws IOException {
+    private void runDelete() {
         gameMenu.printError(selectedBuildingController.deleteBuilding().getMessage());
     }
 
@@ -85,7 +85,7 @@ public class SelectedBuildingMenu implements Initializable {
         new Sound(0).play();
         int ordinal = 0;
         Pattern pattern = Pattern.compile("\\d+");
-        String name = ((ImageView) mouseEvent.getPickResult().getIntersectedNode()).getImage().getUrl().toString();
+        String name = ((ImageView) mouseEvent.getPickResult().getIntersectedNode()).getImage().getUrl();
         Matcher matcher = pattern.matcher(name);
         while (matcher.find()) {
             ordinal = Integer.parseInt(matcher.group());
@@ -147,7 +147,7 @@ public class SelectedBuildingMenu implements Initializable {
          changeProductionButton.setTranslateY(5);
          changeProductionButton.setFitWidth(25);
          changeProductionButton.setFitHeight(25);
-         changeProductionButton.setOnMouseClicked(e -> {runChangeProductionMode();});
+         changeProductionButton.setOnMouseClicked(e -> runChangeProductionMode());
          mainPane.getChildren().add(changeProductionButton);
     }
 

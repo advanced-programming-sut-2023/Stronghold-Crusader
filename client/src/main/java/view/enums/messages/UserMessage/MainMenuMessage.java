@@ -5,7 +5,7 @@ public enum MainMenuMessage {
     ENTER_NEW_GAME("Entered new game menu"),
     ENTER_PROFILE("Entered profile menu"),
     LOGOUT("Logged out");
-    private String message;
+    private final String message;
 
     private MainMenuMessage(String message) {
         this.message = message;

@@ -6,7 +6,7 @@ public enum MapCreationMessage {
     ENTER_PLAYER_NUMER("Please enter player number"),
     ENTER_SIZE("Please enter map size"),
     MAP_INITIALIZE_SUCCESS("Map was successfully initialized");
-    private String message;
+    private final String message;
 
     private MapCreationMessage(String message) {
         this.message = message;
