@@ -16,7 +16,6 @@ public class User {
     private String password;
     private String nickname;
     private String slogan;
-
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;
@@ -24,8 +23,8 @@ public class User {
     private ArrayList<String> senders;
     private int highScore;
     private final ArrayList<String> mapList;
+    private String lastGameId;
     private HashMap<String, String> pendingMaps;
-
     private long lastOnlineTime;
 
 
@@ -304,6 +303,10 @@ public class User {
 
     public ArrayList<String> getMapList() {
         return mapList;
+    }
+
+    public String getLastGameId() {
+        return lastGameId;
     }
 
     public void addMap(String mapId) {

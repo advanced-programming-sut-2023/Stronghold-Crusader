@@ -33,6 +33,7 @@ public class Television extends Application implements Initializable {
     private int number = 1;
     private static String ID;
     private static boolean live = false;
+    private static String gameId;
 
 
     @Override
@@ -52,7 +53,7 @@ public class Television extends Application implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            SaveData saveData = TelevisionManager.load("test", number + ".save");
+            SaveData saveData = TelevisionManager.load(gameId, number + ".save");
             if (saveData == null) {
                 back();
                 return;
@@ -79,7 +80,7 @@ public class Television extends Application implements Initializable {
     }
 
     private void goToLive() {
-        while (TelevisionManager.load("test", number + ".save") != null){
+        while (TelevisionManager.load(gameId, number + ".save") != null){
             number ++;
         }
         number -- ;
@@ -107,7 +108,7 @@ public class Television extends Application implements Initializable {
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) throws Exception {
-        SaveData saveData = TelevisionManager.load("test", number + ".save");
+        SaveData saveData = TelevisionManager.load(gameId, number + ".save");
         if (saveData == null) {
             if (!live) timeline.stop();
             number --;
@@ -176,5 +177,9 @@ public class Television extends Application implements Initializable {
     }
     public void back() throws Exception {
         new MainMenu().start(Main.mainStage);
+    }
+
+    public static void setGameId(String gameId) {
+        Television.gameId = gameId;
     }
 }
