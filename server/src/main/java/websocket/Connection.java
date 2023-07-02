@@ -208,7 +208,6 @@ public class Connection extends Thread {
                 user.setAvatarPath(request.getParameters().get("avatar_path"));
                 break;
             case "accept_map":
-                System.out.println("here");
                 user.addMap(request.getParameters().get("id"));
                 user.removeFromPending(request.getParameters().get("id"));
                 break;

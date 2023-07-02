@@ -1,5 +1,6 @@
 package view.GameMenus.Lobby;
 
+import controller.ChatControllers.ChatCreationController;
 import controller.GameControllers.GameController;
 import controller.GameControllers.GraphicsController;
 import controller.GameControllers.LobbyController;
@@ -30,7 +31,9 @@ import model.Map.MapManager;
 import model.Stronghold;
 import model.User.Player;
 import model.User.User;
+import model.chatRoom.Chat;
 import model.enums.User.Color;
+import view.ChatMenus.ChatCreationMenu;
 import view.GameMenus.GraphicGameMenu;
 import view.Main;
 import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
@@ -50,6 +53,7 @@ public class GameRoomMenu extends Application implements Initializable {
     public Button newGameButton;
     public CheckBox modifiabilityCheck;
     public Button privacyButton;
+    public Button chatButton;
     private boolean editable = false;
 
 
@@ -151,5 +155,7 @@ public class GameRoomMenu extends Application implements Initializable {
         graphicGameMenu.start(Main.mainStage);
     }
 
-
+    public void goToChat() throws Exception {
+        lobbyController.goToChat();
+    }
 }

@@ -1,11 +1,22 @@
 package controller.GameControllers;
 
+import controller.ChatControllers.ChatController;
+import controller.ChatControllers.ChatCreationController;
+import controller.UserControllers.MainController;
+import javafx.application.Platform;
 import model.Lobby.Lobby;
 import model.Lobby.LobbyManager;
 import model.Lobby.LobbyStatus;
+import model.User.Player;
 import model.User.User;
+import model.chatRoom.Chat;
+import model.chatRoom.ChatManager;
 import model.enums.User.Color;
+import view.ChatMenus.MainChatMenu;
+import view.ChatMenus.MainChatMenuController;
+import view.Main;
 
+import java.io.IOException;
 import java.util.Set;
 
 public class LobbyController {
@@ -88,5 +99,27 @@ public class LobbyController {
 
     public String getMapId(){
         return gameRoom.getMapId();
+    }
+
+    public void goToChat() throws Exception {
+        ChatCreationController controller = new ChatCreationController(MainController.currentUser);
+        for (User user : getPlayers()) {
+            controller.addUser(user.getUsername());
+        }
+        controller.setMode(Chat.ChatMode.ROOM);
+        System.out.println(controller.CreateChat(gameId));
+        ChatController chatController = new ChatController(MainController.currentUser);
+        MainChatMenu chatMenu = new MainChatMenu();
+        MainChatMenuController.setController(chatController);
+        MainChatMenuController.currentChatMenu = chatMenu;
+        chatMenu.start(Main.mainStage);
+        MainChatMenuController menu = ChatController.currentMenu;
+        Platform.runLater(() -> {
+            try {
+                menu.loadChat(ChatManager.loadChat("room" + gameId, Chat.ChatMode.ROOM));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
