@@ -40,6 +40,8 @@ public class Lobby {
     public void updateExpireTime() {
         if (expireTimer != null)
             expireTimer.cancel();
+        if (lobbyStatus == LobbyStatus.RUNNING)
+            return;
         expireTimer = new Timer(true);
         TimerTask timerTask = new TimerTask() {
             @Override

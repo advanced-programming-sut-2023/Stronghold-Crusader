@@ -7,6 +7,8 @@ import controller.GameControllers.SelectedBuildingController;
 import controller.MapControllers.BuildingPlacementController;
 import controller.UserControllers.MainController;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,9 +27,9 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.Game.Game;
 import model.Lobby.LobbyManager;
+import model.Lobby.LobbyStatus;
 import model.Map.Map;
 import model.Map.MapManager;
-import model.Stronghold;
 import model.User.Player;
 import model.User.User;
 import model.enums.User.Color;
@@ -91,17 +93,18 @@ public class GameRoomMenu extends Application implements Initializable {
             throw new RuntimeException(e);
         }
         privacyButton.setOnMouseClicked(e -> {
-            changeGameRoomPrivacy();
+            if (lobbyController.getLobbyStatus() == LobbyStatus.PRIVATE)
+                setGameRoomMode(LobbyStatus.PUBLIC);
+            else if(lobbyController.getLobbyStatus() == LobbyStatus.PUBLIC)
+                setGameRoomMode(LobbyStatus.PRIVATE);
             privacyButton.setText(lobbyController.getLobbyStatus().toString());
         });
 
-        modifiabilityCheck.setOnMousePressed(e -> {
-            editable = modifiabilityCheck.isSelected();
-        });
+        modifiabilityCheck.selectedProperty().addListener((observable, oldValue, newValue) -> editable = newValue);
     }
 
-    private void changeGameRoomPrivacy() {
-        lobbyController.changePrivacy();
+    private void setGameRoomMode(LobbyStatus lobbyStatus) {
+        lobbyController.setStatus(lobbyStatus);
     }
 
     private void updateTable() throws Exception {
@@ -137,6 +140,7 @@ public class GameRoomMenu extends Application implements Initializable {
 
     public void createGame() throws Exception {
         if (!lobbyController.isAdmin(MainController.currentUser)) return;
+        lobbyController.setStatus(LobbyStatus.RUNNING);
         HashMap<Color, Player> players = new HashMap<>();
         for (User user : lobbyController.getPlayers())
             players.put(lobbyController.getColor(user), new Player(user));

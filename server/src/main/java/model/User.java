@@ -118,15 +118,6 @@ public class User {
         return socket != null;
     }
 
-    @Override
-    public String toString() {
-        return "username : " + username +
-                "\nnickname : " + nickname +
-                "\nslogan : " + slogan +
-                "\nemail : " + email +
-                "\nhighscore : " + highScore;
-    }
-
     public Socket getSocket() {
         return socket;
     }
@@ -142,5 +133,19 @@ public class User {
 
     public void removeFromPending(String mapId){
         pendingMaps.remove(mapId);
+    }
+
+    public void setLastGameId(String lastGameId) {
+        this.lastGameId = lastGameId;
+        Database.getInstance().updateData();
+    }
+
+    @Override
+    public String toString() {
+        return "username : " + username +
+                "\nnickname : " + nickname +
+                "\nslogan : " + slogan +
+                "\nemail : " + email +
+                "\nhighscore : " + highScore;
     }
 }
