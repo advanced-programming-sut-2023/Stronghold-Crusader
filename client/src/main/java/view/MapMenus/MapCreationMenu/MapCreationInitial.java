@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import model.Game.Game;
 import view.GameMenus.GraphicGameMenu;
 import view.Main;
+import view.MapMenus.MapManagerMenu;
 import view.UserMenus.MainMenu;
 import view.UserMenus.ProfileMenu;
 import view.enums.messages.MapMessage.MapCreationMessage;
@@ -82,7 +83,8 @@ public class MapCreationInitial extends Application {
         timeline.play();
     }
 
-    public void goToChatManager(){
-
+    public void goToMapManager() throws Exception {
+        MapManagerMenu menu = new MapManagerMenu();
+        menu.start(Main.mainStage);
     }
 }

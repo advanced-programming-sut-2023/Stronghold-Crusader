@@ -138,4 +138,8 @@ public class User {
     public void addToPending(String mapId, String sender){
         pendingMaps.put(mapId, sender);
     }
+
+    public void removeFromPending(String mapId){
+        pendingMaps.remove(mapId);
+    }
 }
