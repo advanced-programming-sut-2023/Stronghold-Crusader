@@ -39,6 +39,7 @@ public class Television extends Application implements Initializable {
         AnchorPane betPane = (AnchorPane) rootPane.getChildren().get(0);
         ScrollPane scrollPane = (ScrollPane) betPane.getChildren().get(0);
         stage.setScene(new Scene(rootPane));
+        stage.setFullScreen(true);
         stage.show();
     }
 
