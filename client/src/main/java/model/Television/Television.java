@@ -19,6 +19,8 @@ import javafx.util.Duration;
 import model.Map.Map;
 import model.Map.MapManager;
 import utils.Vector2D;
+import view.Main;
+import view.UserMenus.MainMenu;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,6 +53,10 @@ public class Television extends Application implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             SaveData saveData = TelevisionManager.load("test", number + ".save");
+            if (saveData == null) {
+                back();
+                return;
+            }
             Map map = MapManager.load(saveData.mapId);
             loadMap(map);
             number++;
@@ -165,4 +171,10 @@ public class Television extends Application implements Initializable {
 
     }
 
+    public void back(MouseEvent mouseEvent) throws Exception {
+        new MainMenu().start(Main.mainStage);
+    }
+    public void back() throws Exception {
+        new MainMenu().start(Main.mainStage);
+    }
 }
