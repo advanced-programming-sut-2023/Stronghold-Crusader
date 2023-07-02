@@ -206,7 +206,6 @@ public class Connection extends Thread {
                 user.setLastGameId(request.getParameters().get("lastgameid"));
                 break;
             case "accept_map":
-                System.out.println("here");
                 user.addMap(request.getParameters().get("id"));
                 user.removeFromPending(request.getParameters().get("id"));
                 break;
