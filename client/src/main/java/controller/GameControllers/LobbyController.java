@@ -4,6 +4,7 @@ import model.Lobby.Lobby;
 import model.Lobby.LobbyManager;
 import model.Lobby.LobbyStatus;
 import model.User.User;
+import model.enums.User.Color;
 
 import java.util.Set;
 
@@ -49,7 +50,7 @@ public class LobbyController {
         return player.getUsername().equals(gameRoom.getAdmin().getUsername());
     }
 
-    public String getColor(User player) {
+    public Color getColor(User player) {
         if (gameRoom == null) return null;
         return gameRoom.getColor(player);
     }
@@ -85,5 +86,7 @@ public class LobbyController {
         updateGameRoom();
     }
 
-
+    public String getMapId(){
+        return gameRoom.getMapId();
+    }
 }

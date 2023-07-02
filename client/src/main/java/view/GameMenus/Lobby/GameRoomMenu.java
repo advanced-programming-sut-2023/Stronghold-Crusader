@@ -1,6 +1,10 @@
 package view.GameMenus.Lobby;
 
+import controller.GameControllers.GameController;
+import controller.GameControllers.GraphicsController;
 import controller.GameControllers.LobbyController;
+import controller.GameControllers.SelectedBuildingController;
+import controller.MapControllers.BuildingPlacementController;
 import controller.UserControllers.MainController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -19,12 +23,21 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import model.Game.Game;
 import model.Lobby.LobbyManager;
+import model.Map.Map;
+import model.Map.MapManager;
+import model.Stronghold;
+import model.User.Player;
 import model.User.User;
+import model.enums.User.Color;
+import view.GameMenus.GraphicGameMenu;
 import view.Main;
+import view.MapMenus.dropBuildingMenu.GraphicBuildingPlacementMenu;
 import view.UserMenus.ProfileMenu;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class GameRoomMenu extends Application implements Initializable {
@@ -67,7 +80,7 @@ public class GameRoomMenu extends Application implements Initializable {
             }
             newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
         });
-        if (!lobbyController.isAdmin(MainController.getCurrentUser())){
+        if (!lobbyController.isAdmin(MainController.getCurrentUser())) {
             modifiabilityCheck.setDisable(true);
             privacyButton.setVisible(false);
         }
@@ -77,12 +90,12 @@ public class GameRoomMenu extends Application implements Initializable {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        privacyButton.setOnMouseClicked( e -> {
+        privacyButton.setOnMouseClicked(e -> {
             changeGameRoomPrivacy();
             privacyButton.setText(lobbyController.getLobbyStatus().toString());
         });
 
-        modifiabilityCheck.setOnMousePressed(e ->{
+        modifiabilityCheck.setOnMousePressed(e -> {
             editable = modifiabilityCheck.isSelected();
         });
     }
@@ -94,10 +107,11 @@ public class GameRoomMenu extends Application implements Initializable {
     private void updateTable() throws Exception {
         players.clear();
         lobbyController.updateGameRoom();
-        if (!lobbyController.isLobbyExist()) exitFromRoom(); else {
+        if (!lobbyController.isLobbyExist()) exitFromRoom();
+        else {
 
             for (User player : lobbyController.getPlayers()) {
-                players.add(new GameRoomTable(player, lobbyController.isAdmin(player), lobbyController.getColor(player)));
+                players.add(new GameRoomTable(player, lobbyController.isAdmin(player), lobbyController.getColor(player).toString()));
             }
             lobbyTable.setItems(players);
         }
@@ -108,20 +122,33 @@ public class GameRoomMenu extends Application implements Initializable {
     }
 
     public void back(MouseEvent mouseEvent) throws Exception {
-       exitFromRoom();
+        exitFromRoom();
     }
 
     private void exitFromRoom() throws Exception {
         lobbyController.removePlayer(MainController.getCurrentUser());
-        if (lobbyController.getPlayersCount() == 0 && lobbyController.isLobbyExist()) LobbyManager.deleteLobby(lobbyController.getGameId());
+        if (lobbyController.getPlayersCount() == 0 && lobbyController.isLobbyExist())
+            LobbyManager.deleteLobby(lobbyController.getGameId());
         else if (lobbyController.isAdmin(MainController.getCurrentUser()))
             lobbyController.setAdmin(lobbyController.getRandomPlayerForAdmin());
         newGameButton.setDisable(lobbyController.getPlayersCount() <= 1);
         new LobbyMenu().start(Main.mainStage);
     }
 
-    public void createGame(MouseEvent mouseEvent) {
-
+    public void createGame() throws Exception {
+        if (!lobbyController.isAdmin(MainController.currentUser)) return;
+        HashMap<Color, Player> players = new HashMap<>();
+        for (User user : lobbyController.getPlayers())
+            players.put(lobbyController.getColor(user), new Player(user));
+        Map map = MapManager.load(lobbyController.getMapId());
+        Game game = new Game(map, players, editable, lobbyController.getGameId());
+        GameController gameController = new GameController(MainController.getCurrentUser(), game);
+        GraphicGameMenu.setGameController(gameController);
+        GraphicGameMenu graphicGameMenu = new GraphicGameMenu();
+        GraphicGameMenu.setGraphicsController(new GraphicsController(gameController, game, graphicGameMenu));
+        GraphicBuildingPlacementMenu.setController(new BuildingPlacementController(game.getCurrentPlayer(), map, editable));
+        SelectedBuildingController.setIsModifiable(true);
+        graphicGameMenu.start(Main.mainStage);
     }
 
 

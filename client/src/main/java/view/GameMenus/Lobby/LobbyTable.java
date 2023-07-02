@@ -44,6 +44,7 @@ public class LobbyTable {
             }
         });
         television.setOnMousePressed(e -> {
+            Television.setGameId(gameId);
             Television.setLive(true);
             try {
                 new Television().start(Main.mainStage);

@@ -33,6 +33,7 @@ public class Television extends Application implements Initializable {
     private int number = 1;
     private static String ID;
     private static boolean live = false;
+    private static String gameId;
 
 
     @Override
@@ -52,7 +53,7 @@ public class Television extends Application implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            SaveData saveData = TelevisionManager.load("test", number + ".save");
+            SaveData saveData = TelevisionManager.load(gameId, number + ".save");
             if (saveData == null) {
                 back();
                 return;
@@ -79,7 +80,7 @@ public class Television extends Application implements Initializable {
     }
 
     private void goToLive() {
-        while (TelevisionManager.load("test", number + ".save") != null){
+        while (TelevisionManager.load(gameId, number + ".save") != null){
             number ++;
         }
         number -- ;
@@ -107,7 +108,7 @@ public class Television extends Application implements Initializable {
     }
 
     private void initializeScrollPane(ScrollPane scrollPane) throws Exception {
-        SaveData saveData = TelevisionManager.load("test", number + ".save");
+        SaveData saveData = TelevisionManager.load(gameId, number + ".save");
         if (saveData == null) {
             if (!live) timeline.stop();
             number --;
@@ -148,7 +149,7 @@ public class Television extends Application implements Initializable {
         GridPane cellGrid = (GridPane) mainGrid.getChildren().get(cellCoord.x + 100 * cellCoord.y);
         cellGrid.getChildren().clear();
         int column = 0;
-        if (saveData.assets[x][y] != null) {
+        if (saveData.assets[y][x] != null) {
             ImageView imageView = new ImageView(new Image(saveData.assets[y][x]));
             imageView.setPreserveRatio(true);
             double fitSize = 80;
@@ -176,5 +177,9 @@ public class Television extends Application implements Initializable {
     }
     public void back() throws Exception {
         new MainMenu().start(Main.mainStage);
+    }
+
+    public static void setGameId(String gameId) {
+        Television.gameId = gameId;
     }
 }

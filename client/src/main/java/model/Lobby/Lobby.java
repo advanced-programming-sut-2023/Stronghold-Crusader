@@ -116,8 +116,8 @@ public class Lobby {
         return mapId;
     }
 
-    public String getColor(User user) {
-        return players.get(user.getUsername()).toString();
+    public Color getColor(User user) {
+        return players.get(user.getUsername());
     }
 
     public int getPlayersCount() {
