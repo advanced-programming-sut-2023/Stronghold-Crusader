@@ -40,6 +40,7 @@ public class ScoreBoardMenu extends Application {
     public TableColumn<ScoreBoardTable, ImageView> televisionColumn;
     public TableColumn<ScoreBoardTable, Button> selectColumn;
     private final ObservableList<ScoreBoardTable> rankingTable = FXCollections.observableArrayList();
+    public TableColumn<ScoreBoardTable, String> lastSeenColumn;
 
 
     @Override
@@ -67,6 +68,8 @@ public class ScoreBoardMenu extends Application {
         connectionColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, ImageView>("connectionMode"));
         televisionColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, ImageView>("television"));
         selectColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, Button>("select"));
+        lastSeenColumn.setCellValueFactory(new PropertyValueFactory<ScoreBoardTable, String>("lastSeen"));
+
         addUsers();
         makeTimeLineForUpdatingData();
     }

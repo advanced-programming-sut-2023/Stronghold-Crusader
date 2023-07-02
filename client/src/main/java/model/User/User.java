@@ -16,6 +16,7 @@ public class User {
     private String password;
     private String nickname;
     private String slogan;
+
     private String email;
     private Pair passwordRecovery;
     private String avatarPath;

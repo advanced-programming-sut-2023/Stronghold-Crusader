@@ -39,6 +39,7 @@ public class myTradeList extends Application implements Initializable {
         AnchorPane anchorPane = FXMLLoader.load(myTradeList.class.getResource("/FXML/Gamefxml/TradeMenus/DonatesMenu.fxml"));
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
     }
 

@@ -41,6 +41,7 @@ public class RequestMenu extends Application implements Initializable {
         stage = newStage;
         AnchorPane anchorPane = FXMLLoader.load(myTradeList.class.getResource("/FXML/Gamefxml/TradeMenus/RequestMenu.fxml"));
         Scene scene = new Scene(anchorPane);
+        stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
     }
