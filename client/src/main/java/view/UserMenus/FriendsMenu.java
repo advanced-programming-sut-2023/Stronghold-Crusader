@@ -94,6 +94,7 @@ public class FriendsMenu extends Application implements Initializable {
 
     private void translateUserToTableItem(ArrayList<User> users) {
         showList.clear();
+        table.getItems().clear();
         for (User user : users) {
             showList.add(new FriendsTable(user));
         }

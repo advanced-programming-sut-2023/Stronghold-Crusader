@@ -211,6 +211,7 @@ public class Connection extends Thread {
                 user.setLastGameId(request.getParameters().get("lastgameid"));
                 break;
             case "accept_map":
+                System.out.println("here");
                 user.addMap(request.getParameters().get("id"));
                 user.removeFromPending(request.getParameters().get("id"));
                 break;
@@ -361,6 +362,7 @@ public class Connection extends Thread {
         switch (request.getCommand()) {
             case "create_map":
                 MapManager.saveMap(parameters.get("map"), parameters.get("id"));
+                loggedInUser.addMap(parameters.get("id"));
                 outputStream.writeUTF("200: success");
                 break;
             case "load_map":

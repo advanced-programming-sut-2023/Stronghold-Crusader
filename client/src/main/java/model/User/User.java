@@ -22,8 +22,8 @@ public class User {
     private ArrayList<String> friends;
     private ArrayList<String> senders;
     private int highScore;
-    private final ArrayList<String> mapList;
     private String lastGameId;
+    private ArrayList<String> mapList;
     private HashMap<String, String> pendingMaps;
     private long lastOnlineTime;
 
@@ -344,6 +344,7 @@ public class User {
         User user = Stronghold.getInstance().getUser(username);
         friends = user.friends;
         senders = user.senders;
+        mapList = user.mapList;
     }
 
     public void acceptMap(String mapId){
@@ -353,6 +354,7 @@ public class User {
         request.setType("user_change");
         request.setCommand("accept_map");
         request.addParameter("id", mapId);
+        request.addParameter("username", username);
         String result = Connection.getInstance().sendRequest(request);
         if (result.startsWith("400")) {
             try {

@@ -128,11 +128,14 @@ public class User {
     }
 
     public void addToPending(String mapId, String sender){
-        pendingMaps.put(mapId, sender);
+        if (!pendingMaps.containsKey(mapId))
+            pendingMaps.put(mapId, sender);
+        Database.getInstance().updateData();
     }
 
     public void removeFromPending(String mapId){
         pendingMaps.remove(mapId);
+        Database.getInstance().updateData();
     }
 
     public void setLastGameId(String lastGameId) {

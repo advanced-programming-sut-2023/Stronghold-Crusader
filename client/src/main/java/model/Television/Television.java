@@ -149,7 +149,7 @@ public class Television extends Application implements Initializable {
         GridPane cellGrid = (GridPane) mainGrid.getChildren().get(cellCoord.x + 100 * cellCoord.y);
         cellGrid.getChildren().clear();
         int column = 0;
-        if (saveData.assets[x][y] != null) {
+        if (saveData.assets[y][x] != null) {
             ImageView imageView = new ImageView(new Image(saveData.assets[y][x]));
             imageView.setPreserveRatio(true);
             double fitSize = 80;
