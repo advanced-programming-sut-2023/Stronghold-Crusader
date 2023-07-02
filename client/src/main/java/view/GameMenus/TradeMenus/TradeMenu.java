@@ -50,6 +50,7 @@ public class TradeMenu extends Application {
         AnchorPane rootPane =
                 FXMLLoader.load(TradeMenu.class.getResource("/FXML/Gamefxml/TradeMenus/tradeMenu.fxml"));
         stage.setScene(new Scene(rootPane));
+        stage.setFullScreen(true);
         stage.show();
     }
 
