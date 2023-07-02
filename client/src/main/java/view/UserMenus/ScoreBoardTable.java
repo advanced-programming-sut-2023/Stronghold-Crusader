@@ -12,6 +12,7 @@ import utils.MenusUtils;
 import view.Main;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class ScoreBoardTable {
     private final int rank;
@@ -21,6 +22,7 @@ public class ScoreBoardTable {
     private final ImageView connectionMode = new ImageView();
     private final ImageView television = new ImageView();
     private final Button select = new Button("select");
+    private String lastSeen;
 
     public ScoreBoardTable(User user) {
         rank = user.getRank();
@@ -35,7 +37,20 @@ public class ScoreBoardTable {
                 throw new RuntimeException(ex);
             }
         });
+        if (!Stronghold.getInstance().isUserOnline(user.getUsername()))
+            createLastSeen(user.getLastOnlineTime());
+        else lastSeen = "now";
     }
+
+    private void createLastSeen(long lastOnlineTime) {
+        if (lastOnlineTime == 0) lastSeen = "long time ago";
+        else {
+            long time = ((System.currentTimeMillis() - lastOnlineTime));
+            lastSeen = Integer.valueOf((int) TimeUnit.MILLISECONDS.toMinutes(time)).toString()
+                    + " minutes ago";
+        }
+    }
+
 
     private void setDetailsForImages(User user) {
         avatar.setRadius(24);
@@ -79,5 +94,9 @@ public class ScoreBoardTable {
 
     public Button getSelect() {
         return select;
+    }
+
+    public String getLastSeen() {
+        return lastSeen;
     }
 }
