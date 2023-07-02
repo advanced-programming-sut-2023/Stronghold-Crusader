@@ -363,7 +363,8 @@ public class Connection extends Thread {
                 loggedInUser.addMap(parameters.get("id"));
                 break;
             case "send_map":
-                Database.getInstance().getUser(parameters.get("user")).addToPending();
+//                Database.getInstance().getUser(parameters.get("user")).addToPending();
+                break;
             default:
                 outputStream.writeUTF("400: bad request");
         }
