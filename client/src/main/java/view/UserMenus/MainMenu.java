@@ -1,7 +1,6 @@
 package view.UserMenus;
 
 import controller.ChatControllers.ChatController;
-import controller.GameControllers.LobbyController;
 import controller.MapControllers.MapCreationController;
 import controller.UserControllers.MainController;
 import controller.UserControllers.ProfileController;
@@ -13,9 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import model.Game.Game;
-import model.Map.Map;
 import model.Television.Television;
+import model.Television.TelevisionManager;
 import model.User.UserManager;
 import network.Connection;
 import network.Request;
@@ -23,9 +21,7 @@ import view.ChatMenus.MainChatMenu;
 import view.ChatMenus.MainChatMenuController;
 import view.GameMenus.Lobby.LobbyMenu;
 import view.Main;
-import view.MapMenus.MapCreationMenu.MapCreationGraphicController;
 import view.MapMenus.MapCreationMenu.MapCreationInitial;
-import view.MapMenus.MapCreationMenu.MapCreationMenu;
 
 public class MainMenu extends Application {
     public static MainController mainController;
@@ -88,6 +84,7 @@ public class MainMenu extends Application {
     }
 
     public void goToTelevision() throws Exception {
+        if (TelevisionManager.load("test", "1.save") == null) return;
         new Television().start(Main.mainStage);
     }
 
