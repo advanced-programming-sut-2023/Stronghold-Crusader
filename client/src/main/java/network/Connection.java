@@ -7,9 +7,9 @@ import java.net.Socket;
 
 public class Connection {
     private static Connection instance;
-    private final Socket socket;
-    private final DataOutputStream outputStream;
-    private final DataInputStream inputStream;
+    private Socket socket;
+    private DataOutputStream outputStream;
+    private DataInputStream inputStream;
     private static Listener listener;
 
     public static void connect(String host, int port) {
@@ -24,7 +24,8 @@ public class Connection {
             outputStream = new DataOutputStream(socket.getOutputStream());
             inputStream = new DataInputStream(socket.getInputStream());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Cannot connect to the server, restart the application");
+            System.exit(0);
         }
     }
 
@@ -44,7 +45,7 @@ public class Connection {
         return outputStream;
     }
 
-    public String sendRequest(Request request){
+    public String sendRequest(Request request) {
         try {
             outputStream.writeUTF(request.toJson());
             return Listener.consumeLastInput();
@@ -53,7 +54,7 @@ public class Connection {
         }
     }
 
-    public static void startListening(){
+    public static void startListening() {
         listener = new Listener(Connection.getInstance().inputStream);
         listener.start();
     }
