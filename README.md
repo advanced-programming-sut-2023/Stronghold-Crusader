@@ -1,13 +1,14 @@
-# پروژه‌ی برنامه‌سازی پیشرفته
-لطفا نام و نام‌خانوادگی و شماره‌ی دانشجووی اعضای گروه خود را این‌جا وارد کنید:
+# Advanced Programming Project
 
-شماره‌ی تیم: `59`
+Please enter the names and student numbers of your group members here:
 
-نام عضو اول: `دیبا هادی اسفنگره`
-شماره دانشجویی عضو اول: `401110245`
+Team Number: `59`
 
-نام عضو دوم: `کیان قاسمی`
-شماره دانشجویی عضو دوم: `401102264`
+First Member Name: `Diba Hadi Esfandegareh`
+First Member Student Number: `401110245`
 
-نام عضو سوم: `آیین پوست فروشان`
-شماره دانشجویی عضو سوم: `401105742`
+Second Member Name: `Kian Ghasemi`
+Second Member Student Number: `401102264`
+
+Third Member Name: `Ayeen Poost Foroushan`
+Third Member Student Number: `401105742`
